@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>뭉쳐야산다</title>
 </head>
 <body>
-
+	<h1>성공인가요?</h1>
 </body>
 </html>
