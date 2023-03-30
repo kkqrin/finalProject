@@ -7,22 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>자 이제 시작이야.</h1>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<a href="/noticeList.do">공지사항</a>
+	<a href="/noticeWriteFrm">글쓰기</a>
 </body>
 </html>
