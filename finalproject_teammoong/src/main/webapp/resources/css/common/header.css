@@ -14,7 +14,12 @@
 .header-middle{
     background-color: bisque;
 }
+.title{
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 48px;
+}
 
 .header-bottom{
     background-color: sandybrown;
 }
+

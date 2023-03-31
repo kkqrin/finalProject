@@ -11,6 +11,11 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
      <!--font Notosans // 폰트 본고딕 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <!--font Black Han Sans // 타이틀 폰트-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+    
     <!--jquery ui .js-->
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
@@ -20,8 +25,6 @@
 
     <!-- 디폴트 커스텀 CSS -->
     <link rel="stylesheet" href="/resources/css/common/default.css" />
-    <!-- 디폴트 커스텀 js -->
-    <script src="/resources/js/default.js"></script>
     <!--헤더 css-->
     <link rel="stylesheet" href="/resources/css/common/header.css" />
 </head>
@@ -36,13 +39,15 @@
                 <a href="#">로그인</a>
             </div>
             <div class="header-middle">
-                <h3>뭉쳐야산다</h3>
+                <a class="title">뭉쳐야산다</a>
             </div>
             <div class="header-bottom">
                 <h5>메뉴1</h5>
             </div>
         </div><!--header-content-->
+
     </div><!--header-wrap-->
+
 
 </body>
 </html>
