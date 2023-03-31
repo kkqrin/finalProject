@@ -1,34 +1,37 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@include file="/WEB-INF/views/common/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script src="/summernote/summernote-lite.js"></script>
+<script src="/summernote/lang/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="/summernote/summernote-lite.css">
 <body>
-	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<form action="/noticeWrite.do" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<th>
-					<label for="title">Á¦¸ñ</label>
+					<label for="title">ì œëª©</label>
 					<select size="1" name="status" class="input-form-short">
-						<option value="1">°øÁö</option>
-						<option value="0">ÀÏ¹İ</option>
+						<option value="1">ê³µì§€</option>
+						<option value="0">ì¼ë°˜</option>
 					</select>
 					<input type="text" name="noticeTitle" class="input-form">
 				</th>
 			</tr>
 			<tr>
 				<th>
-					<label for="file">ÆÄÀÏÃ·ºÎ</label>
-					<input type="file" name="noticeFile" multiple><button type=button>»èÁ¦</button>
+					<label for="file">íŒŒì¼ì²¨ë¶€</label>
+					<input type="file" name="noticeFile" multiple><button type=button>ì‚­ì œ</button>
 				</th>
 			</tr>
 			<tr>
 				<th>
-					<label for="noticeWriter">ÀÛ¼ºÀÚ</label>
+					<label for="noticeWriter">ì‘ì„±ì</label>
 				</th>
 				<td>
 					${sessionScope.m.memberId }
@@ -36,20 +39,32 @@
 				<td>
 			</tr>
 			<tr>
-				<th>³»¿ë</th>
+				<th>ë‚´ìš©</th>
 			</tr>
 			<tr>
 				<td>
-					<textarea name="noticeContent"></textarea>
+					<textarea id="noticeContent" rows="20" name="noticeContent" class="form"></textarea>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<input type="submit" value="ÀúÀå">
-					<button type="button">Ãë¼Ò</button>
+					<input type="submit" value="ì €ì¥">
+					<button type="button">ì·¨ì†Œ</button>
 				</td>
 			</tr>
 		</table>
 	</form>
+	<script>
+		$("#noticeContent").summernote({
+			height : 550,
+			lang : "ko-KR",
+			callbacks : {
+				onImageUpload : function(files) {
+					uploadImage(files[0], this)
+				}
+				
+			}
+		});
+	</script>
 </body>
 </html>
