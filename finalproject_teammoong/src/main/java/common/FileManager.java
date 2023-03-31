@@ -9,67 +9,52 @@ import java.io.IOException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-//ê³µí†µì ìœ¼ë¡œ ì“¸ íŒŒì¼ ë¶„ë¦¬ : ëª¨ë“ˆí™”
-//íŒŒì¼ ì—…ë¡œë“œí• ë•Œë§ˆë‹¤ íŒŒì¼ê²½ë¡œ, ì‹¤ì œ íŒŒì¼ì´ ë‹¬ë¼ì§
-
 @Component
 public class FileManager {
-
-	
 	public String upload(String savePath, MultipartFile file) {
-		String filename = file.getOriginalFilename(); 
-		
-		//filename => test.txt => test			.txt ì²˜ëŸ¼ ë¶„ë¦¬
-		String onlyFilename = filename.substring(0, filename.lastIndexOf(".")); //ë’¤ì—ì„œ ë¶€í„° ì°¾ì•„ì„œ .ì˜ ì•žê¹Œì§€ ìž˜ë¼ëƒ„ -> test
-		String extention = filename.substring(filename.lastIndexOf(".")); //. ë¶€í„° ëê¹Œì§€ ìž˜ë¼ëƒ„ -> .txt
-		
-		//ì‹¤ì œ ì—…ë¡œë“œí•  íŒŒì¼ëª…
+		String filename = file.getOriginalFilename();
+		//filename =>test.txt
+		String onlyFilename = filename.substring(0, filename.lastIndexOf("."));//test
+		String extention = filename.substring(filename.lastIndexOf("."));//.txt
+		//½ÇÁ¦ ¾÷·ÎµåÇÒ ÆÄÀÏ¸í
 		String filepath = null;
-		//íŒŒì¼ëª… ì¤‘ë³µ ì‹œ ë’¤ì— ë¶™ì¼ ìˆ«ìž
+		//ÆÄÀÏ¸íÀÌ Áßº¹µÆÀ»¶§ µÚ¿¡ ºÙÀÏ ¼ýÀÚ
 		int count = 0;
-		while(true) { //ì¤‘ë³µì´ ì•„ë‹ë•Œ ë¹ ì ¸ì˜¬ê±°ìž„
+		while(true) {
 			if(count == 0) {
-				//ì²«ë²ˆì§¸ ê²€ì¦ì¸ ê²½ìš°, ìˆ«ìžë¥¼ ë¶™ì´ì§€ ì•ŠìŒ
-				filepath = onlyFilename + extention;		//test.txt
+				//Ã¹¹øÂ° °ËÁõÀÎ °æ¿ì ¼ýÀÚºÙÀÌÁö ¾ÊÀ½
+				filepath = onlyFilename+extention;			//text.txt
 			}else {
-				filepath = onlyFilename+"_"+count+extention; 	//test_1.txt, test_2.txt 
+				filepath = onlyFilename+"_"+count+extention;//text_1.txt
 			}
 			File checkFile = new File(savePath+filepath);
-			if(!checkFile.exists()) {  //exists : ì¡´ìž¬í•˜ëŠ”ì§€ ë¬¼ì–´ë´„
+			if(!checkFile.exists()) {
 				break;
 			}
 			count++;
 		}
-		//íŒŒì¼ëª… ì¤‘ë³µì²´í¬ ëë‚˜ëŠ” ì§€ì  -> ì—…ë¡œë“œ íŒŒì¼ëª… í™•ì • -> íŒŒì¼ ì—…ë¡œë“œ
-		
-		//2-2. ì¤‘ë³µì²˜ë¦¬ê°€ ëë‚œ íŒŒì¼ ì—…ë¡œë“œ
+		//ÆÄÀÏ¸í Áßº¹Ã¼Å© ³¡ -> ¾÷·ÎµåÆÄÀÏ¸í È®Á¤ -> ÆÄÀÏ¾÷·Îµå
+		//2-2. Áßº¹Ã³¸®°¡ ³¡³­ ÆÄÀÏ ¾÷·Îµå
 		try {
 			FileOutputStream fos = new FileOutputStream(savePath+filepath);
-			//ë³´ì¡°ìŠ¤íŠ¸ë¦¼ -> ì„±ëŠ¥í–¥ìƒ
+			//¼º´É Çâ»óÀ» À§ÇÑ º¸Á¶½ºÆ®¸² »ý¼º
 			BufferedOutputStream bos = new BufferedOutputStream(fos);
-			
-			//íŒŒì¼ ì—…ë¡œë“œ
+			//ÆÄÀÏ¾÷·Îµå
 			byte[] bytes = file.getBytes();
 			bos.write(bytes);
 			bos.close();
-			
 		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return filepath;
 	}
-	
-	
-	//ê²Œì‹œë¬¼ ì‚­ì œì‹œ ì—…ë¡œë“œ íŒŒì¼ë„ ì‚­ì œ
+
 	public boolean deleteFile(String savePath, String filepath) {
 		File delFile = new File(savePath+filepath);
-		return delFile.delete(); //ì„±ê³µ ì‹¤íŒ¨ ì—¬ë¶€ ë¦¬í„´ -> public boolean
+		return delFile.delete();
 	}
 }
-
-
-
-
-

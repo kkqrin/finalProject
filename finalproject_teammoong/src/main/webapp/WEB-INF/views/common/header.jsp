@@ -15,7 +15,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
-    
     <!--jquery ui .js-->
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
@@ -24,7 +23,6 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css">
     <!--모달 and 알럿-->
     <script src="/resources/js/modal-alert.js"></script>
-
     <!-- 디폴트 커스텀 CSS -->
     <link rel="stylesheet" href="/resources/css/common/default.css" />
     <!--헤더 css-->
