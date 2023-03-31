@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="/noticeWriteFrm">글쓰기</a>
+	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	<a href="/noticeWriteFrm.do">글쓰기</a>
 </body>
 </html>
