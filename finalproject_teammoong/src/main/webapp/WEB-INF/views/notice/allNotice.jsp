@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="/noticeWriteFrm">글쓰기</a>
+	<a href="/noticeWriteFrm.do">글쓰기</a>
 </body>
 </html>
