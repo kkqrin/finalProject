@@ -1,0 +1,16 @@
+.header-wrap{
+    background-color: aqua;
+}
+
+.header-top{
+    text-align: right;
+    background-color: brown;
+}
+
+.header-middle{
+    background-color: bisque;
+}
+
+.header-bottom{
+    background-color: sandybrown;
+}
