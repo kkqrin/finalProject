@@ -236,7 +236,8 @@
 	
 	
 <!-- 	김명훈	 -->
-	
+	<context:component-scan base-package="moo.ng.san.category" />
+	<context:component-scan base-package="moo.ng.san.product" />
 	
 	
 	
