@@ -33,13 +33,16 @@
         <div class="header-content">
         
             <div class="header-top">
-                <a href="#">공지사항</a><span>|</span>
-                <a href="#">회원가입</a><span>|</span>
-                <a href="#">로그인</a>
+                <div class="top-menu">
+                    <a href="#">공지사항</a><span>|</span>
+                    <a href="#">회원가입</a><span>|</span>
+                    <a href="#">로그인</a>
+                </div>
             </div>
 
             <div class="header-middle">
                 <a class="title">뭉쳐야산다</a>
+                <input type="text" placeholder="검색어를 입력하세요">
             </div>
 
             <div class="header-bottom">
