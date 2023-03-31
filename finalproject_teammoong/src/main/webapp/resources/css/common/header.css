@@ -6,6 +6,7 @@
     margin: 0 auto;
 }
 
+/*====top====*/
 .header-top{
     display: flex;
     justify-content: flex-end;
@@ -21,14 +22,21 @@
     font-size: 12px;
 }
 
+/*====middle====*/
 .header-middle{
+    display: flex;
+    
     background-color: bisque;
 }
 .title{
+    display: inline-block;
     font-family: 'Black Han Sans', sans-serif;
     font-size: 48px;
+    margin-right: 10px;
 }
 
+
+/*====middle====*/
 .header-bottom{
     background-color: sandybrown;
 }
