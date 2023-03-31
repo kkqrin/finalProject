@@ -24,5 +24,6 @@
 	
 	
 	<a href="/noticeList.do">공지사항</a>
+	<a href="/boardList.do">여기여기붙어라</a>
 </body>
 </html>

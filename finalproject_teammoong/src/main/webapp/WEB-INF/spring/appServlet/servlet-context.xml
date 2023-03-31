@@ -182,7 +182,7 @@
 	
 	
 	<!--이화정  -->
-	
+	<context:component-scan base-package="moo.ng.san.board" />
 	
 	
 	
