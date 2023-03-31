@@ -96,7 +96,7 @@ a {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     word-break: keep-all;
-    height: 50px;
+    height: 40px;
 }
 
 .posting-price-box{

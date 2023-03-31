@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<!-- jquery -->
-    <script src="/resource/js/jquery-3.6.0.js"></script>
+    <script src="/resources/js/jquery-3.6.0.js"></script>
 	<!-- 구글 아이콘 -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
      <!--font Notosans // 폰트 본고딕 -->
