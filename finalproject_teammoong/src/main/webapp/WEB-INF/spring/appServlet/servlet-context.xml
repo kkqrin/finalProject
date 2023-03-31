@@ -109,6 +109,7 @@
 	
 	
 	<context:component-scan base-package="kr.or.iei" />
+	<context:component-scan base-package="moo.ng.san" />
 	
 	
 	
@@ -182,7 +183,7 @@
 	
 	
 	<!--이화정  -->
-	
+	<context:component-scan base-package="moo.ng.san.board" />
 	
 	
 	
