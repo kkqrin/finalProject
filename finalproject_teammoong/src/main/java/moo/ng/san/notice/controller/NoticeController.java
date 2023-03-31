@@ -16,5 +16,9 @@ public class NoticeController {
 	public String noticeList(Model model) {
 		return "notice/allNotice";
 	}
+	@RequestMapping(value="noticeWriteFrm.do")
+	public String noticeWriteFrm() {
+		return "notice/noticeWriteFrm";
+	}
 	
 }
