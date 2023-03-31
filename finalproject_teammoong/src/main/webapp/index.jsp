@@ -7,9 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/common/header.jsp" %>
-
-	<h3>자 이제 시작이야.</h3>
+	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	
+	<div class="content-wrap">
+		<h3>자 이제 시작이야.</h3>
+	</div>
 	
 	
 	
