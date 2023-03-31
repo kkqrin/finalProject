@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-    <form action="#" method="get" multiple></form>
+    <form action="#" method="get">
     <table border="3">
         <tr>
             <th>카테고리</th>
@@ -80,6 +80,6 @@
         </tr>
         <th colspan="3"><button type="submit">등록</button></th>
     </table>
-
+	</form>
 </body>
 </html>
