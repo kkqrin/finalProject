@@ -5,10 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/resources/css/common/footer.css" />
 </head>
 <body>
-	<script>
-		location.href="/main.do";
-	</script>
+	<div class="footer-wrap">
+		<h5>나는 푸터다.</h5>
+	</div>
 </body>
 </html>

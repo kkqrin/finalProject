@@ -6,18 +6,37 @@
     margin: 0 auto;
 }
 
+/*====top====*/
 .header-top{
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+}
+.header-top>.top-menu{
+    display: flex;
+    align-items: center;
+}
+.header-top>.top-menu span{
+    color: var(--bg-tertiary);
+    padding: 0 20px;
+    line-height : 20px;
+    font-size: 12px;
 }
 
+/*====middle====*/
 .header-middle{
+    display: flex;
+    
     background-color: bisque;
 }
 .title{
+    display: inline-block;
     font-family: 'Black Han Sans', sans-serif;
     font-size: 48px;
+    margin-right: 10px;
 }
 
+
+/*====middle====*/
 .header-bottom{
     background-color: sandybrown;
 }
