@@ -23,10 +23,10 @@ public class BoardController {
 		return "board/boardWriteFrm";
 	}
 	
-	@RequestMapping(value="/boardwrite.do")
+	@RequestMapping(value="/boardWrite.do")
 	public String boardWirte(Board b) {
 		int result = service.insertBoard(b);
-		return "redirect:/boardList.do";
+		return "redirect:/";
 	}
 	
 }

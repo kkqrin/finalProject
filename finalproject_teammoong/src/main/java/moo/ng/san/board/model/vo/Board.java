@@ -25,6 +25,8 @@ public class Board {
 	private String boardDetail;
 	private String referenceLink;
 	private String deliveryDate;
-	private int boardSatus;
+	private String boardEtc;
+	private int boardStatus;
+	private int boardCount;
 	
 }

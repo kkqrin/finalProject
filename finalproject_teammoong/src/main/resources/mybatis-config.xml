@@ -8,6 +8,15 @@
 	<typeAliases>
 		<typeAlias type="moo.ng.san.notice.vo.Notice" alias="n" />
 		<typeAlias type="moo.ng.san.notice.vo.FileVO" alias="f" />
+		
+		
+		
+		
+		
+		
+		
+		
+		<typeAlias type="moo.ng.san.board.model.vo.Board" alias="b" />
 	</typeAliases>
 	<!-- 
 	<typeAliases>
