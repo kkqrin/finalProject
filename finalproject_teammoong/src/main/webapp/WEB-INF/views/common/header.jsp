@@ -22,6 +22,8 @@
     <!--jquery modal-->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css">
+    <!--모달 and 알럿-->
+    <script src="/resources/js/modal-alert.js"></script>
 
     <!-- 디폴트 커스텀 CSS -->
     <link rel="stylesheet" href="/resources/css/common/default.css" />
@@ -29,25 +31,24 @@
     <link rel="stylesheet" href="/resources/css/common/header.css" />
 </head>
 <body>
-
-
 	<div class="header-wrap">
         <div class="header-content">
+        
             <div class="header-top">
                 <a href="#">공지사항</a><span>|</span>
                 <a href="#">회원가입</a><span>|</span>
                 <a href="#">로그인</a>
             </div>
+
             <div class="header-middle">
                 <a class="title">뭉쳐야산다</a>
             </div>
+
             <div class="header-bottom">
                 <h5>메뉴1</h5>
             </div>
+
         </div><!--header-content-->
-
     </div><!--header-wrap-->
-
-
 </body>
 </html>

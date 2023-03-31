@@ -1,5 +1,5 @@
 .header-wrap{
-    background-color: aqua;
+    box-shadow:0px 0px 8px -2px rgba(120, 120, 120, 0.1);
 }
 .header-content{
     width: 1200px;
@@ -8,7 +8,6 @@
 
 .header-top{
     text-align: right;
-    background-color: brown;
 }
 
 .header-middle{
