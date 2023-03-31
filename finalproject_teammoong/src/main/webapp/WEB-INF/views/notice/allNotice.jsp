@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<a href="/noticeWriteFrm.do">±Û¾²±â</a>
 </body>
 </html>

@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="notice">
-  
+	<insert id="insertNotice" parameterType="n">
+		insert into notice_tbl values
+		(notice_seq.nextval, #{noticeWriter}, #{noticeTitle}, date(sysdate,'yyyy-mm-dd'), #{noticeStatus}, 0, #{noticeContent})
+		<selectKey resultType="_int" order="AFTER" keyProperty="noticeNo">
+			select max(notice_no) from notice_tbl
+		</selectKey>
+	</insert>
+	<insert id="insertFile" parameterType="f">
+		insert into notice_file values
+		(notice_file_seq.nextval, #{fileNo}, #{fileName}, #{filepath}, #{noticeNo})
+	</insert>
 </mapper>

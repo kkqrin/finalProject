@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<form action="/noticeWrite.do" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
@@ -22,17 +23,24 @@
 			<tr>
 				<th>
 					<label for="file">파일첨부</label>
-					<input type="file"><button type=button>삭제</button>
+					<input type="file" name="noticeFile" multiple><button type=button>삭제</button>
 				</th>
 			</tr>
 			<tr>
 				<th>
-					내용
+					<label for="noticeWriter">작성자</label>
 				</th>
+				<td>
+					${sessionScope.m.memberId }
+					<input type="hidden" name="noticeWriter" value="${sessionScope.m.memberId }" readonly>
+				<td>
+			</tr>
+			<tr>
+				<th>내용</th>
 			</tr>
 			<tr>
 				<td>
-					<textarea ></textarea>
+					<textarea name="noticeContent"></textarea>
 				</td>
 			</tr>
 			<tr>
