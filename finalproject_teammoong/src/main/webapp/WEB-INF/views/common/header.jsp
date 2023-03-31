@@ -11,9 +11,9 @@
 	<!-- jquery -->
     <script src="/resource/js/jquery-3.6.0.js"></script>
     <!-- 디폴트 커스텀 CSS -->
-    <link rel="stylesheet" href="/resource/css/common/default.css" />
+    <link rel="stylesheet" href="/resources/css/common/default.css" />
     <!-- 디폴트 커스텀 js -->
-    <script src="/resource/js/default.js"></script>
+    <script src="/resources/js/default.js"></script>
     
 </head>
 <body>
