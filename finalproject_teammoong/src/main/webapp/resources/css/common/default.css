@@ -44,7 +44,8 @@
     --success:#469d4d;
     --info:#2fb2da;
 
-    --content-primary:#17191a;
+/*     --content-primary:#17191a; */
+	--content-primary:#3a3a3a;
     --content-secondary:#868b8f;
     --content-tertiary:#c6cacc;
     --content-inverse-primary:#fff;
