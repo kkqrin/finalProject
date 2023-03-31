@@ -7,7 +7,18 @@
 }
 
 .header-top{
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+}
+.header-top>.top-menu{
+    display: flex;
+    align-items: center;
+}
+.header-top>.top-menu span{
+    color: var(--bg-tertiary);
+    padding: 0 20px;
+    line-height : 20px;
+    font-size: 12px;
 }
 
 .header-middle{

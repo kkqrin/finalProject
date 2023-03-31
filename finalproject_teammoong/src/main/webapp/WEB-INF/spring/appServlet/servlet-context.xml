@@ -158,6 +158,7 @@
 	
 	
 	<!-- 김홍미 -->
+	<context:component-scan base-package="moo.ng.san.member" />
 	
 	
 	

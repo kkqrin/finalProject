@@ -14,7 +14,7 @@
 	</div>
 	
 	
-	
+	<a href="/msgTest.do">홍미테스트</a>
 	
 	
 	

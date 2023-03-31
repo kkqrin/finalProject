@@ -33,9 +33,11 @@
         <div class="header-content">
         
             <div class="header-top">
-                <a href="#">공지사항</a><span>|</span>
-                <a href="#">회원가입</a><span>|</span>
-                <a href="#">로그인</a>
+                <div class="top-menu">
+                    <a href="#">공지사항</a><span>|</span>
+                    <a href="#">회원가입</a><span>|</span>
+                    <a href="#">로그인</a>
+                </div>
             </div>
 
             <div class="header-middle">
