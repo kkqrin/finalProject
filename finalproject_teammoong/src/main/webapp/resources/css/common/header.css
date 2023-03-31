@@ -1,6 +1,10 @@
 .header-wrap{
     background-color: aqua;
 }
+.header-content{
+    width: 1200px;
+    margin: 0 auto;
+}
 
 .header-top{
     text-align: right;
