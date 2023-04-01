@@ -14,8 +14,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <!--font Black Dongle // 타이틀 폰트-->
 	<link href="https://fonts.googleapis.com/css2?family=Dongle:wght@700&display=swap" rel="stylesheet">
-	<!--font Jua // 메뉴 폰트-->    
-	<link href="https://fonts.googleapis.com/css2?family=Dongle:wght@700&family=Jua&display=swap" rel="stylesheet">
 
     <!--jquery ui .js-->
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
@@ -54,7 +52,12 @@
             </div>
 
             <div class="header-bottom">
-                <div><a href="#">카테고리</a></div>
+                <div class="menu-category">
+	                <a href="#">
+                	<span class="material-symbols-outlined">reorder</span>
+                	카테고리
+	                </a>
+                </div>
                 <div><a href="#">오늘의상품</a></div>
                 <div><a href="#">타임딜</a></div>
                 <div><a href="#">인기상품</a></div>

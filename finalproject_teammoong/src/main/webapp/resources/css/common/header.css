@@ -57,15 +57,32 @@
 
 /*====bottom====*/
 .header-bottom{
-	background-color:pink;
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: center;
 }
-.header-bottom>div>a{
-	font-size: 18px;
-	font-family: 'Jua', sans-serif;
+.header-bottom>div{
+	display:table;
+	padding : 5px 0;
 }
-.header-bottom>.together>span{
-	display: inline-block;
+.header-bottom>div:not(.menu-category){
+	border-bottom: 4px solid transparent;
+}
+.header-bottom>div:not(.menu-category):hover{
+	border-bottom: 4px solid #f7a4a4;
+}
+.header-bottom>div a,span{
+	display:table-cell;
+	vertical-align: middle;
+	font-size: 16px;
+	font-weight: bolder;
+}
+.header-bottom>.together{
+	width: 125px;
+	position:relative;
+	color: #f7a4a4;
+}
+.header-bottom>.together span{
+	position: absolute;
+	left:102px;
 }
