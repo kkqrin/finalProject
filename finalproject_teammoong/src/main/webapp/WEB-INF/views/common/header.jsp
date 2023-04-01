@@ -41,8 +41,8 @@
             </div>
 
             <div class="header-middle">
-                <a class="title">뭉쳐야산다</a>
-                <input type="text" placeholder="검색어를 입력하세요">
+                <a href="/" class="title">뭉쳐야산다</a>
+                <input type="text" class="mainSearch" placeholder="검색어를 입력하세요">
             </div>
 
             <div class="header-bottom">
