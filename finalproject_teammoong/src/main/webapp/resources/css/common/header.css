@@ -25,29 +25,47 @@
 /*====middle====*/
 .header-middle{
     display: flex;
+    align-items:center;
+    justify-content: center;
 }
 .title{
     display: inline-block;
-    font-family: 'Black Han Sans', sans-serif;
+	font-family: 'Dongle', sans-serif;
     font-size: 48px;
-    margin-right: 10px;
 }
 .mainSearch{
 	width: 700px;
 	position:relative;
-	margin: auto 0;
+	margin: auto 30px;
 }
 .mainSearch-input{
 	width: 100%;
 	border-radius:0px !important;
 	border-bottom: 3px solid #3a3a3a;
 }
-.mainSearch>a{
+.mainSearch>span{ /*input창 안에 검색버튼*/
 	position: absolute;
-	top:5px ; right: 5px;
+	top:8px ; right: 5px;
+	cursor: pointer;
 }
+.header-middle>a>span{ /*알림 장바구니 좋아요*/
+	padding: 15px 5px 0px 5px;
+}
+.header-middle>a>span:hover{
+	color: #f7a4a4;
+} 
 
 /*====bottom====*/
 .header-bottom{
+	background-color:pink;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
-
+.header-bottom>div>a{
+	font-size: 18px;
+	font-family: 'Jua', sans-serif;
+}
+.header-bottom>.together>span{
+	display: inline-block;
+}

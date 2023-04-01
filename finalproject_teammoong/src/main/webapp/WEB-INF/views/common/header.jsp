@@ -9,12 +9,14 @@
     <script src="/resources/js/jquery-3.6.0.js"></script>
 	<!-- 구글 아이콘 -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-     <!--font Notosans // 폰트 본고딕 -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!--font Notosans // 폰트 본고딕 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-    <!--font Black Han Sans // 타이틀 폰트-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+    <!--font Black Dongle // 타이틀 폰트-->
+	<link href="https://fonts.googleapis.com/css2?family=Dongle:wght@700&display=swap" rel="stylesheet">
+	<!--font Jua // 메뉴 폰트-->    
+	<link href="https://fonts.googleapis.com/css2?family=Dongle:wght@700&family=Jua&display=swap" rel="stylesheet">
+
     <!--jquery ui .js-->
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
@@ -44,12 +46,24 @@
                 <a href="/" class="title">뭉쳐야산다</a>
                 <div class="mainSearch">
                 	<input type="text" class="mainSearch-input" placeholder="검색어를 입력하세요">
-                	<a href="#">검색</a>
+                	<span class="material-symbols-outlined">search</span>
                 </div>
+                <a href="#"><span class="material-symbols-outlined">notifications</span></a>
+                <a href="#"><span class="material-symbols-outlined">favorite</span></a>
+                <a href="#"><span class="material-symbols-outlined">shopping_cart</span></a>
             </div>
 
             <div class="header-bottom">
-                <h5>메뉴1</h5>
+                <div><a href="#">카테고리</a></div>
+                <div><a href="#">오늘의상품</a></div>
+                <div><a href="#">타임딜</a></div>
+                <div><a href="#">인기상품</a></div>
+                <div class="together">
+                	<a href="#">
+               		 여기여기붙어라
+               		 <span class="material-symbols-outlined">recommend</span>
+               		</a>
+                </div>
             </div>
 
         </div><!--header-content-->
