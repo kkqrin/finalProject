@@ -2,5 +2,6 @@
 
 
 .footer-wrap{
-	background-color: pink;
+	background-color: #3a3a3a;
+	color: var(--bg-secondary);
 }

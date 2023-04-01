@@ -34,7 +34,7 @@
         
             <div class="header-top">
                 <div class="top-menu">
-                    <a href="#">공지사항</a><span>|</span>
+                    <a href="/noticeList.do">공지사항</a><span>|</span>
                     <a href="#">회원가입</a><span>|</span>
                     <a href="#">로그인</a>
                 </div>
