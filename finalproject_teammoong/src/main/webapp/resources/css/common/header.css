@@ -8,6 +8,7 @@
 
 /*====top====*/
 .header-top{
+	width:100%;
     display: flex;
     justify-content: flex-end;
 }
@@ -26,17 +27,22 @@
 .header-middle{
     display: flex;
     align-items:center;
-    justify-content: center;
 }
 .title{
     display: inline-block;
 	font-family: 'Dongle', sans-serif;
-    font-size: 48px;
+    font-size: 52px;
+}
+.middle-left{
+	display:flex;
+}
+.middle-center{
+	width:75%;
 }
 .mainSearch{
-	width: 700px;
+	width: 800px;
 	position:relative;
-	margin: auto 30px;
+	margin: auto;
 }
 .mainSearch-input{
 	width: 100%;
@@ -48,27 +54,32 @@
 	top:8px ; right: 5px;
 	cursor: pointer;
 }
-.header-middle>a>span{ /*알림 장바구니 좋아요*/
-	padding: 15px 5px 0px 5px;
+.middle-right{
+	margin-left: auto;
 }
-.header-middle>a>span:hover{
+.middle-right>a>span{ /*알림 장바구니 좋아요*/
+	font-size:28px;
+	padding: 5px 10px 0px 10px;
+}
+..middle-right>a>span:hover{
 	color: #f7a4a4;
 } 
 
 /*====bottom====*/
 .header-bottom{
 	display: flex;
-	justify-content: space-around;
+	width:100%;
+	justify-content: space-between;
 	align-items: center;
 }
-.header-bottom>div{
+.header-bottom>div:not(.category-dropdown){
 	display:table;
 	padding : 5px 0;
 }
-.header-bottom>div:not(.menu-category){
+.header-bottom>div:not(.menu-category,.category-dropdown){
 	border-bottom: 4px solid transparent;
 }
-.header-bottom>div:not(.menu-category):hover{
+.header-bottom>div:not(.menu-category,.category-dropdown):hover{
 	border-bottom: 4px solid #f7a4a4;
 }
 .header-bottom>div a,span{
@@ -85,4 +96,25 @@
 .header-bottom>.together span{
 	position: absolute;
 	left:102px;
+}
+
+
+.menu-category{
+	position: relative;
+}
+.menu-category:hover .category-dropdown{
+	display:flex;
+}
+
+/*====category-dropdown====*/
+.category-dropdown{
+	display: none;
+	position:absolute;
+	width:1200px;
+	background-color: pink;
+	left:0;
+	transform: translateY( 35px );
+}
+.category-dropdown>ul>li:first-child {
+	font-weight: bold;
 }

@@ -41,14 +41,20 @@
             </div>
 
             <div class="header-middle">
-                <a href="/" class="title">뭉쳐야산다</a>
-                <div class="mainSearch">
-                	<input type="text" class="mainSearch-input" placeholder="검색어를 입력하세요">
-                	<span class="material-symbols-outlined">search</span>
+            	<div class="middle-left">
+	                <a href="/" class="title">뭉쳐야산다</a>
                 </div>
-                <a href="#"><span class="material-symbols-outlined">notifications</span></a>
-                <a href="#"><span class="material-symbols-outlined">favorite</span></a>
-                <a href="#"><span class="material-symbols-outlined">shopping_cart</span></a>
+                <div class="middle-center">
+	                <div class="mainSearch">
+	                	<input type="text" class="mainSearch-input" placeholder="검색어를 입력하세요">
+	                	<span class="material-symbols-outlined">search</span>
+		            </div>
+	            </div>
+                <div class="middle-right">
+	                <a href="#"><span class="material-symbols-outlined">notifications</span></a>
+	                <a href="#"><span class="material-symbols-outlined">favorite</span></a>
+	                <a href="#"><span class="material-symbols-outlined">shopping_cart</span></a>
+            	</div>
             </div>
 
             <div class="header-bottom">
@@ -57,7 +63,20 @@
                 	<span class="material-symbols-outlined">reorder</span>
                 	카테고리
 	                </a>
+ <!-- dropdown메뉴 --><div class="category-dropdown">
+				      	<ul>
+				      		<li>카테고리</li>
+				      		<li><a href="#">카테고리</a></li>
+				      		<li><a href="#">카테고리</a></li>
+				      	</ul>
+				      	<ul>
+				      		<li>카테고리</li>
+				      		<li><a href="#">카테고리</a></li>
+				      		<li><a href="#">카테고리</a></li>
+				      	</ul>
+			    	</div><!-- dropdown메뉴 -->
                 </div>
+                
                 <div><a href="#">오늘의상품</a></div>
                 <div><a href="#">타임딜</a></div>
                 <div><a href="#">인기상품</a></div>
@@ -68,7 +87,7 @@
                		</a>
                 </div>
             </div>
-
+            
         </div><!--header-content-->
     </div><!--header-wrap-->
 </body>
