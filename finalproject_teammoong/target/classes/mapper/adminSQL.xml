@@ -32,13 +32,12 @@
 	<select id="selectBeforeMember" resultType="_int">
 		select count(*) from member_tbl where reg_date between '2023-03-20' and sysdate-1
 	</select>
-	
+
 
 <!-- 	<select id="selectAllOrderCount" resultType="_int"> -->
 <!-- 		select count(*) from product_tbl -->
 <!-- 	</select> -->
 
-	
 
 	<select id="selectBeforeOrder" resultType="_int">
 		select count(*) from order_tbl where order_date between '2023-03-20' and sysdate-1 
@@ -48,7 +47,7 @@
 		select count(*) from board_tbl where board_start between '2023-03-20' and sysdate-1 
 	</select>
 	
-	<select id="selectAllMemberList" parameterType="map" resultType="member">
+	<select id="selectAllMemberList" parameterType="map" resultType="m">
 		select * from
 			(select rownum as rnum, b.* from
 				(select
@@ -78,7 +77,7 @@
 		update member_tbl set member_status = #{memberGrade} where member_no = #{memberNo}
 	</update>
 	
-	<select id="selectSearchMember" parameterType="member" resultType="member">
+	<select id="selectSearchMember" parameterType="m" resultType="m">
 		select member_no as memberNo,
 					member_id as memberId,
 					member_name as memberName,
@@ -110,7 +109,7 @@
 		select sum(product_price) from product_tbl pt join order_tbl ot on (pt.product_no = ot.product_no) where ot.order_status = 4 and ot.order_date between '2023-03-20' and '2023-03-31'
 	</select>
 	
-	<select id="selectAllProductList" parameterType="map" resultType="product">
+	<!-- <select id="selectAllProductList" parameterType="map" resultType="product">
 		select * from
 			(select rownum as rnum, b.* from
 				(select
@@ -127,7 +126,7 @@
 				from product_tbl order by 1 desc)b)
 		where rnum between #{start} and #{end}
 	</select>
-	
+	 -->
 	<select id="productTotalCount" resultType="_int">
 		select count(*) from product_tbl
 	</select>

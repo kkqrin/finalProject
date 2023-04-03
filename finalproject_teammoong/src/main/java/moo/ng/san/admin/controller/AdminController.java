@@ -176,9 +176,6 @@ public class AdminController {
 		
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="/ajaxProductSearch.do")
-	public String 
-	
+
 	
 }
