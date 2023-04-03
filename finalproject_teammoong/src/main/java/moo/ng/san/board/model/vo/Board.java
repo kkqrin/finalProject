@@ -1,7 +1,5 @@
 package moo.ng.san.board.model.vo;
 
-import javax.annotation.sql.DataSourceDefinition;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
