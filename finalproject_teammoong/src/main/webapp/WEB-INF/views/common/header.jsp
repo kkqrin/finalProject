@@ -35,34 +35,28 @@
         <div class="header-content">
         
             <div class="header-top">
-            	<c:choose>
-            		<c:when test="${empty sessionScope.m}">
-		                <div class="top-menu">
-		                    <a href="/noticeList.do?reqPage=1">공지사항</a><span>|</span>
+            	<div class="top-menu">
+            		<c:choose>
+            			<c:when test="${empty sessionScope.m}">
+            				<a href="/noticeList.do?reqPage=1">공지사항</a><span>|</span>
 		                    <a href="#">회원가입</a><span>|</span>
 		                    <a href="/loginFrm.do">로그인</a>
-		                </div>
-	                </c:when>
-	                <c:when test="${sessionScope.m.memberStatus eq 1}">
-	                	<div class="top-menu">
+	                	</c:when>
+	                	<c:when test="${sessionScope.m.memberStatus eq 1}">
 	                		<a class="helloMsg">${sessionScope.m.memberName }님 환영합니다!</a>
-		                    <a href="/noticeList.do">공지사항</a><span>|</span>
+	                		<a href="/noticeList.do?reqPage=1">공지사항</a><span>|</span>
 		                    <a href="#">마이페이지</a><span>|</span>
 		                    <a href="/logout.do">로그아웃</a>
-		                </div>
-	                </c:when>
-	                <c:when test="${sessionScope.m.memberStatus eq 0}">
-	               		 <div class="top-menu">
-	                		<a class="staffMsg">관리자 버전으로 접속중입니다.</a>
-		                    <a href="/noticeList.do">공지사항</a><span>|</span>
-		                    <a href="/admin.do">관리자페이지</a><span>|</span>
+	                	</c:when>
+	               		<c:when test="${sessionScope.m.memberStatus eq 0}">
+	               			<a href="/noticeList.do?reqPage=1">공지사항</a><span>|</span>
+		                    <a class="staffMsg">관리자 버전으로 접속중입니다.</a>
 		                    <a href="/logout.do">로그아웃</a>
-		                </div>
-	                </c:when>
-                </c:choose>
-
-            </div>
-
+	                	</c:when>
+                	</c:choose>
+           		</div><!-- top-menu -->
+			</div><!-- header-top -->
+			
             <div class="header-middle">
             	<div class="middle-left">
 	                <a href="/" class="title">뭉쳐야산다</a>
@@ -131,7 +125,7 @@
             
         </div><!--header-content-->
     </div><!--header-wrap-->
-    
+
     <script>
     	$(".menu-category").hover(function(){
     		$(".category-dropdown").slideToggle();
