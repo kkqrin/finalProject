@@ -11,18 +11,19 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Component
 public class FileManager {
+	
 	public String upload(String savePath, MultipartFile file) {
 		String filename = file.getOriginalFilename();
 		//filename =>test.txt
 		String onlyFilename = filename.substring(0, filename.lastIndexOf("."));//test
 		String extention = filename.substring(filename.lastIndexOf("."));//.txt
-		//½ÇÁ¦ ¾÷·ÎµåÇÒ ÆÄÀÏ¸í
+		//ì‹¤ì œ ì—…ë¡œë“œí•  íŒŒì¼ëª…
 		String filepath = null;
-		//ÆÄÀÏ¸íÀÌ Áßº¹µÆÀ»¶§ µÚ¿¡ ºÙÀÏ ¼ıÀÚ
+		//íŒŒì¼ëª…ì´ ì¤‘ë³µëì„ë•Œ ë’¤ì— ë¶™ì¼ ìˆ«ì
 		int count = 0;
 		while(true) {
 			if(count == 0) {
-				//Ã¹¹øÂ° °ËÁõÀÎ °æ¿ì ¼ıÀÚºÙÀÌÁö ¾ÊÀ½
+				//ì²«ë²ˆì§¸ ê²€ì¦ì¸ ê²½ìš° ìˆ«ìë¶™ì´ì§€ ì•ŠìŒ
 				filepath = onlyFilename+extention;			//text.txt
 			}else {
 				filepath = onlyFilename+"_"+count+extention;//text_1.txt
@@ -33,13 +34,13 @@ public class FileManager {
 			}
 			count++;
 		}
-		//ÆÄÀÏ¸í Áßº¹Ã¼Å© ³¡ -> ¾÷·ÎµåÆÄÀÏ¸í È®Á¤ -> ÆÄÀÏ¾÷·Îµå
-		//2-2. Áßº¹Ã³¸®°¡ ³¡³­ ÆÄÀÏ ¾÷·Îµå
+		//íŒŒì¼ëª… ì¤‘ë³µì²´í¬ ë -> ì—…ë¡œë“œíŒŒì¼ëª… í™•ì • -> íŒŒì¼ì—…ë¡œë“œ
+		//2-2. ì¤‘ë³µì²˜ë¦¬ê°€ ëë‚œ íŒŒì¼ ì—…ë¡œë“œ
 		try {
 			FileOutputStream fos = new FileOutputStream(savePath+filepath);
-			//¼º´É Çâ»óÀ» À§ÇÑ º¸Á¶½ºÆ®¸² »ı¼º
+			//ì„±ëŠ¥ í–¥ìƒì„ ìœ„í•œ ë³´ì¡°ìŠ¤íŠ¸ë¦¼ ìƒì„±
 			BufferedOutputStream bos = new BufferedOutputStream(fos);
-			//ÆÄÀÏ¾÷·Îµå
+			//íŒŒì¼ì—…ë¡œë“œ
 			byte[] bytes = file.getBytes();
 			bos.write(bytes);
 			bos.close();
@@ -58,3 +59,4 @@ public class FileManager {
 		return delFile.delete();
 	}
 }
+

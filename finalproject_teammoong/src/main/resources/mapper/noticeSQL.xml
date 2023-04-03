@@ -3,13 +3,58 @@
 <mapper namespace="notice">
 	<insert id="insertNotice" parameterType="n">
 		insert into notice_tbl values
-		(notice_seq.nextval, #{noticeWriter}, #{noticeTitle}, date(sysdate,'yyyy-mm-dd'), #{noticeStatus}, 0, #{noticeContent})
+		(notice_seq.nextval, #{noticeWriter}, #{noticeTitle}, sysdate, #{noticeStatus}, 0, #{noticeContent})
 		<selectKey resultType="_int" order="AFTER" keyProperty="noticeNo">
 			select max(notice_no) from notice_tbl
 		</selectKey>
 	</insert>
 	<insert id="insertFile" parameterType="f">
 		insert into notice_file values
-		(notice_file_seq.nextval, #{fileNo}, #{fileName}, #{filepath}, #{noticeNo})
+		(notice_file_seq.nextval, #{fileName}, #{filepath}, #{noticeNo})
 	</insert>
+	<select id="selectNoticeList" parameterType="map" resultType="n">
+		select *from
+			(select rownum as rnum, n. * from
+				(select
+					notice_no as noticeNo,
+					notice_writer as noticeWriter,
+					notice_title as noticeTitle,
+					notice_date as noticeDate,
+					notice_status as noticeStatus,
+					read_count as readCount,
+					notice_content as noticeContent
+				from notice_tbl order by 1 desc)n)
+				where rnum between #{start} and #{end}
+	</select>
+	<select id="totalCount" resultType="_int">
+		select count(*) from notice_tbl
+	</select>
+	<select id="selectOneNotice" parameterType="_int" resultMap="getNotice">
+		select
+		*
+		from notice_tbl where notice_no = #{_parameter}
+	</select>
+	<select id="selectFileList" parameterType="_int" resultType="f">
+		select
+			file_no as fileNo,
+			notice_no as noticeNo,
+			file_name as fileName,
+			filepath
+		from notice_file where notice_no = #{_parameter}
+	</select>
+	<resultMap type="n" id="getNotice">
+		<result column="notice_no" property="noticeNo"/>
+		<result column="notice_title" property="noticeTitle"/>
+		<result column="notice_content" property="noticeContent"/>
+		<result column="notice_writer" property="noticeWriter"/>
+		<result column="notice_date" property="noticeDate"/>
+		<result column="notice_status" property="noticeStatus"/>
+		<result column="read_count" property="readCount"/>
+		<collection property="fileList"
+					select="selectFileList"
+					column="notice_no"
+					ofType="f"
+					javaType="java.util.ArrayList"
+					/>
+	</resultMap>
 </mapper>
