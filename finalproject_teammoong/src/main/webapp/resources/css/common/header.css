@@ -1,0 +1,122 @@
+.header-wrap{
+	height:133px;
+    box-shadow:0px 0px 8px -2px rgba(120, 120, 120, 0.2);
+    position: fixed;
+  	top: 0;
+  	left: 0;
+  	right: 0;
+}
+.header-content{
+    width: 1200px;
+    margin: 0 auto;
+}
+
+/*====top====*/
+.header-top{
+	width:100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.header-top>.top-menu{
+    display: flex;
+    align-items: center;
+}
+.header-top>.top-menu span{
+    color: var(--bg-tertiary);
+    padding: 0 20px;
+    line-height : 20px;
+    font-size: 12px;
+}
+
+/*====middle====*/
+.header-middle{
+    display: flex;
+    align-items:center;
+}
+.title{
+    display: inline-block;
+	font-family: 'Dongle', sans-serif;
+    font-size: 52px;
+}
+.middle-left{
+	display:flex;
+}
+.middle-center{
+	width:75%;
+}
+.mainSearch{
+	width: 800px;
+	position:relative;
+	margin: auto;
+}
+.mainSearch-input{
+	width: 100%;
+	border-radius:0px !important;
+	border-bottom: 3px solid #3a3a3a;
+}
+.mainSearch>span{ /*inputâ �ȿ� �˻���ư*/
+	position: absolute;
+	top:8px ; right: 5px;
+	cursor: pointer;
+}
+.middle-right{
+	margin-left: auto;
+}
+.middle-right>a>span{ /*�˸� ��ٱ��� ���ƿ�*/
+	font-size:28px;
+	padding: 5px 10px 0px 10px;
+}
+.middle-right>a>span:hover{
+	color: #f7a4a4;
+} 
+
+/*====bottom====*/
+.header-bottom{
+	display: flex;
+	width:100%;
+	justify-content: space-between;
+	align-items: center;
+}
+.header-bottom>div:not(.category-dropdown){
+	display:table;
+	padding : 5px 0;
+}
+.header-bottom>div:not(.menu-category,.category-dropdown){
+	border-bottom: 4px solid transparent;
+}
+.header-bottom>div:not(.menu-category,.category-dropdown):hover{
+	border-bottom: 4px solid #f7a4a4;
+}
+.header-bottom>div a,span{
+	display:table-cell;
+	vertical-align: middle;
+	font-size: 16px;
+	font-weight: bolder;
+}
+.header-bottom>.together{
+	width: 125px;
+	position:relative;
+	color: #f7a4a4;
+}
+.header-bottom>.together span{
+	position: absolute;
+	left:102px;
+}
+
+
+.menu-category{
+	position: relative;
+}
+
+/*====category-dropdown====*/
+.category-dropdown{
+	display: none;
+	position:absolute;
+	width:1200px;
+	background-color: pink;
+	left:0;
+	transform: translateY( 35px );
+}
+.category-dropdown>ul>li:first-child {
+	font-weight: bold;
+}

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가이드</title>
+    
+	<!-- jquery -->
+    <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!--font Notosans // 폰트 본고딕 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+	<!--jquery ui .js-->
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+
+    <!--jquery modal-->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css">
+
+    <!--style-->
+    <link rel="stylesheet" href="/resources/css/common/default.css" />
+    
+    <style>
+        /*가이드내 섹션 박스 스타일링*/
+        .box-round {padding:32px;background:var(--bg-primary);border-radius:8px;box-shadow:var(--shadow-bottom);overflow:hidden;box-sizing:border-box;}
+        .box-round + .box-round {margin-top:32px;}
+        .section-tit {margin:24px;}
+    </style>
+
+	<script>
+		$( function() {
+			$( ".select-custom" ).selectmenu();
+		});
+	</script>
+</head>
+<body>
+    <div class="content-wrap">
+        <div class="guide-wrap">
+            <div class="box-round">
+                <h3 class="section-tit">폰트 스타일(Txt Style)</h3>
+
+                <h1>h1 .txt_h01</h1>
+                <h2>h2 .txt_h02</h2>
+                <h3>h3 .txt_h03</h3>
+                <h4>h4 .txt_h04</h4>
+                <h5>h5 .txt_h05</h5>
+                <h6>h6 .txt_h06</h6>
+                
+				<p>.txt_body(기본텍스트)</p>
+				<p class="bold">.bold</p>
+				<p class="link">.link(링크스타일)</p>
+				<p class="error">.error</p>
+				<p class="txt_caption">txt_caption</p>
+
+                <p>
+                    <span class="color-p01">.txt_body.color-p01</span>
+                    <span class="color-p02">.txt_body.color-p02</span>
+                    <span class="color-p03">.txt_body.color-p03</span>
+                    <span class="color-p04">.txt_body.color-p04</span>
+                    <span class="color-p05">.txt_body.color-p05</span>
+                    <span class="color-p06">.txt_body.color-p06</span>
+                    <span class="color-p07">.txt_body.color-p07</span>
+                    <span class="color-p08">.txt_body.color-p08</span>
+                    <span class="color-p09">.txt_body.color-p09</span>
+                </p>
+                <p>
+                    <span class="color-v01">.txt_body.color-v01</span>
+                    <span class="color-v02">.txt_body.color-v02</span>
+                    <span class="color-v03">.txt_body.color-v03</span>
+                    <span class="color-v04">.txt_body.color-v04</span>
+                    <span class="color-v05">.txt_body.color-v05</span>
+                    <span class="color-v06">.txt_body.color-v06</span>
+                    <span class="color-v07">.txt_body.color-v07</span>
+                    <span class="color-v08">.txt_body.color-v08</span>
+                    <span class="color-v09">.txt_body.color-v09</span>
+                </p>
+                <p>
+                    <span class="bg-p01">.txt_body.bg-p01</span>
+                    <span class="bg-p02">.txt_body.bg-p02</span>
+                    <span class="bg-p03">.txt_body.bg-p03</span>
+                    <span class="bg-p04">.txt_body.bg-p04</span>
+                    <span class="bg-p05">.txt_body.bg-p05</span>
+                    <span class="txt_body bg-p06">.txt_body.bg-p06</span>
+                    <span class="txt_body bg-p07">.txt_body.bg-p07</span>
+                    <span class="txt_body bg-p08">.txt_body.bg-p08</span>
+                    <span class="txt_body bg-p09">.txt_body.bg-p09</span>
+                </p>
+                <p>
+                    <span class="txt_body bg-v01">.txt_body.bg-v01</span>
+                    <span class="txt_body bg-v02">.txt_body.bg-v02</span>
+                    <span class="txt_body bg-v03">.txt_body.bg-v03</span>
+                    <span class="txt_body bg-v04">.txt_body.bg-v04</span>
+                    <span class="txt_body bg-v05">.txt_body.bg-v05</span>
+                    <span class="txt_body bg-v06">.txt_body.bg-v06</span>
+                    <span class="txt_body bg-v07">.txt_body.bg-v07</span>
+                    <span class="txt_body bg-v08">.txt_body.bg-v08</span>
+                    <span class="txt_body bg-v09">.txt_body.bg-v09</span>
+                </p>
+            </div>
+
+            <div class="box-round">
+                <h3 class="section-tit">table</h3>
+                <table class="tbl-box">
+                    <tr>
+                        <th>th</th>
+                        <th>th</th>
+                        <th>th</th>
+                        <th>th</th>
+                        <th>th</th>
+                    </tr>
+                    <tr>
+                        <td>table 태그에</td>
+                        <td>.tbl-box</td>
+                        <td>클래스를</td>
+                        <td>주시면</td>
+                        <td>됩니다</td>
+                    </tr>
+                    <tr>
+                        <td>td</td>
+                        <td>td</td>
+                        <td>td</td>
+                        <td>td</td>
+                        <td>td</td>
+                    </tr>
+                </table>
+                <h3 class="section-tit">게시판</h3>
+                <div class="tbl-box">
+                    <table class="guide-board">
+                        <tr>
+                            <th>(예시)NO</th>
+                            <th class="th-width-explain">(예시)글제목</th>
+                            <th>(예시)작성자</th>
+                            <th>(예시)작성일</th>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>table태그에 .guide-board 붙여주면 이 스타일대로 적용됩니다.</td>
+                            <td>user01</td>
+                            <td>3033-13-33</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>[각 열의 widht 설정방법] th태그에 편한대로 클래스 부여한 후, 각자의 css에서 widht값 부여</td>
+                            <td>user02</td>
+                            <td>3033-13-33</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>동일한 방법으로 cursor:pointer; 스타일도 적용하시면 됩니당.</td>
+                            <td>quokka</td>
+                            <td>3033-13-33</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- pagenation-->
+                <h3 class="section-tit">페이징 네비</h3>
+                <div class="pagination">
+                    <a href="javascript:void(0);" class="btn-pagi ctrl">처음으로</a>
+                    <a href="javascript:void(0);" class="btn-pagi ctrl">이전</a>
+                    <ul class="pagination-list">
+                        <li>
+                            <a href="javascript:void(0);" class="btn-pagi page-active">1</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="btn-pagi">2</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="btn-pagi">3</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="btn-pagi">4</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="btn-pagi">5</a>
+                        </li>
+                    </ul>
+                    <a href="javascript:void(0);" class="btn-pagi ctrl">다음</a>
+                    <a href="javascript:void(0);" class="btn-pagi ctrl">끝으로</a>
+                </div>
+                <!-- //pagenation-->
+            </div>
+
+            <div class="box-round">
+                <h3 class="section-tit">area-btn</h3>
+                <button class="btn btn-pri size01" type="button">정렬 안하면 이렇게 아래로 떨어짐 당연함</button>
+                <button class="btn btn-sec size01" type="button">버튼 예시</button>
+                <h5>area-btn 왼쪽정렬(button태그를 div로 감싸고 class="area-btn left")</h5>
+                <div class="area-btn left">
+                    <button class="btn btn-pri size01" type="button">버튼</button>
+                    <button class="btn btn-sec size01" type="button">버튼</button>
+                </div>
+                <h5>area-btn 가운데정렬(button태그를 div로 감싸고 class="area-btn center")</h5>
+                <div class="area-btn center">
+                    <button class="btn btn-pri size01" type="button">등록</button>
+                    <button class="btn btn-sec size01" type="button">취소</button>
+                </div>
+                <h5>area-btn 오른쪽정렬(button태그를 div로 감싸고 class="area-btn right")</h5>
+                <div class="area-btn right">
+                    <button class="btn btn-pri size01" type="button">등록</button>
+                    <button class="btn btn-sec size01" type="button">취소</button>
+                </div>
+                <h5>area-btn 꽉찬버튼(button태그를 div로 감싸고 class="area-btn full")</h5>
+                <div class="area-btn full">
+                    <button class="btn btn-pri size01" type="button">그치만 굳이 클래스 부여해서 정렬 안해도 되쥬</button>
+                </div>
+
+            </div>
+            
+            <div class="box-round">
+                <h3 class="section-tit">btn</h3>
+                <p>
+                    ○ .btn : 버튼 태그에 기본스타일을 먹이기 위해 붙여주는 클래스<br>
+                    ○ .size01 : size01, size02, size03이 있습니다<br>
+                    ○ .btn-border-pri : 색칠 안 된 버튼을 만들고 싶을때 붙여주는 클래스! .btn-border-까지 써주고 뒤에는 색상명 입력.
+                </p>
+                <div class="area-btn left">
+                    <button class="btn btn-pri size01" type="button">size01</button>
+                    <button class="btn btn-sec size01" type="button">size01</button>
+                    <button class="btn btn-ter size01" type="button">size01</button>
+                    <button class="btn btn-black size01" type="button">ize01</button>
+                    <button class="btn btn-dkgray size01" type="button">size01</button>
+                    <button class="btn btn-white size01" type="button">size01</button>
+                </div>
+                <div class="area-btn left">
+                    <button class="btn btn-pri size02" type="button">size02</button>
+                    <button class="btn btn-sec size02" type="button">size02</button>
+                    <button class="btn btn-ter size02" type="button">size02</button>
+                    <button class="btn btn-black size02" type="button">size02</button>
+                    <button class="btn btn-dkgray size02" type="button">size02</button>
+                    <button class="btn btn-white size02" type="button">size02</button>
+                </div> 
+                <div class="area-btn left">
+                    <button class="btn btn-pri size03" type="button">size03</button>
+                    <button class="btn btn-sec size03" type="button">size03</button>
+                    <button class="btn btn-ter size03" type="button">size03</button>
+                    <button class="btn btn-black size03" type="button">size03</button>
+                    <button class="btn btn-dkgray size03" type="button">size03</button>
+                    <button class="btn btn-white size03" type="button">size03</button>
+                </div>
+                <div class="area-btn left">
+                    <button class="btn btn-border-pri size01" type="button">btn-border-</button>
+                    <button class="btn btn-border-sec size01" type="button">btn-border-</button>
+                    <button class="btn btn-border-ter size02" type="button">btn-border-</button>
+                    <button class="btn btn-border-black size02" type="button">btn-border-</button>
+                    <button class="btn btn-border-dkgray size03" type="button">btn-border-</button>
+                    <button class="btn btn-border-white size03" type="button">btn-border-</button>
+                </div>
+            </div>
+
+            <div class="box-round">
+                <h3 class="section-tit">input / select 관련</h3>
+
+                    <input type="text" placeholder="readonly시 보더 없고 클릭안되는 인풋" class="input--noborder" readonly >
+                    <input type="text" placeholder="보더 없는 인풋" class="input-noborder">
+                    <input type="text" placeholder="기본 input창(.input-basic)" class="input-basic">
+                    <input type="text" placeholder="에러 발생시 빨간 테두리 발생 (.error 클래스 추가)" class="input-basic error">
+                    <input type="text" placeholder="input text - disabled" disabled class="input-basic">
+					
+                    <textarea cols="30" rows="5"  placeholder="textarea태그에는 전체적으로 이런 디자인을 걸어놓았어용.."></textarea>
+					<textarea cols="30" rows="5"  placeholder="disabled된 textarea의 모습" disabled></textarea>
+					<textarea class="error" cols="30" rows="7"  placeholder="error난 textarea의 모습// 그냥 빨간 테두리가 추가됨// textarea태그에 .error 클래스 붙여주면 됩니두" ></textarea>
+
+                    <div class="selectBox-widht-explain"><!--너비는 div태그의 클래스로 .selectBox-widht-explain {width:40%;} -->
+                        <select class="select-custom">
+                            <option value="Item1">.select-custom</option>
+                            <option value="Item2">&lt;select class="select-custom"&gt; &lt;/select&gt; ☜ 이렇게 사용</option>
+                            <option value="Item3">만약 셀렉트박스의 widht를 조절하고 싶으면</option>
+                            <option value="Item4">개인적으로(?) widht 스타일 걸어서 하시면 됩니다</option>
+                            <option value="Item5">select 태그를 div로 감싼 후에, 그 div에 widht를 주는 걸 추천합니다</option>
+                            <option value="Item6">Item</option>
+                            <option value="Item7">Item</option>
+                        </select>
+                    </div>
+            </div>
+
+            <div class="box-round">
+                <h3 class="section-tit">comment</h3>
+                <ul class="comment-box"><!--하나의 게시글에 달린 모든 댓글을 담아주는 div-->
+                    
+                    <li class="comment-detail">
+                        <div class="one-comment">
+                            <div class="horiz space-between">
+                                <dl class="comment-tit">
+                                    <dt>
+                                        <img src="" alt="유저이미지">
+                                    </dt>
+                                    <dd>
+                                        <p class="txt_body bold">
+                                            댓글 html(+css)사용방법
+                                        </p>
+                                        <p class="txt_caption color-sec">
+                                            2023.03.29 21:09:04
+                                        </p>
+                                    </dd>
+                                </dl>
+                                <div class="comment-btn">
+                                    <button type="button" class="btn size01">수정</button>
+                                    <button type="button" class="btn size01">삭제</button>
+                                </div>
+                            </div>
+                            <div class="comment-txt">
+                                한 게시물에 달린 "모든" 댓글(일반댓글,답글,답글의답글 등등 전부)은<br>
+                                &lt;ul class="comment-box"&gt;&lt;/ul&gt;태그 안에 넣어줍니다
+                            </div>
+                            <button type="button" class="btn size01">답글달기</button>
+                        </div>
+                    </li>
+                    
+                    <li class="comment-detail">
+                        <div class="one-comment">
+                            <div class="horiz space-between">
+                                <dl class="comment-tit">
+                                    <dt>
+                                        <img src="" alt="유저이미지">
+                                    </dt>
+                                    <dd>
+                                        <p class="txt_body bold">
+                                            김유저
+                                        </p>
+                                        <p class="txt_caption color-sec">
+                                            2023.03.29 21:09:04
+                                        </p>
+                                    </dd>
+                                </dl>
+                                <div class="comment-btn">
+                                    <button type="button" class="btn size01">수정</button>
+                                    <button type="button" class="btn size01">삭제</button>
+                                </div>
+                            </div>
+                            <div class="comment-txt">
+                                하나의 댓글은 &lt;li class="comment-detail"&gt;&lt;/li&gt;태그 안에 넣어줍니다.<br><br>
+                                만약 댓글에 답글이 생길 경우, ★그 답글은 원래의 댓글 &lt;li&gt;&lt;/li&gt;태그를 벗어나지 않고★<br><br>
+                                &lt;ul&gt; <br>
+                                &nbsp;&nbsp;&nbsp; &lt;li class="comment-detail"&gt; 그 안에 더 복잡한 어쩌구 저쩌구 &lt;/li&gt; <br>
+                                &lt;/ul&gt;의 형식을 또 가집니다. <br><br>
+                                결론적으로 li태그 안에 ul과 li이 또 생기는 구조가 되는 겁니다(복잡ㅠ) <br><br>
+                                왜 이런 구조를 가지게 되냐면, 답글이 달릴 때마다 ul태그가 padding-left를 가져야 하기 때문입니다.<br>
+                                답글이 꼬리에 꼬리를 물고 계속 생길수도 있기 때문에 이런 구조를 가지고 css를 준 것입니다....<br><br>
+                                이 페이지의 html을 뜯어보면 아시겠지만, li태그 안에 ul과 li이 또 들어온다고 난이도가 어려워지는건 아닙니다. 다만 읽기에 개짜증납니다.<br>
+                                댓글 기능은 어떤분이 가장 많이 쓰시나요?.. 더 효율적인 코드 작성이 있다면 언제든지 plz
+                            </div>
+                            <button type="button" class="btn size01">답글달기</button>
+                        </div>
+
+                        <ul>
+                            <li class="comment-detail">
+                                <div class="one-comment">
+                                    <div class="horiz space-between">
+                                        <dl class="comment-tit">
+                                            <dt>
+                                                <img src="" alt="유저이미지">
+                                            </dt>
+                                            <dd>
+                                                <p class="txt_body bold">
+                                                    박유저
+                                                </p>
+                                                <p class="txt_caption color-sec">
+                                                    2023.03.29 21:09:04
+                                                </p>
+                                            </dd>
+                                        </dl>
+                                        <div class="comment-btn">
+                                            <button type="button" class="btn size01">수정</button>
+                                            <button type="button" class="btn size01">삭제</button>
+                                        </div>
+                                    </div>
+                                    <div class="comment-txt">
+                                        저는 김유저 댓글에 대한 답글입니다. 
+                                    </div>
+                                    <button type="button" class="btn size01">답글달기</button>
+                                </div>
+                                
+                                <ul>
+                                    <li class="comment-detail">
+                                        <div class="one-comment">
+                                            <div class="horiz space-between">
+                                                <dl class="comment-tit">
+                                                    <dt>
+                                                        <img src="" alt="유저이미지">
+                                                    </dt>
+                                                    <dd>
+                                                        <p class="txt_body bold">
+                                                            최유저
+                                                        </p>
+                                                        <p class="txt_caption color-sec">
+                                                            2023.03.29 21:09:04
+                                                        </p>
+                                                    </dd>
+                                                </dl>
+                                                <div class="comment-btn">
+                                                    <button type="button" class="btn size01">수정</button>
+                                                    <button type="button" class="btn size01">삭제</button>
+                                                </div>
+                                            </div>
+                                            <div class="comment-txt">
+                                                저는 김유저 댓글에 박유저가 단 답글에 대한 답글입니다.<br><br>
+                                                위에 김유저가 설명한 대로,<br>
+                                                이런 경우엔 li(김유저 댓글) 태그 안에<br>
+                                                ul이랑 li가 또 있고(박유저 댓글)<br>
+                                                그 li(박유저 댓글)안에 ul이랑 li(최유저 댓글)가 또 있는 구조를 가지는 것입니다. 설명하는데도 끔찍하군요.
+                                            </div>
+                                            <button type="button" class="btn size01">답글달기</button>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul><!--하나의 게시글에 달린 모든 댓글을 담는 ul-->
+            </div>
+
+            <div class="box-round">
+                <h3 class="section-tit">modal</h3>
+                
+                <div class="area-btn left">
+                    <button class="btn btn-border-pri size01" type="button" data-modal="#modalBasic">모달01</button>
+                    <button class="btn btn-border-sec size01" type="button" data-modal="#modalSec">모달02</button>
+                    <button class="btn btn-border-ter size01" type="button" data-modal="#modalTer">모달03</button>
+                </div>
+
+                <!-- modal-basic -->
+                <div id="modalBasic" class="modal modal-pri">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h6>모달 타이틀</h6>
+                        </div>
+                        <div class="modal-body">
+                            <!--내용영역-->
+                            <h5>내용타이틀</h5>
+                            <p>Contents Contents Contents Contents Contents </p>
+                            <p>Contents Contents Contents Contents Contents </p>
+                            <p>Contents Contents Contents Contents Contents </p>
+                            <p>우측상단에 x버튼이 있는 모달 </p>
+                            <p>x 스타일은 common.css .jquery-modal .modal .close-modal  요거 백그라운드 수정해서 쓰기 </p>
+                            <!--//내용영역-->
+                        </div>
+                        <div class="area-btn right">
+                            <button class="btn btn-pri size01" type="button">버튼</button>
+                            <a href="" rel="modal:close" class="btn btn-sec size01">닫기</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- //modal-basic -->
+                
+                <!-- modal-sec -->
+                <div id="modalSec" class="modal modal-sec">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h6>모달 타이틀</h6>
+                        </div>
+                        <div class="modal-body">
+                            <!--내용영역-->
+                            <h5>내용타이틀</h5>
+                            <p>Contents Contents Contents Contents Contents </p>
+                            <p>이친구는 우측상단에 x버튼이없지 </p>
+                            <!--//내용영역-->
+                        </div>
+                        <div class="area-btn center">
+                            <button class="btn btn-pri size01" type="button">버튼</button>
+                            <a href="" rel="modal:close" class="btn btn-sec size01">닫기</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- //modal-sec -->
+
+                <!-- modal-pri -->
+                <div id="modalTer" class="modal modal-pri">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h6>모달 타이틀</h6>
+                        </div>
+                        <div class="modal-body">
+                            <!--내용영역-->
+                            <h5>내용타이틀</h5>
+                            <p>Contents Contents Contents Contents Contents </p>
+                            <!--//내용영역-->
+                        </div>
+                    </div>
+                </div>
+                <!-- //modal-pri -->
+            </div>
+
+            <div class="box-round">
+                <h3 class="section-tit">alert</h3>
+                
+                <div class="area-btn left">
+                    <button class="btn btn-border-pri size01" type="button" id="alert01">성공</button>
+                    <button class="btn btn-border-sec size01" type="button" id="alert02">에러</button>
+                    <button class="btn btn-border-ter size01" type="button" id="alert03">경고</button>
+                    <button class="btn btn-border-black size01" type="button" id="alert04">정보</button>
+                </div>
+            </div><!--알림 div-->
+        </div><!--guide wrap-->
+    </div><!--content wrap-->
+
+
+
+
+<!--=============================================================================-->
+    <script>
+        //모달 관련 기능
+        $(function () {
+            $('[data-modal]').click(function (event) {
+                const modalId = $(this).data('modal');
+                if ($(modalId).hasClass('modal-pri')) {
+                    $($(this).data('modal')).modal({
+                        fadeDuration: 100
+                    });
+                    return false;
+                } else if ($(modalId).hasClass('modal-sec')) {
+                    $($(this).data('modal')).modal({
+                        escapeClose: false,
+                        showClose: false,
+                        fadeDuration: 100
+                    });
+                    return false;
+                } else {
+                    return false;
+                }
+            });
+            
+        });
+
+        //알림 관련 기능
+        $(function () {
+            $("#alert01").on("click", function () {
+                jQueryAlert('success',"성공내용성공내용성공내용");
+            });
+            $("#alert02").on("click", function () {
+                jQueryAlert('error',"에러내용에러내용에러내용에러내용");
+            });
+            $("#alert03").on("click", function () {
+                jQueryAlert('warning',"경고내용경고내용경고내용경고내용");
+            });
+            $("#alert04").on("click", function () {
+                jQueryAlert('info',"정보내용정보내용정보내용정보내용");
+            });
+
+            function jQueryAlert(type, msg) {
+                let $type = type;
+                let messageBox = msg;
+                switch ($type) {
+                    case 'success':
+                    messageBox = $.parseHTML('<div class="alert__success"></div>');
+                    break;
+                    case 'error':
+                    messageBox = $.parseHTML('<div class="alert__error"></div>');
+                    break;
+                    case 'warning':
+                    messageBox = $.parseHTML('<div class="alert__warning"></div>');
+                    break;
+                    case 'info':
+                    messageBox = $.parseHTML('<div class="alert__info"></div>');
+                    break;
+                }
+                $("body").append(messageBox);
+                $(messageBox).dialog({
+                    dialogClass :$type,
+                    open: $(messageBox).append(msg),
+                    draggable: false,
+                    modal: true,
+                    buttons: {
+                        "OK": function () {
+                            $(this).dialog("close");
+                        }
+                    },
+                    show: {
+                        effect: 'fade',
+                        duration: 200 //at your convenience
+                    },
+                    hide: {
+                        effect: 'fade',
+                        duration: 200 //at your convenience
+                    }
+                });
+            };
+        
+        });
+    </script>
+</body>
+</html>
