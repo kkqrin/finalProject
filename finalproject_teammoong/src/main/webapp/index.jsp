@@ -23,6 +23,7 @@
 	
 	
 	
-	<a href="/noticeList.do">공지사항</a>
+	<a href="/noticeList.do">공지사항</a><br><br>
+	
 </body>
 </html>
