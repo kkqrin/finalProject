@@ -1,9 +1,12 @@
 
 let timeId;
 $(document).ready(function(){
+
+    $(".end-hotdeal").hide();
+
     timeId = window.setInterval(function () {
         var now = new Date();
-        var end = new Date(now.getFullYear(),now.getMonth(),now.getDate(),24,00,00);
+        var end = new Date(now.getFullYear(),now.getMonth(),now.getDate(),11,27,20);
     
         var nt = now.getTime();
         var et = end.getTime();
@@ -24,9 +27,12 @@ $(document).ready(function(){
             $(".minutes").html(min);
             $(".seconds").html(sec);
         }else{
-            $(".hours").html("00");
-            $(".minutes").html("00");
-            $(".seconds").html("00");
+            // $(".hours").html("00");
+            // $(".minutes").html("00");
+            // $(".seconds").html("00");
+            $(".hotdeal-time").children().hide();
+            $(".hotdeal-time").append($("<span>").text("TIME OUT"));
+            $(".end-hotdeal").show();
         }
 
     }, 1000);

@@ -546,8 +546,8 @@
         <!-- 핫딜 상품 wrap -->
         <div class="posting-item">
             <div class="hotdeal-info">
-                <div class="hotdeal-title">오늘 마감</div>
-                <div class="hotdeal-comment">단하루 공동구매 특가</div>
+                <div class="hotdeal-title">마감 임박</div>
+                <div class="hotdeal-comment">오늘 종료되는 공동구매 딜</div>
                 <div class="hotdeal-time-box">
                     <div class="material-symbols-outlined" style="font-variation-settings:'FILL' 0">schedule</div>
                     <div class="hotdeal-time">
@@ -565,7 +565,9 @@
             <div class="posting-img hotdeal">
                 <img src="/resources/img/product/korean-melon.jpg" />
                 <div class="gonggu-info">2인 공동구매</div>
-                <div class="end-hotdeal">마감됏다!!!</div>
+                <div class="end-hotdeal">
+                    판매시간이 종료되었습니다.
+                </div>
             </div>
             <div class="posting-content">
                 <p class="posting-title">[3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균</p>
