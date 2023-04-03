@@ -114,7 +114,6 @@
 	
 	
 	<!-- 장형천 -->
-	<context:component-scan base-package="kr.or.admin" />
 	
 	
 	
