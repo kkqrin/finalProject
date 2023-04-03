@@ -12,7 +12,7 @@
     <!-- 구글 아이콘 -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <style>
-        .material-symbols-outlined {
+        .material-symbols-outlined.star-rate{
         	/* 구글 아이콘 (별점) */
             font-variation-settings:
             'FILL' 1
@@ -62,7 +62,7 @@
                             <p class="price-sail">26,900원</p>
                         </div>
                         <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div>
@@ -71,7 +71,7 @@
                 <div class="posting-detail">
                     <div class="posting-icon">
                         <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div> -->
@@ -87,7 +87,7 @@
                         </div>
                         <!-- <span class="posting-volume">0개 구매</span> -->
                         <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div> -->
@@ -110,7 +110,7 @@
                             <p class="price-sail">26,900원</p>
                         </div>
                         <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div>
@@ -119,7 +119,7 @@
                 <div class="posting-detail">
                     <div class="posting-icon">
                         <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div> -->
@@ -135,7 +135,7 @@
                         </div>
                         <!-- <span class="posting-volume">0개 구매</span> -->
                         <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div> -->
@@ -158,7 +158,7 @@
                             <p class="price-sail">26,900원</p>
                         </div>
                         <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div>
@@ -167,7 +167,7 @@
                 <div class="posting-detail">
                     <div class="posting-icon">
                         <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div> -->
@@ -183,7 +183,7 @@
                         </div>
                         <!-- <span class="posting-volume">0개 구매</span> -->
                         <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div> -->
@@ -206,7 +206,7 @@
                             <p class="price-sail">26,900원</p>
                         </div>
                         <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div>
@@ -215,7 +215,7 @@
                 <div class="posting-detail">
                     <div class="posting-icon">
                         <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div> -->
@@ -231,7 +231,7 @@
                         </div>
                         <!-- <span class="posting-volume">0개 구매</span> -->
                         <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div> -->
@@ -254,7 +254,7 @@
                             <p class="price-sail">26,900원</p>
                         </div>
                         <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div>
@@ -263,7 +263,7 @@
                 <div class="posting-detail">
                     <div class="posting-icon">
                         <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div> -->
@@ -279,7 +279,7 @@
                         </div>
                         <!-- <span class="posting-volume">0개 구매</span> -->
                         <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div> -->
@@ -302,7 +302,7 @@
                             <p class="price-sail">26,900원</p>
                         </div>
                         <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div>
@@ -311,7 +311,7 @@
                 <div class="posting-detail">
                     <div class="posting-icon">
                         <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div> -->
@@ -327,7 +327,7 @@
                         </div>
                         <!-- <span class="posting-volume">0개 구매</span> -->
                         <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div> -->
@@ -350,7 +350,7 @@
                             <p class="price-sail">26,900원</p>
                         </div>
                         <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div>
@@ -359,7 +359,7 @@
                 <div class="posting-detail">
                     <div class="posting-icon">
                         <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div> -->
@@ -375,7 +375,7 @@
                         </div>
                         <!-- <span class="posting-volume">0개 구매</span> -->
                         <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div> -->
@@ -398,7 +398,7 @@
                             <p class="price-sail">26,900원</p>
                         </div>
                         <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div>
@@ -407,7 +407,7 @@
                 <div class="posting-detail">
                     <div class="posting-icon">
                         <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div> -->
@@ -423,7 +423,7 @@
                         </div>
                         <!-- <span class="posting-volume">0개 구매</span> -->
                         <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div> -->
@@ -446,7 +446,7 @@
                             <p class="price-sail">26,900원</p>
                         </div>
                         <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div>
@@ -455,7 +455,7 @@
                 <div class="posting-detail">
                     <div class="posting-icon">
                         <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div> -->
@@ -471,7 +471,7 @@
                         </div>
                         <!-- <span class="posting-volume">0개 구매</span> -->
                         <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div> -->
@@ -494,7 +494,7 @@
                             <p class="price-sail">26,900원</p>
                         </div>
                         <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div>
@@ -503,7 +503,7 @@
                 <div class="posting-detail">
                     <div class="posting-icon">
                         <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div> -->
@@ -519,7 +519,7 @@
                         </div>
                         <!-- <span class="posting-volume">0개 구매</span> -->
                         <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div> -->
@@ -581,7 +581,7 @@
                 <div class="posting-detail">
                     <div class="posting-icon">
                         <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div> -->
@@ -597,7 +597,7 @@
                         </div>
                         <!-- <span class="posting-volume">0개 구매</span> -->
                         <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div>
@@ -635,7 +635,7 @@
                 <div class="posting-detail">
                     <div class="posting-icon">
                         <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div> -->
@@ -651,7 +651,7 @@
                         </div>
                         <!-- <span class="posting-volume">0개 구매</span> -->
                         <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div>
@@ -677,7 +677,7 @@
                 <div class="posting-detail">
                     <div class="posting-icon">
                         <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div> -->
@@ -693,7 +693,7 @@
                         </div>
                         <!-- <span class="posting-volume">0개 구매</span> -->
                         <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div>
@@ -718,7 +718,7 @@
                 <div class="posting-detail">
                     <div class="posting-icon">
                         <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div> -->
@@ -734,7 +734,7 @@
                         </div>
                         <!-- <span class="posting-volume">0개 구매</span> -->
                         <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div>
@@ -759,7 +759,7 @@
                 <div class="posting-detail">
                     <div class="posting-icon">
                         <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div> -->
@@ -775,7 +775,7 @@
                         </div>
                         <!-- <span class="posting-volume">0개 구매</span> -->
                         <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div>
@@ -800,7 +800,7 @@
                 <div class="posting-detail">
                     <div class="posting-icon">
                         <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div> -->
@@ -816,7 +816,7 @@
                         </div>
                         <!-- <span class="posting-volume">0개 구매</span> -->
                         <div class="star-rating">
-                            <div class="material-symbols-outlined">star</div>
+                            <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
                         </div>

@@ -199,6 +199,7 @@ a {
     border-radius: 5px;
     padding: 4px;
     font-size: 10px;
+    display: inline-block;
 }
 
 .posting-volume{
