@@ -69,7 +69,7 @@
 		    const form = new FormData();
 		    form.append("imageFile", file);
 		    $.ajax({
-		        url: "/uploadImage",
+		        url: "/uploadImage.do",
 		        type: "post",
 		        data: form,
 		        processData: false,

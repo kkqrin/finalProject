@@ -63,6 +63,7 @@ public class NoticeController {
 	@ResponseBody
 	public String uploadImage(@RequestParam("imageFile") MultipartFile multipartFile, HttpServletRequest request, HttpServletResponse response) throws IOException {
 	    // 이미지 파일 저장
+		request.setCharacterEncoding("utf-8");
 	    String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/notice/noticeImg/");
 	    File file = new File(savePath, multipartFile.getOriginalFilename());
 	    multipartFile.transferTo(file);
