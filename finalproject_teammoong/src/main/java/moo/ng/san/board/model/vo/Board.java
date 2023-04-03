@@ -1,6 +1,5 @@
 package moo.ng.san.board.model.vo;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
