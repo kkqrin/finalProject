@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="/resources/css/common/default.css" />
     <!--헤더 css-->
     <link rel="stylesheet" href="/resources/css/common/header.css" />
+    
 </head>
 <body>
 	<div class="header-wrap">
@@ -51,9 +52,9 @@
 		            </div>
 	            </div>
                 <div class="middle-right">
-	                <a href="#"><span class="material-symbols-outlined">notifications</span></a>
-	                <a href="#"><span class="material-symbols-outlined">favorite</span></a>
-	                <a href="#"><span class="material-symbols-outlined">shopping_cart</span></a>
+	                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">notifications</span></a>
+	                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">favorite</span></a>
+	                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">shopping_cart</span></a>
             	</div>
             </div>
 
@@ -63,17 +64,35 @@
                 	<span class="material-symbols-outlined">reorder</span>
                 	카테고리
 	                </a>
- <!-- dropdown메뉴 --><div class="category-dropdown">
-				      	<ul>
-				      		<li>카테고리</li>
-				      		<li><a href="#">카테고리</a></li>
-				      		<li><a href="#">카테고리</a></li>
-				      	</ul>
-				      	<ul>
-				      		<li>카테고리</li>
-				      		<li><a href="#">카테고리</a></li>
-				      		<li><a href="#">카테고리</a></li>
-				      	</ul>
+					 <!-- dropdown메뉴 -->
+					 <div class="category-dropdown">
+					 	<div>
+					      	<ul>
+					      		<li>대분류</li>
+					      		<li><a href="#">소분류</a></li>
+					      		<li><a href="#">소분류</a></li>
+					      	</ul>
+					      	<ul>
+					      		<li>대분류</li>
+					      		<li><a href="#">소분류</a></li>
+					      		<li><a href="#">소분류</a></li>
+					      	</ul>
+					      	<ul>
+					      		<li>대분류</li>
+					      		<li><a href="#">소분류</a></li>
+					      		<li><a href="#">소분류</a></li>
+					      	</ul>
+					      	<ul>
+					      		<li>대분류</li>
+					      		<li><a href="#">소분류</a></li>
+					      		<li><a href="#">소분류</a></li>
+					      	</ul>
+					      	<ul>
+					      		<li>대분류</li>
+					      		<li><a href="#">소분류</a></li>
+					      		<li><a href="#">소분류</a></li>
+					      	</ul>
+				      	</div>
 			    	</div><!-- dropdown메뉴 -->
                 </div>
                 
@@ -83,12 +102,20 @@
                 <div class="together">
                 	<a href="/boardList.do">
                		 여기여기붙어라
-               		 <span class="material-symbols-outlined">recommend</span>
+               		 <span class="material-symbols-outlined recommend">recommend</span>
                		</a>
                 </div>
             </div>
             
         </div><!--header-content-->
     </div><!--header-wrap-->
+    
+    <script>
+    	$(".menu-category").hover(function(){
+    		$(".category-dropdown").slideToggle();
+    		$(".category-dropdown").css("display","flex");
+    	})
+    		
+    </script>
 </body>
 </html>

@@ -32,11 +32,13 @@
 	<select id="selectBeforeMember" resultType="_int">
 		select count(*) from member_tbl where reg_date between '2023-03-20' and sysdate-1
 	</select>
-	
+
+
 <!-- 	<select id="selectAllOrderCount" resultType="_int"> -->
 <!-- 		select count(*) from product_tbl -->
 <!-- 	</select> -->
-	
+
+
 	<select id="selectBeforeOrder" resultType="_int">
 		select count(*) from order_tbl where order_date between '2023-03-20' and sysdate-1 
 	</select>
