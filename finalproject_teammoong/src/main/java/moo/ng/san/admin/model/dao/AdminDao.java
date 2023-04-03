@@ -1,15 +1,15 @@
-package kr.or.admin.model.dao;
+package moo.ng.san.admin.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kr.or.admin.model.service.Board;
-import kr.or.admin.model.service.Member;
-import kr.or.admin.model.service.Order;
+import moo.ng.san.member.model.vo.Member;
+import moo.ng.san.product.model.vo.Product;
 
 @Repository
 public class AdminDao {
@@ -73,6 +73,45 @@ public class AdminDao {
 		
 		return Integer.toString(result);
 	}
+
+	public ArrayList<Member> selectAllMemberList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("admin.selectAllMemberList",map);
+		
+		return (ArrayList<Member>)list;
+	}
+
+	public int selectMemberCount() {
+		int totalCount = sqlSession.selectOne("admin.memberTotalCount");
+		return totalCount;
+	}
+
+	public int updateMemberGrade(Member m) {
+		int result = sqlSession.update("admin.updateMemberGrade",m);
+		return result;
+	}
+
+	public ArrayList<Member> selectSearchMember(Member m) {
+		List list = sqlSession.selectList("admin.selectSearchMember", m);
+
+		return (ArrayList<Member>)list;
+	}
+
+	public int selectMonthCount() {
+		int monthCount = sqlSession.selectOne("admin.selectMonthCount");
+		return monthCount;
+	}
+
+	public ArrayList<Product> selectAllProductList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("admin.selectAllProductList",map);
+		
+		return (ArrayList<Product>)list;
+	}
+
+	public int selectProductCount() {
+		int totalCount = sqlSession.selectOne("admin.productTotalCount");
+		return totalCount;
+	}
+
 
 
 	

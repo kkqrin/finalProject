@@ -1,0 +1,142 @@
+
+.photo-review-item{
+    float: left;
+    background-color: lemonchiffon;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.photo-review-img{
+    width: 200px;
+    height: 200px;
+    background-color: hotpink;
+    margin: 0 auto;
+    position: relative;
+}
+
+.photo-review-img>img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo-review-more{
+    position: absolute;
+    background-color: rgba(110, 110, 110, 0.45);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    color: #eee;
+    font-size: 22px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 200px;
+}
+
+.review-header{
+    /* background-color: cornflowerblue; */
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+}
+
+.review-navi{
+    display: flex;
+}
+
+.review-filter{
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.review-range{
+    cursor: pointer;
+}
+
+.review-range-view{
+    position: absolute;
+    background-color: #fff;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+}
+
+.review-range-thing{
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ddd;
+    color: #8d8d8d;
+    cursor: pointer;
+}
+
+.review-range-thing:hover{
+    color: #3a3a3a;
+}
+
+.review-range-thing:last-child{
+    border-bottom: none;
+}
+
+.review-box{
+    /* background-color: #eee; */
+    display: flex;
+    padding: 30px;
+}
+
+.review-img{
+    width: 300px;
+    height: 300px;
+    border: 1px solid black;
+}
+
+.review-img>img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.review-right{
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+    padding-left: 30px;
+}
+
+.review-info{
+    /* background-color: aliceblue; */
+    width: 800px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.review-option{
+    display: flex;
+}
+
+.material-symbols-outlined.star-rate{
+    font-variation-settings:
+    'FILL' 1;
+    color: gold;
+}
+
+.review-content{
+    /* background-color: lavender; */
+    width: 800px;
+    height: 200px;
+    padding: 30px;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+.review-like{
+    text-align: right;
+    padding-top: 15px;
+    /* background-color: honeydew; */
+}
+
+.material-symbols-outlined.review-like-on{
+    display: none;
+}
