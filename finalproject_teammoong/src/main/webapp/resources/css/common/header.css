@@ -144,3 +144,16 @@
 .category-dropdown li:not(:first-child):hover{
 	background-color: #f2f4f5;
 }
+
+
+/*===========================================*/
+.helloMsg{
+	font-size:14px;
+	margin-right:30px;
+	color: #b6e2a1;
+}
+.staffMsg{
+	font-size:14px;
+	margin-right:30px;
+	color: red;
+}

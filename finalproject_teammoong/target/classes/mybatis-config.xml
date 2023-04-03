@@ -12,7 +12,7 @@
 		
 		
 		
-		
+		<typeAlias type="moo.ng.san.member.model.vo.Member" alias="m" />
 		
 		
 		

@@ -18,7 +18,7 @@
 				<a>아이디</a>
 				<input class="input-basic" type="text" name="memberId" placeholder="아이디를 입력하세요">
 				<a>비밀번호</a>
-				<input class="input-basic" type="passowrd" name="memberPw" placeholder="비밀번호를 입력하세요">
+				<input class="input-basic" type="password" name="memberPw" placeholder="비밀번호를 입력하세요">
 				<div class="area-btn full">
 					<button type="button" class="btn btn-border-pri size02">회원가입</button>
 					<button type="submit" class="btn btn-pri size02">로그인</button>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,11 +35,31 @@
         <div class="header-content">
         
             <div class="header-top">
-                <div class="top-menu">
-                    <a href="/noticeList.do">공지사항</a><span>|</span>
-                    <a href="#">회원가입</a><span>|</span>
-                    <a href="/loginFrm.do">로그인</a>
-                </div>
+            	<c:choose>
+            		<c:when test="${empty sessionScope.m}">
+		                <div class="top-menu">
+		                    <a href="/noticeList.do">공지사항</a><span>|</span>
+		                    <a href="#">회원가입</a><span>|</span>
+		                    <a href="/loginFrm.do">로그인</a>
+		                </div>
+	                </c:when>
+	                <c:when test="${sessionScope.m.memberStatus eq 1}">
+	                	<div class="top-menu">
+	                		<a class="helloMsg">${sessionScope.m.memberName }님 환영합니다!</a>
+		                    <a href="/noticeList.do">공지사항</a><span>|</span>
+		                    <a href="#">마이페이지</a><span>|</span>
+		                    <a href="/logout.do">로그아웃</a>
+		                </div>
+	                </c:when>
+	                <c:when test="${sessionScope.m.memberStatus eq 0}">
+	               		 <div class="top-menu">
+	                		<a class="staffMsg">관리자 버전으로 접속중입니다.</a>
+		                    <a href="/noticeList.do">공지사항</a><span>|</span>
+		                    <a href="/admin.do">관리자페이지</a><span>|</span>
+		                    <a href="/logout.do">로그아웃</a>
+		                </div>
+	                </c:when>
+                </c:choose>
             </div>
 
             <div class="header-middle">
