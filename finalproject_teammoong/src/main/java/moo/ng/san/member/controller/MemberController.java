@@ -42,4 +42,10 @@ public class MemberController {
 		return "redirect:/";
 	}//logOut
 	
+	
+	@RequestMapping(value = "/myPage.do")
+	public String myPage() {
+		return "member/myPage";
+	}//myPage
+	
 }//MemberController
