@@ -81,7 +81,7 @@
                 <div><a href="#">타임딜</a></div>
                 <div><a href="#">인기상품</a></div>
                 <div class="together">
-                	<a href="/boardList.do">
+                	<a href="/boardList.do?reqPage=1">
                		 여기여기붙어라
                		 <span class="material-symbols-outlined">recommend</span>
                		</a>
