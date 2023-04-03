@@ -337,6 +337,7 @@ a.ui-button:active,
 
 
 /*  ====  common  ====  */
-.main-content-wrap{width:1200px;margin: 0 auto;flex:1;}
-.content-wrap {width:1200px; margin: 0 auto;}
+.main-content-wrap{width:1200px;margin: 0 auto;flex:1;padding-top:133px;}
+.content-wrap {width:1200px; margin: 0 auto;padding-top:133px;}
+.footer-wrap{width:1200px; margin: 0 auto;}
 .wrap {padding:32px;}

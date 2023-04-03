@@ -1,6 +1,5 @@
 package moo.ng.san.board.model.vo;
 
-import javax.annotation.sql.DataSourceDefinition;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,3 +29,7 @@ public class Board {
 	private int boardCount;
 	
 }
+
+
+
+

@@ -8,8 +8,8 @@
 <link rel="stylesheet" href="/resources/css/common/footer.css" />
 </head>
 <body>
-	<div class="footer-wrap">
-		<div class="content-wrap">
+	<footer>
+		<div class="footer-wrap">
 			<p>
 				<a href="#">입점문의</a>
 				<a href="#">고객센터</a>
@@ -20,6 +20,6 @@
 			<p>대표: 김규린 김명훈 김홍미 안진배 이화정 장형천</p>
 			<p>Copyright 2023. 뭉쳐야산다 all rights reserved.</p>
 		</div>
-	</div>
+	</footer>
 </body>
 </html>
