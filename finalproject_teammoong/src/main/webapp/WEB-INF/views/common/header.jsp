@@ -46,7 +46,7 @@
 	                <c:when test="${sessionScope.m.memberStatus eq 1}">
 	                	<div class="top-menu">
 	                		<a class="helloMsg">${sessionScope.m.memberName }님 환영합니다!</a>
-		                    <a href="/noticeList.do">공지사항</a><span>|</span>
+		                    <a href="/noticeList.do?reqPage=1"">공지사항</a><span>|</span>
 		                    <a href="#">마이페이지</a><span>|</span>
 		                    <a href="/logout.do">로그아웃</a>
 		                </div>
@@ -54,7 +54,7 @@
 	                <c:when test="${sessionScope.m.memberStatus eq 0}">
 	               		 <div class="top-menu">
 	                		<a class="staffMsg">관리자 버전으로 접속중입니다.</a>
-		                    <a href="/noticeList.do">공지사항</a><span>|</span>
+		                    <a href="/noticeList.do?reqPage=1"">공지사항</a><span>|</span>
 		                    <a href="/admin.do">관리자페이지</a><span>|</span>
 		                    <a href="/logout.do">로그아웃</a>
 		                </div>
