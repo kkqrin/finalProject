@@ -11,4 +11,13 @@ public class MemberController {
 		return "common/msg";
 	}
 	
-}
+	
+	@RequestMapping(value="/loginFrm.do")
+	public String loginFrm() {
+		return "member/loginFrm";
+	}
+	
+	
+	
+	
+}//MemberController

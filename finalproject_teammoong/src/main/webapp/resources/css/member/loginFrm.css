@@ -1,0 +1,19 @@
+.content-wrap{
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.memberLogin{
+	width: 500px;
+	margin: 0 auto;
+}
+.memberLogin>div{
+	text-align: center;
+}
+
+.memberLogin .search{
+	display: flex;
+	justify-content: center;
+}
+

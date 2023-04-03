@@ -337,7 +337,16 @@ a.ui-button:active,
 
 
 /*  ====  common  ====  */
-.main-content-wrap{width:1200px;margin: 0 auto;flex:1;padding-top:133px;padding-top:133px;}
-.content-wrap {width:1200px; margin: 0 auto;padding-top:133px;}
+.main-content-wrap{width:1200px;margin: 0 auto;flex:1;padding-top:133px;padding-bottom:210px}
+.content-wrap {width:1200px; margin: 0 auto; padding-top:133px;padding-bottom:210px}
 .footer-wrap{width:1200px; margin: 0 auto;padding:30px 0;}
 .wrap {padding:32px;}
+
+footer{
+	height:160px;
+	width:100%;
+	background-color: #3a3a3a;
+	color: var(--bg-secondary);
+	position: absolute;
+	bottom: 0;
+}
