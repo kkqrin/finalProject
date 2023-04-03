@@ -85,7 +85,7 @@
 	
 	
 	
-	
+	<a href="/boardList.do">여여붙</a>
 	
 	
 	

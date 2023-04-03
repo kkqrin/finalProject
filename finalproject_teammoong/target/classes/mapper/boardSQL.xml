@@ -18,8 +18,8 @@
 			#{referenceLink},
 			to_date(#{deliveryDate},'yyyy-mm-dd'),
 			#{boardEtc},
-			1,
-			0
+			0,
+			1
 			)
 	</insert>
 </mapper>
