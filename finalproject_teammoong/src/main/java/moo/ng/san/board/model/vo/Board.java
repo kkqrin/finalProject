@@ -1,5 +1,7 @@
 package moo.ng.san.board.model.vo;
 
+import java.util.ArrayList;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,6 +28,7 @@ public class Board {
 	private String boardEtc;
 	private int boardStatus;
 	private int boardCount;
+	private ArrayList<FileVO> filepath;
 	
 }
 
