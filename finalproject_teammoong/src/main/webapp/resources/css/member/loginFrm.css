@@ -27,8 +27,9 @@ input{
 .id-pw-input{margin: 0 auto;width: 80%;}
 .search-zone a{margin: 20px;}
 p{text-align: center;}
-p>a{
+.proposalMsg a{
 	font-size: 16px;
 	font-weight: bold;
 	text-decoration: underline;
+	color:#f18f43;
 }

@@ -30,7 +30,7 @@
 				<a href="/searchIdFrm.do">아이디 찾기</a>
 				<a href="/searchPwFrm.do">비밀번호 찾기</a>
 			</div>
-			<p>아직 뭉쳐야 산다 회원이 아니신가요? <a href="#">회원가입하기</a></p>
+			<p class="proposalMsg">아직 뭉쳐야 산다 회원이 아니신가요? <a href="#"> 회원가입하기</a></p>
 		</div>
 	</div>
 	

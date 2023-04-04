@@ -80,7 +80,7 @@ body {overflow-y:overlay;}
 
 /*  ====  text  ====  */
 .bold {font-weight:700!important;}
-.link {text-decoration-line:underline;text-underline-position:under;cursor:pointer;}
+.link {text-decoration: none; cursor:pointer;}
 .link:hover {opacity:0.7;}
 [class*="txt_"].error {color:var(--error)!important;}
 h1, .txt_h01 {font-weight:500;font-size:64px;line-height:96px;}
