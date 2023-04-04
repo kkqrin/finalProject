@@ -1,13 +1,29 @@
 package moo.ng.san.product.model.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import moo.ng.san.product.model.dao.ProductDao;
+import moo.ng.san.product.model.vo.FileVO;
+import moo.ng.san.product.model.vo.Product;
 @Service
 public class ProductService {
 	@Autowired
 	private ProductDao dao;
+
+	public int insertProduct(Product p, ArrayList<FileVO> fileList) {
+		int result = dao.insertProduct(p);
+		if(result > 0) {
+			int productNo = dao.selectProductNo();
+			for(FileVO file : fileList) {
+				file.setProductNo(productNo);
+				result += dao.insertFile(file);
+			}
+		}
+		return result;
+	}
 	
 	
 	
