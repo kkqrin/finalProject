@@ -1,10 +1,15 @@
 package common;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -53,6 +58,29 @@ public class FileManager {
 		}
 		return filepath;
 	}
+	public void download(String savePath, String filename, HttpServletResponse response) {
+	    File file = new File(savePath + filename);
+	    try (FileInputStream fis = new FileInputStream(file);
+	         BufferedInputStream bis = new BufferedInputStream(fis);
+	         OutputStream out = response.getOutputStream()) {
+
+	        // 파일 다운로드를 위한 설정
+	        response.setContentType("application/octet-stream");
+	        response.setHeader("Content-Disposition", "attachment;filename=" + filename);
+	        response.setHeader("Content-Transfer-Encoding", "binary");
+
+	        byte[] buffer = new byte[1024];
+	        int readCount;
+	        while ((readCount = bis.read(buffer)) != -1) {
+	            out.write(buffer, 0, readCount);
+	        }
+	    } catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+
 
 	public boolean deleteFile(String savePath, String filepath) {
 		File delFile = new File(savePath+filepath);

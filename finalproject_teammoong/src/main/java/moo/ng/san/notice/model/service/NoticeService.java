@@ -72,6 +72,33 @@ public class NoticeService {
 
 	public Notice selectOneNotice(int noticeNo) {
 		Notice n = dao.selectOneNotice(noticeNo);
+		
 		return n;
+	}
+
+	public int noticeUpdate(Notice n, ArrayList<FileVO> fileList, int[] fileNo) {
+		int result = dao.noticeUpdate(n);
+		if(result > 0) {
+			if(fileNo != null) {
+				for(int no : fileNo) {
+					result += dao.deleteFile(no);
+				}
+			}
+			for(FileVO file : fileList) {
+				file.setNoticeNo(n.getNoticeNo());
+				result += dao.insertFile(file);
+			}
+		}
+		return result;
+	}
+
+	public int noticeDelete(int noticeNo) {
+		int result = dao.noticeDelete(noticeNo);
+		return result;
+	}
+
+	public int updateReadCount(Notice n) {
+		int result =dao.updateReadCount(n);
+		return result;
 	}
 }
