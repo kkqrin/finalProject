@@ -20,10 +20,10 @@ public class ProductController {
 	
 //	규린작업공간 20~100
 	
-	
-	
-	
-	
+	@RequestMapping(value="/photoReviewMore.do")
+	public String photoReviewMore() {
+		return "product/photoReviewMore";
+	}
 	
 	
 	

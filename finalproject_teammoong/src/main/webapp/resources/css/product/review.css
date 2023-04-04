@@ -9,7 +9,6 @@
 .photo-review-img{
     width: 200px;
     height: 200px;
-    background-color: hotpink;
     margin: 0 auto;
     position: relative;
 }
@@ -31,6 +30,12 @@
     font-weight: 600;
     text-align: center;
     line-height: 200px;
+    cursor: pointer;
+}
+
+.photo-review-more>a{
+    display: inline-block;
+    width: 100%;
 }
 
 .review-header{

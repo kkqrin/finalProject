@@ -5,12 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+    <!-- 슬릭 슬라이더 제이쿼리 -->
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <!-- 상품 css -->
     <link rel="stylesheet" href="/resources/css/product/product.css"/>
+    <!-- 슬릭 슬라이더 -->
     <link rel="stylesheet" href="/resources/slick/slick-theme.css"/>
     <link rel="stylesheet" href="/resources/slick/slick.css"/>
     <!-- 구글 아이콘 -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- 슬라이더 화살표 아이콘 arrow -->
+	<script src="https://kit.fontawesome.com/285f888d1c.js" crossorigin="anonymous"></script>
     <style>
         .material-symbols-outlined.star-rate{
         	/* 구글 아이콘 (별점) */
@@ -19,10 +25,18 @@
         }
         .slick-prev:before, .slick-next:before {
         	/* 슬릭 슬라이더 아이콘 */
-            color: black;
+            color: #565656;
+			font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
         }
-        .slick-prev.slick-disabled:before,
-		.slick-next.slick-disabled:before
+        .slick-next:before{
+			content: '\f054' !important;
+		}
+		.slick-prev:before{
+			content: '\f053' !important;
+		}
+        .popular-product-wrap>.slick-prev.slick-disabled,
+		.popular-product-wrap>.slick-next.slick-disabled
 		{
 			/* 슬릭 슬라이더 첫,마지막페이지 이전,다음 아이콘 숨김 */
     		/* opacity: .25; */
@@ -833,8 +847,6 @@
 
 
     <!-- 상품 js -->
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="/resources/slick/slick.min.js"></script>
     <script src="/resources/js/product.js"></script>
 
