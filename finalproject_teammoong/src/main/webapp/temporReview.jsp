@@ -7,6 +7,12 @@
 <title>Insert title here</title>
     <!-- 리뷰 css -->
     <link rel="stylesheet" href="/resources/css/product/review.css"/>
+	<style>
+		.modal-body>.selectBox-widht-explain{
+			width: 80%;
+			margin: 0 auto;
+		}
+	</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -166,14 +172,18 @@
 				<div class="modal-body">
 					<!--내용영역-->
 					<!-- <h5>내용타이틀</h5> -->
-					<select class="review-color">
-						<option selected>색상</option>
-						<option value="ivory">아이보리</option>
-					</select>
-					<select class="review-size">
-						<option selected>사이즈</option>
-						<option value="240">240</option>
-					</select>
+					<div class="selectBox-widht-explain">
+                        <select class="select-custom review-color" id="ui-id-1">
+                            <option value="0">색상</option>
+                            <option value="Item6">Item</option>
+                            <option value="Item7">Item</option>
+                        </select>
+						<select class="select-custom review-size" id="ui-id-1">
+                            <option value="0">사이즈</option>
+                            <option value="Item6">240</option>
+                            <option value="Item7">245</option>
+                        </select>
+                    </div>
 					<!--//내용영역-->
 				</div>
 				<div class="area-btn center">
@@ -209,5 +219,10 @@
 			
 		});
 	</script>
+		<script>
+			$( function() {
+				$( ".select-custom" ).selectmenu();
+			});
+		</script>
 </body>
 </html>

@@ -1,9 +1,11 @@
 @import './reset.css';
 
 :root {
-    --primary:#93469d;
-    --secondary:#E78A9A;
-    --tertiary:#0A2A33;
+    /*회의를 통해 정해진 색 네가지*/
+    --primary:#ffa200;
+    --secondary:#f18f43;
+    --tertiary:#fbf388;
+    --fourth:#70ad54;
 
     --violet-rgb:147, 70, 157,;
     --violet-100:#f1bff8;
@@ -78,7 +80,7 @@ body {overflow-y:overlay;}
 
 /*  ====  text  ====  */
 .bold {font-weight:700!important;}
-.link {text-decoration-line:underline;text-underline-position:under;cursor:pointer;}
+.link {text-decoration: none; cursor:pointer;}
 .link:hover {opacity:0.7;}
 [class*="txt_"].error {color:var(--error)!important;}
 h1, .txt_h01 {font-weight:500;font-size:64px;line-height:96px;}
@@ -199,6 +201,7 @@ input[type='password'],
 textarea,
 select {font-family:'Noto Sans KR', sans-serif;font-weight:400;font-size:14px;line-height:22px;}
 
+input[type='password'],
 input[type='email'],
 input[type='number'],
 input[type='text'] {height:100%;min-height:36px;padding:8px 10px;border-radius:4px;}
@@ -226,7 +229,7 @@ textarea:focus {background:rgba(var(--violet-rgb) 0.05);}
 
 .input-noborder {display:flex;width:100%;background:var(--bg-primary);border-width:0px;border-radius:4px;}
 
-.input-basic{display:flex;width:100%;min-height:38px;background:var(--bg-primary);border-width:1px;border-style:solid;border-color:var(--content-tertiary);border-radius:4px;}
+input{display:flex;width:100%;min-height:38px;background:var(--bg-primary);border-width:1px;border-style:solid;border-color:var(--content-tertiary);border-radius:4px;}
 .input-basic input[type='password'] {width:100%;height:36px;padding:8px 10px;border-radius:4px;font-weight:400;font-size:14px;line-height:22px;letter-spacing:0.125em;}
 .input-basic input[type='password']::placeholder {font-weight:400;font-size:14px;line-height:22px;}
 .input-basic.readonly {border:0!important;pointer-events:none;}
