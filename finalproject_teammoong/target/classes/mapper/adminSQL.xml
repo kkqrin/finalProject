@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="admin">
+
 	<select id="selectAllMemberCount" resultType="_int">
 		select count(*) from member_tbl 
 	</select>
@@ -109,7 +110,7 @@
 		select sum(product_price) from product_tbl pt join order_tbl ot on (pt.product_no = ot.product_no) where ot.order_status = 4 and ot.order_date between '2023-03-20' and '2023-03-31'
 	</select>
 	
-	<select id="selectAllProductList" parameterType="map" resultType="product">
+	<select id="selectAllProductList" parameterType="map" resultType="p">
 		select * from
 			(select rownum as rnum, b.* from
 				(select
@@ -131,11 +132,11 @@
 		select count(*) from product_tbl
 	</select>
 	
-	<update id="updateProductStatus" parameterType="product">
+	<update id="updateProductStatus" parameterType="p">
 		update product_tbl set product_status = #{productStatus} where product_no = #{productNo};
 	</update>
 	
-	<select id="selectSearchProduct" parameterType="product" resultType="product">
+	<select id="selectSearchProduct" parameterType="p" resultType="p">
 		select product_no as productNo,
 					category_No as categoryNo,
 					product_name as productName,
@@ -157,11 +158,7 @@
 		</choose>
 	</select>
 	
-<<<<<<< HEAD
  	<select id="selectAllOrderList" parameterType="map" resultType="o">
-=======
- 	<select id="selectAllOrderList" parameterType="map" resultType="order">
->>>>>>> parent of 251817a ([커밋]날려버릴 커밋)
 		select * from
 			(select rownum as rnum, b.* from
 			
@@ -182,26 +179,19 @@
 				
 		where rnum between #{start} and #{end}
 	</select>
-	
-	<select id="selectOrderTotalCount" resultType="_int">
+
+
+<!-- 체크할것 -->	
+<!-- 	<select id="selectOrderTotalCount" resultType="_int">
 		select count(*) from product_tbl
 	</select>
-<<<<<<< HEAD
- -->	
+	 -->
+	
 	<update id="updateDeliveryStatus" parameterType="p">
 		update delivery_tbl set delivery_status = #{deliveryStatus} where delivery_no = #{deliveryNo}
 	</update>
 	
 	<select id="selectSearchDelivery" resultType="o">
-=======
-	
-	
-	<update id="updateDeliveryStatus" parameterType="product">
-		update delivery_tbl set delivery_status = #{deliveryStatus} where delivery_no = #{deliveryNo}
-	</update>
-	
-	<select id="selectSearchDelivery" resultType="order">
->>>>>>> parent of 251817a ([커밋]날려버릴 커밋)
 		select
 			ot.order_no as orderNo,
 			ot.member_no as memberNo,
@@ -236,7 +226,7 @@
 		select sum(bt.board_price) from board_join bj join board_tbl bt on (bj.board_no = bt.board_no) where bt.board_date between '2023-03-01' and '2023-03-30 and bt.board_status = 2 
 	</select>
 	
-	<select id="selectAllBoardList" parameterType="map" resultType="board">
+	<select id="selectAllBoardList" parameterType="map" resultType="b">
 		select 
 			bt.board_no as boardNo,
 			bt.board_name as boardName,
@@ -251,8 +241,6 @@
 		join board_join bj on (bt.board_no = bj.board_no)
 		order by count() desc;
 	</select>
-	<!--  -->
-	<!--  -->
-	<!--  -->
+
 	
 </mapper>
