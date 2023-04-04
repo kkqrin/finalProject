@@ -1,9 +1,7 @@
 package moo.ng.san.notice.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -129,5 +127,17 @@ public class NoticeController {
 		}else {
 			return "redirect:/noticeList.do?reqPage=1";
 		}
+	}
+	@RequestMapping(value="/noticeFileDown.do")
+	public void noticeFileDown(int fileNo, HttpServletRequest request, HttpServletResponse response) {
+		//fileNo : DB에서 filename, filepath를 조회해오기위한 용도
+		//request : 파일위치 찾을 때 사용
+		//response : 파일다운로드 로직 구현 시 사용
+		//리턴을 하지않음 - 페이지이동이 필요없으므로
+		FileVO file = service.getFile(fileNo);
+		System.out.println(file);
+		//filename과 filepath를 찾아오기위해서
+		manager.download(file, request, response);
+		
 	}
 }

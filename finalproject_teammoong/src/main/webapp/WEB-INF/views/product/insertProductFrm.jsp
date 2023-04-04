@@ -8,7 +8,7 @@
 <script src="http://code.jquery.com/jquery-3.6.1.js"></script>
 </head>
 <body>
-    <form action="#" method="get">
+    <form action="/insertProduct.do" method="post" enctype="multipart/form-data">
     <table border="3">
         <tr">
             <th>카테고리</th>
@@ -60,7 +60,7 @@
         </tr>
         <tr>
             <th>썸네일</th>
-<!--             <th colspan="2"><input type="file"></th> -->
+            <th colspan="2"><input type="file" multiple></th>
         </tr>
         <tr>
             <th>상품내용</th>

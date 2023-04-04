@@ -10,9 +10,9 @@
 </head>
 <body>
 	<div class="content-wrap">
-	<table>
+	<table class="guide-board">
 		<tr>
-			<th>글번호</th>
+			<th class="">글번호</th>
 			<th>제목</th>
 			<th>작성자</th>
 			<th>조회수</th>
@@ -20,6 +20,16 @@
 		</tr>
 		<c:forEach items="${list }" var="n">
 			<tr>
+			<c:if test="${n.noticeStatus == 1 }">
+				<td><b>${n.noticeNo }</b></td>
+				<td>
+					<b><a href="/noticeView.do?noticeNo=${n.noticeNo}">${n.noticeTitle}</a></b>
+				</td>
+				<td><b>${n.noticeWriter }</b></td>
+				<td><b>${n.readCount }</b></td>
+				<td><b>${n.noticeDate }</b></td>
+			</c:if>
+			<c:if test="${n.noticeStatus == 0 }">
 				<td>${n.noticeNo }</td>
 				<td>
 					<a href="/noticeView.do?noticeNo=${n.noticeNo}">${n.noticeTitle}</a>
@@ -27,12 +37,11 @@
 				<td>${n.noticeWriter }</td>
 				<td>${n.readCount }</td>
 				<td>${n.noticeDate }</td>
+			</c:if>
 			</tr>
 		</c:forEach>
-		<tr>
-			<th colspan="5">${pageNavi }</th>
-		</tr>
 	</table>
+	<div class="pagination">${pageNavi }</div>
 		<c:if test="${sessionScope.m.memberStatus == 0 }">
 			<a href="/noticeWriteFrm.do">글쓰기</a>
 		</c:if>

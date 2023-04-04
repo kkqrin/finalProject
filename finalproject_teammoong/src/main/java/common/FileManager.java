@@ -9,10 +9,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+
+import moo.ng.san.notice.vo.FileVO;
+
+
 
 @Component
 public class FileManager {
@@ -58,27 +64,42 @@ public class FileManager {
 		}
 		return filepath;
 	}
-	public void download(String savePath, String filename, HttpServletResponse response) {
-	    File file = new File(savePath + filename);
-	    try (FileInputStream fis = new FileInputStream(file);
-	         BufferedInputStream bis = new BufferedInputStream(fis);
-	         OutputStream out = response.getOutputStream()) {
-
-	        // 파일 다운로드를 위한 설정
-	        response.setContentType("application/octet-stream");
-	        response.setHeader("Content-Disposition", "attachment;filename=" + filename);
-	        response.setHeader("Content-Transfer-Encoding", "binary");
-
-	        byte[] buffer = new byte[1024];
-	        int readCount;
-	        while ((readCount = bis.read(buffer)) != -1) {
-	            out.write(buffer, 0, readCount);
-	        }
-	    } catch (FileNotFoundException e) {
-	        e.printStackTrace();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
+	public void download(FileVO file, HttpServletRequest request, HttpServletResponse response) {
+		//파일경로
+		String root = request.getSession().getServletContext().getRealPath("/resources/upload/notice/");
+		String downFile = root + file.getFilepath();
+		
+		//파일을 읽어오기위한 주스트림생성(속도개선을위한 보조스트림생성)
+		try {
+			FileInputStream fis = new FileInputStream(downFile);
+			BufferedInputStream bis = new BufferedInputStream(fis);
+			//읽어온 파일을 사용자에게 내보낼 스트림생성
+			ServletOutputStream sos = response.getOutputStream();
+			BufferedOutputStream bos = new BufferedOutputStream(sos);
+			
+			//파일명 처리
+			String resFilename = new String(file.getFileName().getBytes("UTF-8"), "ISO-8859-1");
+			response.setContentType("application/octet-stream");//파일형식이란것을 알려줌
+			response.setHeader("Content-Disposition", "attachment;filename="+resFilename);//파일이름을 알려줌
+			//파일전송
+			while(true) {
+				int read = bis.read();
+				//파일을 계속 읽다가 다읽으면 종료
+				if(read != -1) {
+					bos.write(read);
+				}else {
+					break;
+				}
+			}
+			bos.close();
+			bis.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 	}
 
 

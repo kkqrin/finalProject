@@ -29,7 +29,7 @@
 				<td>
 					<c:forEach items="${n.fileList}" var="f">
 						<p>
-							<a id="fileDown">${f.fileName}</a>
+							<a href="/noticeFileDown.do?fileNo=${f.fileNo }">${f.fileName}</a>
 						</p>
 					</c:forEach>
 				</td>
@@ -48,8 +48,5 @@
 		</table>
 		<a href="/noticeList.do?reqPage=1">목록</a>
 	</div>
-	<script>
-		
-	</script>
 </body>
 </html>
