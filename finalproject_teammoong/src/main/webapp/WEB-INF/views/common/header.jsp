@@ -94,9 +94,9 @@
 			    	</div><!-- dropdown메뉴 -->
                 </div><!-- menu-category -->
                 
-                <div><a href="#">오늘의상품</a></div>
-                <div><a href="#">타임딜</a></div>
                 <div><a href="#">인기상품</a></div>
+                <div><a href="/insertProductFrm.do">물품등록(예비버튼)</a></div>
+                <div><a href="#">오늘의상품</a></div>
                 <div class="together">
                 	<a href="/boardList.do?reqPage=1">
                		 여기여기붙어라
