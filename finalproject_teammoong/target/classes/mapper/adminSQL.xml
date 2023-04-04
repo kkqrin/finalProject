@@ -158,7 +158,9 @@
 		</choose>
 	</select>
 	
+
  	<select id="selectAllOrderList" parameterType="map" resultType="o">
+
 		select * from
 			(select rownum as rnum, b.* from
 			
@@ -185,7 +187,8 @@
 <!-- 	<select id="selectOrderTotalCount" resultType="_int">
 		select count(*) from product_tbl
 	</select>
-	 -->
+-->
+
 	
 	<update id="updateDeliveryStatus" parameterType="p">
 		update delivery_tbl set delivery_status = #{deliveryStatus} where delivery_no = #{deliveryNo}
@@ -242,5 +245,4 @@
 		order by count() desc;
 	</select>
 
-	
 </mapper>

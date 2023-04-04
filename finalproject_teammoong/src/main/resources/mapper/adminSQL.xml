@@ -182,10 +182,12 @@
 
 
 <!-- 체크할것 -->	
-<!-- 	<select id="selectOrderTotalCount" resultType="_int">
+<!-- <select id="selectOrderTotalCount" resultType="_int">
 		select count(*) from product_tbl
 	</select>
-	 -->
+
+ -->
+
 	
 	<update id="updateDeliveryStatus" parameterType="p">
 		update delivery_tbl set delivery_status = #{deliveryStatus} where delivery_no = #{deliveryNo}
@@ -242,5 +244,4 @@
 		order by count() desc;
 	</select>
 
-	
 </mapper>
