@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="/resources/js/jquery-3.6.0.js"></script>
 </head>
 <body>
 	<div class="content-wrap">
@@ -17,7 +18,7 @@
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td>${sessionScope.m.memberId }</td>
+				<td>${n.noticeWriter}</td>
 			</tr>
 			<tr>
 				<th>작성일</th>
@@ -28,7 +29,7 @@
 				<td>
 					<c:forEach items="${n.fileList}" var="f">
 						<p>
-							<a href="/noticeFileDown.do">${f.fileName}</a>
+							<a id="fileDown">${f.fileName}</a>
 						</p>
 					</c:forEach>
 				</td>
@@ -47,5 +48,8 @@
 		</table>
 		<a href="/noticeList.do?reqPage=1">목록</a>
 	</div>
+	<script>
+		
+	</script>
 </body>
 </html>

@@ -43,7 +43,7 @@
                 </div>
                 <div class="middle-center">
 	                <div class="mainSearch">
-	                	<input type="text" class="mainSearch-input" placeholder="상품을 검색해보세요">
+	                	<input type="text" class="mainSearch-input input-noborder" placeholder="상품을 검색해보세요">
 	                	<span class="material-symbols-outlined">search</span>
 		            </div>
 	            </div>

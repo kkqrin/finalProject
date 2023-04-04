@@ -19,7 +19,7 @@
 					notice_no as noticeNo,
 					notice_writer as noticeWriter,
 					notice_title as noticeTitle,
-					notice_date as noticeDate,
+					to_char(notice_date,'yyyy-mm-dd') as noticeDate,
 					notice_status as noticeStatus,
 					read_count as readCount,
 					notice_content as noticeContent
@@ -31,7 +31,7 @@
 	</select>
 	<select id="selectOneNotice" parameterType="_int" resultMap="getNotice">
 		select
-		*
+			*
 		from notice_tbl where notice_no = #{_parameter}
 	</select>
 	<select id="selectFileList" parameterType="_int" resultType="f">
@@ -57,4 +57,20 @@
 					javaType="java.util.ArrayList"
 					/>
 	</resultMap>
+	<update id="noticeUpdate" parameterType="n">
+		update notice_tbl set
+			notice_title = #{noticeTitle},
+			notice_content = #{noticeContent},
+			notice_status = #{noticeStatus}
+		where notice_no = #{noticeNo}
+	</update>
+	<update id="noticeReadCount" parameterType="n">
+		update notice_tbl set
+			read_count = #{readCount}
+		where notice_no = #{noticeNo}
+	</update>
+	<delete id="noticeDelete" parameterType="_int">
+		delete from notice_tbl
+		where notice_no = #{_parameter}
+	</delete>
 </mapper>
