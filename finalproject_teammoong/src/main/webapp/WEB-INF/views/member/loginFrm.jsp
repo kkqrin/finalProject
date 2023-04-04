@@ -9,6 +9,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
+
 	
 	
 	<div class="content-wrap">
@@ -25,9 +26,9 @@
 					</div>
 				</form>	
 			</div>
-			<div class="search">
-				<a href="#">아이디 찾기</a>
-				<a href="#">비밀번호 찾기</a>
+			<div class="search-zone">
+				<a href="/searchIdFrm.do">아이디 찾기</a>
+				<a href="/searchPwFrm.do">비밀번호 찾기</a>
 			</div>
 			<p>아직 뭉쳐야 산다 회원이 아니신가요? <a href="#">회원가입하기</a></p>
 		</div>
