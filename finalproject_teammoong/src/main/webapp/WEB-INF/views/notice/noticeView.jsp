@@ -36,6 +36,14 @@
 			<tr>
 				<td colspan="2">${n.noticeContent }</td>
 			</tr>
+			<c:if test="${not empty sessionScope.m && sessionScope.m.memberId eq n.noticeWriter }">
+				<tr>
+					<th colspan="2">
+						<a href="/noticeUpdateFrm.do?noticeNo=${n.noticeNo }">수정</a>
+						<a href="/noticeDelete.do?noticeNo=${n.noticeNo }">삭제</a>
+					</th>
+				</tr>
+			</c:if>
 		</table>
 		<a href="/noticeList.do?reqPage=1">목록</a>
 	</div>

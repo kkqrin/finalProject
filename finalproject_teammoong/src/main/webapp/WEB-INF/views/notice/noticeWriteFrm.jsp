@@ -36,7 +36,6 @@
 						<label for="noticeWriter">작성자</label>
 					</th>
 					<td>
-						관리자
 						${sessionScope.m.memberId }
 						<input type="hidden" name="noticeWriter" value="${sessionScope.m.memberId }" readonly>
 					<td>

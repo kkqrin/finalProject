@@ -13,27 +13,12 @@
     margin: 0 auto;
 }
 
+
 /*====top====*/
 .header-top{
-	width:100%;
-    display: flex;
-    justify-content: flex-end;
-}
-.header-top>.top-menu{
-    display: flex;
-    align-items: center;
-}
-.header-top>.top-menu span{
-    color: var(--bg-tertiary);
-    padding: 0 20px;
-    line-height : 20px;
-    font-size: 12px;
-}
-
-/*====middle====*/
-.header-middle{
     display: flex;
     align-items:center;
+    padding-top: 10px;
 }
 .title{
     display: inline-block;
@@ -56,7 +41,7 @@
 	border-radius:0px !important;
 	border-bottom: 3px solid #3a3a3a;
 }
-.mainSearch>span{ /*inputâ �ȿ� �˻���ư*/
+.mainSearch>span{ 
 	position: absolute;
 	top:8px ; right: 5px;
 	cursor: pointer;
@@ -64,51 +49,69 @@
 .middle-right{
 	margin-left: auto;
 }
-.middle-right>a>span{ /*�˸� ��ٱ��� ���ƿ�*/
+.middle-right>a>span{ 
 	font-size:28px;
 	padding: 5px 10px 0px 10px;
 }
 .middle-right>a>span:hover{
-	color: #f7a4a4;
+	color: var(--primary);
 } 
 
 /*====bottom====*/
 .header-bottom{
 	display: flex;
 	width:100%;
-	justify-content: space-between;
 	align-items: center;
+	position: relative;
 }
 .header-bottom>div:not(.category-dropdown){
 	display:table;
+	margin: 0 20px;
 	padding : 5px 0;
 }
-.header-bottom>div:not(.menu-category,.category-dropdown){
+.header-bottom>div:not(.menu-category,.category-dropdown,.menu-area){
 	border-bottom: 4px solid transparent;
 }
-.header-bottom>div:not(.menu-category,.category-dropdown):hover{
-	border-bottom: 4px solid #f7a4a4;
+.header-bottom>div:not(.menu-category,.category-dropdown,.menu-area):hover{
+	border-bottom: 4px solid var(--primary);
 }
 .header-bottom>div a,span{
 	display:table-cell;
 	vertical-align: middle;
-	font-size: 16px;
+	font-size: 16	px;
 	font-weight: bolder;
 }
 .header-bottom>.together{
-	width: 125px;
+	width: 112px;
 	position:relative;
-	color: #f7a4a4;
+	color: var(--primary);
 }
 .header-bottom>.together span{
 	position: absolute;
-	left:102px;
+	left:90px;
+	top:3px;
 }
-
 
 .menu-category{
 	position: relative;
 }
+
+/*====menu-area====*/
+.menu-area{
+	position: absolute;
+	right: 0;
+	display: flex;
+	flex-direction: row;
+}
+
+.menu-area a{
+	padding-left : 15px;
+}
+
+
+
+
+
 
 /*====category-dropdown====*/
 .category-dropdown{

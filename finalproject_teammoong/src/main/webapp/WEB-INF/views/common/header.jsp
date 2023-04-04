@@ -34,36 +34,15 @@
 	<div class="header-wrap">
         <div class="header-content">
         
+            
+		
             <div class="header-top">
-            	<div class="top-menu">
-            		<c:choose>
-            			<c:when test="${empty sessionScope.m}">
-            				<a href="/noticeList.do?reqPage=1">공지사항</a><span>|</span>
-		                    <a href="#">회원가입</a><span>|</span>
-		                    <a href="/loginFrm.do">로그인</a>
-	                	</c:when>
-	                	<c:when test="${sessionScope.m.memberStatus eq 1}">
-	                		<a class="helloMsg">${sessionScope.m.memberName }님 환영합니다!</a>
-	                		<a href="/noticeList.do?reqPage=1">공지사항</a><span>|</span>
-		                    <a href="#">마이페이지</a><span>|</span>
-		                    <a href="/logout.do">로그아웃</a>
-	                	</c:when>
-	               		<c:when test="${sessionScope.m.memberStatus eq 0}">
-	               			<a href="/noticeList.do?reqPage=1">공지사항</a><span>|</span>
-		                    <a class="staffMsg">관리자 버전으로 접속중입니다.</a>
-		                    <a href="/logout.do">로그아웃</a>
-	                	</c:when>
-                	</c:choose>
-           		</div><!-- top-menu -->
-			</div><!-- header-top -->
-			
-            <div class="header-middle">
             	<div class="middle-left">
 	                <a href="/" class="title">뭉쳐야산다</a>
                 </div>
                 <div class="middle-center">
 	                <div class="mainSearch">
-	                	<input type="text" class="mainSearch-input" placeholder="검색어를 입력하세요">
+	                	<input type="text" class="mainSearch-input" placeholder="상품을 검색해보세요">
 	                	<span class="material-symbols-outlined">search</span>
 		            </div>
 	            </div>
@@ -72,7 +51,7 @@
 	                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">favorite</span></a>
 	                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">shopping_cart</span></a>
             	</div>
-            </div>
+            </div><!-- header-top -->
 
             <div class="header-bottom">
                 <div class="menu-category">
@@ -110,7 +89,7 @@
 					      	</ul>
 				      	</div>
 			    	</div><!-- dropdown메뉴 -->
-                </div>
+                </div><!-- menu-category -->
                 
                 <div><a href="#">오늘의상품</a></div>
                 <div><a href="#">타임딜</a></div>
@@ -121,7 +100,30 @@
                		 <span class="material-symbols-outlined recommend">recommend</span>
                		</a>
                 </div>
-            </div>
+                
+              	<div class="menu-area">
+	            	<c:choose>
+	            			<c:when test="${empty sessionScope.m}">
+	            				<a href="/noticeList.do?reqPage=1">공지사항</a>
+			                    <a href="/join.do">회원가입</a>
+			                    <a href="/loginFrm.do">로그인</a>
+		                	</c:when>
+		                	<c:when test="${sessionScope.m.memberStatus eq 1}">
+		                		<a class="helloMsg">${sessionScope.m.memberName }님 환영합니다!</a>
+		                		<a href="/noticeList.do?reqPage=1">공지사항</a>
+			                    <a href="/myPage.do">마이페이지</a>
+			                    <a href="/logout.do">로그아웃</a>
+		                	</c:when>
+		               		<c:when test="${sessionScope.m.memberStatus eq 0}">
+		               			<a class="staffMsg">관리자 버전으로 접속중입니다.</a>
+		               			<a href="/noticeList.do?reqPage=1">공지사항</a>
+			                    <a href="/admin.do">관리자페이지</a>
+			                    <a href="/logout.do">로그아웃</a>
+		                	</c:when>
+	                </c:choose>	
+    			</div><!-- menu-area -->
+                
+            </div><!-- header-bottom -->
             
         </div><!--header-content-->
     </div><!--header-wrap-->
