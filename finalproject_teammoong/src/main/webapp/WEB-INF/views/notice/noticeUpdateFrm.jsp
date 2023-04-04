@@ -14,7 +14,7 @@
 </head>
 <body>
 	<div class="content-wrap">
-		<form action="/noticeWriteUpdate.do" method="post" enctype="multipart/form-data" id="updateFrm">
+		<form action="/noticeUpdate.do" method="post" enctype="multipart/form-data" id="updateFrm">
 			<table>
 				<tr>
 					<th colspan="3">
