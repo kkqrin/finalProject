@@ -24,10 +24,11 @@ public class AdminDao {
 		return Integer.toString(result);
 	}
 
-	public String selectAllOrderCount() {
-		int result = sqlSession.selectOne("admin.selectAllOrderCount");
-		return Integer.toString(result);
-	}
+	/*
+	 * public String selectAllOrderCount() { int result =
+	 * sqlSession.selectOne("admin.selectAllOrderCount"); return
+	 * Integer.toString(result); }
+	 */
 
 	public String selectAllBoardCount() {
 		int result = sqlSession.selectOne("admin.selectAllBoardCount");
@@ -59,14 +60,14 @@ public class AdminDao {
 		return Integer.toString(result);
 
 	}
-
-	public String selectVariationOrder() {
-		int beforeOrder = sqlSession.selectOne("admin.selectBeforeOrder");
-		int allOrder = sqlSession.selectOne("admin.selectAllOrder");
-		int result = allOrder - beforeOrder;
-		
-		return Integer.toString(result);
-	}
+	/*
+	 * public String selectVariationOrder() { int beforeOrder =
+	 * sqlSession.selectOne("admin.selectBeforeOrder"); int allOrder =
+	 * sqlSession.selectOne("admin.selectAllOrder"); int result = allOrder -
+	 * beforeOrder;
+	 * 
+	 * return Integer.toString(result); }
+	 */
 
 	public String selectVariationBoard() {
 		int beforeBoard = sqlSession.selectOne("admin.selectBeforeBoard");
@@ -126,16 +127,16 @@ public class AdminDao {
 		return (ArrayList<Product>)list;
 	}
 	
-	public ArrayList<Order> selectAllOrderList(HashMap<String, Object> map) {
-		List list = sqlSession.selectList("admin.selectAllOrderList",map);
-		
-		return (ArrayList<Order>)list;
-	}
-	
-	public int selectOrderCount() {
-		int totalCount = sqlSession.selectOne("admin.selectOrderTotalCount");
-		return totalCount;
-	}
+	/*
+	 * public ArrayList<Order> selectAllOrderList(HashMap<String, Object> map) {
+	 * List list = sqlSession.selectList("admin.selectAllOrderList",map);
+	 * 
+	 * return (ArrayList<Order>)list; }
+	 */
+	/*
+	 * public int selectOrderCount() { int totalCount =
+	 * sqlSession.selectOne("admin.selectOrderTotalCount"); return totalCount; }
+	 */
 
 	public int updateDeliveryStatus(Product p) {
 		int result = sqlSession.update("admin.updateDeliveryStatus",p);
@@ -143,11 +144,12 @@ public class AdminDao {
 		return result;
 	}
 
-	public ArrayList<Order> selectSearchDelivery(Order o) {
-		List list = sqlSession.selectList("admin.selectSearchDelivery",o);
-		
-		return (ArrayList<Order>)list;
-	}
+	/*
+	 * public ArrayList<Order> selectSearchDelivery(Order o) { List list =
+	 * sqlSession.selectList("admin.selectSearchDelivery",o);
+	 * 
+	 * return (ArrayList<Order>)list; }
+	 */
 
 	public String selectAllBoardSalesCount() {
 		int result = sqlSession.selectOne("admin.selectAllBoardSalesCount");
