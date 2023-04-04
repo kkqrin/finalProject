@@ -28,7 +28,8 @@
     <link rel="stylesheet" href="/resources/css/common/default.css" />
     <!--헤더 css-->
     <link rel="stylesheet" href="/resources/css/common/header.css" />
-    
+    <!--date range picker css-->
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
 <body>
 	<div class="header-wrap">
@@ -55,10 +56,12 @@
 
             <div class="header-bottom">
                 <div class="menu-category">
-	                <a href="#">
-                	<span class="material-symbols-outlined">reorder</span>
-                	카테고리
-	                </a>
+					<div class="reorder-box">
+						<a href="#">
+							<span class="material-symbols-outlined reorder">reorder</span>
+							카테고리
+						</a>
+					</div>
 					 <!-- dropdown메뉴 -->
 					 <div class="category-dropdown">
 					 	<div>
@@ -91,9 +94,9 @@
 			    	</div><!-- dropdown메뉴 -->
                 </div><!-- menu-category -->
                 
-                <div><a href="#">오늘의상품</a></div>
-                <div><a href="#">타임딜</a></div>
                 <div><a href="#">인기상품</a></div>
+                <div><a href="/insertProductFrm.do">물품등록(예비버튼)</a></div>
+                <div><a href="#">오늘의상품</a></div>
                 <div class="together">
                 	<a href="/boardList.do?reqPage=1">
                		 여기여기붙어라
@@ -105,7 +108,7 @@
 	            	<c:choose>
 	            			<c:when test="${empty sessionScope.m}">
 	            				<a href="/noticeList.do?reqPage=1">공지사항</a>
-			                    <a href="/join.do">회원가입</a>
+			                    <a href="/signUpFrm.do">회원가입</a>
 			                    <a href="/loginFrm.do">로그인</a>
 		                	</c:when>
 		                	<c:when test="${sessionScope.m.memberStatus eq 1}">

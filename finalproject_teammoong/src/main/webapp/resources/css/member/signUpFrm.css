@@ -1,0 +1,21 @@
+.signUp-form{
+    width: 500px;
+    margin: 0 auto;
+    background-color: pink;
+    padding-top: 50px;
+}
+.signUp-title{
+    text-align: center;
+    border-bottom: 5px solid #3a3a3a;
+}
+.notice{
+    text-align: right;
+    padding-top: 20px;
+    font-size: 16px;
+    line-height: 18px;
+}
+.notice>span{
+    color: red;
+    font-weight: bold;
+    font-size: 24px;
+}
