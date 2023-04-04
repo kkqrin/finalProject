@@ -15,6 +15,8 @@
 
 		
 		<typeAlias type="moo.ng.san.member.model.vo.Member" alias="m" />
+		<typeAlias type="moo.ng.san.product.model.vo.Product" alias="p" />
+		<typeAlias type="moo.ng.san.order.model.vo.Order" alias="o" />
 		
 		
 		

@@ -157,7 +157,7 @@
 		</choose>
 	</select>
 	
- <!-- 	<select id="selectAllOrderList" parameterType="map" resultType="o">
+ 	<select id="selectAllOrderList" parameterType="map" resultType="o">
 		select * from
 			(select rownum as rnum, b.* from
 			
@@ -183,12 +183,11 @@
 		select count(*) from product_tbl
 	</select>
  -->	
-	
 	<update id="updateDeliveryStatus" parameterType="p">
 		update delivery_tbl set delivery_status = #{deliveryStatus} where delivery_no = #{deliveryNo}
 	</update>
 	
-	<!-- <select id="selectSearchDelivery" resultType="o">
+	<select id="selectSearchDelivery" resultType="o">
 		select
 			ot.order_no as orderNo,
 			ot.member_no as memberNo,
