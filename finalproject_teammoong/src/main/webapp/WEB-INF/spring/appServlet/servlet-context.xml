@@ -114,7 +114,6 @@
 	
 	
 	<!-- 장형천 -->
-	
 	<context:component-scan base-package="moo.ng.san.admin" />
 	
 	
@@ -209,7 +208,7 @@
 	
 	
 	<!-- 김규린 -->
-	
+	<context:component-scan base-package="moo.ng.san.order" />
 	
 	
 	

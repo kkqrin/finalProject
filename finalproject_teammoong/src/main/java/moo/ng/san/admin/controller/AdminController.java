@@ -256,14 +256,14 @@ public class AdminController {
 	
 	// 월 거래액
 	@ResponseBody
-	@RequestMapping
+	@RequestMapping(value="/monthBoardSalseCount.do")
 	public String monthBoardSalesCount() {
 		String result = service.selectMonthBoardSalesCount();
 		return result;
 	}
 	
 	// 여기여기 붙어라 참여인원 순으로 list 정렬
-	@RequestMapping
+	@RequestMapping(value="/allBoardList.do")
 	public String allBoardList(int reqPage, Model model) {
 		AdminBoardPageData abpd = service.selectAllBoardList(reqPage);
 		model.addAttribute("orderList",abpd.getList());

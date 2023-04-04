@@ -166,6 +166,14 @@ public class AdminDao {
 		
 		return (ArrayList<Board>)list;
 	}
+
+	public int selectBoardCount() {
+		
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
 	
 	
 
