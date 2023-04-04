@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="admin">
+
 	<select id="selectAllMemberCount" resultType="_int">
 		select count(*) from member_tbl 
 	</select>
@@ -157,11 +158,7 @@
 		</choose>
 	</select>
 	
-<<<<<<< HEAD
- 	<select id="selectAllOrderList" parameterType="map" resultType="o">
-=======
  	<select id="selectAllOrderList" parameterType="map" resultType="order">
->>>>>>> parent of 251817a ([커밋]날려버릴 커밋)
 		select * from
 			(select rownum as rnum, b.* from
 			
@@ -186,22 +183,19 @@
 	<select id="selectOrderTotalCount" resultType="_int">
 		select count(*) from product_tbl
 	</select>
-<<<<<<< HEAD
- -->	
+	
 	<update id="updateDeliveryStatus" parameterType="p">
 		update delivery_tbl set delivery_status = #{deliveryStatus} where delivery_no = #{deliveryNo}
 	</update>
 	
 	<select id="selectSearchDelivery" resultType="o">
-=======
-	
+	</select>
 	
 	<update id="updateDeliveryStatus" parameterType="product">
 		update delivery_tbl set delivery_status = #{deliveryStatus} where delivery_no = #{deliveryNo}
 	</update>
 	
 	<select id="selectSearchDelivery" resultType="order">
->>>>>>> parent of 251817a ([커밋]날려버릴 커밋)
 		select
 			ot.order_no as orderNo,
 			ot.member_no as memberNo,
@@ -251,8 +245,5 @@
 		join board_join bj on (bt.board_no = bj.board_no)
 		order by count() desc;
 	</select>
-	<!--  -->
-	<!--  -->
-	<!--  -->
 	
 </mapper>

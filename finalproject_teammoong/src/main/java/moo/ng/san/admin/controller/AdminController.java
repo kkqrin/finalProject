@@ -263,21 +263,13 @@ public class AdminController {
 	}
 	
 	// 여기여기 붙어라 참여인원 순으로 list 정렬
-<<<<<<< HEAD
 	@RequestMapping(value="/allBoardList.do")
-=======
-	@RequestMapping
->>>>>>> parent of 251817a ([커밋]날려버릴 커밋)
 	public String allBoardList(int reqPage, Model model) {
 		AdminBoardPageData abpd = service.selectAllBoardList(reqPage);
 		model.addAttribute("orderList",abpd.getList());
 		model.addAttribute("pageNavi",abpd.getPageNavi());
 		return "redirect:/";
 	}
-<<<<<<< HEAD
-	
-=======
->>>>>>> parent of 251817a ([커밋]날려버릴 커밋)
 	
 	
 	
