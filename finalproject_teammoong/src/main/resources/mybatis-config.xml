@@ -9,10 +9,8 @@
 		<typeAlias type="moo.ng.san.notice.vo.Notice" alias="n" />
 		<typeAlias type="moo.ng.san.notice.vo.FileVO" alias="f" />
 		
-		<typeAlias type="moo.ng.san.board.model.vo.Board" alias="b" />
-		<typeAlias type="moo.ng.san.product.model.vo.Product" alias="p" />
-
-
+		
+		
 		
 		<typeAlias type="moo.ng.san.member.model.vo.Member" alias="m" />
 		<typeAlias type="moo.ng.san.product.model.vo.Product" alias="p" />

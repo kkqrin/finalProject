@@ -39,13 +39,13 @@ public class AdminController {
 		return result;
 	}
 	
-	/*
-	 * @ResponseBody
-	 * 
-	 * @RequestMapping(value="/ajaxAllOrderCount.do")//, produces =
-	 * "application/json;charset=utf-8") public String orderAllCountSelect() {
-	 * String result = service.selectAllOrderCount(); return result; }
-	 */
+	@ResponseBody
+	@RequestMapping(value="/ajaxAllOrderCount.do")//, produces = "application/json;charset=utf-8")
+	public String orderAllCountSelect() {
+		String result = service.selectAllOrderCount();
+		return result;
+	}
+	
 	@ResponseBody
 	@RequestMapping(value="/ajaxAllBoardCount.do")//, produces="application/json;charset=utf-8")
 	public String boardAllCountSelect() {
@@ -86,14 +86,13 @@ public class AdminController {
 		return result;
 	}
 	
-	/*
-	 * @ResponseBody
-	 * 
-	 * @RequestMapping(value="/ajaxVariationOrder.do")// 숫자 하나 넘겨주는거니까 json은 없어도 될
-	 * 듯, produces = "application/json;charset=utf-8" public String
-	 * orderVariationSelect() { String result = service.selectVariationOrder();
-	 * return result; }
-	 */
+	@ResponseBody
+	@RequestMapping(value="/ajaxVariationOrder.do")// 숫자 하나 넘겨주는거니까 json은 없어도 될 듯, produces = "application/json;charset=utf-8"
+	public String orderVariationSelect() {
+		String result = service.selectVariationOrder();
+		return result;
+	}
+	
 	@ResponseBody
 	@RequestMapping(value="/ajaxVariationBoard.do")// 숫자 하나 넘겨주는거니까 json은 없어도 될 듯, produces = "application/json;charset=utf-8"
 	public String boardVariationSelect() {
@@ -208,15 +207,14 @@ public class AdminController {
 	
 	/* 배송 관리 현황*/
 	
-	/*
-	 * //배송관리 list
-	 * 
-	 * @RequestMapping(value="/allDeliveryList.do") public String
-	 * allDeliveryList(int reqPage, Model model) { 
-	 * AdminOrderPageData aopd = service.selectAllOrderList(reqPage);
-	 * model.addAttribute("orderList",aopd.getList());
-	 * model.addAttribute("pageNavi",aopd.getPageNavi()); return "redirect:/"; }
-	 */
+	//배송관리 list
+	@RequestMapping(value="/allDeliveryList.do")
+	public String allDeliveryList(int reqPage, Model model) {
+		AdminOrderPageData aopd = service.selectAllOrderList(reqPage);
+		model.addAttribute("orderList",aopd.getList());
+		model.addAttribute("pageNavi",aopd.getPageNavi());
+		return "redirect:/";
+	}
 	
 	
 	// 배송 상태 변경
@@ -231,16 +229,15 @@ public class AdminController {
 		}
 	}
 	
-	/*
-	 * // 배송 검색
-	 * 
-	 * @ResponseBody
-	 * 
-	 * @RequestMapping(value="/ajaxAdminSearchDelivery.do", produces =
-	 * "application/json;charset=utf-8") public String adminSearchDelivery(Order o)
-	 * { ArrayList<Order> list = service.selectSearchDelivery(o); Gson gson = new
-	 * Gson(); String result = gson.toJson(list); return result; }
-	 */
+	// 배송 검색
+	@ResponseBody
+	@RequestMapping(value="/ajaxAdminSearchDelivery.do", produces = "application/json;charset=utf-8")
+	public String adminSearchDelivery(Order o) {
+		ArrayList<Order> list = service.selectSearchDelivery(o);
+		Gson gson = new Gson();
+		String result = gson.toJson(list);
+		return result;
+	}
 	
 	// 배송 일괄 변경
 	
@@ -266,14 +263,21 @@ public class AdminController {
 	}
 	
 	// 여기여기 붙어라 참여인원 순으로 list 정렬
+<<<<<<< HEAD
 	@RequestMapping(value="/allBoardList.do")
+=======
+	@RequestMapping
+>>>>>>> parent of 251817a ([커밋]날려버릴 커밋)
 	public String allBoardList(int reqPage, Model model) {
 		AdminBoardPageData abpd = service.selectAllBoardList(reqPage);
 		model.addAttribute("orderList",abpd.getList());
 		model.addAttribute("pageNavi",abpd.getPageNavi());
 		return "redirect:/";
 	}
+<<<<<<< HEAD
 	
+=======
+>>>>>>> parent of 251817a ([커밋]날려버릴 커밋)
 	
 	
 	
