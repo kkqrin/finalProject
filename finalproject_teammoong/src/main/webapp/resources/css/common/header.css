@@ -13,10 +13,12 @@
     margin: 0 auto;
 }
 
+
 /*====top====*/
 .header-top{
     display: flex;
     align-items:center;
+    padding-top: 10px;
 }
 .title{
     display: inline-block;
@@ -98,6 +100,8 @@
 .menu-area{
 	position: absolute;
 	right: 0;
+	display: flex;
+	flex-direction: row;
 }
 
 .menu-area a{
