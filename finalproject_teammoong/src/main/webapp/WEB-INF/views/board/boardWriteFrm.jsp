@@ -6,21 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>여기여기붙어라</title>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>제이쿼리 위젯 달력 사용하기</title>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>여기여기붙어라</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="js/jquery-3.6.3.min.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <script>
 
 	function previewImage(event) {
@@ -36,11 +31,9 @@
 		reader.readAsDataURL(event.target.files[0]);
 	}
 
-    $( function() {
-      $( "#datepicker" ).datepicker({
-         dateFormat:"yy-mm-dd"
-      });     
-    } );
+		
+	
+
     </script>
 	<link rel="stylesheet" href="/resources/css/board/boardWriteFrm.css" />
 </head>
@@ -100,7 +93,7 @@
 			                        <input type="text" name="accountName" required>
 			                    </td>
 			                    <td>
-			                        <select class="selec-custom" name="accountBank">
+			                        <select class="select-custom" name="accountBank">
 			                            <option value="bank1">은행명 선택</option>
 			                            <option value="bank2">NH농협은행</option>
 			                            <option value="bank3">KB국민은행</option>
@@ -137,17 +130,11 @@
 		                        <td colspan="4">판매기간<sup>*</sup></td>
 		                    </tr>
 		                    <tr>
-		                        <td colspan="2">폼 시작일</td>
-		                        <td colspan="2">종료일</td>
+		                        <td colspan="4">폼 시작/종료</td>
 		                    </tr>
 		                    <tr>
-			                    <td colspan="2">
-			                        <!-- <input type="text" id="datepicker"  placeholder="폼 시작일" required> -->
-			                        <input type="text" id="form-start" placeholder="폼 시작일" name="boardStart" required>
-			                    </td>
-			                    <td colspan="2">
-			                        <!-- <input type="text" id="datepicker"  placeholder="폼 종료일" required> -->
-			                        <input type="text" id="form-end" placeholder="폼 종료일" name="boardEnd" required>
+			                    <td colspan="4">
+			                        <input type="text" id="daterangepicker" placeholder="폼 시작일" required>
 			                    </td>
 			                </tr>
 			                <tr>
@@ -161,20 +148,30 @@
 		                    <tr>
 		                        <td colspan="4">상세정보입력<sup>*</sup><span>재고를 제외한 상품 정보는 구매 발생 전까지만 수정 가능합니다.</span></td>
 		                    </tr>
-		                    <tr>
-		                        <td colspan="4">상품명<input type="text" id="goods-name" name="detailName"  placeholder="상품명을 입력해 주세요" required></td>
+							<tr>
+								<td colspan="4">상품1</td>
+							</tr>
+		                    <tr class="one-goods">
+		                        <td colspan="4"><input type="text" id="goods-name" name="detailName"  placeholder="상품명을 입력해 주세요" required></td>
 		                    </tr>
-		                    <tr>
-		                        <td colspan="4">가격<input type="text" id="goods-price" name="detailPrice" placeholder="가격을 입력해 주세요" required></td>
+		                    <tr class="one-goods">
+		                        <td colspan="4"><input type="text" id="goods-price" name="detailPrice" placeholder="가격을 입력해 주세요" required></td>
 		                    </tr>
-		                    <tr>
-		                        <td colspan="4">재고<input type="text" id="goods-count" name="detailCount" placeholder="재고를 입력해 주세요" required></td>
+		                    <tr class="one-goods">
+		                        <td colspan="4"><input type="text" id="goods-count" name="detailCount" placeholder="재고를 입력해 주세요" required></td>
 		                    </tr>
+							<tr>
+								<td colspan="4">
+									<div class="area-btn right">
+										<button type="button" id="goods-plus" class="btn btn-border-sec size01">상품추가</button>
+									</div>
+								</td>
+							</tr>
 		                    <tr>
 		                        <td colspan="4">판매 상품 리스트<span>(총 1개의 상품)</span></td>
 		                    </tr>
 		                    <tr>
-		                        <td colspan="4"><input type="text" id="goods-name" name="boardPrice" placeholder="상품명" >원</td>
+		                        <td colspan="4"><input type="text" id="goods-name" name="boardPrice" placeholder="상품명" ></td>
 		                    </tr>
 		                    <tr>
 		                        <td colspan="4">공구 사이트 링크</td>
@@ -201,5 +198,88 @@
 		            </form>
 				</div>
 		    </div>
+			
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+			<script>
+				
+				let i=1;
+				$("#goods-plus").on("click", function(){
+
+				const tr0 = $('<tr>');
+				const td0 = $('<td>').attr('colspan', 4);
+				let count = "상품"+(i+1);
+				td0.text(count);
+				td0.appendTo(tr0);	
+				i++;
+
+				const tr = $('<tr>').addClass('one-goods');
+				const td = $('<td>').attr('colspan', 4);
+				const input = $('<input>').attr({
+				type: 'text',
+				id: 'goods-name',
+				name: 'detailName',
+				placeholder: '상품명을 입력해주세요',
+				required: true
+				});
+				input.appendTo(td);
+				td.appendTo(tr);
+				
+				const tr2 = $('<tr>').addClass('one-goods');
+				const td2 = $('<td>').attr('colspan', 4);
+				const input2 = $('<input>').attr({
+				type: 'text',
+				id: 'goods-price',
+				name: 'detailPrice',
+				placeholder: '가격을 입력해 주세요',
+				required: true
+				});
+				input2.appendTo(td2);
+				td2.appendTo(tr2);
+			
+				const tr3 = $('<tr>').addClass('one-goods');
+				const td3 = $('<td>').attr('colspan', 4);
+				const input3 = $('<input>').attr({
+				type: 'text',
+				id: 'goods-count',
+				name: 'detailCount',
+				placeholder: '재고를 입력해 주세요',
+				required: true
+				});
+				input3.appendTo(td3);
+				td3.appendTo(tr3);
+				$("#goods-plus").parent().parent().parent().before(tr0).before(tr).before(tr2).before(tr3);
+
+				/*<tr class="one-goods"></tr>*/
+				});
+				
+
+				$("#daterangepicker").daterangepicker();
+
+				$("#daterangepicker").daterangepicker({
+					locale: {
+					"separator": " ~ ",                     // 시작일시와 종료일시 구분자
+					"format": 'YYYY-MM-DD HH:mm:ss',     // 일시 노출 포맷
+					"applyLabel": "확인",                    // 확인 버튼 텍스트
+					"cancelLabel": "취소",                   // 취소 버튼 텍스트
+					"daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
+					"monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
+					},
+					timePicker: true,                        // 시간 노출 여부
+					showDropdowns: true,                     // 년월 수동 설정 여부
+					autoApply: true,                         // 확인/취소 버튼 사용여부
+					timePicker24Hour: true,                  // 24시간 노출 여부(ex> true : 23:50, false : PM 11:50)
+					timePickerSeconds: true,                 // 초 노출 여부
+					
+				});
+
+				$("#daterangepicker").on('show.daterangepicker', function (ev, picker) {
+					$(".yearselect").css("float", "left");
+					$(".monthselect").css("float", "right");
+					$(".cancelBtn").css("float", "right");
+				});
+			</script>
 </body>
 </html>
