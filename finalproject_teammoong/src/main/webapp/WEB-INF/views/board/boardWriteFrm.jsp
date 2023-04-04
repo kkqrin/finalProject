@@ -22,27 +22,51 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-        
+
+	function previewImage(event) {
+		var reader = new FileReader();
+		reader.onload = function() {
+		var output = document.createElement('img');
+		output.src = reader.result;
+		output.style.maxWidth = '250px';
+		output.style.maxHeight = '250px';
+		document.querySelector('.image-preview').innerHTML = '';
+		document.querySelector('.image-preview').appendChild(output);
+		};
+		reader.readAsDataURL(event.target.files[0]);
+	}
+
     $( function() {
       $( "#datepicker" ).datepicker({
          dateFormat:"yy-mm-dd"
       });     
     } );
     </script>
+	<link rel="stylesheet" href="/resources/css/board/boardWriteFrm.css" />
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" /> 
 	<div class="content-wrap">
+		<div class="content-board-wrap">
 		                <form action="/boardWrite.do" method="get">
 		                <table class="writeFrm-input-wrap">
 		                	<tr>
-		                		<td>
+		                		<td colspan="4">
 		                			<input type="hidden" name="boardWriter" value="${sessionScope.m.memberId }">
 		                		</td>
 		                	</tr>
 		                	<tr>
-		                		<th>썸네일</th>
-		                		<td><input type="file" name="boardFile" multiple></td>
+		                		<td colspan="4">
+									<div class="board-wrap">
+										<div class="boardFile-wrap">
+											<input type="file" name="file" id="file" onchange="previewImage(event)">
+											<div class="image-preview"></div>
+											<label for="file">
+												<div class="btn-upload">썸네일 이미지 등록</div>
+											</label>
+										</div>
+									</div>
+								</td>
 		                	</tr>
 		                	<tr>
 		                		<td colspan="4">폼제목<sup>*</sup></td>
@@ -54,7 +78,7 @@
 		                    	<td colspan="4">카테고리<sup>*</sup></td>
 		                    </tr>
 		                    <tr>
-		                    	<td>
+		                    	<td colspan="4">
 		                    		<input type="radio" name="categoryNo" id="c" value="1">
 		                        	<label for="c">의류</label>
 		                        	<input type="radio" name="categoryNo" id="f" value="2">
@@ -175,6 +199,7 @@
 		                </table>
 		                    <input type="submit" value="폼만들기">
 		            </form>
-		        </div>
+				</div>
+		    </div>
 </body>
 </html>
