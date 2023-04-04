@@ -82,15 +82,15 @@
 	font-weight: bolder;
 }
 .header-bottom>.together{
-	width: 125px;
+	width: 112px;
 	position:relative;
 	color: #f7a4a4;
 }
 .header-bottom>.together span{
 	position: absolute;
-	left:102px;
+	left:90px;
+	top:3px;
 }
-
 
 .menu-category{
 	position: relative;
