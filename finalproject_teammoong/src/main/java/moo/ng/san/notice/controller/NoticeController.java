@@ -1,7 +1,9 @@
 package moo.ng.san.notice.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,7 +47,6 @@ public class NoticeController {
 		if(!noticeFile[0].isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/notice/");
 			for(MultipartFile file : noticeFile) {
-				System.out.println(savePath);
 				String fileName = file.getOriginalFilename();
 				String filepath = manager.upload(savePath, file);
 				FileVO fileVO = new FileVO();
@@ -78,8 +79,55 @@ public class NoticeController {
 	@RequestMapping(value="/noticeView.do")
 	public String noticeView(int noticeNo, Model model) {
 		Notice n = service.selectOneNotice(noticeNo);
+		n.setReadCount(n.getReadCount()+1);
+		int result = service.updateReadCount(n);
 		model.addAttribute("n",n);
 		return "notice/noticeView";
 	}
 	
+	@RequestMapping(value="/noticeUpdateFrm.do")
+	public String noticeUpdateFrm(int noticeNo, Model model) {
+		Notice n = service.selectOneNotice(noticeNo);
+		model.addAttribute("n",n);
+		return "notice/noticeUpdateFrm";
+	}
+	
+	@RequestMapping(value="/noticeUpdate.do")
+	public String noticeUpdate(Notice n, int[] fileNo, String[] filepath, MultipartFile[] noticeFile, HttpServletRequest request) {
+		ArrayList<FileVO> fileList = new ArrayList<FileVO>();
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/notice/");
+		if(!noticeFile[0].isEmpty()) {
+			for(MultipartFile file : noticeFile) {
+				String filename = file.getOriginalFilename();
+				String upFilepath = manager.upload(savePath, file);
+				
+				FileVO fileVO = new FileVO();
+				fileVO.setFileName(filename);
+				fileVO.setFilepath(upFilepath);
+				fileVO.setNoticeNo(n.getNoticeNo());
+				fileList.add(fileVO);
+			}
+		}
+		int result = service.noticeUpdate(n, fileList, fileNo);
+		if(fileNo != null && (result == (fileList.size()+fileNo.length+1))) {
+			for(String delFile :filepath) {
+				boolean delResult = manager.deleteFile(savePath, delFile);
+			}
+			return "redirect:/noticeList.do?reqPage=1";
+		}else if(fileNo == null && (result == fileList.size()+1)) {
+			return "redirect:/noticeList.do?reqPage=1";
+		}else {
+			return "redirect:/noticeUpdateFrm.do";
+		}
+	}
+	
+	@RequestMapping(value="/noticeDelete.do")
+	public String noticeDelete(int noticeNo) {
+		int result = service.noticeDelete(noticeNo);
+		if(result > 0) {
+			return "redirect:/noticeList.do?reqPage=1";
+		}else {
+			return "redirect:/noticeList.do?reqPage=1";
+		}
+	}
 }

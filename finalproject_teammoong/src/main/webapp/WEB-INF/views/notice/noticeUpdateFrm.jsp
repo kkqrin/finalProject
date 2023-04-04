@@ -7,27 +7,27 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="/resources/js/jquery-3.6.0.js"></script>
 <script src="/resources/summernote/summernote-lite.js"></script>
 <script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
 <link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
 </head>
 <body>
 	<div class="content-wrap">
-		<form action="/noticeWrite.do" method="post" enctype="multipart/form-data" id="writeFrm">
+		<form action="/noticeWriteUpdate.do" method="post" enctype="multipart/form-data" id="updateFrm">
 			<table>
 				<tr>
 					<th colspan="3">
 						<label for="title">제목</label>
 						<select size="1" name="noticeStatus" class="input-form-short">
-							<option value="1">공지</option>
-							<option value="0">일반</option>
+							<option value="1" ${n.noticeStatus == 1 ? "selected" : ""}>공지</option>
+							<option value="0" ${n.noticeStatus == 0 ? "selected" : ""}>일반</option>
 						</select>
-						<input type="text" name="noticeTitle" >
+						<input type="text" name="noticeTitle" value="${n.noticeTitle}">
 					</th>
 				</tr>
 				<tr>
 					<th colspan="3">
-						<label for="file">파일첨부</label>
 						<input type="file" name="noticeFile" multiple>
 						<c:forEach items="${n.fileList }" var="f">
 							<p>
@@ -42,8 +42,8 @@
 						<label for="noticeWriter">작성자</label>
 					</th>
 					<td>
-						${sessionScope.m.memberId }
-						<input type="hidden" name="noticeWriter" value="${sessionScope.m.memberId }" readonly>
+						${n.noticeWriter }
+						<input type="hidden" name="noticeWriter" value="${n.noticeWriter}" readonly>
 					<td>
 				</tr>
 				<tr>
@@ -51,16 +51,17 @@
 				</tr>
 				<tr>
 					<td colspan="3">
-						<textarea id="noticeContent" rows="20" name="noticeContent" class="form"></textarea>
+						<textarea id="noticeContent" rows="20" name="noticeContent" class="form">${n.noticeContent }</textarea>
 					</td>
 				</tr>
 				<tr>
 					<td colspan="3">
 						<input type="submit" value="저장">
-						<button type="button">취소</button>
+						<button type="button"><a href="/noticeList.do?reqPage=1">취소</a></button>
 					</td>
 				</tr>
 			</table>
+			<input type="hidden" name="noticeNo" value="${n.noticeNo}">
 		</form>
 	</div>
 	<script>
@@ -101,7 +102,7 @@
 			filepathInput.val(filepath);
 			filepathInput.hide();
 			
-			$("#writeFrm").append(fileNoInput).append(filepathInput);
+			$("#updateFrm").append(fileNoInput).append(filepathInput);
 			$(obj).parent().remove();
 		}
 	</script>

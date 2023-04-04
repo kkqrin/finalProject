@@ -33,7 +33,9 @@
 			<th colspan="5">${pageNavi }</th>
 		</tr>
 	</table>
-		<a href="/noticeWriteFrm.do">글쓰기</a>
+		<c:if test="${sessionScope.m.memberStatus == 0 }">
+			<a href="/noticeWriteFrm.do">글쓰기</a>
+		</c:if>
 	</div>
 </body>
 </html>
