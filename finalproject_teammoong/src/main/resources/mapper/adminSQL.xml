@@ -109,7 +109,7 @@
 		select sum(product_price) from product_tbl pt join order_tbl ot on (pt.product_no = ot.product_no) where ot.order_status = 4 and ot.order_date between '2023-03-20' and '2023-03-31'
 	</select>
 	
-	<!-- <select id="selectAllProductList" parameterType="map" resultType="product">
+	<select id="selectAllProductList" parameterType="map" resultType="product">
 		select * from
 			(select rownum as rnum, b.* from
 				(select
@@ -126,12 +126,118 @@
 				from product_tbl order by 1 desc)b)
 		where rnum between #{start} and #{end}
 	</select>
-	 -->
-	<select id="productTotalCount" resultType="_int">
+	 
+	<select id="selectProductTotalCount" resultType="_int">
+		select count(*) from product_tbl
+	</select>
+	
+	<update id="updateProductStatus" parameterType="product">
+		update product_tbl set product_status = #{productStatus} where product_no = #{productNo};
+	</update>
+	
+	<select id="selectSearchProduct" parameterType="product" resultType="product">
+		select product_no as productNo,
+					category_No as categoryNo,
+					product_name as productName,
+					product_ea as productEa,
+					product_price as productPrice,
+					product_status as productStatus,
+					product_cost as productCost,
+					gonggu_number as gongguNumber,
+					product_content as productContent,
+					product_discount as productDiscount
+		from product_tbl
+		<choose>
+			<when test="productNo == 0">
+				where product_No = #{productNo}
+			</when>
+			<when test="productName == null">
+				where product_name = #{productName}
+			</when>
+		</choose>
+	</select>
+	
+ 	<select id="selectAllOrderList" parameterType="map" resultType="order">
+		select * from
+			(select rownum as rnum, b.* from
+			
+				(select
+					ot.order_no as orderNo,
+					ot.member_No as memberNo,
+					mt.member_id, mt.member_phone,
+					ot.product_no as productNo,
+					ot.pay_no as payNo,
+					ot.order_date as orderDate,
+					ot.order_status as orderStatus,
+					ot.product_cost as productCost,
+					dt.delivery_no, dt.delivery_status
+				from order_tbl ot
+				join delivery_tbl dt on (ot.product_no = dt.product_no)
+				join member_tbl mt on (ot.member_no = mt.member_no)
+				order by 1 desc)b)
+				
+		where rnum between #{start} and #{end}
+	</select>
+	
+	<select id="selectOrderTotalCount" resultType="_int">
 		select count(*) from product_tbl
 	</select>
 	
 	
+	<update id="updateDeliveryStatus" parameterType="product">
+		update delivery_tbl set delivery_status = #{deliveryStatus} where delivery_no = #{deliveryNo}
+	</update>
+	
+	<select id="selectSearchDelivery" resultType="order">
+		select
+			ot.order_no as orderNo,
+			ot.member_no as memberNo,
+			ot.product_no as productNo,
+			tb.product_name,
+			tb.product_ea,
+			ot.order_date as orderDate,
+			ot.order_status as orderStatus
+		from order_tbl ot join product_tbl tb on ot.product_no = tb.product_no
+		<choose>
+			<when test="order_no == 0 and member_no == 0">
+				where product_no = #{productNo}
+			</when>
+			<when test="order_no == 0 and product_no == 0">
+				where member_no == #{memberNo}
+			</when>
+			<when test="member_no == 0 and product_no == 0">
+				where order_no = #{orderNo}
+			</when>
+		</choose>
+	</select>
+	
+	<select id="selectOrderTotalCount" resultType="_int">
+		select count(*) from order_tbl
+	</select>
+	
+	<select id="selectAllBoardSalesCount" resultType="_int">
+		select sum(bt.board_price) from board_join bj join board_tbl bt on (bj.board_no = bt.board_no)
+	</select>
+	
+	<select id="selectMonthBoardSalesCount" resultType="_int">
+		select sum(bt.board_price) from board_join bj join board_tbl bt on (bj.board_no = bt.board_no) where bt.board_date between '2023-03-01' and '2023-03-30 and bt.board_status = 2 
+	</select>
+	
+	<select id="selectAllBoardList" parameterType="map" resultType="board">
+		select 
+			bt.board_no as boardNo,
+			bt.board_name as boardName,
+			bt.category_no as categoryNo,
+			bt.board_price as boardPrice,
+			bt.board_date as boardDate,
+			bt.board_start as boardStart,
+			bt.board_end as boardEnd,
+			 
+			
+		from board_tbl bt
+		join board_join bj on (bt.board_no = bj.board_no)
+		order by count() desc;
+	</select>
 	
 	
 </mapper>

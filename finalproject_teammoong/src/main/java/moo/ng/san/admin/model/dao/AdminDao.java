@@ -6,8 +6,10 @@ import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Repository;
 
+import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.product.model.vo.Product;
 
@@ -108,10 +110,64 @@ public class AdminDao {
 	}
 
 	public int selectProductCount() {
-		int totalCount = sqlSession.selectOne("admin.productTotalCount");
+		int totalCount = sqlSession.selectOne("admin.selectProductTotalCount");
 		return totalCount;
 	}
 
+	public int updateProductStatus(Product p) {
+		int result = sqlSession.update("admin.updateProductStatus",p);
+
+		return result;
+	}
+
+	public ArrayList<Product> selectSearchMember(Product p) {
+		List list = sqlSession.selectList("admin.selectSearchProduct", p);
+
+		return (ArrayList<Product>)list;
+	}
+	
+	public ArrayList<Order> selectAllOrderList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("admin.selectAllOrderList",map);
+		
+		return (ArrayList<Order>)list;
+	}
+	
+	public int selectOrderCount() {
+		int totalCount = sqlSession.selectOne("admin.selectOrderTotalCount");
+		return totalCount;
+	}
+
+	public int updateDeliveryStatus(Product p) {
+		int result = sqlSession.update("admin.updateDeliveryStatus",p);
+		
+		return result;
+	}
+
+	public ArrayList<Order> selectSearchDelivery(Order o) {
+		List list = sqlSession.selectList("admin.selectSearchDelivery",o);
+		
+		return (ArrayList<Order>)list;
+	}
+
+	public String selectAllBoardSalesCount() {
+		int result = sqlSession.selectOne("admin.selectAllBoardSalesCount");
+		
+		return Integer.toString(result);
+	}
+
+	public String selectMonthBoardSalesCount() {
+		int result = sqlSession.selectOne("admin.selectMonthBoardSalesCount");
+		
+		return Integer.toString(result);
+	}
+
+	public ArrayList<Board> selectAllBoardList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("admin.selectAllBoardList",map);
+		
+		return (ArrayList<Board>)list;
+	}
+	
+	
 
 
 	

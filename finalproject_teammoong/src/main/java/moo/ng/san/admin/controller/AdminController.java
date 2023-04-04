@@ -3,6 +3,7 @@ package moo.ng.san.admin.controller;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,9 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import moo.ng.san.admin.model.service.AdminService;
+import moo.ng.san.admin.model.vo.AdminBoardPageData;
 import moo.ng.san.admin.model.vo.AdminMemberPageData;
+import moo.ng.san.admin.model.vo.AdminOrderPageData;
 import moo.ng.san.admin.model.vo.AdminProductPageData;
 import moo.ng.san.member.model.vo.Member;
+import moo.ng.san.product.model.vo.Product;
 
 @Controller
 public class AdminController {
@@ -130,7 +134,7 @@ public class AdminController {
 	// 검색기능
 	@ResponseBody
 	@RequestMapping(value="/ajaxAdminSearchMember.do", produces = "application/json;charset=utf-8")
-	public String adminSearchMember(Member m, Model model) {
+	public String adminSearchMember(Member m) {
 		ArrayList<Member> list = service.selectSearchMember(m);
 		Gson gson = new Gson();
 		String result = gson.toJson(list);
@@ -149,7 +153,7 @@ public class AdminController {
 		if(result > 0) {
 			return "ok";
 		}else {
-			return "dup";
+			return "again";
 		}
 	}
 	
@@ -176,6 +180,117 @@ public class AdminController {
 		
 	}
 	
-
+	//상품 마감 업데이트
+	@ResponseBody
+	@RequestMapping(value="/ajaxProductChangeStatus.do")
+	public String productChangeStatus(Product p) {
+		int result = service.updateProductStatus(p);
+		if(result > 0) {
+			return "ok"; 
+		}
+			return "again";
+		
+	}
+	
+	//회원 검색
+	@ResponseBody
+	@RequestMapping(value="/ajaxAdminSearchProduct.do", produces = "application/json;charset=utf-8")
+	public String adminSearchProduct(Product p) {
+		ArrayList<Product> list = service.selectSearchProduct(p);
+		Gson gson = new Gson();
+		String result = gson.toJson(list);
+		return result;
+	}
+	
+	//일괄선택
+	
+	
+	/* 배송 관리 현황*/
+	
+	//배송관리 list
+	@RequestMapping(value="/allDeliveryList.do")
+	public String allDeliveryList(int reqPage, Model model) {
+		AdminOrderPageData aopd = service.selectAllOrderList(reqPage);
+		model.addAttribute("orderList",aopd.getList());
+		model.addAttribute("pageNavi",aopd.getPageNavi());
+		return "redirect:/";
+	}
+	
+	
+	// 배송 상태 변경
+	@ResponseBody
+	@RequestMapping(value="/ajaxChangeDeliveryStatus.do")
+	public String changeDeliveryStatus(Product p) {
+		int result = service.updateDeliveryStatus(p);
+		if(result > 0) {
+			return "ok";
+		}else {
+			return "again";
+		}
+	}
+	
+	// 배송 검색
+	@ResponseBody
+	@RequestMapping(value="/ajaxAdminSearchDelivery.do", produces = "application/json;charset=utf-8")
+	public String adminSearchDelivery(Order o) {
+		ArrayList<Order> list = service.selectSearchDelivery(o);
+		Gson gson = new Gson();
+		String result = gson.toJson(list);
+		return result;
+	}
+	
+	// 배송 일괄 변경
+	
+	
+	/* 이벤트 발행 관리 */
+	
+	/* 여기여기 붙어라 관리 */
+	
+	// 총 거래금액
+	@ResponseBody
+	@RequestMapping(value="/ajaxAllBoardSalesCount.do")
+	public String allBoardSalesCount() {
+		String result = service.selectAllBoardSalesCount();
+		return result;
+	}
+	
+	// 월 거래액
+	@ResponseBody
+	@RequestMapping
+	public String monthBoardSalesCount() {
+		String result = service.selectMonthBoardSalesCount();
+		return result;
+	}
+	
+	// 여기여기 붙어라 참여인원 순으로 list 정렬
+	@RequestMapping
+	public String allBoardList(int reqPage, Model model) {
+		AdminBoardPageData abpd = service.selectAllBoardList(reqPage);
+		model.addAttribute("orderList",abpd.getList());
+		model.addAttribute("pageNavi",abpd.getPageNavi());
+		return "redirect:/";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
