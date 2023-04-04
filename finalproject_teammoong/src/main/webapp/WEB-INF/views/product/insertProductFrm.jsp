@@ -5,33 +5,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-3.6.1.js"></script>
 </head>
 <body>
     <form action="#" method="get">
     <table border="3">
-        <tr>
+        <tr">
             <th>카테고리</th>
             <th>
                 <select name="category">
-                    <option value="">카테고리</option>
-                    <option value="1" name="option">패션</option>
-                    <option value="2" name="option">뷰티</option>
-                    <option value="3">식품</option>
-                    <option value="4">생활용품</option>
-                    <option value="5">가전/디지털</option>
-                    <option value="6">가구</option>
-                    <option value="7">침구</option>
-                    <option value="8">인테리어</option>
-                    <option value="9">공구</option>
-                    <option value="10">출산/유아동</option>
-                    <option value="11">반려용품</option>
-                    <option value="12">명품</option>
-                    <option value="13">상품권</option>
+                    <!--아작스로 카테고리 추가  -->
                 </select>
             </th>
             <th>
                 <select name="detail-category">
-                    <option value="">세부 카테고리</option>
+                	<!--아작스로 세부 카테고리 추가  -->
                 </select>
             </th>
         </tr>
@@ -72,7 +60,7 @@
         </tr>
         <tr>
             <th>썸네일</th>
-            <th colspan="2"><input type="file"></th>
+<!--             <th colspan="2"><input type="file"></th> -->
         </tr>
         <tr>
             <th>상품내용</th>
@@ -81,5 +69,39 @@
         <th colspan="3"><button type="submit">등록</button></th>
     </table>
 	</form>
+	<script>
+		window.onload = function(){
+			var categoryNo = $("[name=category]").val();
+			$("[name=category]").empty();
+            $("[name=category]").append("<option>카테고리</option>");
+            $("[name=detail-category]").append("<option>세부카테고리</option>");
+		    $.ajax({
+		    	url : "/selectAllCategory.do",
+		    	type : "POST",
+		    	dataType : "JSON",
+		    	success : function(values){
+		    		for(var i=0; i<values.length; i++){
+		    		$("[name=category]").append("<option value="+[i+1]+">"+values[i].categoryName+"</option>");
+		    		}
+		    	},
+		    });
+	    }
+		$("[name=category]").on("change",function(){
+		    $("[name=detail-category]").empty();
+		    $("[name=detail-category]").append("<option>세부카테고리</option>");
+		    $.ajax({
+		    	url : "/selectDetailCategory.do",
+		    	type : "POST",
+		    	dataType : "JSON",
+		    	data : {categoryNo : $("[name=category]").val()},
+		    	success : function(data){
+		    		for(var i=0; i<data.length; i++){
+			    		$("[name=detail-category]").append("<option value="+[i+1]+">"+data[i].dcategoryName+"</option>");
+			    		}
+	    		},
+		    });
+		});
+		
+	</script>
 </body>
 </html>
