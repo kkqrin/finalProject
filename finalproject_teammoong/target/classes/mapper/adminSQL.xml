@@ -240,6 +240,8 @@
 		join board_join bj on (bt.board_no = bj.board_no)
 		order by count() desc;
 	</select>
-	
+	<!--  -->
+	<!--  -->
+	<!--  -->
 	
 </mapper>
