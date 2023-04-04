@@ -55,10 +55,12 @@
 
             <div class="header-bottom">
                 <div class="menu-category">
-	                <a href="#">
-                	<span class="material-symbols-outlined">reorder</span>
-                	카테고리
-	                </a>
+					<div class="reorder-box">
+						<a href="#">
+							<span class="material-symbols-outlined reorder">reorder</span>
+							카테고리
+						</a>
+					</div>
 					 <!-- dropdown메뉴 -->
 					 <div class="category-dropdown">
 					 	<div>
@@ -105,7 +107,7 @@
 	            	<c:choose>
 	            			<c:when test="${empty sessionScope.m}">
 	            				<a href="/noticeList.do?reqPage=1">공지사항</a>
-			                    <a href="/join.do">회원가입</a>
+			                    <a href="/signUpFrm.do">회원가입</a>
 			                    <a href="/loginFrm.do">로그인</a>
 		                	</c:when>
 		                	<c:when test="${sessionScope.m.memberStatus eq 1}">

@@ -1,0 +1,14 @@
+.signUp-form{
+    width: 500px;
+    margin: 0 auto;
+    background-color: pink;
+    padding-top: 50px;
+}
+.signUp-title{
+    text-align: center;
+    border-bottom: 5px solid #3a3a3a;
+}
+.notice{
+    color: red;
+    text-align: right;
+}

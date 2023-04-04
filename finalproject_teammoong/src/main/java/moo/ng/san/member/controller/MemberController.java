@@ -48,4 +48,11 @@ public class MemberController {
 		return "member/myPage";
 	}//myPage
 	
+
+	@RequestMapping(value = "/signUpFrm.do")
+	public String joinMemberFrm(){
+		return "member/signUpFrm";
+	}//joinMemberFrm
+
+
 }//MemberController

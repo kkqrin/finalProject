@@ -17,6 +17,10 @@
 	display: flex;
 	justify-content: center;
 }
+.search-zone a:hover{
+	opacity: 0.8;
+	transition-duration: 0.3s;
+}
 label{
 	font-weight: bold;
 	padding-bottom: 10px;
@@ -26,10 +30,17 @@ input{
 }
 .id-pw-input{margin: 0 auto;width: 80%;}
 .search-zone a{margin: 20px;}
-p{text-align: center;}
+.proposalMsg{text-align: center;}
 .proposalMsg a{
 	font-size: 16px;
 	font-weight: bold;
 	text-decoration: underline;
-	color:#f18f43;
+	color:var(--primary);
+}
+.proposalMsg a:hover{
+	opacity: 0.8;
+	transition-duration: 0.3s;
+}
+[type="submit"]{
+	margin-top: 5px;
 }
