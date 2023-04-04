@@ -237,7 +237,7 @@
 			bt.board_date as boardDate,
 			bt.board_start as boardStart,
 			bt.board_end as boardEnd,
-			 
+			
 			
 		from board_tbl bt
 		join board_join bj on (bt.board_no = bj.board_no)
