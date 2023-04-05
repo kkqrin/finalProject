@@ -5,16 +5,24 @@
 
 	<select id="selectAllCategory" resultType="c">
 		select
-			category_no as categoryNo,
+			categort_no as categoryNo,
 			category_name as categoryName
 		from product_category
 	</select>
 	
 	<select id="selectDetailCategory" resultType="dc" parameterType="_int">
 		select
+			d_category_no as dCategoryNo,
 			category_no as categoryNo,
 			d_category_name as dCategoryName
 		from detail_category
 		where category_no = #{_parameter}
+	</select>
+	<select id="selectAllDetailCategory" resultType="dc">
+		select
+			d_category_no as dCategoryNo,
+			category_no as categoryNo,
+			d_category_name as dCategoryName
+		from detail_category
 	</select>
 </mapper>

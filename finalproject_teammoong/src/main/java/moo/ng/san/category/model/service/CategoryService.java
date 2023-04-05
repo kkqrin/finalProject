@@ -23,4 +23,9 @@ public class CategoryService {
 		ArrayList<DetailCategory> list = dao.selectDetailCategory(categoryNo);
 		return list;
 	}
+
+	public ArrayList<DetailCategory> selectAllDetailCategory() {
+		ArrayList<DetailCategory> list = dao.selectAllDetailCategory();
+		return list;
+	}
 }
