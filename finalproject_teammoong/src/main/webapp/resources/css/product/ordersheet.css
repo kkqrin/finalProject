@@ -64,3 +64,36 @@
     font-size: 16px;
     font-weight: 600;
 }
+
+#deli-post-number{
+    width: 30%;
+}
+.deli-box{
+    text-align: left;
+}
+
+.deli-box *{
+    margin-top: 10px;
+}
+
+.deli-box>div *{
+    display: inline-block;
+}
+
+.order-payment-wrap{
+    width: 550px;
+}
+
+.saved-money-box>div>input{
+    width: 60%;
+}
+
+.saved-money-box>div *{
+    display: inline-block;
+}
+
+.order-pay-box>div>button{
+    width: 80%;
+    margin: 10px auto;
+}
+
