@@ -127,7 +127,7 @@
 					<tr>
 						<td><label for="id">생년월일</label></td>
 							<input type="hidden" name="memberBDay">
-						<td id="no"><input type="text" id="year"></td>
+						<td id="no"><div class="bday-input"><input type="text" id="year" class="input-noborder">년</div></td>
 						<td id="no">
 							<select id="month" class="select-custom">
 								<c:forEach var="i" begin="1" end="12" step="1">
@@ -135,13 +135,26 @@
 								</c:forEach>
 							</select>
 						</td>
-						<td><input type="text" id="day"></td>
+						<td id="no"><div class="bday-input"><input type="text" id="day" class="input-noborder">일</div></td>
 					</tr>
 					<tr class="caution-tr">
 						<td></td>
 						<td class="caution" colspan="3"><a>생일 쿠폰이 발급됩니다! (최초 등록 후 수정 불가)</a></td>
 					</tr>
-				</table>
+					<tr class="caution-tr">
+						<td></td>
+						<td class="caution" colspan="3"><a>제대로된 날짜를 입력하세요</a></td>
+					</tr>
+					<tr>
+						<td><label for="id">프로필사진</label></td>
+						<td colspan="3">
+							<div class="proPic">안녕</div>
+							<div class="proPic-info">
+								사진 업로드에 대한 설명
+								<input type="file" name="memberPath">
+							</div>
+						</td>
+					</tr>
 			</form>
 		</div><!--signUp-form-->
 
