@@ -68,24 +68,27 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="content-wrap">
-	
+	<pre>
+		남은 거 : 포토후기 더보기 > 상세보기 이미지 왜 바로 안뜨는지? 나중에 뜨는지?
+		신고버튼 아직 구현 안함, 도움이 돼요 디자인 수정
+	</pre>
 		<h1>포토후기</h1>
 		<!-- 최근 5개의 리뷰만 노출 -->
 		<div class="photo-review-wrap">
 			<div class="photo-review-list">
 				<div class="photo-review-item">
 					<div class="photo-review-img">
-						<img src="#">
+						<img src="/resources/img/review/banana_review1.jpg" />
 					</div>
 				</div>
 				<div class="photo-review-item">
 					<div class="photo-review-img">
-						<img src="#">
+						<img src="/resources/img/review/banana_review2.jpg" />
 					</div>
 				</div>
 				<div class="photo-review-item">
 					<div class="photo-review-img">
-						<img src="#">
+						<img src="/resources/img/review/banana_review3.jpg" />
 					</div>
 				</div>
 				<div class="photo-review-item">
@@ -282,6 +285,9 @@
 					<div class="review-box">
 						<div class="review-img">
 							<img src="/resources/img/product/lactofit.jpg" />
+							<img src="/resources/img/review/banana_review1.jpg" />
+							<img src="/resources/img/review/banana_review2.jpg" />
+							<img src="/resources/img/review/banana_review3.jpg" />
 						</div>
 						<div class="review-right">
 							<div class="review-info">
@@ -309,7 +315,7 @@
 					</div>
 					<!--//내용영역-->
 				</div>
-				<button type="button">돌아가기</button>
+				<div class="back-photo-review-more" data-modal="#modal-photo-review-more">사진 목록보기</div>
 			</div>
 		</div>
 
