@@ -60,7 +60,7 @@ public class NoticeController {
 			return "redirect:/";
 		}
 	}
-	@RequestMapping(value = "/uploadImage.do")
+	@RequestMapping(value = "/uploadImage.do", produces = "plain/text;charset=utf-8")
 	@ResponseBody
 	public String uploadImage(@RequestParam("imageFile") MultipartFile multipartFile, HttpServletRequest request, HttpServletResponse response) throws IOException {
 	    // 이미지 파일 저장
