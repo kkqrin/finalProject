@@ -30,6 +30,11 @@
     <link rel="stylesheet" href="/resources/css/common/header.css" />
     <!--date range picker css-->
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+	<style>
+		.categoryGroup ul li{
+			font-size: 10px;
+		}
+	</style>
 </head>
 <body>
 	<div class="header-wrap">
@@ -73,32 +78,45 @@
 					</div>
 					 <!-- dropdown메뉴 -->
 					 <div class="category-dropdown">
-					 	<div>
-					      	<ul>
-					      		<li>대분류</li>
-					      		<li><a href="#">소분류</a></li>
-					      		<li><a href="#">소분류</a></li>
-					      	</ul>
-					      	<ul>
-					      		<li>대분류</li>
-					      		<li><a href="#">소분류</a></li>
-					      		<li><a href="#">소분류</a></li>
-					      	</ul>
-					      	<ul>
-					      		<li>대분류</li>
-					      		<li><a href="#">소분류</a></li>
-					      		<li><a href="#">소분류</a></li>
-					      	</ul>
-					      	<ul>
-					      		<li>대분류</li>
-					      		<li><a href="#">소분류</a></li>
-					      		<li><a href="#">소분류</a></li>
-					      	</ul>
-					      	<ul>
-					      		<li>대분류</li>
-					      		<li><a href="#">소분류</a></li>
-					      		<li><a href="#">소분류</a></li>
-					      	</ul>
+					 	<div class="categoryGroup">
+					      <!-- Ajax를 통한 카테고리값 가져오기 -->
+					      <ul>
+					      	<li>패션</li>
+					      	<li>1</li>
+					      	<li>1</li>
+					      	<li>1</li>
+					      	
+					      </ul>
+					      <ul>
+					      	<li>패션</li>
+					      </ul>
+					      <ul>
+					      	<li>패션</li>
+					      </ul>
+					      <ul>
+					      	<li>패션</li>
+					      </ul>
+					      <ul>
+					      	<li>패션</li>
+					      </ul>
+					      <ul>
+					      	<li>패션</li>
+					      </ul>
+					      <ul>
+					      	<li>패션</li>
+					      </ul>
+					      <ul>
+					      	<li>패션</li>
+					      </ul>
+					      <ul>
+					      	<li>패션</li>
+					      </ul>
+					      <ul>
+					      	<li>패션</li>
+					      </ul>
+					      <ul>
+					      	<li>패션</li>
+					      </ul>
 				      	</div>
 			    	</div><!-- dropdown메뉴 -->
                 </div><!-- menu-category -->
@@ -141,7 +159,34 @@
     		$(".category-dropdown").slideToggle();
     		$(".category-dropdown").css("display","flex");
     	})
-    		
+    	
+//     	window.onload = function(){
+// 		    $.ajax({
+// 		    	url : "/selectAllCategory.do",
+// 		    	type : "POST",
+// 		    	dataType : "JSON",
+// 		    	success : function(values){
+// 		    		console.log(values)
+// 		    		for(var i=0; i<values.length; i++){
+// 		    			$(".categoryGroup").append("<ul><li><a>"+values[i].categoryName+"</a></li></ul>");
+// 		    		}
+// 		    		$(".categoryGroup").children().children().children().addClass('test11');
+// 		    		 $.ajax({
+// 		    		    	url : "/selectAllDetailCategory.do",
+// 		    		    	type : "POST",
+// 		    		    	dataType : "JSON",
+// 		    		    	success : function(data){
+// 		    		    		console.log(data)
+// 		    		    		for(var i=0; i<data.length; i++){
+// 		    			    		$(".categoryGroup").children().append("<li><a>"+data[i].dcategoryName+"</a></li>");
+// 		    		    		}
+// 		    	    		},
+// 		    		    });
+// 		    	},
+// 		    });
+// 	    }
+    	
+		    		   
     </script>
 </body>
 </html>

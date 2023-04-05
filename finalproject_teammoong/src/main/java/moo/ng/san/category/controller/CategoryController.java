@@ -31,4 +31,10 @@ public class CategoryController {
 		ArrayList<DetailCategory> list = service.selectDetailCategory(categoryNo);
 		return list;
 	}
+	@ResponseBody
+	@RequestMapping(value="/selectAllDetailCategory.do", method=RequestMethod.POST, produces = "application/json; charset=utf8")
+	public ArrayList<DetailCategory> selectAllDetailCategory(){
+		ArrayList<DetailCategory> list = service.selectAllDetailCategory();
+		return list;
+	}
 }
