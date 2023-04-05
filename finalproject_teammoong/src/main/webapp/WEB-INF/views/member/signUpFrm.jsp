@@ -71,8 +71,8 @@
 					</tr>
 					<tr class="emailChk" style="display: none;">
 						<td></td>
-						<td colspan="3"><input type="text" id="emailChk" placeholder="입력한 이메일로 전송된 인증번호를 입력해주세요"></td>
-						<td><button type="button" id="cerNumChk" class="btn btn-sec size02">인증번호 확인</button></td>	
+						<td colspan="3"><input type="text" id="emailCerNum" placeholder="입력한 이메일로 전송된 인증번호를 입력해주세요"></td>
+						<td><button type="button" id="emailCerNumChk" class="btn btn-sec size02">인증번호 확인</button></td>	
 					</tr>
 					<tr>
 						<td><label for="phone"><span>*</span>휴대폰</label></td>
@@ -95,7 +95,7 @@
 					</tr>
 					<tr>
 						<td></td>
-						<td colspan="3"><input type="text" id="cerNum" placeholder="우편번호 조회 버튼을 눌러 값을 입력해주세요" readonly></td>
+						<td colspan="3"><input type="text" id="addrDetail" placeholder="우편번호 조회 버튼을 눌러 값을 입력해주세요" readonly></td>
 					</tr>
 					<tr>
 						<td><span style="color: red; font-size: 20px;">*</span>성별</td>
@@ -119,7 +119,7 @@
 					<tr>
 						<td><label for="id">계좌번호</label></td>
 						<td colspan="3">
-							<select class="select-custom" name="memberAccount">
+							<select class="select-custom" name="memberBank">
 								<option value="" selected disabled hidden>은행을 선택하세요</option>
 								<option value="우리은행">우리은행</option>
 							</select>
@@ -127,7 +127,7 @@
 					</tr>
 					<tr>
 						<td></td>
-						<td colspan="3"><input type="text" id="cerNum" placeholder="계좌번호를 입력하세요"></td>
+						<td colspan="3"><input type="text" name="memberAccount" placeholder="계좌번호를 입력하세요"></td>
 					</tr>
 					<tr>
 						<td><label for="id">생년월일</label></td>
@@ -162,6 +162,9 @@
 								<label class="fileUpload" for="fileUpload">
 									프로필 사진 업로드
 								</label>
+								<label class="deletePic" onclick="readURL(0);" style="display: none;">
+									사진 삭제하기
+								</label>
 								<input type="file" name="memberPath" id="fileUpload" accept=".gif, .jpg, .jpeg, .png" onchange="readURL(this);" style="display: none;">
 								<p>
 									64x64 사이즈에 최적화되어 있습니다.
@@ -177,7 +180,18 @@
 					</tr>
 				</table>
 				<div class="terms">
-					<h1>안녕</h1>
+					<div><span style="color: red; font-size: 20px;">*</span>이용약관동의</div>
+					<div class="check">
+						<ul>
+							<li>전체 동의합니다</li>
+							<li>이용약관 동의(필수)<a>약관보기></a></li>
+							<li>마케팅 활용동의(선택)<a>약관보기></a></li>
+							<li>본인은 만 14세 이상입니다.(필수)</li>
+						</ul>
+					</div>
+				</div>
+				<div class="area-btn center">
+				<button class="btn btn-pri size02" type="submit">가입하기</button>
 				</div>	
 			</form>
 		</div><!--signUp-form-->
@@ -193,6 +207,7 @@
 
 
 	<script>
+
 			$("#emailChk").on("click",function(){
 				$(".emailChk").show(200);
 			})
@@ -212,13 +227,19 @@
 				if (input.files && input.files[0]) {
 					var reader = new FileReader();
 					reader.onload = function(e) {
-					document.getElementById('preview').src = e.target.result;
+						//이미지를 다 읽어온 이후
+						document.getElementById('preview').src = e.target.result;
+						$(".fileUpload").hide();
+						$(".deletePic").show();
 					};
 					reader.readAsDataURL(input.files[0]);
 				} else {
-					document.getElementById('preview').src = "";
+					document.getElementById('preview').src = "/resources/upload/member/common/moongs.png";
+					$(".deletePic").hide();
+					$(".fileUpload").show();
 				}
 			}
+
 	</script>
 
 

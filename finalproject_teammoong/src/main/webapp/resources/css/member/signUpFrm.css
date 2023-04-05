@@ -20,7 +20,6 @@
 }
 .notice>span, label>span{
     color: red;
-    font-weight: bold;
     font-size: 24px;
     height: 20px;
     display: inline-block;
@@ -180,8 +179,9 @@ select{
 }
 .fileUpload{
     display: inline-block;
-    padding: 3px 50px;
-    border: 1px solid var(--content-tertiary);
+    background-color: var(--secondary);
+    padding: 4px 50px;
+    color: #fff;
     border-radius: 100px;
     cursor: pointer;
     margin-bottom: 10px;
@@ -197,7 +197,36 @@ select{
 
 
 
+.deletePic{
+    display: inline-block;
+    border: 1px solid var(--content-tertiary);
+    padding: 3px 68px;
+    border-radius: 100px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    
+}
+
+
 .terms{
     border-top: 5px solid #3a3a3a;
     margin-top: 100px;
+    display: flex;
+    padding: 40px 10px 60px 10px;
+}
+.terms>div{
+    font-weight: bold;
+    font-size: 16px;
+}
+.terms>.check{
+    padding: 0 50px;
+    font-weight: 500;
+}
+.terms>.check>ul>li>a{
+    color: var(--primary);
+    display: inline-block;
+    margin-left: 145px;
+}
+.terms>.check>ul>li:nth-child(3)>a{
+    margin-left: 131px;
 }
