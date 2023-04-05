@@ -10,10 +10,15 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-				<div class="banner">
-					<h4>회원가입</h4>
-					<h2>흩어지면 비싸다, 뭉쳐야 산다.</h2>
-				</div>
+	<div class="banner">
+		
+		<div>
+			<div>
+				<h4>회원가입</h4>
+				<h2>흩어지면 비싸다, 뭉쳐야 산다.</h2>
+			</div>
+		</div>
+	</div>
 	<div class="content-wrap">
 
 		
@@ -147,14 +152,33 @@
 					</tr>
 					<tr>
 						<td><label for="id">프로필사진</label></td>
-						<td colspan="3">
-							<div class="proPic">안녕</div>
-							<div class="proPic-info">
-								사진 업로드에 대한 설명
-								<input type="file" name="memberPath">
+						<td class="proPic-zone" colspan="3" id="no">
+							<div class="proPic-left">
+								<div class="proPic">
+									<img id="preview" src="/resources/upload/member/common/moongs.png">
+								</div>
+							</div>
+							<div class="proPic-right">
+								<label class="fileUpload" for="fileUpload">
+									프로필 사진 업로드
+								</label>
+								<input type="file" name="memberPath" id="fileUpload" accept=".gif, .jpg, .jpeg, .png" onchange="readURL(this);" style="display: none;">
+								<p>
+									64x64 사이즈에 최적화되어 있습니다.
+								</p>
+								<p class="uploadNotice">
+									(000KB미만만 가능, .jpg,.png,.gif만 가능)
+								</p>
+								<p class="uploadNotice o">
+									미설정 시 뭉산의 기본 아이콘이 제공됩니다
+								</p>
 							</div>
 						</td>
 					</tr>
+				</table>
+				<div class="terms">
+					<h1>안녕</h1>
+				</div>	
 			</form>
 		</div><!--signUp-form-->
 
@@ -181,7 +205,23 @@
 			$( function() {
 				$( ".select-custom" ).selectmenu();
 			});
+
+
+
+			function readURL(input) {
+				if (input.files && input.files[0]) {
+					var reader = new FileReader();
+					reader.onload = function(e) {
+					document.getElementById('preview').src = e.target.result;
+					};
+					reader.readAsDataURL(input.files[0]);
+				} else {
+					document.getElementById('preview').src = "";
+				}
+			}
 	</script>
+
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
