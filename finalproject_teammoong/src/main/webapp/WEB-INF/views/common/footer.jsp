@@ -17,6 +17,7 @@
 			<p>법인명(상호): 뭉쳐야 산다</p>
 			<p>사업자등록번호: KH202303270503</p>
 			<p>대표: 김규린 김명훈 김홍미 안진배 이화정 장형천</p>
+			<p>기본 귤 아이콘  제작자: Freepik - Flaticon</p>
 			<p>Copyright 2023. 뭉쳐야산다 all rights reserved.</p>
 		</div>
 	</footer>

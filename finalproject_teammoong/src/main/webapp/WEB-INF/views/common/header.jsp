@@ -30,12 +30,26 @@
     <link rel="stylesheet" href="/resources/css/common/header.css" />
     <!--date range picker css-->
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+	<style>
+		.categoryGroup ul li{
+			font-size: 10px;
+		}
+	</style>
 </head>
 <body>
 	<div class="header-wrap">
         <div class="header-content">
         
-            
+            <div class="header-info">
+				<c:choose>
+					<c:when test="${sessionScope.m.memberStatus eq 1}">
+						<a class="helloMsg">${sessionScope.m.memberName }님 환영합니다!</a>
+					</c:when>
+					<c:when test="${sessionScope.m.memberStatus eq 0}">
+						<a class="staffMsg">관리자 버전으로 접속중입니다.</a>
+					</c:when>
+				</c:choose>
+			</div>
 		
             <div class="header-top">
             	<div class="middle-left">
@@ -64,32 +78,45 @@
 					</div>
 					 <!-- dropdown메뉴 -->
 					 <div class="category-dropdown">
-					 	<div>
-					      	<ul>
-					      		<li>대분류</li>
-					      		<li><a href="#">소분류</a></li>
-					      		<li><a href="#">소분류</a></li>
-					      	</ul>
-					      	<ul>
-					      		<li>대분류</li>
-					      		<li><a href="#">소분류</a></li>
-					      		<li><a href="#">소분류</a></li>
-					      	</ul>
-					      	<ul>
-					      		<li>대분류</li>
-					      		<li><a href="#">소분류</a></li>
-					      		<li><a href="#">소분류</a></li>
-					      	</ul>
-					      	<ul>
-					      		<li>대분류</li>
-					      		<li><a href="#">소분류</a></li>
-					      		<li><a href="#">소분류</a></li>
-					      	</ul>
-					      	<ul>
-					      		<li>대분류</li>
-					      		<li><a href="#">소분류</a></li>
-					      		<li><a href="#">소분류</a></li>
-					      	</ul>
+					 	<div class="categoryGroup">
+					      <!-- Ajax를 통한 카테고리값 가져오기 -->
+					      <ul>
+					      	<li>패션</li>
+					      	<li>1</li>
+					      	<li>1</li>
+					      	<li>1</li>
+					      	
+					      </ul>
+					      <ul>
+					      	<li>패션</li>
+					      </ul>
+					      <ul>
+					      	<li>패션</li>
+					      </ul>
+					      <ul>
+					      	<li>패션</li>
+					      </ul>
+					      <ul>
+					      	<li>패션</li>
+					      </ul>
+					      <ul>
+					      	<li>패션</li>
+					      </ul>
+					      <ul>
+					      	<li>패션</li>
+					      </ul>
+					      <ul>
+					      	<li>패션</li>
+					      </ul>
+					      <ul>
+					      	<li>패션</li>
+					      </ul>
+					      <ul>
+					      	<li>패션</li>
+					      </ul>
+					      <ul>
+					      	<li>패션</li>
+					      </ul>
 				      	</div>
 			    	</div><!-- dropdown메뉴 -->
                 </div><!-- menu-category -->
@@ -105,21 +132,17 @@
                 </div>
                 
               	<div class="menu-area">
+								<a href="/noticeList.do?reqPage=1">공지사항</a>
 	            	<c:choose>
 	            			<c:when test="${empty sessionScope.m}">
-	            				<a href="/noticeList.do?reqPage=1">공지사항</a>
 			                    <a href="/signUpFrm.do">회원가입</a>
 			                    <a href="/loginFrm.do">로그인</a>
 		                	</c:when>
 		                	<c:when test="${sessionScope.m.memberStatus eq 1}">
-		                		<a class="helloMsg">${sessionScope.m.memberName }님 환영합니다!</a>
-		                		<a href="/noticeList.do?reqPage=1">공지사항</a>
 			                    <a href="/myPage.do">마이페이지</a>
 			                    <a href="/logout.do">로그아웃</a>
 		                	</c:when>
 		               		<c:when test="${sessionScope.m.memberStatus eq 0}">
-		               			<a class="staffMsg">관리자 버전으로 접속중입니다.</a>
-		               			<a href="/noticeList.do?reqPage=1">공지사항</a>
 			                    <a href="/admin.do">관리자페이지</a>
 			                    <a href="/logout.do">로그아웃</a>
 		                	</c:when>
@@ -136,7 +159,34 @@
     		$(".category-dropdown").slideToggle();
     		$(".category-dropdown").css("display","flex");
     	})
-    		
+    	
+//     	window.onload = function(){
+// 		    $.ajax({
+// 		    	url : "/selectAllCategory.do",
+// 		    	type : "POST",
+// 		    	dataType : "JSON",
+// 		    	success : function(values){
+// 		    		console.log(values)
+// 		    		for(var i=0; i<values.length; i++){
+// 		    			$(".categoryGroup").append("<ul><li><a>"+values[i].categoryName+"</a></li></ul>");
+// 		    		}
+// 		    		$(".categoryGroup").children().children().children().addClass('test11');
+// 		    		 $.ajax({
+// 		    		    	url : "/selectAllDetailCategory.do",
+// 		    		    	type : "POST",
+// 		    		    	dataType : "JSON",
+// 		    		    	success : function(data){
+// 		    		    		console.log(data)
+// 		    		    		for(var i=0; i<data.length; i++){
+// 		    			    		$(".categoryGroup").children().append("<li><a>"+data[i].dcategoryName+"</a></li>");
+// 		    		    		}
+// 		    	    		},
+// 		    		    });
+// 		    	},
+// 		    });
+// 	    }
+    	
+		    		   
     </script>
 </body>
 </html>
