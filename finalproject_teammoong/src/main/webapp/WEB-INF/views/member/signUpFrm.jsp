@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,15 +10,16 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-
+				<div class="banner">
+					<h4>회원가입</h4>
+					<h2>흩어지면 비싸다, 뭉쳐야 산다.</h2>
+				</div>
 	<div class="content-wrap">
 
-
+		
 
 		<div class="signUp-form">
 			<div class="signUp-title">
-				<h2>회원가입</h2>
-				<h5>흩어지면 비싸다, 뭉쳐야 산다.</h5>
 				<p class="notice"><span>*</span>필수입력사항</p>
 			</div><!--signUp-title-->
 
@@ -62,12 +64,17 @@
 						<td></td>
 						<td class="caution" colspan="3"><a>이메일 양식이 올바르지 않습니다</a></td>
 					</tr>
+					<tr class="emailChk" style="display: none;">
+						<td></td>
+						<td colspan="3"><input type="text" id="emailChk" placeholder="입력한 이메일로 전송된 인증번호를 입력해주세요"></td>
+						<td><button type="button" id="cerNumChk" class="btn btn-sec size02">인증번호 확인</button></td>	
+					</tr>
 					<tr>
 						<td><label for="phone"><span>*</span>휴대폰</label></td>
 						<td colspan="3"><input type="text" name="memberEmail" id="phone"></td>
 						<td><button type="button" id="phoneChk" class="btn btn-sec size02">인증번호 발송</button></td>	
 					</tr>
-					<tr class="cerNumChk">
+					<tr class="cerNumChk" style="display: none;">
 						<td></td>
 						<td colspan="3"><input type="text" id="cerNum" placeholder="인증번호를 입력해주세요"></td>
 						<td><button type="button" id="cerNumChk" class="btn btn-sec size02">인증번호 확인</button></td>	
@@ -87,21 +94,27 @@
 					</tr>
 					<tr>
 						<td><span style="color: red; font-size: 20px;">*</span>성별</td>
-						<td><label for="m">남자</label></td>
-						<input type="radio" name="memberGender" id="m" value="1">
-						<td><label for="f">여자</label></td>
-						<input type="radio" name="memberGender" id="f" value="2">
-						<td><label for="n">선택안함</label></td>
-						<input type="radio" name="memberGender" id="n" value="3">
+						<td>
+							<input type="radio" name="memberGender" id="m" value="1">
+							<label for="m">남자</label>
+						</td>
+						<td id="no">
+							<input type="radio" name="memberGender" id="f" value="2">
+							<label for="f">여자</label>
+						</td>
+						<td>
+							<input type="radio" name="memberGender" id="n" value="3">
+							<label for="n">선택안함</label>
+						</td>
 					</tr>
 					<tr class="caution-tr">
 						<td></td>
-						<td class="caution" colspan="3"><a>더 나은 상품 제공을 위한 통계 용도로 사용됩니다</a></td>
+						<td class="caution" colspan="3"><a>더 나은 상품 제공을 위한 통계 용도로만 사용됩니다</a></td>
 					</tr>
 					<tr>
 						<td><label for="id">계좌번호</label></td>
 						<td colspan="3">
-							<select class="select-custom">
+							<select class="select-custom" name="memberAccount">
 								<option value="" selected disabled hidden>은행을 선택하세요</option>
 								<option value="우리은행">우리은행</option>
 							</select>
@@ -110,6 +123,23 @@
 					<tr>
 						<td></td>
 						<td colspan="3"><input type="text" id="cerNum" placeholder="계좌번호를 입력하세요"></td>
+					</tr>
+					<tr>
+						<td><label for="id">생년월일</label></td>
+							<input type="hidden" name="memberBDay">
+						<td id="no"><input type="text" id="year"></td>
+						<td id="no">
+							<select id="month" class="select-custom">
+								<c:forEach var="i" begin="1" end="12" step="1">
+									<option value="${i }">${i }월</option>
+								</c:forEach>
+							</select>
+						</td>
+						<td><input type="text" id="day"></td>
+					</tr>
+					<tr class="caution-tr">
+						<td></td>
+						<td class="caution" colspan="3"><a>생일 쿠폰이 발급됩니다! (최초 등록 후 수정 불가)</a></td>
 					</tr>
 				</table>
 			</form>
@@ -126,9 +156,13 @@
 
 
 	<script>
-			$(".cerNumChk").hide();
+			$("#emailChk").on("click",function(){
+				$(".emailChk").show(200);
+			})
+	
+	
 			$("#phoneChk").on("click",function(){
-				$(".cerNumChk").slideDown();
+				$(".cerNumChk").show(200);
 			})
 
 			$( function() {

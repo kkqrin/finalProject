@@ -18,9 +18,9 @@
 			<div class="id-pw-input">
 			
 				<label for="id">아이디</label>
-				<input class="input-basic" type="text" name="memberId" id="id" placeholder="아이디를 입력하세요">
+				<input class="input-basic" type="text" name="memberId" id="id" placeholder="아이디를 입력하세요" required>
 				<label for="pw">비밀번호</label>
-				<input class="input-basic" type="password" name="memberPw" id="pw" placeholder="비밀번호를 입력하세요">
+				<input class="input-basic" type="password" name="memberPw" id="pw" placeholder="비밀번호를 입력하세요" required>
 				<div class="area-btn full">
 					<button type="submit" id="login" class="btn btn-pri size02">로그인</button>
 				</div>
@@ -63,6 +63,16 @@
 		$("#login").on("click",function(){
 			const inputId = $("[name=memberId]").val();
 			const inputPw = $("[name=memberPw]").val();
+			
+	
+			if(inputId==""){
+				$("[name=memberId]").focus();
+				return false;
+			}else if(inputPw==""){
+				$("[name=memberPw]").focus();
+				return false;
+			}
+		
 			
 			$.ajax({
 				url: "/login.do",

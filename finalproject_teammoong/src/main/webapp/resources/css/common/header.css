@@ -50,6 +50,7 @@
 	position: absolute;
 	top:8px ; right: 5px;
 	cursor: pointer;
+	font-size: 26px;
 }
 .middle-right{
 	margin-left: auto;
@@ -81,10 +82,10 @@
 .header-bottom>div:not(.menu-category,.category-dropdown,.menu-area):hover{
 	border-bottom: 4px solid var(--primary);
 }
-.header-bottom>div a,span{
+.header-bottom>div a, .material-symbols-outlined{
 	vertical-align: middle;
 	font-size: 16px;
-	font-weight: bolder;
+	font-weight: 500;
 }
 
 
@@ -96,7 +97,8 @@
 .header-bottom>.together span{
 	position: absolute;
 	left:102px;
-	top:5px;
+	top:6px;
+	font-size: 24px;
 }
 
 .menu-category{
@@ -132,7 +134,7 @@
 	height:200px;
 	background-color: rgba(255,255,255,0.9);
 	left:0;
-	top: 15px;;
+	top: 9px;;
 	transform: translateY( 35px );
 	padding: 20px 50px;
 }
