@@ -15,7 +15,7 @@
 		<div>
 			<div>
 				<h4>회원가입</h4>
-				<h2>흩어지면 비싸다, 뭉쳐야 산다.</h2>
+				<h2>흩어지면 비싸다, 뭉쳐야 싸게 산다.</h2>
 			</div>
 		</div>
 	</div>
@@ -114,7 +114,7 @@
 					</tr>
 					<tr class="caution-tr">
 						<td></td>
-						<td class="caution" colspan="3"><a>더 나은 상품 제공을 위한 통계 용도로만 사용됩니다</a></td>
+						<td class="caution birth" colspan="3"><a>더 나은 상품 제공을 위한 통계 용도로만 사용됩니다</a></td>
 					</tr>
 					<tr>
 						<td><label for="id">계좌번호</label></td>

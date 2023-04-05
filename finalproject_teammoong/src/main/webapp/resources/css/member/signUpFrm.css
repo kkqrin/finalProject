@@ -49,6 +49,10 @@ table tbody tr td:nth-child(3):not(#no){
 .caution{
     position: relative;
     text-align: left;
+    display: none;
+}
+.birth{
+	display: table-cell;
 }
 .caution>a{
     position: absolute;
