@@ -35,7 +35,16 @@
 	<div class="header-wrap">
         <div class="header-content">
         
-            
+            <div class="header-info">
+				<c:choose>
+					<c:when test="${sessionScope.m.memberStatus eq 1}">
+						<a class="helloMsg">${sessionScope.m.memberName }님 환영합니다!</a>
+					</c:when>
+					<c:when test="${sessionScope.m.memberStatus eq 0}">
+						<a class="staffMsg">관리자 버전으로 접속중입니다.</a>
+					</c:when>
+				</c:choose>
+			</div>
 		
             <div class="header-top">
             	<div class="middle-left">
@@ -105,21 +114,17 @@
                 </div>
                 
               	<div class="menu-area">
+								<a href="/noticeList.do?reqPage=1">공지사항</a>
 	            	<c:choose>
 	            			<c:when test="${empty sessionScope.m}">
-	            				<a href="/noticeList.do?reqPage=1">공지사항</a>
 			                    <a href="/signUpFrm.do">회원가입</a>
 			                    <a href="/loginFrm.do">로그인</a>
 		                	</c:when>
 		                	<c:when test="${sessionScope.m.memberStatus eq 1}">
-		                		<a class="helloMsg">${sessionScope.m.memberName }님 환영합니다!</a>
-		                		<a href="/noticeList.do?reqPage=1">공지사항</a>
 			                    <a href="/myPage.do">마이페이지</a>
 			                    <a href="/logout.do">로그아웃</a>
 		                	</c:when>
 		               		<c:when test="${sessionScope.m.memberStatus eq 0}">
-		               			<a class="staffMsg">관리자 버전으로 접속중입니다.</a>
-		               			<a href="/noticeList.do?reqPage=1">공지사항</a>
 			                    <a href="/admin.do">관리자페이지</a>
 			                    <a href="/logout.do">로그아웃</a>
 		                	</c:when>
