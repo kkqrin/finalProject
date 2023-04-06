@@ -19,11 +19,11 @@ public class MainCotroller {
 	
 	@RequestMapping(value = "/main.do")
 	public String mainPage(Model model) {
-//		ArrayList<Category> category = service.selectAllCategory();
-//		ArrayList<DetailCategory> detailCategory = service.selectAllDetailCategory();
-//		
-//		model.addAttribute("c", category);
-//		model.addAttribute("d", detailCategory);
+		ArrayList<Category> category = service.selectAllCategory();
+		ArrayList<DetailCategory> detailCategory = service.selectAllDetailCategory();
+		
+		model.addAttribute("c", category);
+		model.addAttribute("d", detailCategory);
 		return "common/main";
 	}
 }

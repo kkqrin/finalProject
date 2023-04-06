@@ -54,11 +54,13 @@
 							<c:forEach items="${c }" var="c" varStatus="i" begin="0" end="13" step="1">
 								<div class="one-category">
 									<a class="cate-name" href="${i.index+1 }">${c.categoryName }</a>
-<%-- 									<c:forEach items="${d }" var="d"> --%>
-										<div class="sub">
-											<a href="#">${d.dCategoryName }</a>
-										</div>
-<%-- 									</c:forEach> --%>
+										<c:forEach items="${d }" var="d">
+										<c:if test=" ${d.categoryNo eq c.categoryNo}">
+											<div class="sub">
+												<a href="#">${d.dCategoryName }</a>
+											</div>
+										</c:if>
+										</c:forEach>
 								</div><!-- one-category -->
 							</c:forEach>
 						</div>
