@@ -40,153 +40,124 @@
 	<div class="header-wrap">
         <div class="header-content">
         
-            <div class="header-info">
-				<c:choose>
-					<c:when test="${sessionScope.m.memberStatus eq 1}">
-						<a class="helloMsg">${sessionScope.m.memberName }님 환영합니다!</a>
-					</c:when>
-					<c:when test="${sessionScope.m.memberStatus eq 0}">
-						<a class="staffMsg">관리자 버전으로 접속중입니다.</a>
-					</c:when>
-				</c:choose>
-			</div>
+            
 		
-            <div class="header-top">
-            	<div class="middle-left">
-	                <a href="/" class="title">뭉쳐야산다</a>
-                </div>
-                <div class="middle-center">
-	                <div class="mainSearch">
-	                	<input type="text" class="mainSearch-input input-noborder" placeholder="상품을 검색해보세요">
-	                	<span class="material-symbols-outlined">search</span>
-		            </div>
-	            </div>
-                <div class="middle-right">
-	                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">notifications</span></a>
-	                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">favorite</span></a>
-	                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">shopping_cart</span></a>
-            	</div>
-            </div><!-- header-top -->
-
-            <div class="header-bottom">
-                <div class="menu-category">
+			<section>
+			<div class="header-left">
+				<div class="menu-category">
 					<div class="reorder-box">
-						<a href="#">
-							<span class="material-symbols-outlined reorder">reorder</span>
-							카테고리
-						</a>
+						<span class="material-symbols-outlined reorder">reorder</span>
+						카테고리
 					</div>
-					 <!-- dropdown메뉴 -->
-					 <div class="category-dropdown">
-					 	<div class="categoryGroup">
-					      <!-- Ajax를 통한 카테고리값 가져오기 -->
-					      <ul>
-					      	<li>패션</li>
-					      	<li>1</li>
-					      	<li>1</li>
-					      	<li>1</li>
-					      	
-					      </ul>
-					      <ul>
-					      	<li>패션</li>
-					      </ul>
-					      <ul>
-					      	<li>패션</li>
-					      </ul>
-					      <ul>
-					      	<li>패션</li>
-					      </ul>
-					      <ul>
-					      	<li>패션</li>
-					      </ul>
-					      <ul>
-					      	<li>패션</li>
-					      </ul>
-					      <ul>
-					      	<li>패션</li>
-					      </ul>
-					      <ul>
-					      	<li>패션</li>
-					      </ul>
-					      <ul>
-					      	<li>패션</li>
-					      </ul>
-					      <ul>
-					      	<li>패션</li>
-					      </ul>
-					      <ul>
-					      	<li>패션</li>
-					      </ul>
-				      	</div>
-			    	</div><!-- dropdown메뉴 -->
-                </div><!-- menu-category -->
-                
-                <div><a href="#">인기상품</a></div>
-                <div><a href="/insertProductFrm.do">물품등록(예비버튼)</a></div>
-                <div><a href="#">오늘의상품</a></div>
-                <div class="together">
-                	<a href="/boardList.do?reqPage=1">
-               		 여기여기붙어라
-               		 <span class="material-symbols-outlined recommend">recommend</span>
-               		</a>
-                </div>
-                
-              	<div class="menu-area">
+					<div class="category-content">
+						<div class="main-category">
+							<div class="one-category">
+								<a class="cate-name" href="#">패션</a>
+								<div class="sub">
+									<a href="#">여성의류</a>
+									<a href="#">남성의류</a>
+									<a href="#">유니섹스</a>
+									<a href="#">언더웨어/이지웨어</a>
+								</div>
+							</div><!-- one-category -->
+							<div class="one-category">
+								<a class="cate-name" href="#">뷰티</a>
+								<div class="sub">
+									<a href="#">스킨케어</a>
+									<a href="#">베이스메이크업</a>
+									<a href="#">색조메이크업</a>
+									<a href="#">클렌징</a>
+								</div>
+							</div><!-- one-category -->
+						</div>
+					</div><!-- category-content -->
+              	</div><!-- menu-category -->
+			</div><!-- header-left -->
+			
+			
+			<div class="header-right">
+				<div class="header-info">
+					<c:choose>
+						<c:when test="${sessionScope.m.memberStatus eq 1}">
+							<a class="helloMsg">${sessionScope.m.memberName }님 환영합니다!</a>
+						</c:when>
+						<c:when test="${sessionScope.m.memberStatus eq 0}">
+							<a class="staffMsg">관리자 버전으로 접속중입니다.</a>
+						</c:when>
+					</c:choose>
+				</div><!-- header-info -->
+				<div class="header-top">
+	            	<div class="middle-left">
+		                <a href="/" class="title">뭉쳐야산다</a>
+	                </div>
+	                <div class="middle-center">
+		                <div class="mainSearch">
+		                	<input type="text" class="mainSearch-input input-noborder" placeholder="상품을 검색해보세요">
+		                	<span class="material-symbols-outlined">search</span>
+			            </div>
+		            </div>
+	                <div class="middle-right">
+		                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">notifications</span></a>
+		                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">favorite</span></a>
+		                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">shopping_cart</span></a>
+	            	</div>
+            	</div><!-- header-top -->
+            	
+            	
+            	<div class="header-bottom">
+            		<div class="menu-product">
+		                <div><a href="#">인기상품</a></div>
+		                <div><a href="/insertProductFrm.do">물품등록(예비버튼)</a></div>
+		                <div><a href="#">오늘의상품</a></div>
+		                <div class="together">
+		                	<a href="/boardList.do?reqPage=1">
+		               		 여기여기붙어라
+		               		 <span class="material-symbols-outlined recommend">recommend</span>
+		               		</a>
+		                </div>
+	                </div>
+	              	<div class="menu-area">
 								<a href="/noticeList.do?reqPage=1">공지사항</a>
-	            	<c:choose>
-	            			<c:when test="${empty sessionScope.m}">
-			                    <a href="/signUpFrm.do">회원가입</a>
-			                    <a href="/loginFrm.do">로그인</a>
-		                	</c:when>
-		                	<c:when test="${sessionScope.m.memberStatus eq 1}">
-			                    <a href="/myPage.do">마이페이지</a>
-			                    <a href="/logout.do">로그아웃</a>
-		                	</c:when>
-		               		<c:when test="${sessionScope.m.memberStatus eq 0}">
-			                    <a href="/admin.do">관리자페이지</a>
-			                    <a href="/logout.do">로그아웃</a>
-		                	</c:when>
-	                </c:choose>	
-    			</div><!-- menu-area -->
+		            	<c:choose>
+		            			<c:when test="${empty sessionScope.m}">
+				                    <a href="/signUpFrm.do">회원가입</a>
+				                    <a href="/loginFrm.do">로그인</a>
+			                	</c:when>
+			                	<c:when test="${sessionScope.m.memberStatus eq 1}">
+				                    <a href="/myPage.do">마이페이지</a>
+				                    <a href="/logout.do">로그아웃</a>
+			                	</c:when>
+			               		<c:when test="${sessionScope.m.memberStatus eq 0}">
+				                    <a href="/admin.do">관리자페이지</a>
+				                    <a href="/logout.do">로그아웃</a>
+			                	</c:when>
+		                </c:choose>	
+	    			</div><!-- menu-area -->
                 
-            </div><!-- header-bottom -->
+            	</div><!-- header-bottom -->
+			</div>
+            </section>
+
+            
             
         </div><!--header-content-->
     </div><!--header-wrap-->
-
+	
     <script>
-    	$(".menu-category").hover(function(){
-    		$(".category-dropdown").slideToggle();
-    		$(".category-dropdown").css("display","flex");
-    	})
-    	
-//     	window.onload = function(){
-// 		    $.ajax({
-// 		    	url : "/selectAllCategory.do",
-// 		    	type : "POST",
-// 		    	dataType : "JSON",
-// 		    	success : function(values){
-// 		    		console.log(values)
-// 		    		for(var i=0; i<values.length; i++){
-// 		    			$(".categoryGroup").append("<ul><li><a>"+values[i].categoryName+"</a></li></ul>");
-// 		    		}
-// 		    		$(".categoryGroup").children().children().children().addClass('test11');
-// 		    		 $.ajax({
-// 		    		    	url : "/selectAllDetailCategory.do",
-// 		    		    	type : "POST",
-// 		    		    	dataType : "JSON",
-// 		    		    	success : function(data){
-// 		    		    		console.log(data)
-// 		    		    		for(var i=0; i<data.length; i++){
-// 		    			    		$(".categoryGroup").children().append("<li><a>"+data[i].dcategoryName+"</a></li>");
-// 		    		    		}
-// 		    	    		},
-// 		    		    });
-// 		    	},
-// 		    });
-// 	    }
-    	
-		    		   
+		$(".menu-category").mouseenter(function(){
+			$(".category-content").fadeIn();
+		});
+		$(".menu-category").mouseleave(function(){
+			$(".category-content").fadeOut();
+			$(".sub").fadeOut();
+		});
+		
+		$(".cate-name").mouseenter(function(event){
+			event.stopPropagation();
+			$(".sub").fadeOut();
+			$(this).next().fadeIn();
+		});
+
     </script>
 </body>
 </html>

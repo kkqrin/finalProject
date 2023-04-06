@@ -32,6 +32,30 @@
   .main-content{
   	padding-top: 30px; 
   }
+    #drop-zone {
+    width: 300px;
+    height: 50px;
+    border: 2px dashed #ccc;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 20px auto;
+    line-height: 50px;
+    cursor: pointer;
+  }
+  #drop-zone.dragover {
+    background-color: #eee;
+  }
+  #file-names {
+    margin-top: 20px;
+  }
+  #file-names p {
+    margin: 0;
+  }
+  #file-names button {
+    margin-left: 10px;
+  }
 </style>
 </head>
 <body>
@@ -61,18 +85,13 @@
 								<label for="file">파일첨부</label>
 							</th>
 							<td>
-							    <div class="custom-file-upload" id="file-choose">
-								    <input type="file" name="noticeFile" multiple id="fileUpload">
-								    <c:forEach items="${n.fileList }" var="f">
-							     		<p>
-							        		<a href="/noticeFileDown.do?fileNo=${f.fileNo}">${f.fileName }</a>
-							        		<button type="button" onclick="deleteFile(this,${f.fileNo}, '${f.filepath}');">삭제</button>
-							      		</p>
-							    	</c:forEach>					    
-									<label for="fileUpload">선택하기</label>
-							    </div>
-							    <div id="file-names"></div>
-							</td>
+								<div id="drop-zone">
+      							<label for="fileUpload">파일을 여기에 끌어다 놓거나 클릭하세요.</label>
+    						</div>
+    							<input type="file" name="noticeFile" id="fileUpload" multiple style="display: none" />
+    						<div id="file-names">
+    						</div>
+    					</td>
 						</tr>
 						<tr>
 							<th>
@@ -131,31 +150,73 @@
 		        }
 		    });
 		}
-		function deleteFile(obj, fileNo, filepath){
-			const fileNoInput = $("<input>");
-			fileNoInput.attr("name","fileNo");
-			fileNoInput.val(fileNo);
-			fileNoInput.hide();
-			
-			const filepathInput = $("<input>");
-			filepathInput.attr("name","filepath");
-			filepathInput.val(filepath);
-			filepathInput.hide();
-			
-			$("#writeFrm").append(fileNoInput).append(filepathInput);
-			$(obj).parent().remove();
-		}
+		
 		$(document).ready(function() {
 			  $('#fileUpload').change(function() {
 			    const files = $('#fileUpload')[0].files;
 			    if (files.length > 0) {
-			      let fileNames = '';
+			      let fileNamesWrapper = $('<div></div>');
 			      for (let i = 0; i < files.length; i++) {
-			        fileNames += files[i].name + ', ';
+			        let fileDiv = $('<div></div>');
+			        let fileNameSpan = $('<span></span>');
+			        fileNameSpan.text(files[i].name);
+			        let delBtn = $('<button type="button">삭제</button>');
+			        delBtn.attr("class", "delete-file-btn");
+			        fileDiv.append(fileNameSpan);
+			        fileDiv.append(delBtn);
+			        fileNamesWrapper.append(fileDiv);
 			      }
-			      fileNames = fileNames.substring(0, fileNames.length - 2);
-			      $('#file-names').text(fileNames);
+			      $('#file-names').html(fileNamesWrapper);
+			      
 			    }
+			  });
+
+			  $(document).ready(function() {
+				  let dropZone = $('#drop-zone');
+
+				  dropZone.on('dragover', function(e) {
+				    e.preventDefault();
+				    dropZone.addClass('drag-over');
+				  });
+
+				  dropZone.on('dragleave', function(e) {
+				    e.preventDefault();
+				    dropZone.removeClass('drag-over');
+				  });
+
+				  dropZone.on('drop', function(e) {
+				    e.preventDefault();
+				    dropZone.removeClass('drag-over');
+				    const files = e.originalEvent.dataTransfer.files;
+				    
+				    if (files.length > 0) {
+				      let fileNamesWrapper = $('<div></div>');
+				      let formData = new FormData();
+				      for (let i = 0; i < files.length; i++) {
+				    	  formData.append("noticeFile", files[i]);
+				        let fileDiv = $('<div></div>');
+				        let fileNameSpan = $('<span></span>');
+				        fileNameSpan.text(files[i].name);
+				        let delBtn = $('<button type="button">삭제</button>');
+				        delBtn.attr("class", "delete-file-btn");
+				        fileDiv.append(fileNameSpan);
+				        fileDiv.append(delBtn);
+				        fileNamesWrapper.append(fileDiv);
+				        // 삭제 버튼 클릭 시 해당 파일 삭제
+				        delBtn.on('click', function() {
+				          fileDiv.remove();
+				        });
+				      $('#fileUpload')[0].files = files;
+				        
+				      }
+				      $('#file-names').html(fileNamesWrapper);
+				      console.log(files); 
+				    }
+				  });
+				});
+
+			  $(document).on("click", ".delete-file-btn", function() {
+			    $(this).parent().remove();
 			  });
 			});
 	</script>

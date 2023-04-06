@@ -97,6 +97,7 @@ public class NoticeController {
 		if(!noticeFile[0].isEmpty()) {
 			for(MultipartFile file : noticeFile) {
 				String filename = file.getOriginalFilename();
+				System.out.println(filename);
 				String upFilepath = manager.upload(savePath, file);
 				
 				FileVO fileVO = new FileVO();

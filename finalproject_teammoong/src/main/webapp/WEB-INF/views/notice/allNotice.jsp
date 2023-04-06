@@ -21,6 +21,7 @@
 		<div class="content-all">
 			<h3>공지사항</h3>
 			<p class="bold">뭉쳐야산다의 새로운 소식들과 정보를 한곳에서 확인하세요</p>
+					<a href="/dayCheckMain.do" class="btn btn-pri size03">출석체크</a>
 			<div class="main-content">
 				<table class="guide-board">
 					<tr>

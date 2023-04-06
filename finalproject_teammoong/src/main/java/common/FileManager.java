@@ -25,6 +25,7 @@ public class FileManager {
 	
 	public String upload(String savePath, MultipartFile file) {
 		String filename = file.getOriginalFilename();
+		System.out.println(filename);
 		//filename =>test.txt
 		String onlyFilename = filename.substring(0, filename.lastIndexOf("."));//test
 		String extention = filename.substring(filename.lastIndexOf("."));//.txt

@@ -47,7 +47,7 @@
 	                  <!--//내용영역-->
 	              </div>
 	              <div class="area-btn center full">
-	                  <a href="" rel="modal:close" class="btn btn-sec size01">닫기</a>
+	                  <a href="" rel="modal:close" class="btn btn-sec size01 close">닫기</a>
 	              </div>
 	          </div>
 	    </div>
@@ -60,11 +60,24 @@
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 	<script>
+	
+		$(function(){
+			$("[name]").keypress(function(e){
+				if(e.keyCode == 13){
+					login();
+				}
+			});
+		});
+	
 		$("#login").on("click",function(){
+			login();	
+		})
+		
+		
+		function login(){
 			const inputId = $("[name=memberId]").val();
 			const inputPw = $("[name=memberPw]").val();
-			
-	
+
 			if(inputId==""){
 				$("[name=memberId]").focus();
 				return false;
@@ -87,8 +100,9 @@
 					}
 				}//ajax success구문
 			})//ajax
-		})
-		
+		};
+	
+
 		
 		
 		//모달 관련 기능

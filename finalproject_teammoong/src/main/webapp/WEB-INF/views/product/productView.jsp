@@ -37,10 +37,12 @@
 	<div class="content-wrap">
 	        <div class="top-info-box">
             <div class="img-box">
-                <img src="" style="width: 300px; height: 500px;">
+            <c:forEach items="${p.fileList }" var="i">
+                <img src="/resources/upload/product/${i.filepath }" style="width: 300px; height: 500px;">
+                </c:forEach>
             </div>
             <div class="first-info-box">
-                <div><a>[플랜터스]허니 로스트 피넛</a><span><a href="#">♡</a></span><span><a href="#">☆</a></span></div>
+                <div><a>${p.productName }</a><span><a href="#">♡</a></span><span><a href="#">☆</a></span></div>
                 <div><a>00%</a><a>8,990원</a></div>
                 <table border="1">
                     <tr>
