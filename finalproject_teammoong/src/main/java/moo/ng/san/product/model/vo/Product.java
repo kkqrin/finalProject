@@ -20,7 +20,5 @@ public class Product {
 	private int gongguNumber;
 	private String productContent;
 	private int productDiscount;
-	/*
-	 * 파일이미지용 arraylist 추가예정
-	 * */
+	private ArrayList<String> fileList;
 }

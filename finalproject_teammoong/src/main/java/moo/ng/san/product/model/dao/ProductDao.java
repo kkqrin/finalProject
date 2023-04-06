@@ -1,5 +1,8 @@
 package moo.ng.san.product.model.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,6 +28,16 @@ public class ProductDao {
 	public int insertFile(FileVO file) {
 		int result = sqlSessoin.insert("product.insertFile",file);
 		return result;
+	}
+
+	public Product selectProductByProductNo(int productNo) {
+		Product p = sqlSessoin.selectOne("product.selectProductByProductNo", productNo);
+		return p;
+	}
+
+	public ArrayList<String> selectProductImg(int productNo) {
+		List list = sqlSessoin.selectList("product.selectProductImg",productNo);
+		return (ArrayList<String>)list;
 	}
 	
 	
