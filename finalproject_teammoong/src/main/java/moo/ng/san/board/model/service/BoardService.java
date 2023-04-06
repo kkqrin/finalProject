@@ -18,7 +18,9 @@ public class BoardService {
 
 
 	public int insertBoard(Board b, ArrayList<FileVO> fileList) {
+		System.out.println(b);
 		int result = dao.insertBoard(b);
+		System.out.println(b);
 		if(result > 0) {
 			//2. 방금 insert한 board_no 조회
 			//int boardNo = dao.selectBoardNo();
@@ -80,5 +82,18 @@ public class BoardService {
 		}
 		BoardPageData bpd = new BoardPageData(list, pageNavi);
 		return bpd;
+	}
+
+
+	public Board selectOneBoard(int boardNo) {
+		//1. board 테이블 조회
+		Board b = dao.selectOneBoard(boardNo);
+		//2. file_tbl 테이블 조회
+		/*
+		 * <select id="selectOneBoard" parameterType="_int" resultMap="getBoard"> select
+		 *
+		 * from board where board_no = #{_parameter} </select>
+		 */
+		return b;
 	}
 }

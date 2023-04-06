@@ -34,7 +34,7 @@
     justify-content: center;
 }
 
-#file {
+#bFile {
     display: none;
 }
 
@@ -48,4 +48,7 @@ table tbody tr td{
 
 .one-goods{
     border: none;
+}
+sup{
+    color: red;
 }

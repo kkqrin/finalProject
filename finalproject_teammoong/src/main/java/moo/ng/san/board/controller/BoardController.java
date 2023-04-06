@@ -40,9 +40,8 @@ public class BoardController {
 	public String boardWirte(Board b, MultipartFile[] boardFile, HttpServletRequest request) {
 		ArrayList<FileVO> fileList = new ArrayList<FileVO>();
 		if(!boardFile[0].isEmpty()) {
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload.board/");
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/board/");
 			for(MultipartFile file : boardFile) {
-				String filename = file.getOriginalFilename();
 				String filepath = manager.upload(savePath, file);
 				FileVO fileVO = new FileVO();
 				fileVO.setFilepath(filepath);
@@ -56,5 +55,10 @@ public class BoardController {
 			return "redirect:/";
 		}
 	}
-	
+	@RequestMapping(value="/boardView.do")
+	public String boardView(int boardNo, Model model) {
+		Board b = service.selectOneBoard(boardNo);
+		model.addAttribute("b",b);
+		return "board/boardView";
+		}
 }
