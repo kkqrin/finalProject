@@ -25,22 +25,23 @@
 	<insert id="insertBoard" parameterType="b">
 		insert into board_tbl values(
 			board_seq.nextval,
-			'test',
+			#{boardWriter},
 			#{boardName},
 			#{categoryNo},
 			#{boardContent},
+			#{boardPrice},
 			to_char(sysdate,'yyy-mm-dd'),
 			#{accountWriter},
 			#{accountName},
 			#{accountBank},
 			to_date(#{boardStart},'yyyy-mm-dd'),
 			to_date(#{boardEnd},'yyyy-mm-dd'),
+			#{boardDetail},
 			#{referenceLink},
 			to_date(#{deliveryDate},'yyyy-mm-dd'),
 			#{boardEtc},
-			0,
 			1,
-			'dora'
+			0
 			)
 	</insert>
 	<insert id="insertFile" parameterType="bf">

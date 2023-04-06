@@ -42,7 +42,7 @@
 			<jsp:include page="/WEB-INF/views/common/header.jsp" />
 			<div class="content-wrap">
 				<div class="content-board-wrap">
-					<form action="/boardWrite.do" method="get">
+					<form action="/boardWrite.do" method="post">
 						<table class="writeFrm-input-wrap">
 							<tr>
 								<td colspan="4">
@@ -53,7 +53,7 @@
 								<td colspan="4">
 									<div class="board-wrap">
 										<div class="boardFile-wrap">
-											<input type="file" name="file" id="file" onchange="previewImage(event)">
+											<input type="file" name="boardFile" id="file" onchange="previewImage(event)" multiple>
 											<div class="image-preview"></div>
 											<label for="file">
 												<div class="btn-upload">썸네일 이미지 등록</div>
@@ -136,7 +136,9 @@
 							</tr>
 							<tr>
 								<td colspan="4">
-									<input type="text" id="daterangepicker" placeholder="폼 시작일" required>
+									<input type="text" id="daterangepicker" required>
+									<input type="hidden" name="boardStart">
+									<input type="hidden" name="boardEnd">
 								</td>
 							</tr>
 							<tr>
@@ -187,9 +189,10 @@
 								<td colspan="4">배송 예정일<sup>*</sup></td>
 							</tr>
 							<tr>
-								<!-- <td><input type="text" id="datepicker"  placeholder="배송을 보낼 날짜를 선택해 주세요." required></td> -->
-								<td colspan="4"><input type="text" id="delivery-date" name="deliveryDate"
-										placeholder="배송을 보낼 날짜를 선택해 주세요." required></td>
+								<td colspan="4">
+									<input type="text" id="deldate" required>
+									<input type="hidden" name="deliveryDate">
+								</td>					
 							</tr>
 							<tr>
 								<td colspan="4">기타 문의사항</td>
@@ -289,10 +292,12 @@
 					timePicker24Hour: true,                  // 24시간 노출 여부(ex> true : 23:50, false : PM 11:50)
 					//timePickerSeconds: true,                 // 초 노출 여부
 				}, function (start, end, label) {
-					console.log(start.format('YYYYMMDD'), end.format('YYYYMMDD'));
-					var startVal = start.format('YYYYMMDD');
-					var endVal = end.format('YYYYMMDD');
-//input hidden 날짜 값 넣어서 디비로 보내기
+					console.log(start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD'));
+					var boardStart = start.format('YYYY-MM-DD');
+					var boardEnd = end.format('YYYY-MM-DD');
+					//input hidden 날짜 값 넣어서 디비로 보내기
+					$("[name=boardStart]").val(boardStart);
+					$("[name=boardEnd]").val(boardEnd);
 				});
 
 				$("#daterangepicker").on('show.daterangepicker', function (ev, picker) {
@@ -300,6 +305,39 @@
 					$(".monthselect").css("float", "right");
 					$(".cancelBtn").css("float", "right");
 				});
+
+
+				$("#deldate").daterangepicker();
+
+				$("#deldate").daterangepicker({
+					locale: {
+					"separator": " ~ ",                     // 시작일시와 종료일시 구분자
+					"format": 'YYYY-MM-DD HH:mm:ss',     // 일시 노출 포맷
+					"applyLabel": "확인",                    // 확인 버튼 텍스트
+					"cancelLabel": "취소",                   // 취소 버튼 텍스트
+					"daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
+					"monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
+					},
+					//timePicker: true,                        // 시간 노출 여부
+					showDropdowns: true,                     // 년월 수동 설정 여부
+					autoApply: true,                         // 확인/취소 버튼 사용여부
+					timePicker24Hour: true,                  // 24시간 노출 여부(ex> true : 23:50, false : PM 11:50)
+					//timePickerSeconds: true,                 // 초 노출 여부
+					singleDatePicker: true                   // 하나의 달력 사용 여부
+				
+					}, function (start, label) {
+						console.log(start.format('YYYY-MM-DD'));
+						var deliveryDate = start.format('YYYY-MM-DD');
+						//input hidden 날짜 값 넣어서 디비로 보내기
+						$("[name=deliveryDate]").val(deliveryDate);
+						});
+				
+				$("#deldate").on('show.daterangepicker', function (ev, picker) {
+					$(".yearselect").css("float", "left");
+					$(".monthselect").css("float", "right");
+					$(".cancelBtn").css("float", "right");
+				});
+
 
 			</script>
 		</body>
