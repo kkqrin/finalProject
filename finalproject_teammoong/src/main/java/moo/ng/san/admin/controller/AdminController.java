@@ -1,6 +1,7 @@
 package moo.ng.san.admin.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
@@ -16,6 +17,7 @@ import moo.ng.san.admin.model.vo.AdminBoardPageData;
 import moo.ng.san.admin.model.vo.AdminMemberPageData;
 import moo.ng.san.admin.model.vo.AdminOrderPageData;
 import moo.ng.san.admin.model.vo.AdminProductPageData;
+import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.product.model.vo.Product;
 
@@ -25,10 +27,25 @@ public class AdminController {
 	@Autowired
 	private AdminService service;
 	
+	
+	/* 페이징 처리 */
 	@RequestMapping(value="/admin.do")
 	public String admin() {
 		return "admin/admin";
 	}
+	
+	@RequestMapping(value="/adminMemberPage.do")
+	public String adminMemberPage() {
+		return "admin/adminMemberPage";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/* admin main 페이지 */
 	// count
@@ -75,6 +92,29 @@ public class AdminController {
 		String result = service.selectEventCount();
 		return result;
 	}
+	
+	// 전체 카운트
+	@ResponseBody
+	@RequestMapping(value="/ajaxTotalCount.do", produces="application/json;charset=utf-8")
+	public String ajaxTotalCountSelect(Model model) {
+		String memberCount = service.selectAllMemberCount();
+		String orderCount = service.selectAllOrderCount();
+		String boardCount = service.selectAllBoardCount();
+		String salesCount = service.selectAllSalesCount();
+		String bestSalesCount = service.selectBestSalesCount();
+		String couponCount = service.selectEventCount();
+		String[] total = new String[6];
+		total[0] = memberCount;
+		total[1] = orderCount;
+		total[2] = boardCount;
+		total[3] = salesCount;
+		total[4] = bestSalesCount;
+		total[5] = couponCount;
+		Gson gson = new Gson();
+		String result = gson.toJson(total);
+		return result;
+		
+	}
 		
 	
 	// 증감
@@ -106,7 +146,7 @@ public class AdminController {
 	@RequestMapping(value="/allMemberList.do")
 	public String allMemberSelect(int reqPage, Model model) {
 		AdminMemberPageData ampd = service.selectAllMemberList(reqPage);
-		model.addAttribute("list",ampd.getList());
+		model.addAttribute("memberList",ampd.getList());
 		model.addAttribute("pageNavi",ampd.getPageNavi());
 		return "redirect:/";
 	}
@@ -272,8 +312,38 @@ public class AdminController {
 	}
 	
 	
+	/* 신고 게시글 관리 */
 	
+	//신고 게시글 리스트
+	@RequestMapping(value="/reportBoardManage.do")
+	public String reportBoardManage(int reqPage, Model model) {
+		AdminBoardPageData abrpd = service.selectReportBoardList(reqPage);
+		model.addAttribute("reportList",abrpd.getList());
+		model.addAttribute("pageNavi",abrpd.getPageNavi());
+		return "redirect:/";
+	}
 	
+	// 신고회원 회원등급 update
+	@ResponseBody
+	@RequestMapping(value="/ajaxReportMemberUpdate.do")
+	public String reportMemberUpdate(Member m) {
+		int result = service.updateReportMember(m);
+		if(result > 0) {
+			return "ok";
+		}else {
+			return "again";
+		}
+	}
+	
+	//정지회원 검색기능
+	@ResponseBody
+	@RequestMapping(value="/ajaxReportMemberSearch.do", produces = "application/json;charset=utf-8")
+	public String reportMemberSearch(Board b) {
+		ArrayList<Board> list = service.selectReportMember(b);
+		Gson gson = new Gson();
+		String result = gson.toJson(list);
+		return result;
+	}
 	
 	
 	

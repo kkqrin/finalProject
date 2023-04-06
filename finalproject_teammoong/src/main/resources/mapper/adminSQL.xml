@@ -161,7 +161,6 @@
  	<select id="selectAllOrderList" parameterType="map" resultType="o">
 		select * from
 			(select rownum as rnum, b.* from
-			
 				(select
 					ot.order_no as orderNo,
 					ot.member_No as memberNo,
@@ -230,17 +229,70 @@
 	
 	<select id="selectAllBoardList" parameterType="map" resultType="b">
 		select 
-			bt.board_no as boardNo,
-			bt.board_name as boardName,
-			bt.category_no as categoryNo,
-			bt.board_price as boardPrice,
-			bt.board_date as boardDate,
-			bt.board_start as boardStart,
-			bt.board_end as boardEnd,
-			
-			
+		    bt.board_no as boardNo,
+		    bt.category_no as categoryNo,
+		    bo.detail_name,
+		    bo.board_price,
+		    bt.board_date as boardDate,
+		    bt.board_start as boardStart,
+		    bt.board_end as boardEnd,
+		    count(distinct bj.board_no) as total
 		from board_tbl bt
 		join board_join bj on (bt.board_no = bj.board_no)
-		order by count() desc;
+		join board_option bo on (bt.board_no = bo.board_no)
+		group by bt.board_no, bt.category_no, bo.detail_name, bo.board_price, bt.board_date, bt.board_start, bt.board_end
+		order by total desc
 	</select>
+	
+	<select id="selectReportBoardList" parameterType="map" resultType="b">
+		select * from
+			(select rownum as rnum, b.* from
+				(select
+					bt.board_no as boardNo,
+					bt.board_name as boardName,
+					bt.board_writer as boardWriter,
+					bt.board_status as boardStatus,
+					nt.member_no,
+					nt.notify_item,
+					count(distinct nt.board_no) as total
+				from board_tbl bt
+				join notify_tbl nt on (bt.board_no = nt.board_no)
+				group by bt.board_no, bt.board_name, bt.board_writer, bt.board_status, nt.member_no, nt.notify_item
+				order by total desc)b)
+			where rnum between #{start} and #{end}
+		
+	</select>
+	
+	<select id="selectReportBoardCount" resultType="_int">
+		select count(distinct nt.board_no) as total
+			from board_tbl bt
+		join notify_tbl nt on bt.board_no = nt.board_no
+	</select>
+	
+	<update id="updateReportMember" parameterType="m">
+		update member_tbl set member_status = #{memberStatus} where member_no = #{memberNo};
+	</update>
+	
+ 	<select id="selectReportMember" parameterType="b" resultType="b">
+		select 
+			bt.board_no as boardNo,
+			bt.board_name as boardName,
+			bt.board_writer as boardWriter,
+			bt.board_status as boardStatus,
+			nt.member_no,
+			nt.notify_item,
+			count(distinct nt.board_no) as total
+		from board_tbl bt join notify_tbl nt on (bt.board_no = nt.board_no)
+		<choose>
+			<when test="bt.board_writer == null">
+				where bt.board_no = #{boardNo}
+			</when>
+			<when test="bt.board_no == 0">
+				where bt.board_writer = #{boardWriter}
+			</when>
+		</choose>
+	</select>
+	
+	
+	
 </mapper>

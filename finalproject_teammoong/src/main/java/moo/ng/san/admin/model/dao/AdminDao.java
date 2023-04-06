@@ -172,6 +172,29 @@ public class AdminDao {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	public ArrayList<Board> selectReportBoardList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("admin.selectReportBoardList",map);
+		
+		return (ArrayList<Board>)list;
+	}
+
+	public int selectReportBoardCount() {
+		int totalCount = sqlSession.selectOne("admin.selectReportBoardCount");
+		
+		return totalCount;
+	}
+
+	public int updateReportMember(Member m) {
+		int result = sqlSession.update("admin.updateReportMember",m);
+		return result;
+	}
+
+	public ArrayList<Board> selectReportMember(Board b) {
+		List list = sqlSession.selectList("admin.selectReportMember",b);
+		// TODO Auto-generated method stub
+		return (ArrayList<Board>)list;
+	}
 	
 	
 	

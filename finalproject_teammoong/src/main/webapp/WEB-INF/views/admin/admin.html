@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>admin 1 page</title>
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!-- google icon -->
@@ -16,7 +15,8 @@
     .adminPage-wrapper{
         background-color: #111;
         width: 1200px;
-        margin: auto;
+        margin-top: 300px;
+        
     }
     .adminPage-header{
         margin-left: 30px;
@@ -31,8 +31,8 @@
         background-color: lightcoral;
         height: 2000px;
     }
-    .adminPage-back>ul>li{
-        text-decoration: none;
+    .adminPage-sidebar>ul>li{
+        list-style-type: none;
     }
     .adminPage-main{
         background-color: lightgreen;
@@ -67,34 +67,33 @@
 
 </style>
 <body>
-<%-- <jsp:include page="/WEB-INF/views/common/header.jsp" /> --%>
     <div class="adminPage-wrapper">
         <div class="adminPage-header">
-            <h1><a href="#">관리자 페이지 입니다.</a></h1>
+            <h1><a href="#">Admin-Page</a></h1>
         </div>
         <div class="adminPage-back">
             <div class="adminPage-sidebar">
                 <ul>
-                    <a>회원 관리</a>
-                    <il>회원등급 관리</il>
+                    <a href="/adminMemberPage.do">회원 관리</a>
+                    <li><a href="/manageMemberGrade.do">회원등급 관리</a></li>
                 </ul>
                 <ul>
-                    <a>매출 관리</a>
-                    <li>전체 매출 관리</li>
-                    <li>카테고리별 매출관리</li>
+                    <a href="/adminSalesManagePage.do">매출 관리</a>
+                    <li><a href="/totalSalesManage.do">전체 매출 관리</a></li>
+                    <li><a href="/categorySalesManage.do">카테고리별 매출관리</a></li>
                 </ul>
                 <ul>
-                    <a>상품 관리</a>
-                    <li>전체 매출 관리</li>
-                    <li>카테고리별 매출관리</li>
-                    <li>카테고리별 매출관리</li>
+                    <a href="/adminProductPage.do">상품 관리</a>
+                    <li><a href="/productConfirmManage.do">상품 등록 관리</a></li>
+                    <li><a href="/productRegist.do"></a>상품 등록</li>
+                    <li><a href="/deliveryManage.do"></a>배송 관리</li>
                 </ul>
                 <ul>
                     <a>이벤트 관리</a>
                     <li>쿠폰 발행 관리</li>
                 </ul>
                 <ul>
-                    <a>여기여기붙어라 관리</a>
+                    <a href="/adminBoardManagePage.do">여기여기붙어라 관리</a>
                     <li>여기여기붙어라 게시판 관리</li>
                     <li>여기여기붙어라 신고 관리</li>
                     <li>카테고리별 매출관리</li>
@@ -161,8 +160,6 @@
 	<h3><a href="/adminMemberPage.do">관리자 페이지(회원)</a></h3>
 	<h3><a href="/adminProductPage.do">관리자 페이지(상품)</a></h3>
 
-<%-- <jsp:include page="/WEB-INF/views/common/footer.jsp" /> --%>
-
     <script>
         var memberTotalCount = $("#memberTotalCount");
         var productTotalCount = $("#productTotalCount");
@@ -176,7 +173,6 @@
             method : "get",
             dataType : "json",
             success : function(data){
-            	console.log("통신성공")
                 memberTotalCount.text(data.total[0]);
                 productTotalCount.text(data.total[1]);
                 boardTotalCount.text(data.total[2]);
