@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import moo.ng.san.member.model.service.MemberService;
 import moo.ng.san.member.model.vo.Member;
@@ -27,13 +28,16 @@ public class MemberController {
 		return "member/loginFrm";
 	}
 	
+	@ResponseBody
 	@RequestMapping(value = "/login.do")
 	public String login(Member member, HttpSession session) {
 		Member loginMember = service.selectOneMember(member);
 		if(loginMember!=null) {
 			session.setAttribute("m", loginMember);
+			return "ok";
+		}else {
+			return "error";
 		}
-		return "redirect:/";
 	}//login
 	
 	@RequestMapping(value = "/logout.do")
@@ -48,4 +52,11 @@ public class MemberController {
 		return "member/myPage";
 	}//myPage
 	
+
+	@RequestMapping(value = "/signUpFrm.do")
+	public String joinMemberFrm(){
+		return "member/signUpFrm";
+	}//joinMemberFrm
+
+
 }//MemberController

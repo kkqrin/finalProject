@@ -4,10 +4,17 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import moo.ng.san.product.model.vo.Product;
+
 @Repository
 public class ProductDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessoin;
+
+	public int insertProduct(Product p) {
+		int result = sqlSessoin.insert("product.insertProduct",p);
+		return result;
+	}
 	
 	
 	

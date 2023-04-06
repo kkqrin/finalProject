@@ -44,19 +44,19 @@ public class NoticeService {
 		int pageNaviSize = 5;
 		
 		int pageNo = 1;
-		if(reqPage>3) {
-			pageNo = reqPage-2;
+		if(reqPage>5) {
+			pageNo = reqPage-4;
 		}
 		
 		String pageNavi = "";
 		if(pageNo != 1) {
-			pageNavi += "<a href = '/noticeList.do?reqPage="+(pageNo -1)+"'>[이전]</a>";
+			pageNavi += "<a href = '/noticeList.do?reqPage="+(pageNo -1)+"'class='btn-pagi ctrl'>[이전]</a>";
 		}
 		for(int i=0;i<pageNaviSize;i++) {
 			if(pageNo == reqPage) {
-				pageNavi += "<span>"+pageNo+"</span>";
+				pageNavi += "<span class='btn-pagi page-active'>"+pageNo+"</span>";
 			}else {
-				pageNavi += "<a href='/noticeList.do?reqPage="+pageNo+"'>"+pageNo+"</a>";
+				pageNavi += "<a href='/noticeList.do?reqPage="+pageNo+"'class='btn-pagi'>"+pageNo+"</a>";
 			}
 			pageNo++;
 			if(pageNo > totalPage) {
@@ -64,7 +64,7 @@ public class NoticeService {
 			}
 		}
 		if(pageNo <=totalPage) {
-			pageNavi += "<a href = '/noticeList.do?reqPage="+pageNo+"'>[다음]</a>";
+			pageNavi += "<a href = '/noticeList.do?reqPage="+pageNo+"'class='btn-pagi ctrl'>[다음]</a>";
 		}
 		NoticePageData npd = new NoticePageData(list, pageNavi);
 		return npd;
@@ -100,5 +100,10 @@ public class NoticeService {
 	public int updateReadCount(Notice n) {
 		int result =dao.updateReadCount(n);
 		return result;
+	}
+
+	public FileVO getFile(int fileNo) {
+		FileVO f = dao.selectOneFile(fileNo);
+		return f;
 	}
 }

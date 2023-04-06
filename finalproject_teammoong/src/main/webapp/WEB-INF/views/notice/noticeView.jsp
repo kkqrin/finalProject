@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
+    <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,9 +11,9 @@
 </head>
 <body>
 	<div class="content-wrap">
-		<table>
+		<table class="tbl-box">
 			<tr>
-				<th>제목</th>
+				<th style="width: 30%;">제목</th>
 				<td>${n.noticeTitle }</td>
 			</tr>
 			<tr>
@@ -29,7 +29,7 @@
 				<td>
 					<c:forEach items="${n.fileList}" var="f">
 						<p>
-							<a id="fileDown">${f.fileName}</a>
+							<a href="/noticeFileDown.do?fileNo=${f.fileNo }">${f.fileName}</a>
 						</p>
 					</c:forEach>
 				</td>
@@ -40,16 +40,18 @@
 			<c:if test="${not empty sessionScope.m && sessionScope.m.memberId eq n.noticeWriter }">
 				<tr>
 					<th colspan="2">
-						<a href="/noticeUpdateFrm.do?noticeNo=${n.noticeNo }">수정</a>
-						<a href="/noticeDelete.do?noticeNo=${n.noticeNo }">삭제</a>
+						<div class="area-btn center">
+							<a href="/noticeUpdateFrm.do?noticeNo=${n.noticeNo }" class="btn btn-sec size02"">수정</a>
+							<a href="/noticeDelete.do?noticeNo=${n.noticeNo }" class="btn btn-black size02">삭제</a>
+						</div>
 					</th>
 				</tr>
 			</c:if>
 		</table>
-		<a href="/noticeList.do?reqPage=1">목록</a>
+		<div class="area-btn right" style="padding-top:10px;">
+			<a href="/noticeList.do?reqPage=1" class="btn btn-pri size02">목록</a>
+		</div>
 	</div>
-	<script>
-		
-	</script>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

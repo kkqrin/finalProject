@@ -59,4 +59,9 @@ public class NoticeDao {
 		int result = sqlSession.update("notice.noticeReadCount",n);
 		return result;
 	}
+
+	public FileVO selectOneFile(int fileNo) {
+		FileVO f = sqlSession.selectOne("notice.selectOneFile",fileNo); 
+		return f;
+	}
 }
