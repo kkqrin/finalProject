@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Product {
 	private int productNo;
-	private int categoryNo;
+	private int dCategoryNo;
 	private String productName;
 	private int productEa;
 	private int productPrice;
@@ -20,7 +20,5 @@ public class Product {
 	private int gongguNumber;
 	private String productContent;
 	private int productDiscount;
-	/*
-	 * 파일이미지용 arraylist 추가예정
-	 * */
+	private ArrayList<String> fileList;
 }

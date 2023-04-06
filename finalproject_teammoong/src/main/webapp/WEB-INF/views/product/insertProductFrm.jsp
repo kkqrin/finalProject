@@ -12,6 +12,17 @@
 		text-align: left;
 		background-color: #fff;
 	}
+	 input[type=radio],input[type=checkbox]{
+        width: auto;
+        display: inline-block;
+        min-height: auto;
+        margin-left : 30px;
+        
+    }
+   	label{
+   		margin-right : 130px;
+   	}
+    
 </style>
 </head>
 <body>
@@ -21,62 +32,69 @@
     <table border="3">
         <tr>
             <th>카테고리</th>
-            <th>
+            <td>
                 <select name="category">
                     <!--아작스로 카테고리 추가  -->
                 </select>
-            </th>
-            <th>
-                <select name="detail-category">
+            </td>
+            <td>
+                <select name="dCategoryNo">
                 	<!--아작스로 세부 카테고리 추가  -->
                 </select>
-            </th>
+            </td>
         </tr>
         <tr>
             <th>상품이름</th>
-            <th colspan="2"><input type="text" name="productName"></th>
+            <td colspan="2"><input type="text" name="productName"></td>
         </tr>
         <tr>
             <th>상품수량</th>
-            <th colspan="2"><input type="text" name="productEa"></th>
+            <td colspan="2"><input type="text" name="productEa"></td>
         </tr>
         <tr>
             <th>상품가격</th>
-            <th colspan="2"><input type="text" name="productPrice"></th>
+            <td colspan="2"><input type="text" name="productPrice"></td>
         </tr>
         <tr>
             <th>할인률</th>
-            <th colspan="2"><input type="text" name="productPrice"></th>
+            <td colspan="2"><input type="text" name="productDiscount"></td>
         </tr>
-        <tr>
-            <th>상품상태</th>
-            <th colspan="2"><input type="text" name="productStatus" value="1"></th>
-        </tr>
+            <input type="hidden" name="productStatus" value="1">
         <tr>
             <th>원가격</th>
-            <th colspan="2"><input type="text" name="productCost"></th>
+            <td colspan="2"><input type="text" name="productCost"></td>
         </tr>
         <tr>
             <th>공동구매인원수</th>
-            <th  colspan="2">
-                <select name="gonggu-number">
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-            </th>
+            <td  colspan="2">
+<!--                 <select name="gongguNumber"> -->
+<!--                     <option value="2">2</option> -->
+<!--                     <option value="3">3</option> -->
+<!--                     <option value="4">4</option> -->
+<!--                     <option value="5">5</option> -->
+<!--                 </select> -->
+				<div style="text-align : left;"> 
+                <input type="radio" id="two" name="gongguNumber" value="1">
+                <label for="two">2</label>
+                <input type="radio" id="three" name="gongguNumber" value="1">
+                <label for="three">3</label>
+                <input type="radio" id="four" name="gongguNumber" value="1">
+                <label for="four">4</label>
+                <input type="radio" id="five" name="gongguNumber" value="1">
+                <label for="five">5</label>
+                </div>
+            </td>
         </tr>
         <tr>
             <th>썸네일</th>
-            <th colspan="2"><input type="file" multiple></th>
+            <td colspan="2"><input type="file" name="productFile" multiple></td>
         </tr>
         <tr>
             <th>상품내용</th>
-            <th colspan="2"><textarea name="productContent"></textarea></th>
+            <td colspan="2"><textarea name="productContent"></textarea></td>
         </tr>
         <tr>
-        <th colspan="3"><div class="area-btn full"><button class="btn btn-pri size01" type="button">등록</button></div></th>
+        <th colspan="3"><div class="area-btn full"><button class="btn btn-pri size01" type="submit">등록</button></div></th>
         </tr>
         <tr>
         <th colspan="3"><div class="area-btn full"><button class="btn btn-sec size01" type="button">취소</button></div></th>
@@ -90,7 +108,7 @@
 	<script>
 	$( function() {
 		$( "[name=category]" ).selectmenu();
-		$( "[name=detail-category]" ).selectmenu();
+		$( "[name=dCategoryNo]" ).selectmenu();
 		$("[name=gonggu-number]").selectmenu();
 	});
 		$("[name=productContent]").summernote({
@@ -107,7 +125,7 @@
 			var categoryNo = $("[name=category]").val();
 			$("[name=category]").empty();
             $("[name=category]").append("<option>카테고리</option>");
-            $("[name=detail-category]").append("<option>세부카테고리</option>");
+            $("[name=dCategoryNo]").append("<option>세부카테고리</option>");
 		    $.ajax({
 		    	url : "/selectAllCategory.do",
 		    	type : "POST",
@@ -121,8 +139,8 @@
 		    });
 	    }
 		$("[name=category]").on("selectmenuchange",function(){
-		    $("[name=detail-category]").empty();
-		    $("[name=detail-category]").append("<option>세부카테고리</option>");
+		    $("[name=dCategoryNo]").empty();
+		    $("[name=dCategoryNo]").append("<option>세부카테고리</option>");
 		    $.ajax({
 		    	url : "/selectDetailCategory.do",
 		    	type : "POST",
@@ -131,13 +149,13 @@
 		    	success : function(data){
 		    		console.log(data)
 		    		for(var i=0; i<data.length; i++){
-			    		$("[name=detail-category]").append("<option value="+data[i].dcategoryNo+">"+data[i].dcategoryName+"</option>");
+			    		$("[name=dCategoryNo]").append("<option value="+data[i].dcategoryNo+">"+data[i].dcategoryName+"</option>");
 			    		}
 		    		
 	    		},
 		    });
 		});
-		$("[name=detail-category]").on("selectmenuchange",function(){
+		$("[name=dCategoryNo]").on("selectmenuchange",function(){
 			console.log($(this).val());
 		})
 		
