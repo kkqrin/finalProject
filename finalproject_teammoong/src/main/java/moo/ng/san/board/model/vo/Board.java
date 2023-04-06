@@ -21,7 +21,6 @@ public class Board {
 	private String accountBank;
 	private String boardStart;
 	private String boardEnd;
-	private String boardDetail;
 	private String referenceLink;
 	private String deliveryDate;
 	private String boardEtc;

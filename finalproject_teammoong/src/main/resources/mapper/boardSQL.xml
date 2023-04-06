@@ -29,14 +29,12 @@
 			#{boardName},
 			#{categoryNo},
 			#{boardContent},
-			#{boardPrice},
-			to_char(sysdate,'yyy-mm-dd'),
+			to_char(sysdate,'yyyy-mm-dd'),
 			#{accountWriter},
 			#{accountName},
 			#{accountBank},
 			to_date(#{boardStart},'yyyy-mm-dd'),
 			to_date(#{boardEnd},'yyyy-mm-dd'),
-			#{boardDetail},
 			#{referenceLink},
 			to_date(#{deliveryDate},'yyyy-mm-dd'),
 			#{boardEtc},
@@ -46,10 +44,12 @@
 	</insert>
 	<insert id="insertFile" parameterType="bf">
 		insert into file_tbl values(file_seq.nextval, #{boardNo}, #{filepath})
-		<selectKey resultType="_int" order="AFTER" keyProperty="boardNo">
-			select max(board_no) from board_tbl
-		</selectKey>
 	</insert>
+	<select id="selectOneBoard" parameterType="_int" resultMap="getBoard">
+		select
+			*
+		from board_tbl where board_no = #{_parameter}	
+	</select>
 	<select id="selectFileList" parameterType="_int" resultType="bf">
 		select
 			file_no as fileNo,
@@ -64,14 +64,12 @@
 		<result column="board_name" property="boardName" />
 		<result column="category_no" property="categoryNo" />
 		<result column="board_content" property="boardContent" />
-		<result column="board_price" property="boardPrice" />
 		<result column="board_date" property="boardDate" />
 		<result column="account_writer" property="accountWriter" />
 		<result column="account_name" property="accountName" />
 		<result column="account_bank" property="accountBank" />
 		<result column="board_start" property="boardStart" />
 		<result column="board_end" property="boardEnd" />
-		<result column="board_detail" property="boardDetail" />
 		<result column="reference_link" property="referenceLink" />
 		<result column="delivery_date" property="deliveryDate" />
 		<result column="board_etc" property="boardEtc" />
