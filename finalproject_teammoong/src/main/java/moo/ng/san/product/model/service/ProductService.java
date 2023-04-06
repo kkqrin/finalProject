@@ -13,16 +13,8 @@ public class ProductService {
 	@Autowired
 	private ProductDao dao;
 
-//	public int insertProduct(Product p, ArrayList<FileVO> fileList) {
-//		int result = dao.insertProduct(p);
-//		if(result > 0) {
-//			int productNo = dao.selectProductNo();
-//			for(FileVO file : fileList) {
-//				file.setProductNo(productNo);
-//				result += dao.insertFile(file);
-//			}
-//		}
-//		return result;
+
+
 	
 	
 	
@@ -134,5 +126,27 @@ public class ProductService {
 	
 	
 //	명훈작업공간 120~200
+	public int insertProduct(Product p, ArrayList<FileVO> fileList) {
+	int result = dao.insertProduct(p);
+	if(result > 0) {
+		int productNo = dao.selectProductNo();
+		for(FileVO file : fileList) {
+			file.setProductNo(productNo);
+			result += dao.insertFile(file);
+		}
+	}
+	return result;
+}
+
+	public Product selectProductByProductNo(int productNo) {
+		Product p = dao.selectProductByProductNo(productNo);
+		if(p != null) {
+			ArrayList<String> filepath = dao.selectProductImg(productNo);
+			p.setFileList(filepath);
+		}
+		System.out.println(p);
+		return p;
+		
+	}
 }
 
