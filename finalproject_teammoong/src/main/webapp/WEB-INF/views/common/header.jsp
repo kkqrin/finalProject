@@ -51,24 +51,16 @@
 					</div>
 					<div class="category-content">
 						<div class="main-category">
-							<div class="one-category">
-								<a class="cate-name" href="#">패션</a>
-								<div class="sub">
-									<a href="#">여성의류</a>
-									<a href="#">남성의류</a>
-									<a href="#">유니섹스</a>
-									<a href="#">언더웨어/이지웨어</a>
-								</div>
-							</div><!-- one-category -->
-							<div class="one-category">
-								<a class="cate-name" href="#">뷰티</a>
-								<div class="sub">
-									<a href="#">스킨케어</a>
-									<a href="#">베이스메이크업</a>
-									<a href="#">색조메이크업</a>
-									<a href="#">클렌징</a>
-								</div>
-							</div><!-- one-category -->
+							<c:forEach items="${c }" var="c" varStatus="i" begin="0" end="13" step="1">
+								<div class="one-category">
+									<a class="cate-name" href="${i.index+1 }">${c.categoryName }</a>
+<%-- 									<c:forEach items="${d }" var="d"> --%>
+										<div class="sub">
+											<a href="#">${d.dCategoryName }</a>
+										</div>
+<%-- 									</c:forEach> --%>
+								</div><!-- one-category -->
+							</c:forEach>
 						</div>
 					</div><!-- category-content -->
               	</div><!-- menu-category -->
@@ -154,8 +146,8 @@
 		
 		$(".cate-name").mouseenter(function(event){
 			event.stopPropagation();
-			$(".sub").fadeOut();
-			$(this).next().fadeIn();
+			$(".sub").hide();
+			$(this).next().show();
 		});
 
     </script>
