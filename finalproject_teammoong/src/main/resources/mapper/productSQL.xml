@@ -6,7 +6,7 @@
 	<insert id="insertProduct" parameterType="p">
 		insert into product_tbl values
 		(product_seq.nextval,
-		#{categoryNo},
+		#{dCategoryNo},
 		#{productName},
 		#{productEa},
 		#{productPrice},
@@ -16,5 +16,14 @@
 		#{productContent},
 		#{productDiscount})
 	</insert>
+	
+	<select id="selectProductNo" resultType="_int">
+		select max(product_no) from product_tbl
+	</select>
 
+	<insert id="insertFile">
+		insert into product_img values(product_img_seq.nextval,
+		#{productNo},
+		#{filepath})
+	</insert>
 </mapper>

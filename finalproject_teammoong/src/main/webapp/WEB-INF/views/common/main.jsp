@@ -63,7 +63,7 @@
     <!-- 인기상품 wrap -->
         <div class="posting-item popular">
             <div class="posting-img popular">
-                <a href="#">
+                <a href="/productView.do">
                     <img src="/resources/img/product/lactofit.jpg" />
                 </a>
                 <div class="gonggu-info">2인 공동구매</div>
