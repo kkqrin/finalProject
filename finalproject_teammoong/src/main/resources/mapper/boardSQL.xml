@@ -41,6 +41,9 @@
 			1,
 			0
 			)
+			<selectKey resultType="_int" order="AFTER" keyProperty="boardNo">
+			select max(board_no) from board_tbl
+		</selectKey>
 	</insert>
 	<insert id="insertFile" parameterType="bf">
 		insert into file_tbl values(file_seq.nextval, #{boardNo}, #{filepath})

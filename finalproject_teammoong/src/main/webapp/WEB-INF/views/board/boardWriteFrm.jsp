@@ -13,6 +13,24 @@
 	<script type="text/javascript"
 		src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <link rel="stylesheet" href="/resources/css/board/boardWriteFrm.css" />
+
+
+
+	<script>
+		    function previewImage(event) {
+			var reader = new FileReader();
+			reader.onload = function() {
+				var output = document.createElement('img');
+				output.src = reader.result;
+				output.style.maxWidth = '250px';
+				output.style.maxHeight = '250px';
+				document.querySelector('.image-preview').innerHTML = '';
+				document.querySelector('.image-preview').appendChild(output);
+			};
+			reader.readAsDataURL(event.target.files[0]);
+		}
+	</script>
+	
 </head>
 
 <body>
@@ -21,8 +39,6 @@
 		<div class="content-board-wrap">
 			<form action="/boardWrite.do" method="post"
 				enctype="multipart/form-data">
-				<input type="hidden" name="boardNo"
-							value="${sessionScope.m.memberNo }">
 				<table class="writeFrm-input-wrap">
 					<tr>
 						<td colspan="4"><input type="hidden" name="boardWriter"
@@ -35,7 +51,7 @@
 									<input type="file" name="boardFile" id="bFile"
 										onchange="previewImage(event)" multiple>
 									<div class="image-preview"></div>
-									<label for="file">
+									<label for="bFile">
 										<div class="btn-upload">썸네일 이미지 등록<sup>*</sup></div>
 									</label>
 								</div>
@@ -173,17 +189,7 @@
 							name="boardEtc" placeholder="문의사항 필요한 경우 작성해 주세요."></td>
 					</tr>
 				</table>
-				<input class="btn btn-border-sec size01" type="submit" id="form" value="폼만들기">
-				<div class="box-round">
-                <h3 class="section-tit">alert</h3>
-                
-                <div class="area-btn left">
-                    <button class="btn btn-border-pri size01" type="button" id="alert01">성공</button>
-<!--                     <button class="btn btn-border-sec size01" type="button" id="alert02">에러</button> -->
-                    <button class="btn btn-border-ter size01" type="button" id="alert03">경고</button>
-                    <button class="btn btn-border-black size01" type="button" id="alert04">정보</button>
-                </div>
-            </div><!--알림 div-->
+				<input class="btn btn-border-sec size01" type="submit" id="form" value="폼만들기">       
 			</form>
 		</div>
 	</div>
@@ -351,7 +357,7 @@
     	    if(!fileCheck){
             jQueryAlert('warning',"썸네일을 추가 주세요!");
 //     	        alert("파일을 첨부해 주세요!");
-//     	        return false;
+    	        return false;
     	    }	
         });
         $("#alert03").on("click", function () {
@@ -402,19 +408,7 @@
     
     });
 	
-    function previewImage(event) {
-		var reader = new FileReader();
-		reader.onload = function() {
-			var output = document.createElement('img');
-			output.src = reader.result;
-			output.style.maxWidth = '250px';
-			output.style.maxHeight = '250px';
-			document.querySelector('.image-preview').innerHTML = '';
-			document.querySelector('.image-preview').appendChild(output);
-		};
-		reader.readAsDataURL(event.target.files[0]);
-	}
-	
+
 	</script>
 <!-- 	<script src="/resources/js/modal-alert.js"></script> -->
 </body>
