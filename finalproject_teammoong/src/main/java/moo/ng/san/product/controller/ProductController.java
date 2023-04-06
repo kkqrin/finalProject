@@ -136,28 +136,30 @@ public class ProductController {
 		return "product/insertProductFrm";
 	}
 	
-//	@RequestMapping(value="insertProduct.do")
-//	public String insertProduct(Product p, MultipartFile[] productFile, HttpServletRequest request) {
-//		ArrayList<FileVO> fileList = new ArrayList<FileVO>();
-//		if(!productFile[0].isEmpty()) {
-//			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/product/");
-//			for(MultipartFile file : productFile) {
-//				String filename = file.getOriginalFilename();
-//				String filepath = fileManager.upload(savePath, file);
-//				FileVO fileVO = new FileVO();
-//				fileVO.setFilepath(filepath);
-//				fileList.add(fileVO);
-//			}
-//		}
-//		int result = service.insertProduct(p, fileList);
-//		if(result == (fileList.size()+1)) {
-//			return "redirect:/";
-//		} else {
-//			return "redirect:/insertProductFrm.do";
-//		}
-//	}
-	
-	
+	@RequestMapping(value="/insertProduct.do")
+	public String insertProduct(Product p, MultipartFile[] productFile, HttpServletRequest request) {
+		System.out.println("productController product p 값 :"+p);
+		ArrayList<FileVO> fileList = new ArrayList<FileVO>();
+		if(!productFile[0].isEmpty()) {
+			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/product/");
+			for(MultipartFile file : productFile) {
+				String filepath = fileManager.upload(savePath, file);
+				FileVO fileVO = new FileVO();
+				fileVO.setFilepath(filepath);
+				fileList.add(fileVO);
+			}
+		}
+		int result = service.insertProduct(p, fileList);
+		if(result == (fileList.size()+1)) {
+			return "redirect:/";
+		} else {
+			return "redirect:/insertProductFrm.do";
+		}
+	}
+	@RequestMapping(value="/productView.do")
+	public String productView() {
+		return "product/productView";
+	}
 	
 	
 	
