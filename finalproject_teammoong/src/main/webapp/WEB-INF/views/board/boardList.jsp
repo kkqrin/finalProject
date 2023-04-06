@@ -54,33 +54,47 @@
     <div class="content-wrap">
         <a href="/boardWriteFrm.do">글쓰기</a>
 
-        
+        <div class="board-wrap-header">
+            <h4>최근 등록 상품</h4>
+            <div>
+                <div>더보기</div>
+                <span class="material-symbols-outlined">add_box</span>
+            </div>
+        </div>
         <div class="popular-product-wrap">
-        <!-- 인기상품 wrap -->
-            <div class="posting-item popular">
+        <!-- 여여붙 상품 wrap -->
+            <div class="posting-item popular board-item">
                 <div class="posting-img popular">
                     <a href="#">
-                        <img src="/resources/img/product/lactofit.jpg" />
+                        <img src="/resources/img/board/pizza.jpeg" />
                     </a>
-                    <div class="gonggu-info">2인 공동구매</div>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
                 </div>
                 <div class="posting-content popular">
                     <p class="posting-title">
                         <a href="#">
-                            [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
                         </a>
                     </p>
                     <div class="posting-price-box">
-                        <p class="price-through">70,000원</p>
-                        <div class="sail-box popular">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
                             <div class="sail-box-popular">
-                                <p class="sail-percent">62%</p>
-                                <p class="price-sail">26,900원</p>
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
                             </div>
-                            <div class="star-rating">
-                                <div class="material-symbols-outlined star-rate">star</div>
-                                <div class="rating-average">4.8</div>
-                                <div class="review-count">(152)</div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
                             </div>
                         </div>
                     </div>
@@ -94,30 +108,38 @@
                     </div>
                 </div>
             </div>
-            <div class="posting-item popular">
+            <div class="posting-item popular board-item">
                 <div class="posting-img popular">
                     <a href="#">
-                        <img src="/resources/img/product/lactofit.jpg" />
+                        <img src="/resources/img/board/pizza.jpeg" />
                     </a>
-                    <div class="gonggu-info">2인 공동구매</div>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
                 </div>
                 <div class="posting-content popular">
                     <p class="posting-title">
                         <a href="#">
-                            [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
                         </a>
                     </p>
                     <div class="posting-price-box">
-                        <p class="price-through">70,000원</p>
-                        <div class="sail-box popular">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
                             <div class="sail-box-popular">
-                                <p class="sail-percent">62%</p>
-                                <p class="price-sail">26,900원</p>
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
                             </div>
-                            <div class="star-rating">
-                                <div class="material-symbols-outlined star-rate">star</div>
-                                <div class="rating-average">4.8</div>
-                                <div class="review-count">(152)</div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
                             </div>
                         </div>
                     </div>
@@ -131,30 +153,38 @@
                     </div>
                 </div>
             </div>
-            <div class="posting-item popular">
+            <div class="posting-item popular board-item">
                 <div class="posting-img popular">
                     <a href="#">
-                        <img src="/resources/img/product/lactofit.jpg" />
+                        <img src="/resources/img/board/pizza.jpeg" />
                     </a>
-                    <div class="gonggu-info">2인 공동구매</div>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
                 </div>
                 <div class="posting-content popular">
                     <p class="posting-title">
                         <a href="#">
-                            [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
                         </a>
                     </p>
                     <div class="posting-price-box">
-                        <p class="price-through">70,000원</p>
-                        <div class="sail-box popular">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
                             <div class="sail-box-popular">
-                                <p class="sail-percent">62%</p>
-                                <p class="price-sail">26,900원</p>
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
                             </div>
-                            <div class="star-rating">
-                                <div class="material-symbols-outlined star-rate">star</div>
-                                <div class="rating-average">4.8</div>
-                                <div class="review-count">(152)</div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
                             </div>
                         </div>
                     </div>
@@ -168,30 +198,83 @@
                     </div>
                 </div>
             </div>
-            <div class="posting-item popular">
+            <div class="posting-item popular board-item">
                 <div class="posting-img popular">
                     <a href="#">
-                        <img src="/resources/img/product/lactofit.jpg" />
+                        <img src="/resources/img/board/pizza.jpeg" />
                     </a>
-                    <div class="gonggu-info">2인 공동구매</div>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
                 </div>
                 <div class="posting-content popular">
                     <p class="posting-title">
                         <a href="#">
-                            [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
                         </a>
                     </p>
                     <div class="posting-price-box">
-                        <p class="price-through">70,000원</p>
-                        <div class="sail-box popular">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
                             <div class="sail-box-popular">
-                                <p class="sail-percent">62%</p>
-                                <p class="price-sail">26,900원</p>
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
                             </div>
-                            <div class="star-rating">
-                                <div class="material-symbols-outlined star-rate">star</div>
-                                <div class="rating-average">4.8</div>
-                                <div class="review-count">(152)</div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
                             </div>
                         </div>
                     </div>
@@ -206,14 +289,13 @@
                 </div>
             </div>
 
+
             
             
             
 
 
-            <div class="posting-item popular">
-                전체보기
-            </div>
+
         </div>
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />	
