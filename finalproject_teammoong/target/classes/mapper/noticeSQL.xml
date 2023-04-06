@@ -85,4 +85,7 @@
 		delete from notice_tbl
 		where notice_no = #{_parameter}
 	</delete>
+	<delete id="deleteFile" parameterType="_int">
+		delete from notice_file where file_no = #{no}
+	</delete>
 </mapper>

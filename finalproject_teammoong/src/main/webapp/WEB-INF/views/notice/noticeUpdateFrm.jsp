@@ -36,14 +36,14 @@
   }
   #drop-zone {
     width: 300px;
-    height: 150px;
+    height: 50px;
     border: 2px dashed #ccc;
     border-radius: 20px;
     text-align: center;
-    font-size: 24px;
+    font-size: 15px;
     font-weight: bold;
     margin: 20px auto;
-    line-height: 150px;
+    line-height: 50px;
     cursor: pointer;
   }
   #drop-zone.dragover {
@@ -87,20 +87,20 @@
 						<label for="file">파일첨부</label>
 					</th>
 					<td>
-						<div class="custom-file-upload" id="file-choose">
-  							<label for="fileUpload">파일 선택</label>
-  							<c:forEach items="${n.fileList }" var="f">
+						<div id="drop-zone">
+      						<label for="fileUpload">파일을 여기에 끌어다 놓거나 클릭하세요.</label>
+    					</div>
+    					<div class="oldFile">
+    						<c:forEach items="${n.fileList }" var="f">
 							     <p>
 							     	<a href="/noticeFileDown.do?fileNo=${f.fileNo}">${f.fileName }</a>
 							        <button type="button" onclick="deleteFile(this,${f.fileNo}, '${f.filepath}');">삭제</button>
 							     </p>
-							</c:forEach>	
+							</c:forEach>
 						</div>
-						<div id="drop-zone">
-      					파일을 여기에 끌어다 놓거나 클릭하세요.
+    					<input type="file" name="noticeFile" id="fileUpload" multiple style="display: none" />
+    					<div id="file-names">
     					</div>
-    					<input type="file" id="fileUpload" multiple style="display: none" />
-    					<div id="file-names"></div>
 					</td>
 				</tr>
 				<tr>
@@ -175,74 +175,76 @@
 			$("#updateFrm").append(fileNoInput).append(filepathInput);
 			$(obj).parent().remove();
 		}
+	
 		$(document).ready(function() {
 			  $('#fileUpload').change(function() {
 			    const files = $('#fileUpload')[0].files;
 			    if (files.length > 0) {
-			      let fileNames = '';
+			      let fileNamesWrapper = $('<div></div>');
 			      for (let i = 0; i < files.length; i++) {
-			        fileNames += files[i].name + '<button type="button" class="delete-file-btn" onclick="deleteSelectedFile(this)">삭제</button></div>';
+			        let fileDiv = $('<div></div>');
+			        let fileNameSpan = $('<span></span>');
+			        fileNameSpan.text(files[i].name);
+			        let delBtn = $('<button type="button">삭제</button>');
+			        delBtn.attr("class", "delete-file-btn");
+			        fileDiv.append(fileNameSpan);
+			        fileDiv.append(delBtn);
+			        fileNamesWrapper.append(fileDiv);
 			      }
-			      $('#file-names').empty();
-			      $('#file-names').append(fileNames);
-			    } else {
-			      $('#file-names').empty();
+			      $('#file-names').html(fileNamesWrapper);
+			      
 			    }
+			  });
+
+			  $(document).ready(function() {
+				  let dropZone = $('#drop-zone');
+
+				  dropZone.on('dragover', function(e) {
+				    e.preventDefault();
+				    dropZone.addClass('drag-over');
+				  });
+
+				  dropZone.on('dragleave', function(e) {
+				    e.preventDefault();
+				    dropZone.removeClass('drag-over');
+				  });
+
+				  dropZone.on('drop', function(e) {
+				    e.preventDefault();
+				    dropZone.removeClass('drag-over');
+				    const files = e.originalEvent.dataTransfer.files;
+				    
+				    if (files.length > 0) {
+				      let fileNamesWrapper = $('<div></div>');
+				      let formData = new FormData();
+				      for (let i = 0; i < files.length; i++) {
+				    	  formData.append("noticeFile", files[i]);
+				        let fileDiv = $('<div></div>');
+				        let fileNameSpan = $('<span></span>');
+				        fileNameSpan.text(files[i].name);
+				        let delBtn = $('<button type="button">삭제</button>');
+				        delBtn.attr("class", "delete-file-btn");
+				        fileDiv.append(fileNameSpan);
+				        fileDiv.append(delBtn);
+				        fileNamesWrapper.append(fileDiv);
+				        // 삭제 버튼 클릭 시 해당 파일 삭제
+				        delBtn.on('click', function() {
+				          fileDiv.remove();
+				        });
+				      $('#fileUpload')[0].files = files;
+				        
+				      }
+				      $('#file-names').html(fileNamesWrapper);
+				      console.log(files); 
+				    }
+				  });
+				});
+
+			  $(document).on("click", ".delete-file-btn", function() {
+			    $(this).parent().remove();
 			  });
 			});
 
-			function deleteSelectedFile(btn) {
-			  const file = $(btn).prev();
-			  file.val('');
-			  $(btn).remove();
-			  file.remove();
-			}
-			
-			const dropZone = document.getElementById("drop-zone");
-			const fileInput = document.getElementById("fileUpload");
-			const fileNames = document.getElementById("file-names");
-
-			dropZone.addEventListener("dragover", (e) => {
-			  e.preventDefault();
-			  dropZone.classList.add("dragover");
-			});
-
-			dropZone.addEventListener("dragleave", () => {
-			  dropZone.classList.remove("dragover");
-			});
-
-			dropZone.addEventListener("drop", (e) => {
-			  e.preventDefault();
-			  dropZone.classList.remove("dragover");
-			  const files = e.dataTransfer.files;
-			  for (let i = 0; i < files.length; i++) {
-			    const file = files[i];
-			    console.log(file);
-			    // 파일 정보를 가져오기 위해 FileReader 객체 사용
-			    const reader = new FileReader();
-			    reader.readAsDataURL(file);
-			    reader.onload = function () {
-			      const fileInfo = `${file.name} (${Math.round(file.size / 1024)} KB)`;
-			      console.log(fileInfo);
-			      fileNames.append += `<p>'file <button type="button" onclick="removeFile(event)">삭제</button></p>`;
-			    };
-			  }
-			});
-
-			fileInput.addEventListener("change", () => {
-			  const files = fileInput.files;
-			  fileNames.innerHTML = "";
-			  for (let i = 0; i < files.length; i++) {
-			    const file = files[i];
-			    const fileInfo = `${file.name} (${Math.round(file.size / 1024)} KB)`;
-			    fileNames.innerHTML += `<p>${fileInfo} <button type="button" onclick="removeFile(event)">삭제</button></p>`;
-			  }
-			});
-
-			function removeFile(e) {
-			  e.target.parentNode.remove();
-			  fileInput.value = "";
-			}
 
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
