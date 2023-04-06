@@ -10,9 +10,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>여기여기붙어라</title>
-
-
-
+	<script type="text/javascript"
+		src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <link rel="stylesheet" href="/resources/css/board/boardWriteFrm.css" />
 </head>
 
@@ -180,7 +179,7 @@
                 
                 <div class="area-btn left">
                     <button class="btn btn-border-pri size01" type="button" id="alert01">성공</button>
-                    <button class="btn btn-border-sec size01" type="button" id="alert02">에러</button>
+<!--                     <button class="btn btn-border-sec size01" type="button" id="alert02">에러</button> -->
                     <button class="btn btn-border-ter size01" type="button" id="alert03">경고</button>
                     <button class="btn btn-border-black size01" type="button" id="alert04">정보</button>
                 </div>
@@ -189,8 +188,7 @@
 		</div>
 	</div>
 
-	<script type="text/javascript"
-		src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+
 	<script type="text/javascript"
 		src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 	<script type="text/javascript"
@@ -348,10 +346,10 @@
         $("#alert01").on("click", function () {
             jQueryAlert('success',"성공내용성공내용성공내용");
         });
-        $("#alert02").on("click", function () {
+        $("#form").on("click", function () {
     		const fileCheck = $("#bFile").val();
     	    if(!fileCheck){
-            jQueryAlert('error',"에러내용에러내용에러내용에러내용");
+            jQueryAlert('warning',"썸네일을 추가 주세요!");
 //     	        alert("파일을 첨부해 주세요!");
 //     	        return false;
     	    }	
