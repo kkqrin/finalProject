@@ -287,12 +287,21 @@ a {
 .board-wrap-header>div{
     display: flex;
     align-items: center;
+}
+
+.board-wrap-header>div>a{
+    display: flex;
+    align-items: center;
     cursor: pointer;
 }
 
-.board-wrap-header>div>span{
+.board-wrap-header>div>a>span{
     font-size: 18px;
     margin-top: 1px;
+}
+
+.board-product-wrap{
+    overflow: hidden;
 }
 
 .board-date-box{
@@ -344,6 +353,10 @@ a {
 .board-view-count{
     display: flex;
     align-items: center;
+}
+
+.posting-item.board-item{
+    width: 300px;
 }
 
 /* ////// */
