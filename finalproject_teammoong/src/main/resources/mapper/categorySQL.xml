@@ -5,7 +5,7 @@
 
 	<select id="selectAllCategory" resultType="c">
 		select
-			categort_no as categoryNo,
+			category_no as categoryNo,
 			category_name as categoryName
 		from product_category
 	</select>
