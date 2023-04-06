@@ -137,5 +137,16 @@ public class ProductService {
 	}
 	return result;
 }
+
+	public Product selectProductByProductNo(int productNo) {
+		Product p = dao.selectProductByProductNo(productNo);
+		if(p != null) {
+			ArrayList<String> filepath = dao.selectProductImg(productNo);
+			p.setFileList(filepath);
+		}
+		System.out.println(p);
+		return p;
+		
+	}
 }
 
