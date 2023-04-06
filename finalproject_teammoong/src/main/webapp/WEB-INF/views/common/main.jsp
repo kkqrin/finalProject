@@ -632,33 +632,23 @@
 
 
 
-    <h1>일일 특가</h1>
-    <div class="product-wrap daysail">
-        <div class="posting-item">
+    <h1>품절 임박</h1>
+    <div class="product-wrap soldout">
+        <div class="posting-item soldout">
             <div class="hotdeal-info">
-                <div class="hotdeal-title">마감 임박</div>
-                <div class="hotdeal-comment">오늘 종료되는 공동구매 딜</div>
-                <div class="hotdeal-time-box">
-                    <div class="material-symbols-outlined" style="font-variation-settings:'FILL' 0">schedule</div>
-                    <div class="hotdeal-time">
-                        <span class="hours"></span>
-                        <span class="col">:</span>
-                        <span class="minutes"></span>
-                        <span class="col">:</span>
-                        <span class="seconds"></span>
-                    </div>
-                </div>
-                <div class="hotdeal-comment">망설이면 늦어요!</div>
+                <div class="hotdeal-title">재고가 얼마 남지 않았어요</div>
+                <div class="hotdeal-comment">품절 임박</div>
+                <div class="hotdeal-comment">서둘러 구매하세요!</div>
             </div>
         </div>
-        <div class="posting-item hotdeal">
-            <div class="posting-img hotdeal">
+        <div class="posting-item soldout">
+            <div class="posting-img soldout">
                 <a href="#">
-                    <img src="/resources/img/product/korean-melon.jpg" />
+                    <img src="/resources/img/product/bubble_tomato.jpg" />
                 </a>
                 <div class="gonggu-info">2인 공동구매</div>
-                <div class="end-hotdeal">
-                    판매시간이 종료되었습니다.
+                <div class="end-hotdeal soldout color-v06">
+                    남은 재고 : 2개
                 </div>
             </div>
             <div class="posting-content">
@@ -701,7 +691,131 @@
                 </div>
             </div>
         </div>
+        <div class="posting-item soldout">
+            <div class="posting-img soldout">
+                <a href="#">
+                    <img src="/resources/img/product/bubble_tomato.jpg" />
+                </a>
+                <div class="gonggu-info">2인 공동구매</div>
+                <div class="end-hotdeal soldout color-v06">
+                    남은 재고 : 2개
+                </div>
+            </div>
+            <div class="posting-content">
+                <p class="posting-title">
+                    <a href="#">
+                        [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
+                    </a>
+                </p>
+                <div class="posting-price-box">
+                    <p class="price-through">70,000원</p>
+                    <div class="sail-box">
+                        <p class="sail-percent">62%</p>
+                        <p class="price-sail">26,900원</p>
+                    </div>
+                </div>
+                <div class="posting-detail">
+                    <div class="posting-icon">
+                        <!-- <div class="star-rating">
+                            <div class="material-symbols-outlined star-rate">star</div>
+                            <div class="rating-average">4.8</div>
+                            <div class="review-count">(152)</div>
+                        </div> -->
+                        <!-- <div class="comment-div">
+                            <span class="material-symbols-outlined">chat_bubble</span>
+                            <span class="comment-count">3</span>
+                        </div> -->
+                    </div>
+                    <div class="posting-info">
+                        <div>
+                            <span class="posting-info-box today-close">오늘마감</span>
+                            <span class="posting-info-box">무료배송</span>
+                        </div>
+                        <!-- <span class="posting-volume">0개 구매</span> -->
+                        <div class="star-rating">
+                            <div class="material-symbols-outlined star-rate">star</div>
+                            <div class="rating-average">4.8</div>
+                            <div class="review-count">(152)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
+
+
+
+    <h1>할인률 높은 상품</h1>
+    <div class="product-wrap highsale">
+        <div class="posting-item highsale">
+            <div class="hotdeal-info">
+                <div class="hotdeal-title">지금이 가장 저렴해요</div>
+                <div class="hotdeal-comment">높은 할인률 상품을 만나보세요!</div>
+                <div class="hotdeal-comment">이 가격 놓치지마세요!</div>
+            </div>
+        </div>
+        <div class="posting-item highsale">
+            <div class="posting-img highsale">
+                <a href="#">
+                    <img src="/resources/img/product/bubble_tomato.jpg" />
+                </a>
+                <div class="gonggu-info">2인 공동구매</div>
+                <div class="end-hotdeal highsale color-v06">
+                    할인률 62%
+                </div>
+            </div>
+            <div class="posting-content">
+                <p class="posting-title">
+                    <a href="#">
+                        [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
+                    </a>
+                </p>
+                <div class="posting-price-box">
+                    <p class="price-through">70,000원</p>
+                    <div class="sail-box">
+                        <p class="sail-percent">62%</p>
+                        <p class="price-sail">26,900원</p>
+                    </div>
+                </div>
+                <div class="posting-detail">
+                    <div class="posting-icon">
+                        <!-- <div class="star-rating">
+                            <div class="material-symbols-outlined star-rate">star</div>
+                            <div class="rating-average">4.8</div>
+                            <div class="review-count">(152)</div>
+                        </div> -->
+                        <!-- <div class="comment-div">
+                            <span class="material-symbols-outlined">chat_bubble</span>
+                            <span class="comment-count">3</span>
+                        </div> -->
+                    </div>
+                    <div class="posting-info">
+                        <div>
+                            <span class="posting-info-box today-close">오늘마감</span>
+                            <span class="posting-info-box">무료배송</span>
+                        </div>
+                        <!-- <span class="posting-volume">0개 구매</span> -->
+                        <div class="star-rating">
+                            <div class="material-symbols-outlined star-rate">star</div>
+                            <div class="rating-average">4.8</div>
+                            <div class="review-count">(152)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
 
 
 
@@ -950,7 +1064,23 @@
             </div>
         </div>
     </div>
+
+
+
+    
+
 </div>
+<!-- 최근 본 상품 -->
+<div class="recent-product-box">
+    <div class="recent-product">최근본상품
+        1
+        2
+        3
+    </div>
+</div>
+
+
+
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />	
 
