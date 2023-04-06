@@ -42,7 +42,6 @@ public class BoardController {
 		if(!boardFile[0].isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload.board/");
 			for(MultipartFile file : boardFile) {
-				String filename = file.getOriginalFilename();
 				String filepath = manager.upload(savePath, file);
 				FileVO fileVO = new FileVO();
 				fileVO.setFilepath(filepath);

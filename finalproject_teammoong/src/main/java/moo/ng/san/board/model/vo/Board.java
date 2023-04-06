@@ -15,7 +15,6 @@ public class Board {
 	private String boardName;
 	private int categoryNo;
 	private String boardContent;
-	private int boardPrice;
 	private String boardDate;
 	private String accountWriter;
 	private String accountName;

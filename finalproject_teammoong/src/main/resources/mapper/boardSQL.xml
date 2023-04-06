@@ -29,7 +29,6 @@
 			#{boardName},
 			#{categoryNo},
 			#{boardContent},
-			#{boardPrice},
 			to_char(sysdate,'yyy-mm-dd'),
 			#{accountWriter},
 			#{accountName},
