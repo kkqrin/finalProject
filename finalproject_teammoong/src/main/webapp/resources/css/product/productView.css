@@ -10,7 +10,7 @@ img{
 }
 .first-info-box{
     margin-left: 30px;
-    margin-top: 30px;
+    margin-top: 10px;
 }
 .first-info-box-table>table{
     border: none;
@@ -49,14 +49,35 @@ img{
     height: 45px;
     
 }
+
 .price-box-top{
     display: flex;
+    padding-top: 10px;
 }
 .real-price{
     padding-left: 9px;
 }
-.delivery-box{
+
+.flex-wrap{
+    padding-top: 10px;
+}
+.flex-box{
     display: flex;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #e1e4e5;
+}
+.info-title-box{
+    line-height: 65px;
+}
+.info-title{
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 100px;
+}
+.info-content{
+    font-size: 15px;
+    padding-left: 250px;
 }
 .arrive-box{
     display: flex;
