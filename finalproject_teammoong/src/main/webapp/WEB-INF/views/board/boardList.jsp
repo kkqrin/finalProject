@@ -80,9 +80,13 @@
             <div class="posting-item popular board-item">
                 <div class="posting-img popular">
                     <a href="/boardView.do?boardNo=${b.boardNo }">
-<%--                     <c:forEach items="${b.fileList }" var="i"> --%>
-						<img src="/resources/upload/board/${b.filepath}">
-<%-- 						</c:forEach> --%>
+                    <c:set var="oneFile" value="0" />
+                    <c:forEach items="${b.fileList }" var="i">
+                    	<c:if test="${b.boardNo eq i.boardNo && oneFile eq 0}">
+							<img src="/resources/upload/board/${i.filepath}">
+							<c:set var="oneFile" value="1" />
+                    	</c:if>
+					</c:forEach>
                     </a>
                     <!-- <div class="gonggu-info">2인 공동구매</div> -->
                 </div>
