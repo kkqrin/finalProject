@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class DayCheck {
 	public int checkNo;
 	public int memberNo;
+	public int pointEa;
 	public int pointNo;
 	public String checkDate;
 	public String today;

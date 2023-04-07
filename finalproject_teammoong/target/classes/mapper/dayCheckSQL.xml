@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="dayCheck">
-  
+	<select id="selectDayCheck" resultType="day">
+		select
+		check_no as checkNo,
+		member_no as memberNo,
+		point_no as pointNo,
+		check_date as checkDate,
+		today,
+		point_ea as pointEa
+		from day_check where member_no = #{memberNo}
+	</select>
+	<insert id="insertDayCheck" parameterType="day">
+		insert into day_check values
+		(day_check_seq.nextval, #{memberNo}, #{pointNo}, sysdate, sysdate, 50)
+	</insert>
 </mapper>

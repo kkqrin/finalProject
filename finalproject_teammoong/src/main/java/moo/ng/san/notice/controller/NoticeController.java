@@ -39,6 +39,7 @@ public class NoticeController {
 	public String noticeWriteFrm() {
 		return "notice/noticeWriteFrm";
 	}
+	@ResponseBody
 	@RequestMapping(value="/noticeWrite.do")
 	public String noticeWrite(Notice n, MultipartFile[] noticeFile, HttpServletRequest request) {
 		ArrayList<FileVO> fileList = new ArrayList<FileVO>();
@@ -55,9 +56,9 @@ public class NoticeController {
 		}
 		int result = service.insertNotice(n,fileList);
 		if(result == (fileList.size()+1)) {
-			return "redirect:/noticeList.do?reqPage=1";
+			return "success";
 		}else {
-			return "redirect:/";
+			return "error";
 		}
 	}
 	@RequestMapping(value = "/uploadImage.do", produces = "plain/text;charset=utf-8")
