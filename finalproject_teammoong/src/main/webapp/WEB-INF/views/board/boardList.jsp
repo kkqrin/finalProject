@@ -206,19 +206,12 @@
                 </div>
             </div>
 
-            
-            
-            
-
-
             <div class="posting-item popular">
                 전체보기
             </div>
         </div>
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />	
-
-
 
 
     <!-- 상품 js -->

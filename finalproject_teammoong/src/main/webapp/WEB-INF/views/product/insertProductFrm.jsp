@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="http://code.jquery.com/jquery-3.6.1.js"></script>
+<!-- <script src="http://code.jquery.com/jquery-3.6.1.js"></script> -->
 <link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
 <style>
 	.note-editable{
@@ -16,8 +16,7 @@
         width: auto;
         display: inline-block;
         min-height: auto;
-        margin-left : 30px;
-        
+        margin-left : 20px;
     }
    	label{
    		margin-right : 130px;
@@ -75,13 +74,13 @@
 <!--                 </select> -->
 				<div style="text-align : left;"> 
                 <input type="radio" id="two" name="gongguNumber" value="1">
-                <label for="two">2</label>
+                <label for="two">2명</label>
                 <input type="radio" id="three" name="gongguNumber" value="1">
-                <label for="three">3</label>
+                <label for="three">3명</label>
                 <input type="radio" id="four" name="gongguNumber" value="1">
-                <label for="four">4</label>
+                <label for="four">4명</label>
                 <input type="radio" id="five" name="gongguNumber" value="1">
-                <label for="five">5</label>
+                <label for="five">5명</label>
                 </div>
             </td>
         </tr>
