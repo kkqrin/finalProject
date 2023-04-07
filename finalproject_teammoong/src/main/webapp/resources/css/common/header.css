@@ -178,6 +178,7 @@ section{
 	width: 200px;
 	color:#000;
 	display: none;
+	box-shadow: var(--shadow-elevation);
 }
 .sub>a:hover{
 	transform:translate(10px,0);
