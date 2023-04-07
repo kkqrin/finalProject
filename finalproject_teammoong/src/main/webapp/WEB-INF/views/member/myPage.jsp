@@ -12,8 +12,15 @@
 
 
 	<div class="content-wrap">
-		<h1>안녕 나는 마이페이지</h1>
-	</div>
+		<h3>마이페이지</h3>
+		<div class="mypage-menu">
+		
+		</div>
+		
+		<div class="mypage-content">
+		
+		</div>
+	</div><!-- content-wrap -->
 	
 	
 	
