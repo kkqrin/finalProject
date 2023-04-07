@@ -17,9 +17,13 @@
 		<div class="mypage-right">
 			<div class="mypage-right-title">회원 정보 수정</div>
 			<div class="mypage-content">
-				아이디:
-				생일:
-				현재 비밀번호
+				아이디:<br>
+				생일:<br>
+				이메일:<br>
+				휴대폰:<br>
+				계좌번호:<br>
+				주소:<br>
+				
 			</div>
 		</div>
 		
