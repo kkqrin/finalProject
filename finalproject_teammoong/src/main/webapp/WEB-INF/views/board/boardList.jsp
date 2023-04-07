@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,8 +53,13 @@
     
     
     <div class="content-wrap">
-        <a href="/boardWriteFrm.do">글쓰기</a>
-
+    
+    	<c:if test="${not empty sessionScope.m}">
+        	<div class="area-btn right" style="padding-top : 25px;">
+        		<button class="btn btn-sec size02" onclick="location.href='/boardWriteFrm.do'">글쓰기</button>
+			</div>
+    	</c:if>
+    
         <div class="board-wrap-header">
             <h4>최근 등록 상품</h4>
             <div>

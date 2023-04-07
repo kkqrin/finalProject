@@ -26,11 +26,18 @@ public class BoardDao {
 	}
 	public int insertBoard(Board b) {
 		int result = sqlSession.insert("board.insertBoard",b);
+		System.out.println(result);
 		return result;
 	}
 	public int insertFile(FileVO file) {
 		int result = sqlSession.insert("board.insertFile",file);
+		System.out.println(result);
 		return result;
 	}
+	public Board selectOneBoard(int boardNo) {
+		Board b = sqlSession.selectOne("board.selectOneBoard",boardNo);
+		return b;
+	}
+	
 
 }
