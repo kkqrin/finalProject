@@ -411,6 +411,7 @@
 
 	</script>
 <!-- 	<script src="/resources/js/modal-alert.js"></script> -->
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />	
 </body>
 
 </html>

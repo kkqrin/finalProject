@@ -343,7 +343,7 @@ a.ui-button:active,
 
 /*  ====  common  ====  */
 .main-content-wrap{width:1200px;margin: 0 auto;flex:1;padding-top:120px;padding-bottom:210px}
-.content-wrap {width:1200px; margin: 50 auto; padding-top:120px;padding-bottom:210px}
+.content-wrap {width:1200px; margin: 50px auto; padding-top:120px;padding-bottom:210px}
 .footer-wrap{width:1200px; margin: 0 auto;padding-top:30px;}
 .wrap {padding:32px;}
 
