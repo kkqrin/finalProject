@@ -80,12 +80,12 @@
                         <div class="real-price"><span class="product-price"></span><span>원</span></div>
                     </div>
                 </div>
-                <div class="first-info-box-table">
-                    <div class="delivery-box">
-                        <div>
-                            <a>배송</a>
+                <div class="flex-wrap">
+                    <div class="flex-box">
+                        <div class="info-title-box">
+                            <a class="info-title">배송</a>
                         </div>
-                        <div>
+                        <div class="info-content">
                             <ul>
                                 <li>1일내 도착 확률 : 88%</li>
                                 <li>3일내 도착 확률 : 91%</li>
@@ -93,33 +93,34 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="arrive-box">
-                        <div>
-                            <a>배송</a>
+
+                        <div class="flex-box">
+                            <div class="info-title-box">
+                                <a class="info-title">배송</a>
+                            </div>
+                            <div class="info-content">
+                                <ul>
+                                    <li>1일내 도착 확률 : 88%</li>
+                                    <li>3일내 도착 확률 : 91%</li>
+                                    <li>5일내 도착 확률 : 97%</li>
+                                </ul>
+                            </div>
                         </div>
-                        <div>
-                            <ul>
-                                <li>1일내 도착 확률 : 88%</li>
-                                <li>3일내 도착 확률 : 91%</li>
-                                <li>5일내 도착 확률 : 97%</li>
-                            </ul>
+                        
+                        <div class="flex-box">
+                            <div class="info-title-box">
+                                <a class="info-title">배송</a>
+                            </div>
+                            <div>
+                                <ul class="info-content">
+                                    <li>1일내 도착 확률 : 88%</li>
+                                    <li>3일내 도착 확률 : 91%</li>
+                                    <li>5일내 도착 확률 : 97%</li>
+                                </ul>
+                            </div>
                         </div>
+
                     </div>
-                    </div>
-                    <div class="review-box">
-                        <div>
-                            <a>배송</a>
-                        </div>
-                        <div>
-                            <ul>
-                                <li>1일내 도착 확률 : 88%</li>
-                                <li>3일내 도착 확률 : 91%</li>
-                                <li>5일내 도착 확률 : 97%</li>
-                            </ul>
-                        </div>
-                    </div>
-                    </div>
-                    
                     <!-- <table style="border: 1px solid transparent;">
                         <tr>
                             <th>배 송</th>
