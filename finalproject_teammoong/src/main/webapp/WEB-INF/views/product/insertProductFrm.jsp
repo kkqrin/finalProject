@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- <script src="http://code.jquery.com/jquery-3.6.1.js"></script> -->
+<script src="http://code.jquery.com/jquery-3.6.1.js"></script>
 <link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
 <style>
 	.note-editable{
@@ -20,6 +20,9 @@
     }
    	label{
    		margin-right : 130px;
+   	}
+   	select{
+   	
    	}
     
 </style>
@@ -57,8 +60,8 @@
         <tr>
             <th>할인률</th>
             <td colspan="2"><input type="text" name="productDiscount"></td>
-        </tr>
             <input type="hidden" name="productStatus" value="1">
+        </tr>
         <tr>
             <th>원가격</th>
             <td colspan="2"><input type="text" name="productCost"></td>
@@ -150,7 +153,9 @@
 		    		for(var i=0; i<data.length; i++){
 			    		$("[name=dCategoryNo]").append("<option value="+data[i].dcategoryNo+">"+data[i].dcategoryName+"</option>");
 			    		}
-		    		
+// 		    		select메뉴 비우는 코드
+		    		$( "[name=dCategoryNo]" ).selectmenu("refresh");
+		    		$( "[name=dCategoryNo]" ).selectmenu();
 	    		},
 		    });
 		});
