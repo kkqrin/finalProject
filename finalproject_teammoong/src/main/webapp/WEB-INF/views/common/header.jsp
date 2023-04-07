@@ -37,6 +37,7 @@
 	</style>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/common/stickyRight.jsp" />
 	<div class="header-wrap">
         <div class="header-content">
         
@@ -125,7 +126,12 @@
             
         </div><!--header-content-->
     </div><!--header-wrap-->
+
+
+
+
 	
     <script src="/resources/js/header.js"></script>
+
 </body>
 </html>
