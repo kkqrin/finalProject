@@ -16,11 +16,13 @@
         width: auto;
         display: inline-block;
         min-height: auto;
-        margin-left : 30px;
-        
+        margin-left : 20px;
     }
    	label{
    		margin-right : 130px;
+   	}
+   	select{
+   	
    	}
     
 </style>
@@ -58,8 +60,8 @@
         <tr>
             <th>할인률</th>
             <td colspan="2"><input type="text" name="productDiscount"></td>
-        </tr>
             <input type="hidden" name="productStatus" value="1">
+        </tr>
         <tr>
             <th>원가격</th>
             <td colspan="2"><input type="text" name="productCost"></td>
@@ -75,13 +77,13 @@
 <!--                 </select> -->
 				<div style="text-align : left;"> 
                 <input type="radio" id="two" name="gongguNumber" value="1">
-                <label for="two">2</label>
+                <label for="two">2명</label>
                 <input type="radio" id="three" name="gongguNumber" value="1">
-                <label for="three">3</label>
+                <label for="three">3명</label>
                 <input type="radio" id="four" name="gongguNumber" value="1">
-                <label for="four">4</label>
+                <label for="four">4명</label>
                 <input type="radio" id="five" name="gongguNumber" value="1">
-                <label for="five">5</label>
+                <label for="five">5명</label>
                 </div>
             </td>
         </tr>
@@ -151,7 +153,9 @@
 		    		for(var i=0; i<data.length; i++){
 			    		$("[name=dCategoryNo]").append("<option value="+data[i].dcategoryNo+">"+data[i].dcategoryName+"</option>");
 			    		}
-		    		
+// 		    		select메뉴 비우는 코드
+		    		$( "[name=dCategoryNo]" ).selectmenu("refresh");
+		    		$( "[name=dCategoryNo]" ).selectmenu();
 	    		},
 		    });
 		});
