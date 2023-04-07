@@ -16,6 +16,7 @@
 	<script src="https://kit.fontawesome.com/285f888d1c.js" crossorigin="anonymous"></script>
     <!--productView.css-->
     <link rel="stylesheet" href="/resources/css/product/productView.css">
+    <script src="/resources/js/jquery-3.6.0.js"></script>
 </head>
 <style>
     .slick-prev:before, .slick-next:before {
@@ -48,30 +49,41 @@
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+
+
+
+    
+
+
+
+
 	<div class="content-wrap">
 	        <div class="top-info-box">
-            <div class="img-box"style="width: 300px;">
+            <div class="img-box"style="width: 500px;">
             <c:forEach items="${p.fileList }" var="i">
                 <img src="/resources/upload/product/${i.filepath }">
             </c:forEach>
             </div>
             <div class="first-info-box">
                 <div><a>${p.productName }</a><span><a href="/productLike.do">♡</a></span><span><a href="#">☆</a></span></div>
-                <div><a>00%</a><a>8,990원</a></div>
-                <table border="1">
-                    <tr>
-                        <th>배송</th>
-                        <th>Double click to editDouble click to edit</th>
-                    </tr>
-                    <tr>
-                        <th>내일도착확률</th>
-                        <th>Double click to editDouble click to edit</th>
-                    </tr>
-                    <tr>
-                        <th>별점(리뷰)</th>
-                        <th>Double click to editDouble click to edit</th>
-                    </tr>
-                </table>
+                <div class="no-discount-Price"><a style="text-decoration: line-through;">${p.productPrice}</a></div>
+                <div class="prodcut-discount"><a>${p.productDiscount}%</a><a class="product-price"></a></div>
+                <div class="first-info-box-table">
+                    <table style="border: none;">
+                        <tr>
+                            <th>배 송</th>
+                            <td>Double click to editDouble click to edit</td>
+                        </tr>
+                        <tr>
+                            <th>내 일 도 착 확 률</th>
+                            <td>Double click to editDouble click to edit</td>
+                        </tr>
+                        <tr>
+                            <th>후 기</th>
+                            <td>Double click to editDouble click to edit</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
         <hr>
@@ -105,18 +117,36 @@
             <div class="product-info-view" style="height: 500px;">상세정보</div>
             <div class="product-review" style="height: 500px;">리뷰보기</div>
             <div class="product-inquiry" style="height: 500px;">문의하기</div>
+            
         </div>
         <button class="scroll-top" style="font-size: 50px;">↑</button>
 	</div>
-	
+	<input type="hidden" id="productPrice" value="${p.productPrice}">
+    <input type="hidden" id="productDiscount" value="${p.productDiscount}">
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	
-
+    
     
 </body>
     	<!-- 슬릭 슬라이더 js -->
 	<script type="text/javascript" src="/resources/slick/slick.min.js"></script>
     <script>
+        let productPrice = $("#productPrice").val();
+        let productDiscount = $("#productDiscount").val();
+        
+        $(function(){
+            let result = productPrice * (100-productDiscount)/100000;
+            var num = 0;
+            num = result;
+            console.log(result);
+            var DiscountPrice = Math.floor(result);
+            console.log(DiscountPrice*1000);
+            var price = DiscountPrice*1000;
+            price = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            console.log(price);
+            $(".product-price").text(price);
+        })
+
         $('.img-box').slick();
         $(".scroll-top").on("click",function(){
             var offset = $("body").offset();
