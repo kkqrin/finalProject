@@ -38,6 +38,15 @@ public class BoardDao {
 		Board b = sqlSession.selectOne("board.selectOneBoard",boardNo);
 		return b;
 	}
+	public ArrayList<FileVO> selectFileList(int boardNo) {
+		List list = sqlSession.selectList("board.selectFileList",boardNo);
+		return (ArrayList<FileVO>)list;
+	}
+	public ArrayList<String> selectBoardImg() {
+		List list = sqlSession.selectList("board.selectBoardImg");
+		System.out.println("Board Dao fileList : "+list);
+		return (ArrayList<String>)list;
+	}
 	
 
 }

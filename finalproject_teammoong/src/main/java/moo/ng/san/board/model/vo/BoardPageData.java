@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class BoardPageData {
 	private ArrayList<Board> list;
 	private String pageNavi;
+	
 }
