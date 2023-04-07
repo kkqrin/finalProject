@@ -9,24 +9,20 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-
-
 	<div class="content-wrap">
 		<div class="mypage-wrap">
+		
+		<jsp:include page="/WEB-INF/views/common/myPageMenu.jsp" />
+		
+		<div class="mypage-right">
+			<div class="mypage-right-title">개인 정보 수정</div>
+			<div class="mypage-content">
 			
-			<jsp:include page="/WEB-INF/views/common/myPageMenu.jsp" />
-			
-			<div class="mypage-right">
-				<div class="mypage-right-title">구매 내역/후기 작성</div>
-				<div class="mypage-content">
-					본격적인 콘텐츠가 들어가는 부분
-				</div>
 			</div>
-		</div><!--mypage-wrap-->
-	</div><!-- content-wrap -->
-	
-	
-	
+		</div>
+		
+		</div>
+	</div>
 	
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>

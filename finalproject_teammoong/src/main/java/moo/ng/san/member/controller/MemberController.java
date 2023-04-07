@@ -58,5 +58,9 @@ public class MemberController {
 		return "member/signUpFrm";
 	}//joinMemberFrm
 
+	@RequestMapping(value = "/myPageMemberInfo.do")
+	public String myPageMemberInfo() {
+		return "member/myPageMemberInfo";
+	}//myPageMemberInfo(개인정보수정)
 
 }//MemberController
