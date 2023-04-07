@@ -15,7 +15,7 @@
 		<jsp:include page="/WEB-INF/views/common/myPageMenu.jsp" />
 		
 		<div class="mypage-right">
-			<div class="mypage-right-title">회원 정보 수정</div>
+			<div class="mypage-right-title">받은 쪽지함</div>
 			<div class="mypage-content">
 			
 			</div>

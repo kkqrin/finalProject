@@ -159,7 +159,7 @@
 	<!-- 김홍미 -->
 	<context:component-scan base-package="moo.ng.san.member" />
 	<context:component-scan base-package="common" />
-	
+	<context:component-scan base-package="moo.ng.san.dm" />
 	
 	
 	
