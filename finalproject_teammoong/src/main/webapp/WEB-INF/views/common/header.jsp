@@ -53,7 +53,7 @@
 						<div class="main-category">
 							<!--ajax로 카테고리가 생성될 영역-->
 						</div>
-				</div><!-- category-content -->
+					</div><!-- category-content -->
               	</div><!-- menu-category -->
 			</div><!-- header-left -->
 			

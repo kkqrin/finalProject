@@ -40,6 +40,17 @@
 
                     }//전체 for
 
+                    /*
+                    <div class="one-category">
+                        <a class="cate-name" href="c.categyNo">대분류 이름</a>
+                        <div class="sub">
+                            <a href="d.dCategoryNo">소분류 이름</a>
+                        </div>
+                    </div>
+                    
+                    */
+
+
 
                     $(".menu-category").mouseenter(function(){
                         $(".category-content").fadeIn();

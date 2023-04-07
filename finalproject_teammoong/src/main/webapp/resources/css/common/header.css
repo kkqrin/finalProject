@@ -125,7 +125,6 @@ section{
 .menu-category{
 	position:relative;
 	height: 120px;
-	line-height: 42px;
 	background-color: var(--primary);
 	display:flex;
 	align-items: center;
@@ -142,6 +141,10 @@ section{
 .reorder{
 	font-size: 36px;
 }
+.main-category{
+	line-height: 42px;
+}
+
 
 .category-content{
 	position: absolute;
@@ -149,7 +152,7 @@ section{
 	left:0;
 	background-color:var(--primary);
 	width: 200px;
-	height: 550px;
+	height: 546px;
 	display: none;
 	color:#fff;
 }
@@ -160,8 +163,6 @@ section{
 	flex-direction:column;
 	width:100%;
 	font-size:16px;
-}
-.main-category>.one-category{
 	position: relative;
 }
 .main-category a{
@@ -176,6 +177,7 @@ section{
 	left:200px;
 	background-color:#fff;
 	width: 200px;
+	height: 100%;
 	color:#000;
 	display: none;
 	box-shadow: var(--shadow-elevation);
