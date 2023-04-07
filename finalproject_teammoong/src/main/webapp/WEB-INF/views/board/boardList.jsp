@@ -633,8 +633,6 @@
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />	
 
 
-
-
     <!-- 상품 js -->
     <script type="text/javascript" src="/resources/slick/slick.min.js"></script>
     <script src="/resources/js/product.js"></script>

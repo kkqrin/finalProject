@@ -164,16 +164,4 @@ public class ProductController {
 		return "product/productView";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
