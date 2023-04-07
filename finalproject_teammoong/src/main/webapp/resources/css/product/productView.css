@@ -20,6 +20,47 @@ img{
     background-color: #fff;
     text-align: left;
 }
-.no-discount-Price>a{
-    text-decoration: dashed;
+.product-name{
+    font-size: 30px;
+    font-weight: bold;
+}
+.no-discount-price{
+    font-size: 15px;
+    padding-left: 15px;
+}
+.product-discount>a{
+    font-size: 30px;
+    color: #f88000;
+    font-weight: bold;
+    width: 80px;
+}
+.product-price{
+    font-size: 20px;
+    color: #3A3A3A;
+}
+.price-box>tbody>tr:first-child>td:first-child{
+    width: 80px;
+}
+.price-box td{
+    text-align: left;
+}
+.price-box{
+    border: 1px solid #fff;
+    height: 45px;
+    
+}
+.price-box-top{
+    display: flex;
+}
+.real-price{
+    padding-left: 9px;
+}
+.delivery-box{
+    display: flex;
+}
+.arrive-box{
+    display: flex;
+}
+.review-box{
+    display: flex;
 }
