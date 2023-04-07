@@ -15,11 +15,9 @@
 		<jsp:include page="/WEB-INF/views/common/myPageMenu.jsp" />
 		
 		<div class="mypage-right">
-			<div class="mypage-right-title">회원 정보 수정</div>
+			<div class="mypage-right-title">회원 탈퇴</div>
 			<div class="mypage-content">
-				아이디:
-				생일:
-				현재 비밀번호
+
 			</div>
 		</div>
 		

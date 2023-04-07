@@ -21,6 +21,7 @@
 					<a href="#">찜한 상품</a>
 					<a href="#">쿠폰/적립금</a>
 					<a href="/myPageMemberInfo.do">회원 정보 수정</a>
+					<a href="/myPageMemberDelete.do">회원 탈퇴</a>
 				</div><!--one-menu-->
 				<div class="one-menu">
 					<a class="one-menu-title">여기여기붙어라</a>

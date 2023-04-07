@@ -61,6 +61,12 @@ public class MemberController {
 	@RequestMapping(value = "/myPageMemberInfo.do")
 	public String myPageMemberInfo() {
 		return "member/myPageMemberInfo";
-	}//myPageMemberInfo(개인정보수정)
+	}//myPageMemberInfo(회원정보수정)
+	
+	
+	@RequestMapping(value = "/myPageMemberDelete.do")
+	public String myPageMemberDelete() {
+		return "member/myPageMemberDelete";
+	}//myPageMemberDelete(회원탈퇴)
 
 }//MemberController
