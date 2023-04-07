@@ -130,13 +130,13 @@ section{
 	align-items: center;
 	justify-content:center;
 	color: #fff;
-	cursor: pointer;
 }
 .reorder-box{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	font-size: 16px;
+	cursor: pointer;
 }
 .reorder{
 	font-size: 36px;
@@ -165,9 +165,9 @@ section{
 	font-size:16px;
 	position: relative;
 }
-.main-category a{
+.main-category>div>a{
 	display: inline-block;
-	padding-left:25px;
+	padding-left:20px;
 	width: 100%;
 }
 /*=============sub==============*/
@@ -182,8 +182,13 @@ section{
 	display: none;
 	box-shadow: var(--shadow-elevation);
 }
+.sub>a{
+	display: inline-block;
+	padding-left:10px;
+	width: 100%;
+}
 .sub>a:hover{
-	transform:translate(10px,0);
+	transform:translate(5px,0);
 	transition-duration:0.3s;
 }	
 .cate-name:hover{
