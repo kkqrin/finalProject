@@ -1071,11 +1071,57 @@
 
 </div>
 <!-- 최근 본 상품 -->
-<div class="recent-product-box">
-    <div class="recent-product">최근본상품
-        1
-        2
-        3
+<div class="recent-product-container">
+    <div class="recent-product-box">
+        <!-- <button type="button" class="material-symbols-outlined order-product-expand-less">expand_less</button> -->
+        <div class="recent-product-title">최근 본 상품</div>
+        <div class="recent-product-content">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span>
+                            <img src="/resources/img/product/lactofit.jpg">
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span>
+                            <img src="/resources/img/product/bubble_tomato.jpg">
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span>
+                            <img src="/resources/img/product/cleansing_foam.jpeg">
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span>
+                            <img src="/resources/img/product/orange.jpeg">
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span>
+                            <img src="/resources/img/product/korean-melon.jpg">
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="icon-logo-box">
+            <div class="kkt-logo">
+                <a href="#">
+                    <img src="/resources/img/common/kakaotalk_logo.png">
+                </a>
+            </div>
+        </div>
+        <!-- <button type="button" class="material-symbols-outlined order-product-expand-more">expand_more</button> -->
     </div>
 </div>
 
@@ -1091,6 +1137,45 @@
     <script type="text/javascript" src="/resources/slick/slick.min.js"></script>
     <script src="/resources/js/product.js"></script>
 
+    <!-- 최근 본 상품 슬라이드 -->
+    <script>
+        // recent-product-content
+        $('.recent-product-content>ul').slick({
+            // dots: false,
+            infinite: false,
+            speed: 100,
+            slidesToShow: 2,
+            slidesToScroll: 1,
+            vertical : true,
+            prevArrow : "<button type='button' class='material-symbols-outlined order-product-expand-less'>expand_less</button>",
+            nextArrow : "<button type='button' class='material-symbols-outlined order-product-expand-more'>expand_more</button>"
+            // responsive: [
+            //     {
+            //     breakpoint: 1024,
+            //     settings: {
+            //         slidesToShow: 3,
+            //         slidesToScroll: 3,
+            //         infinite: true,
+            //         dots: true
+            //     }
+            //     },
+            //     {
+            //     breakpoint: 600,
+            //     settings: {
+            //         slidesToShow: 2,
+            //         slidesToScroll: 2
+            //     }
+            //     },
+            //     {
+            //     breakpoint: 480,
+            //     settings: {
+            //         slidesToShow: 1,
+            //         slidesToScroll: 1
+            //     }
+            //     }
+            // ]
+        });
+    </script>
 </body>
 	
 </html>
