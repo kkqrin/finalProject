@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/resources/css/member/myPage.css" />
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -12,14 +13,17 @@
 
 
 	<div class="content-wrap">
-		<h3>마이페이지</h3>
-		<div class="mypage-menu">
-		
-		</div>
-		
-		<div class="mypage-content">
-		
-		</div>
+		<div class="mypage-wrap">
+			
+			<jsp:include page="/WEB-INF/views/common/myPageMenu.jsp" />
+			
+			<div class="mypage-right">
+				<div class="mypage-right-title">구매 내역/후기 작성</div>
+				<div class="mypage-content">
+					본격적인 콘텐츠가 들어가는 부분
+				</div>
+			</div>
+		</div><!--mypage-wrap-->
 	</div><!-- content-wrap -->
 	
 	
