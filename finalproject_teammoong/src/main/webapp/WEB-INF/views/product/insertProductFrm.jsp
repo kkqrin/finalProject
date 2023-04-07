@@ -21,9 +21,6 @@
    	label{
    		margin-right : 130px;
    	}
-   	select{
-   	
-   	}
     
 </style>
 </head>

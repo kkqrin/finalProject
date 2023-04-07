@@ -65,24 +65,76 @@
             </c:forEach>
             </div>
             <div class="first-info-box">
-                <div><a>${p.productName }</a><span><a href="/productLike.do">♡</a></span><span><a href="#">☆</a></span></div>
-                <div class="no-discount-Price"><a style="text-decoration: line-through;">${p.productPrice}</a></div>
-                <div class="prodcut-discount"><a>${p.productDiscount}%</a><a class="product-price"></a></div>
+                <div class="product-name"><a>${p.productName }</a><span><a href="/productLike.do">♡</a></span><span><a href="#">☆</a></span></div>
+                <div class="price-box-top">
+                <div class="price-box1">
+                    <div class="product-discount">
+                        <a>${p.productDiscount}%</a>
+                    </div>
+                </div>
+                    <div class="price-box2">
+                        <div class="no-discount-price">
+                            <a style="text-decoration: line-through;">${p.productPrice}</a>
+                            <span>원</span>
+                        </div>
+                        <div class="real-price"><span class="product-price"></span><span>원</span></div>
+                    </div>
+                </div>
                 <div class="first-info-box-table">
-                    <table style="border: none;">
+                    <div class="delivery-box">
+                        <div>
+                            <a>배송</a>
+                        </div>
+                        <div>
+                            <ul>
+                                <li>1일내 도착 확률 : 88%</li>
+                                <li>3일내 도착 확률 : 91%</li>
+                                <li>5일내 도착 확률 : 97%</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="arrive-box">
+                        <div>
+                            <a>배송</a>
+                        </div>
+                        <div>
+                            <ul>
+                                <li>1일내 도착 확률 : 88%</li>
+                                <li>3일내 도착 확률 : 91%</li>
+                                <li>5일내 도착 확률 : 97%</li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="review-box">
+                        <div>
+                            <a>배송</a>
+                        </div>
+                        <div>
+                            <ul>
+                                <li>1일내 도착 확률 : 88%</li>
+                                <li>3일내 도착 확률 : 91%</li>
+                                <li>5일내 도착 확률 : 97%</li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+                    
+                    <!-- <table style="border: 1px solid transparent;">
                         <tr>
                             <th>배 송</th>
-                            <td>Double click to editDouble click to edit</td>
+                            <td colspan="2">Double click to editDouble click to edit</td>
                         </tr>
                         <tr>
                             <th>내 일 도 착 확 률</th>
-                            <td>Double click to editDouble click to edit</td>
+                            <td colspan="2">Double click to editDouble click to edit</td>
                         </tr>
                         <tr>
                             <th>후 기</th>
-                            <td>Double click to editDouble click to edit</td>
+                            <td colspan="2">Double click to editDouble click to edit</td>
                         </tr>
-                    </table>
+                    </table> -->
+                    
                 </div>
             </div>
         </div>
