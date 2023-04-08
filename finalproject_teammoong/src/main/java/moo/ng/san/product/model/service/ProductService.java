@@ -148,5 +148,10 @@ public class ProductService {
 		return p;
 		
 	}
+
+	public ArrayList<Product> selectProductList() {
+		ArrayList<Product> list = dao.selectProductList();
+		return list;
+	}
 }
 
