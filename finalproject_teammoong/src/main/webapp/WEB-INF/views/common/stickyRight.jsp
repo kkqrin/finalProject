@@ -6,8 +6,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
     <!-- 슬릭 슬라이더 제이쿼리 -->
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
     <!-- 슬릭 슬라이더 -->
     <link rel="stylesheet" href="/resources/slick/slick-theme.css"/>
     <link rel="stylesheet" href="/resources/slick/slick.css"/>
