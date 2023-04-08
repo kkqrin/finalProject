@@ -51,4 +51,19 @@
 		FROM PRODUCT_IMG
 		WHERE PRODUCT_NO = #{_parameter}
 	</select>
+	
+	<select id="selectProductList" resultType="p">
+		SELECT 
+			PRODUCT_NO AS productNo,
+			D_CATEGORY_NO AS dCategoryNo,
+			PRODUCT_NAME AS productName,
+			PRODUCT_EA AS productEa,
+			PRODUCT_PRICE AS productPrice,
+			PRODUCT_STATUS AS productStatus,
+			PRODUCT_COST AS productCost,
+			GONGGU_NUMBER AS  gongguNumber,
+			PRODUCT_CONTENT AS productContnet,
+			PRODUCT_DISCOUNT AS productDiscount
+		FROM PRODUCT_TBL 
+	</select>
 </mapper>
