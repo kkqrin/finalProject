@@ -250,7 +250,7 @@
 			}
         $(function () {
             $("#alert01").on("click", function () {
-                jQueryAlert('success',"성공적으로 처리되었습니다.");
+                jQueryAlert('success',"글쓰기 작성 완료");
             });
             $("#alert02").on("click", function () {
                 jQueryAlert('error',"관리자에게 문의하세요.");
