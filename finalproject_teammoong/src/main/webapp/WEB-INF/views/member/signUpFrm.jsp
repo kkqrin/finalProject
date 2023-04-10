@@ -298,8 +298,9 @@
 			$("[name='memberPhone']").keyup(function(){
 				//핸드폰 정규표현식
 				const pwReg = /^\d{3}-\d{3,4}-\d{4}$/;
+				const pwReg2 = /^0+\d{9,10}$/;
 				const inputPw = $(this).val();
-				if(pwReg.test(inputPw)){
+				if(pwReg.test(inputPw) || pwReg2.test(inputPw)){
 					$(this).removeClass("error");
 					$(".caution-tr").eq(3).css("display","none");
 					result[3] = true;
