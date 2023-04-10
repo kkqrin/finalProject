@@ -50,6 +50,12 @@ public class ProductDao {
 	}
 
 
+	public ArrayList<String> selectProductFiles(int productNo) {
+		List list = sqlSessoin.selectList("product.selectProductFilelist",productNo);
+		return (ArrayList<String>)list;
+	}
+	
+	
 	
 	
 	

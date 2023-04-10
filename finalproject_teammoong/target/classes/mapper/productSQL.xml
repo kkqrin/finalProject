@@ -84,5 +84,14 @@
 				(SELECT FILEPATH FROM PRODUCT_IMG WHERE P_IMG_NO=(SELECT MIN(P_IMG_NO) FROM PRODUCT_IMG  WHERE PRODUCT_NO=PRODUCT_TBL.PRODUCT_NO))  AS thumbnail
 		FROM PRODUCT_TBL WHERE D_CATEGORY_NO = #{sCategoryNo} ORDER BY 1 DESC) P)
 		WHERE RNUM BETWEEN #{start} AND #{end}
+		
+		
+	<select id="selectProductFilelist" parameterType="_int" resultType="pf">
+		SELECT
+			P_IMG_NO AS pImgNo,
+			PRODUCT_NO AS productNo,
+			FILEPATH AS filepath
+		FROM PRODUCT_IMG
+		WHERE PRODUCT_NO = #{_parameter}
 	</select>
 </mapper>

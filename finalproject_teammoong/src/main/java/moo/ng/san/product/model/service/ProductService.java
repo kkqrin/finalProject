@@ -171,6 +171,10 @@ public class ProductService {
 
 	public ArrayList<Product> selectProductList() {
 		ArrayList<Product> list = dao.selectProductList();
+		for(Product p : list) {
+			ArrayList<String> productFileList = dao.selectProductFiles(p.getProductNo());
+			p.setFileList(productFileList);
+		}
 		return list;
 	}
 
