@@ -64,7 +64,9 @@
         <div class="posting-item popular">
             <div class="posting-img popular">
                 <a href="/productView.do?productNo=6">
-                    <img src="/resources/upload/product/ALL.png" />
+           		<c:forEach var="pf" items="${p.fileList}" begin="0" end="0" step="1">
+                    <img src="/resources/upload/product/${pf.filepath }" />
+                </c:forEach>
                 </a>
                 <div class="gonggu-info">2인 공동구매</div>
             </div>

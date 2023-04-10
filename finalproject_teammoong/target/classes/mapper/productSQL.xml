@@ -66,4 +66,13 @@
 			PRODUCT_DISCOUNT AS productDiscount
 		FROM PRODUCT_TBL 
 	</select>
+	
+	<select id="selectProductFilelist" parameterType="_int" resultType="pf">
+		SELECT
+			P_IMG_NO AS pImgNo,
+			PRODUCT_NO AS productNo,
+			FILEPATH AS filepath
+		FROM PRODUCT_IMG
+		WHERE PRODUCT_NO = #{_parameter}
+	</select>
 </mapper>

@@ -46,6 +46,11 @@ public class ProductDao {
 		List list = sqlSessoin.selectList("product.selectProductList");
 		return (ArrayList<Product>)list;
 	}
+
+	public ArrayList<String> selectProductFiles(int productNo) {
+		List list = sqlSessoin.selectList("product.selectProductFilelist",productNo);
+		return (ArrayList<String>)list;
+	}
 	
 	
 	
