@@ -119,7 +119,7 @@
 					</tr>
 					<tr>
 						<td></td>
-						<td colspan="3"><input type="text" name="memberAccount" placeholder="계좌번호를 입력하세요"></td>
+						<td colspan="3"><input type="text" name="memberAccount" placeholder="계좌번호를 입력하세요('-'없이)"></td>
 					</tr>
 					<tr>
 						<td><label for="id">생년월일</label></td>
@@ -351,6 +351,12 @@
 				}
 			})//이메일 정규표현식
 			
+			
+			
+			$("[name='memberAccount']").on("change",function(){
+				const result = $(this).val().replaceAll("-","");
+				$(this).val(result);
+			});
 			
 			
 			
