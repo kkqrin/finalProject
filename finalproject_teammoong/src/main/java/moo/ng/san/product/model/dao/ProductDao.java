@@ -1,12 +1,14 @@
 package moo.ng.san.product.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import moo.ng.san.category.model.vo.DetailCategory;
 import moo.ng.san.product.model.vo.FileVO;
 import moo.ng.san.product.model.vo.Product;
 
@@ -44,8 +46,8 @@ public class ProductDao {
 		List list = sqlSessoin.selectList("product.selectProductList");
 		return (ArrayList<Product>)list;
 	}
-	
-	
+
+
 	
 	
 	
@@ -55,7 +57,17 @@ public class ProductDao {
 	
 //	규린작업공간 20~100
 	
-	
+	public ArrayList<Product> selectInfiniteScrollProductList(HashMap<String, Object> map) {
+		List list = sqlSessoin.selectList("product.selectInfiniteScrollProductList", map);
+		
+		return (ArrayList<Product>)list;
+	}
+
+	public ArrayList<DetailCategory> selectDetailCategory(int fCategory) {
+		List list = sqlSessoin.selectList("category.selectDetailCategory", fCategory);
+		
+		return (ArrayList<DetailCategory>)list;
+	}
 	
 	
 	
