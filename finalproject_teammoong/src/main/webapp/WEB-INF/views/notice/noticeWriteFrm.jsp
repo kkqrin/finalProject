@@ -27,7 +27,7 @@
     display: none;
   }
   .content-all{
-  	padding-top: 30px; 
+  	
   }
   .main-content{
   	padding-top: 30px; 
