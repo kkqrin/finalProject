@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BoardOption {
+public class BoardOrder {
+	private int orderDetailNo;
 	private int optionNo;
-	private int boardNo;
-	private String detailName;
-	private int detailCount;
-	private int detailPrice;
+	private int memberNo;
+	private String oderName;
+	private int orderPrice;
+	private int orderCount;
 }

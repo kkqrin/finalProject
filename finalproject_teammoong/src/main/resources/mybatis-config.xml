@@ -21,6 +21,7 @@
 		
 		<typeAlias type="moo.ng.san.board.model.vo.Board" alias="b" />
 		<typeAlias type="moo.ng.san.board.model.vo.FileVO" alias="bf" />
+		<typeAlias type="moo.ng.san.board.model.vo.BoardOption" alias="bo" />
 		
 		
 		

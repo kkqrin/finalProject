@@ -73,16 +73,18 @@ public class ProductController {
 		
 		
 		// 카테고리별 상품리스트
-		ArrayList<Product> list = service.selectInfiniteScrollProductList(sCategory, 1, 3);
+		ArrayList<Product> list = service.selectInfiniteScrollProductList(sCategory, 1, 10);
 		// 하위 카테고리 리스트
 		ArrayList<DetailCategory> dCategoryList = service.selectDetailCategory(fCategory);
-		// 파일 리스트
-//		ArrayList<FileVO> fileList = service.selectAllFileList();
+//		ArrayList<DetailCategory> dCategoryList = service.selectAllDetailCategory();
+
 		
 //		model.addAttribute("fCategory", fCategory);
 //		model.addAttribute("sCategory", sCategory);
 		model.addAttribute("list", list);
 		model.addAttribute("dCategoryList", dCategoryList);
+		
+		System.out.println(dCategoryList);
 		
 		return "product/productList";
 	}
