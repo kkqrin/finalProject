@@ -8,6 +8,9 @@
 		#{productNo}
 		)
 	</insert>
+	<delete id="deleteLike" parameterType="l">
+		DELETE FROM PRODUCT_LIKE WHERE MEMBER_NO = #{memberNo} and PRODUCT_NO = #{productNo}
+	</delete>
 	<select id="selectProductLike" parameterType="l" resultType="l">
 		SELECT
 			LIKE_NO AS likeNo,

@@ -20,4 +20,8 @@ public class LikeService {
 		Like like = dao.selectProductLike(l);
 		return like;
 	}
+
+	public int deleteLike(Like l) {
+		return dao.deleteLike(l);
+	}
 }
