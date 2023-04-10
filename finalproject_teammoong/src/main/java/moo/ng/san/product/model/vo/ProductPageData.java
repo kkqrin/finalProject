@@ -13,7 +13,7 @@ import moo.ng.san.category.model.vo.DetailCategory;
 @NoArgsConstructor
 public class ProductPageData {
 	private ArrayList<Product> list;
-	private ArrayList<DetailCategory> categoryList;
+	private ArrayList<DetailCategory> dCategoryList;
 	// 무한 스크롤
 	private int start;
 	private int amount;

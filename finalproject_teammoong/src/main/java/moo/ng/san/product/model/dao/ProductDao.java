@@ -70,6 +70,12 @@ public class ProductDao {
 		
 		return (ArrayList<DetailCategory>)list;
 	}
+
+	public ArrayList<DetailCategory> selectAllDetailCategory() {
+		List list = sqlSessoin.selectList("category.selectAllDetailCategory");
+		
+		return (ArrayList<DetailCategory>)list;
+	}
 	
 	
 	

@@ -1,17 +1,10 @@
 package moo.ng.san.product.model.service;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import com.google.gson.JsonObject;
 
 import moo.ng.san.category.model.vo.DetailCategory;
 import moo.ng.san.product.model.dao.ProductDao;
@@ -55,7 +48,10 @@ public class ProductService {
 		return dao.selectDetailCategory(fCategory);
 	}
 	
-	
+	public ArrayList<DetailCategory> selectAllDetailCategory() {
+		return dao.selectAllDetailCategory();
+	}
+
 	
 	
 	
@@ -165,6 +161,7 @@ public class ProductService {
 			ArrayList<String> filepath = dao.selectProductImg(productNo);
 			p.setFileList(filepath);
 		}
+		System.out.println(p);
 		return p;
 		
 	}
@@ -270,27 +267,6 @@ public class ProductService {
 
 
 
-//	public JsonObject SummerNoteImageFile(MultipartFile file) {
-//		JsonObject jsonObject = new JsonObject();
-//		String fileRoot = "C:\\summernoteImg\\";
-//		String originalFileName = file.getOriginalFilename();
-//		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
-//		
-//		String saveFileName = UUID.randomUUID()+extension;
-//			
-//		File targetFile = new File(fileRoot+saveFileName);
-//		
-//		try {
-//			InputStream fileStream = file.getInputStream();
-//			FileUtils.copyInputStreamToFile(fileStream, targetFile);
-//			jsonObject.addProperty("url", "/summernoteImg/"+saveFileName);
-//			jsonObject.addProperty("responseCode", "succcess");
-//		} catch(IOException e) {
-//			FileUtils.deleteQuietly(targetFile);
-//			jsonObject.addProperty("responseCode", "error");
-//			e.printStackTrace();
-//		}	
-//		return jsonObject;
-//	}
+
 }
 
