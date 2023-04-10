@@ -53,7 +53,7 @@
     'GRAD' 0,
     'opsz' 48
     } */
-    #test {
+    .test {
     color: #f88000;
     font-variation-settings:
     'FILL' 1,
@@ -61,7 +61,7 @@
     'GRAD' 0,
     'opsz' 48
     }
-    .material-symbols-outlined1:hover {
+    .material-symbols-outlined:hover {
     color: #f88000;
     font-variation-settings:
     'FILL' 1,
@@ -161,13 +161,20 @@
                 </div>  
             </div>
         <div class="gonggu-content-wrap">
-
+            <div class="gonggu-content-title"></div>
+        </div>
+        <div class="fix-button-box">
+            <div class="button-box">
+                <button type="button" class="button buy-one-btn">혼자구매</button>
+                <button type="button" class="button gonggu-buy-btn">공동구매</button>
+            </div>
         </div>
     </div>
 <input type="hidden" id="productPrice" value="${p.productPrice}">
 <input type="hidden" id="productDiscount" value="${p.productDiscount}">
 <input type="hidden" id="loginMember" value="${sessionScope.m.memberNo}">
-<input type="hidden" id="productNo" value="9">
+<input type="hidden" id="productNo" value="${p.productNo}">
+<input type="hidden" id="likeNo" value="${l.likeNo}">
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <!-- <div class="quick-scroll-bar">
     <ul>
@@ -191,22 +198,57 @@
     	<!-- 슬릭 슬라이더 js -->
 	<script type="text/javascript" src="/resources/slick/slick.min.js"></script>
     <script>
-        console.log($("#productNo").val())
-        window.onload = function(){
+        $("[name=like]").children().on("click",function(){ /*like click event*/
+            $(this).children().toggleClass("test");
+        })
+
+            $("[name=like]").on("click",function(){ /*like delete*/
             $.ajax({
-                url : "/selectProductLike.do",
+                url : "/deleteLike.do",
                 type : "POST",
-                dataType : "JSON",
-                data : {memberNo : $("#loginMember").val(), productNo : $("#productNo").val()},
+		    	dataType : "JSON",
+                data : {productNo : $("#productNo").val(), memberNo : $("#loginMember").val()},
                 success : function(data){
-                    console.log(data);
-                    if(data.memberNo == $("#loginMember").val()){
-                        $("[name=like]").empty();
-                        $("[name=like]").append("<span class='material-symbols-outlined' id='test'>favorite</span>")
-                    }
+                    $("[name=like]").empty();
+                    $("[name=like]").append("<span class='material-symbols-outlined'>favorite</span>")
                 }
             });
-        }
+        });
+            $("[name=like]").on("click",function(){ /*like insert*/
+            $.ajax({
+                url : "/productLike.do",
+                type : "POST",
+		    	dataType : "JSON",
+                data : {productNo : $("#productNo").val(), memberNo : $("#loginMember").val()},
+                success : function(data){
+                    console.log(data);
+                }
+            });
+        });
+        window.onload = function(){
+            if($("#loginMember").val() != ''){
+                $.ajax({
+                    url : "/selectProductLike.do",
+                    type : "POST",
+                    dataType : "JSON",
+                    data : {memberNo : $("#loginMember").val(), productNo : $("#productNo").val()},
+                    success : function(data){
+                        console.log(data);
+                        if(data.memberNo == $("#loginMember").val()){
+                            $("[name=like]").empty();
+                            $("[name=like]").append("<span class='material-symbols-outlined test'>favorite</span>")
+                        // } else  {
+                        //     $("[name=like]").empty();
+                        //     $("[name=like]").append("<span class='material-symbols-outlined'>favorite</span>")
+                        }
+                    },
+                    error : function(){
+                        $("[name=like]").empty();
+                        $("[name=like]").append("<span class='material-symbols-outlined'>favorite</span>")
+                    }
+                });
+                }
+            }
         let productPrice = $("#productPrice").val();
         let productDiscount = $("#productDiscount").val();
         
@@ -214,12 +256,9 @@
             let result = productPrice * (100-productDiscount)/100000;
             var num = 0;
             num = result;
-            console.log(result);
             var DiscountPrice = Math.floor(result);
-            console.log(DiscountPrice*1000);
             var price = DiscountPrice*1000;
             price = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            console.log(price);
             $(".product-price").text(price);
         })
 
@@ -256,16 +295,6 @@
                     $("html, body").animate({scrollTop: offset.top},400); // 선택한 위치로 이동. 두번째 인자는 0.4초를 의미한다.
             });
         });
-        $("[name=like]").on("click",function(){
-            $.ajax({
-                url : "/productLike.do",
-                type : "POST",
-		    	dataType : "JSON",
-                data : {productNo : 9, memberNo : $("#loginMember").val()},
-                success : function(data){
-                    console.log(data);
-                }
-            });
-        });
+        
         </script>
 </html>
