@@ -48,9 +48,7 @@ public class ProductService {
 		return dao.selectDetailCategory(fCategory);
 	}
 	
-	public ArrayList<DetailCategory> selectAllDetailCategory() {
-		return dao.selectAllDetailCategory();
-	}
+
 
 	
 	

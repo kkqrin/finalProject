@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.JsonObject;
 
 import common.FileManager;
+import moo.ng.san.category.model.vo.Category;
 import moo.ng.san.category.model.vo.DetailCategory;
 import moo.ng.san.product.model.service.ProductService;
 import moo.ng.san.product.model.vo.FileVO;
@@ -73,18 +74,25 @@ public class ProductController {
 		
 		
 		// 카테고리별 상품리스트
-		ArrayList<Product> list = service.selectInfiniteScrollProductList(sCategory, 1, 10);
+		ArrayList<Product> list = service.selectInfiniteScrollProductList(sCategory, 1, 3);
 		// 하위 카테고리 리스트
 		ArrayList<DetailCategory> dCategoryList = service.selectDetailCategory(fCategory);
-//		ArrayList<DetailCategory> dCategoryList = service.selectAllDetailCategory();
 
+		
 		
 //		model.addAttribute("fCategory", fCategory);
 //		model.addAttribute("sCategory", sCategory);
 		model.addAttribute("list", list);
 		model.addAttribute("dCategoryList", dCategoryList);
-		
-		System.out.println(dCategoryList);
+
+//		if(!dCategoryList.isEmpty()) {
+//			for(DetailCategory dc : dCategoryList) {				
+//			System.out.println(dc.getCategoryNo());
+//			System.out.println(dc.getDCategoryNo());
+//			System.out.println(dc.getDCategoryName());
+//			}
+//		}
+//		System.out.println(dCategoryList);
 		
 		return "product/productList";
 	}
