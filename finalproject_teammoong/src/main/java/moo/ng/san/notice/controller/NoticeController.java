@@ -91,6 +91,7 @@ public class NoticeController {
 		return "notice/noticeUpdateFrm";
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="/noticeUpdate.do")
 	public String noticeUpdate(Notice n, int[] fileNo, String[] filepath, MultipartFile[] noticeFile, HttpServletRequest request) {
 		ArrayList<FileVO> fileList = new ArrayList<FileVO>();
@@ -113,11 +114,11 @@ public class NoticeController {
 			for(String delFile :filepath) {
 				boolean delResult = manager.deleteFile(savePath, delFile);
 			}
-			return "redirect:/noticeList.do?reqPage=1";
+			return "success";
 		}else if(fileNo == null && (result == fileList.size()+1)) {
-			return "redirect:/noticeList.do?reqPage=1";
+			return "success";
 		}else {
-			return "redirect:/noticeUpdateFrm.do";
+			return "error";
 		}
 	}
 	

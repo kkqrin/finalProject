@@ -1,10 +1,12 @@
 package moo.ng.san.product.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import moo.ng.san.category.model.vo.DetailCategory;
 import moo.ng.san.product.model.dao.ProductDao;
 import moo.ng.san.product.model.vo.FileVO;
 import moo.ng.san.product.model.vo.Product;
@@ -27,14 +29,29 @@ public class ProductService {
 	
 //	규린작업공간 20~100
 	
+	public ArrayList<Product> selectInfiniteScrollProductList(int sCategoryNo, int start, int amount) {
+		// start : 1, amount : 3
+		int end = start + amount - 1; // 끝번호
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("sCategoryNo", sCategoryNo);
+		
+		ArrayList<Product> list = dao.selectInfiniteScrollProductList(map);
+		
+		return list;
+	}
 	
+	public ArrayList<DetailCategory> selectDetailCategory(int fCategory) {
+		
+		return dao.selectDetailCategory(fCategory);
+	}
 	
-	
-	
-	
-	
-	
-	
+	public ArrayList<DetailCategory> selectAllDetailCategory() {
+		return dao.selectAllDetailCategory();
+	}
+
 	
 	
 	
@@ -151,7 +168,109 @@ public class ProductService {
 
 	public ArrayList<Product> selectProductList() {
 		ArrayList<Product> list = dao.selectProductList();
+		for(Product p : list) {
+			ArrayList<String> productFileList = dao.selectProductFiles(p.getProductNo());
+			p.setFileList(productFileList);
+		}
 		return list;
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 

@@ -90,7 +90,7 @@
         </tr>
         <tr>
             <th>상품내용</th>
-            <td colspan="2"><textarea name="productContent"></textarea></td>
+            <td colspan="2"><textarea name="productContent" id="summernote"></textarea></td>
         </tr>
         <tr>
         <th colspan="3"><div class="area-btn full"><button class="btn btn-pri size01" type="submit">등록</button></div></th>
@@ -111,16 +111,45 @@
 		$( "[name=dCategoryNo]" ).selectmenu();
 		$("[name=gonggu-number]").selectmenu();
 	});
-		$("[name=productContent]").summernote({
-			height : 550,
-			lang : "ko-KR",
-			callbacks : {
-				onImageUpload : function(files) {
-					uploadImage(files[0], this)
+    var setting = {
+            height : 300,
+            minHeight : null,
+            maxHeight : null,
+            focus : true,
+            lang : 'ko-KR',
+            toolbar : toolbar,
+            //콜백 함수
+            callbacks : { 
+            	onImageUpload : function(files, editor, welEditable) {
+            // 파일 업로드(다중업로드를 위해 반복문 사용)
+            for (var i = files.length - 1; i >= 0; i--) {
+            uploadSummernoteImageFile(files[i],
+            this);
+            		}
+            	}
+            }
+         };
+        $('#summernote').summernote(setting);
+        
+		
+		function uploadSummernoteImageFile(file, el) {
+			data = new FormData();
+			data.append("file", file);
+			$.ajax({
+				data : data,
+				type : "POST",
+				url : "uploadSummernoteImageFile",
+				contentType : false,
+				enctype : 'multipart/form-data',
+				processData : false,
+				success : function(data) {
+					$(el).summernote('editor.insertImage', data.url);
 				}
-				
-			}
-		});
+			});
+		}
+
+
+	
 		window.onload = function(){
 			var categoryNo = $("[name=category]").val();
 			$("[name=category]").empty();
