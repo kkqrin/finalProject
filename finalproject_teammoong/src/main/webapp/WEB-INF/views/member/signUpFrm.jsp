@@ -61,8 +61,12 @@
 					</tr>
 					<tr>
 						<td><label for="phone"><span>*</span>휴대폰</label></td>
-						<td colspan="3"><input type="text" name="memberEmail" id="phone"></td>
+						<td colspan="3"><input type="text" name="memberPhone" id="phone"></td>
 						<td><button type="button" id="phoneChk" class="btn btn-sec size02">인증번호 발송</button></td>	
+					</tr>
+					<tr class="caution-tr">
+						<td></td>
+						<td class="caution" colspan="3"></td>
 					</tr>
 					<tr class="cerNumChk" style="display: none;">
 						<td></td>
@@ -231,6 +235,9 @@
 			
 			
 			
+			const result = [false, false, false, false, false, false]; //정규표현식 검사
+			//0아이디,1비밀번호,2비밀번호 확인,3핸드폰양식,4본인확인 이메일,5생년월일
+			
 			$("[name='memberId']").keyup(function(){
 				//영문 혹은 영문+숫자, 8자 이상 16자 이하
 				const idReg = /^[a-z0-9]{8,16}$/;
@@ -239,11 +246,13 @@
 					$(".caution").eq(0).html("<a>사용 가능한 아이디 입니다.</a>");
 					$(".caution").eq(0).children().css("color","#3a3a3a");
 			        $(this).removeClass("error");
+			        result[0] = true;
 				}else{
 					$(this).addClass("error");
 					$(".caution-tr").eq(0).css("display","table-row");
 					$(".caution").eq(0).children().css("color","var(--secondary)");
 					$(".caution").eq(0).html("<a>영문 혹은 영문+숫자, 6자 이상 16자 이하</a>");
+					result[0] = false;
 				}
 			})//아이디 정규표현식
 
@@ -256,11 +265,13 @@
 					$(".caution").eq(1).html("<a>사용가능한 비밀번호입니다</a>");
 					$(".caution").eq(1).children().css("color","#3a3a3a");
 			        $(this).removeClass("error");
+			        result[1] = true;
 				}else{
 					$(this).addClass("error");
 					$(".caution-tr").eq(1).css("display","table-row");
 					$(".caution").eq(1).children().css("color","var(--secondary)");
 					$(".caution").eq(1).html("<a>영문,숫자,특수문자(공백 제외)조합으로 8글자 이상</a>");
+					result[1] = false;
 				}
 			})//비밀번호 정규표현식
 			
@@ -272,33 +283,81 @@
 			    	$(".caution").eq(2).html("<a>비밀번호가 일치합니다</a>");
 			    	$(".caution").eq(2).children().css("color","#3a3a3a");
 			        $(this).removeClass("error");
+			        result[2] = true;
+			        
 			    }else{
 			    	$(this).addClass("error");
 					$(".caution-tr").eq(2).css("display","table-row");
 					$(".caution").eq(2).children().css("color","var(--secondary)");
 					$(".caution").eq(2).html("<a>비밀번호가 일치하지 않습니다</a>");
+					result[2] = false;
 			    }
 			})//비밀번호 확인 처리
 
+			
+			$("[name='memberPhone']").keyup(function(){
+				//핸드폰 정규표현식
+				const pwReg = /^\d{3}-\d{3,4}-\d{4}$/;
+				const inputPw = $(this).val();
+				if(pwReg.test(inputPw)){
+					$(this).removeClass("error");
+					$(".caution-tr").eq(3).css("display","none");
+					result[3] = true;
+				}else{
+					$(this).addClass("error");
+					$(".caution-tr").eq(3).css("display","table-row");
+					$(".caution").eq(3).children().css("color","var(--secondary)");
+					$(".caution").eq(3).html("<a>형식에 맞지 않는 번호입니다</a>");
+					result[3] = false;
+				}
+			})//핸드폰 형식 검사
+			
+
+			$("#phoneChk").on("click",function(){
+				if(result[3]){
+					const result = $("[name='memberPhone']").val().replaceAll("-","");
+					$("#phone").val(result);
+					$(".cerNumChk").slideDown(200);
+				}
+			})
+			
+			
+			
+			
+			
+			
+			
 			
 			$("[name='memberEmail']").keyup(function(){
 				//이메일 정규표현식
 				const pwReg = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
 				const inputPw = $(this).val();
 				if(pwReg.test(inputPw)){
-					$(".caution").eq(4).html("<a>비밀번호 찾기 시 사용되는 이메일입니다.</a>");
-					$(".caution").eq(4).children().css("color","#3a3a3a");
+					$(".caution").eq(5).html("<a>비밀번호 찾기 시 사용되는 이메일입니다.</a>");
+					$(".caution").eq(5).children().css("color","#3a3a3a");
 			        $(this).removeClass("error");
+			        result[4] = true;
 				}else{
 					$(this).addClass("error");
-					$(".caution-tr").eq(4).css("display","table-row");
-					$(".caution").eq(4).children().css("color","var(--secondary)");
-					$(".caution").eq(4).html("<a>이메일 양식을 다시 한 번 확인해주세요</a>");
+					$(".caution-tr").eq(5).css("display","table-row");
+					$(".caution").eq(5).children().css("color","var(--secondary)");
+					$(".caution").eq(5).html("<a>이메일 양식을 다시 한 번 확인해주세요</a>");
+					result[4] = false;
 				}
 				if(inputPw==""){
-					$(".caution-tr").eq(4).css("display","none");
+					$(".caution-tr").eq(5).css("display","none");
+					result[4] = true;
 				}
 			})//이메일 정규표현식
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			
@@ -357,10 +416,7 @@
 				$(".emailChk").slideDown(200);
 			})
 	
-	
-			$("#phoneChk").on("click",function(){
-				$(".cerNumChk").slideDown(200);
-			})
+
 			//버튼 누르면 인증번호 창 뜨게
 			
 			
@@ -383,6 +439,8 @@
 				}
 			}
 			//파일 이미지
+
+			
 
 	</script>
 
