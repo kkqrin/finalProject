@@ -6,11 +6,11 @@
 .signUp-form{
     width: 680px;
     margin: 0 auto;
-    padding-top: 10px;
 }
 .signUp-title{
     text-align: center;
     border-bottom: 5px solid #3a3a3a;
+    margin-bottom: 20px;
 }
 .notice{
     text-align: right;
@@ -46,13 +46,16 @@ table tbody tr td:nth-child(3):not(#no){
     width: 25%;
     padding: 10px 10px 0 10px;
 }
+.caution-tr{
+	display:none;
+ }
 .caution{
     position: relative;
     text-align: left;
-    display: none;
+    width: 100%;
 }
-.birth{
-	display: table-cell;
+.gender{
+	display: table-row;
 }
 .caution>a{
     position: absolute;
@@ -67,10 +70,6 @@ table tbody tr td:nth-child(3):not(#no){
     padding: 7px 24px !important;
     width: 100%;
     margin: 0;
-}
-
-.phoneCaution{
-    padding-bottom: 20px;
 }
 .sub{
     color: blue;
@@ -99,7 +98,7 @@ table tbody tr td:nth-child(3):not(#no){
 
 
 .banner{
-	margin-top:150px;
+	margin-top:120px;
 	width: 100%;
 	height: 200px;
 	background-color: var(--secondary);
@@ -144,7 +143,7 @@ table tbody tr td:nth-child(3):not(#no){
     border-radius: 4px;
     font-size: 14px;
 }
-#year, #day{
+#birth-year, #birth-day{
 	text-align: right;
 	width: 98px;
 }
@@ -214,7 +213,7 @@ select{
 
 .terms{
     border-top: 5px solid #3a3a3a;
-    margin-top: 100px;
+    margin-top: 115px;
     display: flex;
     padding: 40px 10px 60px 10px;
 }

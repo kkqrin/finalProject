@@ -10,7 +10,7 @@
 				member_id as memberId,
 				member_pw as memberPw,
 				member_name as memberName,
-				member_email as memberEamil,
+				member_email as memberEmail,
 				member_phone as memberPhone,
 				member_addr as memberAddr,
 				member_gender as memberGender,

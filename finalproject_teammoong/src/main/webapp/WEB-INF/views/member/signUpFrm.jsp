@@ -34,11 +34,10 @@
 					<tr>
 						<td><label for="id"><span>*</span>아이디</label></td>
 						<td colspan="3"><input type="text" name="memberId" id="id" placeholder="아이디를 입력해주세요"></td>
-						<td><button type="button" id="idChk" class="btn btn-sec size02">중복확인</button></td>
 					</tr>
 					<tr class="caution-tr">
 						<td></td>
-						<td class="caution idChk" colspan="3"><a>6자 이상 16자 이하의 영문, 영문+숫자</a></td>
+						<td class="caution" colspan="3"></td>
 					</tr>
 					<tr>
 						<td><label for="pw"><span>*</span>비밀번호</label></td>
@@ -46,7 +45,7 @@
 					</tr>
 					<tr class="caution-tr">
 						<td></td>
-						<td class="caution" colspan="3"><a>영문/숫자/특수문자(공백 제외) 중 2개 이상 조합, 10글자 이상</a></td>
+						<td class="caution" colspan="3"></td>
 					</tr>
 					<tr>
 						<td><label for="pwRe"><span>*</span>비밀번호확인</label></td>
@@ -61,20 +60,6 @@
 						<td colspan="3"><input type="text" name="memberName" id="name" placeholder="이름을 입력해주세요"></td>
 					</tr>
 					<tr>
-						<td><label for="email"><span>*</span>이메일</label></td>
-						<td colspan="3"><input type="text" name="memberEmail" id="email" placeholder="예시) moongsan@google.com"></td>
-						<td><button type="button" id="emailChk" class="btn btn-sec size02">중복확인</button></td>
-					</tr>
-					<tr class="caution-tr">
-						<td></td>
-						<td class="caution" colspan="3"><a>이메일 양식이 올바르지 않습니다</a></td>
-					</tr>
-					<tr class="emailChk" style="display: none;">
-						<td></td>
-						<td colspan="3"><input type="text" id="emailCerNum" placeholder="입력한 이메일로 전송된 인증번호를 입력해주세요"></td>
-						<td><button type="button" id="emailCerNumChk" class="btn btn-sec size02">인증번호 확인</button></td>	
-					</tr>
-					<tr>
 						<td><label for="phone"><span>*</span>휴대폰</label></td>
 						<td colspan="3"><input type="text" name="memberEmail" id="phone"></td>
 						<td><button type="button" id="phoneChk" class="btn btn-sec size02">인증번호 발송</button></td>	
@@ -83,10 +68,6 @@
 						<td></td>
 						<td colspan="3"><input type="text" id="cerNum" placeholder="인증번호를 입력해주세요"></td>
 						<td><button type="button" id="cerNumChk" class="btn btn-sec size02">인증번호 확인</button></td>	
-					</tr>
-					<tr class="caution-tr cerNumChk">
-						<td></td>
-						<td class="caution phoneCaution" colspan="3"><a>인증번호가 오지 않는다면, 통신사 스팸 서비스 혹은 휴대폰 번호 차단 여부를 확인해주세요</a></td>
 					</tr>
 					<tr>
 						<td class="addr"><label for="addr"><span>*</span>주소</label></td>
@@ -112,39 +93,23 @@
 							<label for="n">선택안함</label>
 						</td>
 					</tr>
+					<tr class="caution-tr gender">
+						<td></td>
+						<td class="caution" colspan="3"><a>더 나은 상품 제공을 위한 통계 용도로만 사용됩니다</a></td>
+					</tr>
+					<tr>
+						<td><label for="email">본인확인 이메일</label></td>
+						<td colspan="3"><input type="text" name="memberEmail" id="email" placeholder="예시) moongsan@google.com"></td>
+					</tr>
 					<tr class="caution-tr">
 						<td></td>
-						<td class="caution birth" colspan="3"><a>더 나은 상품 제공을 위한 통계 용도로만 사용됩니다</a></td>
+						<td class="caution" colspan="3"></td>
 					</tr>
 					<tr>
 						<td><label for="id">계좌번호</label></td>
 						<td colspan="3">
 							<select class="select-custom" name="memberBank">
-								<option value="" selected disabled hidden>은행을 선택하세요</option>
-								<option value="bank2">NH농협은행</option>
-								<option value="bank3">KB국민은행</option>
-								<option value="bank4">신한은행</option>
-								<option value="bank5">우리은행</option>
-								<option value="bank6">하나은행</option>
-								<option value="bank7">IBK기업은행</option>
-								<option value="bank8">부산은행</option>
-								<option value="bank9">경남은행</option>
-								<option value="bank10">대구은행</option>
-								<option value="bank11">우체국</option>
-								<option value="bank12">새마을금고</option>
-								<option value="bank13">SC제일은행</option>
-								<option value="bank14">광주은행</option>
-								<option value="bank15">수협</option>
-								<option value="bank16">전북은행</option>
-								<option value="bank17">신협은행</option>
-								<option value="bank18">제주은행</option>
-								<option value="bank19">케이뱅크</option>
-								<option value="bank20">카카오뱅크</option>
-								<option value="bank21">토스뱅크</option>
-								<option value="bank22">카카오뱅크(미성년자)</option>
-								<option value="bank23">토스뱅크(미성년자)</option>
-								<option value="bank24">씨티은행</option>
-								<option value="bank25">KDB산업</option>
+								<option value="null" selected disabled hidden>은행을 선택하세요</option>
 							</select>
 						</td>
 					</tr>
@@ -154,16 +119,22 @@
 					</tr>
 					<tr>
 						<td><label for="id">생년월일</label></td>
-							<input type="hidden" name="memberBDay">
-						<td id="no"><div class="bday-input"><input type="text" id="year" class="input-noborder">년</div></td>
+							<input type="hidden" name="memberBDay" value="">
+						<td id="no"><div class="bday-input"><input type="text" id="birth-year" class="input-noborder">년</div></td>
 						<td id="no">
-							<select id="month" class="select-custom">
+							<select id="birth-month" class="select-custom">
 								<c:forEach var="i" begin="1" end="12" step="1">
-									<option value="${i }">${i }월</option>
-								</c:forEach>
+									<c:if test="${i<10}">
+										<option value="0${i }">0${i }월</option>
+									</c:if>
+									<c:if test="${10<=i}">
+										<option value="${i }">${i }월</option>
+									</c:if>
+							
+								</c:forEach>	
 							</select>
 						</td>
-						<td id="no"><div class="bday-input"><input type="text" id="day" class="input-noborder">일</div></td>
+						<td id="no"><div class="bday-input"><input type="text" id="birth-day" class="input-noborder">일</div></td>
 					</tr>
 					<tr class="caution-tr">
 						<td></td>
@@ -206,15 +177,28 @@
 					<div><span style="color: red; font-size: 20px;">*</span>이용약관동의</div>
 					<div class="check">
 						<ul>
-							<li>전체 동의합니다</li>
-							<li>이용약관 동의(필수)<a>약관보기></a></li>
-							<li>마케팅 활용동의(선택)<a>약관보기></a></li>
-							<li>본인은 만 14세 이상입니다.(필수)</li>
+							<li>
+								<input type="checkbox" name="allcheck" id="allcheck">
+								<label for="allCheck">전체 동의합니다</label>
+							</li>
+							<li>
+								<input type="checkbox" name="agree" id="agree1">
+								<label for="agree1">이용약관 동의(필수)</label><a>약관보기></a>
+							</li>
+							<li>
+								<input type="checkbox" name="agree" id="agree2">
+								<label for="agree2">마케팅 활용동의(선택)</label><a>약관보기></a>
+								
+							</li>
+							<li>
+								<input type="checkbox" name="agree" id="agree3">
+								<label for="agree3">본인은 만 14세 이상입니다.(필수)</label>
+							</li>
 						</ul>
 					</div>
 				</div>
 				<div class="area-btn center">
-				<button class="btn btn-pri size02" type="submit">가입하기</button>
+				<button class="btn btn-pri size02" type="button" id="submit">가입하기</button>
 				</div>	
 			</form>
 		</div><!--signUp-form-->
@@ -230,19 +214,146 @@
 
 
 	<script>
+	
+			const memberBank = ["NH농협은행","KB국민은행","신한은행","우리은행","하나은행","IBK기업은행","부산은행","경남은행",
+								  "대구은행","우체국은행","새마을금고","SC제일은행","광주은행","수협","전북은행","신협은행","제주은행","케이뱅크","카카오뱅크",
+								  "토스뱅크","카카오뱅크(미성년자)","토스뱅크(미성년자)","씨티은행","KDB산업"];	
+		
+			function makeBankList(){
+				for(let i = 0; i < memberBank.length ; i++){
+					let option = "<option value="+memberBank[i]+">"+memberBank[i]+"</option>";
+					$("[name='memberBank']").append(option);
+				}
+			}
+			
+			makeBankList();
+			// 은행 selectBox 채우는 함수
+			
+			
+			
+			$("[name='memberId']").keyup(function(){
+				//영문 혹은 영문+숫자, 8자 이상 16자 이하
+				const idReg = /^[a-z0-9]{8,16}$/;
+				const inputId = $(this).val();
+				if(idReg.test(inputId)){
+					$(".caution").eq(0).html("<a>사용 가능한 아이디 입니다.</a>");
+					$(".caution").eq(0).children().css("color","#3a3a3a");
+			        $(this).removeClass("error");
+				}else{
+					$(this).addClass("error");
+					$(".caution-tr").eq(0).css("display","table-row");
+					$(".caution").eq(0).children().css("color","var(--secondary)");
+					$(".caution").eq(0).html("<a>영문 혹은 영문+숫자, 6자 이상 16자 이하</a>");
+				}
+			})//아이디 정규표현식
+
+			
+			$("[name='memberPw']").keyup(function(){
+				//영문,숫자,특수문자(공백 제외)조합으로 8글자 이상
+				const pwReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+				const inputPw = $(this).val();
+				if(pwReg.test(inputPw)){
+					$(".caution").eq(1).html("<a>사용가능한 비밀번호입니다</a>");
+					$(".caution").eq(1).children().css("color","#3a3a3a");
+			        $(this).removeClass("error");
+				}else{
+					$(this).addClass("error");
+					$(".caution-tr").eq(1).css("display","table-row");
+					$(".caution").eq(1).children().css("color","var(--secondary)");
+					$(".caution").eq(1).html("<a>영문,숫자,특수문자(공백 제외)조합으로 8글자 이상</a>");
+				}
+			})//비밀번호 정규표현식
+			
+			$("#pwRe").keyup(function(){
+				const inputPw = $("[name='memberPw']").val();
+			    const inputPwRe = $(this).val();
+			    
+			    if(inputPw==inputPwRe){
+			    	$(".caution").eq(2).html("<a>비밀번호가 일치합니다</a>");
+			    	$(".caution").eq(2).children().css("color","#3a3a3a");
+			        $(this).removeClass("error");
+			    }else{
+			    	$(this).addClass("error");
+					$(".caution-tr").eq(2).css("display","table-row");
+					$(".caution").eq(2).children().css("color","var(--secondary)");
+					$(".caution").eq(2).html("<a>비밀번호가 일치하지 않습니다</a>");
+			    }
+			})//비밀번호 확인 처리
+
+			
+			$("[name='memberEmail']").keyup(function(){
+				//이메일 정규표현식
+				const pwReg = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+				const inputPw = $(this).val();
+				if(pwReg.test(inputPw)){
+					$(".caution").eq(4).html("<a>비밀번호 찾기 시 사용되는 이메일입니다.</a>");
+					$(".caution").eq(4).children().css("color","#3a3a3a");
+			        $(this).removeClass("error");
+				}else{
+					$(this).addClass("error");
+					$(".caution-tr").eq(4).css("display","table-row");
+					$(".caution").eq(4).children().css("color","var(--secondary)");
+					$(".caution").eq(4).html("<a>이메일 양식을 다시 한 번 확인해주세요</a>");
+				}
+			})//이메일 정규표현식
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			$("#submit").on("click",function(){
+				
+				const year = $("#birth-year").val();
+				const month = $("#birth-month").val();
+				let day;
+				if($("#birth-day").val()<10){
+					day = "0"+$("#birth-day").val();
+				}else{
+					day = $("#birth-day").val()
+				}
+				$("[name='memberBDay']").val(year+month+day); //생일 yyyymmdd형식으로 만들기
+				
+				
+				
+				
+				
+				$("<form>").submit();
+				
+			})
+			
+			
+			
+			
 			$( function() {
 				$( ".select-custom" ).selectmenu();
 			});	
 	
 			$("#emailChk").on("click",function(){
-				$(".emailChk").show(200);
+				$(".emailChk").slideDown(200);
 			})
 	
 	
 			$("#phoneChk").on("click",function(){
-				$(".cerNumChk").show(200);
+				$(".cerNumChk").slideDown(200);
 			})
-
+			//버튼 누르면 인증번호 창 뜨게
+			
+			
+			
+			
 			function readURL(input) {
 				if (input.files && input.files[0]) {
 					var reader = new FileReader();
@@ -259,6 +370,7 @@
 					$(".fileUpload").show();
 				}
 			}
+			//파일 이미지
 
 	</script>
 
