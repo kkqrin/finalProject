@@ -10,7 +10,7 @@
 <script src="/resources/js/jquery-3.6.0.js"></script>
 <style>
   .content-all{
-  	padding-top: 30px; 
+  	
   }
   .main-content{
   	padding-top: 30px; 

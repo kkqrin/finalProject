@@ -7,9 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DayCheck {
-	private int checkNo;
+public class Point {
+	private int pointNo;
 	private int memberNo;
 	private int pointEa;
-	private String checkDate;
 }
