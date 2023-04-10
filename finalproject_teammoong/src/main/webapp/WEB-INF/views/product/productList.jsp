@@ -21,9 +21,9 @@
 		<h3>식품</h3>
 		<ul class="subcategory-name-list">
 			<li><a href="#">전체보기</a></li>
-<%--  		<c:forEach items="${dCategoryList }" var="dc"> --%>
-<%-- 			<li>${dc.dCategoryName }</li> --%>
-<%-- 		</c:forEach> --%>
+			<c:forEach items="${detailCategoryList}" var="test">
+				<li>${test.detailCategoryName}</li>
+			</c:forEach>
 		</ul>
 	</div>
     <div class="product-wrap">
