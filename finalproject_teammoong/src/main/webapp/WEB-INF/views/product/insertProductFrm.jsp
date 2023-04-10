@@ -178,7 +178,7 @@
 		    	success : function(data){
 		    		console.log(data)
 		    		for(var i=0; i<data.length; i++){
-			    		$("[name=dCategoryNo]").append("<option value="+data[i].dcategoryNo+">"+data[i].dcategoryName+"</option>");
+			    		$("[name=dCategoryNo]").append("<option value="+data[i].detailCategoryNo+">"+data[i].detailCategoryName+"</option>");
 			    		}
 // 		    		select메뉴 비우는 코드
 		    		$( "[name=dCategoryNo]" ).selectmenu("refresh");
