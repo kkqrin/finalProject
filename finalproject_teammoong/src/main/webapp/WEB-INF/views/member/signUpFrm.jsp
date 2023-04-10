@@ -60,20 +60,6 @@
 						<td colspan="3"><input type="text" name="memberName" id="name" placeholder="이름을 입력해주세요"></td>
 					</tr>
 					<tr>
-						<td><label for="email"><span>*</span>이메일</label></td>
-						<td colspan="3"><input type="text" name="memberEmail" id="email" placeholder="예시) moongsan@google.com"></td>
-						<td><button type="button" id="emailChk" class="btn btn-sec size02">중복확인</button></td>
-					</tr>
-					<tr class="caution-tr">
-						<td></td>
-						<td class="caution" colspan="3"><a>이메일 양식이 올바르지 않습니다</a></td>
-					</tr>
-					<tr class="emailChk" style="display: none;">
-						<td></td>
-						<td colspan="3"><input type="text" id="emailCerNum" placeholder="입력한 이메일로 전송된 인증번호를 입력해주세요"></td>
-						<td><button type="button" id="emailCerNumChk" class="btn btn-sec size02">인증번호 확인</button></td>	
-					</tr>
-					<tr>
 						<td><label for="phone"><span>*</span>휴대폰</label></td>
 						<td colspan="3"><input type="text" name="memberEmail" id="phone"></td>
 						<td><button type="button" id="phoneChk" class="btn btn-sec size02">인증번호 발송</button></td>	
@@ -107,9 +93,17 @@
 							<label for="n">선택안함</label>
 						</td>
 					</tr>
+					<tr class="caution-tr gender">
+						<td></td>
+						<td class="caution" colspan="3"><a>더 나은 상품 제공을 위한 통계 용도로만 사용됩니다</a></td>
+					</tr>
+					<tr>
+						<td><label for="email">본인확인 이메일</label></td>
+						<td colspan="3"><input type="text" name="memberEmail" id="email" placeholder="예시) moongsan@google.com"></td>
+					</tr>
 					<tr class="caution-tr">
 						<td></td>
-						<td class="caution birth" colspan="3"><a>더 나은 상품 제공을 위한 통계 용도로만 사용됩니다</a></td>
+						<td class="caution" colspan="3"></td>
 					</tr>
 					<tr>
 						<td><label for="id">계좌번호</label></td>
@@ -183,10 +177,23 @@
 					<div><span style="color: red; font-size: 20px;">*</span>이용약관동의</div>
 					<div class="check">
 						<ul>
-							<li>전체 동의합니다</li>
-							<li>이용약관 동의(필수)<a>약관보기></a></li>
-							<li>마케팅 활용동의(선택)<a>약관보기></a></li>
-							<li>본인은 만 14세 이상입니다.(필수)</li>
+							<li>
+								<input type="checkbox" name="allcheck" id="allcheck">
+								<label for="allCheck">전체 동의합니다</label>
+							</li>
+							<li>
+								<input type="checkbox" name="agree" id="agree1">
+								<label for="agree1">이용약관 동의(필수)</label><a>약관보기></a>
+							</li>
+							<li>
+								<input type="checkbox" name="agree" id="agree2">
+								<label for="agree2">마케팅 활용동의(선택)</label><a>약관보기></a>
+								
+							</li>
+							<li>
+								<input type="checkbox" name="agree" id="agree3">
+								<label for="agree3">본인은 만 14세 이상입니다.(필수)</label>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -272,6 +279,38 @@
 					$(".caution").eq(2).html("<a>비밀번호가 일치하지 않습니다</a>");
 			    }
 			})//비밀번호 확인 처리
+
+			
+			$("[name='memberEmail']").keyup(function(){
+				//이메일 정규표현식
+				const pwReg = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+				const inputPw = $(this).val();
+				if(pwReg.test(inputPw)){
+					$(".caution").eq(4).html("<a>비밀번호 찾기 시 사용되는 이메일입니다.</a>");
+					$(".caution").eq(4).children().css("color","#3a3a3a");
+			        $(this).removeClass("error");
+				}else{
+					$(this).addClass("error");
+					$(".caution-tr").eq(4).css("display","table-row");
+					$(".caution").eq(4).children().css("color","var(--secondary)");
+					$(".caution").eq(4).html("<a>이메일 양식을 다시 한 번 확인해주세요</a>");
+				}
+			})//이메일 정규표현식
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			
