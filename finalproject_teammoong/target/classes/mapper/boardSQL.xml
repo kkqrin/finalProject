@@ -85,4 +85,12 @@
 					javaType="java.util.ArrayList"
 		/>
 	</resultMap>
+	
+	<select id="selectBoardImg" resultType="bf" >
+		SELECT 
+			FILE_NO AS fileNo,
+			BOARD_NO AS boardNo,
+			filepath
+		FROM FILE_TBL
+	</select>
 </mapper>

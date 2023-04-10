@@ -338,36 +338,6 @@ a {
 
 
 
-/* 최근 본 상품 */
-.recent-product-box{
-    position: absolute;
-    top: 516px;
-    right: 20px;
-    bottom: -236px;
-    z-index: 1;
-    margin-top: 236px;
-}
-
-.recent-product{
-    width: 80px;
-    height: 280;
-    background-color: hotpink;
-    position: sticky;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 80px;
-    font-size: 12px;
-    line-height: 16px;
-    color: rgb(51, 51, 51);
-    letter-spacing: -0.3px;
-}
-
-
-
-
-
-
-
 
 /* 여여붙 */
 

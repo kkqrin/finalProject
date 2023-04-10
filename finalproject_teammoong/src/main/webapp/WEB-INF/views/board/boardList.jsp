@@ -52,6 +52,11 @@
 
     
     
+    
+    
+    
+    
+    
     <div class="content-wrap">
     
     	<c:if test="${not empty sessionScope.m}">
@@ -71,17 +76,23 @@
         </div>
         <div class="popular-product-wrap">
         <!-- 여여붙 상품 wrap -->
+        <c:forEach items="${list }" var="b">
             <div class="posting-item popular board-item">
                 <div class="posting-img popular">
-                    <a href="#">
-                        <img src="/resources/img/board/pizza.jpeg" />
+                    <a href="/boardView.do?boardNo=${b.boardNo }">
+                    <c:set var="oneFile" value="0" />
+                    <c:forEach items="${b.fileList }" var="i">
+                    	<c:if test="${b.boardNo eq i.boardNo && oneFile eq 0}">
+							<img src="/resources/upload/board/${i.filepath}">
+							<c:set var="oneFile" value="1" />
+                    	</c:if>
+					</c:forEach>
                     </a>
                     <!-- <div class="gonggu-info">2인 공동구매</div> -->
                 </div>
                 <div class="posting-content popular">
                     <p class="posting-title">
-                        <a href="#">
-                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        <a href="/boardView.do?boardNo=${b.boardNo }">${b.boardName }
                         </a>
                     </p>
                     <div class="posting-price-box">
@@ -95,7 +106,7 @@
                         <div class="sail-box popular board-seller-profile-box">
                             <div class="sail-box-popular">
                                 <div class="board-seller-profile">
-                                    <img src="/resources/upload/member/common/moongs.png">
+                                   <img src="/resources/upload/member/common/moongs.png">
                                 </div>
                                 <div class="board-seller-id">뭉산오렌지</div>
                             </div>
@@ -116,6 +127,13 @@
                     </div>
                 </div>
             </div>
+      </c:forEach>
+            
+            
+            
+            
+            
+            
             <div class="posting-item popular board-item">
                 <div class="posting-img popular">
                     <a href="#">
@@ -625,11 +643,8 @@
             <a href="javascript:void(0);" class="btn-pagi ctrl">다음</a>
             <a href="javascript:void(0);" class="btn-pagi ctrl">끝으로</a>
         </div>
-                
 
-
-
-    </div>
+	</div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />	
 
 

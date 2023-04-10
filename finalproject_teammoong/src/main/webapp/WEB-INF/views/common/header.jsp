@@ -37,6 +37,7 @@
 	</style>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/common/stickyRight.jsp" />
 	<div class="header-wrap">
         <div class="header-content">
         
@@ -51,18 +52,7 @@
 					</div>
 					<div class="category-content">
 						<div class="main-category">
-							<c:forEach items="${c }" var="c" varStatus="i" begin="0" end="13" step="1">
-								<div class="one-category">
-									<a class="cate-name" href="${i.index+1 }">${c.categoryName }</a>
-										<c:forEach items="${d }" var="d">
-										<c:if test=" ${d.categoryNo eq c.categoryNo}">
-											<div class="sub">
-												<a href="#">${d.dCategoryName }</a>
-											</div>
-										</c:if>
-										</c:forEach>
-								</div><!-- one-category -->
-							</c:forEach>
+							<!--ajax로 카테고리가 생성될 영역-->
 						</div>
 					</div><!-- category-content -->
               	</div><!-- menu-category -->
@@ -91,7 +81,7 @@
 			            </div>
 		            </div>
 	                <div class="middle-right">
-		                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">notifications</span></a>
+		                <a href="/myPageDmReceive.do"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">notifications</span></a>
 		                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">favorite</span></a>
 		                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">shopping_cart</span></a>
 	            	</div>
@@ -136,22 +126,12 @@
             
         </div><!--header-content-->
     </div><!--header-wrap-->
-	
-    <script>
-		$(".menu-category").mouseenter(function(){
-			$(".category-content").fadeIn();
-		});
-		$(".menu-category").mouseleave(function(){
-			$(".category-content").fadeOut();
-			$(".sub").fadeOut();
-		});
-		
-		$(".cate-name").mouseenter(function(event){
-			event.stopPropagation();
-			$(".sub").hide();
-			$(this).next().show();
-		});
 
-    </script>
+
+
+
+	
+    <script src="/resources/js/header.js"></script>
+
 </body>
 </html>

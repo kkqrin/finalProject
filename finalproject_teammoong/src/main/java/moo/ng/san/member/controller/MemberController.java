@@ -58,5 +58,15 @@ public class MemberController {
 		return "member/signUpFrm";
 	}//joinMemberFrm
 
+	@RequestMapping(value = "/myPageMemberInfo.do")
+	public String myPageMemberInfo() {
+		return "member/myPageMemberInfo";
+	}//myPageMemberInfo(회원정보수정)
+	
+	
+	@RequestMapping(value = "/myPageMemberDelete.do")
+	public String myPageMemberDelete() {
+		return "member/myPageMemberDelete";
+	}//myPageMemberDelete(회원탈퇴)
 
 }//MemberController

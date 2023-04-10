@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+    <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -53,7 +53,6 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-	
 <div class="main-content-wrap">
     
     
@@ -1070,15 +1069,6 @@
     
 
 </div>
-<!-- 최근 본 상품 -->
-<div class="recent-product-box">
-    <div class="recent-product">최근본상품
-        1
-        2
-        3
-    </div>
-</div>
-
 
 
 
@@ -1090,6 +1080,7 @@
     <!-- 상품 js -->
     <script type="text/javascript" src="/resources/slick/slick.min.js"></script>
     <script src="/resources/js/product.js"></script>
+
 
 </body>
 	

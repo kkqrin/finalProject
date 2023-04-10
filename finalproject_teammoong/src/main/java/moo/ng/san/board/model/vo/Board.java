@@ -26,7 +26,7 @@ public class Board {
 	private String boardEtc;
 	private int boardStatus;
 	private int boardCount;
-	private ArrayList<FileVO> fileList;
+	private ArrayList<String> fileList;
 	
 }
 

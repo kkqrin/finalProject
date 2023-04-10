@@ -274,7 +274,16 @@
     
     
     
-    
+    	            <div class="box-round">
+                <h3 class="section-tit">alert</h3>
+                
+                <div class="area-btn left">
+                    <button class="btn btn-border-pri size01" type="button" id="alert01">성공</button>
+                    <button class="btn btn-border-sec size01" type="button" id="alert02">에러</button>
+                    <button class="btn btn-border-ter size01" type="button" id="alert03">경고</button>
+                    <button class="btn btn-border-black size01" type="button" id="alert04">정보</button>
+                </div>
+            </div><!--알림 div-->
     
     
     
@@ -347,6 +356,8 @@
                 }
             });
         });
+        
+
     </script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,9 +21,6 @@
     }
    	label{
    		margin-right : 130px;
-   	}
-   	select{
-   	
    	}
     
 </style>
@@ -60,7 +58,6 @@
         <tr>
             <th>할인률</th>
             <td colspan="2"><input type="text" name="productDiscount"></td>
-            <input type="hidden" name="productStatus" value="1">
         </tr>
         <tr>
             <th>원가격</th>
@@ -76,13 +73,13 @@
 <!--                     <option value="5">5</option> -->
 <!--                 </select> -->
 				<div style="text-align : left;"> 
-                <input type="radio" id="two" name="gongguNumber" value="1">
+                <input type="radio" id="two" name="gongguNumber" value="2">
                 <label for="two">2명</label>
-                <input type="radio" id="three" name="gongguNumber" value="1">
+                <input type="radio" id="three" name="gongguNumber" value="3">
                 <label for="three">3명</label>
-                <input type="radio" id="four" name="gongguNumber" value="1">
+                <input type="radio" id="four" name="gongguNumber" value="4">
                 <label for="four">4명</label>
-                <input type="radio" id="five" name="gongguNumber" value="1">
+                <input type="radio" id="five" name="gongguNumber" value="5">
                 <label for="five">5명</label>
                 </div>
             </td>
@@ -102,6 +99,7 @@
         <th colspan="3"><div class="area-btn full"><button class="btn btn-sec size01" type="button">취소</button></div></th>
         </tr>
     </table>
+            <input type="hidden" name="productStatus" value="1">
 	</form>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />

@@ -121,7 +121,30 @@
 						<td colspan="3">
 							<select class="select-custom" name="memberBank">
 								<option value="" selected disabled hidden>은행을 선택하세요</option>
-								<option value="우리은행">우리은행</option>
+								<option value="bank2">NH농협은행</option>
+								<option value="bank3">KB국민은행</option>
+								<option value="bank4">신한은행</option>
+								<option value="bank5">우리은행</option>
+								<option value="bank6">하나은행</option>
+								<option value="bank7">IBK기업은행</option>
+								<option value="bank8">부산은행</option>
+								<option value="bank9">경남은행</option>
+								<option value="bank10">대구은행</option>
+								<option value="bank11">우체국</option>
+								<option value="bank12">새마을금고</option>
+								<option value="bank13">SC제일은행</option>
+								<option value="bank14">광주은행</option>
+								<option value="bank15">수협</option>
+								<option value="bank16">전북은행</option>
+								<option value="bank17">신협은행</option>
+								<option value="bank18">제주은행</option>
+								<option value="bank19">케이뱅크</option>
+								<option value="bank20">카카오뱅크</option>
+								<option value="bank21">토스뱅크</option>
+								<option value="bank22">카카오뱅크(미성년자)</option>
+								<option value="bank23">토스뱅크(미성년자)</option>
+								<option value="bank24">씨티은행</option>
+								<option value="bank25">KDB산업</option>
 							</select>
 						</td>
 					</tr>
@@ -207,7 +230,10 @@
 
 
 	<script>
-
+			$( function() {
+				$( ".select-custom" ).selectmenu();
+			});	
+	
 			$("#emailChk").on("click",function(){
 				$(".emailChk").show(200);
 			})
@@ -216,12 +242,6 @@
 			$("#phoneChk").on("click",function(){
 				$(".cerNumChk").show(200);
 			})
-
-			$( function() {
-				$( ".select-custom" ).selectmenu();
-			});
-
-
 
 			function readURL(input) {
 				if (input.files && input.files[0]) {

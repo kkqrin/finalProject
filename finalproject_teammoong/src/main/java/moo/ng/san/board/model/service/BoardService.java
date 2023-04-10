@@ -46,6 +46,10 @@ public class BoardService {
 		map.put("start", start);
 		map.put("end", end);
 		ArrayList<Board> list = dao.selectBoardList(map);
+		for(Board b : list) {
+			ArrayList<String> fileList = dao.selectBoardImg();
+			b.setFileList(fileList);
+		}
 		//pageNavi 제작시작
 		//전체페이지 수 계산필요 -> 전체 게시물 수 조회
 		int totalCount = dao.selectBoardCount();
@@ -81,6 +85,7 @@ public class BoardService {
 			pageNavi +="<a href='/boardList.do?reqPage="+pageNo+"'>[다음]</a>";
 		}
 		BoardPageData bpd = new BoardPageData(list, pageNavi);
+//		bpd.setFileList(fileList);
 		return bpd;
 	}
 
@@ -95,5 +100,10 @@ public class BoardService {
 		 * from board where board_no = #{_parameter} </select>
 		 */
 		return b;
+	}
+
+
+	public ArrayList<FileVO> selectFileList(int boardNo) {
+		return dao.selectFileList(boardNo);
 	}
 }

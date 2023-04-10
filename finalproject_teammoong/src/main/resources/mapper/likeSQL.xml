@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN
+" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="like">
+	<insert id="insertLike" parameterType="l">
+		INSERT INTO PRODUCT_LIKE VALUES(PRODUCT_LIKE_SEQ.NEXTVAL,
+		#{memberNo},
+		#{productNo}
+		)
+	</insert>
+	<select id="selectProductLike" parameterType="l" resultType="l">
+		SELECT
+			LIKE_NO AS likeNo,
+			MEMBER_NO AS memberNo,
+			PRODUCT_NO AS productNo
+		FROM PRODUCT_LIKE
+		WHERE MEMBER_NO = #{memberNo} and PRODUCT_NO = #{productNo}
+	</select>
+</mapper>

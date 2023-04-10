@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -163,5 +164,14 @@ public class ProductController {
 		model.addAttribute("p",p);
 		return "product/productView";
 	}
+	@GetMapping("/")
+	public String selectProductList(Model model) {
+		ArrayList<Product> list = service.selectProductList();
+		System.out.println("productController에서 list값  :"+list);
+		model.addAttribute("productList",list);
+		return "common/header";
+	}
+	
+	
 	
 }

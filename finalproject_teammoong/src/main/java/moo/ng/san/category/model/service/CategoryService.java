@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import moo.ng.san.category.model.dao.CategoryDao;
 import moo.ng.san.category.model.vo.Category;
 import moo.ng.san.category.model.vo.DetailCategory;
+import moo.ng.san.category.model.vo.ForHeaderCategory;
 
 @Service
 public class CategoryService {
@@ -28,4 +29,16 @@ public class CategoryService {
 		ArrayList<DetailCategory> list = dao.selectAllDetailCategory();
 		return list;
 	}
+
+	public ForHeaderCategory selectForHeaderCategory() {
+		
+		ForHeaderCategory list = new ForHeaderCategory();
+		ArrayList<Category> c = dao.selectAllCategory();
+		ArrayList<DetailCategory> d = dao.selectAllDetailCategory();
+		list.setCategory(c);
+		list.setDetailCategory(d);
+		
+		return list;
+	}//헤더에 불러올 용도로 쓰이는 서비스
+	
 }

@@ -159,7 +159,7 @@
 	<!-- 김홍미 -->
 	<context:component-scan base-package="moo.ng.san.member" />
 	<context:component-scan base-package="common" />
-	
+	<context:component-scan base-package="moo.ng.san.dm" />
 	
 	
 	
@@ -238,6 +238,7 @@
 <!-- 	김명훈	 -->
 	<context:component-scan base-package="moo.ng.san.category" />
 	<context:component-scan base-package="moo.ng.san.product" />
+	<context:component-scan base-package="moo.ng.san.like" />
 	
 	
 	
