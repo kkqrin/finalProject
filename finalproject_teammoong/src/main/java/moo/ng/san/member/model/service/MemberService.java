@@ -17,4 +17,5 @@ public class MemberService {
 		return dao.selectOneMember(member);
 	}//selectOneMember
 
+	
 }//MemberService

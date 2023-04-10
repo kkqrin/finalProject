@@ -120,31 +120,7 @@
 						<td><label for="id">계좌번호</label></td>
 						<td colspan="3">
 							<select class="select-custom" name="memberBank">
-								<option value="" selected disabled hidden>은행을 선택하세요</option>
-								<option value="bank2">NH농협은행</option>
-								<option value="bank3">KB국민은행</option>
-								<option value="bank4">신한은행</option>
-								<option value="bank5">우리은행</option>
-								<option value="bank6">하나은행</option>
-								<option value="bank7">IBK기업은행</option>
-								<option value="bank8">부산은행</option>
-								<option value="bank9">경남은행</option>
-								<option value="bank10">대구은행</option>
-								<option value="bank11">우체국</option>
-								<option value="bank12">새마을금고</option>
-								<option value="bank13">SC제일은행</option>
-								<option value="bank14">광주은행</option>
-								<option value="bank15">수협</option>
-								<option value="bank16">전북은행</option>
-								<option value="bank17">신협은행</option>
-								<option value="bank18">제주은행</option>
-								<option value="bank19">케이뱅크</option>
-								<option value="bank20">카카오뱅크</option>
-								<option value="bank21">토스뱅크</option>
-								<option value="bank22">카카오뱅크(미성년자)</option>
-								<option value="bank23">토스뱅크(미성년자)</option>
-								<option value="bank24">씨티은행</option>
-								<option value="bank25">KDB산업</option>
+								<option value="null" selected disabled hidden>은행을 선택하세요</option>
 							</select>
 						</td>
 					</tr>
@@ -154,16 +130,22 @@
 					</tr>
 					<tr>
 						<td><label for="id">생년월일</label></td>
-							<input type="hidden" name="memberBDay">
-						<td id="no"><div class="bday-input"><input type="text" id="year" class="input-noborder">년</div></td>
+							<input type="hidden" name="memberBDay" value="">
+						<td id="no"><div class="bday-input"><input type="text" id="birth-year" class="input-noborder">년</div></td>
 						<td id="no">
-							<select id="month" class="select-custom">
+							<select id="birth-month" class="select-custom">
 								<c:forEach var="i" begin="1" end="12" step="1">
-									<option value="${i }">${i }월</option>
-								</c:forEach>
+									<c:if test="${i<10}">
+										<option value="0${i }">0${i }월</option>
+									</c:if>
+									<c:if test="${10<=i}">
+										<option value="${i }">${i }월</option>
+									</c:if>
+							
+								</c:forEach>	
 							</select>
 						</td>
-						<td id="no"><div class="bday-input"><input type="text" id="day" class="input-noborder">일</div></td>
+						<td id="no"><div class="bday-input"><input type="text" id="birth-day" class="input-noborder">일</div></td>
 					</tr>
 					<tr class="caution-tr">
 						<td></td>
@@ -214,7 +196,7 @@
 					</div>
 				</div>
 				<div class="area-btn center">
-				<button class="btn btn-pri size02" type="submit">가입하기</button>
+				<button class="btn btn-pri size02" type="button" id="submit">가입하기</button>
 				</div>	
 			</form>
 		</div><!--signUp-form-->
@@ -230,6 +212,41 @@
 
 
 	<script>
+	
+			const memberBank = ["NH농협은행","KB국민은행","신한은행","우리은행","하나은행","IBK기업은행","부산은행","경남은행",
+								  "대구은행","우체국은행","새마을금고","SC제일은행","광주은행","수협","전북은행","신협은행","제주은행","케이뱅크","카카오뱅크",
+								  "토스뱅크","카카오뱅크(미성년자)","토스뱅크(미성년자)","씨티은행","KDB산업"];	
+		
+			function makeBankList(){
+				for(let i = 0; i < memberBank.length ; i++){
+					let option = "<option value="+memberBank[i]+">"+memberBank[i]+"</option>";
+					$("[name='memberBank']").append(option);
+				}
+			}
+			
+			makeBankList();
+	
+			$("#submit").on("click",function(){
+				
+				const year = $("#birth-year").val();
+				const month = $("#birth-month").val();
+				let day;
+				if($("#birth-day").val()<10){
+					day = "0"+$("#birth-day").val();;
+				}else{
+					day = $("#birth-day").val()
+				}
+				
+				$("[name='memberBDay']").val(year+month+day);
+				
+				
+				$("<form>").submit();
+				
+			})
+			
+			
+			
+			
 			$( function() {
 				$( ".select-custom" ).selectmenu();
 			});	

@@ -4,8 +4,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import moo.ng.san.member.model.service.MemberService;
 import moo.ng.san.member.model.vo.Member;
@@ -60,6 +62,11 @@ public class MemberController {
 
 	@RequestMapping(value = "/myPageMemberInfo.do")
 	public String myPageMemberInfo() {
+		/*
+		 * 세션에서 이름이 m인 객체를 꺼내서 Member타입으로 저장. 
+		 * required=false : 이름이 m인 객체가 없으면 null을 꺼내옴
+		 * --> required=false 가 없는 경우 이름이 m인 객체가 없으면 에러 발생
+		 * */
 		return "member/myPageMemberInfo";
 	}//myPageMemberInfo(회원정보수정)
 	
