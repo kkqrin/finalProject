@@ -9,8 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.JsonObject;
 
 import common.FileManager;
 import moo.ng.san.product.model.service.ProductService;
@@ -140,7 +144,6 @@ public class ProductController {
 	
 	@RequestMapping(value="/insertProduct.do")
 	public String insertProduct(Product p, MultipartFile[] productFile, HttpServletRequest request) {
-		System.out.println("productController product p 값 :"+p);
 		ArrayList<FileVO> fileList = new ArrayList<FileVO>();
 		if(!productFile[0].isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/product/");
@@ -164,14 +167,18 @@ public class ProductController {
 		model.addAttribute("p",p);
 		return "product/productView";
 	}
-	@GetMapping("/")
+	@GetMapping("/main.do")
 	public String selectProductList(Model model) {
 		ArrayList<Product> list = service.selectProductList();
-		System.out.println("productController에서 list값  :"+list);
 		model.addAttribute("productList",list);
-		return "common/header";
+		return "common/main";
 	}
-	
+//	@RequestMapping(value="SummerNoteImageFile" , method = RequestMethod.POST)
+//	public @ResponseBody JsonObject SummerNoteImageFile(@RequestParam("file") MultipartFile file) {
+//		JsonObject jsonObject = service.SummerNoteImageFile(file);
+//		 System.out.println(jsonObject);
+//		return jsonObject;
+//	}
 	
 	
 }

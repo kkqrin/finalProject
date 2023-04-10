@@ -6,6 +6,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import moo.ng.san.product.model.vo.FileVO;
 import moo.ng.san.product.model.vo.Product;
@@ -14,7 +15,8 @@ import moo.ng.san.product.model.vo.Product;
 public class ProductDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessoin;
-
+	
+	@Transactional
 	public int insertProduct(Product p) {
 		int result = sqlSessoin.insert("product.insertProduct",p);
 		return result;
@@ -24,7 +26,7 @@ public class ProductDao {
 		int productNo = sqlSessoin.selectOne("product.selectProductNo");
 		return productNo;
 	}
-
+	@Transactional
 	public int insertFile(FileVO file) {
 		int result = sqlSessoin.insert("product.insertFile",file);
 		return result;

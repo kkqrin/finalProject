@@ -129,3 +129,40 @@ img{
 .share-icon>a>span{
     font-size: 40px;
 }
+
+/* 구매버튼 css 시작 */
+.fix-button-box{
+    position: fixed;
+    width: 100%;
+    max-width: 1200px;
+    bottom: 0;
+    z-index: 100;
+    padding: 8px 10px;
+    background-color: #fff;
+}
+.button-box{
+    display: flex;
+    margin: 0 3px;
+}
+.button{
+    position: relative;
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+    border-radius: 7px;
+    height: 50px;
+    margin: 0 3px;
+}
+.buy-one-btn{
+    flex: 0.3 1 0%;
+    border: 1px solid #f88000;
+}
+.gonggu-buy-btn{
+    flex: 0.7 1 0%;
+    background-color: #f88000;
+    color: #fff;
+}
+/* 구매버튼 css 끝 */
