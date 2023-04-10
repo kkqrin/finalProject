@@ -295,16 +295,28 @@
 					$(".caution").eq(4).children().css("color","var(--secondary)");
 					$(".caution").eq(4).html("<a>이메일 양식을 다시 한 번 확인해주세요</a>");
 				}
+				if(inputPw==""){
+					$(".caution-tr").eq(4).css("display","none");
+				}
 			})//이메일 정규표현식
 			
 			
 			
+			const allCheck = document.querySelector("#allcheck")
+			const agreeArr = document.querySelectorAll("[name=agree]");
 			
-			
-			
-			
-			
-			
+			allCheck.addEventListener("change",function(){  
+			    agreeArr.forEach(function(agree){
+			        agree.checked=true;
+			    })
+			})//전체약관체크
+			agreeArr.forEach(function(agree){
+			    agree.addEventListener("click",function(){
+			        if(agree.checked==false){
+			            allCheck.checked=false;
+			        }
+			    })
+			})//하나라도 선택 풀리면 전체 동의도 풀림
 			
 			
 			

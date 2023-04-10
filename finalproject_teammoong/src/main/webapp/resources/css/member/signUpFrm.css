@@ -77,7 +77,7 @@ table tbody tr td:nth-child(3):not(#no){
 }
 
 [type=radio]{
-    display: none;
+    display: none !important;
 }
 
 [for="m"],[for="f"],[for="n"]{
@@ -228,7 +228,7 @@ select{
 .terms>.check>ul>li>a{
     color: var(--primary);
     display: inline-block;
-    margin-left: 145px;
+    margin-left: 146px;
 }
 .terms>.check>ul>li:nth-child(3)>a{
     margin-left: 131px;
