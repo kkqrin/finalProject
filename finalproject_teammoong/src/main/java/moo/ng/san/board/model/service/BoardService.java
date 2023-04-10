@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import moo.ng.san.board.model.dao.BoardDao;
 import moo.ng.san.board.model.vo.Board;
+import moo.ng.san.board.model.vo.BoardOption;
 import moo.ng.san.board.model.vo.BoardPageData;
 import moo.ng.san.board.model.vo.FileVO;
 
@@ -17,10 +18,8 @@ public class BoardService {
 	private BoardDao dao;
 
 
-	public int insertBoard(Board b, ArrayList<FileVO> fileList) {
-		System.out.println(b);
+	public int insertBoard(Board b, ArrayList<FileVO> fileList, String[] detailName, int[] detailPrice, int[] detailCount) {
 		int result = dao.insertBoard(b);
-		System.out.println(b);
 		if(result > 0) {
 			//2. 방금 insert한 board_no 조회
 			//int boardNo = dao.selectBoardNo();
@@ -28,11 +27,21 @@ public class BoardService {
 			for(FileVO file : fileList) {
 				file.setBoardNo(b.getBoardNo());
 				result += dao.insertFile(file);
+			}//파일업로드완료
+			for(int i=0 ; i<detailName.length ; i++) {
+				BoardOption o = new BoardOption();
+				o.setBoardNo(b.getBoardNo());
+				o.setDetailCount(detailCount[i]);
+				o.setDetailName(detailName[i]);
+				o.setDetailPrice(detailPrice[i]);
+				result += dao.insertBoardOption(o);
 			}
 		}
 		return result;
 	}
+		
 
+	
 
 	public BoardPageData selectBoardList(int reqPage) {
 		// 한 페이지당 보여줄 게시물 수 : 5
@@ -106,4 +115,10 @@ public class BoardService {
 	public ArrayList<FileVO> selectFileList(int boardNo) {
 		return dao.selectFileList(boardNo);
 	}
+
+
+	public ArrayList<BoardOption> selectOneBoardOptionList(int boardNo) {
+		return dao.selectOptionList(boardNo);
+	}
+
 }
