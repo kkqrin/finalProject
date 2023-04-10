@@ -29,7 +29,7 @@
                             
                             if(c.categoryNo==d.categoryNo){
                                 const a2 = $("<a>");
-                                a2.prop('href',d.dCategoryNo);
+                                a2.prop('href',"/productList.do?category="+d.categoryNo+d.dCategoryNo);
                                 a2.text(d.dCategoryName);
                                 div2.append(a2);
                             }
