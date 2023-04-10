@@ -90,7 +90,7 @@
         </tr>
         <tr>
             <th>상품내용</th>
-            <td colspan="2"><textarea name="productContent"></textarea></td>
+            <td colspan="2"><textarea name="productContent" id="summernote"></textarea></td>
         </tr>
         <tr>
         <th colspan="3"><div class="area-btn full"><button class="btn btn-pri size01" type="submit">등록</button></div></th>
@@ -111,16 +111,40 @@
 		$( "[name=dCategoryNo]" ).selectmenu();
 		$("[name=gonggu-number]").selectmenu();
 	});
-		$("[name=productContent]").summernote({
-			height : 550,
-			lang : "ko-KR",
-			callbacks : {
-				onImageUpload : function(files) {
-					uploadImage(files[0], this)
-				}
-				
+    $('#summernote').summernote({
+		height: 300,
+		minHeight: null,
+		maxHeight: null,
+		focus: true,
+		lang: "ko-KR",
+		callbacks: {
+			onImageUpload : function(files){
+				sendFile(files[0],this);
+			}
+		}
+			
+	});
+		
+	function sendFile(file, editor){
+		var data = new FormData();
+		data.append("file", file);
+		console.log(file);
+		$.ajax({
+			data : data,
+			type : "POST",
+			url : "SummerNoteImageFile",
+			contentType : false,
+			processData : false,
+			success : function(data){
+				console.log(data);
+				console.log(editor);
+				$(editor).summernote("insertImage",data.url);
 			}
 		});
+	}
+
+
+	
 		window.onload = function(){
 			var categoryNo = $("[name=category]").val();
 			$("[name=category]").empty();

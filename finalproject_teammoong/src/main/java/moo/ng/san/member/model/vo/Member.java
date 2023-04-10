@@ -23,4 +23,5 @@ public class Member {
 	private int memberStatus;
 	private String memberBank;
 	private String regDate;
+
 }

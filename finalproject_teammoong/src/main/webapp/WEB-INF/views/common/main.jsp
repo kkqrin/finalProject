@@ -1,5 +1,6 @@
     <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,16 +60,19 @@
     <h1>인기상품</h1>
     <div class="popular-product-wrap">
     <!-- 인기상품 wrap -->
+       <c:forEach items="${productList }" var="p">
         <div class="posting-item popular">
             <div class="posting-img popular">
                 <a href="/productView.do?productNo=6">
-                    <img src="/resources/upload/product/ALL.png" />
+           		<c:forEach var="pf" items="${p.fileList}" begin="0" end="0" step="1">
+                    <img src="/resources/upload/product/${pf.filepath }" />
+                </c:forEach>
                 </a>
                 <div class="gonggu-info">2인 공동구매</div>
             </div>
             <div class="posting-content popular">
                 <p class="posting-title">
-                    <a href="#">
+                    <a href="/productView.do?productNo=${p.productNo }">
                         [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
                     </a>
                 </p>
@@ -96,6 +100,7 @@
                 </div>
             </div>
         </div>
+       </c:forEach>
         <div class="posting-item popular">
             <div class="posting-img popular">
                 <a href="#">

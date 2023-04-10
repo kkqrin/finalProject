@@ -20,5 +20,6 @@ public class Product {
 	private int gongguNumber;
 	private String productContent;
 	private int productDiscount;
+	private String thumbnail;
 	private ArrayList<String> fileList;
 }
