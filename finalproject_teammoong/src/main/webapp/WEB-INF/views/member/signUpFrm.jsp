@@ -34,11 +34,10 @@
 					<tr>
 						<td><label for="id"><span>*</span>아이디</label></td>
 						<td colspan="3"><input type="text" name="memberId" id="id" placeholder="아이디를 입력해주세요"></td>
-						<td><button type="button" id="idChk" class="btn btn-sec size02">중복확인</button></td>
 					</tr>
 					<tr class="caution-tr">
 						<td></td>
-						<td class="caution idChk" colspan="3"><a>6자 이상 16자 이하의 영문, 영문+숫자</a></td>
+						<td class="caution" colspan="3"></td>
 					</tr>
 					<tr>
 						<td><label for="pw"><span>*</span>비밀번호</label></td>
@@ -46,7 +45,7 @@
 					</tr>
 					<tr class="caution-tr">
 						<td></td>
-						<td class="caution" colspan="3"><a>영문/숫자/특수문자(공백 제외) 중 2개 이상 조합, 10글자 이상</a></td>
+						<td class="caution" colspan="3"></td>
 					</tr>
 					<tr>
 						<td><label for="pwRe"><span>*</span>비밀번호확인</label></td>
@@ -83,10 +82,6 @@
 						<td></td>
 						<td colspan="3"><input type="text" id="cerNum" placeholder="인증번호를 입력해주세요"></td>
 						<td><button type="button" id="cerNumChk" class="btn btn-sec size02">인증번호 확인</button></td>	
-					</tr>
-					<tr class="caution-tr cerNumChk">
-						<td></td>
-						<td class="caution phoneCaution" colspan="3"><a>인증번호가 오지 않는다면, 통신사 스팸 서비스 혹은 휴대폰 번호 차단 여부를 확인해주세요</a></td>
 					</tr>
 					<tr>
 						<td class="addr"><label for="addr"><span>*</span>주소</label></td>
@@ -225,19 +220,75 @@
 			}
 			
 			makeBankList();
-	
+			// 은행 selectBox 채우는 함수
+			
+			
+			
+			$("[name='memberId']").keyup(function(){
+				//영문 혹은 영문+숫자, 8자 이상 16자 이하
+				const idReg = /^[a-z0-9]{8,16}$/;
+				const inputId = $(this).val();
+				if(idReg.test(inputId)){
+					$(".caution").eq(0).html("<a>사용 가능한 아이디 입니다.</a>");
+					$(".caution").eq(0).children().css("color","#3a3a3a");
+			        $(this).removeClass("error");
+				}else{
+					$(this).addClass("error");
+					$(".caution-tr").eq(0).css("display","table-row");
+					$(".caution").eq(0).children().css("color","var(--secondary)");
+					$(".caution").eq(0).html("<a>영문 혹은 영문+숫자, 6자 이상 16자 이하</a>");
+				}
+			})//아이디 정규표현식
+
+			
+			$("[name='memberPw']").keyup(function(){
+				//영문,숫자,특수문자(공백 제외)조합으로 8글자 이상
+				const pwReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+				const inputPw = $(this).val();
+				if(pwReg.test(inputPw)){
+					$(".caution").eq(1).html("<a>사용가능한 비밀번호입니다</a>");
+					$(".caution").eq(1).children().css("color","#3a3a3a");
+			        $(this).removeClass("error");
+				}else{
+					$(this).addClass("error");
+					$(".caution-tr").eq(1).css("display","table-row");
+					$(".caution").eq(1).children().css("color","var(--secondary)");
+					$(".caution").eq(1).html("<a>영문,숫자,특수문자(공백 제외)조합으로 8글자 이상</a>");
+				}
+			})//비밀번호 정규표현식
+			
+			$("#pwRe").keyup(function(){
+				const inputPw = $("[name='memberPw']").val();
+			    const inputPwRe = $(this).val();
+			    
+			    if(inputPw==inputPwRe){
+			    	$(".caution").eq(2).html("<a>비밀번호가 일치합니다</a>");
+			    	$(".caution").eq(2).children().css("color","#3a3a3a");
+			        $(this).removeClass("error");
+			    }else{
+			    	$(this).addClass("error");
+					$(".caution-tr").eq(2).css("display","table-row");
+					$(".caution").eq(2).children().css("color","var(--secondary)");
+					$(".caution").eq(2).html("<a>비밀번호가 일치하지 않습니다</a>");
+			    }
+			})//비밀번호 확인 처리
+			
+			
+			
 			$("#submit").on("click",function(){
 				
 				const year = $("#birth-year").val();
 				const month = $("#birth-month").val();
 				let day;
 				if($("#birth-day").val()<10){
-					day = "0"+$("#birth-day").val();;
+					day = "0"+$("#birth-day").val();
 				}else{
 					day = $("#birth-day").val()
 				}
+				$("[name='memberBDay']").val(year+month+day); //생일 yyyymmdd형식으로 만들기
 				
-				$("[name='memberBDay']").val(year+month+day);
+				
+				
 				
 				
 				$("<form>").submit();
@@ -252,14 +303,18 @@
 			});	
 	
 			$("#emailChk").on("click",function(){
-				$(".emailChk").show(200);
+				$(".emailChk").slideDown(200);
 			})
 	
 	
 			$("#phoneChk").on("click",function(){
-				$(".cerNumChk").show(200);
+				$(".cerNumChk").slideDown(200);
 			})
-
+			//버튼 누르면 인증번호 창 뜨게
+			
+			
+			
+			
 			function readURL(input) {
 				if (input.files && input.files[0]) {
 					var reader = new FileReader();
@@ -276,6 +331,7 @@
 					$(".fileUpload").show();
 				}
 			}
+			//파일 이미지
 
 	</script>
 
