@@ -66,14 +66,14 @@
 							class="mid-input" id="title" required></td>
 					<tr>
 					<tr>
-			            <th colspan="2">카테고리<sup>*</sup></th>
+			            <td colspan="2">카테고리<sup>*</sup></td>
 			            <td>
 			                <select name="category">
 			                    <!--아작스로 카테고리 추가  -->
 			                </select>
 			            </td>
 			            <td>
-			                <select name="dCategoryNo">
+			                <select name="detailCategoryNo">
 			                	<!--아작스로 세부 카테고리 추가  -->
 			                </select>
 			            </td>
@@ -97,10 +97,7 @@
 							required></td>
 					</tr>
 					<tr>
-						<td colspan="4">판매기간<sup>*</sup></td>
-					</tr>
-					<tr>
-						<td colspan="4">폼 시작/종료</td>
+						<td colspan="4">폼 시작/종료<sup>*</sup></td>
 					</tr>
 					<tr>
 						<td colspan="4"><input type="text" id="daterangepicker"
@@ -260,10 +257,14 @@
 				//timePickerSeconds: true,                 // 초 노출 여부
 				},
 				function(start, end, label) {
-					console.log(start.format('YYYY-MM-DD'), end
-							.format('YYYY-MM-DD'));
+// 					console.log(start.format('YYYY-MM-DD'), end
+// 							.format('YYYY-MM-DD'));
 					var boardStart = start.format('YYYY-MM-DD');
 					var boardEnd = end.format('YYYY-MM-DD');
+					
+					console.log(boardStart);
+					console.log(boardEnd);
+					
 					//input hidden 날짜 값 넣어서 디비로 보내기
 					$("[name=boardStart]").val(boardStart);
 					$("[name=boardEnd]").val(boardEnd);
@@ -412,15 +413,14 @@
 		
 		$( function() {
 			$( "[name=category]" ).selectmenu();
-			$( "[name=dCategoryNo]" ).selectmenu();
-			
+			$( "[name=detailCategoryNo]" ).selectmenu();
 		});
 		
 		window.onload = function(){
 			var categoryNo = $("[name=category]").val();
 			$("[name=category]").empty();
             $("[name=category]").append("<option>카테고리</option>");
-            $("[name=dCategoryNo]").append("<option>세부카테고리</option>");
+            $("[name=detailCategoryNo]").append("<option>세부카테고리</option>");
 		    $.ajax({
 		    	url : "/selectAllCategory.do",
 		    	type : "POST",
@@ -434,8 +434,8 @@
 		    });
 	    }
 		$("[name=category]").on("selectmenuchange",function(){
-		    $("[name=dCategoryNo]").empty();
-		    $("[name=dCategoryNo]").append("<option>세부카테고리</option>");
+		    $("[name=detailCategoryNo]").empty();
+		    $("[name=detailCategoryNo]").append("<option>세부카테고리</option>");
 		    $.ajax({
 		    	url : "/selectDetailCategory.do",
 		    	type : "POST",
@@ -444,15 +444,15 @@
 		    	success : function(data){
 		    		console.log(data)
 		    		for(var i=0; i<data.length; i++){
-			    		$("[name=dCategoryNo]").append("<option value="+data[i].dcategoryNo+">"+data[i].dcategoryName+"</option>");
+			    		$("[name=detailCategoryNo]").append("<option value="+data[i].detailCategoryNo+">"+data[i].detailCategoryName+"</option>");
 			    		}
 // 		    		select메뉴 비우는 코드
-		    		$( "[name=dCategoryNo]" ).selectmenu("refresh");
-		    		$( "[name=dCategoryNo]" ).selectmenu();
+		    		$( "[name=detailCategoryNo]" ).selectmenu("refresh");
+		    		$( "[name=detailCategoryNo]" ).selectmenu();
 	    		},
 		    });
 		});
-		$("[name=dCategoryNo]").on("selectmenuchange",function(){
+		$("[name=detailCategoryNo]").on("selectmenuchange",function(){
 			console.log($(this).val());
 		})
 		
