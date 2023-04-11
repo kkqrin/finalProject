@@ -177,7 +177,7 @@ table [onclick] {cursor:pointer;}
 .btn:hover {opacity:0.8;}
 .btn-pri {background:var(--primary);color:var(--bg-primary);}
 .btn-sec {background:var(--secondary);color:var(--bg-primary);}
-.btn-ter {background:var(--tertiary);color:var(--bg-primary);}
+.btn-ter {background:var(--tertiary);color:var(--primary);}
 .btn-black {background:var(--content-primary);color:var(--bg-primary);}
 .btn-dkgray {background:var(--content-secondary);color:var(--bg-primary);}
 .btn-white {background:var(--content-tertiary);color:var(--bg-primary);}

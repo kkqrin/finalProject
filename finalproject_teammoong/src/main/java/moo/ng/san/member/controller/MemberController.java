@@ -1,5 +1,7 @@
 package moo.ng.san.member.controller;
 
+import java.util.Random;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,20 +11,50 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import common.PhoneCertify;
 import moo.ng.san.member.model.service.MemberService;
 import moo.ng.san.member.model.vo.Member;
+import net.nurigo.sdk.NurigoApp;
+import net.nurigo.sdk.message.exception.NurigoMessageNotReceivedException;
+import net.nurigo.sdk.message.model.Message;
+import net.nurigo.sdk.message.service.DefaultMessageService;
 
 @Controller
 public class MemberController {
 
 	@Autowired
 	MemberService service;
-	
+	@Autowired
+	PhoneCertify phoneCertify;
 	
 	@RequestMapping(value = "/msgTest.do")
 	public String msgTest() {
 		return "common/msg";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/memberPhoneCheck.do")
+	public String phoneCheck(String memberPhone) {
+		return phoneCertify.PhoneCheck(memberPhone);
+	}
+	
+	
+	@RequestMapping(value = "/join.do")
+	public String signIn(Member m) {
+		return "";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	@RequestMapping(value="/loginFrm.do")
@@ -76,4 +108,20 @@ public class MemberController {
 		return "member/myPageMemberDelete";
 	}//myPageMemberDelete(회원탈퇴)
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }//MemberController

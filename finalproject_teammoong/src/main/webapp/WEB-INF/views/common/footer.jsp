@@ -10,7 +10,7 @@
 	<footer>
 		<div class="footer-wrap">
 			<p>
-				<a href="#">입점문의</a>
+				<a href="/askItemFrm.do">입점문의</a>
 				<a href="#">고객센터</a>
 				<a href="#">회사소개</a>
 			</p>

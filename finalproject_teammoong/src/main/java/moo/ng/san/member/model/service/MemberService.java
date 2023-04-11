@@ -17,5 +17,10 @@ public class MemberService {
 		return dao.selectOneMember(member);
 	}//selectOneMember
 
+
+	public void memberPhoneCheck(String memberPhone) {
+		
+	}//memberPhoneCheck
+
 	
 }//MemberService
