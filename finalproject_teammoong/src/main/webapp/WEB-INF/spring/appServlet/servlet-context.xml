@@ -137,8 +137,8 @@
 	<!-- 안진배 -->
 	
 	<context:component-scan base-package="moo.ng.san.notice" />
-	<context:component-scan base-package="moo.ng.san.datCheck" />
-	
+	<context:component-scan base-package="moo.ng.san.dayCheck" />
+	<context:component-scan base-package="moo.ng.san.askItem" />
 	
 	
 	
