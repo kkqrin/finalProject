@@ -6,7 +6,7 @@
 	<insert id="insertProduct" parameterType="p">
 		insert into product_tbl values
 		(product_seq.nextval,
-		#{dCategoryNo},
+		#{detailCategoryNo},
 		#{productName},
 		#{productEa},
 		#{productPrice},
@@ -30,7 +30,7 @@
 	<select id="selectProductByProductNo" parameterType="_int" resultType="p">
 		SELECT 
 			PRODUCT_NO AS productNo,
-			D_CATEGORY_NO AS dCategoryNo,
+			D_CATEGORY_NO AS detailCategoryNo,
 			PRODUCT_NAME AS productName,
 			PRODUCT_EA AS productEa,
 			PRODUCT_PRICE AS productPrice,
@@ -55,7 +55,7 @@
 	<select id="selectProductList" resultType="p">
 		SELECT 
 			PRODUCT_NO AS productNo,
-			D_CATEGORY_NO AS dCategoryNo,
+			D_CATEGORY_NO AS detailCategoryNo,
 			PRODUCT_NAME AS productName,
 			PRODUCT_EA AS productEa,
 			PRODUCT_PRICE AS productPrice,
@@ -72,7 +72,7 @@
 		(SELECT ROWNUM AS RNUM, P.* FROM
 		(SELECT 
 				PRODUCT_NO AS productNo,
-				D_CATEGORY_NO AS dCategoryNo,
+				D_CATEGORY_NO AS detailCategoryNo,
 				PRODUCT_NAME AS productName,
 				PRODUCT_EA AS productEa,
 				PRODUCT_PRICE AS productPrice,
@@ -82,7 +82,7 @@
 				PRODUCT_CONTENT AS productContent,
 				PRODUCT_DISCOUNT AS productDiscount,
 				(SELECT FILEPATH FROM PRODUCT_IMG WHERE P_IMG_NO=(SELECT MIN(P_IMG_NO) FROM PRODUCT_IMG  WHERE PRODUCT_NO=PRODUCT_TBL.PRODUCT_NO))  AS thumbnail
-		FROM PRODUCT_TBL WHERE D_CATEGORY_NO = #{sCategoryNo} ORDER BY 1 DESC) P)
+		FROM PRODUCT_TBL WHERE D_CATEGORY_NO = #{detailCategoryNo} ORDER BY 1 DESC) P)
 		WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>	
 	<select id="selectProductFilelist" parameterType="_int" resultType="pf">

@@ -38,7 +38,7 @@
                 </select>
             </td>
             <td>
-                <select name="dCategoryNo">
+                <select name="detailCategoryNo">
                 	<!--아작스로 세부 카테고리 추가  -->
                 </select>
             </td>
@@ -108,7 +108,7 @@
 	<script>
 	$( function() {
 		$( "[name=category]" ).selectmenu();
-		$( "[name=dCategoryNo]" ).selectmenu();
+		$( "[name=detailCategoryNo]" ).selectmenu();
 		$("[name=gonggu-number]").selectmenu();
 	});
     var setting = {
@@ -154,7 +154,7 @@
 			var categoryNo = $("[name=category]").val();
 			$("[name=category]").empty();
             $("[name=category]").append("<option>카테고리</option>");
-            $("[name=dCategoryNo]").append("<option>세부카테고리</option>");
+            $("[name=detailCategoryNo]").append("<option>세부카테고리</option>");
 		    $.ajax({
 		    	url : "/selectAllCategory.do",
 		    	type : "POST",
@@ -168,8 +168,8 @@
 		    });
 	    }
 		$("[name=category]").on("selectmenuchange",function(){
-		    $("[name=dCategoryNo]").empty();
-		    $("[name=dCategoryNo]").append("<option>세부카테고리</option>");
+		    $("[name=detailCategoryNo]").empty();
+		    $("[name=detailCategoryNo]").append("<option>세부카테고리</option>");
 		    $.ajax({
 		    	url : "/selectDetailCategory.do",
 		    	type : "POST",
@@ -178,15 +178,15 @@
 		    	success : function(data){
 		    		console.log(data)
 		    		for(var i=0; i<data.length; i++){
-			    		$("[name=dCategoryNo]").append("<option value="+data[i].dcategoryNo+">"+data[i].dcategoryName+"</option>");
+			    		$("[name=detailCategoryNo]").append("<option value="+data[i].detailCategoryNo+">"+data[i].detailCategoryName+"</option>");
 			    		}
 // 		    		select메뉴 비우는 코드
-		    		$( "[name=dCategoryNo]" ).selectmenu("refresh");
-		    		$( "[name=dCategoryNo]" ).selectmenu();
+		    		$( "[name=detailCategoryNo]" ).selectmenu("refresh");
+		    		$( "[name=detailCategoryNo]" ).selectmenu();
 	    		},
 		    });
 		});
-		$("[name=dCategoryNo]").on("selectmenuchange",function(){
+		$("[name=detailCategoryNo]").on("selectmenuchange",function(){
 			console.log($(this).val());
 		})
 		

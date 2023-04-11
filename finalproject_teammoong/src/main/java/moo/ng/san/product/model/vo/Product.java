@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Product {
 	private int productNo;
-	private int dCategoryNo;
+	private int detailCategoryNo;
 	private String productName;
 	private int productEa;
 	private int productPrice;

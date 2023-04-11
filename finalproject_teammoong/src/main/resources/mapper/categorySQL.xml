@@ -12,17 +12,17 @@
 	
 	<select id="selectDetailCategory" resultType="dc" parameterType="_int">
 		select
-			d_category_no as dCategoryNo,
+			d_category_no as detailCategoryNo,
 			category_no as categoryNo,
-			d_category_name as dCategoryName
+			d_category_name as detailCategoryName
 		from detail_category
 		where category_no = #{_parameter}
 	</select>
 	<select id="selectAllDetailCategory" resultType="dc">
 		select
-			d_category_no as dCategoryNo,
+			d_category_no as detailCategoryNo,
 			category_no as categoryNo,
-			d_category_name as dCategoryName
+			d_category_name as detailCategoryName
 		from detail_category
 	</select>
 </mapper>

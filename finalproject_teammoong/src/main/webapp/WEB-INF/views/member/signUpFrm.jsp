@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원가입</title>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link rel="stylesheet" href="/resources/css/member/signUpFrm.css" />
 </head>
 <body>
@@ -75,7 +76,7 @@
 					</tr>
 					<tr>
 						<td class="addr"><label for="addr"><span>*</span>주소</label></td>
-						<td colspan="3"><input type="text" name="memberAddr"  placeholder="기본배송지로 등록됩니다"></td>
+						<td colspan="3"><input type="text" name="memberAddr"  placeholder="기본배송지로 등록됩니다" readonly></td>
 						<td><button type="button" id="addr" class="btn btn-sec size02">우편번호 조회</button></td>	
 					</tr>
 					<tr>
@@ -119,7 +120,7 @@
 					</tr>
 					<tr>
 						<td></td>
-						<td colspan="3"><input type="text" name="memberAccount" placeholder="계좌번호를 입력하세요"></td>
+						<td colspan="3"><input type="text" name="memberAccount" placeholder="계좌번호를 입력하세요('-'없이)"></td>
 					</tr>
 					<tr>
 						<td><label for="id">생년월일</label></td>
@@ -298,8 +299,9 @@
 			$("[name='memberPhone']").keyup(function(){
 				//핸드폰 정규표현식
 				const pwReg = /^\d{3}-\d{3,4}-\d{4}$/;
+				const pwReg2 = /^0+\d{9,10}$/;
 				const inputPw = $(this).val();
-				if(pwReg.test(inputPw)){
+				if(pwReg.test(inputPw) || pwReg2.test(inputPw)){
 					$(this).removeClass("error");
 					$(".caution-tr").eq(3).css("display","none");
 					result[3] = true;
@@ -349,6 +351,46 @@
 					result[4] = true;
 				}
 			})//이메일 정규표현식
+			
+			
+			$("#addr").on("click",function(){
+				new daum.Postcode({
+			        oncomplete: function(data) {
+			        	$("[name='memberAddr']").val(data.address);
+			            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+			            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+			        }
+			    }).open();
+				if($("[name='memberAddr']").val()==!""){
+					alert("gd");
+				}
+			});
+			
+			
+			
+			
+			
+			
+			
+			
+			$("[name='memberAccount']").on("change",function(){
+				const result = $(this).val().replaceAll("-","");
+				$(this).val(result);
+			});//계좌번호 정규표현식(하는중)
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			
@@ -434,7 +476,7 @@
 					reader.readAsDataURL(input.files[0]);
 				} else {
 					document.getElementById('preview').src = "/resources/upload/member/common/moongs.png";
-					$(".deletePic").hide();
+					$(".deletePic").hide();	
 					$(".fileUpload").show();
 				}
 			}
