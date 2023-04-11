@@ -15,14 +15,13 @@
 <div class="content-wrap">
 
 	
-<%-- 	<h1>상위 카테고리 : ${fCategory }</h1> --%>
-<%-- 	<h1>하위 카테고리 : ${sCategory }</h1> --%>
+
 	<div class="category-wrap">
-		<h3>하잉</h3>
+		<h3>${detailCategoryList[0].categoryName }</h3>
 		<ul class="subcategory-name-list">
-			<li><a href="#">전체보기</a></li>
-			<c:forEach items="${detailCategoryList}" var="test">
-				<li><a href="#">${test.detailCategoryName}</a></li>
+			<li><a href="/productList.do?category=${10000 + fCategory }">전체보기</a></li>
+			<c:forEach items="${detailCategoryList}" var="i">
+				<li><a href="/productList.do?category=${i.categoryNo}${i.detailCategoryNo}">${i.detailCategoryName}</a></li>
 			</c:forEach>
 		</ul>
 	</div>
@@ -65,9 +64,9 @@
         </div>
 	</c:forEach>
     </div>
+<input type="hidden" id="fCategoryNo" value="${fCategory }">
 <input type="hidden" id="sCategoryNo" value="${sCategory }">
-<input type="hidden" id="startHidden" value="4" totalCount="10" currentCount="0">
-<button type="button" class="temporBtn">일단더보기</button>
+<input type="hidden" id="startHidden" value="4" totalCount="${totalCount }" currentCount="0">
 
 </div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />	
@@ -76,30 +75,8 @@
     <script src="/resources/js/product.js"></script>
     
 	<script>
-// 		$(window).on("scroll", function(){
-// 			let scrollTop = $(window).scrollTop();
-// 			let windowHeight = $(window).height();
-// 			let documentHeight = $(document).height();
-// 			let isBottom = scrollTop + windowHeight >= documentHeight;
-			
-// 			const startHidden = $("#startHidden").val();
-// 			const sCategoryNo = $("#sCategoryNo").val();
-			
-// 			if(isBottom){
-// 				console.log("마지막!!");
-				
-// 				$.ajax({
-// 					url : "/productMore.do",
-// 					data : {start : 4, amount : 3, sCategoryNo: sCategoryNo },
-// 					success : function(data){
-// 						console.log(data);
-// // 						console.log("eez");
-// 					}
-// 				})
-// 			}
-// 		});
-		
-// 		$(".temporBtn").on("click", function(){
+	
+	// 무한 스크롤
 		$(window).on("scroll", function(){
 			let scrollTop = $(window).scrollTop();
 			let windowHeight = $(window).height();
@@ -107,16 +84,17 @@
 			let isBottom = scrollTop + windowHeight >= documentHeight;
 			
 			const startHidden = $("#startHidden").val();
+			const fCategoryNo = $("#fCategoryNo").val();
 			const sCategoryNo = $("#sCategoryNo").val();
+			const totalCount = Number($("#startHidden").attr("totalCount"));
+			const currentVal = Number($("#startHidden").val())
 			
-			
-			if(isBottom){
+			// (1) 2 3 (4) 5 6 (7) 8 9 (10) < 10
+			if(isBottom && currentVal <= totalCount){
 				console.log("마지막!!");
 				$.ajax({
 					url : "/productMore.do",
-					data : {start : startHidden, amount : 3, detailCategoryNo: sCategoryNo },
-	// 				contentType: false,
-	// 				processData: false,
+					data : {start : startHidden, amount : 3, fCategoryNo : fCategoryNo, sCategoryNo: sCategoryNo },
 					success : function(data){
 						console.log(data);
 						
@@ -130,7 +108,6 @@
 	// 			                </a>
 	// 			                <div class="gonggu-info">${p.gongguNumber}인 공동구매</div>
 	// 			            </div>
-	
 							const div = $("<div>");
 							div.addClass("posting-item");
 							
@@ -152,9 +129,6 @@
 							imgDiv.append(infoDiv);
 							div.append(imgDiv);
 							
-	// 						$(".product-wrap").append(div);
-							
-							
 	
 	// 			            <div class="posting-content">
 	
@@ -163,8 +137,6 @@
 	// 			                        ${p.productName}
 	// 			                    </a>
 	// 			                </p>
-	
-	
 							const contentDiv = $("<div>");
 							contentDiv.addClass("posting-content");
 							
@@ -279,22 +251,23 @@
 						
 						// 화면에 posting-item 추가 완료
 						// 다음 아이템 보기 위한 값 수정 1~3 -> 4~6
-						const currentVal = Number($("#startHidden").val()); // 1
-						$("#startHidden").val(currentVal + 3);	// 1+3
+						// const currentVal = Number($("#startHidden").val()); // 1
 						
-						// currentCount 값도 변경
-						const currentCount = Number($("#startHidden").attr("currentCount")); // 0
-						// 21개면 20개 출력후 select 할때 행이 없으니까 5개 아니라 1개만 불러오므로
-						// amount를 쓰지않고 data.length를 쓴다 !
-						const changeCount = currentCount + data.length; // 0 + 5(리스트길이)
-						$("#startHidden").attr("currentCount", changeCount); // 5
+						$("#startHidden").val(currentVal + data.length);	// 1+3							
 						
-						const totalCount = Number($("#startHidden").attr("totalCount"));
+						// currentCount(ajax로 불러들인 상품 수) 값도 변경
+// 						const currentCount = Number($("#startHidden").attr("currentCount")); // 0
+// 						// 21개면 20개 출력후 select 할때 행이 없으니까 5개 아니라 1개만 불러오므로
+// 						// amount를 쓰지않고 data.length를 쓴다 !
+// 						const changeCount = currentCount + data.length; // 0 + 5(리스트길이)
+// 						$("#startHidden").attr("currentCount", changeCount); // 5
 						
-						if(changeCount == totalCount){
-							// 변화된 currentCount(실제 가져온 게시물 수)랑 총 개수랑 같으면 끝
-							$("#startHidden").remove();
-						}
+						
+						
+// 						if(changeCount == totalCount){
+// 							// 변화된 currentCount(실제 가져온 게시물 수)랑 총 개수랑 같으면 끝
+// 							$("#startHidden").remove();
+// 						}
 						
 						
 						

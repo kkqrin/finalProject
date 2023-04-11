@@ -30,7 +30,7 @@ public class ProductService {
 	
 //	규린작업공간 20~100
 	
-	public ArrayList<Product> selectInfiniteScrollProductList(int start, int amount, int detailCategoryNo) {
+	public ArrayList<Product> selectInfiniteScrollProductList(int start, int amount, int firstCategoryNo ,int detailCategoryNo) {
 		// start : 1, amount : 3
 
 		int end = start + amount - 1; // 끝번호
@@ -38,6 +38,7 @@ public class ProductService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
+		map.put("firstCategoryNo", firstCategoryNo);
 		map.put("detailCategoryNo", detailCategoryNo);
 		
 		ArrayList<Product> list = dao.selectInfiniteScrollProductList(map);
@@ -45,13 +46,20 @@ public class ProductService {
 		return list;
 	}
 	
-	public ArrayList<DetailCategory> selectDetailCategory(int fCategory) {
+	public ArrayList<DetailCategory> selectCategoryNameOnList(int fCategory) {
 		
-		return dao.selectDetailCategory(fCategory);
+		return dao.selectCategoryNameOnList(fCategory);
 	}
 	
 
-
+	public int selectProductCount(int fCategory, int sCategory) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("firstCategoryNo", fCategory);
+		map.put("detailCategoryNo", sCategory);
+		
+		return dao.selectProductCount(map);
+	}
 	
 	
 	
@@ -174,6 +182,8 @@ public class ProductService {
 		}
 		return list;
 	}
+
+
 
 
 
