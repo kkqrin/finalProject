@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import common.FileManager;
@@ -22,6 +23,7 @@ import moo.ng.san.category.model.vo.DetailCategory;
 import moo.ng.san.product.model.service.ProductService;
 import moo.ng.san.product.model.vo.FileVO;
 import moo.ng.san.product.model.vo.Product;
+import moo.ng.san.product.model.vo.ProductPageData;
 
 @Controller
 public class ProductController {
@@ -62,19 +64,19 @@ public class ProductController {
 			// 네 자리 이상면
 			fCategory = category / 100; // 2 3 4 5 6 .. 10 11 12 13
 			sCategory = category - fCategory * 100;
-			System.out.println("상위 카테고리 : "+fCategory+" 하위 카테고리 : "+sCategory);
+//			System.out.println("상위 카테고리 : "+fCategory+" 하위 카테고리 : "+sCategory);
 			
 		}else {
 			// 두 자리면
 			fCategory = category / 10;
 			sCategory = category % 10;
-			System.out.println("상위 카테고리 : "+fCategory+" 하위 카테고리 : "+sCategory);
+//			System.out.println("상위 카테고리 : "+fCategory+" 하위 카테고리 : "+sCategory);
 		}
 		
 		
 		
 		// 카테고리별 상품리스트
-		ArrayList<Product> list = service.selectInfiniteScrollProductList(sCategory, 1, 3);
+//		ArrayList<Product> list = service.selectInfiniteScrollProductList(sCategory, 1, 3);
 		// 하위 카테고리 리스트
 		ArrayList<DetailCategory> detailCategoryList = service.selectDetailCategory(fCategory);
 //		ArrayList<DetailCategory> dCategoryList = service.selectAllDetailCategory();
@@ -82,13 +84,31 @@ public class ProductController {
 		
 		
 //		model.addAttribute("fCategory", fCategory);
-//		model.addAttribute("sCategory", sCategory);
-		model.addAttribute("list", list);
+		model.addAttribute("sCategory", sCategory);
+//		model.addAttribute("list", list);
 		model.addAttribute("detailCategoryList", detailCategoryList);
 		
-		System.out.println(detailCategoryList);
+//		System.out.println(detailCategoryList);
 		
 		return "product/productList";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/productMore.do", produces = "application/json;charset=utf-8")
+	public String productMore(int start, int amount, int detailCategoryNo) {
+		//start : startHidden, amount : 3, detailCategoryNo: sCategoryNo
+		//ProductPageData ppd
+		
+//		ProductPageData ppd = new ProductPageData();
+//		ppd.setStart(start);
+//		ppd.setAmount(amount);
+//		ppd.setDetailCategoryNo(sCategory1);
+		
+		ArrayList<Product> list = service.selectInfiniteScrollProductList(start, amount, detailCategoryNo);
+		
+//		System.out.println(list);
+		
+		return new Gson().toJson(list);
 	}
 	
 	
