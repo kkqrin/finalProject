@@ -62,7 +62,7 @@
 					</tr>
 					<tr>
 						<td><label for="phone"><span>*</span>휴대폰</label></td>
-						<td colspan="3"><input type="text" name="memberPhone" id="phone"></td>
+						<td colspan="3"><input type="text" name="memberPhone" id="phone" placeholder="숫자만 입력해주세요"></td>
 						<td><button type="button" id="phoneChk" class="btn btn-sec size02">인증번호 발송</button></td>	
 					</tr>
 					<tr class="caution-tr">
@@ -73,6 +73,10 @@
 						<td></td>
 						<td colspan="3"><input type="text" id="cerNum" placeholder="인증번호를 입력해주세요"></td>
 						<td><button type="button" id="cerNumChk" class="btn btn-sec size02">인증번호 확인</button></td>	
+					</tr>
+					<tr class="caution-tr">
+						<td></td>
+						<td class="caution" colspan="3"></td>
 					</tr>
 					<tr>
 						<td class="addr"><label for="addr"><span>*</span>주소</label></td>
@@ -240,8 +244,8 @@
 			
 			
 			
-			const result = [false, false, false, false, false, false]; //정규표현식 검사
-			//0아이디,1비밀번호,2비밀번호 확인,3핸드폰양식,4본인확인 이메일,5생년월일
+			let result = [false, false, false, false, false, false, false]; //정규표현식 검사
+			//0아이디, 1비밀번호, 2비밀번호 확인, 3핸드폰양식, 4핸드폰인증코드, 5본인확인 이메일, 6생년월일, 
 			
 			$("[name='memberId']").keyup(function(){
 				//영문 혹은 영문+숫자, 8자 이상 16자 이하
@@ -318,36 +322,74 @@
 				}
 			})//핸드폰 형식 검사
 			
-
+			
+			let code; //★핸드폰 인증코드!!!
 			$("#phoneChk").on("click",function(){
+				let replace;
 				if(result[3]){
-					const result = $("[name='memberPhone']").val().replaceAll("-","");
-					$("#phone").val(result);
+					replace = $("[name='memberPhone']").val().replaceAll("-","");
+					$("#phone").val(replace);
 					$(".cerNumChk").slideDown(200);
 				}
-			})//폰에서 하이픈 빼는거
+				
+				$.ajax({
+					url: "/memberPhoneCheck.do",
+					type: "post",
+					data: {memberPhone : replace},
+					success : function(code){
+						code = code;
+					}//ajax success구문
+				})//ajax
+				
+			})//폰에서 하이픈 빼는거 + 문자메시지 보내기 + 코드 받기
 			
-
+			$("#cerNumChk").on("click",function(){
+				let inputCode = $("#cerNum").val();
+				
+				if(inputCode==""){
+					alert("인증번호를 입력해주세요");
+				}else{
+					if(code == inputCode){
+						$(this).addClass("error");
+						$(".caution-tr").eq(4).css("display","table-row");
+						$(".caution").eq(4).children().css("color","#1877f2");
+						$(".caution").eq(4).html("<a>인증번호가 일치합니다.</a>");
+						result[4]=true;
+					}else{
+						$(this).addClass("error");
+						$(".caution-tr").eq(4).css("display","table-row");
+						$(".caution").eq(4).children().css("color","red");
+						$(".caution").eq(4).html("<a>인증번호가 다릅니다</a>");
+						result[4] = false;
+						
+						$("#phoneChk").removeClass("btn-sec");
+						$("#phoneChk").addClass("btn-dkgray");
+						$("#phoneChk").remove;
+						$("#phoneChk").text("인증번호 재전송");
+					}
+				}//if. inputCode가 null인지 검사
+				
+			})//인증번호 검사
 			
 			$("[name='memberEmail']").keyup(function(){
 				//이메일 정규표현식
 				const pwReg = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
 				const inputPw = $(this).val();
 				if(pwReg.test(inputPw)){
-					$(".caution").eq(5).html("<a>비밀번호 찾기 시 사용되는 이메일입니다.</a>");
-					$(".caution").eq(5).children().css("color","#3a3a3a");
+					$(".caution").eq(6).html("<a>비밀번호 찾기 시 사용되는 이메일입니다.</a>");
+					$(".caution").eq(6).children().css("color","#3a3a3a");
 			        $(this).removeClass("error");
-			        result[4] = true;
+			        result[5] = true;
 				}else{
 					$(this).addClass("error");
-					$(".caution-tr").eq(5).css("display","table-row");
-					$(".caution").eq(5).children().css("color","var(--secondary)");
-					$(".caution").eq(5).html("<a>이메일 양식을 다시 한 번 확인해주세요</a>");
-					result[4] = false;
+					$(".caution-tr").eq(6).css("display","table-row");
+					$(".caution").eq(6).children().css("color","var(--secondary)");
+					$(".caution").eq(6).html("<a>이메일 양식을 다시 한 번 확인해주세요</a>");
+					result[5] = false;
 				}
 				if(inputPw==""){
-					$(".caution-tr").eq(5).css("display","none");
-					result[4] = true;
+					$(".caution-tr").eq(6).css("display","none");
+					result[5] = true;
 				}
 			})//이메일 정규표현식
 			
@@ -372,7 +414,7 @@
 			});//계좌번호 정규표현식(하는중)
 			
 			
-			
+
 			
 			
 			
@@ -411,12 +453,6 @@
 			        }
 			    })
 			})//하나라도 선택 풀리면 전체 동의도 풀림
-			
-			
-			
-			
-			
-			
 			
 			
 			
