@@ -79,16 +79,16 @@
 					</tr>
 					<tr>
 						<td class="addr"><label for="addr"><span>*</span>주소</label></td>
-						<td colspan="3"><input type="text" name="memberZoneCode"  placeholder="우편번호 조회 버튼을 눌러주세요" readonly></td>
+						<td colspan="3"><input type="text" name="memberZoneCode"  placeholder="우편번호 조회 버튼을 눌러주세요" readonly required></td>
 						<td><button type="button" id="addr" class="btn btn-sec size02">우편번호 조회</button></td>	
 					</tr>
 					<tr>
 						<td></td>
-						<td colspan="3"><input type="text" name="memberAddr"  placeholder="기본배송지로 등록됩니다" readonly></td>
+						<td colspan="3"><input type="text" name="memberAddr"  placeholder="기본배송지로 등록됩니다" readonly required></td>
 					</tr>
 					<tr>
 						<td></td>
-						<td colspan="3"><input type="text" id="addrDetail" placeholder="상세주소를 입력해주세요"></td>
+						<td colspan="3"><input type="text" id="addrDetail" placeholder="상세주소를 입력해주세요" required></td>
 					</tr>
 					<tr>
 						<td><span style="color: red; font-size: 20px;">*</span>성별</td>
@@ -376,6 +376,8 @@
 					replace = $("[name='memberPhone']").val().replaceAll("-","");
 					$("#phone").val(replace);
 					$(".cerNumChk").slideDown(200);
+					$(".caution-tr").eq(3).css("display","table-row");
+					$(".caution").eq(3).html("<a>발송된 인증번호를 확인해주세요.</a>");
 				}
 				
 				$.ajax({
@@ -419,6 +421,8 @@
 						$(".caution").eq(4).children().css("color","red");
 						$(".caution").eq(4).html("<a>인증번호가 다릅니다</a>");
 						result[4] = false;
+						
+						$(".caution-tr").eq(3).css("display","none");
 						
 						$("[name='memberPhone']").attr("readonly",false);
 						$("#cerNum").attr("readonly",false);
@@ -611,23 +615,26 @@
 				memberAddr += detailAddr;
 				$("[name='memberAddr']").val(memberAddr);
 				
-// 				console.log($("[name='memberId']").val(),
-// 						$("[name='memberPw']").val(),
-// 						$("[name='memberName']").val(),
-// 						$("[name='memberPhone']").val(),
-// 						$("[name='memberZoneCode']").val(),
-// 						$("[name='memberAddr']").val(),
-// 						$("[name='memberGender']").val(),
-// 						$("[name='memberEmail']").val(),
-// 						$("[name='memberBank']").val(),
-// 						$("[name='memberAccount']").val(),
-// 						$("[name='memberBDay']").val());
-// 				console.log($("[name='memberPath']").val());
+				console.log($("[name='memberId']").val(),
+						$("[name='memberPw']").val(),
+						$("[name='memberName']").val(),
+						$("[name='memberPhone']").val(),
+						$("[name='memberZoneCode']").val(),
+						$("[name='memberAddr']").val(),
+						$("[name='memberGender']").val(),
+						$("[name='memberEmail']").val(),
+						$("[name='memberBank']").val(),
+						$("[name='memberAccount']").val(),
+						$("[name='memberBDay']").val());
+				console.log($("[name='memberPath']").val());
 				
 				const agree1 = $("#agree1").prop('checked');
 				const agree3 = $("#agree3").prop('checked');
 				
+				console.log(result,agree1,agree3);
+				
 				if(result[0] && result[1] && result[2] && result[3] && result[4] && result[5] && result[6] && agree1 && agree3){
+					alert("값 전송가능!");
 					$("<form>").submit();
 				}else if(!agree1 || !agree3){
 					alert("필수 이용약관에 동의해주세요");
