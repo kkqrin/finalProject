@@ -456,6 +456,33 @@
 			console.log($(this).val());
 		})
 		
+		$("[name='accountName']").on("change",function(){
+				const inputAccount = $("[name='accountName']").val();
+				const AcountReg = /[0-9-]$/;
+				
+				if(AcountReg.test(inputAccount)){
+			        $(this).removeClass("error");
+			        $(".caution-tr").eq(6).css("display","none");
+			        
+					const result = $(this).val().replaceAll("-","");
+					$(this).val(result);
+			        
+			        result[5] = true;
+				}else{
+					$(this).addClass("error");
+					$(".caution-tr").eq(6).css("display","table-row");
+					$(".caution").eq(6).children().css("color","var(--secondary)");
+					$(".caution").eq(6).html("<a>숫자를 입력해주세요</a>");
+					result[5] = false;
+				}
+				if(inputAccount==""){
+					$(this).removeClass("error");
+					$(".caution-tr").eq(6).css("display","none");
+					result[5] = true;
+				}
+			});//계좌번호 정규표현식
+		
+		
 	</script>
 <!-- 	<script src="/resources/js/modal-alert.js"></script> -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />	
