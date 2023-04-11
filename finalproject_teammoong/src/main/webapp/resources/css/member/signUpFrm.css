@@ -40,7 +40,7 @@ table tbody tr td:first-child{
     width: 20%;
 }
 table tbody tr td:nth-child(2):not(#no){
-    width: 55%;
+    width: 54%;
 }
 table tbody tr td:nth-child(3):not(#no){
     width: 25%;
@@ -136,7 +136,7 @@ table tbody tr td:nth-child(3):not(#no){
 
 .bday-input{
     display: flex;
-    width: 124px;
+    width: 122px;
     height: 38px;
     line-height: 35px;
     border: 1px solid var(--content-tertiary);

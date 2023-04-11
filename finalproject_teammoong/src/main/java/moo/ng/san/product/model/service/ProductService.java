@@ -10,6 +10,7 @@ import moo.ng.san.category.model.vo.DetailCategory;
 import moo.ng.san.product.model.dao.ProductDao;
 import moo.ng.san.product.model.vo.FileVO;
 import moo.ng.san.product.model.vo.Product;
+import moo.ng.san.product.model.vo.ProductPageData;
 @Service
 public class ProductService {
 	@Autowired
@@ -29,14 +30,15 @@ public class ProductService {
 	
 //	규린작업공간 20~100
 	
-	public ArrayList<Product> selectInfiniteScrollProductList(int sCategoryNo, int start, int amount) {
+	public ArrayList<Product> selectInfiniteScrollProductList(int start, int amount, int detailCategoryNo) {
 		// start : 1, amount : 3
+
 		int end = start + amount - 1; // 끝번호
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
-		map.put("sCategoryNo", sCategoryNo);
+		map.put("detailCategoryNo", detailCategoryNo);
 		
 		ArrayList<Product> list = dao.selectInfiniteScrollProductList(map);
 		

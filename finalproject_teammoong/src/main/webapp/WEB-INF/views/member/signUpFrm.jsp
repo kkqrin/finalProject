@@ -12,7 +12,6 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="banner">
-		
 		<div>
 			<div>
 				<h4>회원가입</h4>
@@ -20,9 +19,9 @@
 			</div>
 		</div>
 	</div>
+	
+	
 	<div class="content-wrap">
-
-		
 
 		<div class="signUp-form">
 			<div class="signUp-title">
@@ -62,7 +61,7 @@
 					</tr>
 					<tr>
 						<td><label for="phone"><span>*</span>휴대폰</label></td>
-						<td colspan="3"><input type="text" name="memberPhone" id="phone"></td>
+						<td colspan="3"><input type="text" name="memberPhone" id="phone" placeholder="숫자만 입력해주세요"></td>
 						<td><button type="button" id="phoneChk" class="btn btn-sec size02">인증번호 발송</button></td>	
 					</tr>
 					<tr class="caution-tr">
@@ -74,14 +73,22 @@
 						<td colspan="3"><input type="text" id="cerNum" placeholder="인증번호를 입력해주세요"></td>
 						<td><button type="button" id="cerNumChk" class="btn btn-sec size02">인증번호 확인</button></td>	
 					</tr>
+					<tr class="caution-tr">
+						<td></td>
+						<td class="caution" colspan="3"></td>
+					</tr>
 					<tr>
 						<td class="addr"><label for="addr"><span>*</span>주소</label></td>
-						<td colspan="3"><input type="text" name="memberAddr"  placeholder="기본배송지로 등록됩니다" readonly></td>
+						<td colspan="3"><input type="text" name="memberZoneCode"  placeholder="우편번호 조회 버튼을 눌러주세요" readonly></td>
 						<td><button type="button" id="addr" class="btn btn-sec size02">우편번호 조회</button></td>	
 					</tr>
 					<tr>
 						<td></td>
-						<td colspan="3"><input type="text" id="addrDetail" placeholder="우편번호 조회 버튼을 눌러 값을 입력해주세요" readonly></td>
+						<td colspan="3"><input type="text" name="memberAddr"  placeholder="기본배송지로 등록됩니다" readonly></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td colspan="3"><input type="text" id="addrDetail" placeholder="상세주소를 입력해주세요"></td>
 					</tr>
 					<tr>
 						<td><span style="color: red; font-size: 20px;">*</span>성별</td>
@@ -111,7 +118,7 @@
 						<td class="caution" colspan="3"></td>
 					</tr>
 					<tr>
-						<td><label for="id">계좌번호</label></td>
+						<td><label for="account">계좌번호</label></td>
 						<td colspan="3">
 							<select class="select-custom" name="memberBank">
 								<option value="null" selected disabled hidden>은행을 선택하세요</option>
@@ -120,12 +127,16 @@
 					</tr>
 					<tr>
 						<td></td>
-						<td colspan="3"><input type="text" name="memberAccount" placeholder="계좌번호를 입력하세요('-'없이)"></td>
+						<td colspan="3"><input type="text" name="memberAccount" placeholder="계좌번호를 입력하세요('-'없이)" id="account"></td>
 					</tr>
 					<tr>
-						<td><label for="id">생년월일</label></td>
+						<td>생년월일</td>
 							<input type="hidden" name="memberBDay" value="">
-						<td id="no"><div class="bday-input"><input type="text" id="birth-year" class="input-noborder">년</div></td>
+						<td id="no">
+							<div class="bday-input year">
+								<input type="text" id="birth-year" class="input-noborder">년
+							</div>
+						</td>
 						<td id="no">
 							<select id="birth-month" class="select-custom">
 								<c:forEach var="i" begin="1" end="12" step="1">
@@ -135,22 +146,25 @@
 									<c:if test="${10<=i}">
 										<option value="${i }">${i }월</option>
 									</c:if>
-							
 								</c:forEach>	
 							</select>
 						</td>
-						<td id="no"><div class="bday-input"><input type="text" id="birth-day" class="input-noborder">일</div></td>
+						<td id="no">
+							<div class="bday-input day">
+								<input type="text" id="birth-day" class="input-noborder">일
+							</div>
+						</td>
 					</tr>
-					<tr class="caution-tr">
+					<tr class="caution-tr gender">
 						<td></td>
 						<td class="caution" colspan="3"><a>생일 쿠폰이 발급됩니다! (최초 등록 후 수정 불가)</a></td>
 					</tr>
 					<tr class="caution-tr">
 						<td></td>
-						<td class="caution" colspan="3"><a>제대로된 날짜를 입력하세요</a></td>
+						<td class="caution" colspan="3"></td>
 					</tr>
 					<tr>
-						<td><label for="id">프로필사진</label></td>
+						<td>프로필사진</td>
 						<td class="proPic-zone" colspan="3" id="no">
 							<div class="proPic-left">
 								<div class="proPic">
@@ -187,16 +201,16 @@
 								<label for="allCheck">전체 동의합니다</label>
 							</li>
 							<li>
-								<input type="checkbox" name="agree" id="agree1">
+								<input type="checkbox" id="agree1" class="agree">
 								<label for="agree1">이용약관 동의(필수)</label><a>약관보기></a>
 							</li>
 							<li>
-								<input type="checkbox" name="agree" id="agree2">
+								<input type="checkbox" name="member_agree" id="agree2" value="1" class="agree">
 								<label for="agree2">마케팅 활용동의(선택)</label><a>약관보기></a>
 								
 							</li>
 							<li>
-								<input type="checkbox" name="agree" id="agree3">
+								<input type="checkbox" id="agree3" class="agree">
 								<label for="agree3">본인은 만 14세 이상입니다.(필수)</label>
 							</li>
 						</ul>
@@ -236,8 +250,8 @@
 			
 			
 			
-			const result = [false, false, false, false, false, false]; //정규표현식 검사
-			//0아이디,1비밀번호,2비밀번호 확인,3핸드폰양식,4본인확인 이메일,5생년월일
+			let result = [false, false, false, false, false, true, true]; //정규표현식 검사
+			//0아이디, 1비밀번호, 2비밀번호 확인, 3핸드폰양식, 4핸드폰인증코드, 5본인확인 이메일, 6생년월일
 			
 			$("[name='memberId']").keyup(function(){
 				//영문 혹은 영문+숫자, 8자 이상 16자 이하
@@ -285,7 +299,6 @@
 			    	$(".caution").eq(2).children().css("color","#3a3a3a");
 			        $(this).removeClass("error");
 			        result[2] = true;
-			        
 			    }else{
 			    	$(this).addClass("error");
 					$(".caution-tr").eq(2).css("display","table-row");
@@ -300,8 +313,8 @@
 				//핸드폰 정규표현식
 				const pwReg = /^\d{3}-\d{3,4}-\d{4}$/;
 				const pwReg2 = /^0+\d{9,10}$/;
-				const inputPw = $(this).val();
-				if(pwReg.test(inputPw) || pwReg2.test(inputPw)){
+				const inputPhone = $(this).val();
+				if(pwReg.test(inputPhone) || pwReg2.test(inputPhone)){
 					$(this).removeClass("error");
 					$(".caution-tr").eq(3).css("display","none");
 					result[3] = true;
@@ -312,43 +325,96 @@
 					$(".caution").eq(3).html("<a>형식에 맞지 않는 번호입니다</a>");
 					result[3] = false;
 				}
+				if(inputPhone==""){
+					$(this).removeClass("error");
+					$(".caution-tr").eq(3).css("display","none");
+					result[5] = true;
+				}
 			})//핸드폰 형식 검사
 			
-
+			
+			let cerCode=""; //★핸드폰 인증코드!!!
 			$("#phoneChk").on("click",function(){
+				let replace;
 				if(result[3]){
-					const result = $("[name='memberPhone']").val().replaceAll("-","");
-					$("#phone").val(result);
+					replace = $("[name='memberPhone']").val().replaceAll("-","");
+					$("#phone").val(replace);
 					$(".cerNumChk").slideDown(200);
 				}
-			})
+				
+				$.ajax({
+					url: "/memberPhoneCheck.do",
+					type: "post",
+					data: {memberPhone : replace},
+					success : function(code){
+						cerCode = code;
+					}//ajax success구문
+				})//ajax
+			})//폰에서 하이픈 빼는거 + 문자메시지 보내기 + 코드 받기
 			
-			
-			
-			
-			
-			
-			
+			$("#cerNumChk").on("click",function(){
+				let inputCode = $("#cerNum").val();
+				
+				if(inputCode==""){
+					alert("인증번호를 입력해주세요");
+				}else{
+					if(cerCode == inputCode){
+						$(this).addClass("error");
+						$(".caution-tr").eq(4).css("display","table-row");
+						$(".caution").eq(4).html("<a>인증번호가 일치합니다.</a>");
+						$(".caution").eq(4).children().css("color","#1877f2");
+						
+						$("[name='memberPhone']").attr("readonly",true);
+						$("#cerNum").attr("readonly",true);
+						
+						$("#cerNumChk").removeClass("btn-sec");
+						$("#cerNumChk").addClass("btn-dkgray");
+						$("#cerNumChk").remove;
+						$("#cerNumChk").text("인증완료");
+						$("#cerNumChk").css("cursor","default");
+						$("#cerNumChk").attr("disabled",true);
+						
+						$("#phoneChk").css("display","none");
+						
+						result[4]=true;
+					}else{
+						$(this).addClass("error");
+						$(".caution-tr").eq(4).css("display","table-row");
+						$(".caution").eq(4).children().css("color","red");
+						$(".caution").eq(4).html("<a>인증번호가 다릅니다</a>");
+						result[4] = false;
+						
+						$("[name='memberPhone']").attr("readonly",false);
+						$("#cerNum").attr("readonly",false);
+						
+						$("#phoneChk").removeClass("btn-sec");
+						$("#phoneChk").addClass("btn-dkgray");
+						$("#phoneChk").remove;
+						$("#phoneChk").text("인증번호 재전송");
+					}
+				}//if. inputCode가 null인지 검사
+				
+			})//인증번호 검사
 			
 			$("[name='memberEmail']").keyup(function(){
 				//이메일 정규표현식
 				const pwReg = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
 				const inputPw = $(this).val();
 				if(pwReg.test(inputPw)){
-					$(".caution").eq(5).html("<a>비밀번호 찾기 시 사용되는 이메일입니다.</a>");
-					$(".caution").eq(5).children().css("color","#3a3a3a");
+					$(".caution").eq(6).html("<a>비밀번호 찾기 시 사용되는 이메일입니다.</a>");
+					$(".caution").eq(6).children().css("color","#3a3a3a");
 			        $(this).removeClass("error");
-			        result[4] = true;
+			        result[5] = true;
 				}else{
 					$(this).addClass("error");
-					$(".caution-tr").eq(5).css("display","table-row");
-					$(".caution").eq(5).children().css("color","var(--secondary)");
-					$(".caution").eq(5).html("<a>이메일 양식을 다시 한 번 확인해주세요</a>");
-					result[4] = false;
+					$(".caution-tr").eq(6).css("display","table-row");
+					$(".caution").eq(6).children().css("color","var(--secondary)");
+					$(".caution").eq(6).html("<a>이메일 양식을 다시 한 번 확인해주세요</a>");
+					result[5] = false;
 				}
 				if(inputPw==""){
-					$(".caution-tr").eq(5).css("display","none");
-					result[4] = true;
+					$(".caution-tr").eq(6).css("display","none");
+					result[5] = true;
 				}
 			})//이메일 정규표현식
 			
@@ -356,34 +422,70 @@
 			$("#addr").on("click",function(){
 				new daum.Postcode({
 			        oncomplete: function(data) {
+			        	console.log(data);
+			        	$("[name='memberZoneCode']").val(data.zonecode);
 			        	$("[name='memberAddr']").val(data.address);
 			            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
 			            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
 			        }
 			    }).open();
-				if($("[name='memberAddr']").val()==!""){
-					alert("gd");
-				}
-			});
+			});//다음 지도 API
 			
-			
-			
-			
-			
-			
-			
+
 			
 			$("[name='memberAccount']").on("change",function(){
 				const result = $(this).val().replaceAll("-","");
 				$(this).val(result);
-			});//계좌번호 정규표현식(하는중)
+			});//계좌번호 정규표현식
 			
 			
+
+			$("#birth-year").on("change",function(){
+				//년도 정규표현식
+				const yearReg = /^\d{4}$/;
+				const inputYear = $(this).val();
+				let now = new Date();
+				let year = now.getFullYear()-15;
+				if(!yearReg.test(inputYear) || inputYear<1900 || year<inputYear){
+					$(".year").addClass("error");
+					$(".caution-tr").eq(8).css("display","table-row");
+					$(".caution").eq(8).children().css("color","var(--secondary)");
+					$(".caution").eq(8).html("<a>입력값을 다시 한 번 확인해주세요.</a>");
+					result[7] = false;
+				}else{
+					$(".year").removeClass("error");
+					$(".caution-tr").eq(8).css("display","none");
+					result[7] = true;
+				}
+				if(inputYear==""){
+					$(".year").removeClass("error");
+					$(".caution-tr").eq(8).css("display","none");
+					result[7] = true;
+				}
+			})//생일 정규표현식(년도)
 			
 			
-			
-			
-			
+			$("#birth-day").on("change",function(){
+				//일자 정규표현식
+				const dayReg = /^\d{1,2}$/;
+				const inputDay = $(this).val();
+				if(!dayReg.test(inputDay) || inputDay<1 || 31<inputDay){
+					$(".day").addClass("error");
+					$(".caution-tr").eq(8).css("display","table-row");
+					$(".caution").eq(8).children().css("color","var(--secondary)");
+					$(".caution").eq(8).html("<a>입력값을 다시 한 번 확인해주세요.</a>");
+					result[7] = false;
+				}else{
+					$(".day").removeClass("error");
+					$(".caution-tr").eq(8).css("display","none");
+					result[7] = true;
+				}
+				if(inputDay==""){
+					$(".day").removeClass("error");
+					$(".caution-tr").eq(8).css("display","none");
+					result[7] = true;
+				}
+			})//생일 정규표현식(일)
 			
 			
 			
@@ -404,7 +506,7 @@
 			
 			
 			const allCheck = document.querySelector("#allcheck")
-			const agreeArr = document.querySelectorAll("[name=agree]");
+			const agreeArr = document.querySelectorAll(".agree");
 			
 			allCheck.addEventListener("change",function(){  
 			    agreeArr.forEach(function(agree){
@@ -421,49 +523,60 @@
 			
 			
 			
-			
-			
-			
-			
-			
-			
 			$("#submit").on("click",function(){
-				
 				const year = $("#birth-year").val();
 				const month = $("#birth-month").val();
-				let day;
-				if($("#birth-day").val()<10){
-					day = "0"+$("#birth-day").val();
+				const day = $("#birth-day").val();
+				
+				if(year!="" && day!=""){
+					let modifyDay;
+					if($("#birth-day").val()<10){
+						modifyDay = "0"+$("#birth-day").val();
+					}else{
+						modifyDay = $("#birth-day").val();
+					}
+					$("[name='memberBDay']").val(year+month+modifyDay); //생일 yyyymmdd형식으로 만들기
 				}else{
-					day = $("#birth-day").val()
+					$("[name='memberBDay']").val(null);
 				}
-				$("[name='memberBDay']").val(year+month+day); //생일 yyyymmdd형식으로 만들기
+
+				let memberAddr = $("[name='memberAddr']").val();
+				const detailAddr = $("#addrDetail").val();
+				memberAddr += detailAddr;
+				$("[name='memberAddr']").val(memberAddr);
 				
+// 				console.log($("[name='memberId']").val(),
+// 						$("[name='memberPw']").val(),
+// 						$("[name='memberName']").val(),
+// 						$("[name='memberPhone']").val(),
+// 						$("[name='memberZoneCode']").val(),
+// 						$("[name='memberAddr']").val(),
+// 						$("[name='memberGender']").val(),
+// 						$("[name='memberEmail']").val(),
+// 						$("[name='memberBank']").val(),
+// 						$("[name='memberAccount']").val(),
+// 						$("[name='memberBDay']").val());
+// 				console.log($("[name='memberPath']").val());
 				
+				const agree1 = $("#agree1").prop('checked');
+				const agree3 = $("#agree3").prop('checked');
 				
+				if(result[0] && result[1] && result[2] && result[3] && result[4] && result[5] && result[6] && agree1 && agree3){
+					$("<form>").submit();
+				}else if(!agree1 || !agree3){
+					alert("필수 이용약관에 동의해주세요");
+				}
 				
-				
-				$("<form>").submit();
-				
-			})
+			});
 			
 			
-			
+/*==================================================================================*/			
 			
 			$( function() {
 				$( ".select-custom" ).selectmenu();
 			});	
 	
-			$("#emailChk").on("click",function(){
-				$(".emailChk").slideDown(200);
-			})
-	
 
-			//버튼 누르면 인증번호 창 뜨게
-			
-			
-			
-			
 			function readURL(input) {
 				if (input.files && input.files[0]) {
 					var reader = new FileReader();
@@ -476,13 +589,12 @@
 					reader.readAsDataURL(input.files[0]);
 				} else {
 					document.getElementById('preview').src = "/resources/upload/member/common/moongs.png";
+					document.getElementsByName('memberPath')[0].value=null;
 					$(".deletePic").hide();	
 					$(".fileUpload").show();
 				}
 			}
 			//파일 이미지
-
-			
 
 	</script>
 
