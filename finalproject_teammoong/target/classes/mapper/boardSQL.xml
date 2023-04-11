@@ -48,10 +48,23 @@
 	<insert id="insertFile" parameterType="bf">
 		insert into file_tbl values(file_seq.nextval, #{boardNo}, #{filepath})
 	</insert>
+	<insert id="insertOption" parameterType="bo">
+		insert into board_option values(board_option_seq.nextval, #{boardNo}, #{detailName}, #{detailPrice}, #{detailCount})
+	</insert>
 	<select id="selectOneBoard" parameterType="_int" resultMap="getBoard">
 		select
 			*
 		from board_tbl where board_no = #{_parameter}	
+	</select>
+	
+	<select id="selectOptionList" parameterType="_int" resultType="bo">
+		select
+			option_no as optionNo,
+			board_no as boardNo,
+			detail_name as detailName,
+			detail_price as detailPrice,
+			detail_count as detailCount
+		from board_option where board_no = #{_parameter}
 	</select>
 	<select id="selectFileList" parameterType="_int" resultType="bf">
 		select

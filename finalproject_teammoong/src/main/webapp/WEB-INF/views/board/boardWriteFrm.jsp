@@ -52,7 +52,7 @@
 										onchange="previewImage(event)" multiple>
 									<div class="image-preview"></div>
 									<label for="bFile">
-										<div class="btn-upload">썸네일 이미지 등록<sup>*</sup></div>
+										<div class="btn-upload">이미지 등록<sup>*</sup></div>
 									</label>
 								</div>
 							</div>

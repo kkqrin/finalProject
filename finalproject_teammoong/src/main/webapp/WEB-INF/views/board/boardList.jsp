@@ -59,11 +59,11 @@
     
     <div class="content-wrap">
     
-    	<c:if test="${not empty sessionScope.m}">
-        	<div class="area-btn right" style="padding-top : 25px;">
-        		<button class="btn btn-sec size02" onclick="location.href='/boardWriteFrm.do'">글쓰기</button>
-			</div>
-    	</c:if>
+       <c:if test="${not empty sessionScope.m}">
+           <div class="area-btn right" style="padding-top : 25px;">
+              <button class="btn btn-sec size02" onclick="location.href='/boardWriteFrm.do'">글쓰기</button>
+         </div>
+       </c:if>
     
         <div class="board-wrap-header">
             <h4>최근 등록 상품</h4>
@@ -82,11 +82,11 @@
                     <a href="/boardView.do?boardNo=${b.boardNo }">
                     <c:set var="oneFile" value="0" />
                     <c:forEach items="${b.fileList }" var="i">
-                    	<c:if test="${b.boardNo eq i.boardNo && oneFile eq 0}">
-							<img src="/resources/upload/board/${i.filepath}">
-							<c:set var="oneFile" value="1" />
-                    	</c:if>
-					</c:forEach>
+                       <c:if test="${b.boardNo eq i.boardNo && oneFile eq 0}">
+                     <img src="/resources/upload/board/${i.filepath}">
+                     <c:set var="oneFile" value="1" />
+                       </c:if>
+               </c:forEach>
                     </a>
                     <!-- <div class="gonggu-info">2인 공동구매</div> -->
                 </div>
@@ -644,8 +644,8 @@
             <a href="javascript:void(0);" class="btn-pagi ctrl">끝으로</a>
         </div>
 
-	</div>
-    <jsp:include page="/WEB-INF/views/common/footer.jsp" />	
+   </div>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />   
 
 
     <!-- 상품 js -->

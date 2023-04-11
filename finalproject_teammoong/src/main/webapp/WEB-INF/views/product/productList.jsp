@@ -11,42 +11,28 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<!-- <h1>상위 카테고리 : ${fCategory }</h1>
-	<h1>하위 카테고리 : ${sCategory }</h1>
-	<c:forEach items="${list }" var="p">
-			<tr>
-				<td>${p.productNo }</td>
-				<td>${p.productName }</td>
-				<td>${p.productPrice }</td>
-				<td>${p.productContent }</td>
-			</tr>
-	</c:forEach> -->
-
-	<!-- 
-	private int productNo;
-	private int dCategoryNo;
-	private String productName;
-	private int productEa;
-	private int productPrice;
-	private int productStatus;
-	private int productCost;
-	private int gongguNumber;
-	private String productContent;
-	private int productDiscount;
-	private ArrayList<String> fileList;
-	-->
+	
 <div class="content-wrap">
 
 	
 <%-- 	<h1>상위 카테고리 : ${fCategory }</h1> --%>
 <%-- 	<h1>하위 카테고리 : ${sCategory }</h1> --%>
+	<div class="category-wrap">
+		<h3>식품</h3>
+		<ul class="subcategory-name-list">
+			<li><a href="#">전체보기</a></li>
+			<c:forEach items="${detailCategoryList}" var="test">
+				<li>${test.detailCategoryName}</li>
+			</c:forEach>
+		</ul>
+	</div>
     <div class="product-wrap">
     <!-- 전체 상품 wrap -->
 	<c:forEach items="${list }" var="p">
         <div class="posting-item">
             <div class="posting-img">
                 <a href="#">
-                    <img src="/resources/upload/product/"${p.thumbnail } />
+                    <img src="/resources/upload/product/${p.thumbnail }" />
                 </a>
                 <div class="gonggu-info">${p.gongguNumber}인 공동구매</div>
             </div>

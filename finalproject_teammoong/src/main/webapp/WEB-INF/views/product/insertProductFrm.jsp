@@ -111,37 +111,42 @@
 		$( "[name=dCategoryNo]" ).selectmenu();
 		$("[name=gonggu-number]").selectmenu();
 	});
-    $('#summernote').summernote({
-		height: 300,
-		minHeight: null,
-		maxHeight: null,
-		focus: true,
-		lang: "ko-KR",
-		callbacks: {
-			onImageUpload : function(files){
-				sendFile(files[0],this);
-			}
-		}
-			
-	});
+    var setting = {
+            height : 300,
+            minHeight : null,
+            maxHeight : null,
+            focus : true,
+            lang : 'ko-KR',
+            toolbar : toolbar,
+            //콜백 함수
+            callbacks : { 
+            	onImageUpload : function(files, editor, welEditable) {
+            // 파일 업로드(다중업로드를 위해 반복문 사용)
+            for (var i = files.length - 1; i >= 0; i--) {
+            uploadSummernoteImageFile(files[i],
+            this);
+            		}
+            	}
+            }
+         };
+        $('#summernote').summernote(setting);
+        
 		
-	function sendFile(file, editor){
-		var data = new FormData();
-		data.append("file", file);
-		console.log(file);
-		$.ajax({
-			data : data,
-			type : "POST",
-			url : "SummerNoteImageFile",
-			contentType : false,
-			processData : false,
-			success : function(data){
-				console.log(data);
-				console.log(editor);
-				$(editor).summernote("insertImage",data.url);
-			}
-		});
-	}
+		function uploadSummernoteImageFile(file, el) {
+			data = new FormData();
+			data.append("file", file);
+			$.ajax({
+				data : data,
+				type : "POST",
+				url : "uploadSummernoteImageFile",
+				contentType : false,
+				enctype : 'multipart/form-data',
+				processData : false,
+				success : function(data) {
+					$(el).summernote('editor.insertImage', data.url);
+				}
+			});
+		}
 
 
 	
@@ -173,7 +178,7 @@
 		    	success : function(data){
 		    		console.log(data)
 		    		for(var i=0; i<data.length; i++){
-			    		$("[name=dCategoryNo]").append("<option value="+data[i].dcategoryNo+">"+data[i].dcategoryName+"</option>");
+			    		$("[name=dCategoryNo]").append("<option value="+data[i].detailCategoryNo+">"+data[i].detailCategoryName+"</option>");
 			    		}
 // 		    		select메뉴 비우는 코드
 		    		$( "[name=dCategoryNo]" ).selectmenu("refresh");

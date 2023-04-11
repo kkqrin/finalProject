@@ -76,7 +76,7 @@ public class ProductDao {
 		
 		return (ArrayList<DetailCategory>)list;
 	}
-	
+
 	
 	
 	

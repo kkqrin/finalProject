@@ -29,8 +29,8 @@
                             
                             if(c.categoryNo==d.categoryNo){
                                 const a2 = $("<a>");
-                                a2.prop('href',"/productList.do?category="+d.categoryNo+d.dCategoryNo);
-                                a2.text(d.dCategoryName);
+                                a2.prop('href',"/productList.do?category="+d.categoryNo+d.detailCategoryNo);
+                                a2.text(d.detailCategoryName);
                                 div2.append(a2);
                             }
                         }//deatail for
@@ -44,7 +44,7 @@
                     <div class="one-category">
                         <a class="cate-name" href="c.categyNo">대분류 이름</a>
                         <div class="sub">
-                            <a href="d.dCategoryNo">소분류 이름</a>
+                            <a href="d.detailCategoryNo">소분류 이름</a>
                         </div>
                     </div>
                     
