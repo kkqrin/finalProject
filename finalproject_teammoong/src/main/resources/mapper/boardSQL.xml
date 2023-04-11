@@ -27,7 +27,7 @@
 			board_seq.nextval,
 			#{boardWriter},
 			#{boardName},
-			#{categoryNo},
+			#{dCategoryNo},
 			#{boardContent},
 			to_char(sysdate,'yyyy-mm-dd'),
 			#{accountWriter},
@@ -78,7 +78,7 @@
 		<result column="board_no" property="boardNo" />
 		<result column="board_writer" property="boardWriter" />
 		<result column="board_name" property="boardName" />
-		<result column="category_no" property="categoryNo" />
+		<result column="dCategory_no" property="dCategoryNo" />
 		<result column="board_content" property="boardContent" />
 		<result column="board_date" property="boardDate" />
 		<result column="account_writer" property="accountWriter" />

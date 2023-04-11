@@ -55,6 +55,7 @@ public class BoardService {
 		map.put("start", start);
 		map.put("end", end);
 		ArrayList<Board> list = dao.selectBoardList(map);
+		
 		for(Board b : list) {
 			ArrayList<String> fileList = dao.selectBoardImg();
 			b.setFileList(fileList);

@@ -13,7 +13,7 @@ public class Board {
 	private int boardNo;
 	private String boardWriter;
 	private String boardName;
-	private int categoryNo;
+	private int dCategoryNo;
 	private String boardContent;
 	private String boardDate;
 	private String accountWriter;

@@ -27,7 +27,7 @@ public class BoardController {
 	@RequestMapping(value="/boardList.do")
 	public String boardList(int reqPage, Model model) {
 		BoardPageData bpd = service.selectBoardList(reqPage);
-		System.out.println("getList 확인"+bpd.getList());
+		//System.out.println("getList 확인"+bpd.getList());
 		model.addAttribute("list",bpd.getList());
 		model.addAttribute("pageNavi", bpd.getPageNavi());
 		return "board/boardList";
@@ -67,6 +67,14 @@ public class BoardController {
 		model.addAttribute("f",fileList);
 		model.addAttribute("b",b);
 		model.addAttribute("o",optionList);
+		model.addAttribute("size",optionList.size());
 		return "board/boardView";
 		}
+	
+	
+	
+	
+	
+	
+	
 }
