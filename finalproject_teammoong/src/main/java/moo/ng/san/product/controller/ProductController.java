@@ -52,8 +52,7 @@ public class ProductController {
 		// 상위 누르면 상위이름 + 하위는 전체 및 상위에 해당하는 모든 하위카테고리
 		// 하위 누르면 상위이름 + 해당 하위 이름 및 상위에 해당하는 모든 하위카테고리
 		
-//		System.out.println("카테고리 : " + category);
-//		System.out.println("현재 페이지 : " + reqPage);
+		System.out.println("카테고리 : " + category);
 		
 		
 		////////// 카테고리 계산 //////////
@@ -64,19 +63,19 @@ public class ProductController {
 			// 네 자리 이상면
 			fCategory = category / 100; // 2 3 4 5 6 .. 10 11 12 13
 			sCategory = category - fCategory * 100;
-//			System.out.println("상위 카테고리 : "+fCategory+" 하위 카테고리 : "+sCategory);
+			System.out.println("상위 카테고리 : "+fCategory+" 하위 카테고리 : "+sCategory);
 			
 		}else {
 			// 두 자리면
 			fCategory = category / 10;
 			sCategory = category % 10;
-//			System.out.println("상위 카테고리 : "+fCategory+" 하위 카테고리 : "+sCategory);
+			System.out.println("상위 카테고리 : "+fCategory+" 하위 카테고리 : "+sCategory);
 		}
 		
 		
 		
 		// 카테고리별 상품리스트
-//		ArrayList<Product> list = service.selectInfiniteScrollProductList(sCategory, 1, 3);
+		ArrayList<Product> list = service.selectInfiniteScrollProductList(1, 3, sCategory);
 		// 하위 카테고리 리스트
 		ArrayList<DetailCategory> detailCategoryList = service.selectDetailCategory(fCategory);
 //		ArrayList<DetailCategory> dCategoryList = service.selectAllDetailCategory();
@@ -85,9 +84,10 @@ public class ProductController {
 		
 //		model.addAttribute("fCategory", fCategory);
 		model.addAttribute("sCategory", sCategory);
-//		model.addAttribute("list", list);
+		model.addAttribute("list", list);
 		model.addAttribute("detailCategoryList", detailCategoryList);
 		
+		System.out.println(list);
 //		System.out.println(detailCategoryList);
 		
 		return "product/productList";
