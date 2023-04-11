@@ -39,7 +39,10 @@ public class MemberController {
 	}
 	
 	
-	
+	@RequestMapping(value = "/join.do")
+	public String signIn(Member m) {
+		return "";
+	}
 	
 	
 	
