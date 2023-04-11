@@ -442,7 +442,7 @@
 			
 			$("#emailCerSend").on("click",function(){
 				if(result[3]){
-					$(".caution-tr").eq(3).css("display","none");
+					$(".caution").eq(3).html("<a>이메일로 인증번호를 전송했습니다.</a>");
 					$(".emailChk").css("display","table-row");
 				}
 			})//이메일 인증번호 보내기
