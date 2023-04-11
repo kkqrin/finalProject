@@ -10,8 +10,8 @@
 		<typeAlias type="moo.ng.san.notice.vo.FileVO" alias="f" />
 		<typeAlias type="moo.ng.san.dayCheck.vo.DayCheck" alias="day" />
 		<typeAlias type="moo.ng.san.dayCheck.vo.Point" alias="point" />
-		
-		
+		<typeAlias type="moo.ng.san.askItem.vo.askItem" alias="a" />
+		<typeAlias type="moo.ng.san.askItem.vo.docuVO" alias="d" />
 		<typeAlias type="moo.ng.san.member.model.vo.Member" alias="m" />
 		<typeAlias type="moo.ng.san.product.model.vo.Product" alias="p" />
 		<typeAlias type="moo.ng.san.product.model.vo.FileVO" alias="pf" />
