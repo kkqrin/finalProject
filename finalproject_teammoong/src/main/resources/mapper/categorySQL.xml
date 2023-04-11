@@ -25,4 +25,15 @@
 			d_category_name as detailCategoryName
 		from detail_category
 	</select>
+	<select id="selectCategoryNameOnList" resultType="dc" parameterType="_int">
+		 select 
+			category_no as categoryNo,
+			d_category_no as detailCategoryNo,
+			d_category_name as detailCategoryName,
+			category_name as categoryName
+		 from detail_category
+		 left join product_category using (category_no)
+		 where category_no=#{_parameter}
+		 order by 2
+	</select>
 </mapper>

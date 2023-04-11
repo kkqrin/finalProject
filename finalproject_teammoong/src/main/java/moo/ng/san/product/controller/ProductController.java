@@ -59,12 +59,15 @@ public class ProductController {
 		int fCategory = 0;
 		int sCategory = 0;
 		// 11 12 13 14 25 26 27 28 29 210 211 212 313 314 .. 1058 ..1066
-		if (category > 100) {
+		if (category > 10000) {
+			// 상위 카테고리 (하위 카테고리 전체)
+			fCategory = category % 10000;
+			System.out.println("상위 카테고리 : "+fCategory+" 하위 카테고리 : "+sCategory);
+		} else if (category > 100) {
 			// 네 자리 이상면
 			fCategory = category / 100; // 2 3 4 5 6 .. 10 11 12 13
 			sCategory = category - fCategory * 100;
 			System.out.println("상위 카테고리 : "+fCategory+" 하위 카테고리 : "+sCategory);
-			
 		}else {
 			// 두 자리면
 			fCategory = category / 10;
@@ -75,19 +78,21 @@ public class ProductController {
 		
 		
 		// 카테고리별 상품리스트
-		ArrayList<Product> list = service.selectInfiniteScrollProductList(1, 3, sCategory);
+		ArrayList<Product> list = service.selectInfiniteScrollProductList(1, 3,fCategory ,sCategory);
 		// 하위 카테고리 리스트
-		ArrayList<DetailCategory> detailCategoryList = service.selectDetailCategory(fCategory);
-//		ArrayList<DetailCategory> dCategoryList = service.selectAllDetailCategory();
-
+		ArrayList<DetailCategory> detailCategoryList = service.selectCategoryNameOnList(fCategory);
+		// 해당 카테고리의 총 상품 수
+		int totalCount = service.selectProductCount(fCategory, sCategory);
+		// 해당 하위 카테고리의 상위 카테고리 이름
 		
 		
-//		model.addAttribute("fCategory", fCategory);
+		model.addAttribute("fCategory", fCategory);
 		model.addAttribute("sCategory", sCategory);
 		model.addAttribute("list", list);
 		model.addAttribute("detailCategoryList", detailCategoryList);
+		model.addAttribute("totalCount", totalCount);
 		
-		System.out.println(list);
+//		System.out.println(list);
 //		System.out.println(detailCategoryList);
 		
 		return "product/productList";
@@ -95,7 +100,7 @@ public class ProductController {
 	
 	@ResponseBody
 	@RequestMapping(value="/productMore.do", produces = "application/json;charset=utf-8")
-	public String productMore(int start, int amount, int detailCategoryNo) {
+	public String productMore(int start, int amount, int fCategoryNo, int sCategoryNo) {
 		//start : startHidden, amount : 3, detailCategoryNo: sCategoryNo
 		//ProductPageData ppd
 		
@@ -104,7 +109,7 @@ public class ProductController {
 //		ppd.setAmount(amount);
 //		ppd.setDetailCategoryNo(sCategory1);
 		
-		ArrayList<Product> list = service.selectInfiniteScrollProductList(start, amount, detailCategoryNo);
+		ArrayList<Product> list = service.selectInfiniteScrollProductList(start, amount, fCategoryNo, sCategoryNo);
 		
 //		System.out.println(list);
 		
