@@ -60,46 +60,23 @@
 						<td colspan="3"><input type="text" name="memberName" id="name" placeholder="이름을 입력해주세요"></td>
 					</tr>
 					<tr>
-						<td><label for="email"><span>*</span>이메일</label></td>
-						<td colspan="3"><input type="text" name="memberEmail" id="email" placeholder="예시) moongsan@google.com"></td>
-						<td><button type="button" id="emailCerSend" class="btn btn-sec size02">이메일 인증</button></td>	
+						<td><label for="phone"><span>*</span>휴대폰</label></td>
+						<td colspan="3"><input type="text" name="memberPhone" id="phone" placeholder="숫자만 입력해주세요"></td>
+						<td><button type="button" id="phoneChk" class="btn btn-sec size02">인증번호 발송</button></td>	
 					</tr>
 					<tr class="caution-tr">
 						<td></td>
 						<td class="caution" colspan="3"></td>
 					</tr>
-					<tr class="emailChk" style="display: none;">
+					<tr class="cerNumChk" style="display: none;">
 						<td></td>
 						<td colspan="3"><input type="text" id="cerNum" placeholder="인증번호를 입력해주세요"></td>
-						<td><button type="button" id="emailChk" class="btn btn-ter size02">인증번호 확인</button></td>	
+						<td><button type="button" id="cerNumChk" class="btn btn-ter size02">인증번호 확인</button></td>	
 					</tr>
 					<tr class="caution-tr">
 						<td></td>
 						<td class="caution" colspan="3"></td>
 					</tr>
-					
-					
-<!-- 					<tr> -->
-<!-- 						<td><label for="phone"><span>*</span>휴대폰</label></td> -->
-<!-- 						<td colspan="3"><input type="text" name="memberPhone" id="phone" placeholder="숫자만 입력해주세요"></td> -->
-<!-- 						<td><button type="button" id="phoneChk" class="btn btn-sec size02">인증번호 발송</button></td>	 -->
-<!-- 					</tr> -->
-<!-- 					<tr class="caution-tr"> -->
-<!-- 						<td></td> -->
-<!-- 						<td class="caution" colspan="3"></td> -->
-<!-- 					</tr> -->
-<!-- 					<tr class="cerNumChk" style="display: none;"> -->
-<!-- 						<td></td> -->
-<!-- 						<td colspan="3"><input type="text" id="cerNum" placeholder="인증번호를 입력해주세요"></td> -->
-<!-- 						<td><button type="button" id="cerNumChk" class="btn btn-sec size02">인증번호 확인</button></td>	 -->
-<!-- 					</tr> -->
-<!-- 					<tr class="caution-tr"> -->
-<!-- 						<td></td> -->
-<!-- 						<td class="caution" colspan="3"></td> -->
-<!-- 					</tr> -->
-
-
-
 					<tr>
 						<td class="addr"><label for="addr"><span>*</span>주소</label></td>
 						<td colspan="3"><input type="text" name="memberZoneCode"  placeholder="우편번호 조회 버튼을 눌러주세요" readonly></td>
@@ -143,6 +120,14 @@
 					<tr>
 						<td></td>
 						<td colspan="3"><input type="text" name="memberAccount" placeholder="계좌번호를 입력하세요('-'없이)" id="account"></td>
+					</tr>
+					<tr class="caution-tr">
+						<td></td>
+						<td class="caution" colspan="3"></td>
+					</tr>
+					<tr>
+						<td><label for="email">본인확인용 이메일</label></td>
+						<td colspan="3"><input type="text" name="memberEmail" id="email" placeholder="예시) moongsan@google.com"></td>
 					</tr>
 					<tr class="caution-tr">
 						<td></td>
@@ -248,6 +233,25 @@
 	</div><!--content-wrap-->
 
 
+<!-- <tr> -->
+<!-- 	<td><label for="email"><span>*</span>이메일</label></td> -->
+<!-- 	<td colspan="3"><input type="text" name="memberEmail" id="email" placeholder="예시) moongsan@google.com"></td> -->
+<!-- 	<td><button type="button" id="emailCerSend" class="btn btn-sec size02">이메일 인증</button></td>	 -->
+<!-- </tr> -->
+<!-- <tr class="caution-tr"> -->
+<!-- 	<td></td> -->
+<!-- 	<td class="caution" colspan="3"></td> -->
+<!-- </tr> -->
+<!-- <tr class="emailChk" style="display: none;"> -->
+<!-- 	<td></td> -->
+<!-- 	<td colspan="3"><input type="text" id="cerNum" placeholder="인증번호를 입력해주세요"></td> -->
+<!-- 	<td><button type="button" id="emailChk" class="btn btn-ter size02">인증번호 확인</button></td>	 -->
+<!-- </tr> -->
+<!-- <tr class="caution-tr"> -->
+<!-- 	<td></td> -->
+<!-- 	<td class="caution" colspan="3"></td> -->
+<!-- </tr> -->
+
 
 
 
@@ -269,17 +273,19 @@
 			
 			
 			
-			let result = [false, false, false, false, false, true, true]; //정규표현식 검사
-			//0아이디, 1비밀번호, 2비밀번호 확인, 3이메일양식, 4이메일인증코드, 5계좌번호형식, 6생년월일
+			let result = [false, false, false, false, false, true, true, true]; //정규표현식 검사
+			//0아이디, 1비밀번호, 2비밀번호 확인, 3휴대폰형식, 4휴대폰인증코드, 5계좌번호형식, 6이메일형식, 7생년월일
+			
+			
 			
 			$("[name='memberId']").keyup(function(){
 				//영문 혹은 영문+숫자, 8자 이상 16자 이하
 				const idReg = /^[a-z0-9]{8,16}$/;
 				const inputId = $(this).val();
 				if(idReg.test(inputId)){
+					$(this).removeClass("error");
 					$(".caution").eq(0).html("<a>사용 가능한 아이디 입니다.</a>");
 					$(".caution").eq(0).children().css("color","#3a3a3a");
-			        $(this).removeClass("error");
 			        result[0] = true;
 				}else{
 					$(this).addClass("error");
@@ -287,6 +293,11 @@
 					$(".caution").eq(0).children().css("color","var(--secondary)");
 					$(".caution").eq(0).html("<a>영문 혹은 영문+숫자, 6자 이상 16자 이하</a>");
 					result[0] = false;
+				}
+				if(inputId==""){
+					$(this).removeClass("error");
+					$(".caution-tr").eq(0).css("display","none");
+			    	result[0] = false;
 				}
 			})//아이디 정규표현식
 
@@ -296,9 +307,10 @@
 				const pwReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 				const inputPw = $(this).val();
 				if(pwReg.test(inputPw)){
+					$(this).removeClass("error");
 					$(".caution").eq(1).html("<a>사용가능한 비밀번호입니다</a>");
 					$(".caution").eq(1).children().css("color","#3a3a3a");
-			        $(this).removeClass("error");
+			       
 			        result[1] = true;
 				}else{
 					$(this).addClass("error");
@@ -307,157 +319,117 @@
 					$(".caution").eq(1).html("<a>영문,숫자,특수문자(공백 제외)조합으로 8글자 이상</a>");
 					result[1] = false;
 				}
+				if(inputPw==""){
+					$(this).removeClass("error");
+					$(".caution-tr").eq(1).css("display","none");
+			    	result[1] = false;
+				}
 			})//비밀번호 정규표현식
 			
 			$("#pwRe").keyup(function(){
 				const inputPw = $("[name='memberPw']").val();
 			    const inputPwRe = $(this).val();
 			    
-			    if(inputPw==inputPwRe){
-			    	$(".caution").eq(2).html("<a>비밀번호가 일치합니다</a>");
-			    	$(".caution").eq(2).children().css("color","#3a3a3a");
-			        $(this).removeClass("error");
-			        result[2] = true;
-			    }else{
+			    if(inputPw!=inputPwRe){
 			    	$(this).addClass("error");
 					$(".caution-tr").eq(2).css("display","table-row");
 					$(".caution").eq(2).children().css("color","var(--secondary)");
 					$(".caution").eq(2).html("<a>비밀번호가 일치하지 않습니다</a>");
 					result[2] = false;
+			    }else{
+			    	$(this).removeClass("error");
+			    	$(".caution").eq(2).html("<a>비밀번호가 일치합니다</a>");
+			    	$(".caution").eq(2).children().css("color","#3a3a3a");
+			        result[2] = true;
+			    }
+			    if(inputPwRe==""){
+			    	$(this).removeClass("error");
+			    	$(".caution-tr").eq(2).css("display","none");
+			    	result[2] = false;
 			    }
 			})//비밀번호 확인 처리
 
 			
-// 			$("[name='memberPhone']").keyup(function(){
-// 				//핸드폰 정규표현식
-// 				const pwReg = /^\d{3}-\d{3,4}-\d{4}$/;
-// 				const pwReg2 = /^0+\d{9,10}$/;
-// 				const inputPhone = $(this).val();
-// 				if(pwReg.test(inputPhone) || pwReg2.test(inputPhone)){
-// 					$(this).removeClass("error");
-// 					$(".caution-tr").eq(3).css("display","none");
-// 					result[3] = true;
-// 				}else{
-// 					$(this).addClass("error");
-// 					$(".caution-tr").eq(3).css("display","table-row");
-// 					$(".caution").eq(3).children().css("color","var(--secondary)");
-// 					$(".caution").eq(3).html("<a>형식에 맞지 않는 번호입니다</a>");
-// 					result[3] = false;
-// 				}
-// 				if(inputPhone==""){
-// 					$(this).removeClass("error");
-// 					$(".caution-tr").eq(3).css("display","none");
-// 					result[5] = true;
-// 				}
-// 			})//핸드폰 형식 검사
-			
-			
-// 			let cerCode=""; //★핸드폰 인증코드!!!
-// 			$("#phoneChk").on("click",function(){
-// 				let replace;
-// 				if(result[3]){
-// 					replace = $("[name='memberPhone']").val().replaceAll("-","");
-// 					$("#phone").val(replace);
-// 					$(".cerNumChk").slideDown(200);
-// 				}
-				
-// 				$.ajax({
-// 					url: "/memberPhoneCheck.do",
-// 					type: "post",
-// 					data: {memberPhone : replace},
-// 					success : function(code){
-// 						cerCode = code;
-// 					}//ajax success구문
-// 				})//ajax
-// 			})//폰에서 하이픈 빼는거 + 문자메시지 보내기 + 코드 받기
-			
-// 			$("#cerNumChk").on("click",function(){
-// 				let inputCode = $("#cerNum").val();
-				
-// 				if(inputCode==""){
-// 					alert("인증번호를 입력해주세요");
-// 				}else{
-// 					if(cerCode == inputCode){
-// 						$(this).addClass("error");
-// 						$(".caution-tr").eq(4).css("display","table-row");
-// 						$(".caution").eq(4).html("<a>인증번호가 일치합니다.</a>");
-// 						$(".caution").eq(4).children().css("color","#1877f2");
-						
-// 						$("[name='memberPhone']").attr("readonly",true);
-// 						$("#cerNum").attr("readonly",true);
-						
-// 						$("#cerNumChk").removeClass("btn-sec");
-// 						$("#cerNumChk").addClass("btn-dkgray");
-// 						$("#cerNumChk").remove;
-// 						$("#cerNumChk").text("인증완료");
-// 						$("#cerNumChk").css("cursor","default");
-// 						$("#cerNumChk").attr("disabled",true);
-						
-// 						$("#phoneChk").css("display","none");
-						
-// 						result[4]=true;
-// 					}else{
-// 						$(this).addClass("error");
-// 						$(".caution-tr").eq(4).css("display","table-row");
-// 						$(".caution").eq(4).children().css("color","red");
-// 						$(".caution").eq(4).html("<a>인증번호가 다릅니다</a>");
-// 						result[4] = false;
-						
-// 						$("[name='memberPhone']").attr("readonly",false);
-// 						$("#cerNum").attr("readonly",false);
-						
-// 						$("#phoneChk").removeClass("btn-sec");
-// 						$("#phoneChk").addClass("btn-dkgray");
-// 						$("#phoneChk").remove;
-// 						$("#phoneChk").text("인증번호 재전송");
-// 					}
-// 				}//if. inputCode가 null인지 검사
-// 			})//인증번호 검사
-			
-			
-			
-			$("[name='memberEmail']").keyup(function(){
-				//이메일 정규표현식
-				const emailReg = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
-				const inputEmail = $(this).val();
-				if(emailReg.test(inputEmail)){
-					$(".caution").eq(3).html("<a>이메일 인증 버튼을 눌러주세요</a>");
-					$(".caution").eq(3).children().css("color","#3a3a3a");
-			        $(this).removeClass("error");
-			        result[3] = true;
+			$("[name='memberPhone']").keyup(function(){
+				//핸드폰 정규표현식
+				const pwReg = /^\d{3}-\d{3,4}-\d{4}$/;
+				const pwReg2 = /^0+\d{9,10}$/;
+				const inputPhone = $(this).val();
+				if(pwReg.test(inputPhone) || pwReg2.test(inputPhone) || inputPhone==""){
+					$(this).removeClass("error");
+					$(".caution-tr").eq(3).css("display","none");
+					result[3] = true;
 				}else{
 					$(this).addClass("error");
 					$(".caution-tr").eq(3).css("display","table-row");
 					$(".caution").eq(3).children().css("color","var(--secondary)");
-					$(".caution").eq(3).html("<a>이메일 양식을 다시 한 번 확인해주세요</a>");
+					$(".caution").eq(3).html("<a>형식에 맞지 않는 번호입니다</a>");
 					result[3] = false;
 				}
-				if(inputEmail==""){
-					$(this).removeClass("error");
-					$(".caution-tr").eq(3).css("display","none");
-					result[3] = true;
-				}
-			})//이메일 정규표현식
+			})//핸드폰 형식 검사
 			
 			
-			$("#emailCerSend").on("click",function(){
+			let cerCode=""; //★핸드폰 인증코드!!!
+			$("#phoneChk").on("click",function(){
+				let replace;
 				if(result[3]){
-					$(".caution").eq(3).html("<a>이메일로 인증번호를 전송했습니다.</a>");
-					$(".emailChk").css("display","table-row");
+					replace = $("[name='memberPhone']").val().replaceAll("-","");
+					$("#phone").val(replace);
+					$(".cerNumChk").slideDown(200);
 				}
-			})//이메일 인증번호 보내기
+				
+				$.ajax({
+					url: "/memberPhoneCheck.do",
+					type: "post",
+					data: {memberPhone : replace},
+					success : function(code){
+						cerCode = code;
+					}//ajax success구문
+				})//ajax
+			})//폰에서 하이픈 빼는거 + 문자메시지 보내기 + 코드 받기
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+			$("#cerNumChk").on("click",function(){
+				let inputCode = $("#cerNum").val();
+				
+				if(inputCode==""){
+					alert("인증번호를 입력해주세요");
+				}else{
+					if(cerCode == inputCode){
+						$(this).addClass("error");
+						$(".caution-tr").eq(4).css("display","table-row");
+						$(".caution").eq(4).html("<a>인증번호가 일치합니다.</a>");
+						$(".caution").eq(4).children().css("color","#1877f2");
+						
+						$("[name='memberPhone']").attr("readonly",true);
+						$("#cerNum").attr("readonly",true);
+						
+						$("#cerNumChk").removeClass("btn-sec");
+						$("#cerNumChk").addClass("btn-ter");
+						$("#cerNumChk").remove;
+						$("#cerNumChk").text("인증완료");
+						$("#cerNumChk").css("cursor","default");
+						$("#cerNumChk").attr("disabled",true);
+						
+						$("#phoneChk").css("display","none");
+						
+						result[4]=true;
+					}else{
+						$(this).addClass("error");
+						$(".caution-tr").eq(4).css("display","table-row");
+						$(".caution").eq(4).children().css("color","red");
+						$(".caution").eq(4).html("<a>인증번호가 다릅니다</a>");
+						result[4] = false;
+						
+						$("[name='memberPhone']").attr("readonly",false);
+						$("#cerNum").attr("readonly",false);
+						
+						$("#phoneChk").removeClass("btn-sec");
+						$("#phoneChk").addClass("btn-dkgray");
+						$("#phoneChk").remove;
+						$("#phoneChk").text("인증번호 재전송");
+					}
+				}//if. inputCode가 null인지 검사
+			})//인증번호 검사
 			
 			
 			$("#addr").on("click",function(){
@@ -472,9 +444,10 @@
 			    }).open();
 			});//다음 지도 API
 			
-
 			
-			$("[name='memberAccount']").on("change",function(){
+			
+			
+			$("[name='memberAccount']").keyup(function(){
 				const inputAccount = $("[name='memberAccount']").val();
 				const AcountReg = /[0-9-]$/;
 				
@@ -501,6 +474,37 @@
 			});//계좌번호 정규표현식
 			
 			
+			$("[name='memberEmail']").keyup(function(){
+				//이메일 정규표현식
+				const emailReg = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+				const inputEmail = $(this).val();
+				if(emailReg.test(inputEmail) || inputEmail==""){
+					$(this).removeClass("error");
+					$(".caution-tr").eq(7).css("display","none");
+					result[6] = true;
+				}else{
+					$(this).addClass("error");
+					$(".caution-tr").eq(7).css("display","table-row");
+					$(".caution").eq(7).children().css("color","var(--secondary)");
+					$(".caution").eq(7).html("<a>이메일 양식을 다시 한 번 확인해주세요</a>");
+					result[6] = false;
+				}
+			})//이메일 정규표현식
+			
+			
+// 			$("#emailCerSend").on("click",function(){
+// 				if(result[3]){
+// 					$(".caution").eq(3).html("<a>이메일로 인증번호를 전송했습니다.</a>");
+// 					$(".emailChk").css("display","table-row");
+// 				}
+// 			})//이메일 인증번호 보내기
+			
+			
+			
+			
+			
+			
+			
 
 			$("#birth-year").on("change",function(){
 				//년도 정규표현식
@@ -510,19 +514,19 @@
 				let year = now.getFullYear()-15;
 				if(!yearReg.test(inputYear) || inputYear<1900 || year<inputYear){
 					$(".year").addClass("error");
-					$(".caution-tr").eq(8).css("display","table-row");
-					$(".caution").eq(8).children().css("color","var(--secondary)");
-					$(".caution").eq(8).html("<a>입력값을 다시 한 번 확인해주세요.</a>");
-					result[6] = false;
+					$(".caution-tr").eq(9).css("display","table-row");
+					$(".caution").eq(9).children().css("color","var(--secondary)");
+					$(".caution").eq(9).html("<a>입력값을 다시 한 번 확인해주세요.</a>");
+					result[7] = false;
 				}else{
 					$(".year").removeClass("error");
-					$(".caution-tr").eq(8).css("display","none");
-					result[6] = true;
+					$(".caution-tr").eq(9).css("display","none");
+					result[7] = true;
 				}
 				if(inputYear==""){
 					$(".year").removeClass("error");
-					$(".caution-tr").eq(8).css("display","none");
-					result[6] = true;
+					$(".caution-tr").eq(9).css("display","none");
+					result[7] = true;
 				}
 			})//생일 정규표현식(년도)
 			
@@ -533,19 +537,19 @@
 				const inputDay = $(this).val();
 				if(!dayReg.test(inputDay) || inputDay<1 || 31<inputDay){
 					$(".day").addClass("error");
-					$(".caution-tr").eq(8).css("display","table-row");
-					$(".caution").eq(8).children().css("color","var(--secondary)");
-					$(".caution").eq(8).html("<a>입력값을 다시 한 번 확인해주세요.</a>");
-					result[6] = false;
+					$(".caution-tr").eq(9).css("display","table-row");
+					$(".caution").eq(9).children().css("color","var(--secondary)");
+					$(".caution").eq(9).html("<a>입력값을 다시 한 번 확인해주세요.</a>");
+					result[7] = false;
 				}else{
 					$(".day").removeClass("error");
-					$(".caution-tr").eq(8).css("display","none");
-					result[6] = true;
+					$(".caution-tr").eq(9).css("display","none");
+					result[7] = true;
 				}
 				if(inputDay==""){
 					$(".day").removeClass("error");
-					$(".caution-tr").eq(8).css("display","none");
-					result[6] = true;
+					$(".caution-tr").eq(9).css("display","none");
+					result[7] = true;
 				}
 			})//생일 정규표현식(일)
 			
