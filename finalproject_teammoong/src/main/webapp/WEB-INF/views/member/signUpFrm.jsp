@@ -76,12 +76,16 @@
 					</tr>
 					<tr>
 						<td class="addr"><label for="addr"><span>*</span>주소</label></td>
-						<td colspan="3"><input type="text" name="memberAddr"  placeholder="기본배송지로 등록됩니다" readonly></td>
+						<td colspan="3"><input type="text" name="zonecode"  placeholder="우편번호 조회 버튼을 눌러주세요" readonly></td>
 						<td><button type="button" id="addr" class="btn btn-sec size02">우편번호 조회</button></td>	
 					</tr>
 					<tr>
 						<td></td>
-						<td colspan="3"><input type="text" id="addrDetail" placeholder="우편번호 조회 버튼을 눌러 값을 입력해주세요" readonly></td>
+						<td colspan="3"><input type="text" name="memberAddr"  placeholder="기본배송지로 등록됩니다" readonly></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td colspan="3"><input type="text" id="addrDetail" placeholder="상세주소를 입력해주세요"></td>
 					</tr>
 					<tr>
 						<td><span style="color: red; font-size: 20px;">*</span>성별</td>
@@ -187,16 +191,16 @@
 								<label for="allCheck">전체 동의합니다</label>
 							</li>
 							<li>
-								<input type="checkbox" name="agree" id="agree1">
+								<input type="checkbox" id="agree1" class="agree">
 								<label for="agree1">이용약관 동의(필수)</label><a>약관보기></a>
 							</li>
 							<li>
-								<input type="checkbox" name="agree" id="agree2">
+								<input type="checkbox" name="member_agree" id="agree2" value="1" class="agree">
 								<label for="agree2">마케팅 활용동의(선택)</label><a>약관보기></a>
 								
 							</li>
 							<li>
-								<input type="checkbox" name="agree" id="agree3">
+								<input type="checkbox" id="agree3" class="agree">
 								<label for="agree3">본인은 만 14세 이상입니다.(필수)</label>
 							</li>
 						</ul>
@@ -321,14 +325,9 @@
 					$("#phone").val(result);
 					$(".cerNumChk").slideDown(200);
 				}
-			})
+			})//폰에서 하이픈 빼는거
 			
-			
-			
-			
-			
-			
-			
+
 			
 			$("[name='memberEmail']").keyup(function(){
 				//이메일 정규표현식
@@ -356,22 +355,16 @@
 			$("#addr").on("click",function(){
 				new daum.Postcode({
 			        oncomplete: function(data) {
+			        	console.log(data);
+			        	$("[name='zonecode']").val(data.zonecode);
 			        	$("[name='memberAddr']").val(data.address);
 			            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
 			            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
 			        }
 			    }).open();
-				if($("[name='memberAddr']").val()==!""){
-					alert("gd");
-				}
-			});
+			});//다음 지도 API
 			
-			
-			
-			
-			
-			
-			
+
 			
 			$("[name='memberAccount']").on("change",function(){
 				const result = $(this).val().replaceAll("-","");
@@ -404,7 +397,7 @@
 			
 			
 			const allCheck = document.querySelector("#allcheck")
-			const agreeArr = document.querySelectorAll("[name=agree]");
+			const agreeArr = document.querySelectorAll(".agree");
 			
 			allCheck.addEventListener("change",function(){  
 			    agreeArr.forEach(function(agree){
@@ -428,7 +421,6 @@
 			
 			
 			$("#submit").on("click",function(){
-				
 				const year = $("#birth-year").val();
 				const month = $("#birth-month").val();
 				let day;
@@ -438,32 +430,21 @@
 					day = $("#birth-day").val()
 				}
 				$("[name='memberBDay']").val(year+month+day); //생일 yyyymmdd형식으로 만들기
+
+
 				
-				
-				
-				
-				
+
 				$("<form>").submit();
-				
-			})
+			});
 			
 			
-			
+/*==================================================================================*/			
 			
 			$( function() {
 				$( ".select-custom" ).selectmenu();
 			});	
 	
-			$("#emailChk").on("click",function(){
-				$(".emailChk").slideDown(200);
-			})
-	
 
-			//버튼 누르면 인증번호 창 뜨게
-			
-			
-			
-			
 			function readURL(input) {
 				if (input.files && input.files[0]) {
 					var reader = new FileReader();
@@ -481,8 +462,6 @@
 				}
 			}
 			//파일 이미지
-
-			
 
 	</script>
 
