@@ -30,16 +30,30 @@ public class ProductService {
 	
 //	규린작업공간 20~100
 	
-	public ArrayList<Product> selectInfiniteScrollProductList(int start, int amount, int firstCategoryNo ,int detailCategoryNo) {
+	public ArrayList<Product> selectInfiniteScrollProductList(int start, int amount, int firstCategoryNo ,int detailCategoryNo, String sortType) {
 		// start : 1, amount : 3
 
 		int end = start + amount - 1; // 끝번호
+		
+//		String sortType = null;
+//		if(sortType.equals("recent-sort")) {
+//			sortType = "1 ASC";
+//		}else if(sortType.equals("discount-sort")) {
+//			sortType = "productDiscount desc";
+//		}else if(sortType.equals("downprice-sort")) {
+//			
+//		}else if(sortType.equals("highprice-sort")) {
+//			
+//		}else {
+//			
+//		}
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
 		map.put("firstCategoryNo", firstCategoryNo);
 		map.put("detailCategoryNo", detailCategoryNo);
+		map.put("sortType", sortType);
 		
 		ArrayList<Product> list = dao.selectInfiniteScrollProductList(map);
 		
