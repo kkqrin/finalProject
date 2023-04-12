@@ -27,9 +27,8 @@
 			board_seq.nextval,
 			#{boardWriter},
 			#{boardName},
-			#{categoryNo},
 			#{boardContent},
-			to_char(sysdate,'yyyy-mm-dd'),
+			to_date(sysdate,'yyyy-mm-dd'),
 			#{accountWriter},
 			#{accountName},
 			#{accountBank},
@@ -39,7 +38,8 @@
 			to_date(#{deliveryDate},'yyyy-mm-dd'),
 			#{boardEtc},
 			1,
-			0
+			0,
+			#{detailCategoryNo}
 			)
 			<selectKey resultType="_int" order="AFTER" keyProperty="boardNo">
 			select max(board_no) from board_tbl
@@ -78,7 +78,7 @@
 		<result column="board_no" property="boardNo" />
 		<result column="board_writer" property="boardWriter" />
 		<result column="board_name" property="boardName" />
-		<result column="category_no" property="categoryNo" />
+		
 		<result column="board_content" property="boardContent" />
 		<result column="board_date" property="boardDate" />
 		<result column="account_writer" property="accountWriter" />
@@ -91,6 +91,7 @@
 		<result column="board_etc" property="boardEtc" />
 		<result column="board_status" property="boardStatus" />
 		<result column="board_count" property="boardCount" />
+		<result column="d_category_no" property="detailCategoryNo" />
 		<collection property="fileList" 
 					select="selectFileList"
 					column="board_no"
