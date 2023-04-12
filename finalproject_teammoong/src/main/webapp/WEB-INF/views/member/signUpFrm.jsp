@@ -59,6 +59,10 @@
 						<td><label for="name"><span>*</span>이름</label></td>
 						<td colspan="3"><input type="text" name="memberName" id="name" placeholder="이름을 입력해주세요"></td>
 					</tr>
+					<tr class="caution-tr">
+						<td></td>
+						<td class="caution" colspan="3"><a>한글 2-10자(공백없이)</a></td>
+					</tr>
 					<tr>
 						<td><label for="phone"><span>*</span>휴대폰</label></td>
 						<td colspan="3"><input type="text" name="memberPhone" id="phone" placeholder="숫자만 입력해주세요"></td>
@@ -78,30 +82,30 @@
 						<td class="caution" colspan="3"></td>
 					</tr>
 					<tr>
-						<td class="addr"><label for="addr"><span>*</span>주소</label></td>
+						<td class="addr"><label for="addr"><span>*</span>주소</label><input type="hidden" name="memberAddr"></td>
 						<td colspan="3"><input type="text" name="memberZoneCode"  placeholder="우편번호 조회 버튼을 눌러주세요" readonly required></td>
 						<td><button type="button" id="addr" class="btn btn-sec size02">우편번호 조회</button></td>	
 					</tr>
 					<tr>
 						<td></td>
-						<td colspan="3"><input type="text" name="memberAddr"  placeholder="기본배송지로 등록됩니다" readonly required></td>
+						<td colspan="3"><input type="text" name="address"  placeholder="기본배송지로 등록됩니다" readonly required></td>
 					</tr>
 					<tr>
 						<td></td>
-						<td colspan="3"><input type="text" id="addrDetail" placeholder="상세주소를 입력해주세요" required></td>
+						<td colspan="3"><input type="text" name="detailAddr" placeholder="상세주소를 입력해주세요" required></td>
 					</tr>
 					<tr>
 						<td><span style="color: red; font-size: 20px;">*</span>성별</td>
 						<td>
-							<input type="radio" name="memberGender" id="m" value="1">
+							<input type="radio" name="memberGender" id="m" value=1>
 							<label for="m">남자</label>
 						</td>
 						<td id="no">
-							<input type="radio" name="memberGender" id="f" value="2">
+							<input type="radio" name="memberGender" id="f" value=2>
 							<label for="f">여자</label>
 						</td>
 						<td>
-							<input type="radio" name="memberGender" id="n" value="3">
+							<input type="radio" name="memberGender" id="n" value=3>
 							<label for="n">선택안함</label>
 						</td>
 					</tr>
@@ -182,7 +186,7 @@
 								<label class="deletePic" onclick="readURL(0);" style="display: none;">
 									사진 삭제하기
 								</label>
-								<input type="file" name="memberPath" id="fileUpload" accept=".gif, .jpg, .jpeg, .png" onchange="readURL(this);" style="display: none;">
+								<input type="file" name="memberPropic" id="fileUpload" accept=".gif, .jpg, .jpeg, .png" onchange="readURL(this);" style="display: none;">
 								<p>
 									64x64 사이즈에 최적화되어 있습니다.
 								</p>
@@ -209,7 +213,7 @@
 								<label for="agree1">이용약관 동의(필수)</label><a>약관보기></a>
 							</li>
 							<li>
-								<input type="checkbox" name="member_agree" id="agree2" value="1" class="agree">
+								<input type="checkbox" name="memberAgree" id="agree2" value=1 class="agree">
 								<label for="agree2">마케팅 활용동의(선택)</label><a>약관보기></a>
 								
 							</li>
@@ -221,7 +225,7 @@
 					</div>
 				</div>
 				<div class="area-btn center">
-				<button class="btn btn-pri size02" type="button" id="submit">가입하기</button>
+				<input type="submit" value="회원가입" class="btn btn-sec size02" style="width: 156.83px;height: 38px;border:none; cursor: pointer;">
 				</div>	
 			</form>
 		</div><!--signUp-form-->
@@ -271,10 +275,10 @@
 			makeBankList();
 			// 은행 selectBox 채우는 함수
 			
+		
 			
-			
-			let result = [false, false, false, false, false, true, true, true]; //정규표현식 검사
-			//0아이디, 1비밀번호, 2비밀번호 확인, 3휴대폰형식, 4휴대폰인증코드, 5계좌번호형식, 6이메일형식, 7생년월일
+			let result = [false, false, false, false, false, true, false ,true, true, true]; //정규표현식 검사
+						//0아이디, 1비밀번호, 2비밀번호 확인, 3이름확인, 4휴대폰형식, 5휴대폰인증코드, 6주소확인, 7계좌번호형식, 8이메일형식, 9생년월일
 			
 			
 			
@@ -304,7 +308,7 @@
 			
 			$("[name='memberPw']").keyup(function(){
 				//영문,숫자,특수문자(공백 제외)조합으로 8글자 이상
-				const pwReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+				const pwReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~+@$!%*#?&])[A-Za-z\d~+@$!%*#?&]{8,}$/;
 				const inputPw = $(this).val();
 				if(pwReg.test(inputPw)){
 					$(this).removeClass("error");
@@ -350,6 +354,28 @@
 			})//비밀번호 확인 처리
 
 			
+			$("[name='memberName']").keyup(function(){
+				const nameReg = /^[ㄱ-ㅎ가-힣]{2,10}$/;
+				const inputName = $(this).val();
+				
+				if(nameReg.test(inputName)){
+					$(this).removeClass("error");
+					$(".caution-tr").eq(3).css("display","none");
+					result[3] = true;
+				}else{
+					$(this).addClass("error");
+					$(".caution-tr").eq(3).css("display","table-row");
+					result[3] = false;
+				}
+				if(inputName==""){
+					$(this).removeClass("error");
+					$(".caution-tr").eq(3).css("display","none");
+			    	result[3] = false;
+				}
+				
+			});//이름 정규표현식
+			
+			
 			$("[name='memberPhone']").keyup(function(){
 				//핸드폰 정규표현식
 				const pwReg = /^\d{3}-\d{3,4}-\d{4}$/;
@@ -357,14 +383,14 @@
 				const inputPhone = $(this).val();
 				if(pwReg.test(inputPhone) || pwReg2.test(inputPhone) || inputPhone==""){
 					$(this).removeClass("error");
-					$(".caution-tr").eq(3).css("display","none");
-					result[3] = true;
+					$(".caution-tr").eq(4).css("display","none");
+					result[4] = true;
 				}else{
 					$(this).addClass("error");
-					$(".caution-tr").eq(3).css("display","table-row");
-					$(".caution").eq(3).children().css("color","var(--secondary)");
-					$(".caution").eq(3).html("<a>형식에 맞지 않는 번호입니다</a>");
-					result[3] = false;
+					$(".caution-tr").eq(4).css("display","table-row");
+					$(".caution").eq(4).children().css("color","var(--secondary)");
+					$(".caution").eq(4).html("<a>형식에 맞지 않는 번호입니다</a>");
+					result[4] = false;
 				}
 			})//핸드폰 형식 검사
 			
@@ -372,12 +398,12 @@
 			let cerCode=""; //★핸드폰 인증코드!!!
 			$("#phoneChk").on("click",function(){
 				let replace;
-				if(result[3]){
+				if(result[4]){
 					replace = $("[name='memberPhone']").val().replaceAll("-","");
-					$("#phone").val(replace);
+					$("[name='memberPhone']").val(replace);
 					$(".cerNumChk").slideDown(200);
-					$(".caution-tr").eq(3).css("display","table-row");
-					$(".caution").eq(3).html("<a>발송된 인증번호를 확인해주세요.</a>");
+					$(".caution-tr").eq(4).css("display","table-row");
+					$(".caution").eq(4).html("<a>발송된 인증번호를 확인해주세요.</a>");
 				}
 				
 				$.ajax({
@@ -398,9 +424,9 @@
 				}else{
 					if(cerCode == inputCode){
 						$(this).addClass("error");
-						$(".caution-tr").eq(4).css("display","table-row");
-						$(".caution").eq(4).html("<a>인증번호가 일치합니다.</a>");
-						$(".caution").eq(4).children().css("color","#1877f2");
+						$(".caution-tr").eq(5).css("display","table-row");
+						$(".caution").eq(5).html("<a>인증번호가 일치합니다.</a>");
+						$(".caution").eq(5).children().css("color","#1877f2");
 						
 						$("[name='memberPhone']").attr("readonly",true);
 						$("#cerNum").attr("readonly",true);
@@ -414,15 +440,15 @@
 						
 						$("#phoneChk").css("display","none");
 						
-						result[4]=true;
+						result[5]=true;
 					}else{
 						$(this).addClass("error");
-						$(".caution-tr").eq(4).css("display","table-row");
-						$(".caution").eq(4).children().css("color","red");
-						$(".caution").eq(4).html("<a>인증번호가 다릅니다</a>");
-						result[4] = false;
+						$(".caution-tr").eq(5).css("display","table-row");
+						$(".caution").eq(5).children().css("color","red");
+						$(".caution").eq(5).html("<a>인증번호가 다릅니다</a>");
+						result[5] = false;
 						
-						$(".caution-tr").eq(3).css("display","none");
+						$(".caution-tr").eq(4).css("display","none");
 						
 						$("[name='memberPhone']").attr("readonly",false);
 						$("#cerNum").attr("readonly",false);
@@ -441,7 +467,8 @@
 			        oncomplete: function(data) {
 			        	console.log(data);
 			        	$("[name='memberZoneCode']").val(data.zonecode);
-			        	$("[name='memberAddr']").val(data.address);
+			        	const addr = String(data.address);
+			        	$("[name='address']").val(addr);
 			            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
 			            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
 			        }
@@ -449,7 +476,19 @@
 			});//다음 지도 API
 			
 			
+			$("[name='detailAddr']").keyup(function(){
+				let address = $("[name='address']").val();
+				let detailAddr = $(this).val();
+				if(address!="" && detailAddr!=""){
+					address += " "+detailAddr;
+					$("[name='memberAddr']").val(address); //합친 주소 값넣기
+					result[6]=true;
+				}else{
+					result[6]=false;
+				}
+			});//주소 입력 확인
 			
+
 			
 			$("[name='memberAccount']").keyup(function(){
 				const inputAccount = $("[name='memberAccount']").val();
@@ -457,23 +496,24 @@
 				
 				if(AcountReg.test(inputAccount)){
 			        $(this).removeClass("error");
-			        $(".caution-tr").eq(6).css("display","none");
+			        $(".caution-tr").eq(7).css("display","none");
 			        
 					const result = $(this).val().replaceAll("-","");
+					result = String(result);
 					$(this).val(result);
 			        
-			        result[5] = true;
+			        result[7] = true;
 				}else{
 					$(this).addClass("error");
-					$(".caution-tr").eq(6).css("display","table-row");
-					$(".caution").eq(6).children().css("color","var(--secondary)");
-					$(".caution").eq(6).html("<a>숫자를 입력해주세요</a>");
-					result[5] = false;
+					$(".caution-tr").eq(7).css("display","table-row");
+					$(".caution").eq(7).children().css("color","var(--secondary)");
+					$(".caution").eq(7).html("<a>숫자를 입력해주세요</a>");
+					result[7] = false;
 				}
 				if(inputAccount==""){
 					$(this).removeClass("error");
-					$(".caution-tr").eq(6).css("display","none");
-					result[5] = true;
+					$(".caution-tr").eq(7).css("display","none");
+					result[7] = true;
 				}
 			});//계좌번호 정규표현식
 			
@@ -484,14 +524,14 @@
 				const inputEmail = $(this).val();
 				if(emailReg.test(inputEmail) || inputEmail==""){
 					$(this).removeClass("error");
-					$(".caution-tr").eq(7).css("display","none");
-					result[6] = true;
+					$(".caution-tr").eq(8).css("display","none");
+					result[8] = true;
 				}else{
 					$(this).addClass("error");
-					$(".caution-tr").eq(7).css("display","table-row");
-					$(".caution").eq(7).children().css("color","var(--secondary)");
-					$(".caution").eq(7).html("<a>이메일 양식을 다시 한 번 확인해주세요</a>");
-					result[6] = false;
+					$(".caution-tr").eq(8).css("display","table-row");
+					$(".caution").eq(8).children().css("color","var(--secondary)");
+					$(".caution").eq(8).html("<a>이메일 양식을 다시 한 번 확인해주세요</a>");
+					result[8] = false;
 				}
 			})//이메일 정규표현식
 			
@@ -518,19 +558,19 @@
 				let year = now.getFullYear()-15;
 				if(!yearReg.test(inputYear) || inputYear<1900 || year<inputYear){
 					$(".year").addClass("error");
-					$(".caution-tr").eq(9).css("display","table-row");
-					$(".caution").eq(9).children().css("color","var(--secondary)");
-					$(".caution").eq(9).html("<a>입력값을 다시 한 번 확인해주세요.</a>");
-					result[7] = false;
+					$(".caution-tr").eq(10).css("display","table-row");
+					$(".caution").eq(10).children().css("color","var(--secondary)");
+					$(".caution").eq(10).html("<a>입력값을 다시 한 번 확인해주세요.</a>");
+					result[9] = false;
 				}else{
 					$(".year").removeClass("error");
-					$(".caution-tr").eq(9).css("display","none");
-					result[7] = true;
+					$(".caution-tr").eq(10).css("display","none");
+					result[9] = true;
 				}
 				if(inputYear==""){
 					$(".year").removeClass("error");
-					$(".caution-tr").eq(9).css("display","none");
-					result[7] = true;
+					$(".caution-tr").eq(10).css("display","none");
+					result[9] = true;
 				}
 			})//생일 정규표현식(년도)
 			
@@ -541,19 +581,19 @@
 				const inputDay = $(this).val();
 				if(!dayReg.test(inputDay) || inputDay<1 || 31<inputDay){
 					$(".day").addClass("error");
-					$(".caution-tr").eq(9).css("display","table-row");
-					$(".caution").eq(9).children().css("color","var(--secondary)");
-					$(".caution").eq(9).html("<a>입력값을 다시 한 번 확인해주세요.</a>");
-					result[7] = false;
+					$(".caution-tr").eq(10).css("display","table-row");
+					$(".caution").eq(10).children().css("color","var(--secondary)");
+					$(".caution").eq(10).html("<a>입력값을 다시 한 번 확인해주세요.</a>");
+					result[9] = false;
 				}else{
 					$(".day").removeClass("error");
-					$(".caution-tr").eq(9).css("display","none");
-					result[7] = true;
+					$(".caution-tr").eq(10).css("display","none");
+					result[9] = true;
 				}
 				if(inputDay==""){
 					$(".day").removeClass("error");
-					$(".caution-tr").eq(9).css("display","none");
-					result[7] = true;
+					$(".caution-tr").eq(10).css("display","none");
+					result[9] = true;
 				}
 			})//생일 정규표현식(일)
 			
@@ -563,15 +603,7 @@
 			
 			
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+					
 			
 			
 			
@@ -593,7 +625,11 @@
 			
 			
 			
-			$("#submit").on("click",function(){
+			$("[type='submit']").on("click",function(){
+				if($("[name='memberGender']:checked").length==0){
+				   $("[name='memberGender']").eq(2).prop('checked',true);
+				}; //성별입력확인받고 입력 안했으면 3으로 값
+
 				const year = $("#birth-year").val();
 				const month = $("#birth-month").val();
 				const day = $("#birth-day").val();
@@ -605,44 +641,60 @@
 					}else{
 						modifyDay = $("#birth-day").val();
 					}
-					$("[name='memberBDay']").val(year+month+modifyDay); //생일 yyyymmdd형식으로 만들기
+					$("[name='memberBDay']").val(year+month+modifyDay); 
 				}else{
 					$("[name='memberBDay']").val(null);
+				}//받은 생일 yyyymmdd형식으로 만들기
+
+				//만약 마케팅 동의 체크를 안하면 undefined가 넘어가지 않게
+				if($("[name='memberAgree']").prop('checked')==false){
+					$("[name='memberAgree']").val(0);
+				}else{
+					$("[name='memberAgree']").val(1);
+				}
+				
+				
+				
+				//본격적인 필수항목 검사
+				let resultChk = true;
+				$.each(result,function(index,item){
+					if(!item){
+						resultChk = false;
+					}
+				});
+				let agree1 = $("#agree1").prop('checked');
+				let agree3 = $("#agree3").prop('checked');
+				
+				if(!resultChk){
+					console.log("이프문 도는 중")
+					event.preventDefault();
+				}else if(!agree1 || !agree3){
+					console.log("이프문22 도는 중")
+					alert("필수 이용약관에 동의해주세요");
+					event.preventDefault();
 				}
 
-				let memberAddr = $("[name='memberAddr']").val();
-				const detailAddr = $("#addrDetail").val();
-				memberAddr += detailAddr;
-				$("[name='memberAddr']").val(memberAddr);
 				
-				console.log($("[name='memberId']").val(),
-						$("[name='memberPw']").val(),
-						$("[name='memberName']").val(),
-						$("[name='memberPhone']").val(),
-						$("[name='memberZoneCode']").val(),
-						$("[name='memberAddr']").val(),
-						$("[name='memberGender']").val(),
-						$("[name='memberEmail']").val(),
-						$("[name='memberBank']").val(),
-						$("[name='memberAccount']").val(),
-						$("[name='memberBDay']").val());
-				console.log($("[name='memberPath']").val());
-				
-				const agree1 = $("#agree1").prop('checked');
-				const agree3 = $("#agree3").prop('checked');
-				
-				console.log(result,agree1,agree3);
-				
-				if(result[0] && result[1] && result[2] && result[3] && result[4] && result[5] && result[6] && agree1 && agree3){
-					alert("값 전송가능!");
-					$("<form>").submit();
-				}else if(!agree1 || !agree3){
-					alert("필수 이용약관에 동의해주세요");
-				}
+				console.log("아이디"+$("[name='memberId']").val(),
+						"비번"+$("[name='memberPw']").val(),
+						"이름"+$("[name='memberName']").val(),
+						"폰"+$("[name='memberPhone']").val(),
+						"우편번호"+$("[name='memberZoneCode']").val(),
+						"합쳐진주소"+$("[name='memberAddr']").val(),
+						"성별"+$("[name='memberGender']:checked").val(),
+						"이메일"+$("[name='memberEmail']").val(),
+						"은행"+$("[name='memberBank']").val(),
+						"계좌"+$("[name='memberAccount']").val(),
+						"생일"+$("[name='memberBDay']").val(),
+						"파일경로"+$("[name='memberPath']").val(),
+						"멤버동의"+$("[name='memberAgree']").val(),
+						"필수1동의"+$("#agree1").prop('checked'),
+						"필수2동의"+$("#agree3").prop('checked'),result);
+
+							
 				
 			});
-			
-			
+
 /*==================================================================================*/			
 			
 			$( function() {

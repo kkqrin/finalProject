@@ -22,14 +22,15 @@
 
 </head>
 <body>
+	<input id="loc" type="hidden" value="${msg.loc }">
 	<div id="modalBasic" class="modal modal-pri">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5>모달 타이틀</h5>
+				<h5>${msg.title }</h5>
 			</div>
 			<div class="modal-body">
 				<p>
-					
+					${msg.msg }
 				</p>
 			</div>
 			<div class="area-btn full">
@@ -39,6 +40,8 @@
 	</div>
 
 	<script>
+		const loc = $("#loc").val();
+	
 		$(function () {
 			$("#modalBasic").modal({
 				fadeDuration: 100
@@ -46,7 +49,7 @@
 			return false;
 		});
 		$("#ok").on('click',function(){
-			location.href = "/";
+			location.href = loc;
 		})
 	</script>
 </body>

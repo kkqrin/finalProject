@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import common.MsgVO;
 import common.PhoneCertify;
 import moo.ng.san.member.model.service.MemberService;
 import moo.ng.san.member.model.vo.Member;
@@ -28,7 +29,12 @@ public class MemberController {
 	PhoneCertify phoneCertify;
 	
 	@RequestMapping(value = "/msgTest.do")
-	public String msgTest() {
+	public String msgTest(Model model) {
+		MsgVO msg = new MsgVO();
+		msg.setTitle("가입을 환영합니다");
+		msg.setMsg("뭉쳐야산다에서 저렴하게 구매해보세요 :)");
+		msg.setLoc("/loginFrm.do");
+		model.addAttribute("msg", msg);
 		return "common/msg";
 	}
 	
@@ -41,6 +47,22 @@ public class MemberController {
 	
 	@RequestMapping(value = "/join.do")
 	public String signIn(Member m) {
+		
+//		System.out.println("저잘왔어요~~");
+//		System.out.println(m.getMemberId());
+//		System.out.println(m.getMemberPw());
+//		System.out.println(m.getMemberName());
+//		System.out.println(m.getMemberEmail());
+//		System.out.println(m.getMemberPhone());
+//		System.out.println(m.getMemberAddr());
+//		System.out.println(m.getMemberGender());
+//		System.out.println(m.getMemberBDay());
+//		System.out.println(m.getMemberBank());
+//		System.out.println(m.getMemberAccount());
+//		System.out.println(m.getMemberAgree());
+//		System.out.println(m.getMemberZoneCode());
+//		System.out.println(m.getMemberPath());
+		
 		return "";
 	}
 	
