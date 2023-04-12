@@ -16,7 +16,7 @@
                         const a1 = $("<a>");
                         a1.addClass("cate-name");
                         const c = category[i];
-                        a1.prop('href',c.categoryNo);
+                        a1.prop('href',"/productList.do?category="+(c.categoryNo+10000));
                         a1.text(c.categoryName);
 
                         div1.append(a1);

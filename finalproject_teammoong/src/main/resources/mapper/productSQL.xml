@@ -70,19 +70,28 @@
 	<select id="selectInfiniteScrollProductList" parameterType="map" resultType="p">
 		SELECT * FROM
 		(SELECT ROWNUM AS RNUM, P.* FROM
-		(SELECT 
-				PRODUCT_NO AS productNo,
-				D_CATEGORY_NO AS detailCategoryNo,
-				PRODUCT_NAME AS productName,
-				PRODUCT_EA AS productEa,
-				PRODUCT_PRICE AS productPrice,
-				PRODUCT_STATUS AS productStatus,
-				PRODUCT_COST AS productCost,
-				GONGGU_NUMBER AS  gongguNumber,
-				PRODUCT_CONTENT AS productContent,
-				PRODUCT_DISCOUNT AS productDiscount,
-				(SELECT FILEPATH FROM PRODUCT_IMG WHERE P_IMG_NO=(SELECT MIN(P_IMG_NO) FROM PRODUCT_IMG  WHERE PRODUCT_NO=PRODUCT_TBL.PRODUCT_NO))  AS thumbnail
-		FROM PRODUCT_TBL WHERE D_CATEGORY_NO = #{detailCategoryNo} ORDER BY 1 DESC) P)
+		(select 
+                p.PRODUCT_NO AS productNo,
+				p.D_CATEGORY_NO AS detailCategoryNo,
+				p.PRODUCT_NAME AS productName,
+				p.PRODUCT_EA AS productEa,
+				p.PRODUCT_PRICE AS productPrice,
+				p.PRODUCT_STATUS AS productStatus,
+				p.PRODUCT_COST AS productCost,
+				p.GONGGU_NUMBER AS  gongguNumber,
+				p.PRODUCT_CONTENT AS productContent,
+				p.PRODUCT_DISCOUNT AS productDiscount,
+				(SELECT FILEPATH FROM PRODUCT_IMG WHERE P_IMG_NO=(SELECT MIN(P_IMG_NO) FROM PRODUCT_IMG  WHERE PRODUCT_NO=p.PRODUCT_NO))  AS thumbnail,
+                pc.category_no as firstCategoryNo
+	      from product_tbl p
+	      join detail_category dc on p.d_category_no = dc.d_category_no
+	      join product_category pc on dc.category_no = pc.category_no
+	      where Pc.Category_No = #{firstCategoryNo}
+	      <if test="detailCategoryNo != 0">
+	      and p.D_CATEGORY_NO = #{detailCategoryNo}
+	      </if>
+	      
+     	  order by 1 DESC) P)
 		WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>	
 	<select id="selectProductFilelist" parameterType="_int" resultType="pf">
@@ -92,5 +101,17 @@
 			FILEPATH AS filepath
 		FROM PRODUCT_IMG
 		WHERE PRODUCT_NO = #{_parameter}
+	</select>
+	
+	<select id="selectProductCount" parameterType="_int" resultType="_int">
+		select count(*) as totalCount 
+		from Product_Tbl
+		left join detail_category using (d_category_no)
+		where 
+		category_no = #{firstCategoryNo}
+		<if test="detailCategoryNo != 0">
+		and d_category_no = #{detailCategoryNo}
+		</if>
+
 	</select>
 </mapper>
