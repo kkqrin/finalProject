@@ -1,0 +1,42 @@
+<!-- <?xml version="1.0" encoding="UTF-8"?> -->
+<!-- <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" > -->
+<!-- <mapper namespace="askItem"> -->
+<!-- 		<insert id="insertAskItem" parameterType="a"> -->
+<!-- 		insert into askitem_tbl values -->
+<!-- 			( -->
+<!-- 			askitem_seq.nextval,  -->
+<!-- 			#{corpName},  -->
+<!-- 			#{repName}, -->
+<!-- 			#{corpAddr1}, -->
+<!-- 			#{corpAddr2}, -->
+<!-- 			#{corpType}, -->
+<!-- 			#{corpItem}, -->
+<!-- 			#{contName}, -->
+<!-- 			#{depart}, -->
+<!-- 			#{positionJob}, -->
+<!-- 			#{contPhone}, -->
+<!-- 			#{cont_mail}, -->
+<!-- 			#{homepage}, -->
+<!-- 			#{category}, -->
+<!-- 			#{askTitle}, -->
+<!-- 			sysdate,  -->
+<!-- 			#{regNo} -->
+<!-- 			) -->
+<!-- 	</insert> -->
+<!-- 	<insert id="insertFile" parameterType="d"> -->
+<!-- 		insert into docu_file values -->
+<!-- 		(docu_file_seq.nextval, #{docuName}, #{docupath}, #{corpNo}) -->
+<!-- 	</insert> -->
+<!-- 	<select id="selectOneFile" resultType="d"> -->
+<!-- 		 select  -->
+<!-- 		 docu_no as docuNo,  -->
+<!-- 		 docu_name as docuName, -->
+<!-- 		 corp_no as corpNo, -->
+<!-- 		 docupath  -->
+<!-- 		from docu_file where docu_no = #{docuNo} -->
+<!-- 	</select> -->
+<!-- 	<delete id="askItemDelete" parameterType="_int"> -->
+<!-- 		delete from askitem_tbl -->
+<!-- 		where corp_no = #{_parameter} -->
+<!-- 	</delete> -->
+<!-- </mapper> -->

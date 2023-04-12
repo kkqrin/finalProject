@@ -1,0 +1,62 @@
+.mypage-wrap{
+    display: flex;
+    flex-wrap: wrap;
+}
+.mypage-wrap .mypage-title{
+    width: 1200px;
+    margin-bottom: 20px;
+}
+
+
+.mypage-zone{
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+}
+
+.mypage-menu{
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+}
+.mypage-menu .one-menu{
+    width: 90%;
+}
+.mypage-menu .one-menu>a{
+    display: inline-block;
+    width: 100%;
+}
+.mypage-menu .one-menu>a:not(.one-menu-title):hover{
+    background-color: var(--bg-dim);
+}
+.mypage-menu .one-menu>.one-menu-title{
+    color: var(--primary);
+    font-size: 24px;
+    font-weight: bold;
+    padding-bottom: 3px;
+    border-bottom: 5px solid var(--primary);
+    cursor: default;
+}
+.mypage-menu .one-menu:not(:first-child){
+    margin-top: 20px;
+}
+.mypage-menu .one-menu>a:not(.one-menu-title){
+    font-size: 18px;
+    padding: 10px 0;
+}
+
+/*==================mypage-content==================*/
+.mypage-right{
+    width: 950px;
+}
+
+.mypage-right-title{
+    font-size: 24px;
+    font-weight: bold;
+    padding-bottom: 3px;
+    border-bottom: 5px solid var(--content-primary);
+}
+
+.mypage-content{
+    padding: 20px;
+}

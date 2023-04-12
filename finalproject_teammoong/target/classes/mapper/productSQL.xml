@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN
+" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="product">
+
+	<insert id="insertProduct" parameterType="p">
+		insert into product_tbl values
+		(product_seq.nextval,
+		#{detailCategoryNo},
+		#{productName},
+		#{productEa},
+		#{productPrice},
+		#{productStatus},
+		#{productCost},
+		#{gongguNumber},
+		#{productContent},
+		#{productDiscount})
+	</insert>
+	
+	<select id="selectProductNo" resultType="_int">
+		select max(product_no) from product_tbl
+	</select>
+
+	<insert id="insertFile">
+		insert into product_img values(product_img_seq.nextval,
+		#{productNo},
+		#{filepath})
+	</insert>
+	
+	<select id="selectProductByProductNo" parameterType="_int" resultType="p">
+		SELECT 
+			PRODUCT_NO AS productNo,
+			D_CATEGORY_NO AS detailCategoryNo,
+			PRODUCT_NAME AS productName,
+			PRODUCT_EA AS productEa,
+			PRODUCT_PRICE AS productPrice,
+			PRODUCT_STATUS AS productStatus,
+			PRODUCT_COST AS productCost,
+			GONGGU_NUMBER AS  gongguNumber,
+			PRODUCT_CONTENT AS productContnet,
+			PRODUCT_DISCOUNT AS productDiscount
+		FROM PRODUCT_TBL 
+		WHERE PRODUCT_NO = #{_parameter}
+	</select>
+	
+	<select id="selectProductImg" parameterType="_int" resultType="pf">
+		SELECT
+			P_IMG_NO AS pImgNo,
+			PRODUCT_NO AS productNo,
+			FILEPATH AS filepath
+		FROM PRODUCT_IMG
+		WHERE PRODUCT_NO = #{_parameter}
+	</select>
+	
+	<select id="selectProductList" resultType="p">
+		SELECT 
+			PRODUCT_NO AS productNo,
+			D_CATEGORY_NO AS detailCategoryNo,
+			PRODUCT_NAME AS productName,
+			PRODUCT_EA AS productEa,
+			PRODUCT_PRICE AS productPrice,
+			PRODUCT_STATUS AS productStatus,
+			PRODUCT_COST AS productCost,
+			GONGGU_NUMBER AS  gongguNumber,
+			PRODUCT_CONTENT AS productContent,
+			PRODUCT_DISCOUNT AS productDiscount
+		FROM PRODUCT_TBL 
+	</select>
+	
+	<select id="selectInfiniteScrollProductList" parameterType="map" resultType="p">
+		SELECT * FROM
+		(SELECT ROWNUM AS RNUM, P.* FROM
+		(select 
+                p.PRODUCT_NO AS productNo,
+				p.D_CATEGORY_NO AS detailCategoryNo,
+				p.PRODUCT_NAME AS productName,
+				p.PRODUCT_EA AS productEa,
+				p.PRODUCT_PRICE AS productPrice,
+				p.PRODUCT_STATUS AS productStatus,
+				p.PRODUCT_COST AS productCost,
+				p.GONGGU_NUMBER AS  gongguNumber,
+				p.PRODUCT_CONTENT AS productContent,
+				p.PRODUCT_DISCOUNT AS productDiscount,
+				(SELECT FILEPATH FROM PRODUCT_IMG WHERE P_IMG_NO=(SELECT MIN(P_IMG_NO) FROM PRODUCT_IMG  WHERE PRODUCT_NO=p.PRODUCT_NO))  AS thumbnail,
+                pc.category_no as firstCategoryNo
+	      from product_tbl p
+	      join detail_category dc on p.d_category_no = dc.d_category_no
+	      join product_category pc on dc.category_no = pc.category_no
+	      where Pc.Category_No = #{firstCategoryNo}
+	      <if test="detailCategoryNo != 0">
+	      and p.D_CATEGORY_NO = #{detailCategoryNo}
+	      </if>
+	      
+     	  order by 1 DESC) P)
+		WHERE RNUM BETWEEN #{start} AND #{end}
+	</select>	
+	<select id="selectProductFilelist" parameterType="_int" resultType="pf">
+		SELECT
+			P_IMG_NO AS pImgNo,
+			PRODUCT_NO AS productNo,
+			FILEPATH AS filepath
+		FROM PRODUCT_IMG
+		WHERE PRODUCT_NO = #{_parameter}
+	</select>
+	
+	<select id="selectProductCount" parameterType="_int" resultType="_int">
+		select count(*) as totalCount 
+		from Product_Tbl
+		left join detail_category using (d_category_no)
+		where 
+		category_no = #{firstCategoryNo}
+		<if test="detailCategoryNo != 0">
+		and d_category_no = #{detailCategoryNo}
+		</if>
+
+	</select>
+</mapper>

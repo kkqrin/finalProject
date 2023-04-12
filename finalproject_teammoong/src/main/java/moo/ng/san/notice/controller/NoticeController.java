@@ -39,13 +39,13 @@ public class NoticeController {
 	public String noticeWriteFrm() {
 		return "notice/noticeWriteFrm";
 	}
+	@ResponseBody
 	@RequestMapping(value="/noticeWrite.do")
 	public String noticeWrite(Notice n, MultipartFile[] noticeFile, HttpServletRequest request) {
 		ArrayList<FileVO> fileList = new ArrayList<FileVO>();
 		if(!noticeFile[0].isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/notice/");
 			for(MultipartFile file : noticeFile) {
-				System.out.println(savePath);
 				String fileName = file.getOriginalFilename();
 				String filepath = manager.upload(savePath, file);
 				FileVO fileVO = new FileVO();
@@ -56,12 +56,12 @@ public class NoticeController {
 		}
 		int result = service.insertNotice(n,fileList);
 		if(result == (fileList.size()+1)) {
-			return "redirect:/noticeList.do?reqPage=1";
+			return "success";
 		}else {
-			return "redirect:/";
+			return "error";
 		}
 	}
-	@RequestMapping(value = "/uploadImage.do")
+	@RequestMapping(value = "/uploadImage.do", produces = "plain/text;charset=utf-8")
 	@ResponseBody
 	public String uploadImage(@RequestParam("imageFile") MultipartFile multipartFile, HttpServletRequest request, HttpServletResponse response) throws IOException {
 	    // 이미지 파일 저장
@@ -78,8 +78,69 @@ public class NoticeController {
 	@RequestMapping(value="/noticeView.do")
 	public String noticeView(int noticeNo, Model model) {
 		Notice n = service.selectOneNotice(noticeNo);
+		n.setReadCount(n.getReadCount()+1);
+		int result = service.updateReadCount(n);
 		model.addAttribute("n",n);
 		return "notice/noticeView";
 	}
 	
+	@RequestMapping(value="/noticeUpdateFrm.do")
+	public String noticeUpdateFrm(int noticeNo, Model model) {
+		Notice n = service.selectOneNotice(noticeNo);
+		model.addAttribute("n",n);
+		return "notice/noticeUpdateFrm";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/noticeUpdate.do")
+	public String noticeUpdate(Notice n, int[] fileNo, String[] filepath, MultipartFile[] noticeFile, HttpServletRequest request) {
+		ArrayList<FileVO> fileList = new ArrayList<FileVO>();
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/notice/");
+		if(!noticeFile[0].isEmpty()) {
+			for(MultipartFile file : noticeFile) {
+				String filename = file.getOriginalFilename();
+				System.out.println(filename);
+				String upFilepath = manager.upload(savePath, file);
+				
+				FileVO fileVO = new FileVO();
+				fileVO.setFileName(filename);
+				fileVO.setFilepath(upFilepath);
+				fileVO.setNoticeNo(n.getNoticeNo());
+				fileList.add(fileVO);
+			}
+		}
+		int result = service.noticeUpdate(n, fileList, fileNo);
+		if(fileNo != null && (result == (fileList.size()+fileNo.length+1))) {
+			for(String delFile :filepath) {
+				boolean delResult = manager.deleteFile(savePath, delFile);
+			}
+			return "success";
+		}else if(fileNo == null && (result == fileList.size()+1)) {
+			return "success";
+		}else {
+			return "error";
+		}
+	}
+	
+	@RequestMapping(value="/noticeDelete.do")
+	public String noticeDelete(int noticeNo) {
+		int result = service.noticeDelete(noticeNo);
+		if(result > 0) {
+			return "redirect:/noticeList.do?reqPage=1";
+		}else {
+			return "redirect:/noticeList.do?reqPage=1";
+		}
+	}
+	@RequestMapping(value="/noticeFileDown.do")
+	public void noticeFileDown(int fileNo, HttpServletRequest request, HttpServletResponse response) {
+		//fileNo : DB에서 filename, filepath를 조회해오기위한 용도
+		//request : 파일위치 찾을 때 사용
+		//response : 파일다운로드 로직 구현 시 사용
+		//리턴을 하지않음 - 페이지이동이 필요없으므로
+		FileVO file = service.getFile(fileNo);
+		System.out.println(file);
+		//filename과 filepath를 찾아오기위해서
+		manager.download(file, request, response);
+		
+	}
 }

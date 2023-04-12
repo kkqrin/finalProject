@@ -17,4 +17,19 @@ public class MemberService {
 		return dao.selectOneMember(member);
 	}//selectOneMember
 
+
+	public int insertMember(Member m, String filePath) {
+		int result = 0;
+		
+		m.setMemberPath(filePath);
+		result = dao.insertMember(m);
+		
+		if(result>0) {
+			
+		}
+		
+		return result;
+	}//insertMember
+
+	
 }//MemberService

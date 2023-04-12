@@ -23,117 +23,115 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css">
     <!--모달 and 알럿-->
-    <script src="/resources/js/modal-alert.js"></script>
+<!--     <script src="/resources/js/modal-alert.js"></script> -->
     <!-- 디폴트 커스텀 CSS -->
     <link rel="stylesheet" href="/resources/css/common/default.css" />
     <!--헤더 css-->
     <link rel="stylesheet" href="/resources/css/common/header.css" />
-    
+    <!--date range picker css-->
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+	<style>
+		.categoryGroup ul li{
+			font-size: 10px;
+		}
+	</style>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/common/stickyRight.jsp" />
 	<div class="header-wrap">
         <div class="header-content">
         
             
 		
-            <div class="header-top">
-            	<div class="middle-left">
-	                <a href="/" class="title">뭉쳐야산다</a>
-                </div>
-                <div class="middle-center">
-	                <div class="mainSearch">
-	                	<input type="text" class="mainSearch-input input-noborder" placeholder="상품을 검색해보세요">
-	                	<span class="material-symbols-outlined">search</span>
+			<section>
+			<div class="header-left">
+				<div class="menu-category">
+					<div class="reorder-box">
+						<span class="material-symbols-outlined reorder">reorder</span>
+						카테고리
+					</div>
+					<div class="category-content">
+						<div class="main-category">
+							<!--ajax로 카테고리가 생성될 영역-->
+						</div>
+					</div><!-- category-content -->
+              	</div><!-- menu-category -->
+			</div><!-- header-left -->
+			
+			
+			<div class="header-right">
+				<div class="header-info">
+					<c:choose>
+						<c:when test="${sessionScope.m.memberStatus eq 1}">
+							<a class="helloMsg">${sessionScope.m.memberName }님 환영합니다!</a>
+						</c:when>
+						<c:when test="${sessionScope.m.memberStatus eq 0}">
+							<a class="staffMsg">관리자 버전으로 접속중입니다.</a>
+						</c:when>
+					</c:choose>
+				</div><!-- header-info -->
+				<div class="header-top">
+	            	<div class="middle-left">
+		                <a href="/" class="title">뭉쳐야산다</a>
+	                </div>
+	                <div class="middle-center">
+		                <div class="mainSearch">
+		                	<input type="text" class="mainSearch-input input-noborder" placeholder="상품을 검색해보세요">
+		                	<span class="material-symbols-outlined">search</span>
+			            </div>
 		            </div>
-	            </div>
-                <div class="middle-right">
-	                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">notifications</span></a>
-	                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">favorite</span></a>
-	                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">shopping_cart</span></a>
-            	</div>
-            </div><!-- header-top -->
+	                <div class="middle-right">
+		                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">notifications</span></a>
+		                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">favorite</span></a>
+		                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">shopping_cart</span></a>
+	            	</div>
+            	</div><!-- header-top -->
+            	
+            	
+            	<div class="header-bottom">
+            		<div class="menu-product">
+		                <div><a href="#">인기상품</a></div>
+		                <div><a href="/insertProductFrm.do">물품등록(예비버튼)</a></div>
+		                <div><a href="#">오늘의상품</a></div>
+		                <div class="together">
+		                	<a href="/boardList.do?reqPage=1">
+		               		 여기여기붙어라
+		               		 <span class="material-symbols-outlined recommend">recommend</span>
+		               		</a>
+		                </div>
+	                </div>
+	              	<div class="menu-area">
+								<a href="/noticeList.do?reqPage=1">공지사항</a>
+		            	<c:choose>
+		            			<c:when test="${empty sessionScope.m}">
+				                    <a href="/signUpFrm.do">회원가입</a>
+				                    <a href="/loginFrm.do">로그인</a>
+			                	</c:when>
+			                	<c:when test="${sessionScope.m.memberStatus eq 1}">
+				                    <a href="/myPage.do">마이페이지</a>
+				                    <a href="/logout.do">로그아웃</a>
+			                	</c:when>
+			               		<c:when test="${sessionScope.m.memberStatus eq 0}">
+				                    <a href="/admin.do">관리자페이지</a>
+				                    <a href="/logout.do">로그아웃</a>
+			                	</c:when>
+		                </c:choose>	
+	    			</div><!-- menu-area -->
+                
+            	</div><!-- header-bottom -->
+			</div>
+            </section>
 
-            <div class="header-bottom">
-                <div class="menu-category">
-	                <a href="#">
-                	<span class="material-symbols-outlined">reorder</span>
-                	카테고리
-	                </a>
-					 <!-- dropdown메뉴 -->
-					 <div class="category-dropdown">
-					 	<div>
-					      	<ul>
-					      		<li>대분류</li>
-					      		<li><a href="#">소분류</a></li>
-					      		<li><a href="#">소분류</a></li>
-					      	</ul>
-					      	<ul>
-					      		<li>대분류</li>
-					      		<li><a href="#">소분류</a></li>
-					      		<li><a href="#">소분류</a></li>
-					      	</ul>
-					      	<ul>
-					      		<li>대분류</li>
-					      		<li><a href="#">소분류</a></li>
-					      		<li><a href="#">소분류</a></li>
-					      	</ul>
-					      	<ul>
-					      		<li>대분류</li>
-					      		<li><a href="#">소분류</a></li>
-					      		<li><a href="#">소분류</a></li>
-					      	</ul>
-					      	<ul>
-					      		<li>대분류</li>
-					      		<li><a href="#">소분류</a></li>
-					      		<li><a href="#">소분류</a></li>
-					      	</ul>
-				      	</div>
-			    	</div><!-- dropdown메뉴 -->
-                </div><!-- menu-category -->
-                
-                <div><a href="#">오늘의상품</a></div>
-                <div><a href="#">타임딜</a></div>
-                <div><a href="#">인기상품</a></div>
-                <div class="together">
-                	<a href="/boardList.do?reqPage=1">
-               		 여기여기붙어라
-               		 <span class="material-symbols-outlined recommend">recommend</span>
-               		</a>
-                </div>
-                
-              	<div class="menu-area">
-	            	<c:choose>
-	            			<c:when test="${empty sessionScope.m}">
-	            				<a href="/noticeList.do?reqPage=1">공지사항</a>
-			                    <a href="/join.do">회원가입</a>
-			                    <a href="/loginFrm.do">로그인</a>
-		                	</c:when>
-		                	<c:when test="${sessionScope.m.memberStatus eq 1}">
-		                		<a class="helloMsg">${sessionScope.m.memberName }님 환영합니다!</a>
-		                		<a href="/noticeList.do?reqPage=1">공지사항</a>
-			                    <a href="/myPage.do">마이페이지</a>
-			                    <a href="/logout.do">로그아웃</a>
-		                	</c:when>
-		               		<c:when test="${sessionScope.m.memberStatus eq 0}">
-		               			<a class="staffMsg">관리자 버전으로 접속중입니다.</a>
-		               			<a href="/noticeList.do?reqPage=1">공지사항</a>
-			                    <a href="/admin.do">관리자페이지</a>
-			                    <a href="/logout.do">로그아웃</a>
-		                	</c:when>
-	                </c:choose>	
-    			</div><!-- menu-area -->
-                
-            </div><!-- header-bottom -->
+            
             
         </div><!--header-content-->
     </div><!--header-wrap-->
 
-    <script>
-    	$(".menu-category").hover(function(){
-    		$(".category-dropdown").slideToggle();
-    		$(".category-dropdown").css("display","flex");
-    	})
-    		
-    </script>
+
+
+
+	
+    <script src="/resources/js/header.js"></script>
+
 </body>
 </html>

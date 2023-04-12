@@ -1,0 +1,202 @@
+.order-sheet-wrap{
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.order-sheet-wrap>form>div>h4,
+.order-payment-wrap div>h4{
+    border-bottom: 1px solid black;
+    padding: 10px;
+    margin-top: 50px;
+}
+
+.order-product-box>h4{
+    display: flex;
+    justify-content: space-between;
+}
+
+.order-product-box>h4>span{
+    font-size: 28px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.order-product-item{
+    background-color: #eee;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-product-img{
+    width: 150px;
+    height: 150px;
+    margin: 20px;
+}
+
+.order-product-img>a>img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* box-shadow: 0px 0px 10px 0px #ccc; */
+}
+
+.order-product-info.total-product-count{
+    width: 100%;
+}
+
+.order-product-info.total-product-count>.order-product-title{
+    width: 100%;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+}
+
+
+.order-product-info{
+    /* background-color: cornflowerblue; */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.order-product-info>.order-product-title{
+    width: 450px;
+    font-size: 16px;
+    font-weight: 600;
+}    
+
+.order-product-info>.order-product-option{
+    padding-top: 10px;
+}
+
+.order-product-volume{
+    width: 150px;
+    background-color: hotpink;
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.order-product-price{
+    width: 150px;
+    background-color: aliceblue;
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.order-delivery-box>div{
+    padding: 20px;
+    padding-left: 40px;
+}
+
+#deli-post-number{
+    width: 30%;
+}
+.deli-box{
+    text-align: left;
+}
+
+.deli-box *{
+    margin-top: 10px;
+}
+
+.deli-box>div *{
+    display: inline-block;
+}
+
+.order-payment-wrap{
+    display: flex;
+}
+
+.order-payment-wrap>div{
+    width: 550px;
+}
+
+.saved-money-box>div>input{
+    width: 60%;
+}
+
+.saved-money-box>div *{
+    display: inline-block;
+}
+
+.order-pay-box>div>button{
+    width: 80%;
+    margin: 20px auto;
+}
+
+.order-agree-box>div{
+    margin: 20px 0;
+}
+
+.order-agree-box>div>div{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.order-agree-box>div>div:last-child{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+@supports (position: sticky) or (position: -webkit-sticky){
+.order-payment-wrap>.total-pay-box{
+    width: 400px;
+    height: 410px;
+    background: var(--bg-secondary);
+    margin: 30px;
+    padding: 30px;
+    box-sizing: border-box;
+    position: sticky;
+    top: 500px;
+    }
+}
+
+.total-pay-box>div{
+    display: flex;
+    justify-content: space-between;
+    margin: 15px;
+}
+
+.total-pay-box>div>div:first-child{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.total-pay-box>div.total-order-amount-2>div,
+.total-pay-box>div.total-order-amount-3>div{
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.total-pay-box>.total-order-buy-save-point{
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.total-order-buy-save-point>button{
+    margin-right: 5px;
+    font-size: 11px;
+    min-width: auto;
+    min-height: auto;
+    width: 36px;
+    height: 22px;
+    margin-top: 1px;
+}
+
+.total-order-buy-save-point>div{
+    font-size: 12px;
+}
+
+.total-order-pay>div{
+    font-size: 18px;
+    font-weight: 600;
+}

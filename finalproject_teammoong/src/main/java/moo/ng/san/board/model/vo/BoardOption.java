@@ -11,5 +11,6 @@ public class BoardOption {
 	private int optionNo;
 	private int boardNo;
 	private String detailName;
-	private String detailCount;
+	private int detailCount;
+	private int detailPrice;
 }

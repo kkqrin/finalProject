@@ -1,6 +1,6 @@
 * {box-sizing:border-box;outline:0;}
-::selection {color:#fff;background-color:#93469d;}
-::-moz-selection {color:#fff;background-color:#93469d;}
+::selection {color:#fff;background-color:#ff9646;}
+::-moz-selection {color:#fff;background-color:#ff9646;}
 body {width:100%;min-height:100vh;display:flex;flex-direction:column;overflow-x:auto;margin:0;position: relative;}
 h1,h2,h3,h4,h5,h6 {margin:0;word-break:keep-all;}
 p {margin:0;word-break:break-all;}

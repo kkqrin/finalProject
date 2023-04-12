@@ -25,12 +25,10 @@
 	<insert id="insertBoard" parameterType="b">
 		insert into board_tbl values(
 			board_seq.nextval,
-			'test',
+			#{boardWriter},
 			#{boardName},
-			#{categoryNo},
 			#{boardContent},
-			#{boardPrice},
-			to_char(sysdate,'yyy-mm-dd'),
+			to_date(sysdate,'yyyy-mm-dd'),
 			#{accountWriter},
 			#{accountName},
 			#{accountBank},
@@ -39,17 +37,35 @@
 			#{referenceLink},
 			to_date(#{deliveryDate},'yyyy-mm-dd'),
 			#{boardEtc},
-			0,
 			1,
-			'dora'
+			0,
+			#{detailCategoryNo}
 			)
-	</insert>
-	<insert id="insertFile" parameterType="bf">
-		insert into file_tbl values(file_seq.nextval, #{boardNo}, #{filepath})
-		<selectKey resultType="_int" order="AFTER" keyProperty="boardNo">
+			<selectKey resultType="_int" order="AFTER" keyProperty="boardNo">
 			select max(board_no) from board_tbl
 		</selectKey>
 	</insert>
+	<insert id="insertFile" parameterType="bf">
+		insert into file_tbl values(file_seq.nextval, #{boardNo}, #{filepath})
+	</insert>
+	<insert id="insertOption" parameterType="bo">
+		insert into board_option values(board_option_seq.nextval, #{boardNo}, #{detailName}, #{detailPrice}, #{detailCount})
+	</insert>
+	<select id="selectOneBoard" parameterType="_int" resultMap="getBoard">
+		select
+			*
+		from board_tbl where board_no = #{_parameter}	
+	</select>
+	
+	<select id="selectOptionList" parameterType="_int" resultType="bo">
+		select
+			option_no as optionNo,
+			board_no as boardNo,
+			detail_name as detailName,
+			detail_price as detailPrice,
+			detail_count as detailCount
+		from board_option where board_no = #{_parameter}
+	</select>
 	<select id="selectFileList" parameterType="_int" resultType="bf">
 		select
 			file_no as fileNo,
@@ -62,21 +78,20 @@
 		<result column="board_no" property="boardNo" />
 		<result column="board_writer" property="boardWriter" />
 		<result column="board_name" property="boardName" />
-		<result column="category_no" property="categoryNo" />
+		
 		<result column="board_content" property="boardContent" />
-		<result column="board_price" property="boardPrice" />
 		<result column="board_date" property="boardDate" />
 		<result column="account_writer" property="accountWriter" />
 		<result column="account_name" property="accountName" />
 		<result column="account_bank" property="accountBank" />
 		<result column="board_start" property="boardStart" />
 		<result column="board_end" property="boardEnd" />
-		<result column="board_detail" property="boardDetail" />
 		<result column="reference_link" property="referenceLink" />
 		<result column="delivery_date" property="deliveryDate" />
 		<result column="board_etc" property="boardEtc" />
 		<result column="board_status" property="boardStatus" />
 		<result column="board_count" property="boardCount" />
+		<result column="d_category_no" property="detailCategoryNo" />
 		<collection property="fileList" 
 					select="selectFileList"
 					column="board_no"
@@ -84,4 +99,12 @@
 					javaType="java.util.ArrayList"
 		/>
 	</resultMap>
+	
+	<select id="selectBoardImg" resultType="bf" >
+		SELECT 
+			FILE_NO AS fileNo,
+			BOARD_NO AS boardNo,
+			filepath
+		FROM FILE_TBL
+	</select>
 </mapper>

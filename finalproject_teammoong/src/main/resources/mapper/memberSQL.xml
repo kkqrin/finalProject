@@ -4,13 +4,36 @@
 
 <mapper namespace="member">
 
+		<insert id="insertMember" parameterType="m">
+			insert into member_tbl values(
+				member_seq.nextval,
+				#{memberId},
+				#{memberPw},
+				#{memberName},
+				#{memberEmail},
+				#{memberPhone},
+				#{memberAddr},
+				#{memberGender},
+				#{memberBDay},
+				#{memberAccount},
+				#{memberPath},
+				#{memberAgree},
+				1,
+				#{memberBank},
+				to_date(sysdate,'yyyy-mm-dd'),
+				#{memberZoneCode}
+			)
+		</insert>
+
+
+
 		<select id="selectOneMember" parameterType="m" resultType="m">
 			select 
 				member_no as memberNo,
 				member_id as memberId,
 				member_pw as memberPw,
 				member_name as memberName,
-				member_email as memberEamil,
+				member_email as memberEmail,
 				member_phone as memberPhone,
 				member_addr as memberAddr,
 				member_gender as memberGender,
@@ -27,6 +50,7 @@
 				and member_pw=#{memberPw}
 			</if>
 		</select> 
+	
 
 
 </mapper>

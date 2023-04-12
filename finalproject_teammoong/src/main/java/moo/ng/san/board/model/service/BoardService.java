@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import moo.ng.san.board.model.dao.BoardDao;
 import moo.ng.san.board.model.vo.Board;
+import moo.ng.san.board.model.vo.BoardOption;
 import moo.ng.san.board.model.vo.BoardPageData;
 import moo.ng.san.board.model.vo.FileVO;
 
@@ -17,7 +18,7 @@ public class BoardService {
 	private BoardDao dao;
 
 
-	public int insertBoard(Board b, ArrayList<FileVO> fileList) {
+	public int insertBoard(Board b, ArrayList<FileVO> fileList, String[] detailName, int[] detailPrice, int[] detailCount) {
 		int result = dao.insertBoard(b);
 		if(result > 0) {
 			//2. 방금 insert한 board_no 조회
@@ -26,11 +27,21 @@ public class BoardService {
 			for(FileVO file : fileList) {
 				file.setBoardNo(b.getBoardNo());
 				result += dao.insertFile(file);
+			}//파일업로드완료
+			for(int i=0 ; i<detailName.length ; i++) {
+				BoardOption o = new BoardOption();
+				o.setBoardNo(b.getBoardNo());
+				o.setDetailCount(detailCount[i]);
+				o.setDetailName(detailName[i]);
+				o.setDetailPrice(detailPrice[i]);
+				result += dao.insertBoardOption(o);
 			}
 		}
 		return result;
 	}
+		
 
+	
 
 	public BoardPageData selectBoardList(int reqPage) {
 		// 한 페이지당 보여줄 게시물 수 : 5
@@ -44,6 +55,11 @@ public class BoardService {
 		map.put("start", start);
 		map.put("end", end);
 		ArrayList<Board> list = dao.selectBoardList(map);
+		
+		for(Board b : list) {
+			ArrayList<String> fileList = dao.selectBoardImg();
+			b.setFileList(fileList);
+		}
 		//pageNavi 제작시작
 		//전체페이지 수 계산필요 -> 전체 게시물 수 조회
 		int totalCount = dao.selectBoardCount();
@@ -79,6 +95,31 @@ public class BoardService {
 			pageNavi +="<a href='/boardList.do?reqPage="+pageNo+"'>[다음]</a>";
 		}
 		BoardPageData bpd = new BoardPageData(list, pageNavi);
+//		bpd.setFileList(fileList);
 		return bpd;
 	}
+
+
+	public Board selectOneBoard(int boardNo) {
+		//1. board 테이블 조회
+		Board b = dao.selectOneBoard(boardNo);
+		//2. file_tbl 테이블 조회
+		/*
+		 * <select id="selectOneBoard" parameterType="_int" resultMap="getBoard"> select
+		 *
+		 * from board where board_no = #{_parameter} </select>
+		 */
+		return b;
+	}
+
+
+	public ArrayList<FileVO> selectFileList(int boardNo) {
+		return dao.selectFileList(boardNo);
+	}
+
+
+	public ArrayList<BoardOption> selectOneBoardOptionList(int boardNo) {
+		return dao.selectOptionList(boardNo);
+	}
+
 }
