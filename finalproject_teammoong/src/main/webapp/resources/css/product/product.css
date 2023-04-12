@@ -436,6 +436,10 @@ a {
     text-align: center;
 }
 
+.category-wrap>h3{
+    cursor: default;
+}
+
 .subcategory-name-list{
     display: grid;
     grid-template-columns: repeat(4, 180px);
@@ -458,4 +462,8 @@ a {
     letter-spacing: -1px;
     cursor: pointer;
     font-size: 14px;
+}
+
+.active-category-name{
+    color: var(--primary);
 }
