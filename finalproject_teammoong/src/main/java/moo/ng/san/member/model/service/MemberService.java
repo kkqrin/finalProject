@@ -18,9 +18,18 @@ public class MemberService {
 	}//selectOneMember
 
 
-	public void memberPhoneCheck(String memberPhone) {
+	public int insertMember(Member m, String filePath) {
+		int result = 0;
 		
-	}//memberPhoneCheck
+		m.setMemberPath(filePath);
+		result = dao.insertMember(m);
+		
+		if(result>0) {
+			
+		}
+		
+		return result;
+	}//insertMember
 
 	
 }//MemberService

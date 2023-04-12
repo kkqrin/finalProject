@@ -2,6 +2,7 @@ package moo.ng.san.member.controller;
 
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 
+import common.FileManager;
 import common.MsgVO;
 import common.PhoneCertify;
 import moo.ng.san.member.model.service.MemberService;
@@ -24,19 +27,12 @@ import net.nurigo.sdk.message.service.DefaultMessageService;
 public class MemberController {
 
 	@Autowired
-	MemberService service;
+	private MemberService service;
 	@Autowired
-	PhoneCertify phoneCertify;
+	private PhoneCertify phoneCertify;
+	@Autowired
+	private FileManager upload; 
 	
-	@RequestMapping(value = "/msgTest.do")
-	public String msgTest(Model model) {
-		MsgVO msg = new MsgVO();
-		msg.setTitle("가입을 환영합니다");
-		msg.setMsg("뭉쳐야산다에서 저렴하게 구매해보세요 :)");
-		msg.setLoc("/loginFrm.do");
-		model.addAttribute("msg", msg);
-		return "common/msg";
-	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/memberPhoneCheck.do")
@@ -46,24 +42,20 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "/join.do")
-	public String signIn(Member m) {
+	public String signIn(Member m, MultipartFile file, HttpServletRequest request ,Model model) {
+
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member");
+		String filePath = upload.upload(savePath, file); //업로드 완료
 		
-//		System.out.println("저잘왔어요~~");
-//		System.out.println(m.getMemberId());
-//		System.out.println(m.getMemberPw());
-//		System.out.println(m.getMemberName());
-//		System.out.println(m.getMemberEmail());
-//		System.out.println(m.getMemberPhone());
-//		System.out.println(m.getMemberAddr());
-//		System.out.println(m.getMemberGender());
-//		System.out.println(m.getMemberBDay());
-//		System.out.println(m.getMemberBank());
-//		System.out.println(m.getMemberAccount());
-//		System.out.println(m.getMemberAgree());
-//		System.out.println(m.getMemberZoneCode());
-//		System.out.println(m.getMemberPath());
+		int result = service.insertMember(m,filePath);
 		
-		return "";
+		
+		MsgVO msg = new MsgVO();
+		msg.setTitle("가입을 환영합니다");
+		msg.setMsg("뭉쳐야산다에서 저렴하게 구매해보세요 :)");
+		msg.setLoc("/loginFrm.do");
+		model.addAttribute("msg", msg);
+		return "common/msg";
 	}
 	
 	
