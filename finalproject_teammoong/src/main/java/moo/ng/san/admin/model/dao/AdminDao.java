@@ -120,7 +120,7 @@ public class AdminDao {
 		return result;
 	}
 
-	public ArrayList<Product> selectSearchMember(Product p) {
+	public ArrayList<Product> selectSearchProduct(Product p) {
 		List list = sqlSession.selectList("admin.selectSearchProduct", p);
 
 		return (ArrayList<Product>)list;
@@ -168,9 +168,9 @@ public class AdminDao {
 	}
 
 	public int selectBoardCount() {
+		int totalCount = sqlSession.selectOne("admin.selectAllBoardCount");
 		
-		// TODO Auto-generated method stub
-		return 0;
+		return totalCount;
 	}
 
 	public ArrayList<Board> selectReportBoardList(HashMap<String, Object> map) {
@@ -195,9 +195,9 @@ public class AdminDao {
 		// TODO Auto-generated method stub
 		return (ArrayList<Board>)list;
 	}
-	
-	
-	
+
+
+
 	
 
 

@@ -2,6 +2,7 @@ package moo.ng.san.admin.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
@@ -73,7 +74,7 @@ public class AdminService {
 	// 페이지 네비 주소 수정 필요
 	public AdminMemberPageData selectAllMemberList(int reqPage) {
 		// 한 페이지 당 보여줄 게시물 수 : 10개
-		int numPerPage = 10;
+		int numPerPage = 5;
 		// reqPage = 1 : 1~2 , reqPage = 2 3~4
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
@@ -105,14 +106,14 @@ public class AdminService {
 		String pageNavi = "";
 		// 이전버튼
 		if (pageNo != 1) {
-			pageNavi += "<a href='/boardList.do?reqPage=" + (pageNo - 1) + "'>[이전]</a>";
+			pageNavi += "<a href='adminMemberPage.do?reqPage=" + (pageNo - 1) + "'>[이전]</a>";
 		}
 		// 페이지 숫자 생성
 		for (int i = 0; i < pageNaviSize; i++) {
 			if (pageNo == reqPage) {
 				pageNavi += "<span>" + pageNo + "</span>";
 			} else {
-				pageNavi += "<a href='/boardList.do?reqPage=" + pageNo + "'>" + pageNo + "</a>";
+				pageNavi += "<a href='adminMemberPage.do?reqPage=" + pageNo + "'>" + pageNo + "</a>";
 			}
 			pageNo++;
 
@@ -122,7 +123,7 @@ public class AdminService {
 		}
 		// 다음버튼
 		if (pageNo <= totalPage) {
-			pageNavi += "<a href='/boardList.do?reqPage=" + pageNo + "'>[다음]</a>";
+			pageNavi += "<a href='adminMemberPage.do?reqPage=" + pageNo + "'>[다음]</a>";
 		}
 		AdminMemberPageData ampd = new AdminMemberPageData(list, pageNavi);
 
@@ -180,14 +181,14 @@ public class AdminService {
 		String pageNavi = "";
 		// 이전버튼
 		if (pageNo != 1) {
-			pageNavi += "<a href='/boardList.do?reqPage=" + (pageNo - 1) + "'>[이전]</a>";
+			pageNavi += "<a href='/adminTotalProductList.do?reqPage=" + (pageNo - 1) + "'>[이전]</a>";
 		}
 		// 페이지 숫자 생성
 		for (int i = 0; i < pageNaviSize; i++) {
 			if (pageNo == reqPage) {
 				pageNavi += "<span>" + pageNo + "</span>";
 			} else {
-				pageNavi += "<a href='/boardList.do?reqPage=" + pageNo + "'>" + pageNo + "</a>";
+				pageNavi += "<a href='/adminTotalProductList.do?reqPage=" + pageNo + "'>" + pageNo + "</a>";
 			}
 			pageNo++;
 
@@ -197,7 +198,7 @@ public class AdminService {
 		}
 		// 다음버튼
 		if (pageNo <= totalPage) {
-			pageNavi += "<a href='/boardList.do?reqPage=" + pageNo + "'>[다음]</a>";
+			pageNavi += "<a href='/adminTotalProductList.do?reqPage=" + pageNo + "'>[다음]</a>";
 		}
 		AdminProductPageData appd = new AdminProductPageData(list, pageNavi);
 
@@ -211,7 +212,7 @@ public class AdminService {
 	}
 
 	public ArrayList<Product> selectSearchProduct(Product p) {
-		ArrayList<Product> list = dao.selectSearchMember(p);
+		ArrayList<Product> list = dao.selectSearchProduct(p);
 
 		return list;
 	}
@@ -429,5 +430,8 @@ public class AdminService {
 		return list;
 	}
 
+
+
+    /*엑셀용*/
 
 }

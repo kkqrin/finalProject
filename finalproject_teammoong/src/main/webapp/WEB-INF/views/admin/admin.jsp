@@ -76,27 +76,27 @@
             <div class="adminPage-sidebar">
                 <ul>
                     <a>회원 관리</a>
-                    <il>회원등급 관리</il>
+                    <li><a href="/adminMemberPage.do?reqPage=1">회원등급 관리</a></li>
                 </ul>
                 <ul>
                     <a>매출 관리</a>
-                    <li>전체 매출 관리</li>
-                    <li>카테고리별 매출관리</li>
+                    <li><a href="/adminTotalSalesManage.do?reqPage=1">전체 매출 관리</a></li>
+                    <li><a href="/categorySalesManage.do">카테고리별 매출관리</a></li>
                 </ul>
                 <ul>
-                    <a>상품 관리</a>
-                    <li>전체 매출 관리</li>
-                    <li>카테고리별 매출관리</li>
-                    <li>카테고리별 매출관리</li>
+                    <a href="/adminProductPage.do">상품 관리</a>
+                    <li><a href="/productConfirmManage.do">상품 등록 관리</a></li>
+                    <li><a href="/productRegist.do"></a>상품 등록</li>
+                    <li><a href="/deliveryManage.do"></a>배송 관리</li>
                 </ul>
                 <ul>
                     <a>이벤트 관리</a>
                     <li>쿠폰 발행 관리</li>
                 </ul>
                 <ul>
-                    <a>여기여기붙어라 관리</a>
+                    <a href="/adminBoardManagePage.do">여기여기붙어라 관리</a>
                     <li>여기여기붙어라 게시판 관리</li>
-                    <li>여기여기붙어라 신고 관리</li>
+                    <li><a href="/adminBoardReportManagePage.do?reqPage=1">여기여기붙어라 신고 관리</a></li>
                     <li>카테고리별 매출관리</li>
                 </ul>
             </div>
@@ -122,7 +122,7 @@
                         <div class="board title"><h3>여기여기붙어라 관리</h3></div>
                         <div class="board icon"><span class="material-symbols-outlined">thumb_up</span></div>
                         <div class="board subTitle"><h4>오늘 등록된 게시물</h4></div>
-                        <div class="board totalCount"><span id="boardTotalcount">10</span><span>개</span></div>
+                        <div class="board totalCount"><span id="boardTotalcount"></span><span>개</span></div>
                         <div class="board variationTitle"><h5>증감</h5></div>
                         <div class="board variationCount"><span>+5개/-5개</span></div>
                     </div>
@@ -130,7 +130,7 @@
                         <div class="order title"><h3>매출액 관리</h3></div>
                         <div class="order icon"><span class="material-symbols-outlined">calculate</span></div>
                         <div class="order subTitle"><h4>이번달 매출액</h4></div>
-                        <div class="order totalCount"><span id="orderTotalcount">100000000</span><span>원</span></div>
+                        <div class="order totalCount"><span id="orderTotalcount"></span><span>원</span></div>
                         <!-- <div class="order variationTitle"><span>증감</span></div>
                         <div class="order variationCount"><span>+50,000,000원/-50,000,000원</span></div> -->
                     </div>
@@ -138,7 +138,7 @@
                         <div class="bestProduct title"><h3>베스트 상품 관리</h3></div>
                         <div class="bestProduct icon"><span class="material-symbols-outlined">mode_heat</span></div>
                         <div class="bestProduct subTitle"><h4>베스트 상품 매출액</h4></div>
-                        <div class="bestProduct totalCount"><span id="bestProductTotalCount">100000000</span><span>원</span></div>
+                        <div class="bestProduct totalCount"><span id="bestProductTotalCount"></span><span>원</span></div>
                         <!-- <div class="bestProduct variationTitle"><span>증감</span></div>
                         <div class="bestProduct variationCount"><span>+20,000,000원/-20,000,000원</span></div> -->
                     </div>
@@ -146,22 +146,19 @@
                         <div class="coupon title"><h3>쿠폰 관리</h3></div>
                         <div class="coupon icon"><span class="material-symbols-outlined">festival</span></div>
                         <div class="coupon subTitle"><h4>현지 진행중인 쿠폰 이벤트</h4></div>
-                        <div class="coupon totalCount"><span id="couponTotalCount">2</span><span>건</span></div>
+                        <div class="coupon totalCount"><span id="couponTotalCount"></span><span>건</span></div>
                         <!-- <div class="coupon variationTitle"><span>증감</span></div>
                         <div class="coupon variationCount"><span>+1건/-1건</span></div> -->
                         
                     </div>
                 </div>
-
             </div>
+            <button type="button" class="checkBtn">확인해봅시다</button>
         </div>
 
     </div>
-    <h1>관리자 페이지입니다.</h1>
-	<h3><a href="/adminMemberPage.do">관리자 페이지(회원)</a></h3>
-	<h3><a href="/adminProductPage.do">관리자 페이지(상품)</a></h3>
 
-<%-- <jsp:include page="/WEB-INF/views/common/footer.jsp" /> --%>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
     <script>
         var memberTotalCount = $("#memberTotalCount");
@@ -176,16 +173,39 @@
             method : "get",
             dataType : "json",
             success : function(data){
-            	console.log("통신성공")
-                memberTotalCount.text(data.total[0]);
-                productTotalCount.text(data.total[1]);
-                boardTotalCount.text(data.total[2]);
-                orderTotalCount.text(data.total[3]);
-                bestProductTotalCount.text(data.total[4]);
-                couponTotalCount.text(data.total[5]);
+            	console.log("통신성공");
+            	console.log(data);
+                memberTotalCount.text(data[0]);
+                productTotalCount.text(data[1]);
+                boardTotalCount.text(data[2]);
+                orderTotalCount.text(data[3]);
+                bestProductTotalCount.text(data[4]);
+                couponTotalCount.text(data[5]); 
             }
             
-        });
+        })
+        
+        
+        
+        $(".checkBtn").on("click",function(){
+	        $.ajax({
+	            url : "/ajaxTotalCount.do",
+	            method : "get",
+	            dataType : "json",
+	            success : function(data){
+	            	console.log("통신성공");
+	            	console.log(data);
+	                memberTotalCount.text(data[0]);
+	                productTotalCount.text(data[1]);
+	                boardTotalCount.text(data[2]);
+	                orderTotalCount.text(data[3]);
+	                bestProductTotalCount.text(data[4]);
+	                couponTotalCount.text(data[5]); 
+	            }
+	            
+	        })
+        	
+        })
 
     </script>
 </body>
