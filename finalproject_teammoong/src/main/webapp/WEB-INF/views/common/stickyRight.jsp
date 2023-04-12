@@ -63,7 +63,6 @@
     position: sticky;
     top: 50%;
     transform: translateY(-50%);
-    width: 80px;
     font-size: 12px;
     line-height: 16px;
     color: rgb(51, 51, 51);

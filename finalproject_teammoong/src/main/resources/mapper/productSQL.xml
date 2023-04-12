@@ -90,8 +90,20 @@
 	      <if test="detailCategoryNo != 0">
 	      and p.D_CATEGORY_NO = #{detailCategoryNo}
 	      </if>
-	      
-     	  order by 1 DESC) P)
+	      <choose>
+	      	<when test="sortType.equals('recent-sort')">
+	     	  order by 1 DESC) P)	      	
+	      	</when>
+	      	<when test="sortType.equals('discount-sort')">
+	     	  order by productDiscount DESC) P)	      	
+	      	</when>
+	      	<when test="sortType.equals('highprice-sort')">
+	     	  order by productPrice DESC) P)
+	      	</when>
+	      	<when test="sortType.equals('lowprice-sort')">
+	     	  order by productPrice ASC) P)
+	      	</when>
+	      </choose>
 		WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>	
 	<select id="selectProductFilelist" parameterType="_int" resultType="pf">
