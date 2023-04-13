@@ -14,13 +14,13 @@
 				#{memberPhone},
 				#{memberAddr},
 				#{memberGender},
-				#{memberBDay},
+				to_date(#{memberBday},'yyyymmdd'),
 				#{memberAccount},
 				#{memberPath},
 				#{memberAgree},
 				1,
 				#{memberBank},
-				to_date(sysdate,'yyyy-mm-dd'),
+				sysdate,
 				#{memberZoneCode}
 			)
 		</insert>
@@ -37,7 +37,7 @@
 				member_phone as memberPhone,
 				member_addr as memberAddr,
 				member_gender as memberGender,
-				member_bday as memberBDay,
+				member_bday as memberBday,
 				member_account as memberAccount,
 				member_path as memberPath,
 				member_agree as memberAgree,

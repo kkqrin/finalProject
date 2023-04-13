@@ -42,20 +42,28 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "/join.do")
-	public String signIn(Member m, MultipartFile file, HttpServletRequest request ,Model model) {
+	public String signIn(Member m, MultipartFile memberPropic, HttpServletRequest request ,Model model) {
 
-		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member");
-		String filePath = upload.upload(savePath, file); //업로드 완료
+		String filePath="";
+		if(!memberPropic.isEmpty()) {
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member");
+			filePath = upload.upload(savePath, memberPropic); //업로드 완료
+			m.setMemberPath(filePath);
+		}else {
+			filePath = "moongs.png";
+			m.setMemberPath(filePath);
+		}
+		int result = service.insertMember(m);
 		
-		int result = service.insertMember(m,filePath);
-		
-		
-		MsgVO msg = new MsgVO();
-		msg.setTitle("가입을 환영합니다");
-		msg.setMsg("뭉쳐야산다에서 저렴하게 구매해보세요 :)");
-		msg.setLoc("/loginFrm.do");
-		model.addAttribute("msg", msg);
-		return "common/msg";
+		if(result>0) {
+			MsgVO msg = new MsgVO();
+			msg.setTitle("가입을 환영합니다");
+			msg.setMsg("뭉쳐야산다에서 저렴하게 구매해보세요 :)");
+			msg.setLoc("/loginFrm.do");
+			model.addAttribute("msg", msg);
+			return "common/msg";
+		}
+		return "redirect:/";
 	}
 	
 	
