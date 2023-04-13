@@ -13,16 +13,43 @@
 
 	<div class="content-wrap">
 		<div class="mypage-wrap">
-			
-			<jsp:include page="/WEB-INF/views/common/myPageMenu.jsp" />
-			
-			<div class="mypage-right">
-				<div class="mypage-right-title">구매 내역/후기 작성</div>
-				<div class="mypage-content">
-					본격적인 콘텐츠가 들어가는 부분
+		
+		<jsp:include page="/WEB-INF/views/common/myPageMenu.jsp" />
+		
+		<div class="mypage-right">
+			<div class="mypage-right-title">회원 정보</div>
+			<div class="mypage-content">
+				<form action="/UpdateMember.do" method="post">
+				
+				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }"><br>
+				아이디:<input type="text" name="memberId" value="${sessionScope.m.memberId }"><br>
+				생일:<input type="text" name="memberBDay" value="${sessionScope.m.memberBday }"><br>
+				이메일:<input type="text" name="memberEmail" value="${sessionScope.m.memberEmail }"><br>
+				휴대폰:<input type="text" name="memberPhone" value="${sessionScope.m.memberPhone }"><br>
+				계좌번호:
+				<c:choose>
+					<c:when test="${empty sessionScope.m.memberAccount }">
+						<select name="memberBank" id="noneBank" class="select-custom">
+							<option value="null" selected disabled hidden>은행을 선택하세요</option>
+						</select>
+					</c:when>
+					<c:otherwise>
+						<input type="hidden" id="memberBank" value="${sessionScope.m.memberBank }">
+						<select name="memberBank" id="Bank" class="select-custom">
+						</select>
+					</c:otherwise>
+				</c:choose>
+				<input type="text" name="memberAccount" value="${sessionScope.m.memberAccount }"><br>
+				주소:<input type="text" name="memberAddr" value="${sessionScope.m.memberAddr }"><br>
+				
+				<div class="area-btn right">
+					<button class="btn btn-sec size02" type="submit">회원정보 수정</button>
 				</div>
+				</form>
 			</div>
-		</div><!--mypage-wrap-->
+		</div><!-- mypage-right -->
+		
+		</div><!-- mypage-wrap -->
 	</div><!-- content-wrap -->
 	
 	
