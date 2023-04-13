@@ -101,11 +101,12 @@
     /* background-color: #eee; */
     display: flex;
     padding: 30px;
+    align-items: center;
 }
 
 .review-img{
-    width: 300px;
-    height: 300px;
+    width: 240px;
+    height: 240px;
     border: 1px solid #ccc;
 }
 
@@ -184,18 +185,43 @@
 ::-webkit-scrollbar-button { display: none; } /* 스크롤 바 상 하단 버튼 */
 
 .review-like{
+    display: flex;
+    justify-content: flex-end;
+    font-size: 14px;
+}
+
+.review-like>div{
     text-align: right;
     padding-top: 15px;
     /* background-color: honeydew; */
     cursor: pointer;
 }
 
+.review-like>div{
+    /* width: 95px; */
+    display: flex;
+    align-items: center;
+    border: 1px solid #3a3a3a;
+    padding: 5px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
 
-.review-like>span{
+.review-like>div a{
+    font-size: 14px;
+}
+
+.review-like>div>span{
     display: none;
     font-size: 22px;
+    padding-right: 3px;
 }
 
 .material-symbols-outlined.review-like-on{
     display: inline;
+}
+
+.review-like>.review-like-color{
+    color: var(--primary);
+    border: 1px solid var(--primary);
 }
