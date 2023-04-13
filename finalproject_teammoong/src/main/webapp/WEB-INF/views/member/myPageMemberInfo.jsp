@@ -22,7 +22,7 @@
 				
 				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }"><br>
 				아이디:<input type="text" name="memberId" value="${sessionScope.m.memberId }"><br>
-				생일:<input type="text" name="memberBDay" value="${sessionScope.m.memberBDay }"><br>
+				생일:<input type="text" name="memberBDay" value="${sessionScope.m.memberBday }"><br>
 				이메일:<input type="text" name="memberEmail" value="${sessionScope.m.memberEmail }"><br>
 				휴대폰:<input type="text" name="memberPhone" value="${sessionScope.m.memberPhone }"><br>
 				계좌번호:

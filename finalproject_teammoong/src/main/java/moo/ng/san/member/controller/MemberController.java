@@ -46,7 +46,7 @@ public class MemberController {
 
 		String filePath="";
 		if(!memberPropic.isEmpty()) {
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member");
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member/");
 			filePath = upload.upload(savePath, memberPropic); //업로드 완료
 			m.setMemberPath(filePath);
 		}else {
