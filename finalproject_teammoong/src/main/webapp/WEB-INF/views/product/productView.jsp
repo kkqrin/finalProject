@@ -77,11 +77,8 @@
 
     
 
-
-
-
 	<div class="content-wrap">
-	        <div class="top-info-box">
+        <div class="top-info-box">
             <div class="img-box"style="width: 500px;">
             <c:forEach items="${p.fileList }" var="i">
                 <img src="/resources/upload/product/${i.filepath }" style="border-radius: 20px;">
@@ -132,36 +129,88 @@
                         </div>
                     </div>
 
-                        <div class="flex-box">
-                            <div class="info-title-box">
-                                <a class="info-title">배송기간</a>
-                            </div>
-                            <div class="info-content">
-                                <ul>
-                                    <li>1일내 도착 확률 ------------- <span class="delivery-percent">88%</span></li>
-                                    <li>3일내 도착 확률 ------------- <span class="delivery-percent">91%</span></li>
-                                    <li>5일내 도착 확률 ------------- <span class="delivery-percent">95%</span></li>
-                                </ul>
-                            </div>
+                    <div class="flex-box">
+                        <div class="info-title-box">
+                            <a class="info-title">배송기간</a>
                         </div>
-                        
-                        <div class="flex-box">
-                            <div class="info-title-box">
-                                <a class="info-title">적립금액</a>
-                            </div>
-                            <div>
-                                <ul class="info-content">
-                                    <li>1일내 도착 확률 : 88%</li>
-                                    <li>3일내 도착 확률 : 91%</li>
-                                    <li>5일내 도착 확률 : 97%</li>
-                                </ul>
-                            </div>
+                        <div class="info-content">
+                            <ul>
+                                <li>1일내 도착 확률 ------------- <span class="delivery-percent">88%</span></li>
+                                <li>3일내 도착 확률 ------------- <span class="delivery-percent">91%</span></li>
+                                <li>5일내 도착 확률 ------------- <span class="delivery-percent">95%</span></li>
+                            </ul>
                         </div>
                     </div>
-                </div>  
-            </div>
+                    
+                    <div class="flex-box">
+                        <div class="info-title-box">
+                            <a class="info-title">적립금액</a>
+                        </div>
+                        <div>
+                            <ul class="info-content">
+                                <li>1일내 도착 확률 : 88%</li>
+                                <li>3일내 도착 확률 : 91%</li>
+                                <li>5일내 도착 확률 : 97%</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>
         <div class="gonggu-content-wrap">
-            <div class="gonggu-content-title"></div>
+            <div class="gonggu-content-title">
+            </div>
+            <div class="inquiry-box">
+                <table class="inquiry-table">
+                    <tr>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>작성일</th>
+                        <th>답변상태</th>
+                    </tr>
+                    <c:forEach items="${iqList }" var="iq">
+                        <tr>
+                            <td class="inquiry-content-btn">${iq.inquiryTitle }</td>
+                            <td>${iq.inquiryWriter }</td>
+                        <td>${iq.inquiryDate }</td>
+                        <c:if test="${iq.inquiryStatus eq  0}">
+                        <td>답변대기</td>
+                    </c:if>
+                        <c:if test="${iq.inquiryStatus eq  1}">
+                            <td>답변완료</td>
+                        </c:if>
+                    </tr>
+                    <tr class="inquiry-content" style="border: none;">
+                        <td colspan="4" value="${iq.inquiryWriter}" style="text-align: left; border: none;">${iq.inquiryContent}</td>
+                    </tr>
+                    <tr class="admin-content" style="border: none;">
+                    </tr>
+                    <tr class="udBtn" style="border: none;">
+                        <td colspan="4" style="border: none;">
+                            <div class="btn-flex-wrap">
+                                <!-- 문의사항 update에 사용할 inquiryNo를 위한 input -->
+                                <input type="hidden" id="inquiryNo" value="${iq.inquiryNo}">
+                                <!-- 문의사항 각 게시글의 첫번째 수정버튼 -->
+                                <c:choose>
+	                                <c:when test="${sessionScope.m.memberId eq iq.inquiryWriter}">
+	                                	<button class="btn btn-pri size01 updateBtn" data-modal="#modalBasic">수정</button>
+	                                </c:when>
+	                                <c:when test="${sessionScope.m.memberStatus eq 0}">
+	                                	<button class="btn btn-pri size01 adminModal" data-modal="#adminModal">답글</button>
+	                                </c:when>
+                                </c:choose>
+                                <!-- 문의사항 각 게시글의 첫번째 삭제버튼 -->
+                                <button class="btn btn-white size01" id="delBtn" data-modal="#modalDelete">삭제</button>
+                            </div>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+            <div class="insertInquiry">
+                <!-- 문의하기 작성 버튼 -->
+                <button type="button" id="insertInquiry" class="btn btn-pri size01" data-modal="#modalBasic2">문의하기</button>
+            </div>
+        </div>
         </div>
         <div class="fix-button-box">
             <div class="button-box">
@@ -170,11 +219,95 @@
             </div>
         </div>
     </div>
+     <!-- 문의사항 삭제 모달 시작 -->
+     <div id="modalDelete" class="modal modal-pri">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6>문의사항 삭제</h6>
+            </div>
+            <div class="modal-body">
+                <!--내용영역-->
+                <h5>문의사항을 삭제하시겠습니까?</h5>
+                <p class="inquiry-modal-sub-info">⁕ 삭제된 문의사항은 저장되지 않으며 복구 할 수 없습니다.</p>
+                <!--//내용영역-->
+            </div>
+            <div class="area-btn center">
+                <button class="btn btn-pri size01" type="button">삭제</button>
+                <a href="" rel="modal:close" class="btn btn-sec size01">닫기</a>
+            </div>
+        </div>
+    </div>
+    <!-- 문의사항 삭제 모달 끌 -->
+    <!-- 문의사항 답글 모달 시작 -->
+    <div id="adminModal" class="modal modal-pri">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6>문의사항 답글</h6>
+            </div>
+            <div class="modal-body">
+                <!--내용영역-->
+                <h5>[<span class="userId"></span>]님의 문의내용</h5>
+                <textarea name="userContent" readonly></textarea>
+                <h5>답글내용 입력</h5>
+                <textarea name="adminContent"></textarea>
+                <input type="hidden" class="adminInquiryNo" value="">
+            </div>
+            <div class="area-btn right">
+                <button class="btn btn-pri size01 adminInsert" type="button" id="adminInsert">답글</button>
+                <a href="" rel="modal:close" class="btn btn-sec size01">닫기</a>
+            </div>
+        </div>
+    </div>
+    <!-- 문의사항 답글 모달 끌 -->
+    <!-- 문의사항 수정 모달 시작 -->
+    <div id="modalBasic" class="modal modal-pri">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6>문의사항 수정</h6>
+            </div>
+            <div class="modal-body">
+                <!--내용영역-->
+                <h5>수정할 내용을 입력해 주세요.</h5>
+                <textarea name="inquiryContent"></textarea>
+                <input type="hidden" class="testNumber" valur="">
+            </div>
+            <div class="area-btn right">
+                <button class="btn btn-pri size01 updateDoneBtn" type="button" id="modalUpdateBtn">수정완료</button>
+                <a href="" rel="modal:close" class="btn btn-sec size01">닫기</a>
+            </div>
+        </div>
+    </div>
+    <!-- 문의사항 수정 모달 끌 -->
+    <!-- 문의사항 작성 모달 시작 -->
+    <div id="modalBasic2" class="modal modal-pri">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6>문의사항 작성</h6>
+            </div>
+            <div class="modal-body">
+                <!--내용영역-->
+                <h5>문의사항을 작성해 주세요</h5>
+                <p class="inquiry-modal-sub-info">⁕ 문의사항 수정은 답변대기 상태에서만 가능합니다.</p>
+                <br>
+                <h6>제목</h6>
+                <input type="text" name="inquiryTitle">
+                <h6>문의 내용</h6>
+                <textarea name="inquiryContent1" style="height: 200px;"></textarea>
+            </div>
+            <div class="area-btn right">
+                <button class="btn btn-pri size01 modalInsertBtn" type="button" id="modalInsertBtn">작성하기</button>
+                <a href="" rel="modal:close" class="btn btn-sec size01">닫기</a>
+            </div>
+        </div>
+    </div>
+    <!-- 문의사항 작성 모달 끝 -->
 <input type="hidden" id="productPrice" value="${p.productPrice}">
 <input type="hidden" id="productDiscount" value="${p.productDiscount}">
 <input type="hidden" id="loginMember" value="${sessionScope.m.memberNo}">
+<input type="hidden" id="loginMemberId" value="${sessionScope.m.memberId}">
 <input type="hidden" id="productNo" value="${p.productNo}">
 <input type="hidden" id="likeNo" value="${l.likeNo}">
+<input type="hidden" id="productContent" value="${p.productContent}">
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <!-- <div class="quick-scroll-bar">
     <ul>
@@ -198,34 +331,8 @@
     	<!-- 슬릭 슬라이더 js -->
 	<script type="text/javascript" src="/resources/slick/slick.min.js"></script>
     <script>
-        $("[name=like]").children().on("click",function(){ /*like click event*/
-            $(this).children().toggleClass("test");
-        })
-
-            $("[name=like]").on("click",function(){ /*like delete*/
-            $.ajax({
-                url : "/deleteLike.do",
-                type : "POST",
-		    	dataType : "JSON",
-                data : {productNo : $("#productNo").val(), memberNo : $("#loginMember").val()},
-                success : function(data){
-                    $("[name=like]").empty();
-                    $("[name=like]").append("<span class='material-symbols-outlined'>favorite</span>")
-                }
-            });
-        });
-            $("[name=like]").on("click",function(){ /*like insert*/
-            $.ajax({
-                url : "/productLike.do",
-                type : "POST",
-		    	dataType : "JSON",
-                data : {productNo : $("#productNo").val(), memberNo : $("#loginMember").val()},
-                success : function(data){
-                    console.log(data);
-                }
-            });
-        });
         window.onload = function(){
+            // 찜하기 DB조회후 로그인한 회원과 같으면 색칠해주는 ajax
             if($("#loginMember").val() != ''){
                 $.ajax({
                     url : "/selectProductLike.do",
@@ -233,7 +340,6 @@
                     dataType : "JSON",
                     data : {memberNo : $("#loginMember").val(), productNo : $("#productNo").val()},
                     success : function(data){
-                        console.log(data);
                         if(data.memberNo == $("#loginMember").val()){
                             $("[name=like]").empty();
                             $("[name=like]").append("<span class='material-symbols-outlined test'>favorite</span>")
@@ -249,9 +355,41 @@
                 });
                 }
             }
+        // 찜하기 버튼 색칠하기
+        $("[name=like]").children().on("click",function(){ /*like click event*/
+            $(this).children().toggleClass("test");
+        })
+        // 찜하기 삭제
+            $("[name=like]").on("click",function(){ /*like delete*/
+            $.ajax({
+                url : "/deleteLike.do",
+                type : "POST",
+		    	dataType : "JSON",
+                data : {productNo : $("#productNo").val(), memberNo : $("#loginMember").val()},
+                success : function(data){
+                    $("[name=like]").empty();
+                    $("[name=like]").append("<span class='material-symbols-outlined'>favorite</span>")
+                }
+            });
+        });
+        // 찜하기 insert
+            $("[name=like]").on("click",function(){ /*like insert*/
+            $.ajax({
+                url : "/productLike.do",
+                type : "POST",
+		    	dataType : "JSON",
+                data : {productNo : $("#productNo").val(), memberNo : $("#loginMember").val()},
+                success : function(data){
+                    console.log(data);
+                }
+            });
+        });
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         let productPrice = $("#productPrice").val();
         let productDiscount = $("#productDiscount").val();
-        
+        // 금액 3자리마다 , 찍는 함수
         $(function(){
             let result = productPrice * (100-productDiscount)/100000;
             var num = 0;
@@ -262,11 +400,19 @@
             $(".product-price").text(price);
         })
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        // 슬릭슬라이드
         $('.img-box').slick();
         $(".scroll-top").on("click",function(){
             var offset = $("body").offset();
             $("html, body").animate({scrollTop: offset.top},400);
         });
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        // 퀵스크롤 버튼 시작
         $(document).ready(function(){
             $('.product-info-btn').click(function(){
                 var offset = $('.product-info-box').offset(); //선택한 태그의 위치를 반환
@@ -295,6 +441,225 @@
                     $("html, body").animate({scrollTop: offset.top},400); // 선택한 위치로 이동. 두번째 인자는 0.4초를 의미한다.
             });
         });
-        
+        //퀵스크롤 버튼 끝
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        //문의사항 클릭한 게시글 내용 보여주는 버튼(toggle)
+        $(".inquiry-content").hide();
+        $(".udBtn").hide();
+        $(".inquiry-content-btn").on("click",function(){
+                $(this).parent().next().toggle();
+                $(this).parent().next().next().next().toggle();
+        });
+        //문의사항 update에 필요한 값을 게시글 첫번째 수정 버튼 눌렀을때 필요한 값을 추출하기
+        $(".updateBtn").on("click",function(){
+            var inquiryContent = $(this).parent().parent().parent().prev().children().text();
+            var testNumber = $(this).prev().val();
+            console.log(testNumber);
+            $("[name=inquiryContent]").val(inquiryContent);
+            $(".testNumber").val(testNumber);
+            console.log($(".testNumber").val());
+        })
+        //모달 띄우는 함수
+        $(function () {
+            $('.btn-flex-wrap').children().click(function (event) {
+                const modalId = $(this).data('modal');
+                if ($(modalId).hasClass('modal-pri')) {
+                    $($(this).data('modal')).modal({
+                        fadeDuration: 100
+                    });
+                    return false;
+                } else if ($(modalId).hasClass('modal-sec')) {
+                    $($(this).data('modal')).modal({
+                        escapeClose: false,
+                        showClose: false,
+                        fadeDuration: 100
+                    });
+                    return false;
+                } else {
+                    return false;
+                }
+            });
+            //모달 닫기
+            $('#insertInquiry').click(function (event) {
+                const modalId = $(this).data('modal');
+                if ($(modalId).hasClass('modal-pri')) {
+                    $($(this).data('modal')).modal({
+                        fadeDuration: 100
+                    });
+                    return false;
+                } else if ($(modalId).hasClass('modal-sec')) {
+                    $($(this).data('modal')).modal({
+                        escapeClose: false,
+                        showClose: false,
+                        fadeDuration: 100
+                    });
+                    return false;
+                } else {
+                    return false;
+                }
+            });
+            
+        });
+        //문의사항 작성
+        $("#modalInsertBtn").on("click",function(){
+            var inquiryTitle = $("[name=inquiryTitle]").val();
+            var inquiryContent = $("[name=inquiryContent1]").val();
+            var inquiryWriter = $("#loginMemberId").val();
+            var productNo = $("#productNo").val();
+            $.ajax({
+                url : "/insertInquiry.do",
+                type : "POST",
+                dataType : "JSON",
+                data : {inquiryTitle:inquiryTitle, inquiryContent:inquiryContent, inquiryWriter:inquiryWriter, productNo:productNo},
+                success : function(data){
+                    if(data == 1){
+                        $("#modalBasic2").hide();
+                            insertAlert();
+                    }
+                }
+            });
+        });
+        //문의사항 삭제
+        //문의사항 수정
+        $(".updateDoneBtn").on("click",function(){
+            var inquiryContent = $("[name=inquiryContent]").val();
+            var inquiryNo = $(".testNumber").val();
+            console.log(inquiryNo);
+            
+            $.ajax({
+                url : "/updateInquiry.do",
+                type : "POST",
+                dataType : "JSON",
+                data : {inquiryContent : inquiryContent, inquiryNo : inquiryNo },
+                success : function(data){
+                    if(data == 1){
+                        $("#modalBasic").hide();
+                        jalertshow();
+                    } else {
+                        console.log("문의사항 작성 실패");
+                    }
+                }
+            });
+        });
+        //문의사항 답글 모달 값 띄우기
+        $(".adminModal").on("click",function(){
+            var inquiryContent = $(this).parent().parent().parent().prev().prev().children().text();
+            var inquiryWriter = $(this).parent().parent().parent().prev().prev().children().attr("value");
+            var inquiryNo = $(this).prev().val();
+            $(".adminInquiryNo").val(inquiryNo);
+            $("[name=userContent]").text(inquiryContent);
+            $(".userId").text(inquiryWriter);
+
+        });
+        //문의사항 답글 달기
+        $(".adminInsert").on("click",function(){
+            var iqAdminContent = $("[name=adminContent]").val();
+            var inquiryNo = $(".adminInquiryNo").val();
+            $.ajax({
+                url : "/adminInsert.do",
+                type : "POST",
+                dataType : "JSON",
+                data : {inquiryNo:inquiryNo, iqAdminContent:iqAdminContent},
+                success : function(data){
+                    if(data == 1){
+
+                    }
+                }
+            });
+        });
+        //답글 select
+         //문의사항 작성 성공시 띄울 alert창
+         function insertAlert(){
+                jQueryAlert('success',"문의사항이 작성되었습니다.");
+
+            function jQueryAlert(type, msg) {
+                let $type = type;
+                let messageBox = msg;
+                switch ($type) {
+                    case 'success':
+                    messageBox = $.parseHTML('<div class="alert__success"></div>');
+                    break;
+                    case 'error':
+                    messageBox = $.parseHTML('<div class="alert__error"></div>');
+                    break;
+                    case 'warning':
+                    messageBox = $.parseHTML('<div class="alert__warning"></div>');
+                    break;
+                    case 'info':
+                    messageBox = $.parseHTML('<div class="alert__info"></div>');
+                    break;
+                }
+                $("body").append(messageBox);
+                $(messageBox).dialog({
+                    dialogClass :$type,
+                    open: $(messageBox).append(msg),
+                    draggable: false,
+                    modal: true,
+                    buttons: {
+                        "OK": function () {
+                            $(this).dialog("close");
+                             location.reload()
+                        }
+                    },
+                    show: {
+                        effect: 'fade',
+                        duration: 200 //at your convenience
+                    },
+                    hide: {
+                        effect: 'fade',
+                        duration: 200 //at your convenience
+                    }
+                });
+            };
+        }
+        //문의사항 수정 성공시 띄울 alert창
+            function jalertshow(){
+                jQueryAlert('success',"문의사항이 수정되었습니다.");
+
+            function jQueryAlert(type, msg) {
+                let $type = type;
+                let messageBox = msg;
+                switch ($type) {
+                    case 'success':
+                    messageBox = $.parseHTML('<div class="alert__success"></div>');
+                    break;
+                    case 'error':
+                    messageBox = $.parseHTML('<div class="alert__error"></div>');
+                    break;
+                    case 'warning':
+                    messageBox = $.parseHTML('<div class="alert__warning"></div>');
+                    break;
+                    case 'info':
+                    messageBox = $.parseHTML('<div class="alert__info"></div>');
+                    break;
+                }
+                $("body").append(messageBox);
+                $(messageBox).dialog({
+                    dialogClass :$type,
+                    open: $(messageBox).append(msg),
+                    draggable: false,
+                    modal: true,
+                    buttons: {
+                        "OK": function () {
+                            $(this).dialog("close");
+                             location.reload()
+                        }
+                    },
+                    show: {
+                        effect: 'fade',
+                        duration: 200 //at your convenience
+                    },
+                    hide: {
+                        effect: 'fade',
+                        duration: 200 //at your convenience
+                    }
+                });
+            };
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         </script>
 </html>

@@ -1,9 +1,15 @@
 package moo.ng.san.product.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +26,8 @@ import com.google.gson.JsonObject;
 import common.FileManager;
 import moo.ng.san.category.model.vo.Category;
 import moo.ng.san.category.model.vo.DetailCategory;
+import moo.ng.san.inquiry.model.service.InquiryService;
+import moo.ng.san.inquiry.model.vo.Inquiry;
 import moo.ng.san.product.model.service.ProductService;
 import moo.ng.san.product.model.vo.FileVO;
 import moo.ng.san.product.model.vo.Product;
@@ -31,6 +39,8 @@ public class ProductController {
 	private ProductService service;
 	@Autowired
 	private FileManager fileManager;
+	@Autowired
+	private InquiryService iqService;
 	
 	
 	
@@ -233,7 +243,9 @@ public class ProductController {
 	@RequestMapping(value="/productView.do")
 	public String productView(int productNo, Model model) {
 		Product p = service.selectProductByProductNo(productNo);
+		ArrayList<Inquiry> list = iqService.selectInquiryList(productNo);
 		model.addAttribute("p",p);
+		model.addAttribute("iqList", list);
 		return "product/productView";
 	}
 	@GetMapping("/main.do")
@@ -242,12 +254,37 @@ public class ProductController {
 		model.addAttribute("productList",list);
 		return "common/main";
 	}
-//	@RequestMapping(value="SummerNoteImageFile" , method = RequestMethod.POST)
-//	public @ResponseBody JsonObject SummerNoteImageFile(@RequestParam("file") MultipartFile file) {
-//		JsonObject jsonObject = service.SummerNoteImageFile(file);
-//		 System.out.println(jsonObject);
-//		return jsonObject;
-//	}
-	
+	@RequestMapping(value="/uploadSummernoteImageFile.do", produces = "application/json; charset=utf8")
+	@ResponseBody
+	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request )  {
+		JsonObject jsonObject = new JsonObject();
+		
+        /*
+		 * String fileRoot = "C:\\summernote_image\\"; // 외부경로로 저장을 희망할때.
+		 */
+		
+		// 내부경로로 저장
+		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
+		String fileRoot = contextRoot+"resources/productContentImg/";
+		
+		String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
+		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
+		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
+		
+		File targetFile = new File(fileRoot + savedFileName);	
+		try {
+			InputStream fileStream = multipartFile.getInputStream();
+			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
+			jsonObject.addProperty("url", "/resources/productContentImg/"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
+			jsonObject.addProperty("responseCode", "success");
+				
+		} catch (IOException e) {
+			FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
+			jsonObject.addProperty("responseCode", "error");
+			e.printStackTrace();
+		}
+		String a = jsonObject.toString();
+		return a;
+	}
 	
 }

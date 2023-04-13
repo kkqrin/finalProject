@@ -23,6 +23,10 @@
 				sysdate,
 				#{memberZoneCode}
 			)
+			
+<!--★ -->	<selectKey resultType="_int" order="AFTER" keyProperty="memberNo"> <!-- order:insert쿼리문 AFTER에 동작해야 하니까 / keyProperty:결과값을 담아줄 변수명-->
+				select max(member_no) from member_tbl
+			</selectKey>
 		</insert>
 
 
@@ -52,5 +56,68 @@
 		</select> 
 	
 
-
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	<select id="selectAllMember" resultType="m">
+		select
+			member_no as memberNo,
+			member_id as memberId,
+			member_name as memberName,
+			member_email as memberEmail,
+			member_phone as memberPhone,
+			member_addr as memberAddr,
+			member_gender as memberGender,
+			to_char(member_bday, 'YYYY-MM-DD') as memberBday,
+			member_account as memberAccount,
+			member_path as memberPath,
+			member_agree as memberAgree,
+			member_status as memberStatus,
+			member_bank as memberBank,
+			reg_date as regDate,
+			member_zonecode as memberZoneCode
+		from member_tbl where member_bday is not null
+	</select>
 </mapper>

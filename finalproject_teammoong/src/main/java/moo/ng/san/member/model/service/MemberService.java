@@ -22,6 +22,9 @@ public class MemberService {
 	public int insertMember(Member m) {
 		int result = 0;
 		result = dao.insertMember(m);
+		if(result>0) {
+			result += dao.insertFirstPoint(m);
+		}
 		return result;
 	}//insertMember
 

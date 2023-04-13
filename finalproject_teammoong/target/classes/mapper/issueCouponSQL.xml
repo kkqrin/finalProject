@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="issueCoupon">
+	<insert id="insertIssueCoupon" parameterType="ic">
+		insert into issue_coupon values
+		(issue_coupon_seq.nextval, #{memberNo}, #{couponNo}, sysdate, sysdate+14, 1) 
+	</insert>
+	<select id="selectAllIssueCoupon" parameterType="ic" resultType="ic">
+		select
+			issue_no as issueNo,
+			member_no as memberNo,
+			coupon_no as couponNo,
+			issue_date as issueDate,
+			to_char(end_date, 'YYYY-MM-DD') as endDate,
+			coupon_status as couponStatus
+		from issue_coupon
+	</select>
+	<update id="updateIssueCoupon" parameterType="_int">
+		update issue_coupon 
+		set coupon_status = 2 where issue_no = #{issueNo}
+	</update>
+</mapper>

@@ -1,12 +1,8 @@
 package moo.ng.san.admin.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
@@ -64,6 +60,10 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping(value="/ajaxAdminSearchMember.do", produces = "application/json;charset=utf-8")
 	public String adminSearchMember(Member m, Model model) {
+		System.out.println(m.getMemberNo());
+		System.out.println(m.getMemberId());
+		System.out.println(m.getMemberName());
+		System.out.println(m);
 		ArrayList<Member> list = service.selectSearchMember(m);
 		Gson gson = new Gson();
 		String result = gson.toJson(list);
@@ -73,10 +73,17 @@ public class AdminController {
 	
 	
 	// 회원 등급 변경 일괄 적용
-	@ResponseBody
-	@RequestMapping(value="/ajaxChangeCheckedMemberGrade.do")
-	public String changeCheckedMemberGrade() {
-		return null;
+	@RequestMapping(value="/checkedChangeMemberStatus.do")
+	public String checkedChangeMemberStatus(HttpServletRequest request) {
+		String no = request.getParameter("no");
+		String level = request.getParameter("level");
+		boolean result = service.updateChangeMemberStatus(no, level);
+		
+		if(result) {
+			return "redirect:/";
+		}else {
+			return "redirect:/";
+		}
 	}
 	
 	
@@ -118,7 +125,33 @@ public class AdminController {
 		
 	}
 	
-	/*상품 관리*/
+	@ResponseBody
+	@RequestMapping(value="/ajaxChangeProductStatus.do")
+	public String productChangeStatus(Product p) {
+		int result = service.updateProductStatus(p);
+		
+		if(result > 0) {
+			return "ok"; 
+		}
+			return "again";
+		
+	}
+	
+	
+	// 상품 상태 변경 일괄 적용
+	@RequestMapping(value="/checkedChangeProductStatus.do")
+	public String checkedChangeProductStatus(HttpServletRequest request) {
+		String no = request.getParameter("no");
+		String level = request.getParameter("level");
+		
+		boolean result = service.updateChangeProductStatus(no, level);
+		
+		if(result) {
+			return "redirect:/";
+		}else {
+			return "redirect:/";
+		}
+	}
 	
 	
 	/* 배송 관리 */
@@ -326,17 +359,7 @@ public class AdminController {
 	
 	// 상품 등록관리
 	
-	@ResponseBody
-	@RequestMapping(value="/ajaxChangeProductStatus.do")
-	public String productChangeStatus(Product p) {
-		int result = service.updateProductStatus(p);
-		if(result > 0) {
-			return "ok"; 
-		}
-			return "again";
-		
-	}
-	
+
 
 	
 	

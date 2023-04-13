@@ -196,6 +196,7 @@ body .top-icon.hide-icon{
 }
 .recent-product-content .slick-slide{
     width:71px !important;
+    height:67px !important;
 }
 
 </style>

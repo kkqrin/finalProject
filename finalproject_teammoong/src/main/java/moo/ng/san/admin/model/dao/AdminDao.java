@@ -196,6 +196,18 @@ public class AdminDao {
 		return (ArrayList<Board>)list;
 	}
 
+	public int updateChangeMemberStatus(HashMap<String, Object> map) {
+		int result = sqlSession.update("admin.updateChangeMemberStatus",map);
+		
+		return result;
+	}
+
+	public int updateChangeProductStatus(HashMap<String, Object> map) {
+		int result = sqlSession.update("admin.updateChangeProductStatus",map);
+		
+		return result;
+	}
+
 
 
 	

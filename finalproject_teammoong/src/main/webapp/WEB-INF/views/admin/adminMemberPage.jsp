@@ -108,9 +108,9 @@
                 <div class="adminPage-content">
                     <div class="adminPage-search">
                         <select id="memberSearchSelect">
-                            <option value="memberNo">회원번호 검색</option>
-                            <option value="memberId">회원 아이디 검색</option>
-                            <option value="memberName">회원 이름 검색</option>
+                            <option id="searchMemberNo" value="memberNo">회원번호 검색</option>
+                            <option id="searchMemberId" value="memberId">회원 아이디 검색</option>
+                            <option id="searchMemberName" value="memberName">회원 이름 검색</option>
                         </select>
                         <input type="text" name="memberSearchBox" id="searchOption">
                         <button type="button" name="searchSubmitBtn">검색</button>
@@ -138,10 +138,8 @@
                             <c:forEach items="${memberList }" var="m">
                                 <tr>
                                 	<td><input type="checkBox" class="checkBox"></td>
-                                    <td>${m.memberNo }</td>
-                                    <input type="hidden" class="memberNo" value="${m.memberNo }">
-                                    <td>${m.memberId }</td>
-                                    <input type="hidden" class="memberId" value="${m.memberId }">
+                                    <td>${m.memberNo }<input type="hidden" class="memberNo" value="${m.memberNo }"></td>
+                                    <td>${m.memberId }<input type="hidden" class="memberId" value="${m.memberId }"></td>
                                     <td>${m.memberName }</td>
                                     <td>${m.memberEmail }</td>
                                     <td>${m.memberPhone }</td>
@@ -185,16 +183,43 @@
                                     </c:choose>
                                     <td>${m.regDate }</td>
                                     <td>
-                                        <select name="memberStatusList" class="memberStatusList">
-                                            <option value="0">관리자</option>
-                                            <option value="1">정상회원</option>
-                                            <option value="2">정지회원</option>
-                                            <option value="3">탈퇴회원</option>
-                                        </select>
+	                                    <c:choose>
+	                                        <c:when test="${m.memberStatus == 0}">
+		                                         <select name="memberStatusList" class="memberStatusList">
+		                                            <option value="0" selected>관리자</option>
+		                                            <option value="1">정상회원</option>
+		                                            <option value="2">정지회원</option>
+		                                            <option value="3">탈퇴회원</option>
+	                                       		 </select>
+	                                        </c:when>
+	                                        <c:when test="${m.memberStatus == 1}">
+		                                         <select name="memberStatusList" class="memberStatusList">
+		                                            <option value="0">관리자</option>
+		                                            <option value="1" selected>정상회원</option>
+		                                            <option value="2">정지회원</option>
+		                                            <option value="3">탈퇴회원</option>
+	                                       		 </select>
+	                                        </c:when>
+	                                        <c:when test="${m.memberStatus == 2}">
+		                                         <select name="memberStatusList" class="memberStatusList">
+		                                            <option value="0">관리자</option>
+		                                            <option value="1">정상회원</option>
+		                                            <option value="2" selected>정지회원</option>
+		                                            <option value="3">탈퇴회원</option>
+	                                       		 </select>
+	                                        </c:when>
+	                                        <c:when test="${m.memberStatus == 3}">
+		                                         <select name="memberStatusList" class="memberStatusList">
+		                                            <option value="0">관리자</option>
+		                                            <option value="1">정상회원</option>
+		                                            <option value="2">정지회원</option>
+		                                            <option value="3" selected>탈퇴회원</option>
+	                                       		 </select>
+	                                        </c:when>
+	                                    </c:choose>
                                     </td>
                                     <td>
-                                    	
-                                    	<button type="button" class="changeMemberStatusBtn" onclick="changeMemberStatus();">회원등급 변경</button>
+                                    	<button type="button" class="changeMemberStatusBtn">회원등급 변경</button>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -205,7 +230,6 @@
                                 <th colspan="2"><button type="button" name="allChangeMemberStatus">일괄 변경</th>
                             </tr>
 	                        <form name="searchForm" method="POST" action="" class="">
-	                        	
 	                       		<button type="button" onclick="exportToExcel();">엑셀출력</button>
 	                        </form><!--  -->
                         </table>
@@ -221,11 +245,9 @@
 <!-- 스크립트를 넣어봅시다 -->
     <script>
     /* 등급 변경 */
-    /* 왜 첫번째만 변경되는가?! */
-    	function changeMemberStatus(){
-    		var memberStatus = $(".memberStatusList option:selected").val();
-    		var memberOldStatus = $(".memberStatus").val();
-    		var memberNo = $(".memberNo").val();
+    	$(".changeMemberStatusBtn").on("click",function(){
+    		var memberNo = $(this).parent().parent().children().eq(1).text();
+    		var memberStatus = $(this).parent().prev().children().val();
     		
             $.ajax({
                 url: "/ajaxChangeMemberStatus.do",
@@ -240,26 +262,58 @@
                 	}
                 }
             })
+    		
+    	});
+    
+    /* 일괄 변경 */
+    
+    $("[name=allChangeMemberStatus]").on("click",function(){
+    	const check = $(".checkBox:checked");
+		if(check.length == 0){
+			alert("선택된 회원이 없습니다.");
+			return;
+		}
+			const no = new Array();
+			//체크된 회원의 등급을 저장할 배열
+			const level = new Array();
+			//체크된 체크박스 기준으로 회원번호, 등급을 찾아서 배열에 넣는 작업
+		
+			check.each(function(index, item){
+				const memberNo = $(item).parent().next().text();
+				no.push(memberNo);
+				//check기준으로 td -> tr -> 후손중에 select찾기
+				const memberLevel = $(item).parent().parent().find("select").val();
+				level.push(memberLevel);
+			});
+			
+			location.href="/checkedChangeMemberStatus.do?no="+no.join("/")+"&level="+level.join("/");
             
-            };
+	});
             
             
         /* 검색기능 */
          $("[name=searchSubmitBtn]").on("click",function(){
         	 var memberSearchOption = $("#memberSearchSelect option:selected").val();
-         	 var memberNo = $("#memberNo").val();
-        	 var memberId = $("#memberId").val();
-        	 var memberName = $("#memberName").val();
+         	 var memberNo = $("#searchMemberNo").val();
+        	 var memberId = $("#searchMemberId").val();
+        	 var memberName = $("#searchMemberName").val();
         	 var memberSearchBox = $("[name=memberSearchBox]").val();
+  
         	 
         	 if(memberSearchOption == 'memberNo'){
-	        	 memberNo = memberSearchBox;
+        		 memberNo = memberSearchBox;
+        		 memberId = '';
+	        	 memberName = '';
         		 
         	 }else if(memberSearchOption == 'memberId'){
         		 memberId = memberSearchBox;
+        		 memberNo = 0;
+        		 memberName = '';
         		 
         	 }else if(memberSearchOption == 'memberName'){
         		 memberName = memberSearchBox;
+        		 memberNo = 0;
+        		 memberId = '';
         	 }
         	 
         	 
@@ -323,8 +377,7 @@
  	    				console.log("다시 시도");
                  	}
                  }
-             })
-        		 
+             })        		 
          });
     	
     	
