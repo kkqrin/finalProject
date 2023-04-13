@@ -42,7 +42,7 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "/join.do")
-	public String signIn(Member m, MultipartFile memberPropic, HttpServletRequest request ,Model model) {
+	public String signIn(Member m, MultipartFile memberPropic, HttpServletRequest request ,Model model,HttpSession session) {
 
 		String filePath="";
 		if(!memberPropic.isEmpty()) {
@@ -55,15 +55,17 @@ public class MemberController {
 		}
 		int result = service.insertMember(m);
 		
-		if(result>0) {
+		if(result==2) {
+			session.setAttribute("m", m);
+			
 			MsgVO msg = new MsgVO();
 			msg.setTitle("가입을 환영합니다");
 			msg.setMsg("뭉쳐야산다에서 저렴하게 구매해보세요 :)");
-			msg.setLoc("/loginFrm.do");
+			msg.setLoc("/");
 			model.addAttribute("msg", msg);
 			return "common/msg";
 		}
-		return "redirect:/";
+		return "redirect:/"; //오류페이지로 넘어가야함
 	}
 	
 	

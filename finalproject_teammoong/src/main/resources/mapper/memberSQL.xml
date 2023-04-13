@@ -23,6 +23,10 @@
 				sysdate,
 				#{memberZoneCode}
 			)
+			
+<!--★ -->	<selectKey resultType="_int" order="AFTER" keyProperty="memberNo"> <!-- order:insert쿼리문 AFTER에 동작해야 하니까 / keyProperty:결과값을 담아줄 변수명-->
+				select max(member_no) from member_tbl
+			</selectKey>
 		</insert>
 
 

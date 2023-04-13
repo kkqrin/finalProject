@@ -381,6 +381,7 @@
 				const pwReg = /^\d{3}-\d{3,4}-\d{4}$/;
 				const pwReg2 = /^0+\d{9,10}$/;
 				const inputPhone = $(this).val();
+
 				if(pwReg.test(inputPhone) || pwReg2.test(inputPhone) || inputPhone==""){
 					$(this).removeClass("error");
 					$(".caution-tr").eq(4).css("display","none");
@@ -492,7 +493,7 @@
 			
 			$("[name='memberAccount']").keyup(function(){
 				const inputAccount = $("[name='memberAccount']").val();
-				const AcountReg = /[0-9-]$/;
+				const AcountReg = /^[0-9]+$/;
 				
 				const inputAccount2 = $(this).val().replaceAll("-","");
 				$(this).val(inputAccount2);
@@ -575,7 +576,7 @@
 			
 			$("#birth-day").on("change",function(){
 				//일자 정규표현식
-				const dayReg = /^\d{1,2}$/;
+				const dayReg = /^[^0]\d{1,2}$/;
 				const inputDay = $(this).val();
 				if(!dayReg.test(inputDay) || inputDay<1 || 31<inputDay){
 					$(".day").addClass("error");
