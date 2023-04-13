@@ -63,6 +63,10 @@
   	gap: 18px;
   	width: 90%;
   }
+  .star{
+  	color : red;
+  	
+  }
 </style>
 </head>
 <body>
@@ -70,16 +74,17 @@
 		<div class="content-all">
 		<h3>입점문의</h3>
 		<p class="bold">*목적에 맞지 않는 광고, 홍보글은 사전 통보 없이 삭제 조치될 수 있음을 안내드립니다.</p>
+		<P class="star bold">* 필수입력 항목</P>
 			<form action="/askItem.do" method="post" enctype="multipart/form-data" id="askItemFrm">
 				<table class="tbn-box">
 					<tr>
-						<th style="width:30%;">사업장명</th>
+						<th style="width:30%;"><sup class="star">*</sup>사업장명</th>
 						<td>
 							<input type="text" name="corpName" class="input-basic" placeholder="회사명을 입력해주세요" required>
 						</td>
 					</tr>
 					<tr>
-						<th>사업자등록번호</th>
+						<th><sup class="star">*</sup>사업자등록번호(필수)</th>
 						<td>
 							<div class="regDiv">
 								<input type="text" name="regNo" class="input-basic" placeholder="사업자번호를 조회해주세요" required readonly>
@@ -88,13 +93,13 @@
 						</td>
 					</tr>
 					<tr>
-						<th>대표자명</th>
+						<th><sup class="star">*</sup>대표자명</th>
 						<td>
 							<input type="text" name="repName" class="input-basic" placeholder="대표자 성함을 입력해주세요" required>
 						</td>
 					</tr>
 					<tr>
-						<th>사업장 주소</th>
+						<th><sup class="star">*</sup>사업장 주소</th>
 						<td>
 							<button type="button" id="addrCheck" class="btn btn-border-pri size01">주소조회</button>		
 							<div class="addrDiv">
@@ -116,7 +121,7 @@
 						</td>
 					</tr>
 					<tr>
-						<th>담당자명</th>
+						<th><sup class="star">*</sup>담당자명</th>
 						<td>
 							<input type="text" name="contName" class="input-basic" placeholder="담당자 성함을 입력해주세요" required>
 						</td>
@@ -124,7 +129,7 @@
 					<tr>
 						<th>부서</th>
 						<td>
-							<input type="text" name="depart" class="input-basic" placeholder="연락처를 입력해주세요">
+							<input type="text" name="depart" class="input-basic" placeholder="부서를 입력해주세요">
 						</td>
 					</tr>
 					<tr>
@@ -155,50 +160,52 @@
 						<th>카테고리</th>
 						<td>
 							<div class="category-box">
-								<input type="checkbox" name="category" id="1" value="패션">
+								<input type="checkbox" name="categoryName" id="1" value="패션">
 								<label for="1">패션</label>
-								<input type="checkbox" name="category" id="2" value="뷰티">
+								<input type="checkbox" name="categoryName" id="2" value="뷰티">
 								<label for="2">뷰티</label>
-								<input type="checkbox" name="category" id="3" value="식품">
+								<input type="checkbox" name="categoryName" id="3" value="식품">
 								<label for="3">식품</label>
-								<input type="checkbox" name="category" id="4" value="생활용품">
+								<input type="checkbox" name="categoryName" id="4" value="생활용품">
 								<label for="4">생활용품</label>
-								<input type="checkbox" name="category" id="5" value="가전/디지털">
+								<input type="checkbox" name="categoryName" id="5" value="가전/디지털">
 								<label for="5">가전/디지털</label>
-								<input type="checkbox" name="category" id="6" value="가구">
+								<input type="checkbox" name="categoryName" id="6" value="가구">
 								<label for="6">가구</label>
-								<input type="checkbox" name="category" id="7" value="침구">
+								<input type="checkbox" name="categoryName" id="7" value="침구">
 								<label for="7">침구</label>
-								<input type="checkbox" name="category" id="8" value="인테리어">
+								<input type="checkbox" name="categoryName" id="8" value="인테리어">
 								<label for="8">인테리어</label>
-								<input type="checkbox" name="category" id="9" value="공구">
+								<input type="checkbox" name="categoryName" id="9" value="공구">
 								<label for="9">공구</label>
-								<input type="checkbox" name="category" id="10" value="스포츠/레저/취미">
+								<input type="checkbox" name="categoryName" id="10" value="스포츠/레저/취미">
 								<label for="10">스포츠/레저/취미</label>
-								<input type="checkbox" name="category" id="11" value="출산/유아동">
+								<input type="checkbox" name="categoryName" id="11" value="출산/유아동">
 								<label for="11">출산/유아동</label>
-								<input type="checkbox" name="category" id="12" value="반려용품">
+								<input type="checkbox" name="categoryName" id="12" value="반려용품">
 								<label for="12">반려용품</label>
-								<input type="checkbox" name="category" id="13" value="명품관">
+								<input type="checkbox" name="categoryName" id="13" value="명품관">
 								<label for="13">명품관</label>
+								<input type="checkbox" name="categoryName" id="14" value="기타(etc)">
+								<label for="14">기타(etc)</label>
 							</div>
 						</td>
 					</tr>
 					<tr>
 						<th>
-							<label for="file">사업자등록증 첨부</label>
+							<label for="file"><sup class="star">*</sup>사업자등록증 첨부</label>
 						</th>
 						<td>
 							<div id="drop-zone">
       							<label for="fileUpload">파일을 여기에 끌어다 놓거나 클릭하세요.</label>
     						</div>
-    						<input type="file" name="corpFile" id="fileUpload" multiple style="display: none" />
+    						<input type="file" name="askItemFile" id="fileUpload" multiple style="display: none" />
     						<div id="file-names">
     						</div>
     					</td>
 					</tr>
 					<tr>
-						<th>제목</th>
+						<th><sup class="star">*</sup>제목</th>
 						<td>
 							<input type="text" name="askTitle" class="input-basic" required>
 						</td>
@@ -218,7 +225,13 @@
 					</tr>
 				</table>
 			</form>
-			<div id="modalBasic" class="modal modal-pri">
+			<div class="area-btn left" style="display:none;">
+                <button class="btn btn-border-pri size01" type="button" id="alert01">성공</button>
+				<button class="btn btn-border-sec size01" type="button" id="alert02">에러</button>
+                <button class="btn btn-border-ter size01" type="button" id="alert03">경고</button>
+                <button class="btn btn-border-black size01" type="button" id="alert04">정보</button>
+           </div>
+			<div id="modalBasic" class="modal modal-sec">
             	<div class="modal-content">
                 	<div class="modal-header">
                     	<h6>사업자등록번호 조회</h6>
@@ -266,7 +279,7 @@
 	    form.append("imageFile", file);
 	    console.log(file);
 	    $.ajax({
-	        url: "/uploadImage.do",
+	        url: "/uploadAskItemImage.do",
 	        type: "post",
 	        data: form,
 	        processData: false,
@@ -298,6 +311,13 @@
         });
         $("#regInsertBtn").hide();
     });
+	$(function(){
+		$("#checkRegNo").keypress(function(e){
+			if(e.keyCode == 13){
+				$("#checkRegBtn").click();
+			}
+		});
+	});
 	function resetInput() {
         $('#checkRegNo').val('');
         $("#regInsertBtn").hide();
@@ -410,16 +430,18 @@
 		    $(this).parent().remove();
 		  });
 		});
-	function submitAskitemForm() {
-		  const form = $('#askItemFrm')[0]; // form 엘리먼트를 가져옵니다.
+	function submitAskItemForm() {
+		  const form = $("#askItemFrm")[0]; // form 엘리먼트를 가져옵니다.
 		  const formData = new FormData(form); // form 데이터를 FormData 객체로 생성합니다.
-
+		  console.log($('[name=regNo]').val());
+		 
 		  $.ajax({
 		    url: "/askItem.do", // action 속성값으로 요청을 보낼 URL을 지정합니다.
 		    method: 'POST', // 요청 방식을 지정합니다.
 		    data: formData, // 전송할 데이터를 지정합니다.
 		    processData: false, // 데이터 전송 시 데이터 처리 방식을 지정합니다. 기본값은 true입니다.
 		    contentType: false, // 데이터 전송 시 컨텐트 타입을 지정합니다. 기본값은 'application/x-www-form-urlencoded; charset=UTF-8'입니다.
+		    traditional : true,
 		    success: function(data) {
 	    		console.log(data);
 		    	if(data == "success"){

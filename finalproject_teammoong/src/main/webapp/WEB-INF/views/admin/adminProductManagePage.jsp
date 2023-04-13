@@ -67,28 +67,28 @@
         <div class="adminPage-back">
             <div class="adminPage-sidebar">
                 <ul>
-                    <a href="/adminMemberPage.do?reqPage=1">회원 관리</a>
-                    <li><a href="/manageMemberGrade.do">회원등급 관리</a></li>
+                    <li>회원 관리</li>
+                    <il><a href="/adminMemberPage.do?reqPage=1">회원 관리</a></il><!-- jsp 생성완료 -->
                 </ul>
                 <ul>
-                    <a>매출 관리</a>
-                    <li><a href="/adminTotalSalesManage.do?reqPage=1">전체 매출 관리</a></li>
+                    <li>매출 관리</li>
+                    <li><a href="/adminTotalSalesManage.do?reqPage=1">전체 매출 관리</a></li><!-- jsp 생성완료 -->
                     <li><a href="/categorySalesManage.do">카테고리별 매출관리</a></li>
                 </ul>
                 <ul>
-                    <li><a href="/adminTotalProductList.do?reqPage=1">상품 관리</a></li>
-                    <li><a href="/productConfirmManage.do">상품 등록 관리</a></li>
-                    <li><a href="/productRegist.do?reqPage=1"></a>상품 등록</li>
-                    <li><a href="/deliveryManage.do"></a>배송 관리</li>
+                    <li>상품 관리</li>
+                    <li><a href="/adminTotalProductList.do?reqPage=1">상품 관리</li><!-- jsp 생성완료 -->
+                    <li><a href="/adminProductRegist.do"></a>상품 등록</li>
+                    <li><a href="/adminDeliveryManagePage.do?reqPage=1"></a>배송 관리</li>
                 </ul>
                 <ul>
                     <a>이벤트 관리</a>
                     <li>쿠폰 발행 관리</li>
                 </ul>
                 <ul>
-                    <a href="/adminBoardManagePage.do">여기여기붙어라 관리</a>
-                    <li>여기여기붙어라 게시판 관리</li>
-                    <li><a href="/adminBoardReportManagePage.do?reqPage=1">여기여기붙어라 신고 관리</a></li>
+                    <li>여기여기붙어라 관리</li>
+                    <li><a href="/adminBoardManagePage.do?reqPage=1">여기여기붙어라 게시판 관리</a></li><!-- jsp 생성완료 -->
+                    <li><a href="/adminBoardReportManagePage.do?reqPage=1">여기여기붙어라 신고 관리</a></li><!-- jsp 생성완료 -->
                     <li>카테고리별 매출관리</li>
                 </ul>
             </div>
@@ -100,7 +100,7 @@
                             <option value="productName">상품 이름</option>
                             <option value="productStatus">상품 상태 검색</option>
                         </select>
-                        <input type="text" name="productSearchBox" id="searchOption" placeholder="상품 상태 검색시 [대기/등록/보류/만료] 중 하나로 입력해주세요">
+                        <input type="text" name="productSearchBox" id="searchOption" placeholder="상태 검색시 [대기/등록/보류/만료]">
                         <!-- 상품 상태 검색 시 1,2,3,4 로 변환해주는 choose 걸어줘야 함 -->
                         <button type="button" name="searchSubmitBtn">검색</button>
                     </div>
@@ -123,12 +123,14 @@
                                 <tr>
                                 	<td><input type="checkBox" id="checkBox"></td>
                                     <td>${p.productNo }</td>
-                                    <td>${p.dCategoryNo }</td>
+                                  	<input type="hidden" class="productNo" value="${p.productNo }">
+                                    <td>${p.detailCategoryNo }</td>
                                     <td>${p.productName }</td>
+                                    <input type="hidden" class="productName" value="${p.productName }">
                                     <td>${p.productEa }</td>
                                     <td>${p.productPrice }</td>
                                     <td>${p.productCost }</td>
-                                    <td>${p.productNumber }</td>
+                                    <td>${p.gongguNumber }</td>
                                     <td>${p.productContent }</td>
                                     <td>${p.productDiscount }</td>
                                     <c:choose>
@@ -146,6 +148,7 @@
                                     	</c:when>
                                     </c:choose>
                                     <td>
+                                    <input type="hidden" class="productStatus" value="${p.productStatus }">
                                         <select class="productStatusList" id="productStatusList">
                                             <option value="0">대기</option>
                                             <option value="1">등록</option>
@@ -154,7 +157,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                    	<input type="hidden" class="productStatus" value="${p.productStatus }">
+                                    	
                                     	<button type="button" id="changeProductStatusBtn" onclick="changeProductStatus();">상품 상태 변경</button>
                                     </td>
                                 </tr>
@@ -163,13 +166,13 @@
                                 <th colspan="11">${pageNavi}</th>
                             </tr>
                             <tr>
-                                <th colspan="2"><button type="button" name="allChangeProductStatus">일괄 변경</th>
+                                <th colspan="2"><button type="button" name="allChangeProductStatus">일괄 변경</button></th>
                             </tr>
-	                        <form name="searchForm" method="POST" action="" class="">
-	                        	<input type="hidden" class="productNo" value="${p.productNo }">
-	                       		<button type="button" onclick="exportToExcel();">엑셀출력</button>
-	                        </form><!--  -->
                         </table>
+		                        <form name="searchForm" method="POST" action="" class="">
+
+		                       		<button type="button" onclick="exportToExcel();">엑셀출력</button>
+		                        </form><!--  -->
                     </div>
                      <div id="ajaxResult" class="table"></div>
                 </div>
@@ -177,18 +180,19 @@
         </div>
 
     </div>
-
++9
 
 <!-- 스크립트를 넣어봅시다 -->
     <script>
 	function changeProductStatus(){
-		var productStatusSelect = $(".productStatusList option:selected").val();
+		var productStatus = $(".productStatusList option:selected").val();
 		var productNo = $(".productNo").val();
+
 		
         $.ajax({
             url: "/ajaxChangeProductStatus.do",
             type: "POST",
-            data: {productStatusSelect : productStatus, productNo : productNo},
+            data: {productStatus : productStatus, productNo : productNo},
             success: function(data) {
             	if(data == "ok"){
             		$("#adminProductTable").load(location.href+ '#adminProductTable');
@@ -204,18 +208,16 @@
         /* 검색기능 */
         $("[name=searchSubmitBtn]").on("click",function(){
        	 var productSearchOption = $("#productSearchSelect option:selected").val();
-         var productNo = $("#productNo").val();
-       	 var productName = $("#productName").val();
-       	 var productStatus = $("#productStatus").val();
+         var productNo = $(".productNo").val();
+       	 var productName = $(".productName").val();
+       	 var productStatus = $(".productStatus").val();
        	 var productSearchBox = $("[name=productSearchBox]").val();
        	 
-       	 if(memberSearchOption == 'productNo'){
+       	 if(productSearchOption == 'productNo'){
        		productNo = memberSearchBox;
-       		 
-       	 }else if(memberSearchOption == 'productName'){
+       	 }else if(productSearchOption == 'productName'){
        		productName = memberSearchBox;
-       		 
-       	 }else if(memberSearchOption == 'productStatus'){
+       	 }else if(productSearchOption == 'productStatus'){
        		 if(productSearchBox == '대기'){
 	       		productStatus = 1;
        		 }else if(productSearchBox == '등록'){

@@ -1,4 +1,4 @@
-package moo.ng.san.dayCheck.vo;
+package moo.ng.san.dayCheck.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

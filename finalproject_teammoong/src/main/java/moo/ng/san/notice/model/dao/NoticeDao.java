@@ -8,8 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import moo.ng.san.notice.vo.FileVO;
-import moo.ng.san.notice.vo.Notice;
+import moo.ng.san.notice.model.vo.FileVO;
+import moo.ng.san.notice.model.vo.Notice;
 
 @Repository
 public class NoticeDao {

@@ -17,9 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import common.FileManager;
 import moo.ng.san.notice.model.service.NoticeService;
-import moo.ng.san.notice.vo.FileVO;
-import moo.ng.san.notice.vo.Notice;
-import moo.ng.san.notice.vo.NoticePageData;
+import moo.ng.san.notice.model.vo.FileVO;
+import moo.ng.san.notice.model.vo.Notice;
+import moo.ng.san.notice.model.vo.NoticePageData;
 
 @Controller
 public class NoticeController {

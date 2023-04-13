@@ -558,12 +558,12 @@
 	console.log("페이지 로드 : "+$("#startHidden").val());
 
 		//////////////////////
-		//////////////// 중복 출력 되는 경우, 로드 전에 스크롤을 내린다음에 버튼 클릭하면 그때 엠티 되면서 스크롤 마지막에 닿아서 두번출력됨
+		//////////////// 중복 출력 되는 경우, 로드 전에 스크롤을 내린다음에 버튼 클릭하면 그순간 스크롤 마지막에 닿아서 두번(1,2,3번째)출력됨
 	productMoreAjax(true);
 	console.log("페이지 로드 후 아작스1 : "+$("#startHidden").val());
 
 
-	// 상품 정렬버튼 선택
+	// 상품 정렬 -> 상품들 지우고 start 초기화 후 ajax 실행 (ajax에서 현재 선택된 정렬타입을 읽어옴)
 	$(".product-sort").on("click", function(){
 		// empty
 		$(".product-wrap .posting-item").remove();
@@ -575,7 +575,8 @@
 		// 아작스 함수 실행
 		console.log("초기화전 : "+$("#startHidden").val());
 		$("#startHidden").val(1);
-		productMoreAjax(true);
+		///////// 이거 지우니까 해결됨........................
+		// productMoreAjax(true);
 		console.log("정렬 : "+$("#startHidden").val());
 
 	});
@@ -583,14 +584,17 @@
 
 	// 무한 스크롤
 		$(window).on("scroll", function(){
-			let scrollTop = $(window).scrollTop();
-			let windowHeight = $(window).height();
-			let documentHeight = $(document).height();
-			let isBottom = scrollTop + windowHeight >= documentHeight;
+			let scrollTop = $(window).scrollTop(); // 위로 스크롤된 길이
+			let windowHeight = $(window).height(); // 웹브라우저의 창의 높이
+			let documentHeight = $(document).height(); // 문서 전체의 높이
+			let isBottom = scrollTop + windowHeight >= documentHeight; // 바닥까지 스크롤 되었는지 여부 확인
 
-			// 아작스 함수 실행
-			productMoreAjax(isBottom);
-			// console.log(isBottom);
+			// if ($("body").height() > $(window).height()) {
+				// console.log("스크롤");
+				// 아작스 함수 실행
+				productMoreAjax(isBottom);
+				// console.log(isBottom);
+			// }
 
 		});	// 함수 이벤트 종료
 

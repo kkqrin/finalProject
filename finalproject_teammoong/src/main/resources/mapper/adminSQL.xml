@@ -105,7 +105,7 @@
 				where member_name like '%'||#{memberName}||'%'
 			</when>
 			<when test="memberNo == 0 and memberName == null">
-				where member_id = #{memberId}
+				where member_id like '%'|| #{memberId}||'%'
 			</when>
 			<when test="memberId == null and memberName == null">
 				where member_no = #{memberNo}
@@ -125,7 +125,7 @@
 			(select rownum as rnum, b.* from
 				(select
 				product_no as productNo,
-				d_category_no as dCategoryNo,
+				d_category_no as detailCategoryNo,
 				product_name as productName,
 				product_ea as productEa,
 				product_price as productPrice,
@@ -144,13 +144,14 @@
 
 	<update id="updateProductStatus" parameterType="p">
 		update
-			product_tbl set product_status = #{productStatus} where product_no = #{productNo};
+			product_tbl set product_status = #{productStatus} 
+			where product_no = #{productNo}
 	</update>
 
 	<select id="selectSearchProduct" parameterType="p" resultType="p">
 		select 
 			product_no as productNo,
-			d_category_no as dCategoryNo,
+			d_category_no as detailCategoryNo,
 			product_name as productName,
 			product_ea as productEa,
 			product_price as productPrice,
@@ -255,7 +256,7 @@
 		(select rownum as rnum, b.* from
             (select 
                 bt.board_no as boardNo,	
-                bt.d_category_no as dCategoryNo, 
+                bt.d_category_no as detailCategoryNo, 
                 bo.detail_name as detailName, 
                 bo.board_price as boardPrice, 
                 bt.board_date as boardDate,
