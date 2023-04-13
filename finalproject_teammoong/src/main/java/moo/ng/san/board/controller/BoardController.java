@@ -55,9 +55,9 @@ public class BoardController {
 		int result = service.insertBoard(b,fileList,detailName, detailPrice, detailCount);
 
 		if(result == (fileList.size()+1)) {
-			return "redirect:/boardList.do?reqPage=1";
+			return  "redirect:/";
 		}else {			
-			return "redirect:/";
+			return"redirect:/boardList.do?reqPage=1";
 		}
 	}
 	@RequestMapping(value="/boardView.do")
@@ -86,5 +86,8 @@ public class BoardController {
 		model.addAttribute("b", b);
 		return "board/boardOrderAfter";
 	}
-
+	@RequestMapping(value="/myPageRequestDeposit.do")
+	public String myPageRequestDeposit() {
+		return"board/myPageRequestDeposit";
+	}
 }
