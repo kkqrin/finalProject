@@ -586,7 +586,7 @@
                     <img src="/resources/img/product/korean-melon.jpg" />
                 </a>
                 <div class="gonggu-info">2인 공동구매</div>
-                <div class="end-hotdeal">
+                <div class="end-hotdeal shutdown">
                     판매시간이 종료되었습니다.
                 </div>
             </div>

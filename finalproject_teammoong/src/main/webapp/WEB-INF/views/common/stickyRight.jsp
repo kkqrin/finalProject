@@ -63,7 +63,6 @@
     position: sticky;
     top: 50%;
     transform: translateY(-50%);
-    width: 80px;
     font-size: 12px;
     line-height: 16px;
     color: rgb(51, 51, 51);
@@ -187,6 +186,18 @@ body .top-icon.hide-icon{
 .top-icon>a>span:hover{
     background: url(data:image/png;base64,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) 50% 50% / 58px 58px no-repeat;
 }
+
+
+/* 창 크기가 작아지면 최근본상품 사라짐 */
+@media screen and (max-width: 1870px){
+    .recent-product-container {
+        display: none !important;
+    }
+}
+.recent-product-content .slick-slide{
+    width:71px !important;
+}
+
 </style>
 </head>
 <body>

@@ -81,7 +81,7 @@
 			            </div>
 		            </div>
 	                <div class="middle-right">
-		                <a href="/myPageDmReceive.do"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">notifications</span></a>
+		                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">notifications</span></a>
 		                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">favorite</span></a>
 		                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">shopping_cart</span></a>
 	            	</div>

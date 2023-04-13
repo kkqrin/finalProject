@@ -3,6 +3,7 @@ package moo.ng.san.member.model.dao;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import moo.ng.san.member.model.vo.Member;
 
@@ -16,6 +17,11 @@ public class MemberDao {
 	public Member selectOneMember(Member member) {
 		Member m = sqlSession.selectOne("member.selectOneMember",member);
 		return m;
+	}
+
+	@Transactional
+	public int insertMember(Member m) {
+		return sqlSession.insert("member.insertMember", m);
 	}
 
 }

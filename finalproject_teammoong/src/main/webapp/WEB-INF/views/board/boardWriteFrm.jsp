@@ -66,17 +66,18 @@
 							class="mid-input" id="title" required></td>
 					<tr>
 					<tr>
-						<td colspan="4">카테고리<sup>*</sup></td>
-					</tr>
-					<tr>
-						<td colspan="4">
-						<input type="radio" name="categoryNo" id="c" value="1"> 
-						<label for="c">의류</label> 
-						<input type="radio"name="categoryNo" id="f" value="2"> 
-						<label for="f">음식</label>
-						<input type="radio" name="categoryNo" id="t" value="3"> 
-						<label for="t">완구</label></td>
-					</tr>
+			            <td colspan="2">카테고리<sup>*</sup></td>
+			            <td>
+			                <select name="category">
+			                    <!--아작스로 카테고리 추가  -->
+			                </select>
+			            </td>
+			            <td>
+			                <select name="detailCategoryNo">
+			                	<!--아작스로 세부 카테고리 추가  -->
+			                </select>
+			            </td>
+			        </tr>
 					<tr>
 						<td colspan="4">계좌정보<sup>*</sup></td>
 					</tr>
@@ -87,43 +88,16 @@
 					</tr>
 					<tr>
 						<td><input type="text" name="accountName" required></td>
-						<td><select class="select-custom" id="ui-id-1"
-							name="accountBank" required>
-								<option value="bank1">은행명 선택</option>
-								<option value="bank2">NH농협은행</option>
-								<option value="bank3">KB국민은행</option>
-								<option value="bank4">신한은행</option>
-								<option value="bank5">우리은행</option>
-								<option value="bank6">하나은행</option>
-								<option value="bank7">IBK기업은행</option>
-								<option value="bank8">부산은행</option>
-								<option value="bank9">경남은행</option>
-								<option value="bank10">대구은행</option>
-								<option value="bank11">우체국</option>
-								<option value="bank12">새마을금고</option>
-								<option value="bank13">SC제일은행</option>
-								<option value="bank14">광주은행</option>
-								<option value="bank15">수협</option>
-								<option value="bank16">전북은행</option>
-								<option value="bank17">신협은행</option>
-								<option value="bank18">제주은행</option>
-								<option value="bank19">케이뱅크</option>
-								<option value="bank20">카카오뱅크</option>
-								<option value="bank21">토스뱅크</option>
-								<option value="bank22">카카오뱅크(미성년자)</option>
-								<option value="bank23">토스뱅크(미성년자)</option>
-								<option value="bank24">씨티은행</option>
-								<option value="bank25">KDB산업</option>
-								<option value="bank26">은행 정보 없음</option>
-						</select></td>
+						<td>
+							<select class="select-custom" id="ui-id-1" name="accountBank" required>
+							<option value="null" selected disabled hidden>은행선택</option>
+							</select>
+						</td>
 						<td colspan="2"><input type="text" name="accountWriter"
 							required></td>
 					</tr>
 					<tr>
-						<td colspan="4">판매기간<sup>*</sup></td>
-					</tr>
-					<tr>
-						<td colspan="4">폼 시작/종료</td>
+						<td colspan="4">폼 시작/종료<sup>*</sup></td>
 					</tr>
 					<tr>
 						<td colspan="4"><input type="text" id="daterangepicker"
@@ -283,10 +257,14 @@
 				//timePickerSeconds: true,                 // 초 노출 여부
 				},
 				function(start, end, label) {
-					console.log(start.format('YYYY-MM-DD'), end
-							.format('YYYY-MM-DD'));
+// 					console.log(start.format('YYYY-MM-DD'), end
+// 							.format('YYYY-MM-DD'));
 					var boardStart = start.format('YYYY-MM-DD');
 					var boardEnd = end.format('YYYY-MM-DD');
+					
+					console.log(boardStart);
+					console.log(boardEnd);
+					
 					//input hidden 날짜 값 넣어서 디비로 보내기
 					$("[name=boardStart]").val(boardStart);
 					$("[name=boardEnd]").val(boardEnd);
@@ -408,7 +386,103 @@
     
     });
 	
+    
+		const accountBank = [ "NH농협은행", "KB국민은행", "신한은행", "우리은행", "하나은행",
+				"IBK기업은행", "부산은행", "경남은행", "대구은행", "우체국은행", "새마을금고", "SC제일은행",
+				"광주은행", "수협", "전북은행", "신협은행", "제주은행", "케이뱅크", "카카오뱅크", "토스뱅크",
+				"카카오뱅크(미성년자)", "토스뱅크(미성년자)", "씨티은행", "KDB산업" ];
 
+		function makeBankList() {
+			for (let i = 0; i < accountBank.length; i++) {
+				let option = "<option value="+accountBank[i]+">" + accountBank[i]
+						+ "</option>";
+				$("[name='accountBank']").append(option);
+			}
+		}
+
+		makeBankList();
+		
+		$("[name='boardName']").keyup(function(){
+			let inputName = $(this).val().length;
+			console.log(inputName);
+			if(inputName > 65) {
+				alert("입력가능한 글자가 초과되었습니다.");
+			}
+		});
+	
+		
+		$( function() {
+			$( "[name=category]" ).selectmenu();
+			$( "[name=detailCategoryNo]" ).selectmenu();
+		});
+		
+		window.onload = function(){
+			var categoryNo = $("[name=category]").val();
+			$("[name=category]").empty();
+            $("[name=category]").append("<option>카테고리</option>");
+            $("[name=detailCategoryNo]").append("<option>세부카테고리</option>");
+		    $.ajax({
+		    	url : "/selectAllCategory.do",
+		    	type : "POST",
+		    	dataType : "JSON",
+		    	success : function(values){
+		    		console.log(values)
+		    		for(var i=0; i<values.length; i++){
+		    		$("[name=category]").append("<option value="+[i+1]+">"+values[i].categoryName+"</option>");
+		    		}
+		    	},
+		    });
+	    }
+		$("[name=category]").on("selectmenuchange",function(){
+		    $("[name=detailCategoryNo]").empty();
+		    $("[name=detailCategoryNo]").append("<option>세부카테고리</option>");
+		    $.ajax({
+		    	url : "/selectDetailCategory.do",
+		    	type : "POST",
+		    	dataType : "JSON",
+		    	data : {categoryNo : $("[name=category]").val()},
+		    	success : function(data){
+		    		console.log(data)
+		    		for(var i=0; i<data.length; i++){
+			    		$("[name=detailCategoryNo]").append("<option value="+data[i].detailCategoryNo+">"+data[i].detailCategoryName+"</option>");
+			    		}
+// 		    		select메뉴 비우는 코드
+		    		$( "[name=detailCategoryNo]" ).selectmenu("refresh");
+		    		$( "[name=detailCategoryNo]" ).selectmenu();
+	    		},
+		    });
+		});
+		$("[name=detailCategoryNo]").on("selectmenuchange",function(){
+			console.log($(this).val());
+		})
+		
+		$("[name='accountName']").on("change",function(){
+				const inputAccount = $("[name='accountName']").val();
+				const AcountReg = /[0-9-]$/;
+				
+				if(AcountReg.test(inputAccount)){
+			        $(this).removeClass("error");
+			        $(".caution-tr").eq(6).css("display","none");
+			        
+					const result = $(this).val().replaceAll("-","");
+					$(this).val(result);
+			        
+			        result[5] = true;
+				}else{
+					$(this).addClass("error");
+					$(".caution-tr").eq(6).css("display","table-row");
+					$(".caution").eq(6).children().css("color","var(--secondary)");
+					$(".caution").eq(6).html("<a>숫자를 입력해주세요</a>");
+					result[5] = false;
+				}
+				if(inputAccount==""){
+					$(this).removeClass("error");
+					$(".caution-tr").eq(6).css("display","none");
+					result[5] = true;
+				}
+			});//계좌번호 정규표현식
+		
+		
 	</script>
 <!-- 	<script src="/resources/js/modal-alert.js"></script> -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />	

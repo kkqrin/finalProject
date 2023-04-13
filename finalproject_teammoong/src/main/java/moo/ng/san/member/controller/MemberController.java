@@ -2,6 +2,7 @@ package moo.ng.san.member.controller;
 
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 
+import common.FileManager;
+import common.MsgVO;
 import common.PhoneCertify;
 import moo.ng.san.member.model.service.MemberService;
 import moo.ng.san.member.model.vo.Member;
@@ -23,14 +27,12 @@ import net.nurigo.sdk.message.service.DefaultMessageService;
 public class MemberController {
 
 	@Autowired
-	MemberService service;
+	private MemberService service;
 	@Autowired
-	PhoneCertify phoneCertify;
+	private PhoneCertify phoneCertify;
+	@Autowired
+	private FileManager upload; 
 	
-	@RequestMapping(value = "/msgTest.do")
-	public String msgTest() {
-		return "common/msg";
-	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/memberPhoneCheck.do")
@@ -40,8 +42,20 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "/join.do")
-	public String signIn(Member m) {
-		return "";
+	public String signIn(Member m, MultipartFile file, HttpServletRequest request ,Model model) {
+
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member");
+		String filePath = upload.upload(savePath, file); //업로드 완료
+		
+		int result = service.insertMember(m,filePath);
+		
+		
+		MsgVO msg = new MsgVO();
+		msg.setTitle("가입을 환영합니다");
+		msg.setMsg("뭉쳐야산다에서 저렴하게 구매해보세요 :)");
+		msg.setLoc("/loginFrm.do");
+		model.addAttribute("msg", msg);
+		return "common/msg";
 	}
 	
 	

@@ -55,7 +55,7 @@ public class BoardDao {
 	
 	public int insertBoardOption(BoardOption o) {
 		int result = sqlSession.insert("board.insertOption",o);
-		return 0;
+		return result;
 	}
 	
 

@@ -16,7 +16,7 @@ public class Member {
 	private String memberPhone;
 	private String memberAddr;
 	private int memberGender;
-	private String memberBDay;
+	private String memberBday; // 카멜표기법에는 대문자가 연속으로 들어올수 없어서 변경(강사님)
 	private String memberAccount;
 	private String memberPath;
 	private int memberAgree;
