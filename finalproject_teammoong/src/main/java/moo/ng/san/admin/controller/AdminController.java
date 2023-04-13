@@ -110,7 +110,7 @@ public class AdminController {
 	// 상품 검색기능
 	@ResponseBody
 	@RequestMapping(value="/ajaxAdminSearchProduct.do", produces = "application/json;charset=utf-8")
-	public String adminSearchProduct(Product p, Model model) {
+	public String adminSearchProduct(Product p) {
 		ArrayList<Product> list = service.selectSearchProduct(p);
 		Gson gson = new Gson();
 		String result = gson.toJson(list);
@@ -450,11 +450,6 @@ public class AdminController {
 	
 	/*엑셀 출력*/
 
-	
-	
-	
-	
-	
 	
 	
 	
