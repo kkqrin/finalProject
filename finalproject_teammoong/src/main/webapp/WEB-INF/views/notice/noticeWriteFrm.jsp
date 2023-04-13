@@ -63,7 +63,7 @@
 		<div class="content-all">
 			<h3>공지사항 작성</h3>
 			<div class="main-content">
-				<form action="/noticeWrite.do" method="post" enctype="multipart/form-data" id="writeFrm">
+				<form method="post" enctype="multipart/form-data" id="writeFrm">
 					<table class="tbn-box">
 						<tr>
 							<th style="width:30%;">
