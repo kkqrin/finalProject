@@ -166,3 +166,21 @@ img{
     color: #fff;
 }
 /* 구매버튼 css 끝 */
+
+.inquiry-box{
+    margin-top: 20px;
+}
+
+.btn-flex-wrap{
+    float: right;
+    display: flex;
+}
+.insertInquiry{
+    float: right;
+    margin-top: 20px;
+}
+.inquiry-modal-sub-info{
+    padding-left: 5px;
+    font-size: 13px;
+    color: cadetblue
+}

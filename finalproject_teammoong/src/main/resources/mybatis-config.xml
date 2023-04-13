@@ -29,6 +29,8 @@
 		<typeAlias type="moo.ng.san.category.model.vo.DetailCategory" alias="dc" />
 		<typeAlias type="moo.ng.san.like.model.vo.Like" alias="l" />
 		
+		<typeAlias type="moo.ng.san.inquiry.model.vo.Inquiry" alias="iq" />
+		<typeAlias type="moo.ng.san.inquiry.model.vo.InquiryAdmin" alias="iqa" />
 		
 		
 		

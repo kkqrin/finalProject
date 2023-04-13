@@ -63,7 +63,7 @@
        <c:forEach items="${productList }" var="p">
         <div class="posting-item popular">
             <div class="posting-img popular">
-                <a href="/productView.do?productNo=6">
+                <a href="/productView.do?productNo=${p.productNo }">
            		<c:forEach var="pf" items="${p.fileList}" begin="0" end="0" step="1">
                     <img src="/resources/upload/product/${pf.filepath }" />
                 </c:forEach>

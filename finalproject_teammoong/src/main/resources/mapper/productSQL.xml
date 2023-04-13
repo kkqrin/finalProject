@@ -37,7 +37,7 @@
 			PRODUCT_STATUS AS productStatus,
 			PRODUCT_COST AS productCost,
 			GONGGU_NUMBER AS  gongguNumber,
-			PRODUCT_CONTENT AS productContnet,
+			PRODUCT_CONTENT AS productContent,
 			PRODUCT_DISCOUNT AS productDiscount
 		FROM PRODUCT_TBL 
 		WHERE PRODUCT_NO = #{_parameter}
