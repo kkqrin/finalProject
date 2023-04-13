@@ -6,24 +6,42 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript"
 		src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 		<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 
 
 </head>
+
+<style>
+
+table tbody tr, table tbody tr td{
+    border: none;
+    font-size: 16px;
+ 
+}
+sup{
+    color: red;
+}
+
+</style>
+
 <body>	
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="content-wrap">
 		<div class="content-boardView-wrap">
 		<form action="/boardWriteView.do" method="post">
 				<div style="display: none;">
-					${b.boardNo }
+					<input type="text" name="memberNo" value="${sessionScope.m.memberNo }">
+				</div>
+				<div style="display: none;">
+					<input type="text" name="boardNo" value="${b.boardNo }">
 				</div>
 				<div style="display: none;">
 					${b.boardWriter }
 				</div>
-				<div style="display: none;">
+				<div>
 					${b.boardDate }
 				</div>
 				<div style="background-color: #212429; color: #fff; width: 100%; height: 80px; text-align: center; font-size: 23px; line-height: 80px;">
@@ -38,12 +56,17 @@
 					</tr>
 				</c:forEach>
 				<tr>
-					<td style="text-align:left;" colspan="4">-입금 예정 날짜</td>
+					<td style="text-align:left;" colspan="4">-입금 정보<sup>*</sup></td>
 				</tr> 
 				<tr>
 					<td colspan="4">
 						<input type="text" id="paydate" required>
 						<input type="hidden" name="payerDate" required>
+					</td>
+				</tr> 
+				<tr>
+					<td style="text-align:left;" colspan="4">
+						<input type="text" name="payerName"  required placeholder="입금자명"> 
 					</td>
 				</tr>
 				<tr>
@@ -73,7 +96,7 @@
 							${bo.detailCount}
 						</td>
 						<td>
-							<input type="text" id="totalEaInput" class="detailCount"  placeholder="수량 입력" value="" required>
+							<input type="text" id="totalEaInput" class="detailCount" name="orderCount" placeholder="수량 입력" value="" required>
 						</td>
 					</tr>
 					</c:forEach>
@@ -104,6 +127,39 @@
 					</td>
 				</tr>
 				<tr>
+					<td style="text-align:left;" colspan="4">- 배송지 정보<sup>*</sup></td>
+				</tr>
+				<tr>
+					<td style="text-align:left;" colspan="4">
+						<input type="text" name="receiverName"  required placeholder="수령자명"> 
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align:left;" colspan="4">
+						<input type="text" name="receiverPhone"  required placeholder="연락처"> 
+					</td>
+				</tr>
+				<tr>
+					<td class="addr" style="text-align:left;"colspan="4"><input
+						type="hidden" name="receiverAddr"></td>
+				</tr>
+				<tr>
+					<td colspan="3"><input type="text" name="memberZoneCode"
+						placeholder="우편번호 조회 버튼을 눌러주세요" readonly required></td>
+					<td colspan="1" style="padding-left: 80px;"><button type="button" id="addr"
+							class="btn btn-sec size02">우편번호 조회</button></td>
+				</tr>
+				<tr>
+					
+					<td colspan="4"><input type="text" name="address"
+						placeholder="기본배송지로 등록됩니다" readonly required></td>
+				</tr>
+				<tr>
+					
+					<td colspan="4"><input type="text" name="detailAddr"
+						placeholder="상세주소를 입력해주세요" required></td>
+				</tr>
+				<tr>
 					<td style="text-align:left;"colspan="4">- 환불계좌 정보(가상계좌 환불, 제작무산 등의 경우) <sup>*</sup></td>
 				</tr>
 				<tr>
@@ -120,15 +176,15 @@
 					<td style="text-align:left;" colspan="4">- 개인정보 수집 및 동의<sup>*</sup></td>
 				</tr>
 				<tr>
-					<td style="text-align:left;" colspan="4">상품 주문 및 배송을 위해 위에 입력된 개인정보를 수집합니다.<br> 수집한 개인정보는
+					<td style="text-align:left; border: solid 1px #ced4da;" colspan="4">상품 주문 및 배송을 위해 위에 입력된 개인정보를 수집합니다.<br> 수집한 개인정보는
 주문과 배송이외의 목적으로는 사용하지 않습니다.<br>
 개인정보의 수집 및 이용에 대한 동의를 거부할수 있으며, 이 경우 상품 주문이 어려울 수 있습니다.</td>
 				</tr>
 				<tr>
-					<td colspan="4"><input type="checkbox" required>동의</td>
+					<td colspan="4"><label><input type="checkbox" required>동의</label></td>
 				</tr>
 			</table>
-			<input class="btn btn-border-sec size01" type="submit" id="form" value="안전하게 구매하기"> 
+			<input class="btn btn-border-sec size01" type="submit" id="form" value="제출" style="background-color: #f26656; border-color: #f0513e; color: #fff; cursor: pointer; padding: 20px 50px 20px 50px; margin-top: 15px"> 
 		</form>	
 		</div>
 	</div>
@@ -146,6 +202,10 @@
 // 		const result = orderCount * price;
 // 		 $("#result-price").val(result);
 // 	});
+
+	$( function() {
+				$( ".select-custom" ).selectmenu();
+			});	
  
  	$(".detailCount").on("change",function(){
  		var detailPrice = $(this).parent().parent().children().eq(1).children().val();//가격
@@ -195,7 +255,7 @@
 				console.log(start.format('YYYY-MM-DD'));
 				const deliveryDate = start.format('YYYY-MM-DD');
 				//input hidden 날짜 값 넣어서 디비로 보내기
-				$("[name=deliveryDate]").val(deliveryDate);
+				$("[name=payerDate]").val(deliveryDate);
 			});
 
 	$("#paydate").on('show.daterangepicker', function(ev, picker) {
@@ -219,6 +279,51 @@
 		}
 
 		makeBankList();
+		
+		
+		$("#addr").on("click",function(){
+			new daum.Postcode({
+		        oncomplete: function(data) {
+		        	console.log(data);
+		        	$("[name='memberZoneCode']").val(data.zonecode);
+		        	const addr = String(data.address);
+		        	$("[name='address']").val(addr);
+		            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+		            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+		        }
+		    }).open();
+		});//다음 지도 API
+		
+		
+		$("[name='detailAddr']").keyup(function(){
+			let address = $("[name='address']").val();
+			let detailAddr = $(this).val();
+			if(address!="" && detailAddr!=""){
+				address += " "+detailAddr;
+				$("[name='receiverAddr']").val(address); //합친 주소 값넣기
+				result[6]=true;
+			}else{
+				result[6]=false;
+			}
+		});//주소 입력 확인
+		
+// 		$("[type='submit']").on("click",function(){
+			
+// 			event.preventDefault();
+				
+// 			console.log("보드넘버: "+$("[name='boardNo']").val());
+// 			console.log("멤버넘버: "+$("[name='memberNo']").val());
+// 			console.log("페이어네임: "+$("[name='payerName']").val());
+// 			console.log("페이어데이트: "+$("[name='payerDate']").val());
+// 			console.log("리시버네임: "+$("[name='receiverName']").val());
+// 			console.log("리시버폰: "+$("[name='receiverPhone']").val());
+// 			console.log("리시버주소: "+$("[name='receiverAddr']").val());
+// 			console.log("리펀드뱅크: "+$("[name='refundBank']").val());
+// 			console.log("리펀드어카운트: "+$("[name='refundAccount']").val());
+// 			console.log("리펀드네임: "+$("[name='refundName']").val());
+// 			console.log("오더카운트: "+$("[name='orderCount']").val());
+// 		});
+		
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />	
 </body>

@@ -57,21 +57,21 @@
 		resultType="m">
 		select * from
 		(select rownum as rnum, b.* from
-		(select
-		member_no as memberNo,
-		member_id as memberId,
-		member_name as memberName,
-		member_email as memberEmail,
-		member_phone as memberPhone,
-		member_addr as memberAddr,
-		member_gender as memberGender,
-		member_bday as memberBday,
-		member_bank as memberBank,
-		member_account as memberAccount,
-		member_status as memberStatus,
-		member_agree as memberAgree,
-		reg_date as regDate
-		from member_tbl order by 1 desc)b)
+			(select
+				member_no as memberNo,
+				member_id as memberId,
+				member_name as memberName,
+				member_email as memberEmail,
+				member_phone as memberPhone,
+				member_addr as memberAddr,
+				member_gender as memberGender,
+				member_bday as memberBday,
+				member_bank as memberBank,
+				member_account as memberAccount,
+				member_status as memberStatus,
+				member_agree as memberAgree,
+				reg_date as regDate
+			from member_tbl order by 1 desc)b)
 		where rnum between #{start} and #{end}
 	</select>
 
@@ -80,8 +80,10 @@
 		select count(*) from member_tbl
 	</select>
 
-	<update id="updateMemberGrade" parameterType="_int">
-		update member_tbl set member_status = #{memberStatus} where member_no = #{memberNo}
+	<update id="updateMemberGrade" parameterType="m">
+		update member_tbl set 
+			member_status = #{memberStatus} 
+		where member_no = #{memberNo}
 	</update>
 
 	<select id="selectSearchMember" parameterType="m" resultType="m">
@@ -101,13 +103,13 @@
 			reg_date as regDate
 		from member_tbl
 		<choose>
-			<when test="memberNo == 0 and memberId == null">
+			<when test="memberNo == 0 and memberId == ''">
 				where member_name like '%'||#{memberName}||'%'
 			</when>
-			<when test="memberNo == 0 and memberName == null">
+			<when test="memberNo == 0 and memberName == ''">
 				where member_id like '%'|| #{memberId}||'%'
 			</when>
-			<when test="memberId == null and memberName == null">
+			<when test="memberId == '' and memberName == ''">
 				where member_no = #{memberNo}
 			</when>
 		</choose>
@@ -143,9 +145,7 @@
 	</select>
 
 	<update id="updateProductStatus" parameterType="p">
-		update
-			product_tbl set product_status = #{productStatus} 
-			where product_no = #{productNo}
+		update product_tbl set product_status = #{productStatus} where product_no = #{productNo}
 	</update>
 
 	<select id="selectSearchProduct" parameterType="p" resultType="p">
@@ -162,13 +162,13 @@
 			product_discount as productDiscount
 		from product_tbl
 		<choose>
-			<when test="productNo == 0 and productName == 0">
+			<when test="productNo == 0 and productName == ''">
 				where product_status = #{productStatus}
 			</when>
 			<when test="productNo == 0 and productStatus == 0">
 				where product_name like '%'||#{productName}||'%'
 			</when>
-			<when test="productStatus == 0 and productName == null">
+			<when test="productStatus == 0 and productName == ''">
 				where product_no = #{productNo}
 			</when>
 		</choose>
@@ -267,7 +267,7 @@
             join board_join bj on (bt.board_no = bj.board_no)
             join board_option bo on (bt.board_no = bo.board_no)
             order by 1 desc)b)
-		where rnum between 1 and 5;
+		where rnum between #{start} and #{end};
 	</select>
 
 	<select id="selectReportBoardList" parameterType="map" resultType="b">
@@ -291,7 +291,7 @@
 		      nt.member_no, 
 		      nt.notify_item
 		    ORDER BY reportNum DESC)b)
-			where rnum between #{stats} and #{end}
+			where rnum between #{start} and #{end}
 	</select>
 
 	<select id="selectReportBoardCount" resultType="_int">
@@ -305,14 +305,15 @@
 
 	<select id="selectReportMember" parameterType="b" resultType="b">
 		select
-		bt.board_no as boardNo,
-		bt.board_name as boardName,
-		bt.board_writer as boardWriter,
-		bt.board_status as boardStatus,
-		nt.member_no,
-		nt.notify_item,
-		count(distinct nt.board_no) as total
-		from board_tbl bt join notify_tbl nt on (bt.board_no = nt.board_no)
+			bt.board_no as boardNo,
+			bt.board_name as boardName,
+			bt.board_writer as boardWriter,
+			bt.board_status as boardStatus,
+			nt.member_no,
+			nt.notify_item,
+			count(distinct nt.board_no) as total
+		from board_tbl bt 
+		join notify_tbl nt on (bt.board_no = nt.board_no)
 		<choose>
 			<when test="bt.board_writer == null">
 				where bt.board_no = #{boardNo}
@@ -322,6 +323,16 @@
 			</when>
 		</choose>
 	</select>
+	
+	<update id="updateChangeMemberStatus" parameterType="map">
+		update member_tbl set member_Status = #{memberStatus} where member_no = #{memberNo}
+	</update>
+	
+	<update id="updateChangeProductStatus" parameterType="map">
+		update product_tbl set 
+			product_Status = #{productStatus} 
+		where product_no = #{productNo}
+	</update>
 
 	<!-- 차트용 query -->
 <!-- 	<select id="selectTotalSalesFas" resultType="_int">

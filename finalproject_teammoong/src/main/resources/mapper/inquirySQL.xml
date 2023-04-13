@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN
+" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="inquiry">
+
+	<select id="selectInquiryList" parameterType="_int" resultType="iq">
+		SELECT 
+			INQUIRY_NO AS inquiryNo,
+			PRODUCT_NO AS productNo,
+			INQUIRY_TITLE AS inquiryTitle,
+			INQUIRY_CONTENT AS inquiryContent,
+			INQUIRY_WRITER AS inquiryWriter,
+			INQUIRY_DATE AS inquiryDate
+		FROM INQUIRY_BOARD
+		WHERE PRODUCT_NO = #{_parameter}
+	</select>
+	
+	<update id="updateInquiry" parameterType="iq">
+		UPDATE INQUIRY_BOARD  SET INQUIRY_CONTENT = #{inquiryContent}
+		WHERE INQUIRY_NO = #{inquiryNo}
+	</update>
+	
+	<insert id="insertInquiry" parameterType="iq">
+		INSERT INTO INQUIRY_BOARD VALUES(INQUIRY_BOARD_SEQ.NEXTVAL,
+		#{productNo},
+		#{inquiryTitle},
+		#{inquiryContent},
+		#{inquiryWriter},
+		0,
+		TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
+	</insert>
+	
+	<insert id="adminInsert" parameterType="iqa">
+		INSERT INTO INQUIRY_ADMIN VALUES(INQUIRY_ADMIN_SEQ.NEXTVAL,
+		#{inquiryNo},
+		#{iqAdminContent},
+		TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
+	</insert>
+
+</mapper>

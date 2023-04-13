@@ -2,7 +2,7 @@ package moo.ng.san.admin.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
@@ -428,6 +428,46 @@ public class AdminService {
 		ArrayList<Board>list = dao.selectReportMember(b);
 		// TODO Auto-generated method stub
 		return list;
+	}
+
+	public boolean updateChangeMemberStatus(String no, String level) {
+		StringTokenizer sT1 = new StringTokenizer(no, "/");
+		StringTokenizer sT2 = new StringTokenizer(level, "/");
+		boolean result = true;
+		while(sT1.hasMoreTokens()) {//sT1에 토큰남아있어?
+			int memberNo = Integer.parseInt(sT1.nextToken());
+			int memberStatus = Integer.parseInt(sT2.nextToken());
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("memberNo", memberNo);
+			map.put("memberStatus", memberStatus);
+			int changeResult = dao.updateChangeMemberStatus(map);
+			if(changeResult == 0) {
+				result = false;
+				break; //한번이라도 실패하면 더이상 update를 할 필요가 없으므로 while문 종료
+			}
+		}
+		
+		return result;
+	}
+
+	public boolean updateChangeProductStatus(String no, String level) {
+		StringTokenizer sT1 = new StringTokenizer(no, "/");
+		StringTokenizer sT2 = new StringTokenizer(level, "/");
+		boolean result = true;
+		while(sT1.hasMoreTokens()) {//sT1에 토큰남아있어?
+			int productNo = Integer.parseInt(sT1.nextToken());
+			int productStatus = Integer.parseInt(sT2.nextToken());
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("productNo", productNo);
+			map.put("productStatus", productStatus);
+			int changeResult = dao.updateChangeProductStatus(map);
+			if(changeResult == 0) {
+				result = false;
+				break; //한번이라도 실패하면 더이상 update를 할 필요가 없으므로 while문 종료
+			}
+		}
+		
+		return result;
 	}
 
 
