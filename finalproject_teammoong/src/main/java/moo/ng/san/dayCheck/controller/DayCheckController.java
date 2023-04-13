@@ -10,8 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import moo.ng.san.dayCheck.model.vo.DayCheck;
 import moo.ng.san.dayCheck.service.DayCheckService;
-import moo.ng.san.dayCheck.vo.DayCheck;
 import moo.ng.san.member.model.vo.Member;
 
 @Controller

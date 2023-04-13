@@ -6,23 +6,23 @@
 		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
 	<typeAliases>
-		<typeAlias type="moo.ng.san.notice.vo.Notice" alias="n" />
-		<typeAlias type="moo.ng.san.notice.vo.FileVO" alias="f" />
-		<typeAlias type="moo.ng.san.dayCheck.vo.DayCheck" alias="day" />
-		<typeAlias type="moo.ng.san.dayCheck.vo.Point" alias="point" />
+		<typeAlias type="moo.ng.san.notice.model.vo.Notice" alias="n" />
+		<typeAlias type="moo.ng.san.notice.model.vo.FileVO" alias="f" />
+		<typeAlias type="moo.ng.san.dayCheck.model.vo.DayCheck" alias="day" />
+		<typeAlias type="moo.ng.san.dayCheck.model.vo.Point" alias="point" />
 		<typeAlias type="moo.ng.san.askItem.model.vo.AskItem" alias="a" />
 		<typeAlias type="moo.ng.san.askItem.model.vo.DocuVO" alias="d" />
 		<typeAlias type="moo.ng.san.member.model.vo.Member" alias="m" />
 		<typeAlias type="moo.ng.san.product.model.vo.Product" alias="p" />
 		<typeAlias type="moo.ng.san.product.model.vo.FileVO" alias="pf" />
 		<typeAlias type="moo.ng.san.order.model.vo.Order" alias="o" />
-		
+		<typeAlias type="moo.ng.san.askItem.model.vo.AskItemCategory" alias="ac" />
 		
 		
 		<typeAlias type="moo.ng.san.board.model.vo.Board" alias="b" />
 		<typeAlias type="moo.ng.san.board.model.vo.FileVO" alias="bf" />
 		<typeAlias type="moo.ng.san.board.model.vo.BoardOption" alias="bo" />
-		
+		<typeAlias type="moo.ng.san.board.model.vo.BoardJoin" alias="bj" />
 		
 		
 		<typeAlias type="moo.ng.san.category.model.vo.Category" alias="c" />

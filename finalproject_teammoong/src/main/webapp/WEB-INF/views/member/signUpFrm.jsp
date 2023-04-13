@@ -139,7 +139,7 @@
 					</tr>
 					<tr>
 						<td>생년월일</td>
-							<input type="hidden" name="memberBDay" value="">
+							<input type="hidden" name="memberBday" value="">
 						<td id="no">
 							<div class="bday-input year">
 								<input type="text" id="birth-year" class="input-noborder">년
@@ -494,14 +494,12 @@
 				const inputAccount = $("[name='memberAccount']").val();
 				const AcountReg = /[0-9-]$/;
 				
+				const inputAccount2 = $(this).val().replaceAll("-","");
+				$(this).val(inputAccount2);
+				
 				if(AcountReg.test(inputAccount)){
 			        $(this).removeClass("error");
 			        $(".caution-tr").eq(7).css("display","none");
-			        
-					const result = $(this).val().replaceAll("-","");
-					result = String(result);
-					$(this).val(result);
-			        
 			        result[7] = true;
 				}else{
 					$(this).addClass("error");
@@ -641,9 +639,9 @@
 					}else{
 						modifyDay = $("#birth-day").val();
 					}
-					$("[name='memberBDay']").val(year+month+modifyDay); 
+					$("[name='memberBday']").val(year+month+modifyDay); 
 				}else{
-					$("[name='memberBDay']").val(null);
+					$("[name='memberBday']").val(null);
 				}//받은 생일 yyyymmdd형식으로 만들기
 
 				//만약 마케팅 동의 체크를 안하면 undefined가 넘어가지 않게
@@ -666,30 +664,28 @@
 				let agree3 = $("#agree3").prop('checked');
 				
 				if(!resultChk){
-					console.log("이프문 도는 중")
 					event.preventDefault();
 				}else if(!agree1 || !agree3){
-					console.log("이프문22 도는 중")
 					alert("필수 이용약관에 동의해주세요");
 					event.preventDefault();
 				}
 
 				
-				console.log("아이디"+$("[name='memberId']").val(),
-						"비번"+$("[name='memberPw']").val(),
-						"이름"+$("[name='memberName']").val(),
-						"폰"+$("[name='memberPhone']").val(),
-						"우편번호"+$("[name='memberZoneCode']").val(),
-						"합쳐진주소"+$("[name='memberAddr']").val(),
-						"성별"+$("[name='memberGender']:checked").val(),
-						"이메일"+$("[name='memberEmail']").val(),
-						"은행"+$("[name='memberBank']").val(),
-						"계좌"+$("[name='memberAccount']").val(),
-						"생일"+$("[name='memberBDay']").val(),
-						"파일경로"+$("[name='memberPath']").val(),
-						"멤버동의"+$("[name='memberAgree']").val(),
-						"필수1동의"+$("#agree1").prop('checked'),
-						"필수2동의"+$("#agree3").prop('checked'),result);
+// 				console.log("아이디"+$("[name='memberId']").val(),
+// 						"비번"+$("[name='memberPw']").val(),
+// 						"이름"+$("[name='memberName']").val(),
+// 						"폰"+$("[name='memberPhone']").val(),
+// 						"우편번호"+$("[name='memberZoneCode']").val(),
+// 						"합쳐진주소"+$("[name='memberAddr']").val(),
+// 						"성별"+$("[name='memberGender']:checked").val(),
+// 						"이메일"+$("[name='memberEmail']").val(),
+// 						"은행"+$("[name='memberBank']").val(),
+// 						"계좌"+$("[name='memberAccount']").val(),
+// 						"생일"+$("[name='memberBday']").val(),
+// 						"파일경로"+$("[name='memberPath']").val(),
+// 						"멤버동의"+$("[name='memberAgree']").val(),
+// 						"필수1동의"+$("#agree1").prop('checked'),
+// 						"필수2동의"+$("#agree3").prop('checked'),result);
 
 							
 				

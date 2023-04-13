@@ -68,7 +68,7 @@
 				</c:if>
 			</div>
 		</div>
-		<input type="text" name="memberNo" value="${sessionScope.m.memberNo}"> 
+		<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}"> 
 		<div class="area-btn left" style="display:none;">
                 <button class="btn btn-border-pri size01" type="button" id="alert01">성공</button>
 				<button class="btn btn-border-sec size01" type="button" id="alert02">에러</button>

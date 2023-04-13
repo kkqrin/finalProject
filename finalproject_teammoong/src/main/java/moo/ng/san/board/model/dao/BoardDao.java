@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import moo.ng.san.board.model.vo.Board;
+import moo.ng.san.board.model.vo.BoardJoin;
 import moo.ng.san.board.model.vo.BoardOption;
 import moo.ng.san.board.model.vo.FileVO;
 
@@ -55,6 +56,11 @@ public class BoardDao {
 	
 	public int insertBoardOption(BoardOption o) {
 		int result = sqlSession.insert("board.insertOption",o);
+		return result;
+	}
+	public int insertBoardJoin(BoardJoin bj) {
+		int result = sqlSession.insert("board.insertBoardJoin",bj);
+		System.out.println(result);
 		return result;
 	}
 	

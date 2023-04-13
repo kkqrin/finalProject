@@ -62,6 +62,7 @@ public class ProductController {
 		if (category > 10000) {
 			// 상위 카테고리 (하위 카테고리 전체)
 			fCategory = category % 10000;
+//			sCategory = 10000;
 			System.out.println("상위 카테고리 : "+fCategory+" 하위 카테고리 : "+sCategory);
 		} else if (category > 100) {
 			// 네 자리 이상면
@@ -78,7 +79,7 @@ public class ProductController {
 		
 		
 		// 카테고리별 상품리스트
-		ArrayList<Product> list = service.selectInfiniteScrollProductList(1, 3, fCategory, sCategory, "recent-sort");
+//		ArrayList<Product> list = service.selectInfiniteScrollProductList(1, 3, fCategory, sCategory, "recent-sort");
 		// 하위 카테고리 리스트
 		ArrayList<DetailCategory> detailCategoryList = service.selectCategoryNameOnList(fCategory);
 		// 해당 카테고리의 총 상품 수
@@ -88,7 +89,7 @@ public class ProductController {
 		
 		model.addAttribute("fCategory", fCategory);
 		model.addAttribute("sCategory", sCategory);
-		model.addAttribute("list", list);
+//		model.addAttribute("list", list);
 		model.addAttribute("detailCategoryList", detailCategoryList);
 		model.addAttribute("totalCount", totalCount);
 		
@@ -108,10 +109,12 @@ public class ProductController {
 //		ppd.setStart(start);
 //		ppd.setAmount(amount);
 //		ppd.setDetailCategoryNo(sCategory1);
+		
+		System.out.println("sCategoryNo : "+sCategoryNo);
 		System.out.println(sortType);
 		ArrayList<Product> list = service.selectInfiniteScrollProductList(start, amount, fCategoryNo, sCategoryNo, sortType);
 		
-//		System.out.println(list);
+		System.out.println(list);
 		
 		return new Gson().toJson(list);
 	}

@@ -115,7 +115,7 @@
 		WHERE PRODUCT_NO = #{_parameter}
 	</select>
 	
-	<select id="selectProductCount" parameterType="_int" resultType="_int">
+	<select id="selectProductCount" parameterType="map" resultType="_int">
 		select count(*) as totalCount 
 		from Product_Tbl
 		left join detail_category using (d_category_no)

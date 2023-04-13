@@ -1,5 +1,7 @@
 package moo.ng.san.askItem.model.vo;
 
+import java.util.ArrayList;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,8 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AskItem {
 	private int corpNo;
-	private int regNo;
-	private String corpName;
+	private String regNo;//
+	private String corpName;//
 	private String repName;
 	private String corpAddr1;
 	private String corpAddr2;
@@ -22,8 +24,10 @@ public class AskItem {
 	private String contPhone;
 	private String contMail;
 	private String homepage;
-	private String category;
 	private String askTitle;
 	private String askContent;
 	private String askDate;
+	private ArrayList<AskItemCategory>categoryList;
+	private ArrayList<DocuVO>fileList;
+	
 }
