@@ -2,7 +2,7 @@
 let timeId;
 $(document).ready(function(){
 
-    $(".end-hotdeal").hide();
+    $(".end-hotdeal.shutdown").hide();
 
     timeId = window.setInterval(function () {
         var now = new Date();
@@ -32,7 +32,7 @@ $(document).ready(function(){
             // $(".seconds").html("00");
             $(".hotdeal-time").children().hide();
             $(".hotdeal-time").append($("<span>").text("TIME OUT"));
-            $(".end-hotdeal").show();
+            $(".end-hotdeal.shutdown").show();
         }
 
     }, 1000);

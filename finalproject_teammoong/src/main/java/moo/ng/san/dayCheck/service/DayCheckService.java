@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import moo.ng.san.dayCheck.model.dao.DayCheckDao;
-import moo.ng.san.dayCheck.vo.DayCheck;
-import moo.ng.san.dayCheck.vo.Point;
+import moo.ng.san.dayCheck.model.vo.DayCheck;
+import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.member.model.vo.Member;
 
 @Service

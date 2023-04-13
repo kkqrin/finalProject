@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import moo.ng.san.notice.model.dao.NoticeDao;
-import moo.ng.san.notice.vo.FileVO;
-import moo.ng.san.notice.vo.Notice;
-import moo.ng.san.notice.vo.NoticePageData;
+import moo.ng.san.notice.model.vo.FileVO;
+import moo.ng.san.notice.model.vo.Notice;
+import moo.ng.san.notice.model.vo.NoticePageData;
 
 @Service
 public class NoticeService {

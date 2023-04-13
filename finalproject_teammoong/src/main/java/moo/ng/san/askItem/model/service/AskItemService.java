@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import moo.ng.san.askItem.model.dao.AskItemDao;
 import moo.ng.san.askItem.model.vo.AskItem;
+import moo.ng.san.askItem.model.vo.AskItemCategory;
 import moo.ng.san.askItem.model.vo.DocuVO;
 
 @Service
@@ -14,13 +15,18 @@ public class AskItemService {
 	@Autowired
 	private AskItemDao dao;
 
-	public int insertAskItem(AskItem a, ArrayList<DocuVO> fileList) {
-		int result = dao.insetAskItem(a);
+	public int insertAskItem(AskItem a, ArrayList<AskItemCategory> categories, ArrayList<DocuVO> fileList) {
+		int result = dao.insertAskItem(a);
 		if(result>0) {
 			for(DocuVO file : fileList) {
 				file.setCorpNo(a.getCorpNo());
-				result +=dao.insertFile(file);
+				result +=dao.insertDocu(file);
 			}
+			for(AskItemCategory category : categories) {
+				category.setCorpNo(a.getCorpNo());
+				result +=dao.insertCategory(category);
+			}
+			
 		}
 		return result;
 	}
@@ -33,5 +39,4 @@ public class AskItemService {
 		DocuVO d = dao.selectOneFile(docuNo);
 		return d;
 	}
-
 }

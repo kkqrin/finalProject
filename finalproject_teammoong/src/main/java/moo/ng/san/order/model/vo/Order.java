@@ -9,4 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Order {
 	private int orderNo;
+	private int memberNo;
+	private int productNo;
+	private int payNo;
+	private String orderDate;
+	private int orderStatus;
 }

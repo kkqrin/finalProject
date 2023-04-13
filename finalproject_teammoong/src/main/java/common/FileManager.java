@@ -26,7 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonObject;
 
-import moo.ng.san.notice.vo.FileVO;
+import moo.ng.san.notice.model.vo.FileVO;
 
 
 

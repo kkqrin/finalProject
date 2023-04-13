@@ -1,4 +1,4 @@
-package moo.ng.san.notice.vo;
+package moo.ng.san.notice.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

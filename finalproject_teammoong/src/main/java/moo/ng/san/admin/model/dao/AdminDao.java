@@ -120,7 +120,7 @@ public class AdminDao {
 		return result;
 	}
 
-	public ArrayList<Product> selectSearchMember(Product p) {
+	public ArrayList<Product> selectSearchProduct(Product p) {
 		List list = sqlSession.selectList("admin.selectSearchProduct", p);
 
 		return (ArrayList<Product>)list;
@@ -168,13 +168,36 @@ public class AdminDao {
 	}
 
 	public int selectBoardCount() {
+		int totalCount = sqlSession.selectOne("admin.selectAllBoardCount");
 		
-		// TODO Auto-generated method stub
-		return 0;
+		return totalCount;
 	}
-	
-	
-	
+
+	public ArrayList<Board> selectReportBoardList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("admin.selectReportBoardList",map);
+		
+		return (ArrayList<Board>)list;
+	}
+
+	public int selectReportBoardCount() {
+		int totalCount = sqlSession.selectOne("admin.selectReportBoardCount");
+		
+		return totalCount;
+	}
+
+	public int updateReportMember(Member m) {
+		int result = sqlSession.update("admin.updateReportMember",m);
+		return result;
+	}
+
+	public ArrayList<Board> selectReportMember(Board b) {
+		List list = sqlSession.selectList("admin.selectReportMember",b);
+		// TODO Auto-generated method stub
+		return (ArrayList<Board>)list;
+	}
+
+
+
 	
 
 

@@ -2,6 +2,7 @@ package moo.ng.san.member.model.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import moo.ng.san.member.model.dao.MemberDao;
 import moo.ng.san.member.model.vo.Member;
@@ -17,10 +18,12 @@ public class MemberService {
 		return dao.selectOneMember(member);
 	}//selectOneMember
 
-
-	public void memberPhoneCheck(String memberPhone) {
-		
-	}//memberPhoneCheck
+	@Transactional
+	public int insertMember(Member m) {
+		int result = 0;
+		result = dao.insertMember(m);
+		return result;
+	}//insertMember
 
 	
 }//MemberService
