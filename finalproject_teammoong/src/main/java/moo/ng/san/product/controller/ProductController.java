@@ -1,9 +1,15 @@
 package moo.ng.san.product.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +26,8 @@ import com.google.gson.JsonObject;
 import common.FileManager;
 import moo.ng.san.category.model.vo.Category;
 import moo.ng.san.category.model.vo.DetailCategory;
+import moo.ng.san.inquiry.model.service.InquiryService;
+import moo.ng.san.inquiry.model.vo.Inquiry;
 import moo.ng.san.product.model.service.ProductService;
 import moo.ng.san.product.model.vo.FileVO;
 import moo.ng.san.product.model.vo.Product;
@@ -31,6 +39,8 @@ public class ProductController {
 	private ProductService service;
 	@Autowired
 	private FileManager fileManager;
+	@Autowired
+	private InquiryService iqService;
 	
 	
 	
@@ -62,6 +72,7 @@ public class ProductController {
 		if (category > 10000) {
 			// 상위 카테고리 (하위 카테고리 전체)
 			fCategory = category % 10000;
+//			sCategory = 10000;
 			System.out.println("상위 카테고리 : "+fCategory+" 하위 카테고리 : "+sCategory);
 		} else if (category > 100) {
 			// 네 자리 이상면
@@ -78,7 +89,7 @@ public class ProductController {
 		
 		
 		// 카테고리별 상품리스트
-		ArrayList<Product> list = service.selectInfiniteScrollProductList(1, 3, fCategory, sCategory, "recent-sort");
+//		ArrayList<Product> list = service.selectInfiniteScrollProductList(1, 3, fCategory, sCategory, "recent-sort");
 		// 하위 카테고리 리스트
 		ArrayList<DetailCategory> detailCategoryList = service.selectCategoryNameOnList(fCategory);
 		// 해당 카테고리의 총 상품 수
@@ -88,7 +99,7 @@ public class ProductController {
 		
 		model.addAttribute("fCategory", fCategory);
 		model.addAttribute("sCategory", sCategory);
-		model.addAttribute("list", list);
+//		model.addAttribute("list", list);
 		model.addAttribute("detailCategoryList", detailCategoryList);
 		model.addAttribute("totalCount", totalCount);
 		
@@ -108,10 +119,12 @@ public class ProductController {
 //		ppd.setStart(start);
 //		ppd.setAmount(amount);
 //		ppd.setDetailCategoryNo(sCategory1);
+		
+		System.out.println("sCategoryNo : "+sCategoryNo);
 		System.out.println(sortType);
 		ArrayList<Product> list = service.selectInfiniteScrollProductList(start, amount, fCategoryNo, sCategoryNo, sortType);
 		
-//		System.out.println(list);
+		System.out.println(list);
 		
 		return new Gson().toJson(list);
 	}
@@ -230,7 +243,9 @@ public class ProductController {
 	@RequestMapping(value="/productView.do")
 	public String productView(int productNo, Model model) {
 		Product p = service.selectProductByProductNo(productNo);
+		ArrayList<Inquiry> list = iqService.selectInquiryList(productNo);
 		model.addAttribute("p",p);
+		model.addAttribute("iqList", list);
 		return "product/productView";
 	}
 	@GetMapping("/main.do")
@@ -239,12 +254,37 @@ public class ProductController {
 		model.addAttribute("productList",list);
 		return "common/main";
 	}
-//	@RequestMapping(value="SummerNoteImageFile" , method = RequestMethod.POST)
-//	public @ResponseBody JsonObject SummerNoteImageFile(@RequestParam("file") MultipartFile file) {
-//		JsonObject jsonObject = service.SummerNoteImageFile(file);
-//		 System.out.println(jsonObject);
-//		return jsonObject;
-//	}
-	
+	@RequestMapping(value="/uploadSummernoteImageFile.do", produces = "application/json; charset=utf8")
+	@ResponseBody
+	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request )  {
+		JsonObject jsonObject = new JsonObject();
+		
+        /*
+		 * String fileRoot = "C:\\summernote_image\\"; // 외부경로로 저장을 희망할때.
+		 */
+		
+		// 내부경로로 저장
+		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
+		String fileRoot = contextRoot+"resources/productContentImg/";
+		
+		String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
+		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
+		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
+		
+		File targetFile = new File(fileRoot + savedFileName);	
+		try {
+			InputStream fileStream = multipartFile.getInputStream();
+			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
+			jsonObject.addProperty("url", "/resources/productContentImg/"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
+			jsonObject.addProperty("responseCode", "success");
+				
+		} catch (IOException e) {
+			FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
+			jsonObject.addProperty("responseCode", "error");
+			e.printStackTrace();
+		}
+		String a = jsonObject.toString();
+		return a;
+	}
 	
 }

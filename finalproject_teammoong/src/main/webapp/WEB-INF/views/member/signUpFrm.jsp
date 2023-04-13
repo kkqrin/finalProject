@@ -139,7 +139,7 @@
 					</tr>
 					<tr>
 						<td>생년월일</td>
-							<input type="hidden" name="memberBDay" value="">
+							<input type="hidden" name="memberBday" value="">
 						<td id="no">
 							<div class="bday-input year">
 								<input type="text" id="birth-year" class="input-noborder">년
@@ -381,6 +381,7 @@
 				const pwReg = /^\d{3}-\d{3,4}-\d{4}$/;
 				const pwReg2 = /^0+\d{9,10}$/;
 				const inputPhone = $(this).val();
+
 				if(pwReg.test(inputPhone) || pwReg2.test(inputPhone) || inputPhone==""){
 					$(this).removeClass("error");
 					$(".caution-tr").eq(4).css("display","none");
@@ -492,16 +493,14 @@
 			
 			$("[name='memberAccount']").keyup(function(){
 				const inputAccount = $("[name='memberAccount']").val();
-				const AcountReg = /[0-9-]$/;
+				const AcountReg = /^[0-9]+$/;
+				
+				const inputAccount2 = $(this).val().replaceAll("-","");
+				$(this).val(inputAccount2);
 				
 				if(AcountReg.test(inputAccount)){
 			        $(this).removeClass("error");
 			        $(".caution-tr").eq(7).css("display","none");
-			        
-					const result = $(this).val().replaceAll("-","");
-					result = String(result);
-					$(this).val(result);
-			        
 			        result[7] = true;
 				}else{
 					$(this).addClass("error");
@@ -575,7 +574,7 @@
 			})//생일 정규표현식(년도)
 			
 			
-			$("#birth-day").on("change",function(){
+			$("#birth-day").keyup(function(){
 				//일자 정규표현식
 				const dayReg = /^\d{1,2}$/;
 				const inputDay = $(this).val();
@@ -598,15 +597,6 @@
 			})//생일 정규표현식(일)
 			
 			
-			
-			
-			
-			
-			
-					
-			
-			
-			
 			const allCheck = document.querySelector("#allcheck")
 			const agreeArr = document.querySelectorAll(".agree");
 			
@@ -626,6 +616,7 @@
 			
 			
 			$("[type='submit']").on("click",function(){
+				
 				if($("[name='memberGender']:checked").length==0){
 				   $("[name='memberGender']").eq(2).prop('checked',true);
 				}; //성별입력확인받고 입력 안했으면 3으로 값
@@ -633,66 +624,40 @@
 				const year = $("#birth-year").val();
 				const month = $("#birth-month").val();
 				const day = $("#birth-day").val();
-				
 				if(year!="" && day!=""){
 					let modifyDay;
 					if($("#birth-day").val()<10){
-						modifyDay = "0"+$("#birth-day").val();
+						modifyDay = "0"+Number($("#birth-day").val());
 					}else{
 						modifyDay = $("#birth-day").val();
 					}
-					$("[name='memberBDay']").val(year+month+modifyDay); 
+					$("[name='memberBday']").val(year+month+modifyDay); 
 				}else{
-					$("[name='memberBDay']").val(null);
+					$("[name='memberBday']").val(null);
 				}//받은 생일 yyyymmdd형식으로 만들기
 
-				//만약 마케팅 동의 체크를 안하면 undefined가 넘어가지 않게
 				if($("[name='memberAgree']").prop('checked')==false){
 					$("[name='memberAgree']").val(0);
 				}else{
 					$("[name='memberAgree']").val(1);
-				}
+				}//만약 마케팅 동의 체크를 안해도 값으로 undefined가 넘어가지 않게
 				
-				
-				
-				//본격적인 필수항목 검사
 				let resultChk = true;
 				$.each(result,function(index,item){
 					if(!item){
 						resultChk = false;
 					}
-				});
+				});//모든 정규표현식을 통과해야 함
+				
 				let agree1 = $("#agree1").prop('checked');
 				let agree3 = $("#agree3").prop('checked');
-				
 				if(!resultChk){
-					console.log("이프문 도는 중")
 					event.preventDefault();
 				}else if(!agree1 || !agree3){
-					console.log("이프문22 도는 중")
 					alert("필수 이용약관에 동의해주세요");
 					event.preventDefault();
-				}
-
-				
-				console.log("아이디"+$("[name='memberId']").val(),
-						"비번"+$("[name='memberPw']").val(),
-						"이름"+$("[name='memberName']").val(),
-						"폰"+$("[name='memberPhone']").val(),
-						"우편번호"+$("[name='memberZoneCode']").val(),
-						"합쳐진주소"+$("[name='memberAddr']").val(),
-						"성별"+$("[name='memberGender']:checked").val(),
-						"이메일"+$("[name='memberEmail']").val(),
-						"은행"+$("[name='memberBank']").val(),
-						"계좌"+$("[name='memberAccount']").val(),
-						"생일"+$("[name='memberBDay']").val(),
-						"파일경로"+$("[name='memberPath']").val(),
-						"멤버동의"+$("[name='memberAgree']").val(),
-						"필수1동의"+$("#agree1").prop('checked'),
-						"필수2동의"+$("#agree3").prop('checked'),result);
-
-							
-				
+				}//필수 이용약관에 체크해야 함
+	
 			});
 
 /*==================================================================================*/			

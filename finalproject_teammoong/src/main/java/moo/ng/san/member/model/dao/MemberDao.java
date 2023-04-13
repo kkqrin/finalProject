@@ -19,9 +19,12 @@ public class MemberDao {
 		return m;
 	}
 
-	@Transactional
 	public int insertMember(Member m) {
 		return sqlSession.insert("member.insertMember", m);
+	}
+
+	public int insertFirstPoint(Member m) {
+		return sqlSession.insert("point.insertFirstPoint", m.getMemberNo());
 	}
 
 }

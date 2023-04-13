@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import common.FileManager;
 import moo.ng.san.board.model.service.BoardService;
 import moo.ng.san.board.model.vo.Board;
+import moo.ng.san.board.model.vo.BoardJoin;
 import moo.ng.san.board.model.vo.BoardOption;
 import moo.ng.san.board.model.vo.BoardPageData;
 import moo.ng.san.board.model.vo.FileVO;
@@ -70,11 +71,20 @@ public class BoardController {
 		model.addAttribute("size",optionList.size());
 		return "board/boardView";
 		}
-	
-	
-	
-	
-	
-	
-	
+	@RequestMapping(value="/boardWriteView.do")
+	public String boardWriteView(BoardJoin bj, int boardNo, Model model) {
+		int result = service.insertBoardJoin(bj);
+		if(result>0) {
+			Board b = service.selectOneBoard(boardNo);
+			model.addAttribute("b", b);
+		}
+		return "board/boardOrderAfter";
+	}
+	@RequestMapping(value="/boardOrderAfter.do")
+	public String boardOrderAfter(int boardNo, Model model) {
+		Board b = service.selectOneBoard(boardNo);
+		model.addAttribute("b", b);
+		return "board/boardOrderAfter";
+	}
+
 }

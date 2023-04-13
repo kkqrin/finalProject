@@ -19,4 +19,5 @@ public class BoardJoin {
 	private String refundBank;
 	private String refundAccount;
 	private String refundName;
+	private int orderCount;
 }
