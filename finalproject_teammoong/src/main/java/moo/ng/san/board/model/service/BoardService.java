@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import moo.ng.san.board.model.dao.BoardDao;
 import moo.ng.san.board.model.vo.Board;
+import moo.ng.san.board.model.vo.BoardJoin;
 import moo.ng.san.board.model.vo.BoardOption;
 import moo.ng.san.board.model.vo.BoardPageData;
 import moo.ng.san.board.model.vo.FileVO;
@@ -120,6 +121,14 @@ public class BoardService {
 
 	public ArrayList<BoardOption> selectOneBoardOptionList(int boardNo) {
 		return dao.selectOptionList(boardNo);
+	}
+
+
+
+
+	public int insertBoardJoin(BoardJoin bj) {
+		int result = dao.insertBoardJoin(bj);
+		return result;
 	}
 
 }
