@@ -552,15 +552,18 @@
     <script src="/resources/js/product.js"></script>
     
 	<script>
+		$(function(){
+			// 페이지 로드 되자마자 스크롤 top으로 이동
+			$(window).scrollTop(0);
 
-	// 페이지 로드 되자마자 최신등록순으로 상품 출력
-	$(".product-sort-top-menu>ul>li").first().children().addClass("active-sort");
-	console.log("페이지 로드 : "+$("#startHidden").val());
-
-		//////////////////////
-		//////////////// 중복 출력 되는 경우, 로드 전에 스크롤을 내린다음에 버튼 클릭하면 그순간 스크롤 마지막에 닿아서 두번(1,2,3번째)출력됨
-	productMoreAjax(true);
-	console.log("페이지 로드 후 아작스1 : "+$("#startHidden").val());
+			// 페이지 로드 되자마자 최신등록순으로 상품 출력
+			$(".product-sort-top-menu>ul>li").first().children().addClass("active-sort");
+			console.log("페이지 로드 : "+$("#startHidden").val());
+		
+			//////////////// 중복 출력 되는 경우, 로드 전에 스크롤을 내린다음에 버튼 클릭하면 그순간 스크롤 마지막에 닿아서 두번(1,2,3번째)출력됨
+			productMoreAjax(true);
+			console.log("페이지 로드 후 아작스 : "+$("#startHidden").val());
+		});
 
 
 	// 상품 정렬 -> 상품들 지우고 start 초기화 후 ajax 실행 (ajax에서 현재 선택된 정렬타입을 읽어옴)
@@ -603,6 +606,7 @@
 			const startHidden = $("#startHidden").val();
 			const fCategoryNo = $("#fCategoryNo").val();
 			const sCategoryNo = $("#sCategoryNo").val();
+			// ★★ㅁ8★ㅁ8ㅁ8★★★ㅁ 상위 카테고리일때 토탈카운드 오류!!
 			const totalCount = Number($("#startHidden").attr("totalCount"));
 			const currentVal = Number($("#startHidden").val());
 			const sortType = $(".active-sort").attr("value");
@@ -682,7 +686,7 @@
 							
 							const throughP = $("<p>");
 							throughP.addClass("price-through");
-							throughP.text(p.productPrice/(100 - p.productDiscount)*100+"원");
+							throughP.text(p.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
 							
 							const sailboxDiv = $("<div>");
 							sailboxDiv.addClass("sail-box");
@@ -693,7 +697,7 @@
 							
 							const sailP = $("<p>");
 							sailP.addClass("price-sail");
-							sailP.text(p.productPrice+"원");
+							sailP.text((Math.floor(p.productPrice*(100 - p.productDiscount)/1000)*10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
 							
 							sailboxDiv.append(percentP);
 							sailboxDiv.append(sailP);
@@ -817,6 +821,23 @@
 				}
 			}
 		});	
+
+
+
+
+		// 화폐 단위
+		// price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		// 	for(let i=0; i<100 ; i++){				
+		// 	const productMoney = $(".posting-price").eq(i);
+		// 	let commaMoney = $(".posting-price").eq(i).text().toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+		// 	$(".posting-price").eq(i).text(commaMoney+"원");
+		// }
+		// const productPrice = $(".price-through");
+		// const productSail = $(".price-sail");
+		// console.log("productPrice 갯수 : " +productPrice.length);
+		// for(let i=0; i<productPrice.length ; i++){
+		// 	$(".price-through").eq(i).text($(".productPrice").eq(i).text().toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+		// }
 
 
 	</script>
