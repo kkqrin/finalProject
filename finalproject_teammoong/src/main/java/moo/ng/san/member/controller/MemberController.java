@@ -55,8 +55,11 @@ public class MemberController {
 		}
 		int result = service.insertMember(m);
 		
-		if(result==2) {
-			session.setAttribute("m", m);
+		if(result>0) {
+			m.setMemberPw(null);
+			Member loginMember = service.selectOneMember(m);
+			System.out.println(loginMember);
+			session.setAttribute("m", loginMember);
 			
 			MsgVO msg = new MsgVO();
 			msg.setTitle("가입을 환영합니다");

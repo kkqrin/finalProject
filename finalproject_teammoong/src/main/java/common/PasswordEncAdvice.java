@@ -25,8 +25,10 @@ public class PasswordEncAdvice {
 		Object[] args = jp.getArgs();
 		Member member = (Member)args[0];
 		String memberPw = member.getMemberPw();
-		String encPw = passEnc.encData(memberPw);
-		member.setMemberPw(encPw);
+			if(memberPw!=null) {
+				String encPw = passEnc.encData(memberPw);
+				member.setMemberPw(encPw);
+			}
 	}
 
 }//PasswordEncAdvice
