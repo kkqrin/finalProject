@@ -60,3 +60,65 @@
 .mypage-content{
     padding: 20px;
 }
+
+
+
+
+/*==================mypage-회원정보수정==================*/
+.fake_hr{
+    border: 1px solid var(--bg-secondary);
+}
+
+.mypage-right .member-info-top{
+    box-shadow: var(--shadow-elevation);
+    border-radius: 10px;
+    padding: 20px 30px;
+    margin-bottom: 30px;
+}
+.member-info-top>.info-align{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.mypage-right .member-info-top .propic{
+    position: relative;
+    margin-right: 30px;
+    display: flex;
+    align-items: center;
+}
+.mypage-right .member-info-top .propic img{
+    width: 64px;
+    height: 64px;
+    border-radius: 32px;
+    border: 1px solid var(--bg-secondary);
+}
+.mypage-right .member-info-top .propic .modify-propic{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #fff;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.mypage-right .member-info-top .name-zone{
+    display: flex;
+    flex-direction: column;
+}
+.mypage-right .member-info-top .name-zone>h5{
+    line-height: 18px;
+}
+.mypage-right .member-info-top .name-zone>p{
+    margin-left: 2px;
+}
+.mypage-right .member-info-top .name-zone>p>.tip{
+    margin-left: 2px;
+}
+#dayCheck{
+    margin-left: 20px;
+}
+.member-info-top .name-zone ,.member-info-top .point-zone{
+    margin-right: 100px;
+}
