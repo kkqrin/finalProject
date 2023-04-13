@@ -27,11 +27,13 @@
 			font-family: 'Font Awesome 5 Free';
             font-weight: 900;
         }
-		.slick-prev{
+		.all-review-wrap .slick-prev,
+		#modal-photo-review-detail .slick-prev{
 			left: 10px;
 			z-index: 100;
 		}
-		.slick-next {
+		.all-review-wrap .slick-next,
+		#modal-photo-review-detail .slick-next{
 			right: 10px;
 		}
 		.slick-next:before{
@@ -70,7 +72,6 @@
 	<div class="content-wrap">
 	<pre>
 		남은 거 : 포토후기 더보기 > 상세보기 이미지 왜 바로 안뜨는지? 나중에 뜨는지?
-		신고버튼 아직 구현 안함, 도움이 돼요 디자인 수정
 	</pre>
 		<h1>포토후기</h1>
 		<!-- 최근 5개의 리뷰만 노출 -->
@@ -143,7 +144,7 @@
 								<div class="material-symbols-outlined star-rate">star_half</div>
 							</div>
 							<div class="review-option">
-								<div class="review-report">
+								<div class="review-report" data-modal="#modal-report-btn">
 									<span class="material-symbols-outlined">warning</span>
 								</div>
 								<div class="review-enroll-date">2023-04-03</div>
@@ -151,9 +152,12 @@
 						</div>
 						<div class="review-content">어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!!어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!!어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!!</div>
 						<div class="review-like">
-							<span class="material-symbols-outlined review-like-on">add_reaction</span>
-							<span class="material-symbols-outlined">sentiment_very_satisfied</span>
-							도움이 돼요
+							<div>
+								<span class="material-symbols-outlined review-like-on">add_reaction</span>
+								<span class="material-symbols-outlined">sentiment_very_satisfied</span>
+								<a>도움이 돼요?</a>
+								<a style="display: none;">도움이 돼요!</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -171,7 +175,7 @@
 								<div class="material-symbols-outlined star-rate">star</div>
 							</div>
 							<div class="review-option">
-								<div class="review-report">
+								<div class="review-report" data-modal="#modal-report-btn">
 									<span class="material-symbols-outlined">warning</span>
 								</div>
 								<div class="review-enroll-date">2023-04-03</div>
@@ -179,9 +183,12 @@
 						</div>
 						<div class="review-content">어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!!</div>
 						<div class="review-like">
-							<span class="material-symbols-outlined review-like-on">add_reaction</span>
-							<span class="material-symbols-outlined">sentiment_very_satisfied</span>
-							도움이 돼요
+							<div>
+								<span class="material-symbols-outlined review-like-on">add_reaction</span>
+								<span class="material-symbols-outlined">sentiment_very_satisfied</span>
+								<a>도움이 돼요?</a>
+								<a style="display: none;">도움이 돼요!</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -199,7 +206,7 @@
 								<div class="material-symbols-outlined star-rate">star</div>
 							</div>
 							<div class="review-option">
-								<div class="review-report">
+								<div class="review-report" data-modal="#modal-report-btn">
 									<span class="material-symbols-outlined">warning</span>
 								</div>
 								<div class="review-enroll-date">2023-04-03</div>
@@ -207,9 +214,12 @@
 						</div>
 						<div class="review-content">어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!!</div>
 						<div class="review-like">
-							<span class="material-symbols-outlined review-like-on">add_reaction</span>
-							<span class="material-symbols-outlined">sentiment_very_satisfied</span>
-							도움이 돼요
+							<div>
+								<span class="material-symbols-outlined review-like-on">add_reaction</span>
+								<span class="material-symbols-outlined">sentiment_very_satisfied</span>
+								<a>도움이 돼요?</a>
+								<a style="display: none;">도움이 돼요!</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -263,7 +273,7 @@
 						<div class="photo-review-list">
 							<div class="photo-review-item">
 								<div class="photo-review-img" data-modal="#modal-photo-review-detail">
-									<img src="#">
+									<img src="/resources/img/review/banana_review1.jpg" />
 								</div>
 							</div>
 							
@@ -284,7 +294,6 @@
 					<!--내용영역-->
 					<div class="review-box">
 						<div class="review-img">
-							<img src="/resources/img/product/lactofit.jpg" />
 							<img src="/resources/img/review/banana_review1.jpg" />
 							<img src="/resources/img/review/banana_review2.jpg" />
 							<img src="/resources/img/review/banana_review3.jpg" />
@@ -307,9 +316,12 @@
 							</div>
 							<div class="review-content">어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!!어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!!어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!!</div>
 							<div class="review-like">
-								<span class="material-symbols-outlined review-like-on">add_reaction</span>
-								<span class="material-symbols-outlined">sentiment_very_satisfied</span>
-								도움이 돼요
+								<div>
+									<span class="material-symbols-outlined review-like-on">add_reaction</span>
+									<span class="material-symbols-outlined">sentiment_very_satisfied</span>
+									<a>도움이 돼요?</a>
+									<a style="display: none;">도움이 돼요!</a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -319,8 +331,38 @@
 			</div>
 		</div>
 
-
-
+		<!-- 신고하기 모달 -->
+		<div id="modal-report-btn" class="modal modal-pri">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h6>리뷰 신고하기</h6>
+				</div>
+				<div class="modal-body">
+					<!--내용영역-->
+					<!-- <h5>내용타이틀</h5> -->
+					<form action="#">
+							<div class="selectBox-widht-explain">
+								<select class="select-custom review-color" id="review-color" style="margin-bottom: 30px;">
+									<option value="0" selected>신고내용</option>
+									<option value="white">상품/스토어와 무관한 내용 게시</option>
+									<option value="black">광고 및 홍보성 계정 및 내용 게시</option>
+									<option value="black">광고 및 홍보성 계정 및 내용 게시</option>
+									<option value="black">광고 및 홍보성 계정 및 내용 게시</option>
+									<option value="black">광고 및 홍보성 계정 및 내용 게시</option>
+									<option value="black">광고 및 홍보성 계정 및 내용 게시</option>
+								</select>
+								<div>직접입력</div>
+								<textarea></textarea>
+							</div>
+					</form>
+					<!--//내용영역-->
+				</div>
+				<div class="area-btn center">
+					<a class="btn btn-pri size01" type="button" id="review-filter-btn" rel="modal:close">확인</a>
+					<a href="" rel="modal:close" class="btn btn-sec size01">닫기</a>
+				</div>
+			</div>
+		</div>
 
 
 
@@ -368,8 +410,12 @@
 		});
 	</script>
     <script>
-        $('.review-img').slick();
-		$(".slick-slide").css("height","298px");
+		$(function(){
+			$('.review-img').slick();
+			// $('.modal-review-img').slick();
+			// 리뷰 메인페이지 슬라이드
+			$(".slick-slide").css("height","238px");
+		});
     </script>
 </body>
 </html>
