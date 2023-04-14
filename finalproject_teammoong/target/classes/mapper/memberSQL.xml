@@ -41,13 +41,14 @@
 				member_phone as memberPhone,
 				member_addr as memberAddr,
 				member_gender as memberGender,
-				member_bday as memberBday,
+				to_char(member_bday,'""YYYY"년 "MM"월 "DD"일"') as memberBday,
 				member_account as memberAccount,
 				member_path as memberPath,
 				member_agree as memberAgree,
 				member_status as memberStatus,
 				member_bank as memberBank,
-				reg_date as regDate
+				reg_date as regDate,
+				member_zonecode as memberZoneCode
 			from member_tbl
 			where member_id=#{memberId}
 			<if test="memberPw != null">

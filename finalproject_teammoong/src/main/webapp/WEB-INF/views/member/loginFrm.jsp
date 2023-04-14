@@ -36,21 +36,21 @@
 	
 	<div class="modal-ground">
 		<div id="modalSec" class="modal modal-sec">
-	          <div class="modal-content">
-	              <div class="modal-header">
-	                  <h5>로그인 실패</h5>
-	              </div>
-	              <div class="modal-body">
-	                  <!--내용영역-->
-	                  <h5></h5>
-	                  <p>아이디 혹은 비밀번호가 다릅니다</p>
-	                  <!--//내용영역-->
-	              </div>
-	              <div class="area-btn center full">
-	                  <a href="" rel="modal:close" class="btn btn-sec size01 close">닫기</a>
-	              </div>
-	          </div>
-	    </div>
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5>로그인 실패</h5>
+				</div>
+				<div class="modal-body">
+					<!--내용영역-->
+					<h5></h5>
+					<p>아이디 혹은 비밀번호가 다릅니다</p>
+					<!--//내용영역-->
+				</div>
+				<div class="area-btn center full">
+					<a href="" rel="modal:close" class="btn btn-sec size01 close">닫기</a>
+				</div>
+			</div>
+		</div>
 	</div><!-- 모달창 -->
 	
 	
@@ -124,8 +124,7 @@
                 } else {
                     return false;
                 }
-            });
-            
+            }); 
         });
 	</script>
 </body>

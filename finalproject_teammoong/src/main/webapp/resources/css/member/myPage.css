@@ -122,3 +122,57 @@
 .member-info-top .name-zone ,.member-info-top .point-zone{
     margin-right: 100px;
 }
+
+
+
+/*===================정보 수정========================*/
+
+.mypage-content .member-info{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.mypage-content .member-info>form>h5{
+    margin-bottom: 20px;
+    width: 950px;
+    text-align: center;
+    background-color: var(--bg-secondary);
+}
+
+.member-info .one-line{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+.member-info .one-line .name-tag{
+    width: 180px;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 38px;
+}
+
+.member-info .one-line input{
+    width: 360px;
+    height: 38px;
+}
+.member-info .one-line .subDiv{
+    display: flex;
+    flex-direction: column;
+}
+.member-info .one-line .subDiv a:not(.caution){
+    font-weight: bold;
+    text-decoration: underline;
+    color: var(--content-tertiary);
+}
+.member-info .one-line .subDiv div{
+    text-align: right;
+}
+.member-info .one-line .caution{
+    /* display: none; */
+    color: var(--primary);
+}
+
+.member-info .one-line #notInput{
+    border: none;
+}
