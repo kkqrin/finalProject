@@ -108,7 +108,7 @@
 				                    <a href="/loginFrm.do">로그인</a>
 			                	</c:when>
 			                	<c:when test="${sessionScope.m.memberStatus eq 1}">
-				                    <a href="/myPage.do">마이페이지</a>
+				                    <a href="/myPage.do?memberNo=${sessionScope.m.memberNo }">마이페이지</a>
 				                    <a href="/logout.do">로그아웃</a>
 			                	</c:when>
 			               		<c:when test="${sessionScope.m.memberStatus eq 0}">

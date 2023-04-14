@@ -14,4 +14,9 @@
 			point_ea as pointEa
 		from point_tbl where member_no = #{memberNo}
 	</select>
+	<select id="selectTotalPoint" parameterType="_int" resultType="point">
+		select
+			sum(point_ea) as pointEa
+		from point_tbl where member_no = #{memberNo}
+	</select>
 </mapper>

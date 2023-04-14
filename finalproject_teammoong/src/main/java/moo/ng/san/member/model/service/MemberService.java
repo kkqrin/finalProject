@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.member.model.dao.MemberDao;
 import moo.ng.san.member.model.vo.Member;
 
@@ -27,6 +28,10 @@ public class MemberService {
 		}
 		return result;
 	}//insertMember
+
+	public Point selectTotalPoint(int memberNo) {
+		return dao.selectTotalPoint(memberNo);
+	}
 
 	
 }//MemberService

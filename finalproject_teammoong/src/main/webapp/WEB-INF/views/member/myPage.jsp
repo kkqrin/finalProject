@@ -48,7 +48,7 @@
 						</div>
 						<div class="point-zone">
 							<p class="tag">현재 포인트</p>
-							<h4>5000P</h4>
+							<h4>${p.pointEa }</h4>
 						</div>
 						<div>
 							<button type="button" class="btn btn-pri size01" id="dayCheck">출석체크</button>
