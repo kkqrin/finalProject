@@ -78,6 +78,7 @@
     
 
 	<div class="content-wrap">
+	<a href="/orderSheet.do?productNo=${p.productNo}">주문하기</a>
         <div class="top-info-box">
             <div class="img-box"style="width: 500px;">
             <c:forEach items="${p.fileList }" var="i">
