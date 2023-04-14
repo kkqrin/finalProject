@@ -356,7 +356,7 @@
 				</div>
 				<div class="area-btn center">
 					<a class="btn btn-pri size01" type="button" id="review-filter-btn" rel="modal:close">확인</a>
-					<a href="" rel="modal:close" class="btn btn-sec size01">닫기</a>
+					<a rel="modal:close" class="btn btn-sec size01 report-modal-close">닫기</a>
 				</div>
 			</div>
 		</div>
@@ -423,6 +423,11 @@
 				$(".report-direct-input").attr("disabled", true);
 				$(".report-direct-input").val("");
 			}
+		});
+
+		// 라디오 초기화
+		$(".report-modal-close").on("click", function(){
+			$(".report-form [type=radio]").prop("checked", false);
 		});
 	</script>
 </body>
