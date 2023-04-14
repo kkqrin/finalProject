@@ -129,7 +129,13 @@ public class ProductController {
 		return new Gson().toJson(list);
 	}
 	
-
+	@RequestMapping(value="/orderSheet.do")
+	public String orderSheet(int productNo) {
+		
+		System.out.println("productNo : " + productNo);
+		
+		return "product/temporOrderSheet";
+	}
 	
 	
 	
@@ -286,5 +292,7 @@ public class ProductController {
 		String a = jsonObject.toString();
 		return a;
 	}
+	
+
 	
 }

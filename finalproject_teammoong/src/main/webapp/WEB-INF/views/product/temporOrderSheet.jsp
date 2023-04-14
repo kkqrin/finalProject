@@ -97,15 +97,15 @@
                     <table class="tbl-box" style="margin-top: 20px;">
                         <tr>
                             <th>보내는분</th>
-                            <td colspan="2">김띵훈</td>
+                            <td colspan="2">${sessionScope.m.memberName}</td>
                         </tr>
                         <tr>
                             <th>휴대폰</th>
-                            <td colspan="2">010-1111-1111</td>
+                            <td colspan="2">${sessionScope.m.memberPhone}</td>
                         </tr>
                         <tr>
                             <th>이메일</th>
-                            <td colspan="2">1234@naver.com</td>
+                            <td colspan="2">${sessionScope.m.memberEmail}</td>
                         </tr>
                     </table>
                 </div>
@@ -272,18 +272,7 @@
         </div>
     
     
-    
-    
-    	            <div class="box-round">
-                <h3 class="section-tit">alert</h3>
-                
-                <div class="area-btn left">
-                    <button class="btn btn-border-pri size01" type="button" id="alert01">성공</button>
-                    <button class="btn btn-border-sec size01" type="button" id="alert02">에러</button>
-                    <button class="btn btn-border-ter size01" type="button" id="alert03">경고</button>
-                    <button class="btn btn-border-black size01" type="button" id="alert04">정보</button>
-                </div>
-            </div><!--알림 div-->
+
     
     
     
