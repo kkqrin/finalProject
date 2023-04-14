@@ -24,6 +24,15 @@ table tbody tr, table tbody tr td{
 sup{
     color: red;
 }
+.status_index{
+    background-color: #fec123 ;
+    color: #fff;
+    width: 20px;
+    border-radius: 50%;
+    position: absolute;
+    left: 700px;
+    margin-top: 50px;
+}
 
 </style>
 
@@ -48,13 +57,20 @@ sup{
 					${b.boardName }
 				</div>
 			<table class="boardView-wrap">
-				<c:forEach items="${f }" var="bf">
+				<c:forEach items="${f }" var="bf" varStatus="status">
 					<tr style="border: none;">
 						<td colspan="4" style="border: none;">
+						<div class="status_index">${status.index+1}</div>
 							<img src="/resources/upload/board/${bf.filepath}" style="width:300px; height:300px">
 						</td>
 					</tr>
 				</c:forEach>
+				<tr>
+					<td style="text-align:left;" colspan="4">-상품 설명<sup>*</sup></td>
+				</tr> 
+				<tr>
+					<td colspan="4"><input type="text" value="${b.boardContent }" readonly style="text-align: center;"></td>
+				</tr>
 				<tr>
 					<td style="text-align:left;" colspan="4">-입금 정보<sup>*</sup></td>
 				</tr> 
@@ -106,7 +122,9 @@ sup{
 				</tr>
 				<tr>
 					<td style="text-align:left;" colspan="2">- 총 상품 금액</td>
-					<td style="text-align:right;" colspan="2" id="result-price"></td>
+					<td style="text-align:right;" colspan="2" id="result-price" >
+						<input type="text" value="" name="depositPrice">
+					</td>
 				</tr>
 				<tr>
 					<td style="text-align:left;"colspan="4">- 주문자 정보<sup>*</sup></td>
@@ -208,15 +226,19 @@ sup{
 			});	
  
  	$(".detailCount").on("change",function(){
- 		var detailPrice = $(this).parent().parent().children().eq(1).children().val();//가격
- 		var totalEaInput = $(this).val();//내가 입력한 수량
-
-	
-		console.log(detailPrice);
-		console.log(totalEaInput);
  		
- 		let resultPrice =  Number($("#result-price").text()) + detailPrice * totalEaInput;
- 		$("#result-price").text(resultPrice);
+ 		
+	
+ 		const detailCount = $(".detailCount");
+ 		let totalPrice = 0;
+ 		detailCount.each(function(index,item){
+ 			var detailPrice = $(item).parent().parent().children().eq(1).children().val();//가격
+ 	 		var totalEaInput = $(item).val();//내가 입력한 수량
+ 	 		totalPrice += detailPrice*totalEaInput;
+ 		});
+	
+
+ 		$("[name='depositPrice']").val(totalPrice);
  		
 
 		

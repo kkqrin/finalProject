@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="coupon">
+	<select id="selectOneCoupon" parameterType="string" resultType="cp">
+		select 
+			coupon_no as couponNo,
+			coupon_title as couponTitle,
+			coupon_price as couponPrice,
+			coupon_end as couponEnd
+		from coupon_tbl where coupon_title=#{couponTitle} 
+	</select>
+</mapper>

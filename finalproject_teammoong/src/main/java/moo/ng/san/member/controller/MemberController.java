@@ -42,7 +42,7 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "/join.do")
-	public String signIn(Member m, MultipartFile memberPropic, HttpServletRequest request ,Model model) {
+	public String signIn(Member m, MultipartFile memberPropic, HttpServletRequest request ,Model model,HttpSession session) {
 
 		String filePath="";
 		if(!memberPropic.isEmpty()) {
@@ -56,14 +56,19 @@ public class MemberController {
 		int result = service.insertMember(m);
 		
 		if(result>0) {
+			m.setMemberPw(null);
+			Member loginMember = service.selectOneMember(m);
+			System.out.println(loginMember);
+			session.setAttribute("m", loginMember);
+			
 			MsgVO msg = new MsgVO();
 			msg.setTitle("가입을 환영합니다");
 			msg.setMsg("뭉쳐야산다에서 저렴하게 구매해보세요 :)");
-			msg.setLoc("/loginFrm.do");
+			msg.setLoc("/");
 			model.addAttribute("msg", msg);
 			return "common/msg";
 		}
-		return "redirect:/";
+		return "redirect:/"; //오류페이지로 넘어가야함
 	}
 	
 	
@@ -114,16 +119,6 @@ public class MemberController {
 		return "member/signUpFrm";
 	}//joinMemberFrm
 
-	@RequestMapping(value = "/myPageMemberInfo.do")
-	public String myPageMemberInfo() {
-		/*
-		 * 세션에서 이름이 m인 객체를 꺼내서 Member타입으로 저장. 
-		 * required=false : 이름이 m인 객체가 없으면 null을 꺼내옴
-		 * --> required=false 가 없는 경우 이름이 m인 객체가 없으면 에러 발생
-		 * */
-		return "member/myPageMemberInfo";
-	}//myPageMemberInfo(회원정보수정)
-	
 	
 	@RequestMapping(value = "/myPageMemberDelete.do")
 	public String myPageMemberDelete() {

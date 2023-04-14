@@ -23,4 +23,8 @@ public class MemberDao {
 		return sqlSession.insert("member.insertMember", m);
 	}
 
+	public int insertFirstPoint(Member m) {
+		return sqlSession.insert("point.insertFirstPoint", m.getMemberNo());
+	}
+
 }

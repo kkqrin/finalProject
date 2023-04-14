@@ -8,9 +8,18 @@
 </head>
 
 <style>
+
+.bankComponent .container .title img {
+width: 21px;
+height: 21px;
+margin-right: 5px;
+}
+img{
+vertical-align: middle;
+}
 .bankComponent .container {
-    width: 100%;
-    padding: 16px;
+width: 100%;
+padding: 16px;
 }
 .complete_title1{
 padding: 72px 0px 0px;
@@ -123,6 +132,44 @@ text-align: left;
 color: rgba(36, 36, 36, 0.6);
 border-bottom: 1px solid rgba(36, 36, 36, 0.6);
 }
+.request-btn1 {
+    display: inline-block;
+    cursor: pointer;
+    width: 30%;
+    height: 42px;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    color: #999;
+    line-height: 42px;
+}
+.request-btn2 {
+    display: inline-block;
+    cursor: pointer;
+    width: 70%;
+    height: 42px;
+    margin: 0 0 0 2px;
+    padding: 10px 0px;
+    border-radius: 10px;
+    background-color: #ffb801;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+}
+.complete_row .info {
+    font-family: Pretendard;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: normal;
+    text-align: left;
+    color: #b8b8b8;
+    display: block;
+    width: 100%;
+}
 </style>
 
 <body>
@@ -130,7 +177,7 @@ border-bottom: 1px solid rgba(36, 36, 36, 0.6);
 	<div class="content-wrap">
 		<div class="content-boardOrderAfter">
 			<div class="complete_title1">
-				입금폼 제출 완료🎉
+				여기여기 입금 제출 완료🎉
 				<div class="complete_title2">
 					 바로 입금을 진행해주세요
 					<br>
@@ -138,8 +185,8 @@ border-bottom: 1px solid rgba(36, 36, 36, 0.6);
 				</div>
 				<div class="bankComponent">
 					<div class="container">
-						<p class="title">
-							🏦입금처 정보
+						<p class="title"><img src="https://d2i2w6ttft7yxi.cloudfront.net/formViewer/bank_icon.webp">
+						입금처 정보
 						</p>
 						<div class="con">
 							<ul>
@@ -162,6 +209,14 @@ border-bottom: 1px solid rgba(36, 36, 36, 0.6);
 							</ul>
 						</div>
 					</div>
+				</div>
+				<div class="complete_row" style="height:42px; display: flex; margin-top:20px;">
+					<div class="request-btn1" onclick="location.href='/boardList.do?reqPage=1';">나중에 하기</div>
+					<div class="request-btn2" onclick="location.href='/myPageRequestDeposit.do';">입금했어요!</div>
+				</div>
+				<div class="complete_row" style="margin-top:20px;">
+					<span class="info">. 시간 내 입금하지 않으면 주문이 취소될 수 있습니다.</span>
+					<span class="info">. 뭉쳐야산다 회원인 경우 폼 참여 내역에서 입금처 정보를 확인하실 수 있습니다.</span>
 				</div>
 			</div>
 		</div>

@@ -5,4 +5,8 @@
 		insert into point_tbl values
 		(point_tbl_seq.nextval, #{memberNo}, 50)
 	</insert>
+	<insert id="insertFirstPoint" parameterType="_int">
+		insert into point_tbl values
+		(point_tbl_seq.nextval, #{memberNo}, 2000)
+	</insert>
 </mapper>
