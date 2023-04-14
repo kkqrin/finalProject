@@ -361,7 +361,57 @@
 			product_Status = #{productStatus} 
 		where product_no = #{productNo}
 	</update>
+	
+	<select id="selectSearchBoard" parameterType="b" resultType="b">
+		select
+              board_no as boardNo,	
+              d_category_no as detailCategoryNo, 
+              board_writer as boardWriter,
+              board_date as boardDate,
+              board_start as boardStart, 
+              board_end as boardEnd,
+              board_status as boardStatus
+        from board_tbl
+		<choose>
+			<when test="detailCategoryNo == 0">
+				where board_status = #{boardStatus}
+			</when>
+			<when test="boardStatus == 0">
+				where d_category_no = #{detailCategoryNo }
+			</when>
+		</choose>
+	</select>
+	
+	<select id="selectSearchBoardOption" parameterType="_int" resultType="bo">
+		select
+			detail_name as detailName,
+			detail_price as detailPrice
+		from board_option
+		where board_no = #{_parameter}
+	</select>
+	
+	<select id="selectFindBoardOption" parameterType="String" resultType="bo">
+		select
+			board_no as boardNo
+		from board_option
+		where detail_name = #{_parameter}
+	</select>
 
+	<select id="selectFindSearchBoardNo" parameterType="_int" resultType="b">
+		select
+              board_no as boardNo,	
+              d_category_no as detailCategoryNo, 
+              board_writer as boardWriter,
+              board_date as boardDate,
+              board_start as boardStart, 
+              board_end as boardEnd,
+              board_status as boardStatus
+        from board_tbl
+        where board_no = #{_parameter}
+	</select>
+	
+	
+	
 	<!-- 차트용 query -->
 <!-- 	<select id="selectTotalSalesFas" resultType="_int">
 		select 

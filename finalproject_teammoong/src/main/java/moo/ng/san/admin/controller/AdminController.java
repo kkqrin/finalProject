@@ -207,6 +207,16 @@ public class AdminController {
 		return "admin/adminBoardManagePage";
 	}
 	
+	// 여여붙 검색기능
+	@ResponseBody
+	@RequestMapping(value="/ajaxAdminSearchBoard.do", produces = "application/json;charset=utf-8")
+	public String adminSearchBoard(Board b, String detailName) {
+		AdminBoardPageData abpd = service.selectSearchboard(b, detailName);
+		Gson gson = new Gson();
+		String result = gson.toJson(abpd);
+		return result;
+	}
+	
 	/* 신고 리스트 조회 */
 	@RequestMapping(value="/adminBoardReportManagePage.do")
 	public String reportBoardManage(int reqPage, Model model) {
@@ -215,6 +225,7 @@ public class AdminController {
 		model.addAttribute("pageNavi",abrpd.getPageNavi());
 		return "admin/adminBoardReportManagePage";
 	}
+	
 	
 
 	

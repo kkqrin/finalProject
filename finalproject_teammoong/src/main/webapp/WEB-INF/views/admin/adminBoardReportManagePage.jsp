@@ -65,33 +65,7 @@
             <h1><a href="#">Admin-Page</a></h1>
         </div>
         <div class="adminPage-back">
-            <div class="adminPage-sidebar">
-                <ul>
-                    <li>회원 관리</li>
-                    <il><a href="/adminMemberPage.do?reqPage=1">회원 관리</a></il><!-- jsp 생성완료 -->
-                </ul>
-                <ul>
-                    <li>매출 관리</li>
-                    <li><a href="/adminTotalSalesManage.do?reqPage=1">전체 매출 관리</a></li><!-- jsp 생성완료 -->
-                    <li><a href="/categorySalesManage.do">카테고리별 매출관리</a></li>
-                </ul>
-                <ul>
-                    <li>상품 관리</li>
-                    <li><a href="/adminTotalProductList.do?reqPage=1">상품 관리</li><!-- jsp 생성완료 -->
-                    <li><a href="/adminProductRegist.do"></a>상품 등록</li>
-                    <li><a href="/adminDeliveryManagePage.do?reqPage=1"></a>배송 관리</li>
-                </ul>
-                <ul>
-                    <a>이벤트 관리</a>
-                    <li>쿠폰 발행 관리</li>
-                </ul>
-                <ul>
-                    <li>여기여기붙어라 관리</li>
-                    <li><a href="/adminBoardManagePage.do?reqPage=1">여기여기붙어라 게시판 관리</a></li><!-- jsp 생성완료 -->
-                    <li><a href="/adminBoardReportManagePage.do?reqPage=1">여기여기붙어라 신고 관리</a></li><!-- jsp 생성완료 -->
-                    <li>카테고리별 매출관리</li>
-                </ul>
-            </div>
+            <jsp:include page="/WEB-INF/views/admin/adminSideNavi.jsp" />
             <div class="adminPage-main">
                 <div class="adminPage-content">
                     <div class="adminPage-search">

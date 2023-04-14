@@ -215,6 +215,29 @@ public class AdminDao {
 		
 		return (ArrayList<BoardOption>)list;
 	}
+	public ArrayList<Board> selectSearchBoard(Board b) {
+		List list = sqlSession.selectList("admin.selectSearchBoard",b);
+		
+		return (ArrayList<Board>)list;
+	}
+	
+	public ArrayList<BoardOption> selectSearchBoardOption(int boardNo) {
+		List list = sqlSession.selectList("admin.selectSearchBoardOption",boardNo);
+		
+		return (ArrayList<BoardOption>)list;
+	}
+
+	public ArrayList<BoardOption> selectFindBoardOption(String detailName) {
+		List list = sqlSession.selectList("admin.selectFindBoardOption",detailName);
+		
+		return (ArrayList<BoardOption>)list;
+	}
+	
+	public ArrayList<Board> selectSearchBoard(int boardNo) {
+		List list = sqlSession.selectList("admin.selectFindSearchBoardNo",boardNo);
+		
+		return (ArrayList<Board>)list;
+	}
 
 
 

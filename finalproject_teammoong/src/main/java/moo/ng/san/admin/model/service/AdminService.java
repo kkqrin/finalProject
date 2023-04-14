@@ -476,6 +476,34 @@ public class AdminService {
 		return result;
 	}
 
+	public AdminBoardPageData selectSearchboard(Board b, String detailName) {
+		
+		if(detailName == null) {
+			ArrayList<Board> boardList = dao.selectSearchBoard(b);
+			for(Board board : boardList) {
+					int boardNo = board.getBoardNo();
+					ArrayList<BoardOption> boardOptionList = dao.selectSearchBoardOption(boardNo);
+					board.setBoardOptionList(boardOptionList);
+			}
+				AdminBoardPageData abpd = new AdminBoardPageData(boardList, null);
+				return abpd;
+			
+		}else {
+			ArrayList<BoardOption> boardOptionList = dao.selectFindBoardOption(detailName);
+			ArrayList<Board> boardList = new ArrayList<Board>();
+			
+			for(BoardOption boardOption : boardOptionList) {
+				int boardNo = boardOption.getBoardNo();
+				boardList = dao.selectSearchBoard(boardNo);
+			}
+			
+			AdminBoardPageData abpd = new AdminBoardPageData(boardList, null);
+			return abpd;
+			
+		}
+
+	}
+
 
 
     /*엑셀용*/
