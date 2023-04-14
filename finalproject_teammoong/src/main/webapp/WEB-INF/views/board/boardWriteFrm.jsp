@@ -10,13 +10,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>여기여기붙어라</title>
-	<script type="text/javascript"
-		src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<link rel="stylesheet" href="/resources/css/board/boardWriteFrm.css" />
 
 
 
 	<script>
+	
+	
+	
 		    function previewImage(event) {
 			var reader = new FileReader();
 			reader.onload = function() {
@@ -29,12 +29,20 @@
 			};
 			reader.readAsDataURL(event.target.files[0]);
 		}
+		    
+			
 	</script>
 	
 </head>
 
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+<!-- 		<script type="text/javascript" -->
+<!-- 		src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script> -->
+<link rel="stylesheet" href="/resources/css/board/boardWriteFrm.css" />
+<script src="/resources/summernote/summernote-lite.js"></script>
+<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
 	<div class="content-wrap">
 		<div class="content-board-wrap">
 			<form action="/boardWrite.do" method="post"
@@ -108,7 +116,7 @@
 						<td colspan="4">상세설명<sup>*</sup></td>
 					</tr>
 					<tr>
-						<td colspan="4"><textarea name="boardContent" required></textarea>
+						<td colspan="4"><textarea id="boardContent" name="boardContent" required></textarea>
 						</td>
 					</tr>
 					<tr>
@@ -333,7 +341,7 @@
         $("#form").on("click", function () {
     		const fileCheck = $("#bFile").val();
     	    if(!fileCheck){
-            jQueryAlert('warning',"썸네일을 추가 주세요!");
+            jQueryAlert('warning',"이미지를 추가 해주세요!");
 //     	        alert("파일을 첨부해 주세요!");
     	        return false;
     	    }	
@@ -414,6 +422,7 @@
 		$( function() {
 			$( "[name=category]" ).selectmenu();
 			$( "[name=detailCategoryNo]" ).selectmenu();
+			$("[name='accountBank']").selectmenu();
 		});
 		
 		window.onload = function(){
@@ -482,7 +491,38 @@
 // 				}
 // 			});//계좌번호 정규표현식
 		
+		$("#boardContent").summernote({
+				height : 550,
+				lang : "ko-KR",
+				toolbar: [
+				    // 글꼴 설정
+				    ['fontname', ['fontname']],
+				    // 글자 크기 설정
+				    ['fontsize', ['fontsize']],
+				    // 굵기, 기울임꼴, 밑줄,취소 선, 서식지우기
+				    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+				    // 글자색
+				    ['color', ['forecolor','color']],
+				    // 표만들기
+				    ['table', ['table']],
+				    // 글머리 기호, 번호매기기, 문단정렬
+				    ['para', ['ul', 'ol', 'paragraph']],
+				    // 줄간격
+				    // 코드보기, 확대해서보기, 도움말
+				    ['view', ['codeview','fullscreen', 'help']]
+				  ],
+				callbacks : {
+					onImageUpload : function(files) {
+						uploadImage(files[0], this)
+					}
 		
+					
+				}
+			});
+			
+		
+
+
 	</script>
 <!-- 	<script src="/resources/js/modal-alert.js"></script> -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />	
