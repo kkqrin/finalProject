@@ -14,6 +14,7 @@ import moo.ng.san.admin.model.vo.AdminMemberPageData;
 import moo.ng.san.admin.model.vo.AdminOrderPageData;
 import moo.ng.san.admin.model.vo.AdminProductPageData;
 import moo.ng.san.board.model.vo.Board;
+import moo.ng.san.board.model.vo.BoardOption;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.product.model.vo.Product;
 
@@ -312,7 +313,12 @@ public class AdminService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
-		ArrayList<Board> list = dao.selectAllBoardList(map);
+		ArrayList<Board> boardList = dao.selectAllBoardList(map);
+		for(Board b : boardList) {
+			int boardNo = b.getBoardNo();
+			ArrayList<BoardOption> boardOptionList = dao.selectAllBoardListBoardOption(boardNo);
+			b.setBoardOptionList(boardOptionList);
+		}
 
 		// pageNavi 제작 시작
 		// 전체 페이지 수 계산 필요 => 전체 게시물 수 조회
@@ -335,14 +341,14 @@ public class AdminService {
 		String pageNavi = "";
 		// 이전버튼
 		if (pageNo != 1) {
-			pageNavi += "<a href='/boardList.do?reqPage=" + (pageNo - 1) + "'>[이전]</a>";
+			pageNavi += "<a href='/adminBoardManagePage.do?reqPage=" + (pageNo - 1) + "'>[이전]</a>";
 		}
 		// 페이지 숫자 생성
 		for (int i = 0; i < pageNaviSize; i++) {
 			if (pageNo == reqPage) {
 				pageNavi += "<span>" + pageNo + "</span>";
 			} else {
-				pageNavi += "<a href='/boardList.do?reqPage=" + pageNo + "'>" + pageNo + "</a>";
+				pageNavi += "<a href='/adminBoardManagePage.do?reqPage=" + pageNo + "'>" + pageNo + "</a>";
 			}
 			pageNo++;
 
@@ -352,9 +358,9 @@ public class AdminService {
 		}
 		// 다음버튼
 		if (pageNo <= totalPage) {
-			pageNavi += "<a href='/boardList.do?reqPage=" + pageNo + "'>[다음]</a>";
+			pageNavi += "<a href='/adminBoardManagePage.do?reqPage=" + pageNo + "'>[다음]</a>";
 		}
-		AdminBoardPageData abpd = new AdminBoardPageData(list, pageNavi);
+		AdminBoardPageData abpd = new AdminBoardPageData(boardList, pageNavi);
 
 		return abpd;
 	}

@@ -200,7 +200,7 @@
                                 </tr>
                             </c:forEach>
                             <tr>
-                                <th colspan="12">${pageNavi}</th>
+                                <th colspan="13">${pageNavi}</th>
                             </tr>
                             <tr>
                                 <th colspan="2"><button type="button" name="allChangeProductStatus">일괄 변경</button></th>

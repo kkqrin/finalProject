@@ -14,7 +14,6 @@
 <style>
     .adminPage-wrapper{
         background-color: #111;
-		width: 1200px;
         margin-top: 300px;
         
     }
@@ -188,7 +187,7 @@
                                 </tr>
                             </c:forEach>
                             <tr>
-                                <th colspan="11">${pageNavi}</th>
+                                <th colspan="12">${pageNavi}</th>
                             </tr>
                             <form name="searchForm" method="POST" action="" class="">
 	                        	<input type="hidden" class="orderNo" value="${o.orderNo }">
