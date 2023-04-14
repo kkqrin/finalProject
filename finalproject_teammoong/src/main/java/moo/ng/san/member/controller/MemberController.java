@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import common.FileManager;
 import common.MsgVO;
 import common.PhoneCertify;
+import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.member.model.service.MemberService;
 import moo.ng.san.member.model.vo.Member;
 import net.nurigo.sdk.NurigoApp;
@@ -109,7 +110,8 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "/myPage.do")
-	public String myPage() {
+	public String myPage(Model model) {
+		
 		return "member/myPage";
 	}//myPage
 	
