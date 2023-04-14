@@ -9,4 +9,14 @@
 		insert into point_tbl values
 		(point_tbl_seq.nextval, #{memberNo}, 2000)
 	</insert>
+	<select id="selectAllPoint" parameterType="_int" resultType="point">
+		select
+			point_ea as pointEa
+		from point_tbl where member_no = #{memberNo}
+	</select>
+	<select id="selectTotalPoint" parameterType="_int" resultType="point">
+		select
+			sum(point_ea) as pointEa
+		from point_tbl where member_no = #{memberNo}
+	</select>
 </mapper>

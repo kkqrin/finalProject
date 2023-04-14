@@ -6,10 +6,14 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import moo.ng.san.coupon.model.service.CouponService;
 import moo.ng.san.coupon.model.vo.Coupon;
 import moo.ng.san.coupon.model.vo.IssueCoupon;
+import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.member.model.vo.Member;
 
 @Controller
@@ -60,5 +64,26 @@ public class CouponController {
 		    }
 
 		}
+	}
+	@RequestMapping(value="/couponSearch.do")
+	public String couponSearch(int memberNo, Model model) {
+		ArrayList<IssueCoupon> list = service.selectAllIssueCoupon(memberNo);
+		model.addAttribute("list",list);
+		return "member/couponSearch";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/pointCheck.do")
+	public int pointCheck(int memberNo) {
+		ArrayList<Point> list = service.selectAllPoint(memberNo);
+		int totalPoint = 0;
+		if(!list.isEmpty()) {
+			for(Point p: list) {
+				int point = p.getPointEa();
+				
+				totalPoint += point;
+			}
+		}
+		return totalPoint;
 	}
 }

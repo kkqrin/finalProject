@@ -155,8 +155,37 @@
 							<div>
 								<span class="material-symbols-outlined review-like-on">add_reaction</span>
 								<span class="material-symbols-outlined">sentiment_very_satisfied</span>
-								<a>도움이 돼요?</a>
-								<a style="display: none;">도움이 돼요!</a>
+								<a>도움이 돼요</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="review-box">
+					<div class="review-img">
+						<!-- <img src="/resources/img/product/lactofit.jpg" /> -->
+					</div>
+					<div class="review-right">
+						<div class="review-info">
+							<div class="review-rating">
+								<div class="material-symbols-outlined star-rate">star</div>
+								<div class="material-symbols-outlined star-rate">star</div>
+								<div class="material-symbols-outlined star-rate">star</div>
+								<div class="material-symbols-outlined star-rate">star</div>
+								<div class="material-symbols-outlined star-rate">star</div>
+							</div>
+							<div class="review-option">
+								<div class="review-report" data-modal="#modal-report-btn">
+									<span class="material-symbols-outlined">warning</span>
+								</div>
+								<div class="review-enroll-date">2023-04-03</div>
+							</div>
+						</div>
+						<div class="review-content">이미지없는 리뷰입니다. 이미지없는 리뷰입니다. 이미지없는 리뷰입니다. 이미지없는 리뷰입니다. </div>
+						<div class="review-like">
+							<div>
+								<span class="material-symbols-outlined review-like-on">add_reaction</span>
+								<span class="material-symbols-outlined">sentiment_very_satisfied</span>
+								<a>도움이 돼요</a>
 							</div>
 						</div>
 					</div>
@@ -186,39 +215,7 @@
 							<div>
 								<span class="material-symbols-outlined review-like-on">add_reaction</span>
 								<span class="material-symbols-outlined">sentiment_very_satisfied</span>
-								<a>도움이 돼요?</a>
-								<a style="display: none;">도움이 돼요!</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="review-box">
-					<div class="review-img">
-						<img src="/resources/img/product/lactofit.jpg" />
-					</div>
-					<div class="review-right">
-						<div class="review-info">
-							<div class="review-rating">
-								<div class="material-symbols-outlined star-rate">star</div>
-								<div class="material-symbols-outlined star-rate">star</div>
-								<div class="material-symbols-outlined star-rate">star</div>
-								<div class="material-symbols-outlined star-rate">star</div>
-								<div class="material-symbols-outlined star-rate">star</div>
-							</div>
-							<div class="review-option">
-								<div class="review-report" data-modal="#modal-report-btn">
-									<span class="material-symbols-outlined">warning</span>
-								</div>
-								<div class="review-enroll-date">2023-04-03</div>
-							</div>
-						</div>
-						<div class="review-content">어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!!</div>
-						<div class="review-like">
-							<div>
-								<span class="material-symbols-outlined review-like-on">add_reaction</span>
-								<span class="material-symbols-outlined">sentiment_very_satisfied</span>
-								<a>도움이 돼요?</a>
-								<a style="display: none;">도움이 돼요!</a>
+								<a>도움이 돼요</a>
 							</div>
 						</div>
 					</div>
@@ -319,20 +316,22 @@
 								<div>
 									<span class="material-symbols-outlined review-like-on">add_reaction</span>
 									<span class="material-symbols-outlined">sentiment_very_satisfied</span>
-									<a>도움이 돼요?</a>
-									<a style="display: none;">도움이 돼요!</a>
+									<a>도움이 돼요</a>
 								</div>
 							</div>
 						</div>
 					</div>
 					<!--//내용영역-->
 				</div>
-				<div class="back-photo-review-more" data-modal="#modal-photo-review-more">사진 목록보기</div>
+				<div class="back-photo-review-more" data-modal="#modal-photo-review-more">
+					<span class="material-symbols-outlined">grid_view</span>
+					<div>사진 목록보기</div>
+				</div>
 			</div>
 		</div>
 
 		<!-- 신고하기 모달 -->
-		<div id="modal-report-btn" class="modal modal-pri">
+		<div id="modal-report-btn" class="modal modal-pri report-modal">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h6>리뷰 신고하기</h6>
@@ -341,25 +340,23 @@
 					<!--내용영역-->
 					<!-- <h5>내용타이틀</h5> -->
 					<form action="#">
-							<div class="selectBox-widht-explain">
-								<select class="select-custom review-color" id="review-color" style="margin-bottom: 30px;">
-									<option value="0" selected>신고내용</option>
-									<option value="white">상품/스토어와 무관한 내용 게시</option>
-									<option value="black">광고 및 홍보성 계정 및 내용 게시</option>
-									<option value="black">광고 및 홍보성 계정 및 내용 게시</option>
-									<option value="black">광고 및 홍보성 계정 및 내용 게시</option>
-									<option value="black">광고 및 홍보성 계정 및 내용 게시</option>
-									<option value="black">광고 및 홍보성 계정 및 내용 게시</option>
-								</select>
-								<div>직접입력</div>
-								<textarea></textarea>
-							</div>
+						<div class="report-form">
+							<div><label><input type="radio" name="report-reason" value="1">상품관련 비방 내용</label></div>
+							<div><label><input type="radio" name="report-reason" value="2">음란, 욕설 등 부절적한 내용</label></div>
+							<div><label><input type="radio" name="report-reason" value="3">개인, 판매자 상업적 홍보</label></div>
+							<div><label><input type="radio" name="report-reason" value="4">상품과 관계없는 내용</label></div>
+							<div><label><input type="radio" name="report-reason" value="5">개인정보 노출</label></div>
+							<div><label><input type="radio" name="report-reason" value="6">저작권 불법도용(이미지,동영상)</label></div>
+							<div><label><input type="radio" name="report-reason" value="7">상품 후기 취지에 어긋난 이용(복사글 등)</label></div>
+							<div><label><input type="radio" name="report-reason" value="8">직접 입력</label></div>
+							<div><textarea class="report-direct-input" disabled></textarea></div>
+						</div>
 					</form>
 					<!--//내용영역-->
 				</div>
 				<div class="area-btn center">
 					<a class="btn btn-pri size01" type="button" id="review-filter-btn" rel="modal:close">확인</a>
-					<a href="" rel="modal:close" class="btn btn-sec size01">닫기</a>
+					<a rel="modal:close" class="btn btn-sec size01 report-modal-close">닫기</a>
 				</div>
 			</div>
 		</div>
@@ -417,5 +414,21 @@
 			$(".slick-slide").css("height","238px");
 		});
     </script>
+	<script>
+		// 신고 모달 직접 입력 선택시 textarea 작성 가능
+		$("[name=report-reason]").on("change", function(){
+			if($(this).val() == 8){
+				$(".report-direct-input").attr("disabled", false);
+			}else{
+				$(".report-direct-input").attr("disabled", true);
+				$(".report-direct-input").val("");
+			}
+		});
+
+		// 라디오 초기화
+		$(".report-modal-close").on("click", function(){
+			$(".report-form [type=radio]").prop("checked", false);
+		});
+	</script>
 </body>
 </html>

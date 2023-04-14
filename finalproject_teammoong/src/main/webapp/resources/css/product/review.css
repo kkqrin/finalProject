@@ -35,13 +35,32 @@
 
 .back-photo-review-more{
     cursor: pointer;
-    background-color: hotpink;
+    /* background-color: hotpink; */
+    border: 1px solid rgb(226, 226, 226);
     width: 200px;
     height: 40px;
     line-height: 40px;
     margin: 0 auto;
     text-align: center;
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px 0px;
+}
+
+.back-photo-review-more>span{
+    /* font-size: 20px; */
+    /* color: #757575; */
+}
+
+.back-photo-review-more>.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 100,
+    'GRAD' 0,
+    'opsz' 22;
+    padding-right: 5px;
 }
 
 .photo-review-more>a{
@@ -102,6 +121,7 @@
     display: flex;
     padding: 30px;
     align-items: center;
+    justify-content: center;
 }
 
 .review-img{
@@ -191,7 +211,7 @@
 }
 
 .review-like>div{
-    text-align: right;
+    /* text-align: right; */
     padding-top: 15px;
     /* background-color: honeydew; */
     cursor: pointer;
@@ -201,20 +221,23 @@
     /* width: 95px; */
     display: flex;
     align-items: center;
-    border: 1px solid #3a3a3a;
-    padding: 5px;
+    border: 1px solid #e2e2e2;
+    padding: 7px 15px;
     border-radius: 10px;
     margin-top: 10px;
+    color: #999;
 }
 
 .review-like>div a{
     font-size: 14px;
+    /* color: #808080; */
 }
 
 .review-like>div>span{
     display: none;
     font-size: 22px;
     padding-right: 3px;
+    /* color: #808080; */
 }
 
 .material-symbols-outlined.review-like-on{
@@ -224,4 +247,11 @@
 .review-like>.review-like-color{
     color: var(--primary);
     border: 1px solid var(--primary);
+}
+
+
+/* 신고 모달 */
+.report-form div{
+    margin: 10px;
+
 }
