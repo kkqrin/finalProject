@@ -251,23 +251,51 @@
 		and '2023-03-30 and bt.board_status = 2
 	</select>
 
+<!-- 	<select id="selectAllBoardList" parameterType="map" resultType="b">
+		select * from
+			(select rownum as rnum, b.* from
+	            (select 
+	                bt.board_no as boardNo,	
+	                bt.d_category_no as detailCategoryNo, 
+	                bo.detail_name as detailName, 
+	                bo.detail_price as detailPrice, 
+	                bt.board_date as boardDate,
+	                bt.board_start as boardStart, 
+	                bt.board_end as boardEnd,
+	                bt.board_status as boardStatus
+	            from board_tbl bt
+	            join board_option bo on (bt.board_no = bo.board_no)
+	            order by 1 desc)b)
+		where rnum between #{start} and #{end}
+	</select> -->
+	
+	
 	<select id="selectAllBoardList" parameterType="map" resultType="b">
 		select * from
-		(select rownum as rnum, b.* from
-            (select 
-                bt.board_no as boardNo,	
-                bt.d_category_no as detailCategoryNo, 
-                bo.detail_name as detailName, 
-                bo.board_price as boardPrice, 
-                bt.board_date as boardDate,
-                bt.board_start as boardStart, 
-                bt.board_end as boardEnd,
-                bt.board_status as boardStatus
-            from board_tbl bt
-            join board_join bj on (bt.board_no = bj.board_no)
-            join board_option bo on (bt.board_no = bo.board_no)
-            order by 1 desc)b)
-		where rnum between #{start} and #{end};
+			(select rownum as rnum, b.* from
+	            (select 
+	                board_no as boardNo,	
+	                d_category_no as detailCategoryNo, 
+	                board_writer as boardWriter,
+	                board_date as boardDate,
+	                board_start as boardStart, 
+	                board_end as boardEnd,
+	                board_status as boardStatus
+	            from board_tbl bt
+	            order by 1 desc)b)
+		where rnum between #{start} and #{end}
+	</select>
+	
+	<select id="selectAllBoardListBoardOption" parameterType="_int" resultType="bo">
+		select * from
+			(select rownum as rnum, b.* from
+	            (select
+	            	board_no as boardNo,
+	                detail_name as detailName, 
+	                detail_price as detailPrice 
+	            from board_option
+	            order by 1 desc)b)
+		where boardNo = #{_parameter}
 	</select>
 
 	<select id="selectReportBoardList" parameterType="map" resultType="b">
@@ -300,7 +328,7 @@
 
 	<update id="updateReportMember" parameterType="m">
 		update member_tbl
-		set member_status = #{memberStatus} where member_no = #{memberNo};
+		set member_status = #{memberStatus} where member_no = #{memberNo}
 	</update>
 
 	<select id="selectReportMember" parameterType="b" resultType="b">
@@ -491,6 +519,6 @@
 		where pc.category_no = 13 and pt.pay_status = 1
 	</select>
  -->
-
-
 </mapper>
+
+

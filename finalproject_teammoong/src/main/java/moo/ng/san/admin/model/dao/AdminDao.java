@@ -10,6 +10,8 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Repository;
 
 import moo.ng.san.board.model.vo.Board;
+import moo.ng.san.board.model.vo.BoardJoin;
+import moo.ng.san.board.model.vo.BoardOption;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.product.model.vo.Product;
 
@@ -206,6 +208,12 @@ public class AdminDao {
 		int result = sqlSession.update("admin.updateChangeProductStatus",map);
 		
 		return result;
+	}
+
+	public ArrayList<BoardOption> selectAllBoardListBoardOption(int boardNo) {
+		List list = sqlSession.selectList("admin.selectAllBoardListBoardOption",boardNo);
+		
+		return (ArrayList<BoardOption>)list;
 	}
 
 

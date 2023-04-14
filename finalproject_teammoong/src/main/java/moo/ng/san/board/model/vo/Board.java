@@ -27,6 +27,8 @@ public class Board {
 	private int boardStatus;
 	private int boardCount;
 	private ArrayList<String> fileList;
+	private ArrayList<BoardOption> boardOptionList;
+	private ArrayList<BoardJoin> boardJoinList;
 	
 }
 
