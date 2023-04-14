@@ -40,9 +40,12 @@
 						<div class="propic">
 							<img src="/resources/upload/member/${sessionScope.m.memberPath }">
 							<div class="modify-propic">
-								<span class="material-symbols-outlined camera">
+								<label for="fileUpload" class="fileUpload">
+								<span class="material-symbols-outlined camera" style="cursor: pointer;">
 									photo_camera
 								</span>
+								</label>
+								<input type="file" name="memberPropic" id="fileUpload" accept=".gif, .jpg, .jpeg, .png" onchange="readURL(this);" style="display: none;">
 							</div>
 						</div>
 						<div class="name-zone">
@@ -71,7 +74,7 @@
 						<div class="one-line">
 							<div class="name-tag">본인인증</div>
 							<div class="subDiv">
-								<input type="text" name="memberPhone" value="${sessionScope.m.memberPhone }">
+								<input type="text" name="memberPhone" value="${sessionScope.m.memberPhone }" readonly>
 								<div>
 								<a data-modal="#modalBasic">인증번호 변경하기</a>
 								</div>
@@ -84,7 +87,7 @@
 									<div class="modal-body" style="display: flex; flex-direction: column; align-items: end;">
 										<input type="text" id="newMemberPhone" placeholder="숫자만 입력하세요('-'제외)" style="margin-bottom:3px;">
 										<div style="display: flex;">
-											<a style="line-height: 36px;margin-right: 10px;">인증번호가 전송되었습니다</a>
+											<a style="line-height: 36px;margin-right: 10px;"></a>
 											<button class="btn btn-sec size01">인증번호 발송</button>
 										</div>
 										<input type="text" id="inputCerNum" placeholder="인증번호를 입력하세요" style="margin:3px 0;">
@@ -173,17 +176,62 @@
 	
 	<script>
 		/*=======핸드폰 번호 인증===============*/
+		let regCheck = false;
+		
 		$(".modal-body").children('#inputCerNum').css('display','none');
 		$(".modal-body").children('div').eq(1).css('display','none');
 
 		$(".modal-body").children().children('a').css('display','none');
 
 		$(".modal-body").children('div').eq(0).children('button').on("click",function(){
-			$(".modal-body").children().children('a').eq(0).css('display','block');
-			$(".modal-body").children('#inputCerNum').fadeIn();
-			$(".modal-body").children('div').eq(1).fadeIn();
+			if(regCheck){
+				$(".modal-body").children().children('a').eq(0).text('인증번호가 전송되었습니다');
+				$(".modal-body").children().children('a').eq(0).css('display','block');
+				$(".modal-body").children('#inputCerNum').val('');
+				$(".modal-body").children('#inputCerNum').fadeIn();
+				$(".modal-body").children('div').eq(1).fadeIn();
+			}else{
+				return false;
+			}
 		});//[인증번호 발송] 클릭 시
 
+		
+		$("#newMemberPhone").on("change",function(){
+			//핸드폰 정규표현식
+			const pwReg = /^\d{3}-\d{3,4}-\d{4}$/;
+			const pwReg2 = /^0+\d{9,10}$/;
+			const inputPhone = $(this).val();
+
+			if(pwReg.test(inputPhone) || pwReg2.test(inputPhone) || inputPhone==""){
+				$(this).removeClass("error");
+				$(".modal-body").children().children('a').eq(0).text('');
+				$(".modal-body").children().children('a').eq(0).css('display','none');
+				let replace = $(this).val().replaceAll("-","");
+				$(this).val(replace);
+				regCheck = true;
+			}else{
+				$(this).addClass("error");
+				$(".modal-body").children().children('a').eq(0).text('핸드폰 형식을 확인해주세요');
+				$(".modal-body").children().children('a').eq(0).css('display','block');
+				regCheck = false;
+			}
+		})//핸드폰 형식 검사
+				
+				
+		let cerCode=""; //★핸드폰 인증코드!!!
+		$(".modal-body").children('div').eq(0).children('button').on("click",function(){
+			const memberPhone = $("#newMemberPhone").val();
+			console.log(memberPhone);
+// 			$.ajax({
+// 				url: "/memberPhoneCheck.do",
+// 				type: "post",
+// 				data: {memberPhone : replace},
+// 				success : function(code){
+// 					cerCode = code;
+// 				}//ajax success구문
+// 			})//ajax
+		})//문자메시지 보내기 + 코드 받기
+		
 
 		
 
@@ -204,6 +252,7 @@
 			$(".modal-body").children('#inputCerNum').css('display','none');
 			$(".modal-body").children('div').eq(1).css('display','none');
 			$(".modal-body").children().children('a').css('display','none');
+			$(this).removeClass("error");
 		})
 
 		
@@ -213,7 +262,6 @@
 		$(".subDiv").children('div').children('a').eq(1).on("click",function(){
 				new daum.Postcode({
 			        oncomplete: function(data) {
-			        	console.log(data);
 			        	$("[name='memberZoneCode']").val(data.zonecode);
 			        	const addr = String(data.address);
 			        	$("[name='memberAddr']").val(addr+" ");
@@ -225,6 +273,15 @@
 			    }).open();
 			});//다음 지도 API	
 		
+			
+	
+			
+			
+			
+			
+			
+			
+			
 		
 		
 		
@@ -319,6 +376,18 @@
 		
 		makeBankList();
 		// 은행 selectBox 채우는 함수
+		
+		
+		
+		function readURL(input) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$(".propic").children('img').attr('src',e.target.result);
+			};
+			reader.readAsDataURL(input.files[0]);
+		}
+		//파일 이미지
+
 
 	</script>
 	

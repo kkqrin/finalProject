@@ -176,7 +176,7 @@
 						<td class="proPic-zone" colspan="3" id="no">
 							<div class="proPic-left">
 								<div class="proPic">
-									<img id="preview" src="/resources/upload/member/common/moongs.png">
+									<img id="preview" src="/resources/upload/member/moongs.png">
 								</div>
 							</div>
 							<div class="proPic-right">
