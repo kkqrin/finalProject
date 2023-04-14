@@ -110,7 +110,9 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "/myPage.do")
-	public String myPage(int memberNo, Model model) {
+	public String myPage(HttpSession session, Model model) {
+		Member m = (Member)session.getAttribute("m");
+		int memberNo = m.getMemberNo();
 		Point point = service.selectTotalPoint(memberNo);
 		model.addAttribute("p", point);
 		return "member/myPage";

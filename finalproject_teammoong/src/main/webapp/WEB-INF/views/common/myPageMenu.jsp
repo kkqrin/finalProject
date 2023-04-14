@@ -16,7 +16,7 @@
 			<div class="mypage-menu">
 				<div class="one-menu">
 					<a class="one-menu-title">나의 정보</a>
-					<a href="/myPage.do?memberNo=${sessionScope.m.memberNo }">회원 정보</a>
+					<a href="/myPage.do">회원 정보</a>
 					<a href="#">구매 내역/후기 작성</a>
 					<a href="#">장바구니</a>
 					<a href="#">찜한 상품</a>
