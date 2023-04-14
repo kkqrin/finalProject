@@ -19,4 +19,26 @@
 		update issue_coupon 
 		set coupon_status = 2 where issue_no = #{issueNo}
 	</update>
+	<select id="selectMemberIssueCoupon" parameterType="_int" resultType="ic">
+		SELECT 
+			  rnum,
+			  issue_no AS issueNo,
+			  member_no AS memberNo,
+			  coupon_no AS couponNo,
+			  TO_CHAR(issue_date, 'YYYY-MM-DD') AS issueDate,
+			  TO_CHAR(end_date, 'YYYY-MM-DD') AS endDate,
+			  coupon_status AS couponStatus
+			FROM (
+			  SELECT 
+			    ROW_NUMBER() OVER (ORDER BY issue_date DESC) as rnum,
+			    issue_no,
+			    member_no,
+			    coupon_no,
+			    issue_date,
+			    end_date,
+			    coupon_status
+			  FROM issue_coupon
+			  WHERE member_no = #{memberNo}
+			) t
+	</select>
 </mapper>

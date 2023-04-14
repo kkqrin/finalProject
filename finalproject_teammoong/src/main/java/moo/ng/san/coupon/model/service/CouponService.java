@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import moo.ng.san.coupon.model.dao.CouponDao;
 import moo.ng.san.coupon.model.vo.Coupon;
 import moo.ng.san.coupon.model.vo.IssueCoupon;
+import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.member.model.vo.Member;
 
 @Service
@@ -38,6 +39,16 @@ public class CouponService {
 	public int updateIssueCoupon(int issueNo) {
 		int result = dao.updateIssueCoupon(issueNo);
 		return result;
+	}
+
+	public ArrayList<IssueCoupon> selectAllIssueCoupon(int memberNo) {
+		ArrayList<IssueCoupon> list = dao.selectAllIssueCoupon(memberNo);
+		return list;
+	}
+
+	public ArrayList<Point> selectAllPoint(int memberNo) {
+		ArrayList<Point> list = dao.selectAllPoint(memberNo);
+		return list;
 	}
 
 }
