@@ -35,14 +35,7 @@
 					<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 					<div class="info-align">
 						<div class="propic">
-							<c:choose>
-								<c:when test="${sessionScope.m.memberPath eq 'moongs.png' }">
-									<img src="/resources/upload/member/common/moongs.png">
-								</c:when>
-								<c:otherwise>
-									<img src="/resources/upload/member/${sessionScope.m.memberPath }">
-								</c:otherwise>
-							</c:choose>
+							<img src="/resources/upload/member/${sessionScope.m.memberPath }">
 							<div class="modify-propic">
 								<span class="material-symbols-outlined camera">
 									photo_camera
