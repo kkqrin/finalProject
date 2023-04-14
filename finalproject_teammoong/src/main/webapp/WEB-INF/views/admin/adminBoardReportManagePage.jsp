@@ -67,28 +67,28 @@
         <div class="adminPage-back">
             <div class="adminPage-sidebar">
                 <ul>
-                    <a href="/adminMemberPage.do?reqPage=1">회원 관리</a>
-                    <li><a href="/manageMemberGrade.do">회원등급 관리</a></li>
+                    <li>회원 관리</li>
+                    <il><a href="/adminMemberPage.do?reqPage=1">회원 관리</a></il><!-- jsp 생성완료 -->
                 </ul>
                 <ul>
-                    <a>매출 관리</a>
-                    <li><a href="/adminTotalSalesManage.do?reqPage=1">전체 매출 관리</a></li>
+                    <li>매출 관리</li>
+                    <li><a href="/adminTotalSalesManage.do?reqPage=1">전체 매출 관리</a></li><!-- jsp 생성완료 -->
                     <li><a href="/categorySalesManage.do">카테고리별 매출관리</a></li>
                 </ul>
                 <ul>
-                    <a href="/adminTotalProductList.do?reqPage=1">상품 관리</a>
-                    <li><a href="/productConfirmManage.do">상품 등록 관리</a></li>
-                    <li><a href="/productRegist.do?reqPage=1"></a>상품 등록</li>
-                    <li><a href="/deliveryManage.do"></a>배송 관리</li>
+                    <li>상품 관리</li>
+                    <li><a href="/adminTotalProductList.do?reqPage=1">상품 관리</li><!-- jsp 생성완료 -->
+                    <li><a href="/adminProductRegist.do"></a>상품 등록</li>
+                    <li><a href="/adminDeliveryManagePage.do?reqPage=1"></a>배송 관리</li>
                 </ul>
                 <ul>
                     <a>이벤트 관리</a>
                     <li>쿠폰 발행 관리</li>
                 </ul>
                 <ul>
-                    <a href="/adminBoardManagePage.do">여기여기붙어라 관리</a>
-                    <li>여기여기붙어라 게시판 관리</li>
-                    <li><a href="/adminBoardReportManagePage.do?reqPage=1">여기여기붙어라 신고 관리</a></li>
+                    <li>여기여기붙어라 관리</li>
+                    <li><a href="/adminBoardManagePage.do?reqPage=1">여기여기붙어라 게시판 관리</a></li><!-- jsp 생성완료 -->
+                    <li><a href="/adminBoardReportManagePage.do?reqPage=1">여기여기붙어라 신고 관리</a></li><!-- jsp 생성완료 -->
                     <li>카테고리별 매출관리</li>
                 </ul>
             </div>

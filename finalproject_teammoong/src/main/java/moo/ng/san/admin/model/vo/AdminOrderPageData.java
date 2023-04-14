@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AdminOrderPageData {
-	private ArrayList<Order> list;
+	private ArrayList<Order> orderList;
 	private String pageNavi;
 }

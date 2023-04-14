@@ -125,6 +125,7 @@ public class AdminController {
 		
 	}
 	
+	//상품 상태 변경
 	@ResponseBody
 	@RequestMapping(value="/ajaxChangeProductStatus.do")
 	public String productChangeStatus(Product p) {
@@ -159,9 +160,9 @@ public class AdminController {
 	@RequestMapping(value="/adminDeliveryManagePage.do")
 	public String allDeliveryList(int reqPage, Model model) {
 		AdminOrderPageData aopd = service.selectAllOrderList(reqPage);
-		model.addAttribute("orderList",aopd.getList());
+		model.addAttribute("orderList",aopd.getOrderList());
 		model.addAttribute("pageNavi",aopd.getPageNavi());
-		return "admin/adminOrderManagePage";
+		return "admin/adminDeliveryManagePage";
 	}
 	
 	
@@ -197,20 +198,20 @@ public class AdminController {
 	
 	/*여여붙 게시판 조회*/
 	// 여기여기 붙어라 참여인원 순으로 list 정렬
+	
 	@RequestMapping(value="/adminBoardManagePage.do")
 	public String allBoardList(int reqPage, Model model) {
 		AdminBoardPageData abpd = service.selectAllBoardList(reqPage);
-		model.addAttribute("boardList",abpd.getList());
+		model.addAttribute("boardList",abpd.getBoardList());
 		model.addAttribute("pageNavi",abpd.getPageNavi());
 		return "admin/adminBoardManagePage";
 	}
-	
 	
 	/* 신고 리스트 조회 */
 	@RequestMapping(value="/adminBoardReportManagePage.do")
 	public String reportBoardManage(int reqPage, Model model) {
 		AdminBoardPageData abrpd = service.selectReportBoardList(reqPage);
-		model.addAttribute("reportList",abrpd.getList());
+		model.addAttribute("reportList",abrpd.getBoardList());
 		model.addAttribute("pageNavi",abrpd.getPageNavi());
 		return "admin/adminBoardReportManagePage";
 	}
