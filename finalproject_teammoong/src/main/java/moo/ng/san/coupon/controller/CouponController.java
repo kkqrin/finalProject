@@ -80,7 +80,7 @@ public class CouponController {
 		if(!list.isEmpty()) {
 			for(Point p: list) {
 				int point = p.getPointEa();
-				System.out.println(point);
+				
 				totalPoint += point;
 			}
 		}
