@@ -14,7 +14,7 @@
 	.menu-bar h5{
 		width: 50%;
 		text-align: center;
-		border-bottom: 5px solid #f88000;
+		
 		cursor: pointer;
 	}
 	.menu-bar h5:hover{
@@ -25,6 +25,7 @@
 		line-height: 70px;
 		text-align:center;
 		font-size: 30px;
+		display:none;
 	}
 </style>
 </head>
