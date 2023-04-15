@@ -14,4 +14,7 @@ public class IssueCoupon {
 	private String issueDate;
 	private String endDate;
 	private int couponStatus;
+	
+	private String couponTitle;
+	private int couponPrice;
 }
