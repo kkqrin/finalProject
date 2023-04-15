@@ -17,4 +17,9 @@ public class OrderService {
 		
 		return dao.selectMemberCouponList(memberNo);
 	}
+
+	public int selectMemberCouponCount(int memberNo) {
+		
+		return dao.selectMemberCouponCount(memberNo);
+	}
 }

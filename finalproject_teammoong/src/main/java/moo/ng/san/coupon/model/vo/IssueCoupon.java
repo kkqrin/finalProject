@@ -17,4 +17,6 @@ public class IssueCoupon {
 	
 	private String couponTitle;
 	private int couponPrice;
+	// 보유 쿠폰 개수
+	private int couponCount;
 }

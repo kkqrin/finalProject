@@ -22,10 +22,14 @@ public class OrderController {
 	public String orderSheet(int productNo, int memberNo, Model model) {
 		
 		// 보유 쿠폰 조회
+		// 보유 쿠폰 개수
+		int couponCount = service.selectMemberCouponCount(memberNo);
+		model.addAttribute("couponCount", couponCount);
+		// 보유 쿠폰 리스트
 		ArrayList<IssueCoupon> couponList = service.selectMemberCouponList(memberNo);
 		model.addAttribute("couponList",couponList);
 		
-		System.out.println(couponList);
+		
 		// 현재 적립금 조회
 		
 		return "order/temporOrderSheet";
