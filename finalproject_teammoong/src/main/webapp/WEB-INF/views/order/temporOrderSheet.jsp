@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +28,16 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	
+	
 	<div class="content-wrap">
+	
+	<input type="hidden" id="session-member-name" value="${sessionScope.m.memberName}">
+	<input type="hidden" id="session-member-phone" value="${sessionScope.m.memberPhone}">
+	<input type="hidden" id="session-member-zonecode" value="${sessionScope.m.memberZoneCode}">
+	<input type="hidden" id="session-member-addr" value="${sessionScope.m.memberAddr}">
+	
+	
         <pre>
             남은 일 : 적립금 [적용][모두사용] 버튼 구현 , 주소검색, 주문자 정보와 동일
         </pre>
@@ -137,7 +147,7 @@
                                     <input type="text" id="deli-post-number" class="input-noborder" placeholder="우편번호">
                                     <button type="button" class="btn btn-pri size01">주소검색</button>
                                 </div>
-                                <input type="text" class="input-noborder" placeholder="주소를 입력해주세요">
+                                <input type="text" id="deli-addr" class="input-noborder" placeholder="주소를 입력해주세요">
                                 <input type="text" class="input-noborder" placeholder="상세주소를 입력해주세요">
                             </td>
                         </tr>
@@ -170,7 +180,9 @@
                                         <div class="selectBox-widht-explain" style="width: 100%;">
                                             <select class="select-custom order-coupon" id="order-coupon">
                                                 <option value="default" selected>사용 가능한 쿠폰 1장 / 전체 2장</option>
-                                                <option value="1">웰컴 쿠폰 10%</option>
+                                                <c:forEach items="${couponList }" var="i">
+                                                <option value="1">${i.couponTitle }( ${i.couponPrice }원 할인 / ~ ${i.endDate } )</option>
+                                                </c:forEach>
                                                 <option value="2" disabled>5만원이상 1천원 할인</option>
                                             </select>
                                         </div>
@@ -283,6 +295,10 @@
     
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+
+    <!-- 주문 js -->
+    <script src="/resources/js/order.js"></script>
+
     <script>
         $( function() {
 			$( ".deli-request" ).selectmenu();
@@ -324,27 +340,7 @@
         });
 
 
-        // 약관 전체 동의
-        $(document).ready(function() {
-            $("#all-agree").click(function() {
-                if($("#all-agree").is(":checked")){
-                    $("input[name=chk]").prop("checked", true);
-                }else{
-                    $("input[name=chk]").prop("checked", false);
-                } 
-            });
 
-            $("input[name=chk]").click(function() {
-                var total = $("input[name=chk]").length;
-                var checked = $("input[name=chk]:checked").length;
-
-                if(total != checked){
-                    $("#all-agree").prop("checked", false);
-                }else{
-                    $("#all-agree").prop("checked", true); 
-                }
-            });
-        });
         
 
     </script>
