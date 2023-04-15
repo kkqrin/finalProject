@@ -32,7 +32,7 @@ public class MemberController {
 	@Autowired
 	private PhoneCertify phoneCertify;
 	@Autowired
-	private FileManager upload; 
+	private FileManager fm; 
 	
 	
 	@ResponseBody
@@ -48,7 +48,7 @@ public class MemberController {
 		String filePath="";
 		if(!memberPropic.isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member/");
-			filePath = upload.upload(savePath, memberPropic); //업로드 완료
+			filePath = fm.upload(savePath, memberPropic); //업로드 완료
 			m.setMemberPath(filePath);
 		}else {
 			filePath = "moongs.png";
@@ -134,7 +134,33 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "/updateMember.do")
-	public String updateMember() {
+	public String updateMember(Member member, MultipartFile memberPropic, HttpServletRequest request) {
+		System.out.println("memberNo : "+member.getMemberNo());
+		System.out.println("memberPhone : "+member.getMemberPhone());
+		System.out.println("memberEmail : "+member.getMemberEmail());
+		System.out.println("memberZoneCode : "+member.getMemberZoneCode());
+		System.out.println("memberAddr : "+member.getMemberAddr());
+		System.out.println("memberBank : "+member.getMemberBank());
+		System.out.println("memberAccount : "+member.getMemberAccount());
+		System.out.println("memberBday : "+member.getMemberBday());
+		
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member/");
+		String filePath="";
+
+		if(!memberPropic.isEmpty()) {
+			filePath = fm.upload(savePath, memberPropic); //업로드 완료
+			member.setMemberPath(filePath);
+		}
+		
+		System.out.println("memberPath : "+member.getMemberPath());
+		
+		int result = service.updateMember(member);
+		
+		
+		if(!memberPropic.isEmpty()) {
+			fm.deleteFile(savePath, filePath);
+		}
+		
 		return "redirect:/myPage.do";
 	}
 	

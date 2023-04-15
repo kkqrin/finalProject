@@ -33,5 +33,9 @@ public class MemberService {
 		return dao.selectTotalPoint(memberNo);
 	}
 
+	public int updateMember(Member member) {
+		return dao.updateMember(member);
+	}
+
 	
 }//MemberService

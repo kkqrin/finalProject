@@ -32,4 +32,9 @@ public class MemberDao {
 		return sqlSession.selectOne("point.selectTotalPoint",memberNo);
 	}
 
+	public int updateMember(Member member) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

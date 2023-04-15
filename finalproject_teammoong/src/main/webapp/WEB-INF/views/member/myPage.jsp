@@ -134,7 +134,8 @@
 							<div class="name-tag">생일</div>
 							<c:choose>
 								<c:when test="${not empty sessionScope.m.memberBday }">
-									<input class="notInput" type="text" name="memberBday" value="${sessionScope.m.memberBday }" readonly>
+									<input class="notInput" id="bdayView" type="text" value="${sessionScope.m.memberBday }" readonly>
+									<input type="hidden" name="memberBday">
 								</c:when>
 								<c:otherwise>
 									<div class="subDiv">
@@ -352,6 +353,17 @@
 			}
 		});//계좌번호 정규표현식	
 			
+		
+	/*====생일 관련==========================================*/		
+		
+		const year = $("#bdayView").val().substring(0,4);
+		const month = $("#bdayView").val().substring(6,8);
+		const day = $("#bdayView").val().substring(10,12);
+		
+		$("[name='memberBday']").val(year+month+day);
+		
+		
+		
 			
 	/*====비밀번호 수정 관련==========================================*/			
 		
