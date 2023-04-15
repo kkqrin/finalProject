@@ -1,5 +1,8 @@
 package moo.ng.san.member.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -59,7 +62,6 @@ public class MemberController {
 		if(result>0) {
 			m.setMemberPw(null);
 			Member loginMember = service.selectOneMember(m);
-			System.out.println(loginMember);
 			session.setAttribute("m", loginMember);
 			
 			MsgVO msg = new MsgVO();
@@ -110,8 +112,7 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "/myPage.do")
-	public String myPage(HttpSession session, Model model) {
-		Member m = (Member)session.getAttribute("m");
+	public String myPage(@SessionAttribute(required=false) Member m, Model model) {
 		int memberNo = m.getMemberNo();
 		Point point = service.selectTotalPoint(memberNo);
 		model.addAttribute("p", point);
@@ -134,15 +135,15 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "/updateMember.do")
-	public String updateMember(Member member, MultipartFile memberPropic, HttpServletRequest request) {
-		System.out.println("memberNo : "+member.getMemberNo());
-		System.out.println("memberPhone : "+member.getMemberPhone());
-		System.out.println("memberEmail : "+member.getMemberEmail());
-		System.out.println("memberZoneCode : "+member.getMemberZoneCode());
-		System.out.println("memberAddr : "+member.getMemberAddr());
-		System.out.println("memberBank : "+member.getMemberBank());
-		System.out.println("memberAccount : "+member.getMemberAccount());
-		System.out.println("memberBday : "+member.getMemberBday());
+	public String updateMember(Member member, MultipartFile memberPropic, HttpServletRequest request, @SessionAttribute(required=false) Member m) {
+//		System.out.println("memberNo : "+member.getMemberNo());
+//		System.out.println("memberPhone : "+member.getMemberPhone());
+//		System.out.println("memberEmail : "+member.getMemberEmail());
+//		System.out.println("memberZoneCode : "+member.getMemberZoneCode());
+//		System.out.println("memberAddr : "+member.getMemberAddr());
+//		System.out.println("memberBank : "+member.getMemberBank());
+//		System.out.println("memberAccount : "+member.getMemberAccount());
+//		System.out.println("memberBday : "+member.getMemberBday());
 		
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member/");
 		String filePath="";
@@ -152,13 +153,32 @@ public class MemberController {
 			member.setMemberPath(filePath);
 		}
 		
-		System.out.println("memberPath : "+member.getMemberPath());
-		
 		int result = service.updateMember(member);
 		
+		String memberPath = m.getMemberPath();
 		
-		if(!memberPropic.isEmpty()) {
-			fm.deleteFile(savePath, filePath);
+		if(result>0 && filePath!="") {
+			m.setMemberPhone(member.getMemberPhone());
+			m.setMemberEmail(member.getMemberEmail());
+			m.setMemberZoneCode(member.getMemberZoneCode());
+			m.setMemberAddr(member.getMemberAddr());
+			m.setMemberBank(member.getMemberBank());
+			m.setMemberAccount(member.getMemberAccount());
+			m.setMemberPath(filePath);
+			
+			if(member.getMemberBday()!=null) {
+				try {
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+					SimpleDateFormat newSdf = new SimpleDateFormat("yyyy년mm월dd일");
+					Date dateBday = sdf.parse(member.getMemberBday());
+					String strBday = newSdf.format(dateBday);
+					m.setMemberBday(strBday);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			fm.deleteFile(savePath, memberPath);
 		}
 		
 		return "redirect:/myPage.do";

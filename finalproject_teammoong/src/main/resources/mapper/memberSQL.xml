@@ -41,7 +41,7 @@
 				member_phone as memberPhone,
 				member_addr as memberAddr,
 				member_gender as memberGender,
-				to_char(member_bday,'""YYYY"년 "MM"월 "DD"일"') as memberBday,
+				to_char(member_bday,'""YYYY"년"MM"월"DD"일"') as memberBday,
 				member_account as memberAccount,
 				member_path as memberPath,
 				member_agree as memberAgree,
@@ -60,7 +60,21 @@
 		
 		
 		
-		
+		<update id="updateMember" parameterType="m">
+			update member_tbl
+			set
+				member_phone = #{memberPhone},
+				member_email = #{memberEmail},
+				member_zonecode = #{memberZoneCode},
+				member_addr = #{memberAddr},
+				member_bank = #{memberBank},
+				member_account = #{memberAccount},
+				member_bday = to_date(#{memberBday},'yyyymmdd')
+				<if test="memberPath != null">
+					,member_path=#{memberPath}
+				</if>
+			where member_no=#{memberNo}
+		</update>
 		
 		
 		

@@ -135,7 +135,6 @@
 							<c:choose>
 								<c:when test="${not empty sessionScope.m.memberBday }">
 									<input class="notInput" id="bdayView" type="text" value="${sessionScope.m.memberBday }" readonly>
-									<input type="hidden" name="memberBday">
 								</c:when>
 								<c:otherwise>
 									<div class="subDiv">
@@ -356,11 +355,6 @@
 		
 	/*====생일 관련==========================================*/		
 		
-		const year = $("#bdayView").val().substring(0,4);
-		const month = $("#bdayView").val().substring(6,8);
-		const day = $("#bdayView").val().substring(10,12);
-		
-		$("[name='memberBday']").val(year+month+day);
 		
 		
 		

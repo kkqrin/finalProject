@@ -133,7 +133,7 @@
     flex-direction: column;
 }
 
-.mypage-content .member-info>form>h5{
+.mypage-content .member-info h5{
     margin-bottom: 20px;
     text-align: center;
     background-color: var(--bg-secondary);

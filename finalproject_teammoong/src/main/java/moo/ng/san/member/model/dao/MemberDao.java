@@ -33,8 +33,7 @@ public class MemberDao {
 	}
 
 	public int updateMember(Member member) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("member.updateMember", member);
 	}
 
 }
