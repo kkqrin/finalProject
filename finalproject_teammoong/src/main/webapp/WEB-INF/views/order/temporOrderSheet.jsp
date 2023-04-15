@@ -148,7 +148,7 @@
                                     <button type="button" class="btn btn-pri size01">주소검색</button>
                                 </div>
                                 <input type="text" id="deli-addr" class="input-noborder" placeholder="주소를 입력해주세요">
-                                <input type="text" class="input-noborder" placeholder="상세주소를 입력해주세요">
+                                <input type="text" id="deli-addr2" class="input-noborder" placeholder="상세주소를 입력해주세요">
                             </td>
                         </tr>
                         <tr>
@@ -179,7 +179,7 @@
                                     <td colspan="2">
                                         <div class="selectBox-widht-explain" style="width: 100%;">
                                             <select class="select-custom order-coupon" id="order-coupon">
-                                                <option value="default" selected>사용 가능한 쿠폰 1장 / 전체 2장</option>
+                                                <option value="default" selected>사용 가능한 쿠폰 ${couponCount }장</option>
                                                 <c:forEach items="${couponList }" var="i">
                                                 <option value="1">${i.couponTitle }( ${i.couponPrice }원 할인 / ~ ${i.endDate } )</option>
                                                 </c:forEach>

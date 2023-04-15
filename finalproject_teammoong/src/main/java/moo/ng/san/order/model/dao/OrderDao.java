@@ -19,5 +19,11 @@ public class OrderDao {
 		
 		return (ArrayList<IssueCoupon>) list;
 	}
+
+	public int selectMemberCouponCount(int memberNo) {
+		int couponCount = sqlSession.selectOne("issueCoupon.selectMemberCouponCount", memberNo);
+		
+		return couponCount;
+	}
 	
 }

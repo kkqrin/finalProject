@@ -41,6 +41,11 @@
 			  WHERE member_no = #{memberNo}
 			) t
 	</select>
+	
+	
+	
+	
+	<!-- 주문서 페이지에서 회원에게 보여질 쿠폰 리스트 (규린) -->
 	<select id="selectMemberCouponList" parameterType="_int" resultType="ic">
        select
             coupon_title AS couponTitle,
@@ -50,5 +55,8 @@
        left join coupon_tbl using (coupon_no)
        where member_no = #{_parameter}
        order by 1 desc
+	</select>
+	<select id="selectMemberCouponCount" parameterType="_int" resultType="_int">
+		 select count(*) AS couponCount from ISSUE_COUPON where member_no=#{_parameter}
 	</select>
 </mapper>
