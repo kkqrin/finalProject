@@ -166,10 +166,7 @@ public class MemberController {
 			m.setMemberAccount(member.getMemberAccount());
 			m.setMemberPath(filePath);
 			
-			Member forBmem = service.selectOneMember(member);
-			m.setMemberBday(forBmem.getMemberBday());
-			
-			if(memberPath!="moongs.png") {
+			if(!memberPath.equals("moongs.png")) {
 				fm.deleteFile(savePath, memberPath);
 			}
 		}
