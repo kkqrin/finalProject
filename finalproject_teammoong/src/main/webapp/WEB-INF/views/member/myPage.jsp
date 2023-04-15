@@ -385,23 +385,25 @@
 		
 	/*=======출석체크 관련================*/
 		$("#dayCheck").on("click",function(){	
-			const memberNo = $("[name='memberNo']").val(); 
-			console.log(memberNo);
-// 			$.ajax({
-// 				url: "/dayCheck.do",
-// 				type: 'get',
-// 				data: { "memberNo": memberNo },
-// 				success: function(data) {
-// 					if(data == "success"){
-// 					$("#alert01").click();
-// 					} else {
-// 					$("#alert02").click();
-// 					}
-// 				},
-// 				error: function() {
-// 					console.error("에러");
-// 				}
-// 			});
+			let strMemberNo = $("[name='memberNo']").val(); 
+			let memberNo = Number(strMemberNo);
+			console.log("회원번호: "+memberNo+", 자료형: "+$.type(memberNo));
+			$.ajax({
+				url: "/dayCheck.do",
+				type: "get",
+				data: {memberNo : memberNo},
+				success: function(data) {
+					if(data == "success"){
+					console.log("회원번호: "+memberNo+", 자료형: "+$.type(memberNo))
+					$("#alert01").click();
+					} else {
+					$("#alert02").click();
+					}
+				},
+				error: function() {
+					console.error("에러");
+				}
+			});
 		});
 
 
@@ -449,7 +451,12 @@
         
         });
 
-	
+		
+		
+		
+		
+		
+		/*=======기타 등등================*/
 
 		$( function() {
 				$( ".select-custom" ).selectmenu();

@@ -133,7 +133,10 @@ public class MemberController {
 	
 	
 	
-	
+	@RequestMapping(value = "/updateMember.do")
+	public String updateMember() {
+		return "redirect:/myPage.do";
+	}
 	
 	
 	
