@@ -68,8 +68,10 @@
 				member_zonecode = #{memberZoneCode},
 				member_addr = #{memberAddr},
 				member_bank = #{memberBank},
-				member_account = #{memberAccount},
-				member_bday = to_date(#{memberBday},'yyyymmdd')
+				member_account = #{memberAccount}
+				<if test="memberBday != null">
+					,member_bday = to_date(#{memberBday},'yyyymmdd')
+				</if>
 				<if test="memberPath != null">
 					,member_path=#{memberPath}
 				</if>

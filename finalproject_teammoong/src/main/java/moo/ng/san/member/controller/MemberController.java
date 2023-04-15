@@ -166,19 +166,12 @@ public class MemberController {
 			m.setMemberAccount(member.getMemberAccount());
 			m.setMemberPath(filePath);
 			
-			if(member.getMemberBday()!=null) {
-				try {
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-					SimpleDateFormat newSdf = new SimpleDateFormat("yyyy년mm월dd일");
-					Date dateBday = sdf.parse(member.getMemberBday());
-					String strBday = newSdf.format(dateBday);
-					m.setMemberBday(strBday);
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-			}
+			Member forBmem = service.selectOneMember(member);
+			m.setMemberBday(forBmem.getMemberBday());
 			
-			fm.deleteFile(savePath, memberPath);
+			if(memberPath!="moongs.png") {
+				fm.deleteFile(savePath, memberPath);
+			}
 		}
 		
 		return "redirect:/myPage.do";

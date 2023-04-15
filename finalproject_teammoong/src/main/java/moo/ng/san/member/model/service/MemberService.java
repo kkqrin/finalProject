@@ -33,6 +33,7 @@ public class MemberService {
 		return dao.selectTotalPoint(memberNo);
 	}
 
+	@Transactional
 	public int updateMember(Member member) {
 		return dao.updateMember(member);
 	}
