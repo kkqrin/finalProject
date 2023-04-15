@@ -75,7 +75,7 @@
     padding: 20px 30px;
     margin-bottom: 30px;
 }
-.member-info-top>.info-align{
+.member-info-top .info-align{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -135,7 +135,6 @@
 
 .mypage-content .member-info>form>h5{
     margin-bottom: 20px;
-    width: 950px;
     text-align: center;
     background-color: var(--bg-secondary);
 }

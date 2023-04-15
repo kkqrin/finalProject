@@ -33,6 +33,7 @@
 		<div class="mypage-right">
 			<div class="mypage-right-title">회원 정보</div>
 			<div class="mypage-content">
+				<form action="/updateMember.do" method="post" enctype="multipart/form-data">
 				
 				<div class="member-info-top">
 					<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
@@ -65,7 +66,6 @@
 				<div class="fake_hr"></div>
 				
 				<div class="member-info">
-					<form action="/updateMember.do" method="post" enctype="multipart/form-data">
 						<h5>정보 수정</h5>
 						<div class="one-line">
 							<div class="name-tag">아이디</div>
@@ -147,7 +147,6 @@
 						<div class="area-btn center" style="margin: 10px 0 30px 0;">
 							<button id="submit" class="btn btn-sec size02">정보 수정하기</button>
 						</div>
-					</form>
 					
 					<div class="fake_hr"></div>
 					
@@ -184,7 +183,7 @@
 							</div><!--모달창-->
 				</div><!-- member-info -->
 				
-				
+				</form>
 			</div><!-- mypage-content -->
 		</div><!-- mypage-right -->
 		
@@ -386,23 +385,23 @@
 		
 	/*=======출석체크 관련================*/
 		$("#dayCheck").on("click",function(){	
-			const memberNo = $("input[name='memberNo']").val(); 
-			
-			$.ajax({
-				url: "/dayCheck.do",
-				type: 'get',
-				data: { "memberNo": memberNo },
-				success: function(data) {
-					if(data == "success"){
-					$("#alert01").click();
-					} else {
-					$("#alert02").click();
-					}
-				},
-				error: function() {
-					console.error("에러");
-				}
-			});
+			const memberNo = $("[name='memberNo']").val(); 
+			console.log(memberNo);
+// 			$.ajax({
+// 				url: "/dayCheck.do",
+// 				type: 'get',
+// 				data: { "memberNo": memberNo },
+// 				success: function(data) {
+// 					if(data == "success"){
+// 					$("#alert01").click();
+// 					} else {
+// 					$("#alert02").click();
+// 					}
+// 				},
+// 				error: function() {
+// 					console.error("에러");
+// 				}
+// 			});
 		});
 
 
@@ -484,6 +483,7 @@
 				$(".propic").children('img').attr('src',e.target.result);
 			};
 			reader.readAsDataURL(input.files[0]);
+			alert("[정보 수정하기]버튼을 눌러주셔야 새로운 이미지가 반영됩니다!");
 		}
 		//파일 이미지
 
