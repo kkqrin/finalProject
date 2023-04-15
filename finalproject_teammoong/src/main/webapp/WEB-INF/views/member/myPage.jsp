@@ -144,41 +144,44 @@
 								</c:otherwise>
 							</c:choose>
 						</div>
-						<div class="one-line">
+						<div class="area-btn center" style="margin: 10px 0 30px 0;">
+							<button id="submit" class="btn btn-sec size02">정보 수정하기</button>
+						</div>
+					</form>
+					
+					<div class="fake_hr"></div>
+					
+					<div class="one-line changePw">
 							<div class="name-tag">비밀번호 변경하기</div>
 							<div class="subDiv" style="width: 360px;">
 								<a data-modal="#modelChangePw" style="text-align: left; line-height: 38px;">비밀번호 변경하기</a>
 							</div>
-						</div>
-						<div id="modelChangePw" class="modal modal-sec">
-								<div class="modal-content">
-									<div class="modal-header" style="text-align: center;">
-										<h5>비밀번호 변경</h5>
+					</div>
+							<div id="modelChangePw" class="modal modal-sec">
+									<div class="modal-content">
+										<div class="modal-header" style="text-align: center;">
+											<h5>비밀번호 변경</h5>
+										</div>
+										<div class="modal-body" style="display: flex; flex-direction: column;">
+											
+											
+											<div class="name-tag">현재 비밀번호</div>
+											<input type="password" id="inputPw" placeholder="현재 비밀번호를 입력하세요">
+											<div class="name-tag">새로운 비밀번호</div>
+											<input type="password" name="memberPw" placeholder="새로운 비밀번호를 입력하세요">
+											<a class="caution">영문,숫자,특수문자(공백 제외)조합으로 8글자 이상</a>
+											<div class="name-tag">새로운 비밀번호 확인</div>
+											<input type="password" id="memberPwRe" placeholder="새로운 비밀번호를 다시 한 번 입력하세요">
+											<a class="caution">값이 동일하지 않습니다</a>
+											
+											
+										</div>
+										<div class="area-btn right">
+											<button id="pwSubmit" class="btn btn-sec size01" style="width: 85%;">변경 확인</button>
+											<a rel="modal:close" class="btn btn-ter size01 close2" style="width: 15%; text-align: center;">취소</a>
+										</div>
 									</div>
-									<div class="modal-body" style="display: flex; flex-direction: column;">
-										
-										
-										<div class="name-tag">현재 비밀번호</div>
-										<input type="password" id="inputPw" placeholder="현재 비밀번호를 입력하세요">
-										<div class="name-tag">새로운 비밀번호</div>
-										<input type="password" name="memberPw" placeholder="새로운 비밀번호를 입력하세요">
-										<a class="caution">영문,숫자,특수문자(공백 제외)조합으로 8글자 이상</a>
-										<div class="name-tag">새로운 비밀번호 확인</div>
-										<input type="password" id="memberPwRe" placeholder="새로운 비밀번호를 다시 한 번 입력하세요">
-										<a class="caution">값이 동일하지 않습니다</a>
-										
-										
-									</div>
-									<div class="area-btn right">
-										<button class="btn btn-sec size01" style="width: 85%;">변경 확인</button>
-										<a rel="modal:close" class="btn btn-ter size01 close2" style="width: 15%; text-align: center;">취소</a>
-									</div>
-								</div>
-						</div><!--모달창-->
-						<div class="area-btn center" style="margin-top: 30px;">
-							<button id="submit" class="btn btn-sec size02">정보 수정하기</button>
-						</div>
-					</form>
+							</div><!--모달창-->
 				</div><!-- member-info -->
 				
 				
@@ -369,14 +372,16 @@
 			$(".modal-body").children('a').css('display','none');
 		})//모달창 [취소]버튼
 
-
-		$("#memberPwRe").keyup(function(){
-			if($(this).val()==$("[name='memberPw']").val()){
+		
+		$("#pwSubmit").on("click",function(){
+			if($("[name='memberPw']").val() == $("#memberPwRe").val()){
 				$(".modal-body").children('a').eq(1).hide();
+				alert("아작스 가자");
 			}else{
 				$(".modal-body").children('a').eq(1).show();
 			}
 		})
+		
 		
 		
 	/*=======출석체크 관련================*/

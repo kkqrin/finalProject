@@ -145,6 +145,12 @@
     justify-content: center;
     padding-bottom: 20px;
 }
+
+.member-info .one-line.changePw{
+	padding: 0;
+	margin: 30px 0;
+}
+
 .member-info .one-line .name-tag{
     width: 180px;
     font-weight: bold;
