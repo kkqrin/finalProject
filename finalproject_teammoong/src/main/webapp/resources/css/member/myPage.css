@@ -64,7 +64,7 @@
 
 
 
-/*==================mypage-회원정보수정==================*/
+/*==================mypage-�쉶�썝�젙蹂댁닔�젙==================*/
 .fake_hr{
     border: 1px solid var(--bg-secondary);
 }
@@ -125,7 +125,7 @@
 
 
 
-/*===================정보 수정========================*/
+/*===================�젙蹂� �닔�젙========================*/
 
 .mypage-content .member-info{
     margin-top: 30px;
@@ -169,11 +169,24 @@
     text-align: right;
 }
 .member-info .one-line .caution{
-    /* display: none; */
+    display: none;
     color: var(--primary);
 }
 
-.member-info .one-line #notInput{
+.member-info .one-line .notInput{
     border: none;
     padding: 0;
+}
+
+
+.modal-body .name-tag{
+	font-weight: bold;
+}
+.modal-body .name-tag:not(:first-child){
+	margin-top:10px;
+}
+
+#modelChangePw input+a{
+	display:none;
+	color: var(--primary);
 }

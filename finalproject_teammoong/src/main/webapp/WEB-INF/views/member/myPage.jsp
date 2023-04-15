@@ -69,7 +69,7 @@
 						<h5>정보 수정</h5>
 						<div class="one-line">
 							<div class="name-tag">아이디</div>
-							<input id="notInput" type="text" name="memberId" value="${sessionScope.m.memberId }" readonly>
+							<input class="notInput" type="text" name="memberId" value="${sessionScope.m.memberId }" readonly>
 						</div>
 						<div class="one-line">
 							<div class="name-tag">본인인증</div>
@@ -134,7 +134,7 @@
 							<div class="name-tag">생일</div>
 							<c:choose>
 								<c:when test="${not empty sessionScope.m.memberBday }">
-									<input id="notInput" type="text" name="memberBday" value="${sessionScope.m.memberBday }" readonly>
+									<input class="notInput" type="text" name="memberBday" value="${sessionScope.m.memberBday }" readonly>
 								</c:when>
 								<c:otherwise>
 									<div class="subDiv">
@@ -147,11 +147,36 @@
 						<div class="one-line">
 							<div class="name-tag">비밀번호 변경하기</div>
 							<div class="subDiv" style="width: 360px;">
-								<a style="text-align: left; line-height: 38px;">비밀번호 변경하기</a>
+								<a data-modal="#modelChangePw" style="text-align: left; line-height: 38px;">비밀번호 변경하기</a>
 							</div>
 						</div>
+						<div id="modelChangePw" class="modal modal-sec">
+								<div class="modal-content">
+									<div class="modal-header" style="text-align: center;">
+										<h5>비밀번호 변경</h5>
+									</div>
+									<div class="modal-body" style="display: flex; flex-direction: column;">
+										
+										
+										<div class="name-tag">현재 비밀번호</div>
+										<input type="password" id="inputPw" placeholder="현재 비밀번호를 입력하세요">
+										<div class="name-tag">새로운 비밀번호</div>
+										<input type="password" name="memberPw" placeholder="새로운 비밀번호를 입력하세요">
+										<a class="caution">영문,숫자,특수문자(공백 제외)조합으로 8글자 이상</a>
+										<div class="name-tag">새로운 비밀번호 확인</div>
+										<input type="password" id="memberPwRe" placeholder="새로운 비밀번호를 다시 한 번 입력하세요">
+										<a class="caution">값이 동일하지 않습니다</a>
+										
+										
+									</div>
+									<div class="area-btn right">
+										<button class="btn btn-sec size01" style="width: 85%;">변경 확인</button>
+										<a rel="modal:close" class="btn btn-ter size01 close2" style="width: 15%; text-align: center;">취소</a>
+									</div>
+								</div>
+						</div><!--모달창-->
 						<div class="area-btn center" style="margin-top: 30px;">
-							<button class="btn btn-sec size02">정보 수정하기</button>
+							<button id="submit" class="btn btn-sec size02">정보 수정하기</button>
 						</div>
 					</form>
 				</div><!-- member-info -->
@@ -175,6 +200,17 @@
 	</div>
 	
 	<script>
+	
+	 	let result = [true, true];
+	 	//0이메일 형식 검사 1계좌번호 형식 검사
+	 	
+	 	$("#submit").on("click",function(){
+	 		if(!result[0]||!result[1]){
+	 			event.preventDefault();
+	 		}
+	 	})
+	
+	
 		/*=======핸드폰 번호 인증===============*/
 		let regCheck = false;
 		
@@ -213,6 +249,8 @@
 				$(this).addClass("error");
 				$(".modal-body").children().children('a').eq(0).text('핸드폰 형식을 확인해주세요');
 				$(".modal-body").children().children('a').eq(0).css('display','block');
+				$(".modal-body").children('#inputCerNum').fadeOut();
+				$(".modal-body").children('div').eq(1).fadeOut();
 				regCheck = false;
 			}
 		})//핸드폰 형식 검사
@@ -236,7 +274,7 @@
 		
 
 
-		/*=======모달 관련 기능==================================*/
+	/*=======핸드폰 모달 관련 기능==================================*/
 		$(function () {
             $('[data-modal]').click(function (event) {
                     $($(this).data('modal')).modal({
@@ -252,13 +290,32 @@
 			$(".modal-body").children('#inputCerNum').css('display','none');
 			$(".modal-body").children('div').eq(1).css('display','none');
 			$(".modal-body").children().children('a').css('display','none');
-			$(this).removeClass("error");
-		})
+			$(".modal-body").children('input').removeClass("error");
+		});
 
 		
+			
+	/*====이메일 관련===========================================*/
+			
+			$("[name='memberEmail']").on("change",function(){
+				//이메일 정규표현식
+				const emailReg = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+				const inputEmail = $(this).val();
+				if(emailReg.test(inputEmail) || inputEmail==""){
+					$(this).removeClass("error");
+					$(".caution").eq(0).fadeOut();
+					result[0] = true;
+				}else{
+					$(this).addClass("error");
+					$(".caution").eq(0).fadeIn();
+					result[0] = false;
+				}
+			})//이메일 정규표현식	
 		
-		
-		
+			
+			
+			
+	/*====주소 관련===========================================*/	
 		$(".subDiv").children('div').children('a').eq(1).on("click",function(){
 				new daum.Postcode({
 			        oncomplete: function(data) {
@@ -273,16 +330,53 @@
 			    }).open();
 			});//다음 지도 API	
 		
-			
 	
+	/*====계좌 관련==========================================*/	
+		$("[name='memberAccount']").keyup(function(){
+			const inputAccount = $("[name='memberAccount']").val();
+			const AcountReg = /^[0-9]+$/;
+			
+			const inputAccount2 = $(this).val().replaceAll("-","");
+			$(this).val(inputAccount2);
+			
+			if(AcountReg.test(inputAccount) || inputAccount==""){
+		        $(this).removeClass("error");
+		        $(".caution").eq(1).css("display","none");
+		        result[1] = true;
+			}else{
+				$(this).addClass("error");
+				$(".caution").eq(1).css("display","block");
+				result[1] = false;
+			}
+		});//계좌번호 정규표현식	
 			
 			
-			
-			
-			
-			
-			
+	/*====비밀번호 수정 관련==========================================*/			
 		
+		$(function () {
+            $('[data-modal]').click(function (event) {
+                    $($(this).data('modal')).modal({
+						showClose: false,
+                        fadeDuration: 100
+                    });
+                    return false;
+            });
+        });//모달창
+        
+        $(".close2").on("click",function(){
+			$(".modal-body").children('input').val("");
+			$(".modal-body").children('input').removeClass("error");
+			$(".modal-body").children('a').css('display','none');
+		})//모달창 [취소]버튼
+
+
+		$("#memberPwRe").keyup(function(){
+			if($(this).val()==$("[name='memberPw']").val()){
+				$(".modal-body").children('a').eq(1).hide();
+			}else{
+				$(".modal-body").children('a').eq(1).show();
+			}
+		})
 		
 		
 	/*=======출석체크 관련================*/
