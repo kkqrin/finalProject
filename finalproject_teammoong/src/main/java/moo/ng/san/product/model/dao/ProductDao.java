@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import moo.ng.san.basket.model.vo.Basket;
 import moo.ng.san.category.model.vo.DetailCategory;
 import moo.ng.san.product.model.vo.FileVO;
+import moo.ng.san.product.model.vo.Option;
 import moo.ng.san.product.model.vo.Product;
 
 @Repository
@@ -82,6 +84,42 @@ public class ProductDao {
 		int totalCount = sqlSession.selectOne("product.selectProductCount", map);
 		
 		return totalCount;
+	}
+
+	public ArrayList<Option> selectOptionList(int productNo) {
+		List list = sqlSession.selectList("product.selectOptionList", productNo);
+		
+		return (ArrayList<Option>)list;
+	}
+
+	public int insertShoppingCart(HashMap<String, Object> map) {
+		int result = sqlSession.insert("product.insertShoppingCart", map);
+		
+		return result;
+	}
+
+	public int selectOptionGroupNo(int productNo) {
+		int optionGroupNo = sqlSession.selectOne("product.selectOptionGroupNo", productNo);
+		
+		return optionGroupNo;
+	}
+
+	public int selectRecentBasketNo() {
+		int recentBasketNo = sqlSession.selectOne("product.selectRecentBasketNo");
+		
+		return recentBasketNo;
+	}
+
+	public int insertShoppingCartOption(HashMap<String, Object> map) {
+		int result = sqlSession.insert("product.insertShoppingCartOption", map);
+		
+		return result;
+	}
+
+	public ArrayList<Basket> selectBasketList(int memberNo) {
+		List list = sqlSession.selectList("product.selectBasketList", memberNo);
+		
+		return (ArrayList<Basket>)list;
 	}
 
 	

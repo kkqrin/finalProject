@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,7 +80,9 @@
 
 	<div class="content-wrap">
 	<c:if test="${not empty sessionScope.m }">
-		<a href="/orderSheet.do?memberNo=${sessionScope.m.memberNo}&productNo=${p.productNo}">주문하기</a>
+		<a href="/orderSheet.do?productNo=${p.productNo}">주문하기</a>
+<%-- 		<a href="/putInShoppingCart.do?productNo=${p.productNo}" id="put-in-cart-btn">장바구니담기</a> --%>
+		<button type="button" id="put-in-cart-btn">장바구니 담기</button>
 	</c:if>
         <div class="top-info-box">
             <div class="img-box"style="width: 500px;">
@@ -154,6 +157,22 @@
                                 <li>1일내 도착 확률 : 88%</li>
                                 <li>3일내 도착 확률 : 91%</li>
                                 <li>5일내 도착 확률 : 97%</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="flex-box">
+                        <div class="info-title-box">
+                            <a class="info-title">옵션</a>
+                        </div>
+                        <div>
+                            <ul class="info-content">
+                                <li><select class="select-custom product-option">
+                                    <option value="0" selected>상품 옵션을 선택해주세요</option>
+                                    <c:forEach items="${optionList }" var="po">
+	                                    <option value="${po.optionInfoNo }">${po.optionDetailName } ( +<fmt:formatNumber value="${po.optionPrice }"/>원 )</option>
+                                    </c:forEach>
+                                </select></li>
                             </ul>
                         </div>
                     </div>
@@ -664,5 +683,32 @@
             };
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        </script>
+
+        <script>
+            // 상품 옵션 select
+            $( function() {
+                $( ".product-option" ).selectmenu();
+            });
+            $( ".product-option" ).on("selectmenuchange", function(){
+                console.log($(this).val());
+            });
+
+
+
+
+
+            $("#put-in-cart-btn").on("click", function(){
+                // // 상품번호 배열
+                // const productNo = new Array();
+                // // 옵션 배열
+                // const optionNo = new Array();
+
+                const productNo = $("#productNo").val();
+                const optionNo = $( ".product-option" ).val();
+
+                location.href="/putInShoppingCart.do?productNo="+productNo+"&optionNo="+optionNo;
+            });
+
         </script>
 </html>

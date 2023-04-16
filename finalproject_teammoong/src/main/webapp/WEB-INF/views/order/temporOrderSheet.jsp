@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -181,7 +182,7 @@
                                             <select class="select-custom order-coupon" id="order-coupon">
                                                 <option value="default" selected>사용 가능한 쿠폰 ${couponCount }장</option>
                                                 <c:forEach items="${couponList }" var="i">
-                                                <option value="1">${i.couponTitle }( ${i.couponPrice }원 할인 / ~ ${i.endDate } )</option>
+                                                <option value="1">${i.couponTitle }( <fmt:formatNumber value="${i.couponPrice }"/>원 할인 / ~ ${i.endDate } )</option>
                                                 </c:forEach>
                                                 <option value="2" disabled>5만원이상 1천원 할인</option>
                                             </select>
@@ -192,7 +193,7 @@
                                     <th>적립금</th>
                                     <td colspan="2" class="saved-money-box">
                                         <div>
-                                            <input type="text" placeholder="사용 가능한 적립금 1,000원">
+                                            <input type="text" placeholder="사용 가능한 적립금 <fmt:formatNumber value="${point.pointEa }"/>원">
                                             <button type="button" class="btn btn-pri size01">적용</button>
                                             <button type="button" class="btn btn-pri size01">모두 사용</button>
                                         </div>
