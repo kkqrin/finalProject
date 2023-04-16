@@ -1,4 +1,4 @@
-package moo.ng.san.basket.model.vo;
+package moo.ng.san.product.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,14 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Basket {
-	private int basketNo;
-	private int memberNo;
+public class Option {
+	private int optionInfoNo;
+	private int optionGroupNo;
 	private int productNo;
-	
-	private String thumbnail;
-	private String productName;
-	private int productPrice;
 	private String optionDetailName;
 	private int optionPrice;
 }

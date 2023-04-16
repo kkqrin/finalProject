@@ -6,9 +6,11 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import moo.ng.san.basket.model.vo.Basket;
 import moo.ng.san.category.model.vo.DetailCategory;
 import moo.ng.san.product.model.dao.ProductDao;
 import moo.ng.san.product.model.vo.FileVO;
+import moo.ng.san.product.model.vo.Option;
 import moo.ng.san.product.model.vo.Product;
 import moo.ng.san.product.model.vo.ProductPageData;
 @Service
@@ -75,13 +77,36 @@ public class ProductService {
 		return dao.selectProductCount(map);
 	}
 	
+	public ArrayList<Option> selectOptionList(int productNo) {
+		return dao.selectOptionList(productNo);
+	}
+
+	public int insertShoppingCart(int memberNo, int productNo) {
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("productNo", productNo);
+
+		return dao.insertShoppingCart(map);
+	}
+
+	public int selectOptionGroupNo(int productNo) {
+		return dao.selectOptionGroupNo(productNo);
+	}
 	
+	public int selectRecentBasketNo() {
+		return dao.selectRecentBasketNo();
+	}
 	
-	
-	
-	
-	
-	
+	public int insertShoppingCartOption(int recentBasketNo, int optionGroupNo, int optionNo) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("recentBasketNo", recentBasketNo);
+		map.put("optionGroupNo", optionGroupNo);
+		map.put("optionNo", optionNo);
+		
+		return dao.insertShoppingCartOption(map);
+	}
 	
 	
 	
@@ -196,6 +221,17 @@ public class ProductService {
 		}
 		return list;
 	}
+
+	public ArrayList<Basket> selectBasketList(int memberNo) {
+		
+		return dao.selectBasketList(memberNo);
+	}
+
+
+
+
+
+
 
 
 

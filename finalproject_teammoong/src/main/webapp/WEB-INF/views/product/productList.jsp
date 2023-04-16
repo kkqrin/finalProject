@@ -637,7 +637,7 @@
 							imgDiv.addClass("posting-img");
 							
 							const imgA = $("<a>");
-							imgA.attr("href", "#");
+							imgA.attr("href", "/productView.do?productNo="+p.productNo);
 							
 							const img = $("<img>");
 							img.attr("src", "/resources/upload/product/"+p.thumbnail);
@@ -666,7 +666,7 @@
 							titleP.addClass("posting-title");
 							
 							const titleA = $("<a>");
-							titleA.attr("href", "#");
+							titleA.attr("href", "/productView.do?productNo="+p.productNo);
 							titleA.text(p.productName);
 							
 							titleP.append(titleA);
