@@ -72,11 +72,11 @@
 							<input class="notInput" type="text" name="memberId" value="${sessionScope.m.memberId }" readonly>
 						</div>
 						<div class="one-line">
-							<div class="name-tag">본인인증</div>
+							<div class="name-tag">핸드폰 번호</div>
 							<div class="subDiv">
 								<input type="text" name="memberPhone" value="${sessionScope.m.memberPhone }" readonly>
 								<div>
-								<a data-modal="#modalBasic">인증번호 변경하기</a>
+								<a data-modal="#modalBasic">번호 변경하기</a>
 								</div>
 							</div>
 							<div id="modalBasic" class="modal modal-sec">
