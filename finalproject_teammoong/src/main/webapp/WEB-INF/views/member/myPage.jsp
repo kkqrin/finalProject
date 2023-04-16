@@ -165,18 +165,18 @@
 											
 											
 											<div class="name-tag">현재 비밀번호</div>
-											<input type="password" id="inputPw" placeholder="현재 비밀번호를 입력하세요">
+											<input type="password" name="memberPw" placeholder="현재 비밀번호를 입력하세요">
 											<div class="name-tag">새로운 비밀번호</div>
-											<input type="password" name="memberPw" placeholder="새로운 비밀번호를 입력하세요">
+											<input type="password" id="memberNewPw" placeholder="새로운 비밀번호를 입력하세요">
 											<a class="caution">영문,숫자,특수문자(공백 제외)조합으로 8글자 이상</a>
 											<div class="name-tag">새로운 비밀번호 확인</div>
-											<input type="password" id="memberPwRe" placeholder="새로운 비밀번호를 다시 한 번 입력하세요">
+											<input type="password" id="memberNewPwRe" placeholder="새로운 비밀번호를 다시 한 번 입력하세요">
 											<a class="caution">값이 동일하지 않습니다</a>
 											
 											
 										</div>
 										<div class="area-btn right">
-											<button id="pwSubmit" class="btn btn-sec size01" style="width: 85%;">변경 확인</button>
+											<button id="pwSubmit" class="btn btn-sec size01" style="width: 85%;">변경하기</button>
 											<a rel="modal:close" class="btn btn-ter size01 close2" style="width: 15%; text-align: center;">취소</a>
 										</div>
 									</div>
@@ -202,6 +202,8 @@
 	</div>
 	
 	<script>
+		
+	
 	
 	 	let result = [true, true];
 	 	//0이메일 형식 검사 1계좌번호 형식 검사
@@ -379,28 +381,52 @@
 
 		
 		$("#pwSubmit").on("click",function(){
-			if($("[name='memberPw']").val() == $("#memberPwRe").val()){
+			const memberId = $('[name=memberId]').val();
+			const memberPw = $('[name=memberPw]').val();
+			const memberNewPw = $("#memberNewPw").val();
+			
+			if(memberPw!="" && $("#memberNewPw").val()!="" && $("#memberNewPw").val() == $("#memberNewPwRe").val()){
 				$(".modal-body").children('a').eq(1).hide();
-				alert("아작스 가자");
+				$.ajax({
+					url : "/updateNewPwMember.do",
+					type : "post",
+					data : {memberId:memberId, memberPw:memberPw, memberNewPw:memberNewPw},
+					success: function(result){
+						if(result == "ok"){
+							alert("비밀번호가 성공적으로 변경되었습니다");
+							$(".close2").click();
+						}else{
+							alert("입력하신 [현재 비밀번호]가 틀립니다. 다시 한 번 확인해주세요.");
+						}
+					}//ajax success문
+				});
+			}else if(memberPw==""){
+				$('[name=memberPw]').focus();
+			}else if($("#memberNewPw").val()=="" && $("#memberNewPwRe").val()==""){
+				$(".modal-body").children('a').eq(1).hide();
+				$("#memberNewPw").focus();
 			}else{
 				$(".modal-body").children('a').eq(1).show();
 			}
-		})
+		})//[변경하기] 버튼
+		
+		
+		
+		
+		
+		
 		
 		
 		
 	/*=======출석체크 관련================*/
-		$("#dayCheck").on("click",function(){	
-			let strMemberNo = $("[name='memberNo']").val(); 
-			let memberNo = Number(strMemberNo);
-			console.log("회원번호: "+memberNo+", 자료형: "+$.type(memberNo));
+		$("#dayCheck").on("click",function(){
+			let memberNo = $('[name=memberNo]').val();
 			$.ajax({
 				url: "/dayCheck.do",
 				type: "get",
 				data: {memberNo : memberNo},
 				success: function(data) {
 					if(data == "success"){
-					console.log("회원번호: "+memberNo+", 자료형: "+$.type(memberNo))
 					$("#alert01").click();
 					} else {
 					$("#alert02").click();

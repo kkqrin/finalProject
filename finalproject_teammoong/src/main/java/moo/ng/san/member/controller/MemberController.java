@@ -175,9 +175,23 @@ public class MemberController {
 	}
 	
 	
-	
-	
-	
+	@ResponseBody
+	@RequestMapping(value = "/updateNewPwMember.do")
+	public String updateNewPwMember(String memberId, String memberPw, String memberNewPw) {
+		Member member = new Member();
+		member.setMemberId(memberId);
+		member.setMemberPw(memberPw);
+		
+		Member m = service.selectOneMember(member);
+		
+		if(m==null) {
+			return "fail";
+		}else {
+			member.setMemberPw(memberNewPw);
+			service.updateNewPwMember(member);
+			return "ok";
+		}
+	}//updateNewPwMember
 	
 	
 	

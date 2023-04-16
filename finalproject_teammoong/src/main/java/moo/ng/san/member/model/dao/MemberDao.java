@@ -36,4 +36,8 @@ public class MemberDao {
 		return sqlSession.update("member.updateMember", member);
 	}
 
+	public int updateNewPwMember(Member member) {
+		return sqlSession.update("member.updateNewPwMember",member);
+	}
+
 }
