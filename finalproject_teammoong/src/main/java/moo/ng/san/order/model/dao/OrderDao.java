@@ -15,13 +15,13 @@ public class OrderDao {
 	private SqlSessionTemplate sqlSession;
 
 	public ArrayList<IssueCoupon> selectMemberCouponList(int memberNo) {
-		List list = sqlSession.selectList("issueCoupon.selectMemberCouponList", memberNo);
+		List list = sqlSession.selectList("order.selectMemberCouponList", memberNo);
 		
 		return (ArrayList<IssueCoupon>) list;
 	}
 
 	public int selectMemberCouponCount(int memberNo) {
-		int couponCount = sqlSession.selectOne("issueCoupon.selectMemberCouponCount", memberNo);
+		int couponCount = sqlSession.selectOne("order.selectMemberCouponCount", memberNo);
 		
 		return couponCount;
 	}
