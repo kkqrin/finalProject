@@ -392,22 +392,25 @@
 	
 	<select id="selectFindBoardOption" parameterType="String" resultType="bo">
 		select
-			board_no as boardNo
+			board_no as boardNo,
+			detail_name as detailName,
+			detail_price as detailPrice
 		from board_option
-		where detail_name = #{_parameter}
+		where detail_name like '%'||#{_parameter}||'%'
 	</select>
 
-	<select id="selectFindSearchBoardNo" parameterType="_int" resultType="b">
+	<select id="selectFindSearchBoardNo" parameterType="map" resultType="b">
 		select
-              board_no as boardNo,	
-              d_category_no as detailCategoryNo, 
-              board_writer as boardWriter,
-              board_date as boardDate,
-              board_start as boardStart, 
-              board_end as boardEnd,
-              board_status as boardStatus
-        from board_tbl
-        where board_no = #{_parameter}
+              bt.board_no as boardNo,	
+              bt.d_category_no as detailCategoryNo, 
+              bt.board_writer as boardWriter,
+              bt.board_date as boardDate,
+              bt.board_start as boardStart, 
+              bt.board_end as boardEnd,
+              bt.board_status as boardStatus
+        from board_tbl bt
+        join board_option bo on (bt.board_no = bo.board_no)
+        where bt.board_no = #{boardNo} and bo.detail_name like '%'||#{detailName}||'%'
 	</select>
 	
 	

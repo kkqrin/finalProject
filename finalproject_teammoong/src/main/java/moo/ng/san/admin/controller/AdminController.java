@@ -60,10 +60,6 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping(value="/ajaxAdminSearchMember.do", produces = "application/json;charset=utf-8")
 	public String adminSearchMember(Member m, Model model) {
-		System.out.println(m.getMemberNo());
-		System.out.println(m.getMemberId());
-		System.out.println(m.getMemberName());
-		System.out.println(m);
 		ArrayList<Member> list = service.selectSearchMember(m);
 		Gson gson = new Gson();
 		String result = gson.toJson(list);

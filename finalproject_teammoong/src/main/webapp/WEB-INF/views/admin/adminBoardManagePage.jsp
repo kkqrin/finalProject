@@ -347,11 +347,6 @@
 		   			detailName = '';
 		   	 }
 	  	 	
-		 	console.log(detailCategoryNo);
-	  	 	console.log(detailName);
-	  	 	console.log(boardStatus);
-		   	
-	   	 
 	    	 $.ajax({
 	            url: "/ajaxAdminSearchBoard.do",
 	            type: "POST",
@@ -366,7 +361,7 @@
 							titleTr.html("<th>구분</th><th>게시글 번호</th><th>카테고리 번호</th><th>작성자</th><th>게시일자</th><th>공구 시작일</th><th>공구 마감일</th><th>공구 진행여부</th><th>상품명</th><th>상품가격</th>");
 							table.append(titleTr);
 							for(let i=0;i<data.length;i++){
-								for(let j=0;i<data[i].boardOptionList.length;j++){
+								for(let j=0;j<data[i].boardOptionList.length;j++){
 								const tr = $("<tr>");
 								tr.append("<td>"+"</td>")
 								tr.append("<td>"+data[i].boardNo+"</td>");
@@ -376,9 +371,9 @@
 								tr.append("<td>"+data[i].boardStart+"</td>");
 								tr.append("<td>"+data[i].boardEnd+"</td>");
 								
-								if(boardStatus == 1){
+								if(data[i].boardStatus == 1){
 									tr.append("<td>진행</td>");
-								}else if(boardStatus == 2){
+								}else if(data[i].boardStatus == 2){
 									tr.append("<td>마감</td>");
 								}
 								
@@ -386,7 +381,7 @@
 								tr.append("<td>"+data[i].boardOptionList[j].detailPrice+"원</td>");
 								table.append(tr);
 								
-								}
+								} 
 								
 						}
 						$("#ajaxResult").append(table);
@@ -399,8 +394,6 @@
 	   		 
 	    });
 	   	
-		   	 
-    
     
     
     

@@ -314,6 +314,7 @@ public class AdminService {
 		map.put("start", start);
 		map.put("end", end);
 		ArrayList<Board> boardList = dao.selectAllBoardList(map);
+		
 		for(Board b : boardList) {
 			int boardNo = b.getBoardNo();
 			ArrayList<BoardOption> boardOptionList = dao.selectAllBoardListBoardOption(boardNo);
@@ -478,7 +479,7 @@ public class AdminService {
 
 	public AdminBoardPageData selectSearchboard(Board b, String detailName) {
 		
-		if(detailName == null) {
+		if(detailName == "") {
 			ArrayList<Board> boardList = dao.selectSearchBoard(b);
 			for(Board board : boardList) {
 					int boardNo = board.getBoardNo();
@@ -489,15 +490,29 @@ public class AdminService {
 				return abpd;
 			
 		}else {
-			ArrayList<BoardOption> boardOptionList = dao.selectFindBoardOption(detailName);
+			
+			AdminBoardPageData abpd = new AdminBoardPageData();
 			ArrayList<Board> boardList = new ArrayList<Board>();
 			
-			for(BoardOption boardOption : boardOptionList) {
-				int boardNo = boardOption.getBoardNo();
-				boardList = dao.selectSearchBoard(boardNo);
+			ArrayList<BoardOption> boardOptionList = dao.selectFindBoardOption(detailName); // 상품명으로 boardoption select
+			
+			for(BoardOption boardOption : boardOptionList) { // boardoption select 된 list 를 가지고 boardNo 을 추출해서 board 검색
+				int boardNo = boardOption.getBoardNo(); // boardoption에서 boardNo 추출
+				
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put("boardNo", boardNo);
+				map.put("detailName", detailName);
+				boardList = dao.selectSearchBoard(map); // boardNo 으로 boardList select
+				
+				for (Board board : boardList) {
+					ArrayList<BoardOption> optionList = new ArrayList<BoardOption>();
+					optionList.add(boardOption);
+					board.setBoardOptionList(optionList);
+				}
+				abpd.setBoardList(boardList); // 추출된 값을 abpd 에 set
 			}
 			
-			AdminBoardPageData abpd = new AdminBoardPageData(boardList, null);
+			abpd = new AdminBoardPageData(boardList, null);
 			return abpd;
 			
 		}

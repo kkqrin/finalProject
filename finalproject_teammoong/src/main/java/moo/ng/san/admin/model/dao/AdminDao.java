@@ -233,8 +233,8 @@ public class AdminDao {
 		return (ArrayList<BoardOption>)list;
 	}
 	
-	public ArrayList<Board> selectSearchBoard(int boardNo) {
-		List list = sqlSession.selectList("admin.selectFindSearchBoardNo",boardNo);
+	public ArrayList<Board> selectSearchBoard(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("admin.selectFindSearchBoardNo",map);
 		
 		return (ArrayList<Board>)list;
 	}
