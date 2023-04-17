@@ -157,7 +157,7 @@
     line-height: 38px;
 }
 
-.member-info .one-line input{
+.member-info .one-line input:not([type='checkbox']){
     width: 360px;
     height: 38px;
 }

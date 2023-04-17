@@ -145,6 +145,7 @@ public class MemberController {
 //		System.out.println("memberBday : "+member.getMemberBday());
 //		System.out.println("memberPropic : "+memberPropic);
 //		System.out.println("세션에 있는거 : "+m.getMemberPath());
+		System.out.println("memberAgree : "+member.getMemberAgree());
 		
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member/");
 		String filePath="";
@@ -165,7 +166,7 @@ public class MemberController {
 			m.setMemberAddr(member.getMemberAddr());
 			m.setMemberBank(member.getMemberBank());
 			m.setMemberAccount(member.getMemberAccount());
-			
+			m.setMemberAgree(member.getMemberAgree());
 			
 			if(member.getMemberBday()!=null && member.getMemberBday().length()>0) { //생일을 새로 추가했을 경우
 				String year = member.getMemberBday().substring(0,4);
@@ -211,7 +212,7 @@ public class MemberController {
 		Member m = new Member();
 		m.setMemberId(memberId);
 		m = service.selectOneMember(m);
-		if(m.getMemberNo()==0) {
+		if(m!=null) {
 			return "dup";
 		}
 		return "ok";
