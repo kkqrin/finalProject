@@ -302,6 +302,8 @@ public class ProductController {
 		ArrayList<Option> optionList = service.selectOptionList(productNo);
 		model.addAttribute("optionList", optionList);
 		
+		System.out.println("optionList : " + optionList);
+		
 		return "product/productView";
 	}
 	@GetMapping("/main.do")

@@ -80,7 +80,13 @@
 
 	<div class="content-wrap">
 	<c:if test="${not empty sessionScope.m }">
-		<a href="/orderSheet.do?productNo=${p.productNo}">주문하기</a>
+<%-- 		<a href="/orderSheet.do?productNo=${p.productNo}">주문하기</a> --%>
+			<form action="/orderSheet.do" method="post">
+				<input type="hidden" name="productNo">
+				<input type="hidden" name="optionNo">
+				<button id="order-btn" onclick="orderProduct">주문하기</button>
+                <input type="hidden" id="option-list-null" value="${optionList}">
+			</form>
 <%-- 		<a href="/putInShoppingCart.do?productNo=${p.productNo}" id="put-in-cart-btn">장바구니담기</a> --%>
 		<button type="button" id="put-in-cart-btn">장바구니 담기</button>
 	</c:if>
@@ -413,11 +419,11 @@
         let productDiscount = $("#productDiscount").val();
         // 금액 3자리마다 , 찍는 함수
         $(function(){
-            let result = productPrice * (100-productDiscount)/100000;
+            let result = productPrice * (100-productDiscount)/1000;
             var num = 0;
             num = result;
             var DiscountPrice = Math.floor(result);
-            var price = DiscountPrice*1000;
+            var price = DiscountPrice*10;
             price = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             $(".product-price").text(price);
         })
@@ -694,10 +700,7 @@
                 console.log($(this).val());
             });
 
-
-
-
-
+            // 장바구니 담기
             $("#put-in-cart-btn").on("click", function(){
                 // // 상품번호 배열
                 // const productNo = new Array();
@@ -710,5 +713,22 @@
                 location.href="/putInShoppingCart.do?productNo="+productNo+"&optionNo="+optionNo;
             });
 
+            // 폼 제출
+            $("form").submit(function (e) {
+                const productNo = $("#productNo").val();
+                const optionNo = $( ".product-option" ).val();
+                
+                if(optionNo == 0 && $(".info-content").find("option").length > 1){
+                    // 옵션 선택 안됐을 때 && 옵션이 있는 상품
+					alert("옵션을 선택하세요");       
+					// 폼 제출 막음
+					e.preventDefault();
+                    return false;
+                }else{
+                    // 옵션이 없거나 옵션 선택된 경우 제출
+                    $("[name=productNo]").val(productNo);
+                    $("[name=optionNo]").val(optionNo);
+                }
+			});
         </script>
 </html>
