@@ -34,7 +34,7 @@
 	     </ul>
 	     <ul>
 	         <a>이벤트 관리</a>
-	         <li>쿠폰 발행 관리</li>
+	         <li><a href="/adminDaycheckManagePage.do">쿠폰 발행 관리</a></li>
 	     </ul>
 	     <ul>
 	         <li>여기여기붙어라 관리</li>
