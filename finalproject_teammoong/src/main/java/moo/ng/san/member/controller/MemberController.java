@@ -123,6 +123,13 @@ public class MemberController {
 	public String joinMemberFrm(){
 		return "member/signUpFrm";
 	}//joinMemberFrm
+	
+	
+	
+	@RequestMapping(value = "/searchIdFrm.do")
+	public String searchIdFrm(){
+		return "member/searchIdFrm";
+	}//joinMemberFrm
 
 	
 	@RequestMapping(value = "/myPageMemberDelete.do")

@@ -1,0 +1,25 @@
+.content-wrap{
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.searchId-wrap{
+	width: 500px;
+	margin: 0 auto;
+	background-color: pink;
+}
+.searchId-wrap .searchId-title{
+	text-align: center;
+	padding-bottom: 30px;
+}
+
+.searchId-wrap .menu-bar{
+	display: flex;
+}
+.searchId-wrap .menu-bar>div{
+	width: 50%;
+	height: 150px;
+	text-align: center;
+	background-color: yellow;
+}
