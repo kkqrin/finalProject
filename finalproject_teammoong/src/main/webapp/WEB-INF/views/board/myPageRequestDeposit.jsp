@@ -124,19 +124,19 @@ img, figure {
 			       		<ul>
 			       			<li>
 			       				<strong>입금금액</strong>
-			       				<span>14,000원</span>
+			       				<span>${bj.depositPrice}</span>
 			       			</li>
 			       			<li>
 			       				<strong>입금은행</strong>
-			       				<span>KB국민은행</span>
+			       				<span>${b.accountBank}</span>
 			       			</li>
 			       			<li>
 			       				<strong>입금계좌</strong>
-			       				<span><a id="account-link" href="javascript:copy_account();" style="text-decoration:underline;">02060104144718</a></span>
+			       				<span><a id="account-link" href="javascript:copy_account();" style="text-decoration:underline;">${b.accountWriter}</a></span>
 			       			</li>
 			       			<li>
 			       				<strong>입금주</strong>
-			       				<span>박*슬</span>
+			       				<span>${b.accountName}</span>
 			       			</li>
 						</ul>
 			       </div>
@@ -145,15 +145,15 @@ img, figure {
 			       	<ul>
 			       		<li>
 			       			<strong>주문자명</strong>
-			       			<span>이화정</span>
+			       			<span>${bj.receiverName}</span>
 			       		</li>
 			       		<li>
 			       			<strong>주문자 연락처</strong>
-			       			<span>01094702219</span>
+			       			<span>${bj.receiverPhone}</span>
 			       		</li>
 			       		<li>
 			       			<strong>이메일</strong>
-			       			<span>hwajung135@naver.com</span>
+			       			<span>${sessionScope.m.memberEamil}</span>
 			       		</li>
 			       	</ul>
 			       </div>

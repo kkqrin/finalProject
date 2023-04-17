@@ -59,7 +59,7 @@ sup{
 				<div>
 					${b.boardDate }
 				</div>
-				<div style="background-color: #212429; color: #fff; width: 100%; height: 80px; text-align: center; font-size: 23px; line-height: 80px;">
+				<div style="background-color: var(--primary); color: #fff; width: 100%; height: 80px; text-align: center; font-size: 23px; line-height: 80px;">
 					${b.boardName }
 				</div>
 			<table class="boardView-wrap">
@@ -83,7 +83,7 @@ sup{
 				<tr>
 					<td colspan="4">
 						<input type="text" id="paydate" required>
-						<input type="hidden" name="payerDate" required>
+						<input type="text" name="payerDate" required style="display: none;">
 					</td>
 				</tr> 
 				<tr>
@@ -119,7 +119,7 @@ sup{
 							${bo.detailCount}
 						</td>
 						<td>
-							<input type="text" id="totalEaInput" class="detailCount" name="orderCount" placeholder="수량 입력" value="" required>
+							<input type="text" id="totalEaInput" class="detailCount" name="orderCount" placeholder="수량 입력" value="0" required>
 						</td>
 					</tr>
 					</c:forEach>
@@ -220,18 +220,17 @@ sup{
 			<c:choose>
 			<c:when test="${sessionScope.m.memberId eq b.boardWriter }">
 			<div style="display: flex;">
-			<input class="btn btn-border-sec size01" type="button"  value="수정" style="background-color: var(--secondary); border-color: var(--secondary); color: #fff; cursor: pointer; padding: 20px 50px 20px 50px; margin-top: 15px; width: 50%">
-			<input class="btn btn-border-sec size01" type="button"  value="삭제" style="background-color: #fff; border-color: var(--secondary); color: var(--secondary); cursor: pointer; padding: 20px 50px 20px 50px; margin-top: 15px; width: 50%">
+			<input class="btn btn-border-sec size01" type="button"  value="삭제" style="background-color: var(--primary); border-color: var(--primary); color: #fff; cursor: pointer; padding: 20px 50px 20px 50px; margin-top: 15px; width: 100%">
 			</div>
 			</c:when>
 			<c:when test="${empty sessionScope.m.memberId}">
-			<div style="border: 2px solid var(--secondary);background-color:var(--secondary); text-align: center; font-size: 25px; color: #fff; font-weight: bold; margin: 0 auto;">
+			<div style="border: 2px solid var(--secondary);background-color:var(--primary); text-align: center; font-size: 25px; color: #fff; font-weight: bold; margin: 0 auto;">
 				<a>로그인 후 주문 가능합니다</a>
 			</div>	
 			</c:when>
 			<c:otherwise>
 			
-			<input class="btn btn-border-sec size01" type="submit" id="form" value="제출" style="background-color: #f26656; border-color: #f0513e; color: #fff; cursor: pointer; padding: 20px 50px 20px 50px; margin-top: 15px"> 
+			<input class="btn btn-border-sec size01" type="submit" id="form" value="제출" style="background-color: var(--primary); border-color: var(--primary); color: #fff; cursor: pointer; padding: 20px 50px 20px 50px; margin-top: 15px"> 
 			</c:otherwise>
 			</c:choose>
 		</form>	
@@ -245,8 +244,8 @@ sup{
 	
 	<script>
 	
-	let result = [false, false, false, false, false, false, false, false]; //정규표현식 검사
-	//0주문자명, 1이메일, 2핸드폰, 3수령자명, 4입금자명, 5수령자 연락처, 6계좌번호, 7예금주명
+	let result = [false, false, false, false, false]; //정규표현식 검사
+	//0이메일, 1핸드폰, 2계좌번호, 3주소입력, 4 수령자 연락처
 	
 // 	$("[name='0orderCount']").on("change",function(){
 // 		const orderCount = $("[name='0orderCount']").val();
@@ -255,6 +254,21 @@ sup{
 // 		 $("#result-price").val(result);
 // 	});
 
+	$("[type='submit']").on("click",function(){
+		if(	$("[name='payerDate']").val()==""){
+			alert("입금예정 날짜를 선택해주세요!!");
+		}
+		let resultChk = true;
+		$.each(result,function(index,item){
+			if(!item){
+				resultChk = false;
+			}
+		})
+		if(!resultChk){
+			event.preventDefault();
+		}
+	});
+	
 	
 
 	$( function() {
@@ -359,39 +373,16 @@ sup{
 			if(address!="" && detailAddr!=""){
 				address += " "+detailAddr;
 				$("[name='receiverAddr']").val(address); //합친 주소 값넣기
-				result[6]=true;
+				result[3]=true;
 			}else{
-				result[6]=false;
+				result[3]=false;
 			}
 		});//주소 입력 확인
 		
 		
 		
-		$("[name='memberName']").on("keyup",function(){
-		    const nameReg = /^[가-힣]{1,}$/;
-		    const nameValue = $(this).val();
-		    if(nameReg.test(nameValue)){
-		    	$(this).next().text("")
-		        result[0] = true;
-		    }else{
-		        $(this).next().text("한글만(최소 1글자) 입력 가능합니다.")
-		        $(this).next().css("color","var(--secondary)");
-		        result[0] = false;
-		    }
-		});//주문자명 정규표현식
+	
 		
-		$("[name='payerName']").on("keyup",function(){
-		    const nameReg = /^[가-힣]{1,}$/;
-		    const nameValue = $(this).val();
-		    if(nameReg.test(nameValue)){
-		    	$(this).next().text("")
-		        result[4] = true;
-		    }else{
-		        $(this).next().text("한글만(최소 1글자) 입력 가능합니다.")
-		        $(this).next().css("color","var(--secondary)");
-		        result[4] = false;
-		    }
-		});//입금자명 정규표현식
 		
 		$("[name='memberEmail'").on("keyup",function(){
 		    //이메일 : 영어/숫자4~12글자+@(@뒤로는 제한 없음)
@@ -400,11 +391,11 @@ sup{
 		    const check = emailReg.test(emailValue);
 		    if(check){
 		        $(this).next().text("")
-		        result[1] = true;
+		        result[0] = true;
 		    }else{
 		        $(this).next().text("이메일 형식을 확인하세요")
 		        $(this).next().css("color","var(--secondary)");
-		        result[1] = false;
+		        result[0] = false;
 		    }
 		});//이메일 정규표현식
 		
@@ -422,28 +413,16 @@ sup{
 			if(pwReg.test(inputPhone) || pwReg2.test(inputPhone) || inputPhone==""){
 				$(this).removeClass("error");
 				$(this).next().css("display","none");
-				result[2] = true;
+				result[1] = true;
 			}else{
 				$(this).addClass("error");
 				$(this).next().css("display","table-row");
 				$(this).next().css("color","var(--secondary)");
 				$(this).next().html("<a>형식에 맞지 않는 번호입니다</a>");
-				result[2] = false;
+				result[1] = false;
 			}
 		})//핸드폰 형식 검사
 		
-		$("[name='receiverName']").on("keyup",function(){
-		    const nameReg = /^[가-힣]{1,}$/;
-		    const nameValue = $(this).val();
-		    if(nameReg.test(nameValue)){
-		    	$(this).next().text("")
-		        result[3] = true;
-		    }else{
-		        $(this).next().text("한글만(최소 1글자) 입력 가능합니다.")
-		        $(this).next().css("color","var(--secondary)");
-		        result[3] = false;
-		    }
-		});//수령자명 정규표현식
 		
 		
 		$("[name='receiverPhone']").keyup(function(){
@@ -458,13 +437,13 @@ sup{
 			if(pwReg.test(inputPhone) || pwReg2.test(inputPhone) || inputPhone==""){
 				$(this).removeClass("error");
 				$(this).next().css("display","none");
-				result[2] = true;
+				result[4] = true;
 			}else{
 				$(this).addClass("error");
 				$(this).next().css("display","table-row");
 				$(this).next().css("color","var(--secondary)");
 				$(this).next().html("<a>형식에 맞지 않는 번호입니다</a>");
-				result[2] = false;
+				result[4] = false;
 			}
 		})//수령자 핸드폰 형식 검사
 		
@@ -479,33 +458,22 @@ sup{
 			if(AcountReg.test(inputAccount)){
 		        $(this).removeClass("error");
 		        $(".caution").css("display","none");
-		        result[6] = true;
+		        result[2] = true;
 			}else{
 				$(this).addClass("error");
 				$(".caution").css("display","block");
 				$(".caution").css("color","var(--secondary)");
 				$(".caution").html("<a>숫자를 입력해주세요</a>");
-				result[6] = false;
+				result[2] = false;
 			}
 			if(inputAccount==""){
 				$(this).removeClass("error");
 				$(".caution-tr").css("display","none");
-				result[6] = true;
+				result[2] = true;
 			}
 		});//계좌번호 정규표현식
 		
-		$("[name='refundName']").on("keyup",function(){
-		    const nameReg = /^[가-힣]{1,}$/;
-		    const nameValue = $(this).val();
-		    if(nameReg.test(nameValue)){
-		    	$(this).next().text("")
-		        result[7] = true;
-		    }else{
-		        $(this).next().text("한글만(최소 1글자) 입력 가능합니다.")
-		        $(this).next().css("color","var(--secondary)");
-		        result[7] = false;
-		    }
-		});//예금주명 정규표현식
+	
 	
 // 		$("[type='submit']").on("click",function(){
 			
