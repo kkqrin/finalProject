@@ -6,10 +6,14 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import moo.ng.san.coupon.model.service.CouponService;
 import moo.ng.san.coupon.model.vo.Coupon;
 import moo.ng.san.coupon.model.vo.IssueCoupon;
+import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.member.model.vo.Member;
 
 @Controller
@@ -61,4 +65,35 @@ public class CouponController {
 
 		}
 	}
+	@RequestMapping(value="/couponSearch.do")
+	public String couponSearch(int memberNo, Model model) {
+		ArrayList<IssueCoupon> couponList = service.selectAllIssueCoupon(memberNo);
+		ArrayList<Point> pointList = service.selectAllPoint(memberNo);
+		System.out.println(couponList);
+		System.out.println(pointList);
+		model.addAttribute("couponList",couponList);
+		model.addAttribute("pointList",pointList);
+		return "member/couponSearch";
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="/pointCheck.do")
+	public int pointCheck(int memberNo) {
+		ArrayList<Point> list = service.selectAllPoint(memberNo);
+		int totalPoint = 0;
+		if(!list.isEmpty()) {
+			for(Point p: list) {
+				int pointStatus = p.getPointStatus();
+				int pointEa = p.getPointEa(); // pointEa 변수는 if문 밖에서 선언해야 함
+				if(pointStatus == 3) {
+					totalPoint -= pointEa; // minusPoint를 따로 선언하지 않고 바로 totalPoint에 빼줌
+				} else {
+					totalPoint += pointEa; // plusPoint를 따로 선언하지 않고 바로 totalPoint에 더해줌
+				}
+			}
+		}
+		return totalPoint;
+	}
+	
 }

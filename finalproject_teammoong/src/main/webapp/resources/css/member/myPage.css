@@ -64,7 +64,7 @@
 
 
 
-/*==================mypage-회원정보수정==================*/
+/*==================mypage-�쉶�썝�젙蹂댁닔�젙==================*/
 .fake_hr{
     border: 1px solid var(--bg-secondary);
 }
@@ -75,7 +75,7 @@
     padding: 20px 30px;
     margin-bottom: 30px;
 }
-.member-info-top>.info-align{
+.member-info-top .info-align{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -121,4 +121,77 @@
 }
 .member-info-top .name-zone ,.member-info-top .point-zone{
     margin-right: 100px;
+}
+
+
+
+/*===================�젙蹂� �닔�젙========================*/
+
+.mypage-content .member-info{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.mypage-content .member-info h5{
+    margin-bottom: 20px;
+    text-align: center;
+    background-color: var(--bg-secondary);
+}
+
+.member-info .one-line{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.member-info .one-line.changePw{
+	padding: 0;
+	margin: 30px 0;
+}
+
+.member-info .one-line .name-tag{
+    width: 180px;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 38px;
+}
+
+.member-info .one-line input{
+    width: 360px;
+    height: 38px;
+}
+.member-info .one-line .subDiv{
+    display: flex;
+    flex-direction: column;
+}
+.member-info .one-line .subDiv a:not(.caution){
+    font-weight: bold;
+    text-decoration: underline;
+    color: var(--content-tertiary);
+}
+.member-info .one-line .subDiv div{
+    text-align: right;
+}
+.member-info .one-line .caution{
+    display: none;
+    color: var(--primary);
+}
+
+.member-info .one-line .notInput{
+    border: none;
+    padding: 0;
+}
+
+
+.modal-body .name-tag{
+	font-weight: bold;
+}
+.modal-body .name-tag:not(:first-child){
+	margin-top:10px;
+}
+
+#modelChangePw input+a{
+	display:none;
+	color: var(--primary);
 }

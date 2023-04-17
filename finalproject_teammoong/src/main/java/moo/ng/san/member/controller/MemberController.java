@@ -1,5 +1,8 @@
 package moo.ng.san.member.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import common.FileManager;
 import common.MsgVO;
 import common.PhoneCertify;
+import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.member.model.service.MemberService;
 import moo.ng.san.member.model.vo.Member;
 import net.nurigo.sdk.NurigoApp;
@@ -31,7 +35,7 @@ public class MemberController {
 	@Autowired
 	private PhoneCertify phoneCertify;
 	@Autowired
-	private FileManager upload; 
+	private FileManager fm; 
 	
 	
 	@ResponseBody
@@ -43,11 +47,10 @@ public class MemberController {
 	
 	@RequestMapping(value = "/join.do")
 	public String signIn(Member m, MultipartFile memberPropic, HttpServletRequest request ,Model model,HttpSession session) {
-
 		String filePath="";
 		if(!memberPropic.isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member/");
-			filePath = upload.upload(savePath, memberPropic); //업로드 완료
+			filePath = fm.upload(savePath, memberPropic); //업로드 완료
 			m.setMemberPath(filePath);
 		}else {
 			filePath = "moongs.png";
@@ -58,7 +61,6 @@ public class MemberController {
 		if(result>0) {
 			m.setMemberPw(null);
 			Member loginMember = service.selectOneMember(m);
-			System.out.println(loginMember);
 			session.setAttribute("m", loginMember);
 			
 			MsgVO msg = new MsgVO();
@@ -109,7 +111,10 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "/myPage.do")
-	public String myPage() {
+	public String myPage(@SessionAttribute(required=false) Member m, Model model) {
+		int memberNo = m.getMemberNo();
+		Point point = service.selectTotalPoint(memberNo);
+		model.addAttribute("p", point);
 		return "member/myPage";
 	}//myPage
 	
@@ -128,12 +133,76 @@ public class MemberController {
 	
 	
 	
+	@RequestMapping(value = "/updateMember.do")
+	public String updateMember(Member member, MultipartFile memberPropic, HttpServletRequest request, @SessionAttribute(required=false) Member m) {
+		System.out.println("memberNo : "+member.getMemberNo());
+		System.out.println("memberPhone : "+member.getMemberPhone());
+		System.out.println("memberEmail : "+member.getMemberEmail());
+		System.out.println("memberZoneCode : "+member.getMemberZoneCode());
+		System.out.println("memberAddr : "+member.getMemberAddr());
+		System.out.println("memberBank : "+member.getMemberBank());
+		System.out.println("memberAccount : "+member.getMemberAccount());
+		System.out.println("memberBday : "+member.getMemberBday());
+		System.out.println("memberPropic : "+memberPropic);
+		System.out.println("세션에 있는거 : "+m.getMemberPath());
+		
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member/");
+		String filePath="";
+
+		if(!memberPropic.isEmpty()) {
+			filePath = fm.upload(savePath, memberPropic); //업로드 완료
+			member.setMemberPath(filePath);
+		}
+		
+		int result = service.updateMember(member);
+		
+		String memberPath = m.getMemberPath();
+		
+		if(result>0 || (result>0 && filePath!="")) { //이미지까지 수정하거나, 그냥 수정만 하거나
+			m.setMemberPhone(member.getMemberPhone());
+			m.setMemberEmail(member.getMemberEmail());
+			m.setMemberZoneCode(member.getMemberZoneCode());
+			m.setMemberAddr(member.getMemberAddr());
+			m.setMemberBank(member.getMemberBank());
+			m.setMemberAccount(member.getMemberAccount());
+			
+			
+			if(member.getMemberBday()!=null && member.getMemberBday().length()>0) { //생일을 새로 추가했을 경우
+				String year = member.getMemberBday().substring(0,4);
+				String month = member.getMemberBday().substring(4,6);
+				String day = member.getMemberBday().substring(6,8);
+				m.setMemberBday(year+"년"+month+"월"+day+"일");
+			}
+			if(!memberPropic.isEmpty() && !memberPath.equals("moongs.png")) { //이미지까지 수정하고, 기본 이미지에서 수정하는 경우가 아닌 경우
+				m.setMemberPath(filePath);
+				fm.deleteFile(savePath, memberPath);
+			}else if(!memberPropic.isEmpty() && memberPath.equals("moongs.png")) {
+				m.setMemberPath(filePath);
+			}
+		
+		}
+		
+		return "redirect:/myPage.do";
+	}//updateMember
 	
 	
-	
-	
-	
-	
+	@ResponseBody
+	@RequestMapping(value = "/updateNewPwMember.do")
+	public String updateNewPwMember(String memberId, String memberPw, String memberNewPw) {
+		Member member = new Member();
+		member.setMemberId(memberId);
+		member.setMemberPw(memberPw);
+		
+		Member m = service.selectOneMember(member);
+		
+		if(m==null) {
+			return "fail";
+		}else {
+			member.setMemberPw(memberNewPw);
+			service.updateNewPwMember(member);
+			return "ok";
+		}
+	}//updateNewPwMember
 	
 	
 	

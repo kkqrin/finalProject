@@ -134,6 +134,10 @@ sup{
 						<input type="text" name="memberName"  required placeholder="주문자명"> 
 					</td>
 				</tr>
+				<tr class="caution-tr">
+					<td></td>
+					<td class="caution" colspan="3"><a>한글 2-10자(공백없이)</a></td>
+				</tr>
 				<tr>
 					<td style="text-align:left;" colspan="4">
 						<input type="text" name="memberEmail"  required placeholder="주문자 이메일주소"> 
@@ -214,12 +218,16 @@ sup{
 	
 	<script>
 	
+	
+	
 // 	$("[name='0orderCount']").on("change",function(){
 // 		const orderCount = $("[name='0orderCount']").val();
 // 		const price = $("[name='0price']").val();
 // 		const result = orderCount * price;
 // 		 $("#result-price").val(result);
 // 	});
+
+	
 
 	$( function() {
 				$( ".select-custom" ).selectmenu();
@@ -329,6 +337,29 @@ sup{
 			}
 		});//주소 입력 확인
 		
+		
+		$("[name='memberName']").keyup(function(){
+			const nameReg = /^[ㄱ-ㅎ가-힣]{2,10}$/;
+			const inputName = $(this).val();
+			
+			if(nameReg.test(inputName)){
+				$(this).removeClass("error");
+				$(".caution-tr").css("display","none");
+				$(".caution").css("display","none");
+				result[3] = true;
+			}else{
+				$(this).addClass("error");
+				$(".caution-tr").css("display","table-row");
+				result[3] = false;
+			}
+			if(inputName==""){
+				$(this).removeClass("error");
+				$(".caution-tr").css("display","none");
+		    	result[3] = false;
+			}
+			
+		});//이름 정규표현식
+		
 // 		$("[type='submit']").on("click",function(){
 			
 // 			event.preventDefault();
@@ -345,6 +376,11 @@ sup{
 // 			console.log("리펀드네임: "+$("[name='refundName']").val());
 // 			console.log("오더카운트: "+$("[name='orderCount']").val());
 // 		});
+		
+		
+		
+		
+		
 		
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />	

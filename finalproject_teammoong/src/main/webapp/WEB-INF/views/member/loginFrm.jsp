@@ -36,21 +36,21 @@
 	
 	<div class="modal-ground">
 		<div id="modalSec" class="modal modal-sec">
-	          <div class="modal-content">
-	              <div class="modal-header">
-	                  <h5>로그인 실패</h5>
-	              </div>
-	              <div class="modal-body">
-	                  <!--내용영역-->
-	                  <h5></h5>
-	                  <p>아이디 혹은 비밀번호가 다릅니다</p>
-	                  <!--//내용영역-->
-	              </div>
-	              <div class="area-btn center full">
-	                  <a href="" rel="modal:close" class="btn btn-sec size01 close">닫기</a>
-	              </div>
-	          </div>
-	    </div>
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5>로그인 실패</h5>
+				</div>
+				<div class="modal-body">
+					<!--내용영역-->
+					<h5></h5>
+					<p>아이디 혹은 비밀번호가 다릅니다</p>
+					<!--//내용영역-->
+				</div>
+				<div class="area-btn center full">
+					<a class="btn btn-sec size01 close">닫기</a>
+				</div>
+			</div>
+		</div>
 	</div><!-- 모달창 -->
 	
 	
@@ -69,6 +69,11 @@
 			});
 		});
 	
+		$(".close").on("click",function(){
+			$(".modal-ground").css("display","none");
+		})
+		
+		
 		$("#login").on("click",function(){
 			login();	
 		})
@@ -108,24 +113,11 @@
 		//모달 관련 기능
         $(function () {
             $('[data-modal]').click(function (event) {
-                const modalId = $(this).data('modal');
-                if ($(modalId).hasClass('modal-pri')) {
-                    $($(this).data('modal')).modal({
-                        fadeDuration: 100
-                    });
-                    return false;
-                } else if ($(modalId).hasClass('modal-sec')) {
-                    $($(this).data('modal')).modal({
-                        escapeClose: false,
-                        showClose: false,
-                        fadeDuration: 100
-                    });
-                    return false;
-                } else {
-                    return false;
-                }
-            });
-            
+                $($(this).data('modal')).modal({
+                    fadeDuration: 100
+                });
+                return false;
+            }); 
         });
 	</script>
 </body>

@@ -24,5 +24,4 @@ public class Member {
 	private String memberBank;
 	private String regDate;
 	private String memberZoneCode;
-
 }

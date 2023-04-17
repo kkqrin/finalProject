@@ -21,7 +21,6 @@
 		<div class="content-all">
 			<h3>공지사항</h3>
 			<p class="bold">뭉쳐야산다의 새로운 소식들과 정보를 한곳에서 확인하세요</p>
-					<button type="button" class="btn btn-pri size03" id="dayCheck">출석체크</button>
 			<div class="main-content">
 				<table class="guide-board">
 					<tr>
@@ -77,26 +76,6 @@
         </div>
 	</div>
 	<script>
-		$("#dayCheck").on("click",function(){	
-			const memberNo = $("input[name='memberNo']").val(); 
-			  $.ajax({
-			    url: "/dayCheck.do",
-			    type: 'get',
-			    data: { "memberNo": memberNo },
-			    success: function(data) {
-			      console.log(data);
-			      if(data == "success"){
-			        $("#alert01").click();
-			      } else {
-			        $("#alert02").click();
-			      }
-			    },
-			    error: function() {
-			      console.error("에러");
-			    }
-			  });
-			});
-
         $(function () {
             $("#alert01").on("click", function () {
                 jQueryAlert('success',"출석체크 완료. 50포인트 적립!");

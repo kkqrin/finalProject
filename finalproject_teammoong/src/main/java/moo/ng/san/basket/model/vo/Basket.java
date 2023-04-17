@@ -11,4 +11,10 @@ public class Basket {
 	private int basketNo;
 	private int memberNo;
 	private int productNo;
+	
+	private String thumbnail;
+	private String productName;
+	private int productPrice;
+	private String optionDetailName;
+	private int optionPrice;
 }
