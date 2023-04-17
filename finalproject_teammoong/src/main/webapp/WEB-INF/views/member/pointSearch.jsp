@@ -42,46 +42,53 @@
 							<h5 id="coupon-bar">쿠폰</h5>
 							<h5 id="point-bar">적립금</h5>
 						</div>
-						<div class="coupon-view">
+						<jsp:include page="/WEB-INF/views/member/couponSearch.jsp" />
+						<div class="point-view">
+							${sessionScope.m.memberName}님의 총 적립금은 <span id="totalPoint"></span>p 입니다.
+						</div>
 							<table>
 								<tr>
-									<th>발급번호</th>
-									<th style="width:50%;">쿠폰이름</th>
-									<th>쿠폰수령일</th>
-									<th>쿠폰만료일</th>
+									<th>포인트번호</th>
+									<th>포인트</th>
+									<th>포인트 적립 / 사용일</th>
 									<th>상태</th>
 								</tr>
-								<c:forEach items="${couponList}" var="ic">
-									<tr class="bg-p00">
-										<td>${ic.issueNo}</td>
-										<td>
-											<c:if test="${ic.couponNo == 1}">
-												생일 축하 쿠폰
-											</c:if>
-										</td>
-										<td>${ic.issueDate}</td>
-										<td>${ic.endDate}</td>
-										<td>
-											<c:if test="${ic.couponStatus == 1}">
-												발급 완료
-											</c:if>
-											<c:if test="${ic.couponStatus == 2}">
-												기간 만료
-											</c:if>
-											<c:if test="${ic.couponStatus == 0}">
-												사용 완료
-											</c:if>
-										</td>
-									</tr>
-								</c:forEach>
-							</table>	
-						</div>
-						<div class="pagination">
+									<c:forEach items="${pointList}" var="point">
+										<tr class="bg-p00">
+											<td>${point.pointNo}</td>
+											<td>
+												<b>
+												<c:choose>
+													<c:when test="${point.pointStatus == 3}">
+														- ${point.pointEa}
+													</c:when>
+													<c:otherwise>
+														${point.pointEa}
+													</c:otherwise>
+												</c:choose>
+												</b>
+											</td>
+											<td>${point.pointDate}</td>
+											<td>
+												<c:if test="${point.pointStatus == 0}">
+													출석체크
+												</c:if>
+												<c:if test="${point.pointStatus == 1}">
+													가입축하 지급포인트
+												</c:if>
+												<c:if test="${point.pointStatus == 2}">
+													포인트 적립
+												</c:if>
+												<c:if test="${point.pointStatus == 3}">
+													포인트 사용
+												</c:if>
+											</td>
+										</tr>
+									</c:forEach>
+							</table>
+							<div class="pagination">
 								${pageNavi }
-						</div>
-						<div class="point-view">
-							
-						</div>
+							</div>
 							<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 						</div>
 					</div>
@@ -90,9 +97,7 @@
 		</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <script>
-	$(document).ready(function() {
-		$("#coupon-bar").click();
-	});
+
 	$("#coupon-bar").on("click",function(){
 		$(".point-view").hide();
 		$("#point-bar").css("color","#99999");
@@ -100,9 +105,8 @@
 		$(".coupon-view").show();
 		$("#coupon-bar").css("color","#3A3A3A");
 		$("#coupon-bar").css("border-bottom","5px solid #f88000");
-		
+		location.href = "/couponSearch.do?reqPage=1";
 	});
-	/*
 	$("#point-bar").on("click",function(){
 		$(".coupon-view").hide();
 		$("#coupon-bar").css("color","#99999");
@@ -110,9 +114,8 @@
 		$(".point-view").show();
 		$("#point-bar").css("color","#3A3A3A");
 		$("#point-bar").css("border-bottom","5px solid #f88000");
-		location.href = "/pointSearch.do?reqPage=1";
+		
 	});
-*/
 </script>
 </body>
 </html>
