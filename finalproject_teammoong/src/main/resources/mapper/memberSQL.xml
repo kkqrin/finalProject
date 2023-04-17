@@ -68,7 +68,8 @@
 				member_zonecode = #{memberZoneCode},
 				member_addr = #{memberAddr},
 				member_bank = #{memberBank},
-				member_account = #{memberAccount}
+				member_account = #{memberAccount},
+				member_agree = #{memberAgree}
 				<if test="memberBday != null">
 					,member_bday = to_date(#{memberBday},'yyyymmdd')
 				</if>

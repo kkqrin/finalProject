@@ -35,7 +35,7 @@
 	<select id="selectTotalPoint" parameterType="_int" resultType="point">
 		select
 			sum(point_ea) as pointEa
-		from point_tbl where member_no = #{memberNo}
+		from point_tbl where member_no = #{memberNo} and point_status != 3
 	</select>
 	<select id="totalCount" resultType="_int">
 		select count(*) from point_tbl

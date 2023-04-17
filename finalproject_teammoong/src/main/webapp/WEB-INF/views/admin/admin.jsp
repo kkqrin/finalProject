@@ -63,9 +63,7 @@
             <h1><a href="#">관리자 페이지 입니다.</a></h1>
         </div>
         <div class="adminPage-back">
-            <div class="adminPage-sidebar">
-                <jsp:include page="/WEB-INF/views/admin/adminSideNavi.jsp" />
-            </div>
+            <jsp:include page="/WEB-INF/views/admin/adminSideNavi.jsp" />
             <div class="adminPage-main">
                 <div class="adminPage-content">
                     <div class="mainContent">
