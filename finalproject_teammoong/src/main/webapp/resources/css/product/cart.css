@@ -1,0 +1,172 @@
+
+.cart-title{
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.cart-header{
+    background-color: #eee;
+    display: flex;
+}
+
+
+
+
+
+
+
+
+.cart-product-item{
+    background-color: #eee;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-product-img{
+    width: 150px;
+    height: 150px;
+    margin: 20px;
+}
+
+.cart-product-img>a>img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* box-shadow: 0px 0px 10px 0px #ccc; */
+}
+
+.cart-product-info{
+    /* background-color: cornflowerblue; */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.cart-product-info>.cart-product-title{
+    width: 350px;
+    font-size: 16px;
+    font-weight: 600;
+
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: keep-all;
+    /* height: 50px; */
+}   
+
+
+.cart-product-info>.cart-product-option{
+    padding-top: 10px;
+}
+
+.cart-product-volume{
+    width: 100px;
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+}
+
+.cart-product-volume>button{
+    width: 50px;
+    background-color: #ccc;
+    font-size: 16px;
+    border-radius: 3px;
+}
+
+.cart-product-volume>[name="pop_out"]{
+    margin: 0px 3px;
+}
+
+.cart-product-price{
+    width: 150px;
+    background-color: aliceblue;
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* 결제 금액 */
+.order-payment-wrap{
+    display: flex;
+    margin-bottom: 350px;
+}
+
+/* .order-payment-wrap>div{
+    width: 550px;
+} */
+
+@supports (position: sticky) or (position: -webkit-sticky){
+    .order-payment-wrap>.total-pay-box{
+        width: 300px;
+        height: 330px;
+        background: var(--bg-secondary);
+        margin: 30px;
+        padding: 30px;
+        box-sizing: border-box;
+        position: sticky;
+        top: 0px;
+        }
+    }
+    
+    .total-pay-box>div{
+        display: flex;
+        justify-content: space-between;
+        margin: 15px;
+    }
+    
+    .total-pay-box>div>div:first-child{
+        font-size: 16px;
+        font-weight: 600;
+    }
+    
+    .total-pay-box>div.total-order-amount-2>div,
+    .total-pay-box>div.total-order-amount-3>div{
+        font-size: 14px;
+        font-weight: 400;
+    }
+    
+    .total-pay-box>.total-order-buy-save-point{
+        justify-content: flex-end;
+        align-items: center;
+        margin-top: 30px;
+    }
+    
+    .total-order-buy-save-point>button{
+        margin-right: 5px;
+        font-size: 11px;
+        min-width: auto;
+        min-height: auto;
+        width: 36px;
+        height: 22px;
+        margin-top: 1px;
+    }
+    
+    .total-order-buy-save-point>div{
+        font-size: 12px;
+    }
+    
+    .total-order-pay>div{
+        font-size: 18px;
+        font-weight: 600;
+    }

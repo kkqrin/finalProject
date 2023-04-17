@@ -51,6 +51,8 @@
                         <span class="material-symbols-outlined order-product-expand-less">expand_less</span>
                         <span class="material-symbols-outlined order-product-expand-more">expand_more</span>
                     </h4>
+                    
+                    <!-- 상품 리스트 요약 -->
                     <div class="order-product-item total-product-count-box">
                         <!-- <div class="order-product-img">
                             <a href="#">
@@ -68,40 +70,30 @@
                         <!-- <div class="order-product-volume">1개</div>
                         <div class="order-product-price">1,000원</div> -->
                     </div>
-                    <div class="order-product-item">
-                        <div class="order-product-img">
-                            <a href="#">
-                                <img src="/resources/img/product/lactofit.jpg" />
-                            </a>
-                        </div>
-                        <div class="order-product-info">
-                            <div class="order-product-title">
+                    
+                    
+                    
+                    <!-- 상품 리스트 -->
+                    <c:forEach items="${orderProductList }" var="i">
+                        <div class="order-product-item">
+                            <div class="order-product-img">
                                 <a href="#">
-                                    [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
+                                    <img src="/resources/upload/product/${i.thumbnail }" />
                                 </a>
                             </div>
-                            <div class="order-product-option">3통 120포</div>
-                        </div>
-                        <div class="order-product-volume">1개</div>
-                        <div class="order-product-price">1,000원</div>
-                    </div>
-                    <div class="order-product-item">
-                        <div class="order-product-img">
-                            <a href="#">
-                                <img src="/resources/img/product/lactofit.jpg" />
-                            </a>
-                        </div>
-                        <div class="order-product-info">
-                            <div class="order-product-title">
-                                <a href="#">
-                                    [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
-                                </a>
+                            <div class="order-product-info">
+                                <div class="order-product-title">
+                                    <a href="#">
+                                        ${i.productName }
+                                    </a>
+                                </div>
+                                <div class="order-product-option">${i.optionDetailName }</div>
                             </div>
-                            <div class="order-product-option">3통 120포</div>
+                            <div class="order-product-volume">1개</div>
+                            <div class="order-product-price">${i.productPrice } * ( 100 - ${i.productDiscount }) / 100</div>
                         </div>
-                        <div class="order-product-volume">1개</div>
-                        <div class="order-product-price">1,000원</div>
-                    </div>
+                    </c:forEach>
+
                 </div>
                 <div class="order-member-box">
                     <h4>주문자 정보</h4>
