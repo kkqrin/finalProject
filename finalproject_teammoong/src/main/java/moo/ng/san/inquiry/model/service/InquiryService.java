@@ -30,4 +30,8 @@ public class InquiryService {
 	public int adminInsert(InquiryAdmin iqa) {
 		return dao.adminInsert(iqa);
 	}
+
+	public InquiryAdmin selectAllAdminInquiryByInquiryNo(int inquiryNo) {
+		return dao.selectAllAdminInquiryByInquiryNo(inquiryNo);
+	}
 }

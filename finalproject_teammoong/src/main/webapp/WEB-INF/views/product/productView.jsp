@@ -191,7 +191,9 @@
                         <th>답변상태</th>
                     </tr>
                     <c:forEach items="${iqList }" var="iq">
-                        <tr>
+                        <tr> 
+                            <!-- 관리자 답글 조회시 필요한 문의사항 번호 추출용 -->
+                            <input type="hidden" value="${iq.inquiryNo}">
                             <td class="inquiry-content-btn">${iq.inquiryTitle }</td>
                             <td>${iq.inquiryWriter }</td>
                         <td>${iq.inquiryDate }</td>
@@ -206,6 +208,7 @@
                         <td colspan="4" value="${iq.inquiryWriter}" style="text-align: left; border: none;">${iq.inquiryContent}</td>
                     </tr>
                     <tr class="admin-content" style="border: none;">
+                        
                     </tr>
                     <tr class="udBtn" style="border: none;">
                         <td colspan="4" style="border: none;">
@@ -469,13 +472,6 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-        //문의사항 클릭한 게시글 내용 보여주는 버튼(toggle)
-        $(".inquiry-content").hide();
-        $(".udBtn").hide();
-        $(".inquiry-content-btn").on("click",function(){
-                $(this).parent().next().toggle();
-                $(this).parent().next().next().next().toggle();
-        });
         //문의사항 update에 필요한 값을 게시글 첫번째 수정 버튼 눌렀을때 필요한 값을 추출하기
         $(".updateBtn").on("click",function(){
             var inquiryContent = $(this).parent().parent().parent().prev().children().text();
@@ -525,6 +521,32 @@
                 }
             });
             
+        });
+        //문의사항 클릭한 게시글 내용 보여주는 버튼(toggle) / 관리자 답변 select
+        $(".inquiry-content").hide();
+        $(".udBtn").hide();
+        let chkcnt = 0;
+        $(".inquiry-content-btn").on("click",function(){
+            $(this).parent().next().next().children().remove();
+            $(this).parent().next().toggle();
+            $(this).parent().next().next().next().toggle();
+            var inquiryNo = $(this).prev().val();
+            if(chkcnt == 0){
+                $.ajax({
+                    url : "/selectAdminInquiry.do",
+                    type : "POST",
+                    dataType : "JSON",
+                    data : {inquiryNo : inquiryNo},
+                    context: this,
+                    success : function(data){
+                        $(this).parent().next().next().append("<td colspan='4' style='text-align : left;'>"+data.iqAdminContent+"</td>");
+                        chkcnt = 1;
+                    }
+                });
+            }else if(chkcnt == 1){
+                $(this).parent().next().next().children().remove();
+                chkcnt = 0;
+            }
         });
         //문의사항 작성
         $("#modalInsertBtn").on("click",function(){
@@ -588,12 +610,58 @@
                 data : {inquiryNo:inquiryNo, iqAdminContent:iqAdminContent},
                 success : function(data){
                     if(data == 1){
-
+                        $("#adminModal").hide();
+                        adminInsertAlert();
                     }
                 }
             });
         });
         //답글 select
+        // $(".inquiry-content-btn").on("click",)
+         //문의사항 답글 성공시 띄울 alert창
+         function adminInsertAlert(){
+                jQueryAlert('success',"문의사항 답글 작성 완료.");
+
+            function jQueryAlert(type, msg) {
+                let $type = type;
+                let messageBox = msg;
+                switch ($type) {
+                    case 'success':
+                    messageBox = $.parseHTML('<div class="alert__success"></div>');
+                    break;
+                    case 'error':
+                    messageBox = $.parseHTML('<div class="alert__error"></div>');
+                    break;
+                    case 'warning':
+                    messageBox = $.parseHTML('<div class="alert__warning"></div>');
+                    break;
+                    case 'info':
+                    messageBox = $.parseHTML('<div class="alert__info"></div>');
+                    break;
+                }
+                $("body").append(messageBox);
+                $(messageBox).dialog({
+                    dialogClass :$type,
+                    open: $(messageBox).append(msg),
+                    draggable: false,
+                    modal: true,
+                    buttons: {
+                        "OK": function () {
+                            $(this).dialog("close");
+                             location.reload()
+                        }
+                    },
+                    show: {
+                        effect: 'fade',
+                        duration: 200 //at your convenience
+                    },
+                    hide: {
+                        effect: 'fade',
+                        duration: 200 //at your convenience
+                    }
+                });
+            };
+        }
          //문의사항 작성 성공시 띄울 alert창
          function insertAlert(){
                 jQueryAlert('success',"문의사항이 작성되었습니다.");

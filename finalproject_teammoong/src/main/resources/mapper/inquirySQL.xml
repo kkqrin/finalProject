@@ -36,5 +36,15 @@
 		#{iqAdminContent},
 		TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
 	</insert>
+	
+	<select id="selectAllAdminInquiryByInquiryNo" parameterType="_int" resultType="iqa">
+		SELECT
+			IQ_ADMIN_NO AS iqAdminNo,
+			INQUIRY_NO AS inquiryNo,
+			IQ_ADMIN_CONTENT AS iqAdminContent,
+			IQ_ADMIN_DATE AS iqAdminDate
+		FROM INQUIRY_ADMIN
+		WHERE INQUIRY_NO = #{_parameter}
+	</select>
 
 </mapper>
