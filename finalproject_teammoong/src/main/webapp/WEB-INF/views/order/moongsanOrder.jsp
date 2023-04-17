@@ -43,23 +43,23 @@
             남은 일 : 주소검색 API, 유효성 검사 (나쁜사용자)
         </pre>
         <div class="order-sheet-wrap">
-            <h1>주문서</h1>
+            <h1>뭉쳐야산다!</h1>
             <form action="#" method="post">
                 <div class="order-product-box">
                     <h4>
                         주문 상품
-                        <span class="material-symbols-outlined order-product-expand-less">expand_less</span>
-                        <span class="material-symbols-outlined order-product-expand-more">expand_more</span>
+                        <!-- <span class="material-symbols-outlined order-product-expand-less">expand_less</span>
+                        <span class="material-symbols-outlined order-product-expand-more">expand_more</span> -->
                     </h4>
                     
                     <!-- 상품 리스트 요약 -->
-                    <div class="order-product-item total-product-count-box">
+                    <!-- <div class="order-product-item total-product-count-box">
                         <div class="order-product-info total-product-count">
                             <div class="order-product-title">
                                     <span id="first-product-name"></span> 등 현재 주문 상품은 총 [<span id="order-product-count"></span>]건
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     
                     
                     
@@ -188,16 +188,15 @@
                                 </tr>
                             </table>
                         </div>
-                        <div class="order-pay-box">
+                        <h3>뭉쳐야산다의 공동구매 제품은 뭉산머니로만 결제가 가능합니다.</h3>
+                        <h4>뭉산머니가 부족한 경우 충전후 사용해주세요.</h4>
+                        <h4>뭉산머니 충전하러 가기 >>>>> 1. 마이페이지의 적립금 2. 모달? 새창? 띄워서 3. 그냥 이니시스 결제를 -> 적립금 (4만원대면 5만원 충전되는방식)</h4>
+                        <!-- <div class="order-pay-box">
                             <h4>결제 수단</h4>
                             <div>
                                 <button type="button" class="btn btn-pri size02">신용카드</button>
-                                <!-- <div>
-                                    <button type="button" class="btn btn-pri size02">무통장 입금</button>
-                                    <button type="button" class="btn btn-pri size02">휴대폰</button>
-                                </div> -->
                             </div>
-                        </div>
+                        </div> -->
                         <div class="order-agree-box">
                             <h4>개인정보 수집 / 제공</h4>
                             <div>
@@ -294,14 +293,14 @@
 		});
 
         // 상품 개수
-        $("#order-product-count").text($(".order-product-item").length-1);
+        // $("#order-product-count").text($(".order-product-item").length-1);
 
-        // 상품 이름
-        if($(".order-product-title").eq(1).children().text().length > 30){
-            $("#first-product-name").text($(".order-product-title").eq(1).children().text().substr(0,30)+"..");
-        }else{
-            $("#first-product-name").text($(".order-product-title").eq(1).children().text());
-        }
+        // // 상품 이름
+        // if($(".order-product-title").eq(1).children().text().length > 30){
+        //     $("#first-product-name").text($(".order-product-title").eq(1).children().text().substr(0,30)+"..");
+        // }else{
+        //     $("#first-product-name").text($(".order-product-title").eq(1).children().text());
+        // }
 
 
         // 배송 요청
@@ -318,26 +317,26 @@
 
 
         // 더보기 버튼과 주문한 상품 정보 숨기기
-        $(".order-product-expand-less").hide();
-        $(".order-product-item").hide();
-        $(".total-product-count-box").show();
+        // $(".order-product-expand-less").hide();
+        // $(".order-product-item").hide();
+        // $(".total-product-count-box").show();
 
-        $(".order-product-expand-more").on("click",function(){
-            $(".order-product-expand-less").show();
-            $(".order-product-expand-more").hide();
-            // 주문한 상품 전체보기
-            $(".order-product-item").show();
-            // 주문 상품 전체 개수 숨기기
-            $(".total-product-count-box").hide();
-        });
-        $(".order-product-expand-less").on("click",function(){
-            $(".order-product-expand-more").show();
-            $(".order-product-expand-less").hide();
-            // 주문한 상품 전체 숨기기
-            $(".order-product-item").hide();
-            // 주문 상품 전체 개수 보이기
-            $(".total-product-count-box").show();
-        });
+        // $(".order-product-expand-more").on("click",function(){
+        //     $(".order-product-expand-less").show();
+        //     $(".order-product-expand-more").hide();
+        //     // 주문한 상품 전체보기
+        //     $(".order-product-item").show();
+        //     // 주문 상품 전체 개수 숨기기
+        //     $(".total-product-count-box").hide();
+        // });
+        // $(".order-product-expand-less").on("click",function(){
+        //     $(".order-product-expand-more").show();
+        //     $(".order-product-expand-less").hide();
+        //     // 주문한 상품 전체 숨기기
+        //     $(".order-product-item").hide();
+        //     // 주문 상품 전체 개수 보이기
+        //     $(".total-product-count-box").show();
+        // });
 
         // 상품리스트 상품 가격 + 화폐 단위
 		for(let i=0;i<$(".order-product-price").length;i++){

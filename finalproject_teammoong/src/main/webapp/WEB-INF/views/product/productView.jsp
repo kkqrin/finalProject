@@ -84,7 +84,7 @@
 			<!-- <form action="/orderSheet.do" method="post">
 				<input type="hidden" name="productNo">
 				<input type="hidden" name="optionNo">
-				<button id="order-btn">주문하기</button>
+				<button>주문하기</button>
                 <input type="hidden" id="option-list-null" value="${optionList}">
 			</form> -->
 		<button type="button" id="put-in-cart-btn">장바구니 담기</button>
@@ -187,12 +187,17 @@
                             <form action="/orderSheet.do" method="post">
                                 <input type="hidden" name="productNo">
                                 <input type="hidden" name="optionNo">
-                                <button id="order-btn" class="btn btn-white size02">혼자구매하기</button>
+                                <button class="btn btn-white size02">혼자구매하기</button>
                                 <input type="hidden" id="option-list-null" value="${optionList}">
                             </form>
                         </div>
                         <div class="moong-btn">
-                            <button type="button" class="btn btn-pri size02">뭉쳐야산다</button>
+                            <form action="/moongsanOrder.do" method="post">
+                                <input type="hidden" name="productNo">
+                                <input type="hidden" name="optionNo">
+                                <button class="btn btn-pri size02">뭉쳐야산다</button>
+                                <input type="hidden" id="option-list-null" value="${optionList}">
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -52,4 +52,29 @@ public class OrderController {
 		
 		return "order/orderSheet";
 	}
+	
+	@RequestMapping(value="/moongsanOrder.do")
+	public String moongsanOrder(int[] productNo, int[] optionNo, @SessionAttribute(required=false) Member m, Model model) {
+		// 세션에서 가져옴
+		int memberNo = m.getMemberNo();
+		
+		// 구매하려는 상품 조회
+		ArrayList<Order> orderProductList = service.selectOrderProductList(productNo, optionNo);
+		model.addAttribute("orderProductList", orderProductList);
+		
+//		System.out.println(orderProductList);
+		
+		// 보유 쿠폰 개수
+		int couponCount = service.selectMemberCouponCount(memberNo);
+		model.addAttribute("couponCount", couponCount);
+		// 보유 쿠폰 리스트
+		ArrayList<IssueCoupon> couponList = service.selectMemberCouponList(memberNo);
+		model.addAttribute("couponList",couponList);
+		
+		// 현재 적립금 조회
+		Point point = memberService.selectTotalPoint(memberNo);
+		model.addAttribute("point", point);
+		
+		return "order/moongsanOrder";
+	}
 }
