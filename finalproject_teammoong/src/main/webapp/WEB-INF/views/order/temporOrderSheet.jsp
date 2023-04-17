@@ -77,20 +77,24 @@
                     <c:forEach items="${orderProductList }" var="i">
                         <div class="order-product-item">
                             <div class="order-product-img">
-                                <a href="#">
+                                <a href="/productView.do?productNo=${i.productNo}">
                                     <img src="/resources/upload/product/${i.thumbnail }" />
                                 </a>
                             </div>
                             <div class="order-product-info">
                                 <div class="order-product-title">
-                                    <a href="#">
+                                    <a href="/productView.do?productNo=${i.productNo}">
                                         ${i.productName }
                                     </a>
                                 </div>
                                 <div class="order-product-option">${i.optionDetailName }</div>
                             </div>
                             <div class="order-product-volume">1개</div>
-                            <div class="order-product-price">${i.productPrice } * ( 100 - ${i.productDiscount }) / 100</div>
+                            <div class="order-product-price"><span></span>원</div>
+                            <input type="hidden" class="product-price" value="${i.productPrice }">
+							<input type="hidden" class="product-discount" value="${i.productDiscount }">
+                            <!-- ${i.productPrice } * ( 100 - ${i.productDiscount }) / 100 -->
+                            <!-- .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") -->
                         </div>
                     </c:forEach>
 
@@ -169,12 +173,13 @@
                             <table class="tbl-box" style="margin-top: 20px;">
                                 <tr>
                                     <th>쿠폰</th>
+                                    <input type="hidden" id="number-coupon">
                                     <td colspan="2">
                                         <div class="selectBox-widht-explain" style="width: 100%;">
                                             <select class="select-custom order-coupon" id="order-coupon">
-                                                <option value="default" selected>사용 가능한 쿠폰 ${couponCount }장</option>
+                                                <option value="0" selected>사용 가능한 쿠폰 ${couponCount }장</option>
                                                 <c:forEach items="${couponList }" var="i">
-                                                <option value="1">${i.couponTitle }( <fmt:formatNumber value="${i.couponPrice }"/>원 할인 / ~ ${i.endDate } )</option>
+                                                <option value="${i.couponPrice }">${i.couponTitle }( <fmt:formatNumber value="${i.couponPrice }"/>원 할인 / ~ ${i.endDate } )</option>
                                                 </c:forEach>
                                                 <option value="2" disabled>5만원이상 1천원 할인</option>
                                             </select>
@@ -185,9 +190,10 @@
                                     <th>적립금</th>
                                     <td colspan="2" class="saved-money-box">
                                         <div>
-                                            <input type="text" placeholder="사용 가능한 적립금 <fmt:formatNumber value="${point.pointEa }"/>원">
-                                            <button type="button" class="btn btn-pri size01">적용</button>
-                                            <button type="button" class="btn btn-pri size01">모두 사용</button>
+                                            <input type="text" id="input-saved-money" placeholder="사용 가능한 적립금 <fmt:formatNumber value="${point.pointEa }"/>원">
+                                            <button type="button" class="btn btn-pri size01" id="do-saved-money">적용</button>
+                                            <button type="button" class="btn btn-pri size01" id="all-saved-money">모두 사용</button>
+                                            <input type="hidden" id="hidden-point" value="${point.pointEa }">
                                         </div>
                                     </td>
                                 </tr>
@@ -223,20 +229,19 @@
                     <div class="total-pay-box">
                         <h5>결제 금액</h5>
 
-                        <!-- <div class="total-order-amount-box"> -->
+                        <input type="hidden" id="number-pay-price">
                         <div class="total-order-amount-1">
                             <div>주문금액</div>
-                            <div>42,800원</div>
+                            <div><span></span>원</div>
                         </div>
                         <div class="total-order-amount-2">
                             <div>└ 상품 금액</div>
-                            <div>44,800원</div>
+                            <div><span></span>원</div>
                         </div>
                         <div class="total-order-amount-3">
                             <div>└ 상품 할인 금액</div>
-                            <div>- 2,000원</div>
+                            <div>-<span></span>원</div>
                         </div>
-                        <!-- </div> -->
 
                         <div class="total-order-delivery-fee">
                             <div>배송비</div>
@@ -244,22 +249,22 @@
                         </div>
                         <div class="total-order-coupon">
                             <div>쿠폰 할인</div>
-                            <div>0원</div>
+                            <div><span>0</span>원</div>
                         </div>
                         <div class="total-order-saved-money">
                             <div>적립금 사용</div>
-                            <div>0원</div>
+                            <div><span>0</span>원</div>
                         </div>
 
                         <div class="total-order-pay">
                             <div>최종 결제 금액</div>
-                            <div>42,800원</div>
+                            <div><span></span>원</div>
                         </div>
 
                         <div class="total-order-buy-save-point">
                             <button type="button" class="btn btn-pri">적립</button>
-                            <div>구매시</div>
-                            <div>2,180원 (5%)</div>
+                            <div>구매시 </div>
+                            <div><span></span>원 (5%)</div>
                         </div>
                     </div>
                 </div>
@@ -332,10 +337,92 @@
             $(".total-product-count-box").show();
         });
 
+        // 상품리스트 상품 가격 + 화폐 단위
+		for(let i=0;i<$(".order-product-price").length;i++){
+			// console.log($(".cart-product-price").length);
+
+			const productPrice = $(".product-price").eq(i).val();
+			const productDiscount = $(".product-discount").eq(i).val();
+			
+			// Math.floor(productPrice*(100 - productDiscount)/1000)*10)
+			$(".order-product-price").eq(i).children().text((Math.floor(productPrice*(100 - productDiscount)/1000)*10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+		};
+
+
+        // 결제 금액
+        let productPriceSum = 0;
+        let discountPrice = 0;
+        let payPrice = 0;
+        for(let i=0;i<$(".product-price").length;i++){
+            const productPrice = $(".product-price").eq(i).val();
+            const productDiscount = $(".product-discount").eq(i).val();
+
+            // 할인 전 원래 가격(상품금액)
+            productPriceSum = Number(productPriceSum) + Number(productPrice);
+            $(".total-order-amount-2>div").last().children().text((productPriceSum).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
+
+            // 할인되는 금액(할인금액)
+            discountPrice = Number(discountPrice) + Number(productPrice-(Math.floor(productPrice*(100 - productDiscount)/1000)*10));
+            $(".total-order-amount-3>div").last().children().text(discountPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
+            // 주문금액 (결제할 금액)
+            payPrice = Number(payPrice) + Number((Math.floor(productPrice*(100 - productDiscount)/1000)*10));
+            $(".total-order-amount-1>div").last().children().text(payPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            
+            // 최종 결제 금액 계산을 위해 hidden에 넣어둠
+            $("#number-pay-price").val(payPrice);
+
+            // 최종 결제 금액 = 주문금액 (- 쿠폰(0) - 적립금(0))
+            $(".total-order-pay>div").last().children().text($(".total-order-amount-1>div").last().children().text());
+        }
+
+        // 쿠폰 할인
+        $( ".order-coupon" ).on("selectmenuchange", function(){
+            $(".total-order-coupon>div").last().children().text("-"+$(this).val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            // console.log($(this).val());
+
+            // 현재 적용된 쿠폰 가격, 계산을 위해 hidden에 넣어둠
+            $("#number-coupon").val($(this).val());
+            // 최종 결제 금액 : 주문금액 - 쿠폰 - 적립금
+            // 현재 적용된 쿠폰 및 적립금 빼서 계산
+            $(".total-order-pay>div").last().children().text(($("#number-pay-price").val()-$(this).val()-$("#input-saved-money").val()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        });
+
+
+        // 적립금
+        $("#all-saved-money").on("click", function(){
+            // hidden-point
+            $(".total-order-saved-money>div").last().children().text("-"+$("#hidden-point").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            // input창도 동기화
+            $("#input-saved-money").val($("#hidden-point").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
+            // 최종 결제 금액 : 주문금액 - 쿠폰 - 적립금
+            $(".total-order-pay>div").last().children().text(($("#number-pay-price").val()-$("#number-coupon").val()-$("#input-saved-money").val()));
+        });
+
+        $("#do-saved-money").on("click", function(){
+            const input = Number($("#input-saved-money").val());
+            const total = Number($("#hidden-point").val());
+
+            if(input < total){
+                $(".total-order-saved-money>div").last().children().text("-"+$("#input-saved-money").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                // input창도 동기화
+                $("#input-saved-money").val($("#input-saved-money").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            }else{
+                // 보유 적립금보다 많으면 총 적립금 적용
+                $(".total-order-saved-money>div").last().children().text("-"+$("#hidden-point").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                // input창도 동기화
+                $("#input-saved-money").val($("#hidden-point").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            }
+            
+
+            // 최종 결제 금액 : 주문금액 - 쿠폰 - 적립금
+            
+        });
 
 
         
-
     </script>
 </body>
 </html>

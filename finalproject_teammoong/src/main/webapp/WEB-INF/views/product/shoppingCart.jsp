@@ -55,8 +55,6 @@
 							<div class="cart-product-price"><span></span>원</div>
 							<input type="hidden" class="product-price" value="${i.productPrice }">
 							<input type="hidden" class="product-discount" value="${i.productDiscount }">
-							<!-- ${i.productDiscount}% <fmt:formatNumber value="${i.productPrice }"/>원 -->
-							<!-- ${i.productPrice } * ( 100 - ${i.productDiscount }) / 100 -->
 						</div>
 					</c:forEach>
 					<button>주문하기</button>
@@ -76,7 +74,7 @@
 				</div>
 				<div class="total-order-amount-3">
 					<div>└ 상품 할인 금액</div>
-					<div><input type="hidden" class="hidden-product-price"><span>0</span> 원</div>
+					<div><input type="hidden" class="hidden-product-price">-<span>0</span> 원</div>
 				</div>
 				<!-- </div> -->
 				<!-- <div class="total-order-delivery-fee">
@@ -116,7 +114,7 @@
 	<script>
 		$("[name=chk]").on("change", function(){
 			if($(this).is(":checked")){
-				// 선택 안 된 체크박스는 전달안되게
+				// 선택 안 된 체크박스는 주문서 페이지로 전달안되게
 				$(this).next().prop("disabled", false);
 				$(this).next().next().prop("disabled", false);
 			}else{
@@ -143,7 +141,7 @@
 			}
 		});
 
-		// 가격 단위 표시
+		// 상품리스트 상품 가격 + 화폐 단위
 		for(let i=0;i<$(".cart-product-price").length;i++){
 			// console.log($(".cart-product-price").length);
 
