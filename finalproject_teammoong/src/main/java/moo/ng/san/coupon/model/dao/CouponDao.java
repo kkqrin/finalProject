@@ -1,6 +1,7 @@
 package moo.ng.san.coupon.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -42,14 +43,29 @@ public class CouponDao {
 		return result;
 	}
 
-	public ArrayList<IssueCoupon> selectAllIssueCoupon(int memberNo) {
-		List couponList = sqlSession.selectList("issueCoupon.selectMemberIssueCoupon",memberNo);
+	public ArrayList<IssueCoupon> selectMemberIssueCoupon(HashMap<String, Object> map) {
+		List couponList = sqlSession.selectList("issueCoupon.selectMemberIssueCoupon",map);
 		return (ArrayList<IssueCoupon>) couponList;
 	}
 
-	public ArrayList<Point> selectAllPoint(int memberNo) {
-		List pointList = sqlSession.selectList("point.selectAllPoint",memberNo);
+	public ArrayList<Point> selectAllPoint(HashMap<String, Object> map) {
+		List pointList = sqlSession.selectList("point.selectAllPoint",map);
 		return (ArrayList<Point>)pointList;
+	}
+
+	public int selectIssueCount() {
+		int totalCount = sqlSession.selectOne("issueCoupon.totalCount");
+		return totalCount;
+	}
+
+	public int selectPointCount() {
+		int totalCount = sqlSession.selectOne("point.totalCount");
+		return totalCount;
+	}
+
+	public ArrayList<Point> selectAllPointMember(int memberNo) {
+		List list = sqlSession.selectList("point.selectAllPointMember",memberNo);
+		return (ArrayList<Point>) list;
 	}
 	
 }

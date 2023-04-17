@@ -6,7 +6,7 @@ $(document).ready(function(){
 
     timeId = window.setInterval(function () {
         var now = new Date();
-        var end = new Date(now.getFullYear(),now.getMonth(),now.getDate(),11,27,20);
+        var end = new Date(now.getFullYear(),now.getMonth(),now.getDate(),24,00,00);
     
         var nt = now.getTime();
         var et = end.getTime();
