@@ -52,6 +52,9 @@ $("#delivery-member").on("change", function(){
         // 라디오
         $("#member-address").prop("checked", false);
         $("#new-input-address").prop("checked", true);
+
+        // 주소검색을 위한 상세주소 input 활성화
+        $("#deli-addr2").slideDown(200);
     }
 });
 

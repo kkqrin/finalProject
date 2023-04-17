@@ -17,7 +17,24 @@
 	<select id="selectMemberCouponCount" parameterType="_int" resultType="_int">
 		 select count(*) AS couponCount from ISSUE_COUPON where member_no=#{_parameter}
 	</select>
-
+	<select id="selectOrderProductList" parameterType="map" resultType="o">
+		select
+			p.product_no AS productNo,
+			(SELECT FILEPATH FROM PRODUCT_IMG WHERE P_IMG_NO=(SELECT MIN(P_IMG_NO) FROM PRODUCT_IMG where product_no=p.product_no)) AS thumbnail,
+			p.product_name AS productName,
+			p.product_price AS productPrice,
+			p.product_discount AS productDiscount,
+			oi.option_info_no AS optionNo,
+			oi.option_dateail AS optionDetailName,
+			oi.option_price AS optionPrice
+		from product_tbl p
+		left join OPTION_GROUP_TBL og on p.product_no = og.product_no
+		left join OPTION_INFO_TBL oi on OG.OPTION_GROUP_NO = OI.OPTION_GROUP_NO
+		where p.product_no=#{productNo}
+		<if test="optionNo != 0">
+		and option_info_no = #{optionNo}
+		</if>
+	</select>
 
 
 </mapper>
