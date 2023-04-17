@@ -11,4 +11,6 @@ public class Point {
 	private int pointNo;
 	private int memberNo;
 	private int pointEa;
+	private String pointDate;
+	private int pointStatus;
 }

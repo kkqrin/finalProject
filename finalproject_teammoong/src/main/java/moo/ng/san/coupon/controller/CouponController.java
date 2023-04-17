@@ -67,10 +67,15 @@ public class CouponController {
 	}
 	@RequestMapping(value="/couponSearch.do")
 	public String couponSearch(int memberNo, Model model) {
-		ArrayList<IssueCoupon> list = service.selectAllIssueCoupon(memberNo);
-		model.addAttribute("list",list);
+		ArrayList<IssueCoupon> couponList = service.selectAllIssueCoupon(memberNo);
+		ArrayList<Point> pointList = service.selectAllPoint(memberNo);
+		System.out.println(couponList);
+		System.out.println(pointList);
+		model.addAttribute("couponList",couponList);
+		model.addAttribute("pointList",pointList);
 		return "member/couponSearch";
 	}
+	
 	
 	@ResponseBody
 	@RequestMapping(value="/pointCheck.do")
@@ -79,11 +84,16 @@ public class CouponController {
 		int totalPoint = 0;
 		if(!list.isEmpty()) {
 			for(Point p: list) {
-				int point = p.getPointEa();
-				
-				totalPoint += point;
+				int pointStatus = p.getPointStatus();
+				int pointEa = p.getPointEa(); // pointEa 변수는 if문 밖에서 선언해야 함
+				if(pointStatus == 3) {
+					totalPoint -= pointEa; // minusPoint를 따로 선언하지 않고 바로 totalPoint에 빼줌
+				} else {
+					totalPoint += pointEa; // plusPoint를 따로 선언하지 않고 바로 totalPoint에 더해줌
+				}
 			}
 		}
 		return totalPoint;
 	}
+	
 }

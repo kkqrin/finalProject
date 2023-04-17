@@ -42,13 +42,13 @@ public class CouponService {
 	}
 
 	public ArrayList<IssueCoupon> selectAllIssueCoupon(int memberNo) {
-		ArrayList<IssueCoupon> list = dao.selectAllIssueCoupon(memberNo);
-		return list;
+		ArrayList<IssueCoupon> couponList = dao.selectAllIssueCoupon(memberNo);
+		return couponList;
 	}
 
 	public ArrayList<Point> selectAllPoint(int memberNo) {
-		ArrayList<Point> list = dao.selectAllPoint(memberNo);
-		return list;
+		ArrayList<Point> pointList = dao.selectAllPoint(memberNo);
+		return pointList;
 	}
 
 }
