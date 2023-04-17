@@ -57,7 +57,7 @@
 							<input type="hidden" class="product-discount" value="${i.productDiscount }">
 						</div>
 					</c:forEach>
-					<button>주문하기</button>
+					<!-- <button>주문하기</button> -->
 				</form>
 			</div>
 			<div class="total-pay-box">
@@ -100,7 +100,7 @@
 					<div>2,180원 (5%)</div>
 				</div>
 				<div class="cart-pay-box area-btn full" style="margin-top: 30px;">
-                    <button class="btn btn-pri size02">주문하기</button>
+                    <button class="btn btn-pri size02" id="form-submit-order-btn">주문하기</button>
                 </div>
 			</div>
 		</div>
@@ -218,8 +218,10 @@
 			$(this).next().text($(this).val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		});
 
-
-
+		// 폼 제출
+		$("#form-submit-order-btn").on("click", function(){
+			$("form").submit();
+		});
 
 
 	</script>

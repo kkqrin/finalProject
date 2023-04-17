@@ -50,6 +50,6 @@ public class OrderController {
 		Point point = memberService.selectTotalPoint(memberNo);
 		model.addAttribute("point", point);
 		
-		return "order/temporOrderSheet";
+		return "order/orderSheet";
 	}
 }
