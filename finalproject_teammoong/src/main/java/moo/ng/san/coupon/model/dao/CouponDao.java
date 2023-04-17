@@ -43,13 +43,13 @@ public class CouponDao {
 	}
 
 	public ArrayList<IssueCoupon> selectAllIssueCoupon(int memberNo) {
-		List list = sqlSession.selectList("issueCoupon.selectMemberIssueCoupon",memberNo);
-		return (ArrayList<IssueCoupon>) list;
+		List couponList = sqlSession.selectList("issueCoupon.selectMemberIssueCoupon",memberNo);
+		return (ArrayList<IssueCoupon>) couponList;
 	}
 
 	public ArrayList<Point> selectAllPoint(int memberNo) {
-		List list = sqlSession.selectList("point.selectAllPoint",memberNo);
-		return (ArrayList<Point>)list;
+		List pointList = sqlSession.selectList("point.selectAllPoint",memberNo);
+		return (ArrayList<Point>)pointList;
 	}
 	
 }

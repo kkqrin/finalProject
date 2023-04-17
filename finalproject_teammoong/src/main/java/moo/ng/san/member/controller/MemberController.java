@@ -47,7 +47,6 @@ public class MemberController {
 	
 	@RequestMapping(value = "/join.do")
 	public String signIn(Member m, MultipartFile memberPropic, HttpServletRequest request ,Model model,HttpSession session) {
-
 		String filePath="";
 		if(!memberPropic.isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member/");
@@ -136,14 +135,16 @@ public class MemberController {
 	
 	@RequestMapping(value = "/updateMember.do")
 	public String updateMember(Member member, MultipartFile memberPropic, HttpServletRequest request, @SessionAttribute(required=false) Member m) {
-//		System.out.println("memberNo : "+member.getMemberNo());
-//		System.out.println("memberPhone : "+member.getMemberPhone());
-//		System.out.println("memberEmail : "+member.getMemberEmail());
-//		System.out.println("memberZoneCode : "+member.getMemberZoneCode());
-//		System.out.println("memberAddr : "+member.getMemberAddr());
-//		System.out.println("memberBank : "+member.getMemberBank());
-//		System.out.println("memberAccount : "+member.getMemberAccount());
-//		System.out.println("memberBday : "+member.getMemberBday());
+		System.out.println("memberNo : "+member.getMemberNo());
+		System.out.println("memberPhone : "+member.getMemberPhone());
+		System.out.println("memberEmail : "+member.getMemberEmail());
+		System.out.println("memberZoneCode : "+member.getMemberZoneCode());
+		System.out.println("memberAddr : "+member.getMemberAddr());
+		System.out.println("memberBank : "+member.getMemberBank());
+		System.out.println("memberAccount : "+member.getMemberAccount());
+		System.out.println("memberBday : "+member.getMemberBday());
+		System.out.println("memberPropic : "+memberPropic);
+		System.out.println("세션에 있는거 : "+m.getMemberPath());
 		
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member/");
 		String filePath="";
@@ -157,22 +158,32 @@ public class MemberController {
 		
 		String memberPath = m.getMemberPath();
 		
-		if(result>0 && filePath!="") {
+		if(result>0 || (result>0 && filePath!="")) { //이미지까지 수정하거나, 그냥 수정만 하거나
 			m.setMemberPhone(member.getMemberPhone());
 			m.setMemberEmail(member.getMemberEmail());
 			m.setMemberZoneCode(member.getMemberZoneCode());
 			m.setMemberAddr(member.getMemberAddr());
 			m.setMemberBank(member.getMemberBank());
 			m.setMemberAccount(member.getMemberAccount());
-			m.setMemberPath(filePath);
 			
-			if(!memberPath.equals("moongs.png")) {
-				fm.deleteFile(savePath, memberPath);
+			
+			if(member.getMemberBday()!=null && member.getMemberBday().length()>0) { //생일을 새로 추가했을 경우
+				String year = member.getMemberBday().substring(0,4);
+				String month = member.getMemberBday().substring(4,6);
+				String day = member.getMemberBday().substring(6,8);
+				m.setMemberBday(year+"년"+month+"월"+day+"일");
 			}
+			if(!memberPropic.isEmpty() && !memberPath.equals("moongs.png")) { //이미지까지 수정하고, 기본 이미지에서 수정하는 경우가 아닌 경우
+				m.setMemberPath(filePath);
+				fm.deleteFile(savePath, memberPath);
+			}else if(!memberPropic.isEmpty() && memberPath.equals("moongs.png")) {
+				m.setMemberPath(filePath);
+			}
+		
 		}
 		
 		return "redirect:/myPage.do";
-	}
+	}//updateMember
 	
 	
 	@ResponseBody

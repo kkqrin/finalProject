@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 <link rel="stylesheet" href="/resources/css/member/signUpFrm.css" />
 </head>
 <body>
@@ -130,7 +131,7 @@
 						<td class="caution" colspan="3"></td>
 					</tr>
 					<tr>
-						<td><label for="email">본인확인용 이메일</label></td>
+						<td><label for="email">이메일</label></td>
 						<td colspan="3"><input type="text" name="memberEmail" id="email" placeholder="예시) moongsan@google.com"></td>
 					</tr>
 					<tr class="caution-tr">
@@ -138,30 +139,8 @@
 						<td class="caution" colspan="3"></td>
 					</tr>
 					<tr>
-						<td>생년월일</td>
-							<input type="hidden" name="memberBday" value="">
-						<td id="no">
-							<div class="bday-input year">
-								<input type="text" id="birth-year" class="input-noborder">년
-							</div>
-						</td>
-						<td id="no">
-							<select id="birth-month" class="select-custom">
-								<c:forEach var="i" begin="1" end="12" step="1">
-									<c:if test="${i<10}">
-										<option value="0${i }">0${i }월</option>
-									</c:if>
-									<c:if test="${10<=i}">
-										<option value="${i }">${i }월</option>
-									</c:if>
-								</c:forEach>	
-							</select>
-						</td>
-						<td id="no">
-							<div class="bday-input day">
-								<input type="text" id="birth-day" class="input-noborder">일
-							</div>
-						</td>
+						<td><label for="name">생년월일</label></td>
+						<td colspan="3"><input type="text" id="datepick" name="memberBday" placeholder="생일을 입력해주세요"></td>
 					</tr>
 					<tr class="caution-tr gender">
 						<td></td>
@@ -215,11 +194,6 @@
 							<li>
 								<input type="checkbox" name="memberAgree" id="agree2" value=1 class="agree">
 								<label for="agree2">마케팅 활용동의(선택)</label><a>약관보기></a>
-								
-							</li>
-							<li>
-								<input type="checkbox" id="agree3" class="agree">
-								<label for="agree3">본인은 만 14세 이상입니다.(필수)</label>
 							</li>
 						</ul>
 					</div>
@@ -258,6 +232,12 @@
 
 
 
+	<script type="text/javascript"
+		src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+
+
+
 
 	<script>
 	
@@ -277,8 +257,8 @@
 			
 		
 			
-			let result = [false, false, false, false, false, true, false ,true, true, true]; //정규표현식 검사
-						//0아이디, 1비밀번호, 2비밀번호 확인, 3이름확인, 4휴대폰형식, 5휴대폰인증코드, 6주소확인, 7계좌번호형식, 8이메일형식, 9생년월일
+			let result = [false, false, false, false, false, true, false ,true, true]; //정규표현식 검사
+						//0아이디, 1비밀번호, 2비밀번호 확인, 3이름확인, 4휴대폰형식, 5휴대폰인증코드, 6주소확인, 7계좌번호형식, 8이메일형식
 			
 			
 			
@@ -466,7 +446,6 @@
 			$("#addr").on("click",function(){
 				new daum.Postcode({
 			        oncomplete: function(data) {
-			        	console.log(data);
 			        	$("[name='memberZoneCode']").val(data.zonecode);
 			        	const addr = String(data.address);
 			        	$("[name='address']").val(addr);
@@ -543,59 +522,7 @@
 // 			})//이메일 인증번호 보내기
 			
 			
-			
-			
-			
-			
-			
 
-			$("#birth-year").on("change",function(){
-				//년도 정규표현식
-				const yearReg = /^\d{4}$/;
-				const inputYear = $(this).val();
-				let now = new Date();
-				let year = now.getFullYear()-15;
-				if(!yearReg.test(inputYear) || inputYear<1900 || year<inputYear){
-					$(".year").addClass("error");
-					$(".caution-tr").eq(10).css("display","table-row");
-					$(".caution").eq(10).children().css("color","var(--secondary)");
-					$(".caution").eq(10).html("<a>입력값을 다시 한 번 확인해주세요.</a>");
-					result[9] = false;
-				}else{
-					$(".year").removeClass("error");
-					$(".caution-tr").eq(10).css("display","none");
-					result[9] = true;
-				}
-				if(inputYear==""){
-					$(".year").removeClass("error");
-					$(".caution-tr").eq(10).css("display","none");
-					result[9] = true;
-				}
-			})//생일 정규표현식(년도)
-			
-			
-			$("#birth-day").keyup(function(){
-				//일자 정규표현식
-				const dayReg = /^\d{1,2}$/;
-				const inputDay = $(this).val();
-				if(!dayReg.test(inputDay) || inputDay<1 || 31<inputDay){
-					$(".day").addClass("error");
-					$(".caution-tr").eq(10).css("display","table-row");
-					$(".caution").eq(10).children().css("color","var(--secondary)");
-					$(".caution").eq(10).html("<a>입력값을 다시 한 번 확인해주세요.</a>");
-					result[9] = false;
-				}else{
-					$(".day").removeClass("error");
-					$(".caution-tr").eq(10).css("display","none");
-					result[9] = true;
-				}
-				if(inputDay==""){
-					$(".day").removeClass("error");
-					$(".caution-tr").eq(10).css("display","none");
-					result[9] = true;
-				}
-			})//생일 정규표현식(일)
-			
 			
 			const allCheck = document.querySelector("#allcheck")
 			const agreeArr = document.querySelectorAll(".agree");
@@ -621,21 +548,6 @@
 				   $("[name='memberGender']").eq(2).prop('checked',true);
 				}; //성별입력확인받고 입력 안했으면 3으로 값
 
-				const year = $("#birth-year").val();
-				const month = $("#birth-month").val();
-				const day = $("#birth-day").val();
-				if(year!="" && day!=""){
-					let modifyDay;
-					if($("#birth-day").val()<10){
-						modifyDay = "0"+Number($("#birth-day").val());
-					}else{
-						modifyDay = $("#birth-day").val();
-					}
-					$("[name='memberBday']").val(year+month+modifyDay); 
-				}else{
-					$("[name='memberBday']").val(null);
-				}//받은 생일 yyyymmdd형식으로 만들기
-
 				if($("[name='memberAgree']").prop('checked')==false){
 					$("[name='memberAgree']").val(0);
 				}else{
@@ -650,10 +562,10 @@
 				});//모든 정규표현식을 통과해야 함
 				
 				let agree1 = $("#agree1").prop('checked');
-				let agree3 = $("#agree3").prop('checked');
 				if(!resultChk){
+					alert("누락된 항목이 없는지 다시 한 번 확인해주세요");
 					event.preventDefault();
-				}else if(!agree1 || !agree3){
+				}else if(!agree1){
 					alert("필수 이용약관에 동의해주세요");
 					event.preventDefault();
 				}//필수 이용약관에 체크해야 함
@@ -686,6 +598,23 @@
 			}
 			//파일 이미지
 
+			
+/*=========데이트픽커========================================================*/			
+			
+			$( function() {
+			    $( "#datepick" ).datepicker({
+			    	  changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
+			    	  changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
+			    	  minDate: '-90y', // 현재날짜로부터 100년이전까지 년을 표시한다.
+			    	  yearRange: 'c-90:c', // 년도 선택 셀렉트박스를 현재 년도에서 이전, 이후로 얼마의 범위를 표시할것인가.
+			    	  dateFormat: "yymmdd", // 텍스트 필드에 입력되는 날짜 형식.
+			    	  showAnim: "slideDown", //애니메이션을 적용한다.
+			    	  showMonthAfterYear: true , // 월, 년순의 셀렉트 박스를 년,월 순으로 바꿔준다. 
+			    	  dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], // 요일의 한글 형식.
+			    	  monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] // 월의 한글 형식.
+			    });
+			} );
+			
 	</script>
 
 

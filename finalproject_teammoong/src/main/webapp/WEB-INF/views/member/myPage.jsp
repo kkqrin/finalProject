@@ -138,8 +138,8 @@
 								</c:when>
 								<c:otherwise>
 									<div class="subDiv">
-										<input type="text" name="memberBday" placeholder="생일을 입력하세요">
-										<a class="caution">형식을 확인해주세요</a>
+										<input type="text" id="datepick" name="memberBday" placeholder="생일을 입력하세요">
+										<a class="caution" style="display: flex;">생일 쿠폰이 발급됩니다!(최초 등록 후 수정 불가)</a>
 									</div>
 								</c:otherwise>
 							</c:choose>
@@ -354,13 +354,7 @@
 			}
 		});//계좌번호 정규표현식	
 			
-		
-	/*====생일 관련==========================================*/		
-		
-		
-		
-		
-			
+
 	/*====비밀번호 수정 관련==========================================*/			
 		
 		$(function () {
@@ -526,6 +520,23 @@
 		}
 		//파일 이미지
 
+/*=========데이트픽커========================================================*/			
+			
+			$( function() {
+			    $( "#datepick" ).datepicker({
+			    	  changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
+			    	  changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
+			    	  minDate: '-90y', // 현재날짜로부터 100년이전까지 년을 표시한다.
+			    	  yearRange: 'c-90:c', // 년도 선택 셀렉트박스를 현재 년도에서 이전, 이후로 얼마의 범위를 표시할것인가.
+			    	  dateFormat: "yymmdd", // 텍스트 필드에 입력되는 날짜 형식.
+			    	  showAnim: "slideDown", //애니메이션을 적용한다.
+			    	  showMonthAfterYear: true , // 월, 년순의 셀렉트 박스를 년,월 순으로 바꿔준다. 
+			    	  dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], // 요일의 한글 형식.
+			    	  monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] // 월의 한글 형식.
+			    });
+			} );		
+		
+		
 
 	</script>
 	

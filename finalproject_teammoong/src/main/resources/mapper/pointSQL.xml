@@ -3,20 +3,35 @@
 <mapper namespace="point">
 	<insert id="insertPoint" parameterType="_int">
 		insert into point_tbl values
-		(point_tbl_seq.nextval, #{memberNo}, 50)
+		(point_tbl_seq.nextval, #{memberNo}, 50, sysdate, 0)
 	</insert>
 	<insert id="insertFirstPoint" parameterType="_int">
 		insert into point_tbl values
-		(point_tbl_seq.nextval, #{memberNo}, 2000)
+		(point_tbl_seq.nextval, #{memberNo}, 2000, sysdate, 1)
 	</insert>
 	<select id="selectAllPoint" parameterType="_int" resultType="point">
-		select
-			point_ea as pointEa
-		from point_tbl where member_no = #{memberNo}
+		SELECT 
+			  rnum,
+			  point_no AS pointNo,
+			  member_no AS memberNo,
+			  point_ea AS pointEa,
+			  TO_CHAR(point_date, 'YYYY-MM-DD') AS pointDate,
+			  point_status AS pointStatus
+			FROM (
+			  SELECT 
+			    ROW_NUMBER() OVER (ORDER BY point_date DESC) as rnum,
+			    point_no,
+			    member_no,
+			    point_ea,
+			    point_date,
+			    point_status
+			  FROM point_tbl
+			  WHERE member_no = #{memberNo}
+			) t 
 	</select>
 	<select id="selectTotalPoint" parameterType="_int" resultType="point">
 		select
 			sum(point_ea) as pointEa
-		from point_tbl where member_no = #{memberNo}
+		from point_tbl where member_no = #{memberNo} and point_status != 3
 	</select>
 </mapper>

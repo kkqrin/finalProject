@@ -1,4 +1,4 @@
-package moo.ng.san.dayCheck.model.vo;
+package moo.ng.san.board.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Point {
-	private int pointNo;
+public class Notify {
+	private int notifyNo;
 	private int memberNo;
-	private int pointEa;
-	private String pointDate;
-	private int pointStatus;
+	private int boardNo;
+	private int notifyItem;
+	
 }

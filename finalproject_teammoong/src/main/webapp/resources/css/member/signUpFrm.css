@@ -44,7 +44,6 @@ table tbody tr td:nth-child(2):not(#no){
 }
 table tbody tr td:nth-child(3):not(#no){
     width: 25%;
-    padding: 10px 10px 0 10px;
 }
 .caution-tr{
 	display:none;
@@ -68,8 +67,8 @@ table tbody tr td:nth-child(3):not(#no){
 
 .btn.size02{
     padding: 7px 24px !important;
-    width: 100%;
-    margin: 0;
+    width: 90%;
+    margin: 0 auto;
 }
 .sub{
     color: blue;

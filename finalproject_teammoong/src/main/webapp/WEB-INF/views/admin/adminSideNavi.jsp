@@ -13,45 +13,6 @@
 
 </head>
 <style>
-    .adminPage-wrapper{
-        background-color: #111;
-        width: 1200px;
-        margin: auto;
-    }
-    .adminPage-header{
-        margin-left: 30px;
-    }
-    .adminPage-back{
-        background-color: lightyellow;
-        overflow: hidden;
-    }
-    .adminPage-sidebar{
-        float: left;
-        width: 300px;
-        background-color: lightcoral;
-        height: 2000px;
-    }
-    .adminPage-sidebar>ul>li{
-        text-decoration: none;
-        
-    }
-    .adminPage-main{
-        background-color: lightgreen;
-    }
-    .adminPage-content{
-        background-color: #fff;
-        overflow: hidden;
-    }
-    .material-symbols-outlined{
-        font-size: 150px;
-        
-    }
-    .mainContent{
-        float: left;
-        width: 300px;
-        height: 400px;
-        text-align: center;
-    }
 
 </style>
 <body>
