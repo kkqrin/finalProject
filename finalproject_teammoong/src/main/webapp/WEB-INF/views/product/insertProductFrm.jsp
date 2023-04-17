@@ -42,14 +42,14 @@
 						</select>
 					</td>
 				</tr>
-				<tr>
+				<tr class="product-name-tr">
 					<th>상품이름</th>
 					<td colspan="2"><input type="text" name="productName"></td>
 				</tr>
 				<tr>
 					<th>상품수량</th>
-            <td colspan="2"><input type="text" name="productEa"></td>
-        </tr>
+            		<td colspan="2"><input type="text" name="productEa"></td>
+       	 		</tr>
         <tr>
 			<th>상품가격</th>
             <td colspan="2"><input type="text" name="productPrice"></td>
@@ -106,6 +106,7 @@
 <script src="${pageContext.request.contextPath}/resources/summernote/lang/summernote-ko-KR.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/summernote/summernote-lite.css">
 <script>
+	
 	$(document).ready(function() {
 
 var toolbar = [

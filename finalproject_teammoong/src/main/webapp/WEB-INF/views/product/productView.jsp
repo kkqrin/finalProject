@@ -176,9 +176,44 @@
                             </ul>
                         </div>
                     </div>
+                    <div class="flex-btn">
+                        <div class="one-btn">
+                            <button type="button" class="btn btn-white size02">혼자구매하기</button>
+                        </div>
+                        <div class="moong-btn">
+                            <button type="button" class="btn btn-pri size02">뭉쳐야산다</button>
+                        </div>
+                    </div>
                 </div>
-            </div>  
+            </div>
         </div>
+        <div class="gonggu-board-logo"><h3>뭉쳐야 산다!</h3></div>
+        <div class="gonggu-board">
+            <div class="all-flex-wrap">
+                <div class="left-flex-wrap">
+                    <div class="user-img"><img src="/resources/upload/member/${sessionScope.m.memberPath}" style="width: 50px; height: 50px;"></div>
+                    <div class="user-id">${sessionScope.m.memberId}</div>
+                    <div class="gonggu-number">(1/2)</div>
+                </div>
+                <div class="right-flex-wrap">
+                    <div class="right-flex-info">
+                        <div class="number-info">1명 남음</div>
+                        <div class="time-limit" id="timer"></div>
+                    </div>
+                    <button type="button" class="btn btn-pri size01" id="orderBtn">주문참여</button>
+                </div>
+            </div>
+        </div>
+        <div class="quick-scroll-bar">
+            <table>
+        <tr>
+            <td><a href="#" class="product-info-btn">상품설명</a></td>
+            <td><a href="#" class="product-view-btn">상세정보</a></td>
+            <td><a href="#" class="product-review-btn">리뷰보기</a></td>
+            <td><a href="#" class="product-inquiry-btn">문의하기</a></td>
+        </tr>
+    </table>
+</div>  
         <div class="gonggu-content-wrap">
             <div class="gonggu-content-title">
             </div>
@@ -196,9 +231,9 @@
                             <input type="hidden" value="${iq.inquiryNo}">
                             <td class="inquiry-content-btn">${iq.inquiryTitle }</td>
                             <td>${iq.inquiryWriter }</td>
-                        <td>${iq.inquiryDate }</td>
-                        <c:if test="${iq.inquiryStatus eq  0}">
-                        <td>답변대기</td>
+                            <td>${iq.inquiryDate }</td>
+                            <c:if test="${iq.inquiryStatus eq  0}">
+                                <td>답변대기</td>
                     </c:if>
                         <c:if test="${iq.inquiryStatus eq  1}">
                             <td>답변완료</td>
@@ -217,7 +252,7 @@
                                 <input type="hidden" id="inquiryNo" value="${iq.inquiryNo}">
                                 <!-- 문의사항 각 게시글의 첫번째 수정버튼 -->
                                 <c:choose>
-	                                <c:when test="${sessionScope.m.memberId eq iq.inquiryWriter}">
+                                    <c:when test="${sessionScope.m.memberId eq iq.inquiryWriter}">
 	                                	<button class="btn btn-pri size01 updateBtn" data-modal="#modalBasic">수정</button>
 	                                </c:when>
 	                                <c:when test="${sessionScope.m.memberStatus eq 0}">
@@ -236,14 +271,49 @@
                 <button type="button" id="insertInquiry" class="btn btn-pri size01" data-modal="#modalBasic2">문의하기</button>
             </div>
         </div>
-        </div>
-        <div class="fix-button-box">
-            <div class="button-box">
-                <button type="button" class="button buy-one-btn">혼자구매</button>
-                <button type="button" class="button gonggu-buy-btn">공동구매</button>
-            </div>
-        </div>
     </div>
+    
+<!-- <div class="quick-scroll-bar">
+        <ul>
+        <li><a href="#" class="product-info-btn">상품설명</a></li>
+        <li><a href="#" class="product-view-btn">상세정보</a></li>
+        <li><a href="#" class="product-review-btn">리뷰보기</a></li>
+        <li><a href="#" class="product-inquiry-btn">문의하기</a></li>
+        </ul>
+        </div>
+        <div class="quick-scroll-content">
+        <div class="product-info-box" style="height: 500px;">상품정보</div>
+        <div class="product-info-view" style="height: 500px;">상세정보</div>
+        <div class="product-review" style="height: 500px;">리뷰보기</div>
+        <div class="product-inquiry" style="height: 500px;">문의하기</div>
+    </div> -->
+        <!--구매버튼 시작-->
+        <!-- <div class="fix-button-box">
+            <div class="gonggu-window">
+                <div class="window-close-btn">X</div>
+                    <div class="flex-box">
+                        <div class="info-title-box">
+                            <a class="info-title">옵션</a>
+                        </div>
+                        <div>
+                            <ul class="info-content">
+                                <li><select class="select-custom product-option">
+                                    <option value="0" selected>상품 옵션을 선택해주세요</option>
+                                    <c:forEach items="${optionList }" var="po">
+	                                    <option value="${po.optionInfoNo }">${po.optionDetailName } ( +<fmt:formatNumber value="${po.optionPrice }"/>원 )</option>
+                                    </c:forEach>
+                                </select></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="button-box">
+                    <button type="button" class="button buy-one-btn">혼자구매</button>
+                    <button type="button" class="button gonggu-buy-btn">공동구매</button>
+                </div>
+            </div> -->
+        </div>
+     <!--구매버튼-->
      <!-- 문의사항 삭제 모달 시작 -->
      <div id="modalDelete" class="modal modal-pri">
         <div class="modal-content">
@@ -257,7 +327,7 @@
                 <!--//내용영역-->
             </div>
             <div class="area-btn center">
-                <button class="btn btn-pri size01" type="button">삭제</button>
+                <button class="btn btn-pri size01 deleteButton" type="button">삭제</button>
                 <a href="" rel="modal:close" class="btn btn-sec size01">닫기</a>
             </div>
         </div>
@@ -334,21 +404,7 @@
 <input type="hidden" id="likeNo" value="${l.likeNo}">
 <input type="hidden" id="productContent" value="${p.productContent}">
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
-<!-- <div class="quick-scroll-bar">
-    <ul>
-        <li><a href="#" class="product-info-btn">상품설명</a></li>
-<li><a href="#" class="product-view-btn">상세정보</a></li>
-<li><a href="#" class="product-review-btn">리뷰보기</a></li>
-<li><a href="#" class="product-inquiry-btn">문의하기</a></li>
-</ul>
-</div>
-<div class="quick-scroll-content">
-<div class="product-info-box" style="height: 500px;">상품정보</div>
-<div class="product-info-view" style="height: 500px;">상세정보</div>
-<div class="product-review" style="height: 500px;">리뷰보기</div>
-<div class="product-inquiry" style="height: 500px;">문의하기</div>
 
-</div> -->
 
     
     
@@ -356,6 +412,63 @@
     	<!-- 슬릭 슬라이더 js -->
 	<script type="text/javascript" src="/resources/slick/slick.min.js"></script>
     <script>
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        $("#orderBtn").on("click",function(){
+      // 현재 시간 가져오기
+      var currentTime = new Date();
+      // 12시간 후 시간 계산
+      var endTime = new Date(currentTime.getTime() + 12 * 60 * 60 * 1000);
+      
+      // 타이머 업데이트 함수
+      function updateTimer() {
+        var now = new Date();
+        var diff = endTime - now; // 남은 시간 계산
+        var hours = Math.floor(diff / (60 * 60 * 1000)); // 시간
+        var minutes = Math.floor((diff % (60 * 60 * 1000)) / (60 * 1000)); // 분
+        var seconds = Math.floor((diff % (60 * 1000)) / 1000); // 초
+        
+        // 타이머 텍스트 업데이트
+        $('#timer').text((hours < 10 ? '0' : '') + hours + ':' +
+                        (minutes < 10 ? '0' : '') + minutes + ':' +
+                        (seconds < 10 ? '0' : '') + seconds);
+                        
+        // 타이머가 종료되면 타이머 정지
+        if (diff <= 0) {
+          clearInterval(timerInterval);
+          $('#timer').text('00:00:00');
+        }
+      }
+      
+      // 1초마다 타이머 업데이트
+      var timerInterval = setInterval(updateTimer, 1000);
+    });
+    
+
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        $(".gonggu-window").hide();
+        $(".gonggu-buy-btn").on("click",function(){
+            if($(".gonggu-window").css("display") == "none"){
+                $(".gonggu-window").show();
+            } else {
+                $(".gonggu-window").hide();
+            }
+            // $.ajax({
+            //     url : "/selectOptionGroup.do",
+            //     type : "POST",
+            //     dataType : "JSON",
+            //     data : {productNo : $("#productNo").val()},
+            //     success : function(data){
+            //         console.log(data);
+            //     }
+            // });
+        });
+        $(".window-close-btn").on("click",function(){
+            $(".gonggu-window").hide();
+        });
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         window.onload = function(){
             // 찜하기 DB조회후 로그인한 회원과 같으면 색칠해주는 ajax
             if($("#loginMember").val() != ''){
@@ -568,6 +681,10 @@
             });
         });
         //문의사항 삭제
+        $(".deleteButton").on("click",function(){
+            var inquiryNo = $(this).parent().parent().parent().prev().children().next().children().next().children().children().next().children().val();
+            console.log(inquiryNo);
+        });
         //문의사항 수정
         $(".updateDoneBtn").on("click",function(){
             var inquiryContent = $("[name=inquiryContent]").val();
