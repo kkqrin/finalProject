@@ -101,6 +101,8 @@ public class ProductDao {
 	public int selectOptionGroupNo(int productNo) {
 		int optionGroupNo = sqlSession.selectOne("product.selectOptionGroupNo", productNo);
 		
+		System.out.println("Dao의 optionGroupNo : "+optionGroupNo);
+		
 		return optionGroupNo;
 	}
 

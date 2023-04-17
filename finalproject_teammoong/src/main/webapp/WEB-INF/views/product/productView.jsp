@@ -167,7 +167,7 @@
                         </div>
                     </div>
 
-                    <div class="flex-box">
+                    <div class="flex-box option-list-box">
                         <div class="info-title-box">
                             <a class="info-title">옵션</a>
                         </div>
@@ -901,6 +901,13 @@
                 const optionNo = $( ".product-option" ).val();
 
                 location.href="/putInShoppingCart.do?productNo="+productNo+"&optionNo="+optionNo;
+            });
+
+            // 옵션 없는 상품은 출력 안함
+            $(document).ready(function(){
+                if($(".info-content").find("option").length == 1){
+                    $(".option-list-box").hide();
+                }
             });
 
             // 폼 제출

@@ -150,34 +150,31 @@ public class ProductController {
 	
 	
 		
-	@ResponseBody	
 	@RequestMapping(value="/putInShoppingCart.do")
-	public String putInShoppingCart(int productNo, int optionNo, @SessionAttribute(required=false) Member m) {
+	public String putInShoppingCart(int productNo, String optionNo, @SessionAttribute(required=false) Member m) {
 		// 세션에서 가져옴
 		int memberNo = m.getMemberNo();
+		
+		int optionNumber = Integer.parseInt(optionNo);
 		
 		// 장바구니 담기
 		int result = service.insertShoppingCart(memberNo, productNo);
 		
-		if(result>0) {
+		if(result>0 && optionNumber != 0) {
+			// 옵션이 있는 상품은 장바구니 옵션 테이블에 insert
+			
 			// 옵션 그룹 넘버 조회
-			int optionGroupNo = service.selectOptionGroupNo(productNo);
-			System.out.println("optionGroupNo : " + optionGroupNo);
+			int optionGroupNo = service.selectOptionGroupNo(productNo);			
 			// 최근에 insert된 장바구니 번호(max)
 			int recentBasketNo = service.selectRecentBasketNo();
-			System.out.println("recentBasketNo : " + recentBasketNo);
 			
-			// + 옵션이 있을때
-			result = service.insertShoppingCartOption(recentBasketNo, optionGroupNo, optionNo);
+			// 장바구니 옵션 테이블 insert
+			result = service.insertShoppingCartOption(recentBasketNo, optionGroupNo, optionNumber);
 			
-			if(result>0) {
-				return "ok";					
-			}else {
-				return "fail";
-			}
-		}else {
-			return "fail";			
+			
 		}
+		
+		return "redirect:/productView.do?productNo="+productNo;
 	}
 	
 	
