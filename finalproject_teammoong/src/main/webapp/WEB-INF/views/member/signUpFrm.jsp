@@ -194,11 +194,6 @@
 							<li>
 								<input type="checkbox" name="memberAgree" id="agree2" value=1 class="agree">
 								<label for="agree2">마케팅 활용동의(선택)</label><a>약관보기></a>
-								
-							</li>
-							<li>
-								<input type="checkbox" id="agree3" class="agree">
-								<label for="agree3">본인은 만 14세 이상입니다.(필수)</label>
 							</li>
 						</ul>
 					</div>
@@ -451,7 +446,6 @@
 			$("#addr").on("click",function(){
 				new daum.Postcode({
 			        oncomplete: function(data) {
-			        	console.log(data);
 			        	$("[name='memberZoneCode']").val(data.zonecode);
 			        	const addr = String(data.address);
 			        	$("[name='address']").val(addr);
@@ -568,10 +562,10 @@
 				});//모든 정규표현식을 통과해야 함
 				
 				let agree1 = $("#agree1").prop('checked');
-				let agree3 = $("#agree3").prop('checked');
 				if(!resultChk){
+					alert("누락된 항목이 없는지 다시 한 번 확인해주세요");
 					event.preventDefault();
-				}else if(!agree1 || !agree3){
+				}else if(!agree1){
 					alert("필수 이용약관에 동의해주세요");
 					event.preventDefault();
 				}//필수 이용약관에 체크해야 함
@@ -607,23 +601,17 @@
 			
 /*=========데이트픽커========================================================*/			
 			
-			const date = new Date();
-			const year = date.getFullYear();
-			const minYear = date.getFullYear()-100;
-			const maxYear = date.getFullYear()-15;
-			
 			$( function() {
 			    $( "#datepick" ).datepicker({
-			    	showMonthAfterYear: true,
-			    	changeMonth: true,
-			        changeYear: true,
-			    	yearRange: minYear +':' +maxYear,
-					dateFormat : 'yymmdd', // 일시 노출 포맷
-					closeText : "취소",	
-					dayNamesMin : [ "일", "월", "화", "수", "목", "금", "토" ],
-					monthNamesShort : [ "1월", "2월", "3월", "4월", "5월", "6월",
-							"7월", "8월", "9월", "10월", "11월", "12월" ],
-					showAnim: "slideDown"
+			    	  changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
+			    	  changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
+			    	  minDate: '-90y', // 현재날짜로부터 100년이전까지 년을 표시한다.
+			    	  yearRange: 'c-90:c', // 년도 선택 셀렉트박스를 현재 년도에서 이전, 이후로 얼마의 범위를 표시할것인가.
+			    	  dateFormat: "yymmdd", // 텍스트 필드에 입력되는 날짜 형식.
+			    	  showAnim: "slideDown", //애니메이션을 적용한다.
+			    	  showMonthAfterYear: true , // 월, 년순의 셀렉트 박스를 년,월 순으로 바꿔준다. 
+			    	  dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], // 요일의 한글 형식.
+			    	  monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] // 월의 한글 형식.
 			    });
 			} );
 			
