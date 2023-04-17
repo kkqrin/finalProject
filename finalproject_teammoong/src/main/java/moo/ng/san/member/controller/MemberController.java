@@ -59,19 +59,16 @@ public class MemberController {
 		int result = service.insertMember(m);
 		
 		if(result>0) {
-			result += service.insertFirstPoint(m);
-			if(result>1) {
-				m.setMemberPw(null);
-				Member loginMember = service.selectOneMember(m);
-				session.setAttribute("m", loginMember);
-				
-				MsgVO msg = new MsgVO();
-				msg.setTitle("가입을 환영합니다");
-				msg.setMsg("뭉쳐야산다에서 저렴하게 구매해보세요 :)");
-				msg.setLoc("/");
-				model.addAttribute("msg", msg);
-				return "common/msg";
-			}
+			m.setMemberPw(null);
+			Member loginMember = service.selectOneMember(m);
+			session.setAttribute("m", loginMember);
+			
+			MsgVO msg = new MsgVO();
+			msg.setTitle("가입을 환영합니다");
+			msg.setMsg("뭉쳐야산다에서 저렴하게 구매해보세요 :)");
+			msg.setLoc("/");
+			model.addAttribute("msg", msg);
+			return "common/msg";
 		}
 		return "redirect:/"; //오류페이지로 넘어가야함
 	}

@@ -23,6 +23,11 @@ public class MemberService {
 	public int insertMember(Member m) {
 		int result = 0;
 		result = dao.insertMember(m);
+		if(result>0) {
+			m.setMemberPw(null);
+			Member member = dao.selectOneMember(m);
+			result += dao.insertFirstPoint(member);
+		}
 		return result;
 	}//insertMember
 
@@ -41,14 +46,6 @@ public class MemberService {
 		return dao.updateNewPwMember(member);
 	}
 
-	@Transactional
-	public int insertFirstPoint(Member m) {
-		m.setMemberPw(null);
-		System.out.println(m);
-		Member member = dao.selectOneMember(m);
-		System.out.println(member);
-		return dao.insertFirstPoint(member);
-	}
 
 	
 }//MemberService

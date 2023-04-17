@@ -7,7 +7,7 @@
 	</insert>
 	<insert id="insertFirstPoint" parameterType="_int">
 		insert into point_tbl values
-		(point_tbl_seq.nextval, #{memberNo}, 2000, sysdate,1)
+		(point_tbl_seq.nextval, #{memberNo}, 2000, sysdate, 1)
 	</insert>
 	<select id="selectAllPoint" parameterType="_int" resultType="point">
 		select
@@ -17,6 +17,6 @@
 	<select id="selectTotalPoint" parameterType="_int" resultType="point">
 		select
 			sum(point_ea) as pointEa
-		from point_tbl where member_no = #{memberNo}
+		from point_tbl where member_no = #{memberNo} and point_status != 3
 	</select>
 </mapper>
