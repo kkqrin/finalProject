@@ -40,7 +40,7 @@
 	
 	
         <pre>
-            남은 일 : 적립금 [적용][모두사용] 버튼 구현 , 주소검색, 주문자 정보와 동일
+            남은 일 : 주소검색 API, 유효성 검사 (나쁜사용자)
         </pre>
         <div class="order-sheet-wrap">
             <h1>주문서</h1>
@@ -54,21 +54,11 @@
                     
                     <!-- 상품 리스트 요약 -->
                     <div class="order-product-item total-product-count-box">
-                        <!-- <div class="order-product-img">
-                            <a href="#">
-                                <img src="/resources/img/product/lactofit.jpg" />
-                            </a>
-                        </div> -->
                         <div class="order-product-info total-product-count">
                             <div class="order-product-title">
-                                <!-- <a href="#"> -->
-                                    [3월 한정 파격특가][종근당건강] 락토핏 ..<!-- 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균 --> 외에 상품 [2]개를 주문하셨습니다.
-                                <!-- </a> -->
+                                    <span id="first-product-name"></span> 등 현재 주문 상품은 총 [<span id="order-product-count"></span>]건
                             </div>
-                            <!-- <div class="order-product-option">3통 120포</div> -->
                         </div>
-                        <!-- <div class="order-product-volume">1개</div>
-                        <div class="order-product-price">1,000원</div> -->
                     </div>
                     
                     
@@ -83,9 +73,7 @@
                             </div>
                             <div class="order-product-info">
                                 <div class="order-product-title">
-                                    <a href="/productView.do?productNo=${i.productNo}">
-                                        ${i.productName }
-                                    </a>
+                                    <a href="/productView.do?productNo=${i.productNo}">${i.productName }</a>
                                 </div>
                                 <div class="order-product-option">${i.optionDetailName }</div>
                             </div>
@@ -173,7 +161,7 @@
                             <table class="tbl-box" style="margin-top: 20px;">
                                 <tr>
                                     <th>쿠폰</th>
-                                    <input type="hidden" id="number-coupon">
+                                    <input type="hidden" id="number-coupon" value="0">
                                     <td colspan="2">
                                         <div class="selectBox-widht-explain" style="width: 100%;">
                                             <select class="select-custom order-coupon" id="order-coupon">
@@ -193,7 +181,8 @@
                                             <input type="text" id="input-saved-money" placeholder="사용 가능한 적립금 <fmt:formatNumber value="${point.pointEa }"/>원">
                                             <button type="button" class="btn btn-pri size01" id="do-saved-money">적용</button>
                                             <button type="button" class="btn btn-pri size01" id="all-saved-money">모두 사용</button>
-                                            <input type="hidden" id="hidden-point" value="${point.pointEa }">
+                                            <input type="hidden" id="hidden-total-point" value="${point.pointEa }">
+                                            <input type="hidden" id="hidden-current-point" value="0">
                                         </div>
                                     </td>
                                 </tr>
@@ -260,11 +249,12 @@
                             <div>최종 결제 금액</div>
                             <div><span></span>원</div>
                         </div>
+                        <input type="hidden" id="hidden-total-pay">
 
                         <div class="total-order-buy-save-point">
                             <button type="button" class="btn btn-pri">적립</button>
-                            <div>구매시 </div>
-                            <div><span></span>원 (5%)</div>
+                            <div style="margin-right: 5px;">구매시</div>
+                            <div><span></span>원 (10%)</div>
                         </div>
                     </div>
                 </div>
@@ -303,6 +293,18 @@
             $( ".order-coupon" ).selectmenu();
 		});
 
+        // 상품 개수
+        $("#order-product-count").text($(".order-product-item").length-1);
+
+        // 상품 이름
+        if($(".order-product-title").eq(1).children().text().length > 30){
+            $("#first-product-name").text($(".order-product-title").eq(1).children().text().substr(0,30)+"..");
+        }else{
+            $("#first-product-name").text($(".order-product-title").eq(1).children().text());
+        }
+
+
+        // 배송 요청
         $(".deli-request").on("selectmenuchange", function(){
             // jQuery ui select change 이벤트
             if($(this).val() == 5){
@@ -375,6 +377,9 @@
 
             // 최종 결제 금액 = 주문금액 (- 쿠폰(0) - 적립금(0))
             $(".total-order-pay>div").last().children().text($(".total-order-amount-1>div").last().children().text());
+
+            // 적립금
+            $(".total-order-buy-save-point>div").last().children().text(Math.ceil(Number($("#number-pay-price").val())*10/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
         }
 
         // 쿠폰 할인
@@ -386,41 +391,66 @@
             $("#number-coupon").val($(this).val());
             // 최종 결제 금액 : 주문금액 - 쿠폰 - 적립금
             // 현재 적용된 쿠폰 및 적립금 빼서 계산
-            $(".total-order-pay>div").last().children().text(($("#number-pay-price").val()-$(this).val()-$("#input-saved-money").val()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            $(".total-order-pay>div").last().children().text(($("#number-pay-price").val()-$(this).val()-$("#hidden-current-point").val()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
+            // 최종 결제 금액 hidden에 숨김
+            $("#hidden-total-pay").val(($("#number-pay-price").val()-$(this).val()-$("#hidden-current-point").val())).trigger('change');
         });
 
 
-        // 적립금
+        // 적립금 모두 사용
         $("#all-saved-money").on("click", function(){
-            // hidden-point
-            $(".total-order-saved-money>div").last().children().text("-"+$("#hidden-point").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            // hidden-total-point
+            $(".total-order-saved-money>div").last().children().text("-"+$("#hidden-total-point").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             // input창도 동기화
-            $("#input-saved-money").val($("#hidden-point").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            $("#input-saved-money").val($("#hidden-total-point").val());
 
             // 최종 결제 금액 : 주문금액 - 쿠폰 - 적립금
-            $(".total-order-pay>div").last().children().text(($("#number-pay-price").val()-$("#number-coupon").val()-$("#input-saved-money").val()));
+            $(".total-order-pay>div").last().children().text(($("#number-pay-price").val()-$("#number-coupon").val()-$("#hidden-total-point").val()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            // 계산을 위해 hidden에 넣어둠
+            $("#hidden-current-point").val($("#hidden-total-point").val());
+            // 최종 결제 금액 hidden에 숨김
+            $("#hidden-total-pay").val($("#number-pay-price").val()-$("#number-coupon").val()-$("#hidden-total-point").val()).trigger('change');
         });
 
+        // 적립금 일부 사용
         $("#do-saved-money").on("click", function(){
             const input = Number($("#input-saved-money").val());
-            const total = Number($("#hidden-point").val());
+            const total = Number($("#hidden-total-point").val());
 
             if(input < total){
                 $(".total-order-saved-money>div").last().children().text("-"+$("#input-saved-money").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 // input창도 동기화
-                $("#input-saved-money").val($("#input-saved-money").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                $("#input-saved-money").val($("#input-saved-money").val());
+
+                // 계산을 위해 hidden에 넣어둠
+                $("#hidden-current-point").val($("#input-saved-money").val());
+
+                // 최종 결제 금액 : 주문금액 - 쿠폰 - 적립금
+                $(".total-order-pay>div").last().children().text(($("#number-pay-price").val()-$("#number-coupon").val()-input).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                // 최종 결제 금액 hidden에 숨김
+                $("#hidden-total-pay").val($("#number-pay-price").val()-$("#number-coupon").val()-input).trigger('change');
             }else{
                 // 보유 적립금보다 많으면 총 적립금 적용
-                $(".total-order-saved-money>div").last().children().text("-"+$("#hidden-point").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                $(".total-order-saved-money>div").last().children().text("-"+$("#hidden-total-point").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 // input창도 동기화
-                $("#input-saved-money").val($("#hidden-point").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            }
-            
+                $("#input-saved-money").val($("#hidden-total-point").val());
 
-            // 최종 결제 금액 : 주문금액 - 쿠폰 - 적립금
+                // 계산을 위해 hidden에 넣어둠
+                $("#hidden-current-point").val($("#hidden-total-point").val());
+
+                // 최종 결제 금액 : 주문금액 - 쿠폰 - 적립금
+                $(".total-order-pay>div").last().children().text(($("#number-pay-price").val()-$("#number-coupon").val()-$("#hidden-total-point").val()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                // 최종 결제 금액 hidden에 숨김
+                $("#hidden-total-pay").val($("#number-pay-price").val()-$("#number-coupon").val()-$("#hidden-total-point").val()).trigger('change');
+            }
             
         });
 
+        // 최종 결제 금액에 따라 적립 포인트 계산
+        $("#hidden-total-pay").on("change", function(){
+            $(".total-order-buy-save-point>div").last().children().text(Math.ceil(Number($(this).val())*10/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        })
 
         
     </script>
