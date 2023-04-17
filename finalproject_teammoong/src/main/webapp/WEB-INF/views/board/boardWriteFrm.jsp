@@ -95,14 +95,15 @@
 						<td colspan="2">계좌번호</td>
 					</tr>
 					<tr>
-						<td><input type="text" name="accountName" required></td>
-						<td>
+						<td colspan="1" ><input type="text" name="accountName" style="height: 40px;" required placeholder="이름을 입력해주세요"><span class="comment"></span></td>
+						<td colspan="1">
 							<select class="select-custom" id="ui-id-1" name="accountBank" required>
 							<option value="null" selected disabled hidden>은행선택</option>
 							</select>
 						</td>
 						<td colspan="2"><input type="text" name="accountWriter"
-							required></td>
+							required style="height: 40px;" placeholder="계좌번호를 입력하세요('-'없이)"><span class="caution"></span>
+						</td>
 					</tr>
 					<tr>
 						<td colspan="4">폼 시작/종료<sup>*</sup></td>
@@ -416,7 +417,44 @@
 			if(inputName > 65) {
 				alert("입력가능한 글자가 초과되었습니다.");
 			}
-		});
+		});//제목 정규표현식
+		
+		$("[name='accountName']").on("change",function(){
+		    const nameReg = /^[가-힣]{1,}$/;
+		    const nameValue = $(this).val();
+		    if(nameReg.test(nameValue)){
+		        result[3] = true;
+		    }else{
+		        $(this).next().text("1글자이상(한글)입력가능합니다.")
+		        $(this).next().css("color","var(--secondary)");
+		        result[3] = false;
+		    }
+		});//계좌 이름 정규표현식
+		
+		$("[name='accountWriter']").keyup(function(){
+			const inputAccount = $("[name='accountWriter']").val();
+			const AcountReg = /^[0-9]+$/;
+			
+			const inputAccount2 = $(this).val().replaceAll("-","");
+			$(this).val(inputAccount2);
+			
+			if(AcountReg.test(inputAccount)){
+		        $(this).removeClass("error");
+		        $(".caution").css("display","none");
+		        result[7] = true;
+			}else{
+				$(this).addClass("error");
+				$(".caution").css("display","block");
+				$(".caution").css("color","var(--secondary)");
+				$(".caution").html("<a>숫자를 입력해주세요</a>");
+				result[7] = false;
+			}
+			if(inputAccount==""){
+				$(this).removeClass("error");
+				$(".caution-tr").eq(0).css("display","none");
+				result[7] = true;
+			}
+		});//계좌번호 정규표현식
 	
 		
 		$( function() {
@@ -465,31 +503,7 @@
 			console.log($(this).val());
 		})
 		
-// 		$("[name='accountName']").on("change",function(){
-// 				const inputAccount = $("[name='accountName']").val();
-// 				const AcountReg = /[0-9-]$/;
-				
-// 				if(AcountReg.test(inputAccount)){
-// 			        $(this).removeClass("error");
-// 			        $(".caution-tr").eq(6).css("display","none");
-			        
-// 					const result = $(this).val().replaceAll("-","");
-// 					$(this).val(result);
-			        
-// 			        result[5] = true;
-// 				}else{
-// 					$(this).addClass("error");
-// 					$(".caution-tr").eq(6).css("display","table-row");
-// 					$(".caution").eq(6).children().css("color","var(--secondary)");
-// 					$(".caution").eq(6).html("<a>숫자를 입력해주세요</a>");
-// 					result[5] = false;
-// 				}
-// 				if(inputAccount==""){
-// 					$(this).removeClass("error");
-// 					$(".caution-tr").eq(6).css("display","none");
-// 					result[5] = true;
-// 				}
-// 			});//계좌번호 정규표현식
+
 		
 		$("#boardContent").summernote({
 				height : 550,
