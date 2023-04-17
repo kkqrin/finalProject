@@ -7,6 +7,91 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+
+<style>
+.content-wrap .mypage-content {
+    margin-top: 30px;
+    padding-bottom: 130px;
+}
+.content-wrap .mypage-content .goods {
+    padding: 12px 0;
+    border-top: 1px solid #e3e3e3;
+    border-bottom: 1px solid #e3e3e3;
+}
+.content-wrap .mypage-content .goods strong {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 14px;
+    line-height: 22px;
+    color: #fecd26;
+    margin-left: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 40%;
+}
+img, figure {
+    margin: 0;
+    padding: 0;
+    max-width: 10%;
+    height: auto;
+    line-height: 0;
+}
+.content-wrap .mypage-content .info_goods h3 {
+    font-size: 18px;
+    line-height: 22px;
+    color: #000;
+    font-weight: 700;
+}
+.content-wrap .mypage-content .info_goods .ul_table {
+    border-top: 2px solid #303334;
+
+    margin-top: 8px;
+    padding: 8px 0;
+}
+.content-wrap .mypage-content .info_goods .ul_table li strong {
+    float: left;
+    width: 50%;
+    font-size: 14px;
+    line-height: 35px;
+    color: #404040;
+}
+.content-wrap .mypage-content .info_goods .ul_table li span {
+    float: right;
+    width: 50%;
+    font-size: 14px;
+    line-height: 35px;
+    color: #404040;
+    text-align: right;
+}
+.content-wrap .mypage-content .info_goods h3 {
+    font-size: 18px;
+    line-height: 22px;
+    color: #000;
+    font-weight: 700;
+}
+.form-control {
+    padding: 11px 8px;
+    border-radius: 2px;
+    border: solid 1px #ced4da;
+    background-color: #ffffff;
+    font-size: 12px;
+    font-weight: 300;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #5
+}
+
+.content-wrap .mypage-content .info_goods .ul_table li span.bold {
+    font-weight: 900;
+    color: #fecd26;
+}
+
+</style>
+
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="content-wrap">
@@ -67,7 +152,6 @@
 			       	</ul>
 			       </div>
 				</div>
-			</div>
 			<div class="info_goods">
 				<h3>환불정보</h3>
 					<div class="ul_table">
@@ -105,11 +189,11 @@
 						<ul>
 							<li>
 								<strong>상품가격</strong>
-								<span class>12,000원</span>
+								<span>12,000원</span>
 							</li>
 							<li>
 								<strong>배송비</strong>
-								<span class>3,000원</span>
+								<span>3,000원</span>
 							</li>
 							<li>
 								<strong>총 주문금액</strong>
@@ -140,8 +224,30 @@
 				<div class="info_goods plus_text">
 					<div class="tit_box">
 						<h3>배송정보</h3>
-						<div class="ul_table type=02">
-						
+						<div class="ul_table type02">
+							<ul>
+								<li>
+									<strong>수령인</strong>
+									<span class="delivery_1" style="display: block;">이화정</span>
+								</li>
+							</ul>
+							<ul>
+								<li>
+									<strong>연락처</strong>
+									<span class="delivery_1" style="display: block;">01094702229</span>
+								</li>
+								<li>
+									<strong>배송지</strong>
+									<span class="line delivery_1" style="display: block;">
+									08350
+									<br>
+									서울 구로구 오리로
+									<br>
+									101동
+									</span>
+								</li>
+							</ul>
+						</div>
 						</div>
 					</div>
 				</div>
