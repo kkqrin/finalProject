@@ -37,9 +37,12 @@ public class DayCheckController {
 				return "error";
 			}
 		}else {
-			DayCheck checkDate = dc.get(0);
+			int lastIndex = dc.size()-1;
+			DayCheck checkDate = dc.get(lastIndex);
+			
 			LocalDate today = LocalDate.now();
 			String todayAsString = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			
 			if(!checkDate.getCheckDate().equals(todayAsString)){
 				int result = service.insertDayCheck(memberNo);
 				if(result>0) {

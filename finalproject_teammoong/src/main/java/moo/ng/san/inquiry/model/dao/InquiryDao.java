@@ -33,4 +33,8 @@ public class InquiryDao {
 		int result = sqlSession.insert("inquiry.adminInsert",iqa);
 		return result;
 	}
+	public InquiryAdmin selectAllAdminInquiryByInquiryNo(int inquiryNo) {
+		InquiryAdmin iqa = sqlSession.selectOne("inquiry.selectAllAdminInquiryByInquiryNo",inquiryNo);
+		return iqa;
+	}
 }
