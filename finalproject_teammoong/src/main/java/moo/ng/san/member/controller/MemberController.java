@@ -135,16 +135,16 @@ public class MemberController {
 	
 	@RequestMapping(value = "/updateMember.do")
 	public String updateMember(Member member, MultipartFile memberPropic, HttpServletRequest request, @SessionAttribute(required=false) Member m) {
-		System.out.println("memberNo : "+member.getMemberNo());
-		System.out.println("memberPhone : "+member.getMemberPhone());
-		System.out.println("memberEmail : "+member.getMemberEmail());
-		System.out.println("memberZoneCode : "+member.getMemberZoneCode());
-		System.out.println("memberAddr : "+member.getMemberAddr());
-		System.out.println("memberBank : "+member.getMemberBank());
-		System.out.println("memberAccount : "+member.getMemberAccount());
-		System.out.println("memberBday : "+member.getMemberBday());
-		System.out.println("memberPropic : "+memberPropic);
-		System.out.println("세션에 있는거 : "+m.getMemberPath());
+//		System.out.println("memberNo : "+member.getMemberNo());
+//		System.out.println("memberPhone : "+member.getMemberPhone());
+//		System.out.println("memberEmail : "+member.getMemberEmail());
+//		System.out.println("memberZoneCode : "+member.getMemberZoneCode());
+//		System.out.println("memberAddr : "+member.getMemberAddr());
+//		System.out.println("memberBank : "+member.getMemberBank());
+//		System.out.println("memberAccount : "+member.getMemberAccount());
+//		System.out.println("memberBday : "+member.getMemberBday());
+//		System.out.println("memberPropic : "+memberPropic);
+//		System.out.println("세션에 있는거 : "+m.getMemberPath());
 		
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member/");
 		String filePath="";
@@ -205,7 +205,17 @@ public class MemberController {
 	}//updateNewPwMember
 	
 	
-	
+	@ResponseBody
+	@RequestMapping(value = "/idDoubleCheck.do")
+	public String idDoubleCheck(String memberId) {
+		Member m = new Member();
+		m.setMemberId(memberId);
+		m = service.selectOneMember(m);
+		if(m.getMemberNo()==0) {
+			return "dup";
+		}
+		return "ok";
+	}//idDoubleCheck
 	
 	
 	
