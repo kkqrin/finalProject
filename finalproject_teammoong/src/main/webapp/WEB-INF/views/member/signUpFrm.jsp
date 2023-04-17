@@ -140,7 +140,7 @@
 					</tr>
 					<tr>
 						<td><label for="name">생년월일</label></td>
-						<td colspan="3"><input type="text" id="datepick" placeholder="생일을 입력해주세요"></td>
+						<td colspan="3"><input type="text" id="datepick" name="memberBday" placeholder="생일을 입력해주세요"></td>
 					</tr>
 					<tr class="caution-tr gender">
 						<td></td>
@@ -262,8 +262,8 @@
 			
 		
 			
-			let result = [false, false, false, false, false, true, false ,true, true, true]; //정규표현식 검사
-						//0아이디, 1비밀번호, 2비밀번호 확인, 3이름확인, 4휴대폰형식, 5휴대폰인증코드, 6주소확인, 7계좌번호형식, 8이메일형식, 9생년월일
+			let result = [false, false, false, false, false, true, false ,true, true]; //정규표현식 검사
+						//0아이디, 1비밀번호, 2비밀번호 확인, 3이름확인, 4휴대폰형식, 5휴대폰인증코드, 6주소확인, 7계좌번호형식, 8이메일형식
 			
 			
 			
@@ -554,12 +554,6 @@
 				   $("[name='memberGender']").eq(2).prop('checked',true);
 				}; //성별입력확인받고 입력 안했으면 3으로 값
 
-				
-				
-				
-				
-				
-
 				if($("[name='memberAgree']").prop('checked')==false){
 					$("[name='memberAgree']").val(0);
 				}else{
@@ -613,9 +607,24 @@
 			
 /*=========데이트픽커========================================================*/			
 			
+			const date = new Date();
+			const year = date.getFullYear();
+			const minYear = date.getFullYear()-100;
+			const maxYear = date.getFullYear()-15;
 			
 			$( function() {
-			    $( "#datepick" ).datepicker();
+			    $( "#datepick" ).datepicker({
+			    	showMonthAfterYear: true,
+			    	changeMonth: true,
+			        changeYear: true,
+			    	yearRange: minYear +':' +maxYear,
+					dateFormat : 'yymmdd', // 일시 노출 포맷
+					closeText : "취소",	
+					dayNamesMin : [ "일", "월", "화", "수", "목", "금", "토" ],
+					monthNamesShort : [ "1월", "2월", "3월", "4월", "5월", "6월",
+							"7월", "8월", "9월", "10월", "11월", "12월" ],
+					showAnim: "slideDown"
+			    });
 			} );
 			
 	</script>
