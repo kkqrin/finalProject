@@ -102,12 +102,18 @@ img, figure {
 			<div class="mypage-right-title">입금 참여내역</div>
 			<div class="mypage-content">
 			       <div class="goods">
- 			       	<a href="/boardView.do?boardNo=61"> 
+ 			       	<a href="/boardView.do?${b.boardNo}"> 
 			       		<span>
 			       		<img src="/resources/img/product/orange.jpeg">
+			       			<c:forEach items="${b.fileList }" var="i">
+								<c:if test="${b.boardNo eq i.boardNo && oneFile eq 0}">
+									<img src="/resources/upload/board/${i.filepath}">
+									<c:set var="oneFile" value="1" />
+								</c:if>
+							</c:forEach>
 						</span>
 						<span class="auto_confir_title">
-							<strong>킨더조이</strong> 
+							<strong>${b.boardName}</strong> 
 						</span>
 			       	</a> 
 			       </div>
