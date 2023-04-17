@@ -18,6 +18,7 @@ import moo.ng.san.admin.model.vo.AdminBoardPageData;
 import moo.ng.san.admin.model.vo.AdminMemberPageData;
 import moo.ng.san.admin.model.vo.AdminOrderPageData;
 import moo.ng.san.admin.model.vo.AdminProductPageData;
+import moo.ng.san.admin.model.vo.AdminReportBoardPageData;
 import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.product.model.vo.Product;
@@ -216,9 +217,9 @@ public class AdminController {
 	/* 신고 리스트 조회 */
 	@RequestMapping(value="/adminBoardReportManagePage.do")
 	public String reportBoardManage(int reqPage, Model model) {
-		AdminBoardPageData abrpd = service.selectReportBoardList(reqPage);
-		model.addAttribute("reportList",abrpd.getBoardList());
-		model.addAttribute("pageNavi",abrpd.getPageNavi());
+		AdminReportBoardPageData arbpd = service.selectReportBoardList(reqPage);
+		model.addAttribute("reportList",arbpd.getBoardList());
+		model.addAttribute("pageNavi",arbpd.getPageNavi());
 		return "admin/adminBoardReportManagePage";
 	}
 	
@@ -226,7 +227,6 @@ public class AdminController {
 
 	
 	// ========================================================================
-	
 	
 	
 	

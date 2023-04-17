@@ -13,8 +13,10 @@ import moo.ng.san.admin.model.vo.AdminBoardPageData;
 import moo.ng.san.admin.model.vo.AdminMemberPageData;
 import moo.ng.san.admin.model.vo.AdminOrderPageData;
 import moo.ng.san.admin.model.vo.AdminProductPageData;
+import moo.ng.san.admin.model.vo.AdminReportBoardPageData;
 import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.board.model.vo.BoardOption;
+import moo.ng.san.board.model.vo.Notify;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.product.model.vo.Product;
 
@@ -367,8 +369,7 @@ public class AdminService {
 	}
 	
 	
-	// 페이지 네비 주소 수정 필요
-	public AdminBoardPageData selectReportBoardList(int reqPage) {
+	public AdminReportBoardPageData selectReportBoardList(int reqPage) {
 		// 한 페이지 당 보여줄 게시물 수 : 10개
 		int numPerPage = 10;
 		// reqPage = 1 : 1~2 , reqPage = 2 3~4
@@ -380,6 +381,13 @@ public class AdminService {
 		map.put("start", start);
 		map.put("end", end);
 		ArrayList<Board> list = dao.selectReportBoardList(map);
+		
+		for(Board board : list) {
+			int boardNo = board.getBoardNo();
+			ArrayList<Notify> notifyList = dao.selectReportNotifyList(boardNo);
+			board.setNotifyList(notifyList);
+		}
+		
 
 		// pageNavi 제작 시작
 		// 전체 페이지 수 계산 필요 => 전체 게시물 수 조회
@@ -402,14 +410,14 @@ public class AdminService {
 		String pageNavi = "";
 		// 이전버튼
 		if (pageNo != 1) {
-			pageNavi += "<a href='/boardList.do?reqPage=" + (pageNo - 1) + "'>[이전]</a>";
+			pageNavi += "<a href='/adminBoardReportManagePage.do?reqPage=" + (pageNo - 1) + "'>[이전]</a>";
 		}
 		// 페이지 숫자 생성
 		for (int i = 0; i < pageNaviSize; i++) {
 			if (pageNo == reqPage) {
 				pageNavi += "<span>" + pageNo + "</span>";
 			} else {
-				pageNavi += "<a href='/boardList.do?reqPage=" + pageNo + "'>" + pageNo + "</a>";
+				pageNavi += "<a href='/adminBoardReportManagePage.do?reqPage=" + pageNo + "'>" + pageNo + "</a>";
 			}
 			pageNo++;
 
@@ -419,11 +427,11 @@ public class AdminService {
 		}
 		// 다음버튼
 		if (pageNo <= totalPage) {
-			pageNavi += "<a href='/boardList.do?reqPage=" + pageNo + "'>[다음]</a>";
+			pageNavi += "<a href='/adminBoardReportManagePage.do?reqPage=" + pageNo + "'>[다음]</a>";
 		}
-		AdminBoardPageData abpd = new AdminBoardPageData(list, pageNavi);
+		AdminReportBoardPageData arbpd = new AdminReportBoardPageData(list, pageNavi);
 
-		return abpd;
+		return arbpd;
 	}
 
 	public int updateReportMember(Member m) {

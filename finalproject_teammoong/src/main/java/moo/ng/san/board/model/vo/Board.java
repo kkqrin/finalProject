@@ -27,8 +27,12 @@ public class Board {
 	private int boardStatus;
 	private int boardCount;
 	private ArrayList<String> fileList;
-	private ArrayList<BoardOption> boardOptionList;
+	
+	//형천 추가.
+	private ArrayList<BoardOption> boardOptionList; 
 	private ArrayList<BoardJoin> boardJoinList;
+	private ArrayList<Notify> notifyList;
+	private int reportCount;
 	
 }
 

@@ -302,28 +302,35 @@
 		SELECT *
 		FROM (SELECT ROWNUM AS rnum, b.* FROM 
 		    (SELECT 
-		      bt.board_no, 
-		      bt.board_name, 
-		      bt.board_writer, 
-		      bt.board_status, 
-		      nt.member_no, 
-		      nt.notify_item,
-		      COUNT(DISTINCT nt.board_no) AS reportNum
+		      bt.board_no as boardNo, 
+		      bt.board_name as boardName, 
+		      bt.board_writer as boardWriter,
+		      bt.board_date as boardDate,
+		      (select count(bt.board_no) from notify_tbl nt where bt.board_no = nt.board_no) as reportCount, 
+		      bt.board_status as boardStatus
 		    FROM board_tbl bt
-		    JOIN notify_tbl nt ON (bt.board_no = nt.board_no)
 		    GROUP BY 
 		      bt.board_no, 
 		      bt.board_name, 
-		      bt.board_writer, 
-		      bt.board_status, 
-		      nt.member_no, 
-		      nt.notify_item
-		    ORDER BY reportNum DESC)b)
+		      bt.board_writer,
+		      bt.board_date,
+              bt.report_count,
+		      bt.board_status 
+		    ORDER BY reportCount DESC)b)
 			where rnum between #{start} and #{end}
+	</select>
+	
+	<select id="selectReportNotifyList" parameterType="_int" resultType="ny">
+		select
+			member_no as memberNo,
+			notify_no as notifyNo,
+		    notify_item as notifyItem
+		from notify_tbl
+		where board_no = #{_parameter}
 	</select>
 
 	<select id="selectReportBoardCount" resultType="_int">
-		select * from board_tbl
+		select count(*) from board_tbl
 	</select>
 
 	<update id="updateReportMember" parameterType="m">

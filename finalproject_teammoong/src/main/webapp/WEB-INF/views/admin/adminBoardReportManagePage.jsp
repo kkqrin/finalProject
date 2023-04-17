@@ -70,9 +70,9 @@
                 <div class="adminPage-content">
                     <div class="adminPage-search">
                         <select id="orderSearchSelect">
-                            <option name="orderNo" value="orderNo">주문번호 검색</option>
-                            <option name="orderName" value="orderName">주문자 이름 검색</option>
-                            <option name="orderStatus" value="orderStatus">주문 상태 검색</option>
+                            <option name="boardNo" value="boardNo">게시번호 검색</option>
+                            <option name="memberName" value="memberName">유저이름 검색</option>
+                            <option name="boardStatus" value="boardStatus">신고항목 검색</option>
                         </select>
                         <input type="text" name="orderSearchBox" id="searchOption">
                         <!-- 주문 상태 검색 시 1,2,3,4 로 변환해주는 절차 필요 -->
@@ -82,72 +82,75 @@
                         <table>
                             <tr>
                             	<td>구분</td>
-                                <td>주문번호</td>
-                                <td>상품번호</td>
-                                <td>회원번호</td>
-                                <td>결제번호</td>
-                                <td>주문일자</td>
-                                <td>주문상태</td> <!-- choose -->
-                                <td>수량</td> 
-                                <td>가격</td>
-                                <td>배송주소</td> 
-                                <td>결제상태</td> <!-- choose -->
+                                <td>글번호</td>
+                                <td>제목</td>
+                                <td>작성일자</td>
+                                <td>공구상태</td>
+                                <td>신고번호</td>
+                                <td>글작성자</td> 
+                                <td>신고항목</td> <!-- choose -->
+                          <!--       <td>상태변경</td>
+                                <td>적용</td> -->
+                                <td>삭제처리</td>
                             </tr>
-                            <c:forEach items="${orderList }" var="o">
-                                <tr>
-                                	<td><input type="checkBox" id="checkBox"></td>
-                                    <td>${o.orderNo }</td>
-                                    <td>${o.productNo }</td>
-                                    <td>${o.memberNo }</td>
-                                    <td>${o.payNo }</td>
-                                    <td>${o.orderDate }</td>
-                                    <td>${p.productCost }</td>
-                                    <c:choose>
-                                    	<c:when test="${o.orderStatus == 1 }">
-                                    		<td>결제완료</td>
-                                    	</c:when>
-                                    	<c:when test="${o.orderStatus == 2 }">
-                                    		<td>배송준비중</td>
-                                    	</c:when>
-                                    	<c:when test="${o.orderStatus == 3 }">
-                                    		<td>배송중</td>
-                                    	</c:when>
-                                    	<c:when test="${o.orderStatus == 4 }">
-                                    		<td>배송완료</td>
-                                    	</c:when>
-                                    		<c:when test="${o.orderStatus == 5 }">
-                                    		<td>결제취소</td>
-                                    	</c:when>
-                                    		<c:when test="${o.orderStatus == 6 }">
-                                    		<td>환불완료</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <td>${o.orderDetailCnt }</td>
-                                    <td>${o.orderDetailPrice }</td>
-                                    <td>${o.deliveryAddress }</td>
-                                    <c:choose><!-- 명훈님한테 물어보기, 주문상태하고 겹치는 내용 -->
-                                    	<c:when test="${o.payStatus == 1 }">
-                                    		<td>결제완료</td>
-                                    	</c:when>
-                                    	<c:when test="${o.payStatus == 2 }">
-                                    		<td>결제취소</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <td>
-                                        <select name="orderStatusList"><!-- 명훈님한테 물어보고 변경할 것 -->
-                                            <option name="orderStatusList" value="0">결제완료</option>
-                                            <option name="orderStatusList" value="1">결제취소</option>
-<!--                                             <option name="orderStatusList" value="2">보류</option>
-                                            <option name="orderStatusList" value="3">만료</option>
-                                            <option name="orderStatusList" value="3">만료</option>
-                                            <option name="orderStatusList" value="3">만료</option> -->
-                                        </select>
-                                    </td>
-                                    <td><button type="button" id="changeOrderStatusBtn">상품 상태 변경</button></td>
-                                </tr>
+                            <c:forEach items="${reportList }" var="r">
+                            	<c:forEach items="${r.notifyList }" var="ny">
+	                                <tr>
+	                                	<td><input type="checkBox" id="checkBox"></td>
+	                                    <td>${r.boardNo }</td>
+	                                    <td>${r.boardName }</td>
+	                                    <td>${r.boardDate }</td>
+	                                    <c:choose>
+	                                    	<c:when test="${r.boardStatus == 1 }">
+	                                    		<td>진행</td>
+	                                    	</c:when>
+	                                    	<c:when test="${r.boardStatus == 2 }">
+	                                    		<td>마감</td>
+	                                    	</c:when>
+	                                    	<c:when test="${r.boardStatus == 3 }">
+	                                    		<td>신고마감</td>
+	                                    	</c:when>
+	                                    </c:choose>
+	                                    <td>${ny.notifyNo }</td>
+	                                    <td>${r.boardWriter }</td>
+	                                    
+	                                    <c:choose>
+	                                    	<c:when test="${ny.notifyItem == 1 }">
+	                                    		<td>비난</td>
+	                                    	</c:when>
+	                                    	<c:when test="${ny.notifyItem == 2 }">
+	                                    		<td>욕설</td>
+	                                    	</c:when>
+	                                    	<c:when test="${ny.notifyItem == 3 }">
+	                                    		<td>패드립</td>
+	                                    	</c:when>
+	                                    	<c:when test="${ny.notifyItem == 4 }">
+	                                    		<td>허위물품</td>
+	                                    	</c:when>
+	                                    	<c:when test="${ny.notifyItem == 5 }">
+	                                    		<td>사기</td>
+	                                    	</c:when>	
+	                                    </c:choose>
+	                                   <!--  
+	                                    <td>
+	                                        <select name="orderStatusList">명훈님한테 물어보고 변경할 것
+	                                            <option name="orderStatusList" value="0">결제완료</option>
+	                                            <option name="orderStatusList" value="1">결제취소</option>
+	                                        </select>
+	                                    </td>
+	                                    
+	                                    <td>
+		                                    <button type="button" id="changeBoardStatus">상태변경</button>
+	                                    </td>
+	                                     -->
+	                                    <td>
+		                                    <button type="button" id="deleteBoardBtn">삭제처리</button>
+	                                    </td>
+	                                </tr>
+                            	</c:forEach>
                             </c:forEach>
                             <tr>
-                                <th colspan="11">${o.pageNavi}</th>
+                                <th colspan="9">${pageNavi}</th>
                             </tr>
                         </table>
                     </div>
@@ -160,6 +163,8 @@
 
 <!-- 스크립트를 넣어봅시다 -->
     <script>
+    
+    
 	
         
     </script>

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.board.model.vo.BoardJoin;
 import moo.ng.san.board.model.vo.BoardOption;
+import moo.ng.san.board.model.vo.Notify;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.product.model.vo.Product;
 
@@ -237,6 +238,12 @@ public class AdminDao {
 		List list = sqlSession.selectList("admin.selectFindSearchBoardNo",map);
 		
 		return (ArrayList<Board>)list;
+	}
+
+	public ArrayList<Notify> selectReportNotifyList(int boardNo) {
+		List list = sqlSession.selectList("admin.selectReportNotifyList",boardNo);
+		
+		return (ArrayList<Notify>)list;
 	}
 
 
