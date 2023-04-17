@@ -64,7 +64,7 @@
 
 
 
-/*==================mypage-회원정보수정==================*/
+/*==================mypage-�쉶�썝�젙蹂댁닔�젙==================*/
 .fake_hr{
     border: 1px solid var(--bg-secondary);
 }
@@ -75,7 +75,7 @@
     padding: 20px 30px;
     margin-bottom: 30px;
 }
-.member-info-top>.info-align{
+.member-info-top .info-align{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -125,7 +125,7 @@
 
 
 
-/*===================정보 수정========================*/
+/*===================�젙蹂� �닔�젙========================*/
 
 .mypage-content .member-info{
     margin-top: 30px;
@@ -133,9 +133,8 @@
     flex-direction: column;
 }
 
-.mypage-content .member-info>form>h5{
+.mypage-content .member-info h5{
     margin-bottom: 20px;
-    width: 950px;
     text-align: center;
     background-color: var(--bg-secondary);
 }
@@ -145,6 +144,12 @@
     justify-content: center;
     padding-bottom: 20px;
 }
+
+.member-info .one-line.changePw{
+	padding: 0;
+	margin: 30px 0;
+}
+
 .member-info .one-line .name-tag{
     width: 180px;
     font-weight: bold;
@@ -169,11 +174,24 @@
     text-align: right;
 }
 .member-info .one-line .caution{
-    /* display: none; */
+    display: none;
     color: var(--primary);
 }
 
-.member-info .one-line #notInput{
+.member-info .one-line .notInput{
     border: none;
     padding: 0;
+}
+
+
+.modal-body .name-tag{
+	font-weight: bold;
+}
+.modal-body .name-tag:not(:first-child){
+	margin-top:10px;
+}
+
+#modelChangePw input+a{
+	display:none;
+	color: var(--primary);
 }

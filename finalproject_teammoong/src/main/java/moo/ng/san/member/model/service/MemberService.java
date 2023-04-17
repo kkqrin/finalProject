@@ -33,5 +33,16 @@ public class MemberService {
 		return dao.selectTotalPoint(memberNo);
 	}
 
+	@Transactional
+	public int updateMember(Member member) {
+		return dao.updateMember(member);
+	}
+	
+	
+	@Transactional
+	public int updateNewPwMember(Member member) {
+		return dao.updateNewPwMember(member);
+	}
+
 	
 }//MemberService

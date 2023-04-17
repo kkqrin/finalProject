@@ -18,18 +18,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import common.FileManager;
+import moo.ng.san.basket.model.vo.Basket;
 import moo.ng.san.category.model.vo.Category;
 import moo.ng.san.category.model.vo.DetailCategory;
 import moo.ng.san.inquiry.model.service.InquiryService;
 import moo.ng.san.inquiry.model.vo.Inquiry;
+import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.product.model.service.ProductService;
 import moo.ng.san.product.model.vo.FileVO;
+import moo.ng.san.product.model.vo.Option;
 import moo.ng.san.product.model.vo.Product;
 import moo.ng.san.product.model.vo.ProductPageData;
 
@@ -129,13 +133,53 @@ public class ProductController {
 		return new Gson().toJson(list);
 	}
 	
-	@RequestMapping(value="/orderSheet.do")
-	public String orderSheet(int productNo) {
+	
+	
+	// 장바구니
+	@RequestMapping(value="/shoppingCart.do")
+	public String shoppingCart(@SessionAttribute(required=false) Member m, Model model) {
+		// 세션에서 가져옴
+		int memberNo = m.getMemberNo();
 		
-		System.out.println("productNo : " + productNo);
+		// 장바구니 리스트
+		ArrayList<Basket> basketList = service.selectBasketList(memberNo);
+		model.addAttribute("basketList", basketList);
 		
-		return "product/temporOrderSheet";
+		return "product/shoppingCart";
 	}
+	
+	
+		
+	@ResponseBody	
+	@RequestMapping(value="/putInShoppingCart.do")
+	public String putInShoppingCart(int productNo, int optionNo, @SessionAttribute(required=false) Member m) {
+		// 세션에서 가져옴
+		int memberNo = m.getMemberNo();
+		
+		// 장바구니 담기
+		int result = service.insertShoppingCart(memberNo, productNo);
+		
+		if(result>0) {
+			// 옵션 그룹 넘버 조회
+			int optionGroupNo = service.selectOptionGroupNo(productNo);
+			System.out.println("optionGroupNo : " + optionGroupNo);
+			// 최근에 insert된 장바구니 번호(max)
+			int recentBasketNo = service.selectRecentBasketNo();
+			System.out.println("recentBasketNo : " + recentBasketNo);
+			
+			// + 옵션이 있을때
+			result = service.insertShoppingCartOption(recentBasketNo, optionGroupNo, optionNo);
+			
+			if(result>0) {
+				return "ok";					
+			}else {
+				return "fail";
+			}
+		}else {
+			return "fail";			
+		}
+	}
+	
 	
 	
 	
@@ -252,6 +296,12 @@ public class ProductController {
 		ArrayList<Inquiry> list = iqService.selectInquiryList(productNo);
 		model.addAttribute("p",p);
 		model.addAttribute("iqList", list);
+		
+		
+		// 옵션 조회 (규린)
+		ArrayList<Option> optionList = service.selectOptionList(productNo);
+		model.addAttribute("optionList", optionList);
+		
 		return "product/productView";
 	}
 	@GetMapping("/main.do")

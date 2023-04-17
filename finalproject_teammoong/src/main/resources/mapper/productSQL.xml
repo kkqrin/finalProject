@@ -124,6 +124,49 @@
 		<if test="detailCategoryNo != 0">
 		and d_category_no = #{detailCategoryNo}
 		</if>
-
+	</select>
+	
+	<select id="selectOptionList" parameterType="_int" resultType="po">
+		select
+			option_info_no AS optionInfoNo,
+			product_no AS productNo,
+			option_dateail AS optionDetailName,
+			option_price AS optionPrice
+		from OPTION_GROUP_TBL
+		left join OPTION_INFO_TBL using (option_group_no)
+		where product_no=#{_parameter}
+		order by option_info_no	
+	</select>
+	
+	<insert id="insertShoppingCart" parameterType="map">
+		insert into basket_tbl values(basket_seq.nextval, #{memberNo}, #{productNo})
+	</insert>
+	
+	<select id="selectOptionGroupNo" parameterType="_int" resultType="_int">
+		select option_group_no AS optionGroupNo from OPTION_GROUP_TBL where PRODUCT_NO=#{_parameter}
+	</select>
+	
+	<select id="selectRecentBasketNo" resultType="_int">
+		select max(basket_no) from basket_tbl
+	</select>
+	
+	<insert id="insertShoppingCartOption" parameterType="map">
+		insert into basket_option_tbl values(#{recentBasketNo}, #{optionGroupNo}, #{optionNo})
+	</insert>
+	
+	<select id="selectBasketList" parameterType="_int" resultType="basket">
+		select
+			p.product_no AS productNo,
+			(SELECT FILEPATH FROM PRODUCT_IMG WHERE P_IMG_NO=(SELECT MIN(P_IMG_NO) FROM PRODUCT_IMG where product_no=b.product_no)) AS thumbnail,
+			p.product_name AS productName,
+			p.product_price AS productPrice,
+			OI.OPTION_DATEAIL AS optionDetailName,
+			OI.OPTION_PRICE AS optionPrice
+		from basket_tbl b
+		left join product_tbl p on b.product_no = p.product_no
+		left join option_group_tbl og on b.product_no = og.product_no
+		left join basket_option_tbl bo on og.option_group_no = bo.option_group_no
+		left join option_info_tbl oi on bo.option_info_no = oi.option_info_no
+		where member_no = #{_parameter}
 	</select>
 </mapper>

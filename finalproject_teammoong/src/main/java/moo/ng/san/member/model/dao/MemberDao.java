@@ -32,4 +32,12 @@ public class MemberDao {
 		return sqlSession.selectOne("point.selectTotalPoint",memberNo);
 	}
 
+	public int updateMember(Member member) {
+		return sqlSession.update("member.updateMember", member);
+	}
+
+	public int updateNewPwMember(Member member) {
+		return sqlSession.update("member.updateNewPwMember",member);
+	}
+
 }

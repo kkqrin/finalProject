@@ -1,5 +1,8 @@
 package moo.ng.san.member.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +35,7 @@ public class MemberController {
 	@Autowired
 	private PhoneCertify phoneCertify;
 	@Autowired
-	private FileManager upload; 
+	private FileManager fm; 
 	
 	
 	@ResponseBody
@@ -48,7 +51,7 @@ public class MemberController {
 		String filePath="";
 		if(!memberPropic.isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member/");
-			filePath = upload.upload(savePath, memberPropic); //업로드 완료
+			filePath = fm.upload(savePath, memberPropic); //업로드 완료
 			m.setMemberPath(filePath);
 		}else {
 			filePath = "moongs.png";
@@ -59,7 +62,6 @@ public class MemberController {
 		if(result>0) {
 			m.setMemberPw(null);
 			Member loginMember = service.selectOneMember(m);
-			System.out.println(loginMember);
 			session.setAttribute("m", loginMember);
 			
 			MsgVO msg = new MsgVO();
@@ -110,8 +112,7 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "/myPage.do")
-	public String myPage(HttpSession session, Model model) {
-		Member m = (Member)session.getAttribute("m");
+	public String myPage(@SessionAttribute(required=false) Member m, Model model) {
 		int memberNo = m.getMemberNo();
 		Point point = service.selectTotalPoint(memberNo);
 		model.addAttribute("p", point);
@@ -133,12 +134,64 @@ public class MemberController {
 	
 	
 	
+	@RequestMapping(value = "/updateMember.do")
+	public String updateMember(Member member, MultipartFile memberPropic, HttpServletRequest request, @SessionAttribute(required=false) Member m) {
+//		System.out.println("memberNo : "+member.getMemberNo());
+//		System.out.println("memberPhone : "+member.getMemberPhone());
+//		System.out.println("memberEmail : "+member.getMemberEmail());
+//		System.out.println("memberZoneCode : "+member.getMemberZoneCode());
+//		System.out.println("memberAddr : "+member.getMemberAddr());
+//		System.out.println("memberBank : "+member.getMemberBank());
+//		System.out.println("memberAccount : "+member.getMemberAccount());
+//		System.out.println("memberBday : "+member.getMemberBday());
+		
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member/");
+		String filePath="";
+
+		if(!memberPropic.isEmpty()) {
+			filePath = fm.upload(savePath, memberPropic); //업로드 완료
+			member.setMemberPath(filePath);
+		}
+		
+		int result = service.updateMember(member);
+		
+		String memberPath = m.getMemberPath();
+		
+		if(result>0 && filePath!="") {
+			m.setMemberPhone(member.getMemberPhone());
+			m.setMemberEmail(member.getMemberEmail());
+			m.setMemberZoneCode(member.getMemberZoneCode());
+			m.setMemberAddr(member.getMemberAddr());
+			m.setMemberBank(member.getMemberBank());
+			m.setMemberAccount(member.getMemberAccount());
+			m.setMemberPath(filePath);
+			
+			if(!memberPath.equals("moongs.png")) {
+				fm.deleteFile(savePath, memberPath);
+			}
+		}
+		
+		return "redirect:/myPage.do";
+	}
 	
 	
-	
-	
-	
-	
+	@ResponseBody
+	@RequestMapping(value = "/updateNewPwMember.do")
+	public String updateNewPwMember(String memberId, String memberPw, String memberNewPw) {
+		Member member = new Member();
+		member.setMemberId(memberId);
+		member.setMemberPw(memberPw);
+		
+		Member m = service.selectOneMember(member);
+		
+		if(m==null) {
+			return "fail";
+		}else {
+			member.setMemberPw(memberNewPw);
+			service.updateNewPwMember(member);
+			return "ok";
+		}
+	}//updateNewPwMember
 	
 	
 	

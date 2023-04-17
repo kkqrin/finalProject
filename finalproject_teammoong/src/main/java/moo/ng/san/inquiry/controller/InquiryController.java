@@ -1,5 +1,7 @@
 package moo.ng.san.inquiry.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,5 +45,11 @@ public class InquiryController {
 		} else {
 			return 0;
 		}
+	}
+	@ResponseBody
+	@RequestMapping(value="/selectAdminInquiry.do", method=RequestMethod.POST, produces = "application/json; charset=utf8")
+	public InquiryAdmin selectAllAdminInquiryByInquiryNo(int inquiryNo){
+		InquiryAdmin iqa = service.selectAllAdminInquiryByInquiryNo(inquiryNo);
+		return iqa;
 	}
 }

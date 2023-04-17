@@ -47,7 +47,7 @@
 					<!--//내용영역-->
 				</div>
 				<div class="area-btn center full">
-					<a href="" rel="modal:close" class="btn btn-sec size01 close">닫기</a>
+					<a class="btn btn-sec size01 close">닫기</a>
 				</div>
 			</div>
 		</div>
@@ -69,6 +69,11 @@
 			});
 		});
 	
+		$(".close").on("click",function(){
+			$(".modal-ground").css("display","none");
+		})
+		
+		
 		$("#login").on("click",function(){
 			login();	
 		})
@@ -108,22 +113,10 @@
 		//모달 관련 기능
         $(function () {
             $('[data-modal]').click(function (event) {
-                const modalId = $(this).data('modal');
-                if ($(modalId).hasClass('modal-pri')) {
-                    $($(this).data('modal')).modal({
-                        fadeDuration: 100
-                    });
-                    return false;
-                } else if ($(modalId).hasClass('modal-sec')) {
-                    $($(this).data('modal')).modal({
-                        escapeClose: false,
-                        showClose: false,
-                        fadeDuration: 100
-                    });
-                    return false;
-                } else {
-                    return false;
-                }
+                $($(this).data('modal')).modal({
+                    fadeDuration: 100
+                });
+                return false;
             }); 
         });
 	</script>
