@@ -68,69 +68,8 @@
 			</div>
 		</div>
 		<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}"> 
-		<div class="area-btn left" style="display:none;">
-                <button class="btn btn-border-pri size01" type="button" id="alert01">성공</button>
-				<button class="btn btn-border-sec size01" type="button" id="alert02">에러</button>
-                <button class="btn btn-border-ter size01" type="button" id="alert03">경고</button>
-                <button class="btn btn-border-black size01" type="button" id="alert04">정보</button>
-        </div>
 	</div>
 	<script>
-        $(function () {
-            $("#alert01").on("click", function () {
-                jQueryAlert('success',"출석체크 완료. 50포인트 적립!");
-            });
-            $("#alert02").on("click", function () {
-                jQueryAlert('error',"오늘 출석 체크는 이미 완료되었습니다.");
-            });
-            $("#alert03").on("click", function () {
-                jQueryAlert('warning',"경고내용경고내용경고내용경고내용");
-            });
-            $("#alert04").on("click", function () {
-                jQueryAlert('info',"정보내용정보내용정보내용정보내용");
-            });
-
-            function jQueryAlert(type, msg) {
-                let $type = type;
-                let messageBox = msg;
-                switch ($type) {
-                    case 'success':
-                    messageBox = $.parseHTML('<div class="alert__success"></div>');
-                    break;
-                    case 'error':
-                    messageBox = $.parseHTML('<div class="alert__error"></div>');
-                    break;
-                    case 'warning':
-                    messageBox = $.parseHTML('<div class="alert__warning"></div>');
-                    break;
-                    case 'info':
-                    messageBox = $.parseHTML('<div class="alert__info"></div>');
-                    break;
-                }
-                $("body").append(messageBox);
-                $(messageBox).dialog({
-                    dialogClass :$type,
-                    open: $(messageBox).append(msg),
-                    draggable: false,
-                    modal: true,
-                    buttons: {
-                        "OK": function () {
-                            $(this).dialog("close");
-                            location.href = '/noticeList.do?reqPage=1';
-                        }
-                    },
-                    show: {
-                        effect: 'fade',
-                        duration: 200 //at your convenience
-                    },
-                    hide: {
-                        effect: 'fade',
-                        duration: 200 //at your convenience
-                    }
-                });
-            };
-        
-        });
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>

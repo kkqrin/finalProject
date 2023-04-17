@@ -19,8 +19,9 @@
 		update issue_coupon 
 		set coupon_status = 2 where issue_no = #{issueNo}
 	</update>
-	<select id="selectMemberIssueCoupon" parameterType="_int" resultType="ic">
-		SELECT 
+	<select id="selectMemberIssueCoupon" parameterType="map" resultType="ic">
+		select*from(
+			SELECT 
 			  rnum,
 			  issue_no AS issueNo,
 			  member_no AS memberNo,
@@ -40,8 +41,12 @@
 			  FROM issue_coupon
 			  WHERE member_no = #{memberNo}
 			) t
+		)
+		where rnum between #{start} and #{end}	
 	</select>
-	
+	<select id="totalCount" resultType="_int">
+		select count(*) from issue_coupon
+	</select>
 	
 	
 	
