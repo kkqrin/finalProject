@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.board.model.vo.BoardJoin;
 import moo.ng.san.board.model.vo.BoardOption;
+import moo.ng.san.board.model.vo.Notify;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.product.model.vo.Product;
 
@@ -214,6 +215,35 @@ public class AdminDao {
 		List list = sqlSession.selectList("admin.selectAllBoardListBoardOption",boardNo);
 		
 		return (ArrayList<BoardOption>)list;
+	}
+	public ArrayList<Board> selectSearchBoard(Board b) {
+		List list = sqlSession.selectList("admin.selectSearchBoard",b);
+		
+		return (ArrayList<Board>)list;
+	}
+	
+	public ArrayList<BoardOption> selectSearchBoardOption(int boardNo) {
+		List list = sqlSession.selectList("admin.selectSearchBoardOption",boardNo);
+		
+		return (ArrayList<BoardOption>)list;
+	}
+
+	public ArrayList<BoardOption> selectFindBoardOption(String detailName) {
+		List list = sqlSession.selectList("admin.selectFindBoardOption",detailName);
+		
+		return (ArrayList<BoardOption>)list;
+	}
+	
+	public ArrayList<Board> selectSearchBoard(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("admin.selectFindSearchBoardNo",map);
+		
+		return (ArrayList<Board>)list;
+	}
+
+	public ArrayList<Notify> selectReportNotifyList(int boardNo) {
+		List list = sqlSession.selectList("admin.selectReportNotifyList",boardNo);
+		
+		return (ArrayList<Notify>)list;
 	}
 
 

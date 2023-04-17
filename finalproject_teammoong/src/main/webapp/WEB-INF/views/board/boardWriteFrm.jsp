@@ -184,6 +184,11 @@
 		src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
 	<script>
+	
+	let result = [false, false, false]; //정규표현식 검사
+	//0제목, 1계좌이름, 2계좌번호
+	
+	
 		let i = 1;
 		$("#goods-plus").on(
 				"click",
@@ -416,6 +421,7 @@
 			console.log(inputName);
 			if(inputName > 65) {
 				alert("입력가능한 글자가 초과되었습니다.");
+				result[0]=false;
 			}
 		});//제목 정규표현식
 		
@@ -423,11 +429,11 @@
 		    const nameReg = /^[가-힣]{1,}$/;
 		    const nameValue = $(this).val();
 		    if(nameReg.test(nameValue)){
-		        result[3] = true;
+		        result[1] = true;
 		    }else{
 		        $(this).next().text("1글자이상(한글)입력가능합니다.")
 		        $(this).next().css("color","var(--secondary)");
-		        result[3] = false;
+		        result[1] = false;
 		    }
 		});//계좌 이름 정규표현식
 		
@@ -441,18 +447,18 @@
 			if(AcountReg.test(inputAccount)){
 		        $(this).removeClass("error");
 		        $(".caution").css("display","none");
-		        result[7] = true;
+		        result[2] = true;
 			}else{
 				$(this).addClass("error");
 				$(".caution").css("display","block");
 				$(".caution").css("color","var(--secondary)");
 				$(".caution").html("<a>숫자를 입력해주세요</a>");
-				result[7] = false;
+				result[2] = false;
 			}
 			if(inputAccount==""){
 				$(this).removeClass("error");
 				$(".caution-tr").eq(0).css("display","none");
-				result[7] = true;
+				result[2] = true;
 			}
 		});//계좌번호 정규표현식
 	

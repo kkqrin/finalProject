@@ -34,6 +34,12 @@ sup{
     margin-top: 50px;
 }
 
+.caution {
+    position: relative;
+    text-align: left;
+    width: 100%;
+}
+
 </style>
 
 <body>	
@@ -83,6 +89,7 @@ sup{
 				<tr>
 					<td style="text-align:left;" colspan="4">
 						<input type="text" name="payerName"  required placeholder="입금자명"> 
+						<span class="comment"></span>
 					</td>
 				</tr>
 				<tr>
@@ -132,20 +139,19 @@ sup{
 				<tr>
 					<td style="text-align:left;" colspan="4">
 						<input type="text" name="memberName"  required placeholder="주문자명"> 
-					</td>
-				</tr>
-				<tr class="caution-tr">
-					<td></td>
-					<td class="caution" colspan="3"><a>한글 2-10자(공백없이)</a></td>
-				</tr>
-				<tr>
-					<td style="text-align:left;" colspan="4">
-						<input type="text" name="memberEmail"  required placeholder="주문자 이메일주소"> 
+						<span class="comment"></span>
 					</td>
 				</tr>
 				<tr>
 					<td style="text-align:left;" colspan="4">
-						<input type="text" name="memberPhone"  required placeholder="주문자 핸드폰번호"> 
+						<input type="text" name="memberEmail"  required placeholder="주문자 이메일주소">
+						<span class="comment"></span> 
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align:left;" colspan="4">
+						<input type="text"  id="phoneChk" name="memberPhone"  required placeholder="주문자 핸드폰번호">
+						<span class="comment"></span>
 					</td>
 				</tr>
 				<tr>
@@ -154,11 +160,13 @@ sup{
 				<tr>
 					<td style="text-align:left;" colspan="4">
 						<input type="text" name="receiverName"  required placeholder="수령자명"> 
+						<span class="comment"></span>
 					</td>
 				</tr>
 				<tr>
 					<td style="text-align:left;" colspan="4">
-						<input type="text" name="receiverPhone"  required placeholder="연락처"> 
+						<input type="text" id="phoneChk" name="receiverPhone"  required placeholder="연락처"> 
+						<span class="comment"></span>
 					</td>
 				</tr>
 				<tr>
@@ -191,8 +199,11 @@ sup{
 						</select>
 					</td>
 					<td colspan="2"><input type="text" name="refundAccount"
-							required placeholder="계좌번호"></td>
-					<td><input type="text" name="refundName" required placeholder="예금주명"></td>
+							required placeholder="계좌번호를 입력하세요('-'없이)"><span class="caution"></span></td>
+					<td>
+						<input type="text" name="refundName" required placeholder="예금주명">
+						<span class="comment"></span>
+					</td>
 				</tr>
 				<tr>
 					<td style="text-align:left;" colspan="4">- 개인정보 수집 및 동의<sup>*</sup></td>
@@ -206,7 +217,23 @@ sup{
 					<td colspan="4"><label><input type="checkbox" required>동의</label></td>
 				</tr>
 			</table>
+			<c:choose>
+			<c:when test="${sessionScope.m.memberId eq b.boardWriter }">
+			<div style="display: flex;">
+			<input class="btn btn-border-sec size01" type="button"  value="수정" style="background-color: var(--secondary); border-color: var(--secondary); color: #fff; cursor: pointer; padding: 20px 50px 20px 50px; margin-top: 15px; width: 50%">
+			<input class="btn btn-border-sec size01" type="button"  value="삭제" style="background-color: #fff; border-color: var(--secondary); color: var(--secondary); cursor: pointer; padding: 20px 50px 20px 50px; margin-top: 15px; width: 50%">
+			</div>
+			</c:when>
+			<c:when test="${empty sessionScope.m.memberId}">
+			<div style="border: 2px solid var(--secondary);background-color:var(--secondary); text-align: center; font-size: 25px; color: #fff; font-weight: bold; margin: 0 auto;">
+				<a>로그인 후 주문 가능합니다</a>
+			</div>	
+			</c:when>
+			<c:otherwise>
+			
 			<input class="btn btn-border-sec size01" type="submit" id="form" value="제출" style="background-color: #f26656; border-color: #f0513e; color: #fff; cursor: pointer; padding: 20px 50px 20px 50px; margin-top: 15px"> 
+			</c:otherwise>
+			</c:choose>
 		</form>	
 		</div>
 	</div>
@@ -218,7 +245,8 @@ sup{
 	
 	<script>
 	
-	
+	let result = [false, false, false, false, false, false, false, false]; //정규표현식 검사
+	//0주문자명, 1이메일, 2핸드폰, 3수령자명, 4입금자명, 5수령자 연락처, 6계좌번호, 7예금주명
 	
 // 	$("[name='0orderCount']").on("change",function(){
 // 		const orderCount = $("[name='0orderCount']").val();
@@ -338,28 +366,147 @@ sup{
 		});//주소 입력 확인
 		
 		
-		$("[name='memberName']").keyup(function(){
-			const nameReg = /^[ㄱ-ㅎ가-힣]{2,10}$/;
-			const inputName = $(this).val();
+		
+		$("[name='memberName']").on("keyup",function(){
+		    const nameReg = /^[가-힣]{1,}$/;
+		    const nameValue = $(this).val();
+		    if(nameReg.test(nameValue)){
+		    	$(this).next().text("")
+		        result[0] = true;
+		    }else{
+		        $(this).next().text("한글만(최소 1글자) 입력 가능합니다.")
+		        $(this).next().css("color","var(--secondary)");
+		        result[0] = false;
+		    }
+		});//주문자명 정규표현식
+		
+		$("[name='payerName']").on("keyup",function(){
+		    const nameReg = /^[가-힣]{1,}$/;
+		    const nameValue = $(this).val();
+		    if(nameReg.test(nameValue)){
+		    	$(this).next().text("")
+		        result[4] = true;
+		    }else{
+		        $(this).next().text("한글만(최소 1글자) 입력 가능합니다.")
+		        $(this).next().css("color","var(--secondary)");
+		        result[4] = false;
+		    }
+		});//입금자명 정규표현식
+		
+		$("[name='memberEmail'").on("keyup",function(){
+		    //이메일 : 영어/숫자4~12글자+@(@뒤로는 제한 없음)
+		    const emailReg = /^[a-zA-Z0-9]{4,12}@/;
+		    const emailValue = $(this).val();
+		    const check = emailReg.test(emailValue);
+		    if(check){
+		        $(this).next().text("")
+		        result[1] = true;
+		    }else{
+		        $(this).next().text("이메일 형식을 확인하세요")
+		        $(this).next().css("color","var(--secondary)");
+		        result[1] = false;
+		    }
+		});//이메일 정규표현식
+		
+		
+		
+		$("[name='memberPhone']").keyup(function(){
+			//핸드폰 정규표현식
+			const pwReg = /^\d{3}-\d{3,4}-\d{4}$/;
+			const pwReg2 = /^0+\d{9,10}$/;
+			const inputPhone = $(this).val();
+
+			replace = $("[name='memberPhone']").val().replaceAll("-","");
+			$("[name='memberPhone']").val(replace);
 			
-			if(nameReg.test(inputName)){
+			if(pwReg.test(inputPhone) || pwReg2.test(inputPhone) || inputPhone==""){
 				$(this).removeClass("error");
-				$(".caution-tr").css("display","none");
-				$(".caution").css("display","none");
-				result[3] = true;
+				$(this).next().css("display","none");
+				result[2] = true;
 			}else{
 				$(this).addClass("error");
-				$(".caution-tr").css("display","table-row");
-				result[3] = false;
+				$(this).next().css("display","table-row");
+				$(this).next().css("color","var(--secondary)");
+				$(this).next().html("<a>형식에 맞지 않는 번호입니다</a>");
+				result[2] = false;
 			}
-			if(inputName==""){
+		})//핸드폰 형식 검사
+		
+		$("[name='receiverName']").on("keyup",function(){
+		    const nameReg = /^[가-힣]{1,}$/;
+		    const nameValue = $(this).val();
+		    if(nameReg.test(nameValue)){
+		    	$(this).next().text("")
+		        result[3] = true;
+		    }else{
+		        $(this).next().text("한글만(최소 1글자) 입력 가능합니다.")
+		        $(this).next().css("color","var(--secondary)");
+		        result[3] = false;
+		    }
+		});//수령자명 정규표현식
+		
+		
+		$("[name='receiverPhone']").keyup(function(){
+			//핸드폰 정규표현식
+			const pwReg = /^\d{3}-\d{3,4}-\d{4}$/;
+			const pwReg2 = /^0+\d{9,10}$/;
+			const inputPhone = $(this).val();
+
+			replace = $("[name='receiverPhone']").val().replaceAll("-","");
+			$("[name='receiverPhone']").val(replace);
+			
+			if(pwReg.test(inputPhone) || pwReg2.test(inputPhone) || inputPhone==""){
+				$(this).removeClass("error");
+				$(this).next().css("display","none");
+				result[2] = true;
+			}else{
+				$(this).addClass("error");
+				$(this).next().css("display","table-row");
+				$(this).next().css("color","var(--secondary)");
+				$(this).next().html("<a>형식에 맞지 않는 번호입니다</a>");
+				result[2] = false;
+			}
+		})//수령자 핸드폰 형식 검사
+		
+		
+		$("[name='refundAccount']").keyup(function(){
+			const inputAccount = $("[name='refundAccount']").val();
+			const AcountReg = /^[0-9]+$/;
+			
+			const inputAccount2 = $(this).val().replaceAll("-","");
+			$(this).val(inputAccount2);
+			
+			if(AcountReg.test(inputAccount)){
+		        $(this).removeClass("error");
+		        $(".caution").css("display","none");
+		        result[6] = true;
+			}else{
+				$(this).addClass("error");
+				$(".caution").css("display","block");
+				$(".caution").css("color","var(--secondary)");
+				$(".caution").html("<a>숫자를 입력해주세요</a>");
+				result[6] = false;
+			}
+			if(inputAccount==""){
 				$(this).removeClass("error");
 				$(".caution-tr").css("display","none");
-		    	result[3] = false;
+				result[6] = true;
 			}
-			
-		});//이름 정규표현식
+		});//계좌번호 정규표현식
 		
+		$("[name='refundName']").on("keyup",function(){
+		    const nameReg = /^[가-힣]{1,}$/;
+		    const nameValue = $(this).val();
+		    if(nameReg.test(nameValue)){
+		    	$(this).next().text("")
+		        result[7] = true;
+		    }else{
+		        $(this).next().text("한글만(최소 1글자) 입력 가능합니다.")
+		        $(this).next().css("color","var(--secondary)");
+		        result[7] = false;
+		    }
+		});//예금주명 정규표현식
+	
 // 		$("[type='submit']").on("click",function(){
 			
 // 			event.preventDefault();

@@ -338,6 +338,7 @@
 								tr.append("<td>"+data[i].memberEmail+"</td>");
 								tr.append("<td>"+data[i].memberPhone+"</td>");
 								tr.append("<td>"+data[i].memberAddr+"</td>");
+								
 								if(data[i].memberGender == 1){
 									tr.append("<td>남자</td>");
 								}else if(data[i].memberGender == 2){
@@ -345,13 +346,16 @@
 								}else if(data[i].memberGender == 3){
 									tr.append("<td>성별없음</td>");
 								}
+								
 								tr.append("<td>"+data[i].memberBday+"</td>");
 								tr.append("<td>"+data[i].memberBank+"</td>");
+								
 								if(data[i].memberAccount == undefined){
 									tr.append("<td>계좌 등록 안함</td>");
 								}else{
 									tr.append("<td>"+data[i].memberAccount+"</td>");
 								}
+								
 								if(data[i].memberStatus == 0){
 									tr.append("<td>관리자</td>");
 								}else if(data[i].memberStatus == 1){
@@ -361,11 +365,13 @@
 								}else if(data[i].memberStatus == 3){
 									tr.append("<td>탈퇴회원</td>");
 								}
+								
 								if(data[i].memberAgree == 0){
 									tr.append("<td>동의함</td>");
 								}else if(data[i].memberAgree == 1){
 									tr.append("<td>동의하지 않음</td>");
 								}
+								
 								tr.append("<td>"+data[i].regDate+"</td>");
 								tr.append("<td>"+data[i].memberNo+"</td>");
 								tr.append("<td>"+data[i].memberNo+"</td>");

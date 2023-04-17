@@ -18,6 +18,7 @@ import moo.ng.san.admin.model.vo.AdminBoardPageData;
 import moo.ng.san.admin.model.vo.AdminMemberPageData;
 import moo.ng.san.admin.model.vo.AdminOrderPageData;
 import moo.ng.san.admin.model.vo.AdminProductPageData;
+import moo.ng.san.admin.model.vo.AdminReportBoardPageData;
 import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.product.model.vo.Product;
@@ -60,10 +61,6 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping(value="/ajaxAdminSearchMember.do", produces = "application/json;charset=utf-8")
 	public String adminSearchMember(Member m, Model model) {
-		System.out.println(m.getMemberNo());
-		System.out.println(m.getMemberId());
-		System.out.println(m.getMemberName());
-		System.out.println(m);
 		ArrayList<Member> list = service.selectSearchMember(m);
 		Gson gson = new Gson();
 		String result = gson.toJson(list);
@@ -207,19 +204,29 @@ public class AdminController {
 		return "admin/adminBoardManagePage";
 	}
 	
+	// 여여붙 검색기능
+	@ResponseBody
+	@RequestMapping(value="/ajaxAdminSearchBoard.do", produces = "application/json;charset=utf-8")
+	public String adminSearchBoard(Board b, String detailName) {
+		AdminBoardPageData abpd = service.selectSearchboard(b, detailName);
+		Gson gson = new Gson();
+		String result = gson.toJson(abpd);
+		return result;
+	}
+	
 	/* 신고 리스트 조회 */
 	@RequestMapping(value="/adminBoardReportManagePage.do")
 	public String reportBoardManage(int reqPage, Model model) {
-		AdminBoardPageData abrpd = service.selectReportBoardList(reqPage);
-		model.addAttribute("reportList",abrpd.getBoardList());
-		model.addAttribute("pageNavi",abrpd.getPageNavi());
+		AdminReportBoardPageData arbpd = service.selectReportBoardList(reqPage);
+		model.addAttribute("reportList",arbpd.getBoardList());
+		model.addAttribute("pageNavi",arbpd.getPageNavi());
 		return "admin/adminBoardReportManagePage";
 	}
+	
 	
 
 	
 	// ========================================================================
-	
 	
 	
 	

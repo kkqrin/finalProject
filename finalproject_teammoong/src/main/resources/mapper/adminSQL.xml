@@ -302,28 +302,35 @@
 		SELECT *
 		FROM (SELECT ROWNUM AS rnum, b.* FROM 
 		    (SELECT 
-		      bt.board_no, 
-		      bt.board_name, 
-		      bt.board_writer, 
-		      bt.board_status, 
-		      nt.member_no, 
-		      nt.notify_item,
-		      COUNT(DISTINCT nt.board_no) AS reportNum
+		      bt.board_no as boardNo, 
+		      bt.board_name as boardName, 
+		      bt.board_writer as boardWriter,
+		      bt.board_date as boardDate,
+		      (select count(bt.board_no) from notify_tbl nt where bt.board_no = nt.board_no) as reportCount, 
+		      bt.board_status as boardStatus
 		    FROM board_tbl bt
-		    JOIN notify_tbl nt ON (bt.board_no = nt.board_no)
 		    GROUP BY 
 		      bt.board_no, 
 		      bt.board_name, 
-		      bt.board_writer, 
-		      bt.board_status, 
-		      nt.member_no, 
-		      nt.notify_item
-		    ORDER BY reportNum DESC)b)
+		      bt.board_writer,
+		      bt.board_date,
+              bt.report_count,
+		      bt.board_status 
+		    ORDER BY reportCount DESC)b)
 			where rnum between #{start} and #{end}
+	</select>
+	
+	<select id="selectReportNotifyList" parameterType="_int" resultType="ny">
+		select
+			member_no as memberNo,
+			notify_no as notifyNo,
+		    notify_item as notifyItem
+		from notify_tbl
+		where board_no = #{_parameter}
 	</select>
 
 	<select id="selectReportBoardCount" resultType="_int">
-		select * from board_tbl
+		select count(*) from board_tbl
 	</select>
 
 	<update id="updateReportMember" parameterType="m">
@@ -361,7 +368,60 @@
 			product_Status = #{productStatus} 
 		where product_no = #{productNo}
 	</update>
+	
+	<select id="selectSearchBoard" parameterType="b" resultType="b">
+		select
+              board_no as boardNo,	
+              d_category_no as detailCategoryNo, 
+              board_writer as boardWriter,
+              board_date as boardDate,
+              board_start as boardStart, 
+              board_end as boardEnd,
+              board_status as boardStatus
+        from board_tbl
+		<choose>
+			<when test="detailCategoryNo == 0">
+				where board_status = #{boardStatus}
+			</when>
+			<when test="boardStatus == 0">
+				where d_category_no = #{detailCategoryNo }
+			</when>
+		</choose>
+	</select>
+	
+	<select id="selectSearchBoardOption" parameterType="_int" resultType="bo">
+		select
+			detail_name as detailName,
+			detail_price as detailPrice
+		from board_option
+		where board_no = #{_parameter}
+	</select>
+	
+	<select id="selectFindBoardOption" parameterType="String" resultType="bo">
+		select
+			board_no as boardNo,
+			detail_name as detailName,
+			detail_price as detailPrice
+		from board_option
+		where detail_name like '%'||#{_parameter}||'%'
+	</select>
 
+	<select id="selectFindSearchBoardNo" parameterType="map" resultType="b">
+		select
+              bt.board_no as boardNo,	
+              bt.d_category_no as detailCategoryNo, 
+              bt.board_writer as boardWriter,
+              bt.board_date as boardDate,
+              bt.board_start as boardStart, 
+              bt.board_end as boardEnd,
+              bt.board_status as boardStatus
+        from board_tbl bt
+        join board_option bo on (bt.board_no = bo.board_no)
+        where bt.board_no = #{boardNo} and bo.detail_name like '%'||#{detailName}||'%'
+	</select>
+	
+	
+	
 	<!-- 차트용 query -->
 <!-- 	<select id="selectTotalSalesFas" resultType="_int">
 		select 
