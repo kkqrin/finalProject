@@ -195,7 +195,7 @@
                             </form>
                         </div>
                         <div class="moong-btn">
-                            <form action="/gongguOrder.do?$productNo={p.productNo}" method="post">
+                            <form action="/gongguOrder.do?productNo=${p.productNo}" method="post">
                                 <input type="hidden" name="productNo">
                                 <input type="hidden" name="optionNo">
                                 <button class="btn btn-pri size02">뭉쳐야산다</button>
