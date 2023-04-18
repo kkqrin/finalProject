@@ -288,7 +288,7 @@
                     buttons: {
                         "OK": function () {
                             $(this).dialog("close");
-                            location.href = '/noticeList.do?reqPage=1';
+                            location.href = '/noticeList.do?reqPage=1&searchType=0';
                         }
                     },
                     show: {

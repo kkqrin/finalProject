@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class NoticePageData {
 	private ArrayList<Notice> list;
 	private String pageNavi;
+
 }

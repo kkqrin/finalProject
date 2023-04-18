@@ -29,12 +29,14 @@ public class NoticeController {
 	private FileManager manager;
 	
 	@RequestMapping(value="/noticeList.do")
-	public String noticeList(int reqPage, Model model) {
-		NoticePageData npd = service.selectNoticeList(reqPage);
+	public String noticeList(int reqPage, int searchType, String keyword, Model model) {
+		NoticePageData npd = service.selectNoticeList(reqPage, searchType, keyword);			
+		
 		model.addAttribute("list", npd.getList());
 		model.addAttribute("pageNavi", npd.getPageNavi());
 		return "notice/allNotice";
 	}
+	
 	@RequestMapping(value="/noticeWriteFrm.do")
 	public String noticeWriteFrm() {
 		return "notice/noticeWriteFrm";

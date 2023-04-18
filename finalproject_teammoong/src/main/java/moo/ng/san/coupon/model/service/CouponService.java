@@ -3,7 +3,6 @@ package moo.ng.san.coupon.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,7 +54,7 @@ public class CouponService {
 		map.put("end", end);
 		map.put("memberNo", memberNo);
 		ArrayList<Point> pointList = dao.selectAllPoint(map);
-		int totalCount = dao.selectPointCount();
+		int totalCount = dao.selectPointCount(memberNo);
 		
 		int totalPage = (int)Math.ceil(totalCount/(double)numPerPage);
 		
@@ -82,7 +81,7 @@ public class CouponService {
 			}
 		}
 		if(pageNo <= totalPage) {
-			pageNavi += "<a href = '/couponSearch.do?reqPage="+pageNo+"'class='btn-pagi ctrl'>[다음]</a>";
+			pageNavi += "<a href = '/pointSearch.do?reqPage="+pageNo+"'class='btn-pagi ctrl'>[다음]</a>";
 		}
 		PointPageData ppd = new PointPageData(pointList, pageNavi);
 		
@@ -101,7 +100,7 @@ public class CouponService {
 		map.put("end", end);
 		map.put("memberNo", memberNo);
 		ArrayList<IssueCoupon> couponList = dao.selectMemberIssueCoupon(map);
-		int totalCount = dao.selectIssueCount();
+		int totalCount = dao.selectIssueCount(memberNo);
 		
 		int totalPage = (int)Math.ceil(totalCount/(double)numPerPage);
 		
@@ -109,7 +108,7 @@ public class CouponService {
 		
 		int pageNo = 1;
 		if(reqPage>5) {
-			pageNo = reqPage-4;
+			pageNo = reqPage-5;
 		}
 		
 		String pageNavi = "";
@@ -137,6 +136,14 @@ public class CouponService {
 	public ArrayList<Point> selectAllPointMember(int memberNo) {
 		ArrayList<Point> pointList = dao.selectAllPointMember(memberNo);
 		return pointList;
+	}
+
+	public int insertPoint(int memberNo, int pointEa) {
+		Point point = new Point();
+		point.setMemberNo(memberNo);
+		point.setPointEa(pointEa);
+		int result = dao.insertPoint(point);
+		return result;
 	}
 
 }

@@ -61,7 +61,7 @@
 					</c:if>
 				</table>
 				<div class="area-btn right" style="padding-top:10px;">
-					<a href="/noticeList.do?reqPage=1" class="btn btn-pri size02">목록</a>
+					<a href="/noticeList.do?reqPage=1&searchType=0" class="btn btn-pri size02">목록</a>
 				</div>
 			</div>
 		</div>

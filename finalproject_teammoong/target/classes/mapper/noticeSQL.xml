@@ -25,13 +25,41 @@
 						read_count as readCount,
 						notice_content as noticeContent
 				from notice_tbl
+				where
+				 
+                    <choose>
+                        <when test="searchType == 1">
+                            notice_title LIKE '%' || #{keyword} || '%'
+                        </when>
+                        <when test="searchType == 2">
+                            notice_content LIKE '%' || #{keyword} || '%'
+                        </when>
+                        <otherwise>
+                            1=1
+                        </otherwise>
+                    </choose>
+                
 				order by notice_status desc, notice_no desc
 			)n
 		)
 		where rnum between #{start} and #{end}
 	</select>
-	<select id="totalCount" resultType="_int">
-		select count(*) from notice_tbl
+	<select id="totalCount" parameterType="map" resultType="_int">
+    	SELECT COUNT(*)
+    	FROM notice_tbl
+    	<if test="searchType != 0">
+        	<choose>
+            	<when test="searchType == 1">
+                	WHERE notice_title LIKE '%' || #{keyword} || '%'
+            	</when>
+            	<when test="searchType == 2">
+                	WHERE notice_content LIKE '%' || #{keyword} || '%'
+	            </when>
+    	        <otherwise>
+        	        1=1
+            	</otherwise>
+        	</choose>
+    	</if>
 	</select>
 	<select id="selectOneFile" resultType="f">
 		 select 
