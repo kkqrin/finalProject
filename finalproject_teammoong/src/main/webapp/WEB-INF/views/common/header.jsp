@@ -37,7 +37,6 @@
 	</style>
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/common/stickyRight.jsp" />
 	<div class="header-wrap">
         <div class="header-content">
         

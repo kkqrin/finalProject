@@ -73,6 +73,7 @@
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	<jsp:include page="/WEB-INF/views/common/stickyRight.jsp" />
 
 
 
@@ -423,7 +424,7 @@
 
 
 
-
+<jsp:include page="/temporReview.jsp" />
 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
@@ -564,7 +565,9 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // 슬릭슬라이드
-        $('.img-box').slick();
+        $(function(){
+            $('.img-box').slick();
+        });
         $(".scroll-top").on("click",function(){
             var offset = $("body").offset();
             $("html, body").animate({scrollTop: offset.top},400);
