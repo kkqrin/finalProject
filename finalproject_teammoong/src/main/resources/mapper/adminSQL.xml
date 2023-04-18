@@ -420,7 +420,38 @@
         where bt.board_no = #{boardNo} and bo.detail_name like '%'||#{detailName}||'%'
 	</select>
 	
+	<select id="selectAllCouponList" resultType="ic">
+		select
+			ic.issue_no as issueNo,
+			ic.member_no as memberNo,
+			ic.coupon_no as couponNo,
+			ic.issue_date as issueDate,
+			ic.end_date as endDate,
+			ic.coupon_status as couponStatus,
+			ct.coupon_title as couponTitle,
+			ct.coupon_price  as couponPrice
+		from issue_coupon ic
+		join coupon_tbl ct on (ic.coupon_no = ct.coupon_no)
+	</select>
+
+	<select id="selectAllDcList" resultType="day">
+		select
+			check_no as checkNo,
+			member_no as memberNo,
+			check_date as checkDate,
+			point_ea as pointEa
+		from day_check
+	</select>
 	
+	<select id="selectPointList" resultType="point">
+		select
+			point_no as pointNo,
+			member_no as memberNo,
+			point_ea as pointEa,
+			point_date as pointDate,
+			point_status as pointStatus
+		from point_tbl
+	</select>
 	
 	<!-- 차트용 query -->
 <!-- 	<select id="selectTotalSalesFas" resultType="_int">

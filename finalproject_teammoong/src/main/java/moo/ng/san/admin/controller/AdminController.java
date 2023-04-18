@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 
 import moo.ng.san.admin.model.service.AdminService;
 import moo.ng.san.admin.model.vo.AdminBoardPageData;
+import moo.ng.san.admin.model.vo.AdminCouponPageData;
 import moo.ng.san.admin.model.vo.AdminMemberPageData;
 import moo.ng.san.admin.model.vo.AdminOrderPageData;
 import moo.ng.san.admin.model.vo.AdminProductPageData;
@@ -186,8 +187,17 @@ public class AdminController {
 	}
 	
 	
+	//===========================================================================
+	/* 쿠폰 발행관리 */
 	
-	
+	@RequestMapping(value="/adminCouponList.do")
+	public String adminCouponList(Model model) {
+		AdminCouponPageData acpd = service.selectCouponList();
+		model.addAttribute("couponList",acpd.getCouponList());
+		model.addAttribute("dcList",acpd.getDcList());
+		model.addAttribute("pointList",acpd.getPointList());
+		return "admin/adminDayCheckManagePage";
+	}
 	
 	
 	// ========================================================================
