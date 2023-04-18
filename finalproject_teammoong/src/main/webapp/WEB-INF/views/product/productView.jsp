@@ -73,7 +73,9 @@
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<jsp:include page="/WEB-INF/views/common/stickyRight.jsp" />
+    <c:if test="${not empty sessionScope.m }">
+        <jsp:include page="/WEB-INF/views/common/stickyRight.jsp" />
+    </c:if>
 
 
 
