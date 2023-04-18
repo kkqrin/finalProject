@@ -195,7 +195,7 @@
                             </form>
                         </div>
                         <div class="moong-btn">
-                            <form action="/gongguOrder.do?productNo=${p.productNo}" method="post">
+                            <form action="/moongsanOrder.do" method="post">
                                 <input type="hidden" name="productNo">
                                 <input type="hidden" name="optionNo">
                                 <button class="btn btn-pri size02">뭉쳐야산다</button>
@@ -218,8 +218,13 @@
                 <div class="right-flex-wrap">
                     <div class="right-flex-info">
                         <div class="number-info">${g.countNumber }명 남음</div>
-                        <div class="time-limit" id="timer"></div>
                     </div>
+                    <c:if test="${sessionScope.m.memberId eq g.memberId }">
+                    <button type="button" class="btn btn-pri size01" id="orderBtn">뭉산취소</button>
+                    </c:if>
+                    <c:if test="${sessionScope.m.memberId ne g.memberId }">
+                    <button type="button" class="btn btn-pri size01" id="orderBtn">주문참여</button>
+                    </c:if>
                 </div>
             </div>
         </c:forEach>
@@ -235,6 +240,11 @@
                 </tr>
             </table>
         </div>
+        <div class="product-content-logo class="product-info-box""><h3>상품설명</h3></div>
+        <div class="product-content-wrap">
+            ${p.productContent}
+        </div>
+        <div class="product-review-logo product-review"><h3>리뷰</h3></div>
         <div class="review-wrap">
             <form action="/reviewWrite.do" method="post" enctype="multipart/form-data"></form>
             <table>
@@ -267,6 +277,7 @@
         <div class="gonggu-content-wrap">
             <div class="gonggu-content-title">
             </div>
+            <div class="product-inquiry-logo product-inquiry"><h3>문의사항</h3></div>
             <div class="inquiry-box">
                 <table class="inquiry-table">
                     <tr>
@@ -427,7 +438,7 @@
 <input type="hidden" id="loginMemberId" value="${sessionScope.m.memberId}">
 <input type="hidden" id="productNo" value="${p.productNo}">
 <input type="hidden" id="likeNo" value="${l.likeNo}">
-<input type="hidden" id="productContent" value="${p.productContent}">
+<!-- <input type="hidden" id="productContent" value="${p.productContent}"> -->
 
 
 

@@ -18,4 +18,24 @@ public class GongguDao {
 		List list = sqlSession.selectList("gonggu.selectGongguList",productNo);
 		return (ArrayList<Gonggu>)list;
 	}
+
+	public int insertGonggu(Gonggu g) {
+		int result = sqlSession.insert("gonggu.insertGonggu",g);
+		return result;
+	}
+
+	public Gonggu selectInsertGonggu() {
+		Gonggu gonggu = sqlSession.selectOne("gonggu.selectInsertGonggu");
+		return gonggu;
+	}
+
+	public int insertDetailGonggu(Gonggu gonggu) {
+		int result = sqlSession.insert("gonggu.insertDetailGonggu",gonggu);
+		return result;
+	}
+
+//	public int selectCount() {
+//		int countNumber = sqlSession.selectOne("gonggu.selectCountNumber");
+//		return countNumber;
+//	}
 }
