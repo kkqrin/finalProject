@@ -92,7 +92,7 @@
 	</c:if>
     
         <div class="top-info-box">
-            <div class="img-box"style="width: 500px;">
+            <div class="img-box">
             <c:forEach items="${p.fileList }" var="i">
                 <img src="/resources/upload/product/${i.filepath }" style="border-radius: 20px;">
             </c:forEach>
@@ -434,7 +434,7 @@
     
 </body>
     	<!-- 슬릭 슬라이더 js -->
-	<script type="text/javascript" src="/resources/slick/slick.min.js"></script>
+	<script type="text/javascript" src="/resources/slick/slick.min.js"></script>	
     <script>
         ///////////////////////////////////////////////////////////////////////////////////////////
         $("#orderBtn").on("click",function(){
@@ -1008,4 +1008,5 @@
             };
         // });
         </script>
+        
 </html>
