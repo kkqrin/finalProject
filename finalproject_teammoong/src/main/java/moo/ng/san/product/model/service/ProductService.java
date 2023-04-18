@@ -8,11 +8,13 @@ import org.springframework.stereotype.Service;
 
 import moo.ng.san.basket.model.vo.Basket;
 import moo.ng.san.category.model.vo.DetailCategory;
+import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.product.model.dao.ProductDao;
 import moo.ng.san.product.model.vo.FileVO;
 import moo.ng.san.product.model.vo.Option;
 import moo.ng.san.product.model.vo.Product;
 import moo.ng.san.product.model.vo.ProductPageData;
+import moo.ng.san.product.model.vo.RecentProduct;
 @Service
 public class ProductService {
 	@Autowired
@@ -108,10 +110,42 @@ public class ProductService {
 		return dao.insertShoppingCartOption(map);
 	}
 	
+	public ArrayList<Basket> selectBasketList(int memberNo) {
+		
+		return dao.selectBasketList(memberNo);
+	}
+
+	public int insertRecentProduct(int memberNo, int productNo) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("productNo", productNo);
+		
+		return dao.insertRecentProduct(map);
+	}
+
+	public ArrayList<RecentProduct> selectRecentProductList(int memberNo) {
+		
+		return dao.selectRecentProductList(memberNo);
+	}
 	
-	
-	
-	
+	public int selectUniqueRecentProduct(int memberNo, int productNo) {
+		int result = 0;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("productNo", productNo);
+		
+		RecentProduct rp = dao.selectUniqueRecentProduct(map);
+		
+		if(rp!=null) {
+			result = dao.deletRecentProduct(map);
+		}
+		
+		return result;
+	}
+
+
 	
 	
 	
@@ -208,7 +242,9 @@ public class ProductService {
 			ArrayList<String> filepath = dao.selectProductImg(productNo);
 			p.setFileList(filepath);
 		}
-		System.out.println(p);
+//		System.out.println(p);
+		
+
 		return p;
 		
 	}
@@ -222,10 +258,7 @@ public class ProductService {
 		return list;
 	}
 
-	public ArrayList<Basket> selectBasketList(int memberNo) {
-		
-		return dao.selectBasketList(memberNo);
-	}
+
 
 
 

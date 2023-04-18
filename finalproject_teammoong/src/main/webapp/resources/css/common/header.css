@@ -58,7 +58,7 @@ section{
 	border-radius:0px !important;
 	border-bottom: 3px solid #3a3a3a;
 }
-.mainSearch>span{ 
+.mainSearch>button{ 
 	position: absolute;
 	top:8px ; right: 5px;
 	cursor: pointer;

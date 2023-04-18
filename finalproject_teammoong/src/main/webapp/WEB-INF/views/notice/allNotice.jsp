@@ -59,6 +59,16 @@
 			<div class="pagination">
 			${pageNavi }
 			</div>
+			<div class="searchBox">
+				<form action="/noticeList.do?reqPage=1" method="post">
+					<select name="searchType">
+						<option value="1">제목</option>
+						<option value="2">내용</option>
+					</select>
+					<input type="text" name="keyword" id="searchText">        
+                	<button class="btn btn-pri size01" type="submit" name="searchSubmitBtn">검색</button>
+                </form>
+			</div>
 			<div class="">
 				<c:if test="${sessionScope.m.memberStatus == 0 }">
 					<div class="area-btn right">
@@ -70,6 +80,7 @@
 		<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}"> 
 	</div>
 	<script>
+		
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>

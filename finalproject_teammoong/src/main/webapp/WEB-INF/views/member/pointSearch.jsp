@@ -11,13 +11,13 @@
 		display:flex;
 		
 	}
-	.menu-bar h5{
+	.menu-bar div{
 		width: 50%;
 		text-align: center;
 		
 		cursor: pointer;
 	}
-	.menu-bar h5:hover{
+	.menu-bar div:hover{
 		background-color: rgba(255, 255, 200, 0.5);
 		font-size: 1.5em;
 	}
@@ -39,10 +39,13 @@
 				<div class="mypage-content">
 					<div class="main">
 						<div class="menu-bar">
-							<h5 id="coupon-bar">쿠폰</h5>
-							<h5 id="point-bar">적립금</h5>
+							<div id="coupon-bar">
+								<h5>쿠폰</h5>
+							</div>
+							<div id="point-bar">
+								<h5>적립금</h5>
+							</div>
 						</div>
-						<jsp:include page="/WEB-INF/views/member/couponSearch.jsp" />
 						<div class="point-view">
 							${sessionScope.m.memberName}님의 총 적립금은 <span id="totalPoint"></span>p 입니다.
 						</div>
@@ -82,6 +85,9 @@
 												<c:if test="${point.pointStatus == 3}">
 													포인트 사용
 												</c:if>
+												<c:if test="${point.pointStatus == 4}">
+													포인트 충전
+												</c:if>
 											</td>
 										</tr>
 									</c:forEach>
@@ -97,25 +103,29 @@
 		</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <script>
-
 	$("#coupon-bar").on("click",function(){
+		const memberNo = $("[name=memberNo]").val();
 		$(".point-view").hide();
 		$("#point-bar").css("color","#99999");
 		$("#point-bar").css("border-bottom","none");
 		$(".coupon-view").show();
 		$("#coupon-bar").css("color","#3A3A3A");
 		$("#coupon-bar").css("border-bottom","5px solid #f88000");
-		location.href = "/couponSearch.do?reqPage=1";
+		location.href="/couponSearch.do?reqPage=1&memberNo="+memberNo;
 	});
+	
 	$("#point-bar").on("click",function(){
+		const memberNo = $("[name=memberNo]").val();
 		$(".coupon-view").hide();
 		$("#coupon-bar").css("color","#99999");
 		$("#coupon-bar").css("border-bottom","none");
 		$(".point-view").show();
 		$("#point-bar").css("color","#3A3A3A");
 		$("#point-bar").css("border-bottom","5px solid #f88000");
-		
+		location.href="/pointSearch.do?reqPage=1&memberNo="+memberNo;
 	});
+	$("#point-bar").css("color","#3A3A3A");
+	$("#point-bar").css("border-bottom","5px solid #f88000");
 </script>
 </body>
 </html>

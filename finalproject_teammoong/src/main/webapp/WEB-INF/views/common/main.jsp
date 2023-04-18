@@ -54,6 +54,10 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+    <c:if test="${not empty sessionScope.m }">
+        <jsp:include page="/WEB-INF/views/common/stickyRight.jsp" />
+    </c:if>
+
 <div class="main-content-wrap">
     
     

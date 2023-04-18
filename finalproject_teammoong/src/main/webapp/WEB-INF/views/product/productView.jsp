@@ -73,7 +73,9 @@
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<jsp:include page="/WEB-INF/views/common/stickyRight.jsp" />
+    <c:if test="${not empty sessionScope.m }">
+        <jsp:include page="/WEB-INF/views/common/stickyRight.jsp" />
+    </c:if>
 
 
 
@@ -92,7 +94,7 @@
 	</c:if>
     
         <div class="top-info-box">
-            <div class="img-box"style="width: 500px;">
+            <div class="img-box">
             <c:forEach items="${p.fileList }" var="i">
                 <img src="/resources/upload/product/${i.filepath }" style="border-radius: 20px;">
             </c:forEach>
@@ -193,7 +195,7 @@
                             </form>
                         </div>
                         <div class="moong-btn">
-                            <form action="/moongsanOrder.do" method="post">
+                            <form action="/gongguOrder.do?productNo=${p.productNo}" method="post">
                                 <input type="hidden" name="productNo">
                                 <input type="hidden" name="optionNo">
                                 <button class="btn btn-pri size02">뭉쳐야산다</button>
@@ -206,31 +208,62 @@
         </div>
         <div class="gonggu-board-logo"><h3>뭉쳐야 산다!</h3></div>
         <div class="gonggu-board">
+            <c:forEach items="${gongguList }" var="g">
             <div class="all-flex-wrap">
                 <div class="left-flex-wrap">
-                    <div class="user-img"><img src="/resources/upload/member/${sessionScope.m.memberPath}" style="width: 50px; height: 50px;"></div>
-                    <div class="user-id">${sessionScope.m.memberId}</div>
-                    <div class="gonggu-number">(1/2)</div>
+                    <div class="user-img"><img src="/resources/upload/member/${g.memberPath}" style="width: 50px; height: 50px;"></div>
+                    <div class="user-id">${g.memberId}</div>
+                    <div class="gonggu-number">(${g.countNumber }/${g.gongguNumber })</div>
                 </div>
                 <div class="right-flex-wrap">
                     <div class="right-flex-info">
-                        <div class="number-info">1명 남음</div>
+                        <div class="number-info">${g.countNumber }명 남음</div>
                         <div class="time-limit" id="timer"></div>
                     </div>
-                    <button type="button" class="btn btn-pri size01" id="orderBtn">주문참여</button>
                 </div>
             </div>
+        </c:forEach>
         </div>
+        
         <div class="quick-scroll-bar">
             <table>
-        <tr>
-            <td><a href="#" class="product-info-btn">상품설명</a></td>
-            <td><a href="#" class="product-view-btn">상세정보</a></td>
-            <td><a href="#" class="product-review-btn">리뷰보기</a></td>
-            <td><a href="#" class="product-inquiry-btn">문의하기</a></td>
-        </tr>
-    </table>
-</div>  
+                <tr>
+                    <td><a href="#" class="product-info-btn">상품설명</a></td>
+                    <td><a href="#" class="product-view-btn">상세정보</a></td>
+                    <td><a href="#" class="product-review-btn">리뷰보기</a></td>
+                    <td><a href="#" class="product-inquiry-btn">문의하기</a></td>
+                </tr>
+            </table>
+        </div>
+        <div class="review-wrap">
+            <form action="/reviewWrite.do" method="post" enctype="multipart/form-data"></form>
+            <table>
+                <tr>
+                    <th>사진</th>
+                    <th colspan="5">내용</th>
+                </tr>
+                <tr>
+                    <th><input type="file" name="reviewFile" multiple></th>
+                    <td colspan="5"><textarea style="height: 200px;"></textarea></td>
+                </tr>
+                <tr>
+                    <th>별점</th>
+                    <td style="color:black">
+                        <div>
+                          <label for="star1">★</label>
+                        </div>
+                        <input type="radio" name="star" id="star1">
+                      </td>
+                    <td style="color:black">★★<div><input type="radio" name="star"></div></td>
+                    <td style="color:black">★★★<div><input type="radio" name="star"></div></td>
+                    <td style="color:black">★★★★<div><input type="radio" name="star"></div></td>
+                    <td style="color:black">★★★★★<div><input type="radio" name="star"></div></td>
+                </tr>
+                <tr>
+                    <td colspan="6"><div class="area-btn full"><button class="btn btn-pri size02">리뷰작성</button></div></td>
+                </tr>
+            </table>
+        </div>  
         <div class="gonggu-content-wrap">
             <div class="gonggu-content-title">
             </div>
@@ -289,6 +322,7 @@
             </div>
         </div>
     </div>
+</div>
     
 <!-- <div class="quick-scroll-bar">
         <ul>
@@ -304,32 +338,6 @@
         <div class="product-review" style="height: 500px;">리뷰보기</div>
         <div class="product-inquiry" style="height: 500px;">문의하기</div>
     </div> -->
-        <!--구매버튼 시작-->
-        <!-- <div class="fix-button-box">
-            <div class="gonggu-window">
-                <div class="window-close-btn">X</div>
-                    <div class="flex-box">
-                        <div class="info-title-box">
-                            <a class="info-title">옵션</a>
-                        </div>
-                        <div>
-                            <ul class="info-content">
-                                <li><select class="select-custom product-option">
-                                    <option value="0" selected>상품 옵션을 선택해주세요</option>
-                                    <c:forEach items="${optionList }" var="po">
-	                                    <option value="${po.optionInfoNo }">${po.optionDetailName } ( +<fmt:formatNumber value="${po.optionPrice }"/>원 )</option>
-                                    </c:forEach>
-                                </select></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="button-box">
-                    <button type="button" class="button buy-one-btn">혼자구매</button>
-                    <button type="button" class="button gonggu-buy-btn">공동구매</button>
-                </div>
-            </div> -->
-        </div>
      <!--구매버튼-->
      <!-- 문의사항 삭제 모달 시작 -->
      <div id="modalDelete" class="modal modal-pri">
@@ -434,8 +442,25 @@
     
 </body>
     	<!-- 슬릭 슬라이더 js -->
-	<script type="text/javascript" src="/resources/slick/slick.min.js"></script>
+	<script type="text/javascript" src="/resources/slick/slick.min.js"></script>	
     <script>
+           $(document).ready(function() {
+    // td 요소를 클릭할 때
+    $("td").on("click", function() {
+      // 클릭된 td 요소의 자식 요소인 input[type=radio] 요소의 체크를 토글합니다.
+      var radio = $(this).find("input[type=radio]");
+      radio.prop("checked", !radio.prop("checked"));
+      // 다른 td 요소의 input[type=radio] 요소의 체크를 해제하고 배경색을 초기화합니다.
+      $("td")
+        .not(this)
+        .find("input[type=radio]")
+        .prop("checked", false)
+        .closest("td")
+        .css("background-color", "");
+      // 현재 클릭된 td 요소의 배경색을 검은색으로 변경하거나 원래대로 되돌립니다.
+      $(this).css("background-color", radio.prop("checked") ? "#f88000" : "");
+    });
+  });
         ///////////////////////////////////////////////////////////////////////////////////////////
         $("#orderBtn").on("click",function(){
       // 현재 시간 가져오기
@@ -1008,4 +1033,5 @@
             };
         // });
         </script>
+        
 </html>

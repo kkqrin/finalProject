@@ -70,21 +70,28 @@ public class CouponController {
 	@RequestMapping(value="/couponSearch.do")
 	public String couponSearch(int reqPage, int memberNo, Model model) {
 		CouponPageData cpd = service.selectIssueCouponList(reqPage, memberNo);		
-		System.out.println(cpd);
+		
 		model.addAttribute("couponList",cpd.getCouponList());
-		model.addAttribute("CouponPageNavi", cpd.getPageNavi());
+		model.addAttribute("pageNavi", cpd.getPageNavi());
 		
 		return "member/couponSearch";
 	}
+	
 	@RequestMapping(value="/pointSearch.do")
 	public String pointSearch(int reqPage, int memberNo, Model model) {		
 		PointPageData ppd = service.selectAllPoint(reqPage, memberNo);
 		
 		model.addAttribute("pointList",ppd.getPointList());
-		model.addAttribute("PointPageNavi",ppd.getPageNavi());
+		model.addAttribute("pageNavi",ppd.getPageNavi());
 		return "member/pointSearch";
 	}
 	
+	@RequestMapping(value="/insertPoint.do")
+	public String insertPoint(int memberNo, int pointEa) {
+		int result = service.insertPoint(memberNo, pointEa);
+		System.out.println(result);
+		return "common/main";
+	}
 	
 	@ResponseBody
 	@RequestMapping(value="/pointCheck.do")

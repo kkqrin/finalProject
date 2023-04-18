@@ -53,19 +53,24 @@ public class CouponDao {
 		return (ArrayList<Point>)pointList;
 	}
 
-	public int selectIssueCount() {
-		int totalCount = sqlSession.selectOne("issueCoupon.totalCount");
+	public int selectIssueCount(int memberNo) {
+		int totalCount = sqlSession.selectOne("issueCoupon.totalCount",memberNo);
 		return totalCount;
 	}
 
-	public int selectPointCount() {
-		int totalCount = sqlSession.selectOne("point.totalCount");
+	public int selectPointCount(int memberNo) {
+		int totalCount = sqlSession.selectOne("point.totalCount", memberNo);
 		return totalCount;
 	}
 
 	public ArrayList<Point> selectAllPointMember(int memberNo) {
 		List list = sqlSession.selectList("point.selectAllPointMember",memberNo);
 		return (ArrayList<Point>) list;
+	}
+
+	public int insertPoint(Point point) {
+		int result = sqlSession.insert("point.insertChargePoint", point);
+		return result;
 	}
 	
 }
