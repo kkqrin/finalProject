@@ -232,6 +232,7 @@
             </table>
         </div>
         <div class="review-wrap">
+            <form action="/reviewWrite.do" method="post" enctype="multipart/form-data"></form>
             <table>
                 <tr>
                     <th>사진</th>
@@ -243,16 +244,16 @@
                 </tr>
                 <tr>
                     <th>별점</th>
-                    <td style="color:gold; background-color: darkgray;">
+                    <td style="color:black">
                         <div>
                           <label for="star1">★</label>
                         </div>
                         <input type="radio" name="star" id="star1">
                       </td>
-                    <td style="color:gold">★★<div><input type="radio" name="star"></div></td>
-                    <td style="color:gold">★★★<div><input type="radio" name="star"></div></td>
-                    <td style="color:gold">★★★★<div><input type="radio" name="star"></div></td>
-                    <td style="color:gold">★★★★★<div><input type="radio" name="star"></div></td>
+                    <td style="color:black">★★<div><input type="radio" name="star"></div></td>
+                    <td style="color:black">★★★<div><input type="radio" name="star"></div></td>
+                    <td style="color:black">★★★★<div><input type="radio" name="star"></div></td>
+                    <td style="color:black">★★★★★<div><input type="radio" name="star"></div></td>
                 </tr>
                 <tr>
                     <td colspan="6"><div class="area-btn full"><button class="btn btn-pri size02">리뷰작성</button></div></td>
