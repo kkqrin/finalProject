@@ -223,14 +223,42 @@
         </div>
         <div class="quick-scroll-bar">
             <table>
-        <tr>
-            <td><a href="#" class="product-info-btn">상품설명</a></td>
-            <td><a href="#" class="product-view-btn">상세정보</a></td>
-            <td><a href="#" class="product-review-btn">리뷰보기</a></td>
-            <td><a href="#" class="product-inquiry-btn">문의하기</a></td>
-        </tr>
-    </table>
-</div>  
+                <tr>
+                    <td><a href="#" class="product-info-btn">상품설명</a></td>
+                    <td><a href="#" class="product-view-btn">상세정보</a></td>
+                    <td><a href="#" class="product-review-btn">리뷰보기</a></td>
+                    <td><a href="#" class="product-inquiry-btn">문의하기</a></td>
+                </tr>
+            </table>
+        </div>
+        <div class="review-wrap">
+            <table>
+                <tr>
+                    <th>사진</th>
+                    <th colspan="5">내용</th>
+                </tr>
+                <tr>
+                    <th><input type="file" name="reviewFile" multiple></th>
+                    <td colspan="5"><textarea style="height: 200px;"></textarea></td>
+                </tr>
+                <tr>
+                    <th>별점</th>
+                    <td style="color:gold; background-color: darkgray;">
+                        <div>
+                          <label for="star1">★</label>
+                        </div>
+                        <input type="radio" name="star" id="star1">
+                      </td>
+                    <td style="color:gold">★★<div><input type="radio" name="star"></div></td>
+                    <td style="color:gold">★★★<div><input type="radio" name="star"></div></td>
+                    <td style="color:gold">★★★★<div><input type="radio" name="star"></div></td>
+                    <td style="color:gold">★★★★★<div><input type="radio" name="star"></div></td>
+                </tr>
+                <tr>
+                    <td colspan="6"><div class="area-btn full"><button class="btn btn-pri size02">리뷰작성</button></div></td>
+                </tr>
+            </table>
+        </div>  
         <div class="gonggu-content-wrap">
             <div class="gonggu-content-title">
             </div>
@@ -289,6 +317,7 @@
             </div>
         </div>
     </div>
+</div>
     
 <!-- <div class="quick-scroll-bar">
         <ul>
@@ -304,32 +333,6 @@
         <div class="product-review" style="height: 500px;">리뷰보기</div>
         <div class="product-inquiry" style="height: 500px;">문의하기</div>
     </div> -->
-        <!--구매버튼 시작-->
-        <!-- <div class="fix-button-box">
-            <div class="gonggu-window">
-                <div class="window-close-btn">X</div>
-                    <div class="flex-box">
-                        <div class="info-title-box">
-                            <a class="info-title">옵션</a>
-                        </div>
-                        <div>
-                            <ul class="info-content">
-                                <li><select class="select-custom product-option">
-                                    <option value="0" selected>상품 옵션을 선택해주세요</option>
-                                    <c:forEach items="${optionList }" var="po">
-	                                    <option value="${po.optionInfoNo }">${po.optionDetailName } ( +<fmt:formatNumber value="${po.optionPrice }"/>원 )</option>
-                                    </c:forEach>
-                                </select></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="button-box">
-                    <button type="button" class="button buy-one-btn">혼자구매</button>
-                    <button type="button" class="button gonggu-buy-btn">공동구매</button>
-                </div>
-            </div> -->
-        </div>
      <!--구매버튼-->
      <!-- 문의사항 삭제 모달 시작 -->
      <div id="modalDelete" class="modal modal-pri">
@@ -436,6 +439,23 @@
     	<!-- 슬릭 슬라이더 js -->
 	<script type="text/javascript" src="/resources/slick/slick.min.js"></script>
     <script>
+           $(document).ready(function() {
+    // td 요소를 클릭할 때
+    $("td").on("click", function() {
+      // 클릭된 td 요소의 자식 요소인 input[type=radio] 요소의 체크를 토글합니다.
+      var radio = $(this).find("input[type=radio]");
+      radio.prop("checked", !radio.prop("checked"));
+      // 다른 td 요소의 input[type=radio] 요소의 체크를 해제하고 배경색을 초기화합니다.
+      $("td")
+        .not(this)
+        .find("input[type=radio]")
+        .prop("checked", false)
+        .closest("td")
+        .css("background-color", "");
+      // 현재 클릭된 td 요소의 배경색을 검은색으로 변경하거나 원래대로 되돌립니다.
+      $(this).css("background-color", radio.prop("checked") ? "#f88000" : "");
+    });
+  });
         ///////////////////////////////////////////////////////////////////////////////////////////
         $("#orderBtn").on("click",function(){
       // 현재 시간 가져오기

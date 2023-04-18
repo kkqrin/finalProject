@@ -263,3 +263,13 @@ display: flex;
     margin-top: 15px;
     text-align: center;
 }
+  /* 라디오 버튼을 숨깁니다. */
+input[type="radio"] {
+    position: absolute;
+    left: -9999px;
+}
+
+  /* 체크된 라디오 버튼의 부모 요소인 <td>의 배경색을 변경합니다. */
+input[type="radio"]:checked + label {
+    background-color: #f88000;
+}
