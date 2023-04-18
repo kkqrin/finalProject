@@ -174,8 +174,7 @@
 		</choose>
 	</select>
 
-	<select id="selectAllOrderList" parameterType="map"
-		resultType="o">
+	<select id="selectAllOrderList" parameterType="map"	resultType="o">
 		select * from
 			(select rownum as rnum, b.* from
 				(select
@@ -420,7 +419,32 @@
         where bt.board_no = #{boardNo} and bo.detail_name like '%'||#{detailName}||'%'
 	</select>
 	
-	<select id="selectAllCouponList" resultType="ic">
+	<select id="selectAllCouponList" resultType="cd">
+		SELECT 
+			mt.member_no as memberNo,
+		    mt.member_name AS memberName,
+		    mt.member_id AS memberId,
+		    SUM(pt.point_ea) AS pointEa
+		FROM point_tbl pt
+		JOIN member_tbl mt ON (pt.member_no = mt.member_no)
+		WHERE pt.point_status != 3
+		GROUP BY mt.member_name, mt.member_id, mt.member_no
+		
+	</select>
+	
+	<select id="selectUseMoongList" parameterType="_int" resultType="cd">
+		select
+			mt.member_id as memberId,
+		    pt.point_ea as pointEa,
+		    pt.point_date as pPointDate,
+		    pt.point_status as pointStatus
+		from member_tbl mt
+		join point_tbl pt on (mt.member_no = pt.member_no)
+		where pt.point_status = 3 and mt.member_no = #{_parameter}
+		
+	</select>
+	
+	<!-- <select id="selectAllCouponList" resultType="ic">
 		select
 			ic.issue_no as issueNo,
 			ic.member_no as memberNo,
@@ -451,7 +475,7 @@
 			point_date as pointDate,
 			point_status as pointStatus
 		from point_tbl
-	</select>
+	</select> -->
 	
 	<!-- 차트용 query -->
 <!-- 	<select id="selectTotalSalesFas" resultType="_int">

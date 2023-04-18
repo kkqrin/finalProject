@@ -36,6 +36,8 @@
 		
 		<typeAlias type="moo.ng.san.basket.model.vo.Basket" alias="basket" />
 		
+		<typeAlias type="moo.ng.san.admin.model.vo.CouponData" alias="cd" /> <!-- 쿠폰 통합 -->
+		
 	</typeAliases>
 	<!-- 
 	<typeAliases>

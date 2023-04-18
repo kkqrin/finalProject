@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,13 +14,14 @@ import com.google.gson.Gson;
 
 import moo.ng.san.admin.model.service.AdminService;
 import moo.ng.san.admin.model.vo.AdminBoardPageData;
-import moo.ng.san.admin.model.vo.AdminCouponPageData;
 import moo.ng.san.admin.model.vo.AdminMemberPageData;
 import moo.ng.san.admin.model.vo.AdminOrderPageData;
 import moo.ng.san.admin.model.vo.AdminProductPageData;
 import moo.ng.san.admin.model.vo.AdminReportBoardPageData;
+import moo.ng.san.admin.model.vo.CouponData;
 import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.member.model.vo.Member;
+import moo.ng.san.order.model.vo.Order;
 import moo.ng.san.product.model.vo.Product;
 
 @Controller
@@ -188,15 +188,24 @@ public class AdminController {
 	
 	
 	//===========================================================================
-	/* 쿠폰 발행관리 */
+	/* 뭉머니 관리 */
 	
-	@RequestMapping(value="/adminCouponList.do")
+	//몽머니 List
+	@RequestMapping(value="/adminDaycheckManagePage.do")
 	public String adminCouponList(Model model) {
-		AdminCouponPageData acpd = service.selectCouponList();
-		model.addAttribute("couponList",acpd.getCouponList());
-		model.addAttribute("dcList",acpd.getDcList());
-		model.addAttribute("pointList",acpd.getPointList());
+		ArrayList<CouponData> list = service.selectCouponList();
+		model.addAttribute("mMoneyList",list);
 		return "admin/adminDayCheckManagePage";
+	}
+	
+	//몽머니 List 에서 셀 선택시 모달창에 들어가는 데이터 검색
+	@ResponseBody
+	@RequestMapping(value="/ajaxUseMoongCheck.do", produces = "application/json;charset=utf-8")
+	public String ajaxUseMoongCheck(int memberNo) {
+		ArrayList<CouponData> list = service.selectUseMoongList(memberNo);
+		Gson gson = new Gson();
+		String result = gson.toJson(list);
+		return result;
 	}
 	
 	

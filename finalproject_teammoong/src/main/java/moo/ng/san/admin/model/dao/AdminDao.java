@@ -6,17 +6,15 @@ import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Repository;
 
+import moo.ng.san.admin.model.vo.CouponData;
 import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.board.model.vo.BoardJoin;
 import moo.ng.san.board.model.vo.BoardOption;
 import moo.ng.san.board.model.vo.Notify;
-import moo.ng.san.coupon.model.vo.IssueCoupon;
-import moo.ng.san.dayCheck.model.vo.DayCheck;
-import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.member.model.vo.Member;
+import moo.ng.san.order.model.vo.Order;
 import moo.ng.san.product.model.vo.Product;
 
 @Repository
@@ -249,23 +247,18 @@ public class AdminDao {
 		return (ArrayList<Notify>)list;
 	}
 
-	public ArrayList<IssueCoupon> selectAllCouponList() {
+	public ArrayList<CouponData> selectAllCouponList() {
 		List list = sqlSession.selectList("admin.selectAllCouponList");
-		return (ArrayList<IssueCoupon>)list;
+		
+		return (ArrayList<CouponData>)list;
 	}
 
-	public ArrayList<DayCheck> selectAllDcList() {
-		List list = sqlSession.selectList("admin.selectAllDcList");
+	public ArrayList<CouponData> selectUseMoongList(int memberNo) {
+		List list = sqlSession.selectList("admin.selectUseMoongList", memberNo);
 		
-		return (ArrayList<DayCheck>)list;
+		return (ArrayList<CouponData>)list;
 	}
 
-	public ArrayList<Point> selectPointList() {
-		List list = sqlSession.selectList("admin.selectPointList");
-		
-		return (ArrayList<Point>)list;
-	}
-	
 
 
 

@@ -13,13 +13,13 @@
 	<!-- data tables -->
 	<link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/> 
 	<script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
+<!-- Bootstrap JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
+	
 </head>
 <style>
     .adminPage-wrapper{
-        background-color: #111;
 		width: 1200px;
-        margin-top: 300px;
-        
     }
     .adminPage-header{
         margin-left: 30px;
@@ -58,6 +58,10 @@
     #orderStatusSelect{
     	display: none;
     }
+    #space{
+    	margin-top: 500px;
+    }
+
 
 
 
@@ -100,127 +104,96 @@
             </div>
             <div class="adminPage-main">
                 <div class="adminPage-content">
-                    <div class="adminPage-search">
-                        <select id="orderSearchSelect">
-                            <option value="orderNo">주문번호 검색</option>
-                            <option value="memberName">주문자 이름 검색</option>
-                            <option value="orderStatus">주문 상태 검색</option>
-                        </select>
-                        <input type="text" name="orderSearchBox" id="searchOption">
-                        <!-- 주문 상태 검색 시 1,2,3,4 로 변환해주는 절차 필요 -->
-                        <select id="orderStatusSelect">
-                        	<option value="1">결제완료</option>
-                        	<option value="2">배송준비중</option>
-                        	<option value="3">배송중</option>
-                        	<option value="4">배송완료</option>
-                        	<option value="5">결제취소</option>
-                        	<option value="6">환불완료</option>
-                        </select>
-                        <button type="button" name="searchSubmitBtn">검색</button>
-                    </div>
                     <div class="adminPage-result">
+                    	<div class="space"></div>
                         <table id="dataTables" class="table table-bordered">
+                        <thead>
                             <tr>
                             	<th>구분</th>
-                                <th>회원번호</th> <!-- c.d.p 공통 -->
-                                <th>적립내역</th> <!--  -->
-                                <th>적립포인트명</th> <!-- c.d.p 공통 -->
-                                <th>적립포인트</th> <!-- c.d.p 공통 -->
-                                <th>적립일시</th> <!-- c.d.p 공통 -->
-                                <th>사용내역</th> <!-- c.d.p 공통 -->
-                                <th>사용포인트</th> <!-- c.d.p 공통 -->
-                                <th>총포인트</th> <!-- c.d.p 공통 -->
+                                <th>회원아이디</th> 
+                                <th>회원이름</th>
+                                <th>뭉머니 사용금액</th>
+                                <th>뭉머니 잔액</th>
                             </tr>
-                            <c:forEach items="${couponList }" var="cp">
-                          		<tr>
+                        </thead>
+                            <c:forEach items="${mMoneyList }" var="ml">
+                            	<tr>
+                                    <input type="hidden" name="memberNo" value="${ml.memberNo }">
                                 	<td><input type="checkBox" id="checkBox"></td>
-                                	
-	                                <!-- 
-                                	<c:if test="${cp.memberNo == null and dc.memberNo == null}">
-                                		<td>${pc.memberNo }<td>
-                                	</c:if>
-                                	<c:if test="${cp.memberNo == null and pc.memberNo == null }">
-                                		<td>${dc.memberNo }</td>
-                                	</c:if>
-                                	<c:if test="${pc.memberNo == null and dc.memberNo == null }">
-                                		<td>${cp.memberNo }</td>
-                                	</c:if>
-                                	-->
-                                	
-                                    <td>${cp.memberNo }</td>
-                                    <td>${cp.memberNo }</td>
-                                    <td>${cp.memberNo }</td>
-                                    <td>${cp.memberNo }</td>
-                                    <td>${cp.memberNo }</td>
-                                    <td>${cp.memberNo }</td>
-                                   <%--  <c:choose>
-                                    	<c:when test="${o.payStatus == 1 }">
-                                    		<td>결제완료</td>
-                                    	</c:when>
-                                    	<c:when test="${o.payStatus == 2 }">
-                                    		<td>결제취소</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${o.orderStatus == 1 }">
-                                    		<td>결제완료</td>
-                                    	</c:when>
-                                    	<c:when test="${o.orderStatus == 2 }">
-                                    		<td>배송준비중</td>
-                                    	</c:when>
-                                    	<c:when test="${o.orderStatus == 3 }">
-                                    		<td>배송중</td>
-                                    	</c:when>
-                                    	<c:when test="${o.orderStatus == 4 }">
-                                    		<td>배송완료</td>
-                                    	</c:when>
-                                    		<c:when test="${o.orderStatus == 5 }">
-                                    		<td>결제취소</td>
-                                    	</c:when>
-                                    		<c:when test="${o.orderStatus == 6 }">
-                                    		<td>환불완료</td>
-                                    	</c:when>
-                                    </c:choose> --%>
-                                    <td>
-                                        <select name="orderStatusList">
-                                            <option value="1">결제완료</option>
-                                            <option value="2">배송준비중</option>
-                                            <option value="3">배송중</option>
-                                            <option value="4">배송완료</option>
-                                            <option value="5">결제취소</option>
-                                            <option value="6">환불완료</option>
-                                        </select>
-                                    </td> 
-                                    <td>
-                                    	<%-- <input type="hidden" class="orderStatus" value="${o.orderStatus }"> --%>
-                                    	<button type="button" id="changeOrderStatusBtn" onclick="changeOrderStatus();">상품 상태 변경</button>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                            <tr>
-                                <th colspan="12">${pageNavi}</th>
-                            </tr>
+                                    <td>${ml.memberId }</td>
+                                    <td>${ml.memberName }</td>
+                                    <td>이것은 사용금액</td>
+                                    <td>${ml.pointEa }</td>
+                          	 	</tr>
+							</c:forEach>
                         </table>
-	                    <form name="searchForm" method="POST" action="" class="">
-	                     	<input type="hidden" class="orderNo" value="${o.orderNo }">
-	                    	<button type="button" onclick="exportToExcel();">엑셀출력</button>
-	                     </form><!--  -->
                     </div>
-                    <div>
-                    <div id="ajaxResult" class="table"></div>
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h4 class="modal-title" id="myModalLabel">모달 제목</h4>
+					      </div>
+					      <div class="modal-body">
+					        <!-- 모달 내용 -->
+					      </div>
+					    </div>
+					  </div>
+					</div>
                 </div>
             </div>
         </div>
-
     </div>
 
 
 <!-- 스크립트를 넣어봅시다 -->
     <script>
     /* data tables 적용해보자 */
-    $("#dataTables").DataTable({
-    	
-    });
+    $(document).ready(function() {
+	    $('#dataTables').DataTable({
+	        searching: true,
+	        fixedHeader: true,
+	        columns: [
+	            null,
+	            { searchable: true },
+	            { searchable: true },
+	            { searchable: true },
+	            { searchable: true },
+	        ]
+	    });
+	    
+	    $('#dataTables').on('click', 'td', function() {
+	    	  
+	    	  var memberNo = $(this).closest('tr').find('input[name="memberNo"]').val();
+	    	  
+	    	  $.ajax({
+	    	    url: '/ajaxUseMoongCheck.do',
+	    	    type: 'post',
+	    	    data: {memberNo : memberNo},
+	    	    success: function(data) {
+	    	    	
+	    	    var modalBody = $(".modal-body");
+	    	    modalBody.empty(); // 모달 초기화
+	    	    
+	    	    for(let i=0;i<data.length;i++){
+					const ul = $("<ul>");
+					ul.append("<li>"+data[i].memberId+"님의 뭉머니 사용내역</li>")
+					ul.append("<li>사용한 뭉머니 : "+data[i].pointEa+"</li>");
+					ul.append("<li>뭉머니 적립일 : "+data[i].pPointDate+"</li>");
+					if(data[i].pointStatus == 3){
+						ul.append("<li>뭉머니 "+data[i].pointEa+"뭉 사용완료</li>");
+					}
+					ul.append("<br>");
+					modalBody.append(ul);
+	    	      }
+	    	      $('#myModal').modal('show');
+	    	    }
+    	  });	
+	    	  
+    	});
+	    
+});
+    
     
     
         
