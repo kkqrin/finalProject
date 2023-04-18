@@ -14,6 +14,7 @@ import moo.ng.san.category.model.vo.DetailCategory;
 import moo.ng.san.product.model.vo.FileVO;
 import moo.ng.san.product.model.vo.Option;
 import moo.ng.san.product.model.vo.Product;
+import moo.ng.san.product.model.vo.RecentProduct;
 
 @Repository
 public class ProductDao {
@@ -126,6 +127,24 @@ public class ProductDao {
 
 	public int insertRecentProduct(HashMap<String, Object> map) {
 		int result = sqlSession.insert("product.insertRecentProduct", map);
+		
+		return result;
+	}
+
+	public ArrayList<RecentProduct> selectRecentProductList(int memberNo) {
+		List list = sqlSession.selectList("product.selectRecentProductList", memberNo);
+		
+		return (ArrayList<RecentProduct>)list;
+	}
+
+	public RecentProduct selectUniqueRecentProduct(HashMap<String, Object> map) {
+		RecentProduct rp = sqlSession.selectOne("product.selectUniqueRecentProduct", map);
+		
+		return rp;
+	}
+
+	public int deletRecentProduct(HashMap<String, Object> map) {
+		int result = sqlSession.insert("product.deleteRecentProduct", map);
 		
 		return result;
 	}

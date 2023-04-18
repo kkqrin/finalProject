@@ -38,6 +38,7 @@ import moo.ng.san.product.model.vo.FileVO;
 import moo.ng.san.product.model.vo.Option;
 import moo.ng.san.product.model.vo.Product;
 import moo.ng.san.product.model.vo.ProductPageData;
+import moo.ng.san.product.model.vo.RecentProduct;
 
 @Controller
 public class ProductController {
@@ -65,7 +66,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="/productList.do")
-	public String productList(int category, Model model) {
+	public String productList(int category, Model model, @SessionAttribute(required=false) Member m) {
 		// reqPage cateogory
 		// 상위 누르면 상위이름 + 하위는 전체 및 상위에 해당하는 모든 하위카테고리
 		// 하위 누르면 상위이름 + 해당 하위 이름 및 상위에 해당하는 모든 하위카테고리
@@ -113,6 +114,10 @@ public class ProductController {
 		
 //		System.out.println(list);
 //		System.out.println(detailCategoryList);
+		
+		
+		// 최근 본 상품 select
+		selectRecentProduct(m, model);
 		
 		return "product/productList";
 	}
@@ -182,12 +187,24 @@ public class ProductController {
 	}
 	
 	
+//	@RequestMapping(value="/recentProduct.do")
+//	public String recentProduct(@SessionAttribute(required=false) Member m, Model model) {
+//		
+//		ArrayList<RecentProduct> recentProductList = service.selectRecentProductList(m.getMemberNo());
+//		model.addAttribute("recentProductList", recentProductList);
+//		
+//		return "common/stickyRight";
+//	}
 	
 	
 	
-	
-	
-	
+	// 최근 본 상품 select 콜백
+	public void selectRecentProduct(Member m, Model model) {
+		if(m != null) {			
+			ArrayList<RecentProduct> recentProductList = service.selectRecentProductList(m.getMemberNo());
+			model.addAttribute("recentProductList", recentProductList);
+		}
+	}
 	
 	
 	
@@ -294,7 +311,6 @@ public class ProductController {
 	@RequestMapping(value="/productView.do")
 	public String productView(int productNo, Model model, @SessionAttribute(required=false) Member m) {
 		
-		System.out.println("controller1 : " + productNo);
 		Product p = service.selectProductByProductNo(productNo);
 		ArrayList<Inquiry> list = iqService.selectInquiryList(productNo);
 	
@@ -314,18 +330,38 @@ public class ProductController {
 		if(m!=null) {
 			int memberNo = m.getMemberNo();
 		
-			// 최근 본 상품 insert
-			int result = service.insertRecentProduct(memberNo, productNo);
+			// 중복 있는 지 select 하고 있으면 delete
+			int result = service.selectUniqueRecentProduct(memberNo, productNo);
 			
-			System.out.println("최근 본 상품 result : " + result);
-		}		
-		System.out.println("controller2 : " + productNo);
+//			System.out.println("최근 본 상품 delete 결과 : "+result);
+			
+			// 최근 본 상품 insert
+			result = service.insertRecentProduct(memberNo, productNo);
+			
+//			System.out.println("최근 본 상품 insert 결과 : "+result);
+		}
+		
+		
+		// 최근 본 상품 select
+		selectRecentProduct(m, model);
+//		if(m != null) {			
+//			ArrayList<RecentProduct> recentProductList = service.selectRecentProductList(m.getMemberNo());
+//			model.addAttribute("recentProductList", recentProductList);
+//		}
+		
+		
 		return "product/productView";			
 	}
 	@GetMapping("/main.do")
-	public String selectProductList(Model model) {
+	public String selectProductList(Model model, @SessionAttribute(required=false) Member m) {
 		ArrayList<Product> list = service.selectProductList();
 		model.addAttribute("productList",list);
+		
+
+		// 최근 본 상품 select
+		selectRecentProduct(m, model);
+		
+		
 		return "common/main";
 	}
 	@RequestMapping(value="/uploadSummernoteImageFile.do", produces = "application/json; charset=utf8")

@@ -14,6 +14,7 @@ import moo.ng.san.product.model.vo.FileVO;
 import moo.ng.san.product.model.vo.Option;
 import moo.ng.san.product.model.vo.Product;
 import moo.ng.san.product.model.vo.ProductPageData;
+import moo.ng.san.product.model.vo.RecentProduct;
 @Service
 public class ProductService {
 	@Autowired
@@ -123,9 +124,28 @@ public class ProductService {
 		return dao.insertRecentProduct(map);
 	}
 
+	public ArrayList<RecentProduct> selectRecentProductList(int memberNo) {
+		
+		return dao.selectRecentProductList(memberNo);
+	}
 	
-	
-	
+	public int selectUniqueRecentProduct(int memberNo, int productNo) {
+		int result = 0;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("productNo", productNo);
+		
+		RecentProduct rp = dao.selectUniqueRecentProduct(map);
+		
+		if(rp!=null) {
+			result = dao.deletRecentProduct(map);
+		}
+		
+		return result;
+	}
+
+
 	
 	
 	
@@ -237,6 +257,8 @@ public class ProductService {
 		}
 		return list;
 	}
+
+
 
 
 
