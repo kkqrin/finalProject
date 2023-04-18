@@ -9,8 +9,9 @@
 		insert into point_tbl values
 		(point_tbl_seq.nextval, #{memberNo}, 2000, sysdate, 1)
 	</insert>
-	<select id="selectAllPoint" parameterType="_int" resultType="point">
-		SELECT 
+	<select id="selectAllPoint" parameterType="map" resultType="point">
+		select*from(
+			SELECT 
 			  rnum,
 			  point_no AS pointNo,
 			  member_no AS memberNo,
@@ -27,11 +28,19 @@
 			    point_status
 			  FROM point_tbl
 			  WHERE member_no = #{memberNo}
-			) t 
+			) t
+		)
+		where rnu, between #{start} and #{end}
 	</select>
 	<select id="selectTotalPoint" parameterType="_int" resultType="point">
 		select
 			sum(point_ea) as pointEa
 		from point_tbl where member_no = #{memberNo} and point_status != 3
+	</select>
+	<select id="totalCount" resultType="_int">
+		select count(*) from point_tbl
+	</select>
+	<select id="selectAllPointMember" parameterType="_int">
+		select * from point_tbl where member_no = #{memberNo}
 	</select>
 </mapper>

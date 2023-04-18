@@ -268,7 +268,7 @@
 				const inputId = $(this).val();
 				if(idReg.test(inputId)){
 					$(this).removeClass("error");
-					$(".caution").eq(0).html("<a>사용 가능한 아이디 입니다.</a>");
+					$(".caution-tr").eq(0).css("display","none");
 					$(".caution").eq(0).children().css("color","#3a3a3a");
 			        result[0] = true;
 				}else{
@@ -285,6 +285,35 @@
 				}
 			})//아이디 정규표현식
 
+			$("[name='memberId']").on("change",function(){
+				const inputId = $(this).val();
+				$.ajax({
+					url: "/idDoubleCheck.do",
+					type: "get",
+					data: {memberId : inputId},
+					success : function(result){
+						if(result=="dup"){
+							$(this).addClass("error");
+							$(".caution-tr").eq(0).css("display","table-row");
+							$(".caution").eq(0).children().css("color","var(--secondary)");
+							$(".caution").eq(0).html("<a>중복된 아이디입니다.</a>");
+							result[0] = false;
+						}else{
+							$(this).removeClass("error");
+							$(".caution-tr").eq(0).css("display","table-row");
+							$(".caution").eq(0).html("<a>사용 가능한 아이디 입니다.</a>");
+							$(".caution").eq(0).children().css("color","var(--secondary)");
+					        result[0] = true;
+						}
+					}//ajax success구문
+				})//ajax
+			})
+			
+			
+			
+			
+			
+			
 			
 			$("[name='memberPw']").keyup(function(){
 				//영문,숫자,특수문자(공백 제외)조합으로 8글자 이상

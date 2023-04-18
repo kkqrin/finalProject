@@ -144,6 +144,23 @@
 								</c:otherwise>
 							</c:choose>
 						</div>
+						<div class="one-line">
+							<div class="name-tag">마케팅 수신동의</div>
+							<c:choose>
+								<c:when test="${sessionScope.m.memberAgree eq 0 }">
+									<div style="display: flex; width: 360px;align-items: center;">
+									<input type="checkbox" name="memberAgree" id="agree" value="1"><label for="agree">마케팅 수신정보에 동의합니다</label>
+									<input type="hidden" name="memberAgree" value='0' id="memberAgree_hidden"/>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div style="display: flex; width: 360px;align-items: center;">
+									<input type="checkbox" name="memberAgree" id="agree" value="1" checked><label for="agree">마케팅 수신정보에 동의합니다</label>
+									<input type="hidden" name="memberAgree" value='0' id="memberAgree_hidden"/>
+									</div>
+								</c:otherwise>
+							</c:choose>
+						</div>
 						<div class="area-btn center" style="margin: 10px 0 30px 0;">
 							<button id="submit" class="btn btn-sec size02">정보 수정하기</button>
 						</div>
@@ -353,7 +370,15 @@
 				result[1] = false;
 			}
 		});//계좌번호 정규표현식	
-			
+	
+	/*========마케팅 체크박스 관련=======================================*/	
+		
+	if($("[name='memberAgree']").prop('checked')) {
+    	$("#memberAgree_hidden").prop('checked',true);
+	}
+		
+		
+		
 
 	/*====비밀번호 수정 관련==========================================*/			
 		

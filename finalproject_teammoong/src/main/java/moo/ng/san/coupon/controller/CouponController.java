@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import moo.ng.san.coupon.model.service.CouponService;
 import moo.ng.san.coupon.model.vo.Coupon;
+import moo.ng.san.coupon.model.vo.CouponPageData;
 import moo.ng.san.coupon.model.vo.IssueCoupon;
+import moo.ng.san.coupon.model.vo.PointPageData;
 import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.member.model.vo.Member;
 
@@ -66,21 +68,28 @@ public class CouponController {
 		}
 	}
 	@RequestMapping(value="/couponSearch.do")
-	public String couponSearch(int memberNo, Model model) {
-		ArrayList<IssueCoupon> couponList = service.selectAllIssueCoupon(memberNo);
-		ArrayList<Point> pointList = service.selectAllPoint(memberNo);
-		System.out.println(couponList);
-		System.out.println(pointList);
-		model.addAttribute("couponList",couponList);
-		model.addAttribute("pointList",pointList);
+	public String couponSearch(int reqPage, int memberNo, Model model) {
+		CouponPageData cpd = service.selectIssueCouponList(reqPage, memberNo);		
+		System.out.println(cpd);
+		model.addAttribute("couponList",cpd.getCouponList());
+		model.addAttribute("CouponPageNavi", cpd.getPageNavi());
+		
 		return "member/couponSearch";
+	}
+	@RequestMapping(value="/pointSearch.do")
+	public String pointSearch(int reqPage, int memberNo, Model model) {		
+		PointPageData ppd = service.selectAllPoint(reqPage, memberNo);
+		
+		model.addAttribute("pointList",ppd.getPointList());
+		model.addAttribute("PointPageNavi",ppd.getPageNavi());
+		return "member/pointSearch";
 	}
 	
 	
 	@ResponseBody
 	@RequestMapping(value="/pointCheck.do")
 	public int pointCheck(int memberNo) {
-		ArrayList<Point> list = service.selectAllPoint(memberNo);
+		ArrayList<Point> list = service.selectAllPointMember(memberNo);
 		int totalPoint = 0;
 		if(!list.isEmpty()) {
 			for(Point p: list) {

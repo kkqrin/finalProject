@@ -34,6 +34,12 @@ sup{
     margin-top: 50px;
 }
 
+.caution {
+    position: relative;
+    text-align: left;
+    width: 100%;
+}
+
 </style>
 
 <body>	
@@ -53,7 +59,7 @@ sup{
 				<div>
 					${b.boardDate }
 				</div>
-				<div style="background-color: #212429; color: #fff; width: 100%; height: 80px; text-align: center; font-size: 23px; line-height: 80px;">
+				<div style="background-color: var(--primary); color: #fff; width: 100%; height: 80px; text-align: center; font-size: 23px; line-height: 80px;">
 					${b.boardName }
 				</div>
 			<table class="boardView-wrap">
@@ -77,12 +83,13 @@ sup{
 				<tr>
 					<td colspan="4">
 						<input type="text" id="paydate" required>
-						<input type="hidden" name="payerDate" required>
+						<input type="text" name="payerDate" required style="display: none;">
 					</td>
 				</tr> 
 				<tr>
 					<td style="text-align:left;" colspan="4">
 						<input type="text" name="payerName"  required placeholder="입금자명"> 
+						<span class="comment"></span>
 					</td>
 				</tr>
 				<tr>
@@ -112,7 +119,7 @@ sup{
 							${bo.detailCount}
 						</td>
 						<td>
-							<input type="text" id="totalEaInput" class="detailCount" name="orderCount" placeholder="수량 입력" value="" required>
+							<input type="text" id="totalEaInput" class="detailCount" name="orderCount" placeholder="수량 입력" value="0" required>
 						</td>
 					</tr>
 					</c:forEach>
@@ -132,20 +139,19 @@ sup{
 				<tr>
 					<td style="text-align:left;" colspan="4">
 						<input type="text" name="memberName"  required placeholder="주문자명"> 
-					</td>
-				</tr>
-				<tr class="caution-tr">
-					<td></td>
-					<td class="caution" colspan="3"><a>한글 2-10자(공백없이)</a></td>
-				</tr>
-				<tr>
-					<td style="text-align:left;" colspan="4">
-						<input type="text" name="memberEmail"  required placeholder="주문자 이메일주소"> 
+						<span class="comment"></span>
 					</td>
 				</tr>
 				<tr>
 					<td style="text-align:left;" colspan="4">
-						<input type="text" name="memberPhone"  required placeholder="주문자 핸드폰번호"> 
+						<input type="text" name="memberEmail"  required placeholder="주문자 이메일주소">
+						<span class="comment"></span> 
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align:left;" colspan="4">
+						<input type="text"  id="phoneChk" name="memberPhone"  required placeholder="주문자 핸드폰번호">
+						<span class="comment"></span>
 					</td>
 				</tr>
 				<tr>
@@ -154,11 +160,13 @@ sup{
 				<tr>
 					<td style="text-align:left;" colspan="4">
 						<input type="text" name="receiverName"  required placeholder="수령자명"> 
+						<span class="comment"></span>
 					</td>
 				</tr>
 				<tr>
 					<td style="text-align:left;" colspan="4">
-						<input type="text" name="receiverPhone"  required placeholder="연락처"> 
+						<input type="text" id="phoneChk" name="receiverPhone"  required placeholder="연락처"> 
+						<span class="comment"></span>
 					</td>
 				</tr>
 				<tr>
@@ -191,8 +199,11 @@ sup{
 						</select>
 					</td>
 					<td colspan="2"><input type="text" name="refundAccount"
-							required placeholder="계좌번호"></td>
-					<td><input type="text" name="refundName" required placeholder="예금주명"></td>
+							required placeholder="계좌번호를 입력하세요('-'없이)"><span class="caution"></span></td>
+					<td>
+						<input type="text" name="refundName" required placeholder="예금주명">
+						<span class="comment"></span>
+					</td>
 				</tr>
 				<tr>
 					<td style="text-align:left;" colspan="4">- 개인정보 수집 및 동의<sup>*</sup></td>
@@ -206,7 +217,22 @@ sup{
 					<td colspan="4"><label><input type="checkbox" required>동의</label></td>
 				</tr>
 			</table>
-			<input class="btn btn-border-sec size01" type="submit" id="form" value="제출" style="background-color: #f26656; border-color: #f0513e; color: #fff; cursor: pointer; padding: 20px 50px 20px 50px; margin-top: 15px"> 
+			<c:choose>
+			<c:when test="${sessionScope.m.memberId eq b.boardWriter }">
+			<div style="display: flex;">
+			<input class="btn btn-border-sec size01" type="button"  value="삭제" style="background-color: var(--primary); border-color: var(--primary); color: #fff; cursor: pointer; padding: 20px 50px 20px 50px; margin-top: 15px; width: 100%">
+			</div>
+			</c:when>
+			<c:when test="${empty sessionScope.m.memberId}">
+			<div style="border: 2px solid var(--secondary);background-color:var(--primary); text-align: center; font-size: 25px; color: #fff; font-weight: bold; margin: 0 auto;">
+				<a>로그인 후 주문 가능합니다</a>
+			</div>	
+			</c:when>
+			<c:otherwise>
+			
+			<input class="btn btn-border-sec size01" type="submit" id="form" value="제출" style="background-color: var(--primary); border-color: var(--primary); color: #fff; cursor: pointer; padding: 20px 50px 20px 50px; margin-top: 15px"> 
+			</c:otherwise>
+			</c:choose>
 		</form>	
 		</div>
 	</div>
@@ -218,7 +244,8 @@ sup{
 	
 	<script>
 	
-	
+	let result = [false, false, false, false, false]; //정규표현식 검사
+	//0이메일, 1핸드폰, 2계좌번호, 3주소입력, 4 수령자 연락처
 	
 // 	$("[name='0orderCount']").on("change",function(){
 // 		const orderCount = $("[name='0orderCount']").val();
@@ -227,6 +254,21 @@ sup{
 // 		 $("#result-price").val(result);
 // 	});
 
+	$("[type='submit']").on("click",function(){
+		if(	$("[name='payerDate']").val()==""){
+			alert("입금예정 날짜를 선택해주세요!!");
+		}
+		let resultChk = true;
+		$.each(result,function(index,item){
+			if(!item){
+				resultChk = false;
+			}
+		})
+		if(!resultChk){
+			event.preventDefault();
+		}
+	});
+	
 	
 
 	$( function() {
@@ -331,35 +373,108 @@ sup{
 			if(address!="" && detailAddr!=""){
 				address += " "+detailAddr;
 				$("[name='receiverAddr']").val(address); //합친 주소 값넣기
-				result[6]=true;
+				result[3]=true;
 			}else{
-				result[6]=false;
+				result[3]=false;
 			}
 		});//주소 입력 확인
 		
 		
-		$("[name='memberName']").keyup(function(){
-			const nameReg = /^[ㄱ-ㅎ가-힣]{2,10}$/;
-			const inputName = $(this).val();
+		
+	
+		
+		
+		$("[name='memberEmail'").on("keyup",function(){
+		    //이메일 : 영어/숫자4~12글자+@(@뒤로는 제한 없음)
+		    const emailReg = /^[a-zA-Z0-9]{4,12}@/;
+		    const emailValue = $(this).val();
+		    const check = emailReg.test(emailValue);
+		    if(check){
+		        $(this).next().text("")
+		        result[0] = true;
+		    }else{
+		        $(this).next().text("이메일 형식을 확인하세요")
+		        $(this).next().css("color","var(--secondary)");
+		        result[0] = false;
+		    }
+		});//이메일 정규표현식
+		
+		
+		
+		$("[name='memberPhone']").keyup(function(){
+			//핸드폰 정규표현식
+			const pwReg = /^\d{3}-\d{3,4}-\d{4}$/;
+			const pwReg2 = /^0+\d{9,10}$/;
+			const inputPhone = $(this).val();
+
+			replace = $("[name='memberPhone']").val().replaceAll("-","");
+			$("[name='memberPhone']").val(replace);
 			
-			if(nameReg.test(inputName)){
+			if(pwReg.test(inputPhone) || pwReg2.test(inputPhone) || inputPhone==""){
 				$(this).removeClass("error");
-				$(".caution-tr").css("display","none");
-				$(".caution").css("display","none");
-				result[3] = true;
+				$(this).next().css("display","none");
+				result[1] = true;
 			}else{
 				$(this).addClass("error");
-				$(".caution-tr").css("display","table-row");
-				result[3] = false;
+				$(this).next().css("display","table-row");
+				$(this).next().css("color","var(--secondary)");
+				$(this).next().html("<a>형식에 맞지 않는 번호입니다</a>");
+				result[1] = false;
 			}
-			if(inputName==""){
+		})//핸드폰 형식 검사
+		
+		
+		
+		$("[name='receiverPhone']").keyup(function(){
+			//핸드폰 정규표현식
+			const pwReg = /^\d{3}-\d{3,4}-\d{4}$/;
+			const pwReg2 = /^0+\d{9,10}$/;
+			const inputPhone = $(this).val();
+
+			replace = $("[name='receiverPhone']").val().replaceAll("-","");
+			$("[name='receiverPhone']").val(replace);
+			
+			if(pwReg.test(inputPhone) || pwReg2.test(inputPhone) || inputPhone==""){
+				$(this).removeClass("error");
+				$(this).next().css("display","none");
+				result[4] = true;
+			}else{
+				$(this).addClass("error");
+				$(this).next().css("display","table-row");
+				$(this).next().css("color","var(--secondary)");
+				$(this).next().html("<a>형식에 맞지 않는 번호입니다</a>");
+				result[4] = false;
+			}
+		})//수령자 핸드폰 형식 검사
+		
+		
+		$("[name='refundAccount']").keyup(function(){
+			const inputAccount = $("[name='refundAccount']").val();
+			const AcountReg = /^[0-9]+$/;
+			
+			const inputAccount2 = $(this).val().replaceAll("-","");
+			$(this).val(inputAccount2);
+			
+			if(AcountReg.test(inputAccount)){
+		        $(this).removeClass("error");
+		        $(".caution").css("display","none");
+		        result[2] = true;
+			}else{
+				$(this).addClass("error");
+				$(".caution").css("display","block");
+				$(".caution").css("color","var(--secondary)");
+				$(".caution").html("<a>숫자를 입력해주세요</a>");
+				result[2] = false;
+			}
+			if(inputAccount==""){
 				$(this).removeClass("error");
 				$(".caution-tr").css("display","none");
-		    	result[3] = false;
+				result[2] = true;
 			}
-			
-		});//이름 정규표현식
+		});//계좌번호 정규표현식
 		
+	
+	
 // 		$("[type='submit']").on("click",function(){
 			
 // 			event.preventDefault();

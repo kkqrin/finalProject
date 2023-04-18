@@ -123,6 +123,13 @@ public class MemberController {
 	public String joinMemberFrm(){
 		return "member/signUpFrm";
 	}//joinMemberFrm
+	
+	
+	
+	@RequestMapping(value = "/searchIdFrm.do")
+	public String searchIdFrm(){
+		return "member/searchIdFrm";
+	}//joinMemberFrm
 
 	
 	@RequestMapping(value = "/myPageMemberDelete.do")
@@ -135,16 +142,17 @@ public class MemberController {
 	
 	@RequestMapping(value = "/updateMember.do")
 	public String updateMember(Member member, MultipartFile memberPropic, HttpServletRequest request, @SessionAttribute(required=false) Member m) {
-		System.out.println("memberNo : "+member.getMemberNo());
-		System.out.println("memberPhone : "+member.getMemberPhone());
-		System.out.println("memberEmail : "+member.getMemberEmail());
-		System.out.println("memberZoneCode : "+member.getMemberZoneCode());
-		System.out.println("memberAddr : "+member.getMemberAddr());
-		System.out.println("memberBank : "+member.getMemberBank());
-		System.out.println("memberAccount : "+member.getMemberAccount());
-		System.out.println("memberBday : "+member.getMemberBday());
-		System.out.println("memberPropic : "+memberPropic);
-		System.out.println("세션에 있는거 : "+m.getMemberPath());
+//		System.out.println("memberNo : "+member.getMemberNo());
+//		System.out.println("memberPhone : "+member.getMemberPhone());
+//		System.out.println("memberEmail : "+member.getMemberEmail());
+//		System.out.println("memberZoneCode : "+member.getMemberZoneCode());
+//		System.out.println("memberAddr : "+member.getMemberAddr());
+//		System.out.println("memberBank : "+member.getMemberBank());
+//		System.out.println("memberAccount : "+member.getMemberAccount());
+//		System.out.println("memberBday : "+member.getMemberBday());
+//		System.out.println("memberPropic : "+memberPropic);
+//		System.out.println("세션에 있는거 : "+m.getMemberPath());
+		System.out.println("memberAgree : "+member.getMemberAgree());
 		
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member/");
 		String filePath="";
@@ -165,7 +173,7 @@ public class MemberController {
 			m.setMemberAddr(member.getMemberAddr());
 			m.setMemberBank(member.getMemberBank());
 			m.setMemberAccount(member.getMemberAccount());
-			
+			m.setMemberAgree(member.getMemberAgree());
 			
 			if(member.getMemberBday()!=null && member.getMemberBday().length()>0) { //생일을 새로 추가했을 경우
 				String year = member.getMemberBday().substring(0,4);
@@ -205,7 +213,17 @@ public class MemberController {
 	}//updateNewPwMember
 	
 	
-	
+	@ResponseBody
+	@RequestMapping(value = "/idDoubleCheck.do")
+	public String idDoubleCheck(String memberId) {
+		Member m = new Member();
+		m.setMemberId(memberId);
+		m = service.selectOneMember(m);
+		if(m!=null) {
+			return "dup";
+		}
+		return "ok";
+	}//idDoubleCheck
 	
 	
 	

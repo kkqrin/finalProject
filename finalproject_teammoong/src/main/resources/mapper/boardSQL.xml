@@ -35,7 +35,8 @@
 		#{refundBank},
 		#{refundAccount},
 		#{refundName},
-		#{orderCount}
+		#{orderCount},
+		#{depositPrice}
 		)
 		<selectKey resultType="_int" order="AFTER" keyProperty="joinNo">
 			select max(join_no) from board_join
