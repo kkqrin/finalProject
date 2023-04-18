@@ -23,11 +23,12 @@
 				<a>이름</a>
 				<input type="text" name="memberName" placeholder="이름을 입력해주세요">
 				<a>핸드폰 번호</a>
-				<input type="text" name="memberPhone" placeholder="핸드폰번호를 입력해주세요('-'없이 숫자만)">
+				<input type="text" name="memberPhone" placeholder="가입시 등록한 핸드폰번호를 입력해주세요('-'없이 숫자만)">
 				<a class="caution">핸드폰 번호를 확인해주세요</a>
 				<div class="area-btn full">
-				<button class="btn btn-sec size02 sendPhone login">아이디 찾기</button>
+				<button class="btn btn-sec size02 sendPhone">아이디 찾기</button>
 				</div>
+				<a href="/searchPwFrm.do" style="display:block; text-align:center;text-decoration:underline; margin-top:10px;">비밀번호 찾기</a>
 			</div>
 			<div class="toEmail-view">
 				<a>이름</a>
@@ -38,6 +39,7 @@
 				<div class="area-btn full">
 				<button class="btn btn-sec size02 sendEmail">아이디 찾기</button>
 				</div>
+				<a href="/searchPwFrm.do" style="display:block; text-align:center;text-decoration:underline; margin-top:10px;">비밀번호 찾기</a>
 			</div>
 		</div>
 	</div><!-- content-wrap -->
@@ -54,13 +56,15 @@
 			if(index==0){
 				$(".toPhone-view").css("display","block");
 				$(".toEmail-view").css("display","none");
-				$(".caution").removeClass("error");
+				$("[name='memberPhone']").removeClass("error");
 				$(".caution").css("display","none");
+				$(".toPhone-view").find('input').val("");
 			}else if(index==1){
 				$(".toEmail-view").css("display","block");
 				$(".toPhone-view").css("display","none");
-				$(".caution").removeClass("error");
+				$("[name='memberEmail']").removeClass("error");
 				$(".caution").css("display","none");
+				$(".toEmail-view").find('input').val("");
 			}
 		});//메뉴 움직이기 기능
 	

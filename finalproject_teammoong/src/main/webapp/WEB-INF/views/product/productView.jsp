@@ -73,7 +73,9 @@
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<jsp:include page="/WEB-INF/views/common/stickyRight.jsp" />
+    <c:if test="${not empty sessionScope.m }">
+        <jsp:include page="/WEB-INF/views/common/stickyRight.jsp" />
+    </c:if>
 
 
 
@@ -92,7 +94,7 @@
 	</c:if>
     
         <div class="top-info-box">
-            <div class="img-box"style="width: 500px;">
+            <div class="img-box">
             <c:forEach items="${p.fileList }" var="i">
                 <img src="/resources/upload/product/${i.filepath }" style="border-radius: 20px;">
             </c:forEach>
@@ -193,7 +195,7 @@
                             </form>
                         </div>
                         <div class="moong-btn">
-                            <form action="/moongsanOrder.do" method="post">
+                            <form action="/gongguOrder.do?productNo=${p.productNo}" method="post">
                                 <input type="hidden" name="productNo">
                                 <input type="hidden" name="optionNo">
                                 <button class="btn btn-pri size02">뭉쳐야산다</button>
@@ -206,21 +208,23 @@
         </div>
         <div class="gonggu-board-logo"><h3>뭉쳐야 산다!</h3></div>
         <div class="gonggu-board">
+            <c:forEach items="${gongguList }" var="g">
             <div class="all-flex-wrap">
                 <div class="left-flex-wrap">
-                    <div class="user-img"><img src="/resources/upload/member/${sessionScope.m.memberPath}" style="width: 50px; height: 50px;"></div>
-                    <div class="user-id">${sessionScope.m.memberId}</div>
-                    <div class="gonggu-number">(1/2)</div>
+                    <div class="user-img"><img src="/resources/upload/member/${g.memberPath}" style="width: 50px; height: 50px;"></div>
+                    <div class="user-id">${g.memberId}</div>
+                    <div class="gonggu-number">(${g.countNumber }/${g.gongguNumber })</div>
                 </div>
                 <div class="right-flex-wrap">
                     <div class="right-flex-info">
-                        <div class="number-info">1명 남음</div>
+                        <div class="number-info">${g.countNumber }명 남음</div>
                         <div class="time-limit" id="timer"></div>
                     </div>
-                    <button type="button" class="btn btn-pri size01" id="orderBtn">주문참여</button>
                 </div>
             </div>
+        </c:forEach>
         </div>
+        
         <div class="quick-scroll-bar">
             <table>
                 <tr>
@@ -232,6 +236,7 @@
             </table>
         </div>
         <div class="review-wrap">
+            <form action="/reviewWrite.do" method="post" enctype="multipart/form-data"></form>
             <table>
                 <tr>
                     <th>사진</th>
@@ -243,16 +248,16 @@
                 </tr>
                 <tr>
                     <th>별점</th>
-                    <td style="color:gold; background-color: darkgray;">
+                    <td style="color:black">
                         <div>
                           <label for="star1">★</label>
                         </div>
                         <input type="radio" name="star" id="star1">
                       </td>
-                    <td style="color:gold">★★<div><input type="radio" name="star"></div></td>
-                    <td style="color:gold">★★★<div><input type="radio" name="star"></div></td>
-                    <td style="color:gold">★★★★<div><input type="radio" name="star"></div></td>
-                    <td style="color:gold">★★★★★<div><input type="radio" name="star"></div></td>
+                    <td style="color:black">★★<div><input type="radio" name="star"></div></td>
+                    <td style="color:black">★★★<div><input type="radio" name="star"></div></td>
+                    <td style="color:black">★★★★<div><input type="radio" name="star"></div></td>
+                    <td style="color:black">★★★★★<div><input type="radio" name="star"></div></td>
                 </tr>
                 <tr>
                     <td colspan="6"><div class="area-btn full"><button class="btn btn-pri size02">리뷰작성</button></div></td>
@@ -437,7 +442,7 @@
     
 </body>
     	<!-- 슬릭 슬라이더 js -->
-	<script type="text/javascript" src="/resources/slick/slick.min.js"></script>
+	<script type="text/javascript" src="/resources/slick/slick.min.js"></script>	
     <script>
            $(document).ready(function() {
     // td 요소를 클릭할 때
@@ -1028,4 +1033,5 @@
             };
         // });
         </script>
+        
 </html>

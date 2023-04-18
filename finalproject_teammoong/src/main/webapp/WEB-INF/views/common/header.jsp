@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<!-- 결제 -->
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 	<!-- jquery -->
     <script src="/resources/js/jquery-3.6.0.js"></script>
 	<!-- 구글 아이콘 -->
@@ -33,6 +35,12 @@
 	<style>
 		.categoryGroup ul li{
 			font-size: 10px;
+		}
+		.modal-body{
+			display:flex;
+		}
+		.modal-body input{
+			width: 20%;
 		}
 	</style>
 </head>
@@ -93,6 +101,9 @@
             		<div class="menu-product">
 		                <div><a href="#">인기상품</a></div>
 		                <div><a href="/insertProductFrm.do">물품등록(예비버튼)</a></div>
+		                <c:if test="${!empty sessionScope.m}">
+		                	<div data-modal="#modalBasic"><a href="#">충전하기</a></div>
+		                </c:if>
 		                <div><a href="#">오늘의상품</a></div>
 		                <div class="together">
 		                	<a href="/boardList.do?reqPage=1">
@@ -102,7 +113,7 @@
 		                </div>
 	                </div>
 	              	<div class="menu-area">
-								<a href="/noticeList.do?reqPage=1">공지사항</a>
+								<a href="/noticeList.do?reqPage=1&searchType=0">공지사항</a>
 		            	<c:choose>
 		            			<c:when test="${empty sessionScope.m}">
 				                    <a href="/signUpFrm.do">회원가입</a>
@@ -124,12 +135,92 @@
             </section>
 
             
-            
+            <div id="modalBasic" class="modal modal-sec">
+            	<div class="modal-content">
+                	<div class="modal-header">
+                    	<h6>Moong 충전하기</h6>
+                    </div>
+                    <div class="modal-body">
+                    	<input type="radio" name="pointEa" id="point1" value="1000">
+                    	<label for="point1">1,000</label>
+                    	<input type="radio" name="pointEa" id="point2"value="5000">
+                    	<label for="point2">5,000</label>
+                    	<input type="radio" name="pointEa" id="point3"value="10000">
+                    	<label for="point3">10,000</label>
+                    	<input type="radio" name="pointEa" id="point4"value="30000">
+                    	<label for="point4">30,000</label>
+                    	<input type="radio" name="pointEa" id="point5"value="50000">
+                    	<label for="point5">50,000</label>
+                   	</div>
+                   	<input type="hidden" id="email" value="${m.memberEmail }">
+                   	<input type="hidden" id="memberName" value="${m.memberName }">
+                   	<input type="hidden" id="memberPhone" value="${m.memberPhone }">
+                   	<input type="hidden" id="memberNo" value="${m.memberNo }">
+                    <div class="area-btn right">
+                    	<button class="btn btn-pri size01" type="button" id="payBtn">충전하기</button>
+                        <a href="" rel="modal:close" class="btn btn-sec size01" id="close">닫기</a>
+                    </div>
+                </div>
+            </div>
         </div><!--header-content-->
     </div><!--header-wrap-->
 
-
-
+	
+	<script>
+		$(function () {
+	        $('[data-modal]').click(function (event) {
+	            const modalId = $(this).data('modal');
+	            if ($(modalId).hasClass('modal-pri')) {
+	                $($(this).data('modal')).modal({
+	                    fadeDuration: 100
+	                });
+	                return false;
+	            } else if ($(modalId).hasClass('modal-sec')) {
+	                $($(this).data('modal')).modal({
+	                    escapeClose: false,
+	                    showClose: false,
+	                    fadeDuration: 100
+	                });
+	                return false;
+	            } else {
+	                return false;
+	            }
+	        });
+	    });
+		
+		$("#payBtn").on("click",function(){
+			const price = $("input[name=pointEa]:checked").val();
+			const d = new Date();
+			
+			const memberMail = $("#email").val();
+			const memberName = $("#memberName").val();
+			const memberPhone = $("#memberPhone").val();
+			const memberNo = $("#memberNo").val();
+			
+			
+			const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
+			
+			IMP.init("imp35435215");
+			IMP.request_pay({
+				pg : "html5_inicis",
+				pay_method : "card",
+				merchant_uid: "상품번호_"+date,//상점에서 관리하는 주문번호
+				name: "뭉쳐야산다",//결제이름
+				amount : price,
+				buyer_email: memberMail,
+				buyer_name: memberName,
+				buyer_tel: memberPhone
+			},function(rsp){
+				if(rsp.success){
+					alert("결제성공");
+					$("#close").click();
+					location.href="/insertPoint.do?memberNo="+memberNo+"&pointEa="+price;
+				}else{
+					alert("결제실패");
+				}
+			});
+		});
+	</script>
 
 	
     <script src="/resources/js/header.js"></script>

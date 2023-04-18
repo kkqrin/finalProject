@@ -27,7 +27,8 @@ public class NoticeService {
 		return result;
 	}
 
-	public NoticePageData selectNoticeList(int reqPage) {
+	public NoticePageData selectNoticeList(int reqPage, int searchType, String keyword) {
+		
 		int numPerPage = 10;
 		
 		int end = reqPage * numPerPage;
@@ -36,8 +37,11 @@ public class NoticeService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		
 		ArrayList<Notice> list = dao.selectNoticeList(map);
-		int totalCount = dao.selectNoticeCount();
+		int totalCount = dao.selectNoticeCount(map);
 		
 		int totalPage = (int)Math.ceil(totalCount/(double)numPerPage);
 		
@@ -50,13 +54,13 @@ public class NoticeService {
 		
 		String pageNavi = "";
 		if(pageNo != 1) {
-			pageNavi += "<a href = '/noticeList.do?reqPage="+(pageNo -1)+"'class='btn-pagi ctrl'>[이전]</a>";
+			pageNavi += "<a href = '/noticeList.do?reqPage="+(pageNo -1)+"&searchType="+searchType+"'class='btn-pagi ctrl'>[이전]</a>";
 		}
 		for(int i=0;i<pageNaviSize;i++) {
 			if(pageNo == reqPage) {
 				pageNavi += "<span class='btn-pagi page-active'>"+pageNo+"</span>";
 			}else {
-				pageNavi += "<a href='/noticeList.do?reqPage="+pageNo+"'class='btn-pagi'>"+pageNo+"</a>";
+				pageNavi += "<a href='/noticeList.do?reqPage="+pageNo+"&searchType="+searchType+"'class='btn-pagi'>"+pageNo+"</a>";
 			}
 			pageNo++;
 			if(pageNo > totalPage) {
@@ -64,7 +68,7 @@ public class NoticeService {
 			}
 		}
 		if(pageNo <=totalPage) {
-			pageNavi += "<a href = '/noticeList.do?reqPage="+pageNo+"'class='btn-pagi ctrl'>[다음]</a>";
+			pageNavi += "<a href = '/noticeList.do?reqPage="+pageNo+"&searchType="+searchType+"'class='btn-pagi ctrl'>[다음]</a>";
 		}
 		NoticePageData npd = new NoticePageData(list, pageNavi);
 		return npd;
@@ -106,4 +110,5 @@ public class NoticeService {
 		FileVO f = dao.selectOneFile(fileNo);
 		return f;
 	}
+
 }

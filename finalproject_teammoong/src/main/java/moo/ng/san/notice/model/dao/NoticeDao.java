@@ -31,8 +31,8 @@ public class NoticeDao {
 		return (ArrayList<Notice>)list;
 	}
 
-	public int selectNoticeCount() {
-		int totalCount = sqlSession.selectOne("notice.totalCount");
+	public int selectNoticeCount(HashMap<String, Object> map) {
+		int totalCount = sqlSession.selectOne("notice.totalCount",map);
 		return totalCount;
 	}
 
@@ -64,4 +64,5 @@ public class NoticeDao {
 		FileVO f = sqlSession.selectOne("notice.selectOneFile",fileNo); 
 		return f;
 	}
+
 }

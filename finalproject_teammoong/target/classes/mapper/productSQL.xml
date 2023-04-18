@@ -174,4 +174,34 @@
 			order by 1
 		) B
 	</select>
+	
+	<insert id="insertRecentProduct" parameterType="map">
+		INSERT INTO RECENT_PRODUCT_TBL VALUES(RECENT_PRODUCT_SEQ.NEXTVAL,#{memberNo},#{productNo})
+	</insert>
+	
+	<select id="selectRecentProductList" parameterType="_int" resultType="rp">
+		SELECT
+			RECENT_NO AS recentNo,
+			MEMBER_NO AS memberNo,
+			PRODUCT_NO AS productNo,
+			(SELECT FILEPATH FROM PRODUCT_IMG WHERE P_IMG_NO=(SELECT MIN(P_IMG_NO) FROM PRODUCT_IMG where product_no=P.product_no)) AS thumbnail
+		FROM RECENT_PRODUCT_TBL P
+		WHERE MEMBER_NO = #{_parameter}
+		ORDER BY 1 DESC
+	</select>
+	
+	<select id="selectUniqueRecentProduct" parameterType="map" resultType="rp">
+		SELECT
+			RECENT_NO AS recentNo,
+			MEMBER_NO AS memberNo,
+			PRODUCT_NO AS productNo,
+			(SELECT FILEPATH FROM PRODUCT_IMG WHERE P_IMG_NO=(SELECT MIN(P_IMG_NO) FROM PRODUCT_IMG where product_no=P.product_no)) AS thumbnail
+		FROM RECENT_PRODUCT_TBL P
+		WHERE MEMBER_NO = #{memberNo} AND PRODUCT_NO = #{productNo}
+		ORDER BY 1 DESC
+	</select>
+	
+	<delete id="deleteRecentProduct" parameterType="map">
+		delete from RECENT_PRODUCT_TBL WHERE MEMBER_NO = #{memberNo} AND PRODUCT_NO = #{productNo}
+	</delete>
 </mapper>

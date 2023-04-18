@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -134,6 +135,8 @@
     /* border-top: 5px solid #fff; */
     margin: 40px auto;
     /* padding-top: 10px; */
+    position: absolute;
+    top: 210px;
 }
 
 .kkt-logo>a{
@@ -211,21 +214,23 @@ body .top-icon.hide-icon{
         <div class="recent-product-title">최근 본 상품</div>
         <div class="recent-product-content">
             <ul>
+            	<c:forEach items="${recentProductList}" var="i">
                 <li>
                     <a href="#">
                         <span>
-                            <img src="/resources/img/product/lactofit.jpg">
+                            <img src="/resources/upload/product/${i.thumbnail }">
                         </span>
                     </a>
                 </li>
-                <li>
-                    <a href="#">
-                        <span>
-                            <img src="/resources/img/product/bubble_tomato.jpg">
-                        </span>
-                    </a>
-                </li>
-                <li>
+            	</c:forEach>
+<!--                 <li> -->
+<!--                     <a href="#"> -->
+<!--                         <span> -->
+<!--                             <img src="/resources/img/product/bubble_tomato.jpg"> -->
+<!--                         </span> -->
+<!--                     </a> -->
+<!--                 </li> -->
+                <!-- <li>
                     <a href="#">
                         <span>
                             <img src="/resources/img/product/cleansing_foam.jpeg">
@@ -245,7 +250,7 @@ body .top-icon.hide-icon{
                             <img src="/resources/img/product/korean-melon.jpg">
                         </span>
                     </a>
-                </li>
+                </li> -->
             </ul>
         </div>
         <div class="icon-logo-box">

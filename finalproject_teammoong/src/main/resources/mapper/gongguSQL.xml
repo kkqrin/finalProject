@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN
+" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="gonggu">
+	<select id="selectGongguList" parameterType="_int" resultType="gai">
+		SELECT
+			MEMBER_PATH AS memberPath,
+			MEMBER_ID AS memberId,
+			GONGGU_NUMBER AS gongguNumber,
+			COUNT_NUMBER AS countNumber
+		FROM PRODUCT_TBL
+		LEFT JOIN GONGGU_TBL USING(PRODUCT_NO)
+		LEFT JOIN MEMBER_TBL USING(MEMBER_NO)
+		LEFT JOIN DETAIL_GONGGU_TBL USING(GONGGU_NO)
+		WHERE PRODUCT_NO = #{_parameter}
+	</select>
+</mapper>
