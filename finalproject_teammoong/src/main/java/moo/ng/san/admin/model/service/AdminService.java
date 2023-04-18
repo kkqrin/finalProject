@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import moo.ng.san.admin.model.dao.AdminDao;
 import moo.ng.san.admin.model.vo.AdminBoardPageData;
+import moo.ng.san.admin.model.vo.AdminCouponPageData;
 import moo.ng.san.admin.model.vo.AdminMemberPageData;
 import moo.ng.san.admin.model.vo.AdminOrderPageData;
 import moo.ng.san.admin.model.vo.AdminProductPageData;
@@ -17,6 +18,9 @@ import moo.ng.san.admin.model.vo.AdminReportBoardPageData;
 import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.board.model.vo.BoardOption;
 import moo.ng.san.board.model.vo.Notify;
+import moo.ng.san.coupon.model.vo.IssueCoupon;
+import moo.ng.san.dayCheck.model.vo.DayCheck;
+import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.product.model.vo.Product;
 
@@ -525,6 +529,26 @@ public class AdminService {
 			
 		}
 
+	}
+
+	public AdminCouponPageData selectCouponList() {
+		AdminCouponPageData acpd = new AdminCouponPageData();
+		ArrayList<IssueCoupon> couponList = dao.selectAllCouponList();
+		ArrayList<DayCheck> dcList = dao.selectAllDcList();
+		ArrayList<Point> pointList = dao.selectPointList();
+		acpd.setCouponList(couponList);
+		acpd.setDcList(dcList);
+		acpd.setPointList(pointList);
+		
+		/*
+		for(IssueCoupon issueCoupon : couponList) {
+			int couponNo = issueCoupon.getCouponNo();
+			ArrayList<Point> pointList = dao.selectAllPointList(couponNo);
+			acpd.setPointList(pointList);
+		}
+		*/
+		
+		return acpd;
 	}
 
 

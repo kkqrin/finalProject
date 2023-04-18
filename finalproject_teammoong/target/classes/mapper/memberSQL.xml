@@ -50,10 +50,20 @@
 				reg_date as regDate,
 				member_zonecode as memberZoneCode
 			from member_tbl
-			where member_id=#{memberId}
-			<if test="memberPw != null">
-				and member_pw=#{memberPw}
+			<trim prefix="where" prefixOverrides="and/or" > 
+			<if test="memberId != null">
+			member_id=#{memberId}
 			</if>
+			<if test="memberPw != null">
+			and member_pw=#{memberPw}
+			</if>
+			<if test="memberName != null and memberPhone != null">
+			member_name=#{memberName} and member_phone=#{memberPhone}
+			</if>
+			<if test="memberName != null and memberEmail != null">
+			member_name=#{memberName} and member_email=#{memberEmail}
+			</if>
+			</trim>
 		</select> 
 	
 

@@ -226,6 +226,24 @@ public class MemberController {
 	}//idDoubleCheck
 	
 	
+	@ResponseBody
+	@RequestMapping(value = "/selectMemberId.do")
+	public String selectMemberId(String memberName, String memberPhone, String memberEmail) {
+		Member member = new Member();
+		if(memberPhone!=null) {
+			member.setMemberName(memberName);
+			member.setMemberPhone(memberPhone);
+		}else if(memberEmail!=null) {
+			member.setMemberName(memberName);
+			member.setMemberEmail(memberEmail);
+		}
+		Member m = service.selectOneMember(member);
+		if(m!=null) {
+			return m.getMemberId();
+		}else {
+			return "none";
+		}
+	}//selectMemberId
 	
 	
 }//MemberController

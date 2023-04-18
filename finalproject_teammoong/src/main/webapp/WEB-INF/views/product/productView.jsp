@@ -73,6 +73,7 @@
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	<jsp:include page="/WEB-INF/views/common/stickyRight.jsp" />
 
 
 
@@ -91,7 +92,7 @@
 	</c:if>
     
         <div class="top-info-box">
-            <div class="img-box"style="width: 500px;">
+            <div class="img-box">
             <c:forEach items="${p.fileList }" var="i">
                 <img src="/resources/upload/product/${i.filepath }" style="border-radius: 20px;">
             </c:forEach>
@@ -222,14 +223,43 @@
         </div>
         <div class="quick-scroll-bar">
             <table>
-        <tr>
-            <td><a href="#" class="product-info-btn">상품설명</a></td>
-            <td><a href="#" class="product-view-btn">상세정보</a></td>
-            <td><a href="#" class="product-review-btn">리뷰보기</a></td>
-            <td><a href="#" class="product-inquiry-btn">문의하기</a></td>
-        </tr>
-    </table>
-</div>  
+                <tr>
+                    <td><a href="#" class="product-info-btn">상품설명</a></td>
+                    <td><a href="#" class="product-view-btn">상세정보</a></td>
+                    <td><a href="#" class="product-review-btn">리뷰보기</a></td>
+                    <td><a href="#" class="product-inquiry-btn">문의하기</a></td>
+                </tr>
+            </table>
+        </div>
+        <div class="review-wrap">
+            <form action="/reviewWrite.do" method="post" enctype="multipart/form-data"></form>
+            <table>
+                <tr>
+                    <th>사진</th>
+                    <th colspan="5">내용</th>
+                </tr>
+                <tr>
+                    <th><input type="file" name="reviewFile" multiple></th>
+                    <td colspan="5"><textarea style="height: 200px;"></textarea></td>
+                </tr>
+                <tr>
+                    <th>별점</th>
+                    <td style="color:black">
+                        <div>
+                          <label for="star1">★</label>
+                        </div>
+                        <input type="radio" name="star" id="star1">
+                      </td>
+                    <td style="color:black">★★<div><input type="radio" name="star"></div></td>
+                    <td style="color:black">★★★<div><input type="radio" name="star"></div></td>
+                    <td style="color:black">★★★★<div><input type="radio" name="star"></div></td>
+                    <td style="color:black">★★★★★<div><input type="radio" name="star"></div></td>
+                </tr>
+                <tr>
+                    <td colspan="6"><div class="area-btn full"><button class="btn btn-pri size02">리뷰작성</button></div></td>
+                </tr>
+            </table>
+        </div>  
         <div class="gonggu-content-wrap">
             <div class="gonggu-content-title">
             </div>
@@ -288,6 +318,7 @@
             </div>
         </div>
     </div>
+</div>
     
 <!-- <div class="quick-scroll-bar">
         <ul>
@@ -303,32 +334,6 @@
         <div class="product-review" style="height: 500px;">리뷰보기</div>
         <div class="product-inquiry" style="height: 500px;">문의하기</div>
     </div> -->
-        <!--구매버튼 시작-->
-        <!-- <div class="fix-button-box">
-            <div class="gonggu-window">
-                <div class="window-close-btn">X</div>
-                    <div class="flex-box">
-                        <div class="info-title-box">
-                            <a class="info-title">옵션</a>
-                        </div>
-                        <div>
-                            <ul class="info-content">
-                                <li><select class="select-custom product-option">
-                                    <option value="0" selected>상품 옵션을 선택해주세요</option>
-                                    <c:forEach items="${optionList }" var="po">
-	                                    <option value="${po.optionInfoNo }">${po.optionDetailName } ( +<fmt:formatNumber value="${po.optionPrice }"/>원 )</option>
-                                    </c:forEach>
-                                </select></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="button-box">
-                    <button type="button" class="button buy-one-btn">혼자구매</button>
-                    <button type="button" class="button gonggu-buy-btn">공동구매</button>
-                </div>
-            </div> -->
-        </div>
      <!--구매버튼-->
      <!-- 문의사항 삭제 모달 시작 -->
      <div id="modalDelete" class="modal modal-pri">
@@ -419,6 +424,13 @@
 <input type="hidden" id="productNo" value="${p.productNo}">
 <input type="hidden" id="likeNo" value="${l.likeNo}">
 <input type="hidden" id="productContent" value="${p.productContent}">
+
+
+
+
+<jsp:include page="/temporReview.jsp" />
+
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 
@@ -426,8 +438,25 @@
     
 </body>
     	<!-- 슬릭 슬라이더 js -->
-	<script type="text/javascript" src="/resources/slick/slick.min.js"></script>
+	<script type="text/javascript" src="/resources/slick/slick.min.js"></script>	
     <script>
+           $(document).ready(function() {
+    // td 요소를 클릭할 때
+    $("td").on("click", function() {
+      // 클릭된 td 요소의 자식 요소인 input[type=radio] 요소의 체크를 토글합니다.
+      var radio = $(this).find("input[type=radio]");
+      radio.prop("checked", !radio.prop("checked"));
+      // 다른 td 요소의 input[type=radio] 요소의 체크를 해제하고 배경색을 초기화합니다.
+      $("td")
+        .not(this)
+        .find("input[type=radio]")
+        .prop("checked", false)
+        .closest("td")
+        .css("background-color", "");
+      // 현재 클릭된 td 요소의 배경색을 검은색으로 변경하거나 원래대로 되돌립니다.
+      $(this).css("background-color", radio.prop("checked") ? "#f88000" : "");
+    });
+  });
         ///////////////////////////////////////////////////////////////////////////////////////////
         $("#orderBtn").on("click",function(){
       // 현재 시간 가져오기
@@ -557,7 +586,9 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // 슬릭슬라이드
-        $('.img-box').slick();
+        $(function(){
+            $('.img-box').slick();
+        });
         $(".scroll-top").on("click",function(){
             var offset = $("body").offset();
             $("html, body").animate({scrollTop: offset.top},400);
@@ -900,8 +931,18 @@
                 const productNo = $("#productNo").val();
                 const optionNo = $( ".product-option" ).val();
 
-                location.href="/putInShoppingCart.do?productNo="+productNo+"&optionNo="+optionNo;
+                // alert 띄우고 insert -> OK 누르면 insert 되게 하기 위해 함수 생성해서 번호들 넘겨줌
+                jQueryAlert('warning',"", productNo, optionNo);
+
             });
+            function processResult(result, productNo, optionNo) {
+                // 페이지 이동 및 db처리
+                location.href="/putInShoppingCart.do?productNo="+productNo+"&optionNo="+optionNo;
+            }
+
+
+
+
 
             // 옵션 없는 상품은 출력 안함
             $(document).ready(function(){
@@ -925,7 +966,68 @@
                     // 옵션이 없거나 옵션 선택된 경우 제출
                     $("[name=productNo]").val(productNo);
                     $("[name=optionNo]").val(optionNo);
+
                 }
 			});
+
+            // 장바구니 담기시 성공 alert 띄우고 페이지 이동
+            //알림 관련 기능
+        // $(function () {
+            // $("#alert01").on("click", function () {
+            //     jQueryAlert('success',"성공내용성공내용성공내용");
+            // });
+            // $("#alert02").on("click", function () {
+            //     jQueryAlert('error',"에러내용에러내용에러내용에러내용");
+            // });
+            // $("#put-in-cart-btn").on("click", function () {
+            //     jQueryAlert('warning',"장바구니에 담았어요!");
+            // });
+            // $("#alert04").on("click", function () {
+            //     jQueryAlert('info',"정보내용정보내용정보내용정보내용");
+            // });
+
+            function jQueryAlert(type, msg, p, o) {
+                let $type = type;
+                let messageBox = msg;
+                switch ($type) {
+                    // case 'success':
+                    // messageBox = $.parseHTML('<div class="alert__success"></div>');
+                    // break;
+                    // case 'error':
+                    // messageBox = $.parseHTML('<div class="alert__error"></div>');
+                    // break;
+                    case 'warning':
+                    messageBox = $.parseHTML('<div class="alert__warning" style="line-height:100px;text-align:center;"><div class="title" style="margin-bottom:10px;color:var(--primary);padding:0;">뭉쳐야산다</div><br>장바구니에 담았어요!</div>');
+                    break;
+                    // case 'info':
+                    // messageBox = $.parseHTML('<div class="alert__info"></div>');
+                    // break;
+                }
+                $("body").append(messageBox);
+                $(messageBox).dialog({
+                    dialogClass :$type,
+                    open: $(messageBox).append(msg),
+                    draggable: false,
+                    modal: true,
+                    buttons: {
+                        "OK": function () {
+                            $(this).dialog("close");
+
+                            // OK 버튼 눌렀을 때 insert 하기 위해 콜백함수 실행
+                            processResult(true, p, o);
+                        }
+                    },
+                    show: {
+                        effect: 'fade',
+                        duration: 200 //at your convenience
+                    },
+                    hide: {
+                        effect: 'fade',
+                        duration: 200 //at your convenience
+                    }
+                });
+            };
+        // });
         </script>
+        
 </html>

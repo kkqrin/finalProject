@@ -6,15 +6,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<!-- 슬릭 슬라이더 제이쿼리 -->
-	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script> -->
+	<!-- <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
     <!-- 리뷰 css -->
     <link rel="stylesheet" href="/resources/css/product/review.css"/>
 	<!-- 슬릭 슬라이더 -->
-	<link rel="stylesheet" href="/resources/slick/slick-theme.css"/>
-	<link rel="stylesheet" href="/resources/slick/slick.css"/>
+	<!-- <link rel="stylesheet" href="/resources/slick/slick-theme.css"/> -->
+	<!-- <link rel="stylesheet" href="/resources/slick/slick.css"/> -->
 	<!-- 슬라이더 화살표 아이콘 arrow -->
-	<script src="https://kit.fontawesome.com/285f888d1c.js" crossorigin="anonymous"></script>
+	<!-- <script src="https://kit.fontawesome.com/285f888d1c.js" crossorigin="anonymous"></script> -->
 
 	<style>
 		.modal-body>form>.selectBox-widht-explain{
@@ -68,7 +68,7 @@
 	</style>
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	<!-- <jsp:include page="/WEB-INF/views/common/header.jsp" /> -->
 	<div class="content-wrap">
 	<pre>
 		남은 거 : 포토후기 더보기 > 상세보기 이미지 왜 바로 안뜨는지? 나중에 뜨는지?
@@ -94,12 +94,12 @@
 				</div>
 				<div class="photo-review-item">
 					<div class="photo-review-img">
-						<img src="#">
+						<img src="/resources/img/review/banana_review3.jpg" />
 					</div>
 				</div>
 				<div class="photo-review-item">
 					<div class="photo-review-img">
-						<img src="#">
+						<img src="/resources/img/review/banana_review3.jpg" />
 						<div class="photo-review-more" data-modal="#modal-photo-review-more">더보기</div>
 					</div>
 				</div>
@@ -235,7 +235,7 @@
 				<div class="modal-body">
 					<!--내용영역-->
 					<!-- <h5>내용타이틀</h5> -->
-					<form action="#">
+					<form action="/test.do">
 							<div class="selectBox-widht-explain">
 								<select class="select-custom review-color" id="review-color" style="margin-bottom: 30px;">
 									<option value="0" selected>색상</option>
@@ -339,7 +339,7 @@
 				<div class="modal-body">
 					<!--내용영역-->
 					<!-- <h5>내용타이틀</h5> -->
-					<form action="#">
+					<form action="/test.do">
 						<div class="report-form">
 							<div><label><input type="radio" name="report-reason" value="1">상품관련 비방 내용</label></div>
 							<div><label><input type="radio" name="report-reason" value="2">음란, 욕설 등 부절적한 내용</label></div>
@@ -364,71 +364,11 @@
 
 
 	</div>
-	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+	<!-- <jsp:include page="/WEB-INF/views/common/footer.jsp" /> -->
 	<!-- 리뷰 js -->
 	<script src="/resources/js/review.js"></script>
 	<!-- 슬릭 슬라이더 js -->
-	<script type="text/javascript" src="/resources/slick/slick.min.js"></script>
-	<script>
-		//모달 관련 기능
-		$(function () {
-			$('[data-modal]').click(function (event) {
-				const modalId = $(this).data('modal');
-				if ($(modalId).hasClass('modal-pri')) {
-					$($(this).data('modal')).modal({
-						fadeDuration: 100
-					});
-					return false;
-				} else if ($(modalId).hasClass('modal-sec')) {
-					$($(this).data('modal')).modal({
-						escapeClose: false,
-						showClose: false,
-						fadeDuration: 100
-					});
-					return false;
-				} else {
-					return false;
-				}
-			});
-			
-		});
-	</script>
-	<script>
-		$( function() {
-			// $( "#review-color" ).selectmenu();
-			// $( "#review-size" ).selectmenu();
-			$( ".select-custom" ).selectmenu();
-			$("#review-color-button").css("margin-bottom","30px");
-		});
+	<!-- <script type="text/javascript" src="/resources/slick/slick.min.js"></script> -->
 
-		$("#review-filter-btn").on("click", function(){
-			console.log($("#review-color").val());
-			console.log($("#review-size").val());
-		});
-	</script>
-    <script>
-		$(function(){
-			$('.review-img').slick();
-			// $('.modal-review-img').slick();
-			// 리뷰 메인페이지 슬라이드
-			$(".slick-slide").css("height","238px");
-		});
-    </script>
-	<script>
-		// 신고 모달 직접 입력 선택시 textarea 작성 가능
-		$("[name=report-reason]").on("change", function(){
-			if($(this).val() == 8){
-				$(".report-direct-input").attr("disabled", false);
-			}else{
-				$(".report-direct-input").attr("disabled", true);
-				$(".report-direct-input").val("");
-			}
-		});
-
-		// 라디오 초기화
-		$(".report-modal-close").on("click", function(){
-			$(".report-form [type=radio]").prop("checked", false);
-		});
-	</script>
 </body>
 </html>

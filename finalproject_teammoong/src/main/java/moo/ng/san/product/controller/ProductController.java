@@ -288,20 +288,32 @@ public class ProductController {
 		}
 	}
 	@RequestMapping(value="/productView.do")
-	public String productView(int productNo, Model model) {
+	public String productView(int productNo, Model model, @SessionAttribute(required=false) Member m) {
+		
+		System.out.println("controller1 : " + productNo);
 		Product p = service.selectProductByProductNo(productNo);
 		ArrayList<Inquiry> list = iqService.selectInquiryList(productNo);
+		ArrayList<Option> optionList = service.selectOptionList(productNo);
 		model.addAttribute("p",p);
 		model.addAttribute("iqList", list);
 		
 		
 		// 옵션 조회 (규린)
-		ArrayList<Option> optionList = service.selectOptionList(productNo);
 		model.addAttribute("optionList", optionList);
 		
-		System.out.println("optionList : " + optionList);
+//		System.out.println("optionList : " + optionList);
 		
-		return "product/productView";
+		
+		if(m!=null) {
+			int memberNo = m.getMemberNo();
+		
+			// 최근 본 상품 insert
+			int result = service.insertRecentProduct(memberNo, productNo);
+			
+			System.out.println("최근 본 상품 result : " + result);
+		}		
+		System.out.println("controller2 : " + productNo);
+		return "product/productView";			
 	}
 	@GetMapping("/main.do")
 	public String selectProductList(Model model) {

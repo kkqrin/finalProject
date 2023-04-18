@@ -45,7 +45,6 @@
 	</style>
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/common/stickyRight.jsp" />
 	<div class="header-wrap">
         <div class="header-content">
         
@@ -83,10 +82,12 @@
 		                <a href="/" class="title">뭉쳐야산다</a>
 	                </div>
 	                <div class="middle-center">
-		                <div class="mainSearch">
-		                	<input type="text" class="mainSearch-input input-noborder" placeholder="상품을 검색해보세요">
-		                	<span class="material-symbols-outlined">search</span>
-			            </div>
+						<form action="/searchBar.do" method="post">
+							<div class="mainSearch">
+								<input type="text" name="searchKeyword" class="mainSearch-input input-noborder" placeholder="상품을 검색해보세요">
+								<button class="material-symbols-outlined">search</button>
+							</div>
+						</form>
 		            </div>
 	                <div class="middle-right">
 		                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">notifications</span></a>
