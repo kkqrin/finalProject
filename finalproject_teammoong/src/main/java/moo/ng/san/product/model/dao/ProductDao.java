@@ -124,6 +124,12 @@ public class ProductDao {
 		return (ArrayList<Basket>)list;
 	}
 
+	public int insertRecentProduct(HashMap<String, Object> map) {
+		int result = sqlSession.insert("product.insertRecentProduct", map);
+		
+		return result;
+	}
+
 	
 	
 	

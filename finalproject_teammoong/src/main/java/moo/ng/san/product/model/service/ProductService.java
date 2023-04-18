@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import moo.ng.san.basket.model.vo.Basket;
 import moo.ng.san.category.model.vo.DetailCategory;
+import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.product.model.dao.ProductDao;
 import moo.ng.san.product.model.vo.FileVO;
 import moo.ng.san.product.model.vo.Option;
@@ -108,7 +109,20 @@ public class ProductService {
 		return dao.insertShoppingCartOption(map);
 	}
 	
-	
+	public ArrayList<Basket> selectBasketList(int memberNo) {
+		
+		return dao.selectBasketList(memberNo);
+	}
+
+//	public int insertRecentProduct(int memberNo, int productNo) {
+//		
+//		HashMap<String, Object> map = new HashMap<String, Object>();
+//		map.put("memberNo", memberNo);
+//		map.put("productNo", productNo);
+//		
+//		return dao.insertRecentProduct(map);
+//	}
+
 	
 	
 	
@@ -202,13 +216,30 @@ public class ProductService {
 	return result;
 }
 
-	public Product selectProductByProductNo(int productNo) {
+	public Product selectProductByProductNo(int productNo, Member m) {
 		Product p = dao.selectProductByProductNo(productNo);
 		if(p != null) {
 			ArrayList<String> filepath = dao.selectProductImg(productNo);
 			p.setFileList(filepath);
 		}
-		System.out.println(p);
+//		System.out.println(p);
+		
+		
+		if(m!=null) {
+			int memberNo = m.getMemberNo();
+			
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("memberNo", memberNo);
+			map.put("productNo", productNo);
+			
+//			return dao.insertRecentProduct(map);
+		
+			// 최근 본 상품 insert
+			int result = dao.insertRecentProduct(map);
+			
+			System.out.println("최근 본 상품 result : " + result);
+		}	
+
 		return p;
 		
 	}
@@ -220,11 +251,6 @@ public class ProductService {
 			p.setFileList(productFileList);
 		}
 		return list;
-	}
-
-	public ArrayList<Basket> selectBasketList(int memberNo) {
-		
-		return dao.selectBasketList(memberNo);
 	}
 
 

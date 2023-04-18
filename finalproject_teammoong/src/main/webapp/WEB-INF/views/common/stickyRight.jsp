@@ -134,6 +134,8 @@
     /* border-top: 5px solid #fff; */
     margin: 40px auto;
     /* padding-top: 10px; */
+    position: absolute;
+    top: 210px;
 }
 
 .kkt-logo>a{
@@ -225,7 +227,7 @@ body .top-icon.hide-icon{
                         </span>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="#">
                         <span>
                             <img src="/resources/img/product/cleansing_foam.jpeg">
@@ -245,7 +247,7 @@ body .top-icon.hide-icon{
                             <img src="/resources/img/product/korean-melon.jpg">
                         </span>
                     </a>
-                </li>
+                </li> -->
             </ul>
         </div>
         <div class="icon-logo-box">

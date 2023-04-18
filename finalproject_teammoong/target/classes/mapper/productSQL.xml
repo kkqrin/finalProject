@@ -174,4 +174,8 @@
 			order by 1
 		) B
 	</select>
+	
+	<insert id="insertRecentProduct" parameterType="map">
+		INSERT INTO RECENT_PRODUCT_TBL VALUES(RECENT_PRODUCT_SEQ.NEXTVAL,#{memberNo},#{productNo})
+	</insert>
 </mapper>

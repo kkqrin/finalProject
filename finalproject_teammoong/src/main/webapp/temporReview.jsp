@@ -94,12 +94,12 @@
 				</div>
 				<div class="photo-review-item">
 					<div class="photo-review-img">
-						<img src="#">
+						<img src="/resources/img/review/banana_review3.jpg" />
 					</div>
 				</div>
 				<div class="photo-review-item">
 					<div class="photo-review-img">
-						<img src="#">
+						<img src="/resources/img/review/banana_review3.jpg" />
 						<div class="photo-review-more" data-modal="#modal-photo-review-more">더보기</div>
 					</div>
 				</div>
@@ -235,7 +235,7 @@
 				<div class="modal-body">
 					<!--내용영역-->
 					<!-- <h5>내용타이틀</h5> -->
-					<form action="#">
+					<form action="/test.do">
 							<div class="selectBox-widht-explain">
 								<select class="select-custom review-color" id="review-color" style="margin-bottom: 30px;">
 									<option value="0" selected>색상</option>
@@ -339,7 +339,7 @@
 				<div class="modal-body">
 					<!--내용영역-->
 					<!-- <h5>내용타이틀</h5> -->
-					<form action="#">
+					<form action="/test.do">
 						<div class="report-form">
 							<div><label><input type="radio" name="report-reason" value="1">상품관련 비방 내용</label></div>
 							<div><label><input type="radio" name="report-reason" value="2">음란, 욕설 등 부절적한 내용</label></div>
