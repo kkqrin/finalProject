@@ -185,18 +185,7 @@ public class ProductController {
 		
 		return "redirect:/productView.do?productNo="+productNo;
 	}
-	
-	
-//	@RequestMapping(value="/recentProduct.do")
-//	public String recentProduct(@SessionAttribute(required=false) Member m, Model model) {
-//		
-//		ArrayList<RecentProduct> recentProductList = service.selectRecentProductList(m.getMemberNo());
-//		model.addAttribute("recentProductList", recentProductList);
-//		
-//		return "common/stickyRight";
-//	}
-	
-	
+
 	
 	// 최근 본 상품 select 콜백
 	public void selectRecentProduct(Member m, Model model) {
@@ -207,9 +196,12 @@ public class ProductController {
 	}
 	
 	
-	
-	
-	
+	// 인기 상품 리스트
+	@RequestMapping(value="/bestProductList.do")
+	public String bestProductList(@SessionAttribute(required=false) Member m, Model model) {
+		
+		return "product/bestProductList";
+	}
 	
 	
 	

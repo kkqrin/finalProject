@@ -99,7 +99,7 @@
             	
             	<div class="header-bottom">
             		<div class="menu-product">
-		                <div><a href="#">인기상품</a></div>
+		                <div><a href="/bestProductList.do">인기상품</a></div>
 		                <div><a href="/insertProductFrm.do">물품등록(예비버튼)</a></div>
 		                <c:if test="${!empty sessionScope.m}">
 		                	<div data-modal="#modalBasic"><a href="#">충전하기</a></div>
