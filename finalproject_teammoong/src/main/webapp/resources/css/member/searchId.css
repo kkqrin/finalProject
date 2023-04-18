@@ -42,7 +42,7 @@
 	color: var(--primary);
 }
 
-.sendPhone{
+.sendPhone, .sendEmail{
 	margin-top: 20px;
 }
 
