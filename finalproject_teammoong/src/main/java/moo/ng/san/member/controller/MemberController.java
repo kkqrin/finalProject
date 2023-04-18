@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import common.FileManager;
 import common.MsgVO;
 import common.PhoneCertify;
+import lombok.val;
 import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.member.model.service.MemberService;
 import moo.ng.san.member.model.vo.Member;
@@ -36,7 +39,8 @@ public class MemberController {
 	private PhoneCertify phoneCertify;
 	@Autowired
 	private FileManager fm; 
-	
+	@Autowired
+	private JavaMailSender mailSender;
 	
 	@ResponseBody
 	@RequestMapping(value = "/memberPhoneCheck.do")
@@ -129,8 +133,14 @@ public class MemberController {
 	@RequestMapping(value = "/searchIdFrm.do")
 	public String searchIdFrm(){
 		return "member/searchIdFrm";
-	}//joinMemberFrm
+	}//searchIdFrm
 
+	
+	@RequestMapping(value = "/searchPwFrm.do")
+	public String searchPwFrm() {
+		return "member/searchPwFrm";
+	}//searchPwFrm
+	
 	
 	@RequestMapping(value = "/myPageMemberDelete.do")
 	public String myPageMemberDelete() {
@@ -194,6 +204,15 @@ public class MemberController {
 	}//updateMember
 	
 	
+	@RequestMapping(value = "/updateNewPwMemberFrm.do")
+	public String updateNewPwMemberFrm(String hideMemberId,Model model) {
+		System.out.println(hideMemberId);
+		model.addAttribute("memberId", hideMemberId);
+		return "member/myPageUpdatePw";
+	}
+	
+	
+	
 	@ResponseBody
 	@RequestMapping(value = "/updateNewPwMember.do")
 	public String updateNewPwMember(String memberId, String memberPw, String memberNewPw) {
@@ -228,13 +247,19 @@ public class MemberController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/selectMemberId.do")
-	public String selectMemberId(String memberName, String memberPhone, String memberEmail) {
+	public String selectMemberId(String memberName, String memberPhone, String memberEmail, String memberId) {
 		Member member = new Member();
-		if(memberPhone!=null) {
+		if(memberName!=null && memberPhone!=null) {
 			member.setMemberName(memberName);
 			member.setMemberPhone(memberPhone);
-		}else if(memberEmail!=null) {
+		}else if(memberName!=null && memberEmail!=null) {
 			member.setMemberName(memberName);
+			member.setMemberEmail(memberEmail);
+		}else if(memberId!=null && memberPhone!=null) {
+			member.setMemberId(memberId);
+			member.setMemberPhone(memberPhone);
+		}else if(memberId!=null && memberEmail!=null) {
+			member.setMemberId(memberId);
 			member.setMemberEmail(memberEmail);
 		}
 		Member m = service.selectOneMember(member);
@@ -244,6 +269,15 @@ public class MemberController {
 			return "none";
 		}
 	}//selectMemberId
+	
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/sendEmailMember.do")
+	public String sendEmailMember(String memberEmail) {
+		String code = service.sendMail(memberEmail);
+		return code;
+	}//sendEmailMember
 	
 	
 }//MemberController
