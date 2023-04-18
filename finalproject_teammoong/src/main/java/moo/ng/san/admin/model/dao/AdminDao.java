@@ -13,6 +13,9 @@ import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.board.model.vo.BoardJoin;
 import moo.ng.san.board.model.vo.BoardOption;
 import moo.ng.san.board.model.vo.Notify;
+import moo.ng.san.coupon.model.vo.IssueCoupon;
+import moo.ng.san.dayCheck.model.vo.DayCheck;
+import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.product.model.vo.Product;
 
@@ -245,6 +248,24 @@ public class AdminDao {
 		
 		return (ArrayList<Notify>)list;
 	}
+
+	public ArrayList<IssueCoupon> selectAllCouponList() {
+		List list = sqlSession.selectList("admin.selectAllCouponList");
+		return (ArrayList<IssueCoupon>)list;
+	}
+
+	public ArrayList<DayCheck> selectAllDcList() {
+		List list = sqlSession.selectList("admin.selectAllDcList");
+		
+		return (ArrayList<DayCheck>)list;
+	}
+
+	public ArrayList<Point> selectPointList() {
+		List list = sqlSession.selectList("admin.selectPointList");
+		
+		return (ArrayList<Point>)list;
+	}
+	
 
 
 

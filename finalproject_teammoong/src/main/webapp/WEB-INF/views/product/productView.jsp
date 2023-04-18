@@ -73,6 +73,7 @@
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	<jsp:include page="/WEB-INF/views/common/stickyRight.jsp" />
 
 
 
@@ -419,6 +420,13 @@
 <input type="hidden" id="productNo" value="${p.productNo}">
 <input type="hidden" id="likeNo" value="${l.likeNo}">
 <input type="hidden" id="productContent" value="${p.productContent}">
+
+
+
+
+<jsp:include page="/temporReview.jsp" />
+
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 
@@ -557,7 +565,9 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // 슬릭슬라이드
-        $('.img-box').slick();
+        $(function(){
+            $('.img-box').slick();
+        });
         $(".scroll-top").on("click",function(){
             var offset = $("body").offset();
             $("html, body").animate({scrollTop: offset.top},400);
@@ -900,8 +910,18 @@
                 const productNo = $("#productNo").val();
                 const optionNo = $( ".product-option" ).val();
 
-                location.href="/putInShoppingCart.do?productNo="+productNo+"&optionNo="+optionNo;
+                // alert 띄우고 insert -> OK 누르면 insert 되게 하기 위해 함수 생성해서 번호들 넘겨줌
+                jQueryAlert('warning',"", productNo, optionNo);
+
             });
+            function processResult(result, productNo, optionNo) {
+                // 페이지 이동 및 db처리
+                location.href="/putInShoppingCart.do?productNo="+productNo+"&optionNo="+optionNo;
+            }
+
+
+
+
 
             // 옵션 없는 상품은 출력 안함
             $(document).ready(function(){
@@ -925,7 +945,67 @@
                     // 옵션이 없거나 옵션 선택된 경우 제출
                     $("[name=productNo]").val(productNo);
                     $("[name=optionNo]").val(optionNo);
+
                 }
 			});
+
+            // 장바구니 담기시 성공 alert 띄우고 페이지 이동
+            //알림 관련 기능
+        // $(function () {
+            // $("#alert01").on("click", function () {
+            //     jQueryAlert('success',"성공내용성공내용성공내용");
+            // });
+            // $("#alert02").on("click", function () {
+            //     jQueryAlert('error',"에러내용에러내용에러내용에러내용");
+            // });
+            // $("#put-in-cart-btn").on("click", function () {
+            //     jQueryAlert('warning',"장바구니에 담았어요!");
+            // });
+            // $("#alert04").on("click", function () {
+            //     jQueryAlert('info',"정보내용정보내용정보내용정보내용");
+            // });
+
+            function jQueryAlert(type, msg, p, o) {
+                let $type = type;
+                let messageBox = msg;
+                switch ($type) {
+                    // case 'success':
+                    // messageBox = $.parseHTML('<div class="alert__success"></div>');
+                    // break;
+                    // case 'error':
+                    // messageBox = $.parseHTML('<div class="alert__error"></div>');
+                    // break;
+                    case 'warning':
+                    messageBox = $.parseHTML('<div class="alert__warning" style="line-height:100px;text-align:center;"><div class="title" style="margin-bottom:10px;color:var(--primary);padding:0;">뭉쳐야산다</div><br>장바구니에 담았어요!</div>');
+                    break;
+                    // case 'info':
+                    // messageBox = $.parseHTML('<div class="alert__info"></div>');
+                    // break;
+                }
+                $("body").append(messageBox);
+                $(messageBox).dialog({
+                    dialogClass :$type,
+                    open: $(messageBox).append(msg),
+                    draggable: false,
+                    modal: true,
+                    buttons: {
+                        "OK": function () {
+                            $(this).dialog("close");
+
+                            // OK 버튼 눌렀을 때 insert 하기 위해 콜백함수 실행
+                            processResult(true, p, o);
+                        }
+                    },
+                    show: {
+                        effect: 'fade',
+                        duration: 200 //at your convenience
+                    },
+                    hide: {
+                        effect: 'fade',
+                        duration: 200 //at your convenience
+                    }
+                });
+            };
+        // });
         </script>
 </html>
