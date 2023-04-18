@@ -28,6 +28,8 @@ import common.FileManager;
 import moo.ng.san.basket.model.vo.Basket;
 import moo.ng.san.category.model.vo.Category;
 import moo.ng.san.category.model.vo.DetailCategory;
+import moo.ng.san.gonggu.model.service.GongguService;
+import moo.ng.san.gonggu.model.vo.Gonggu;
 import moo.ng.san.inquiry.model.service.InquiryService;
 import moo.ng.san.inquiry.model.vo.Inquiry;
 import moo.ng.san.member.model.vo.Member;
@@ -45,6 +47,8 @@ public class ProductController {
 	private FileManager fileManager;
 	@Autowired
 	private InquiryService iqService;
+	@Autowired
+	private GongguService gongguService;
 	
 	
 	
@@ -293,12 +297,15 @@ public class ProductController {
 		System.out.println("controller1 : " + productNo);
 		Product p = service.selectProductByProductNo(productNo);
 		ArrayList<Inquiry> list = iqService.selectInquiryList(productNo);
-		ArrayList<Option> optionList = service.selectOptionList(productNo);
+	
 		model.addAttribute("p",p);
 		model.addAttribute("iqList", list);
 		
-		
+		// 명훈이임
+		ArrayList<Gonggu> gongguList = gongguService.selectGongguList(productNo);
+		model.addAttribute("gongguList",gongguList);
 		// 옵션 조회 (규린)
+		ArrayList<Option> optionList = service.selectOptionList(productNo);
 		model.addAttribute("optionList", optionList);
 		
 //		System.out.println("optionList : " + optionList);
