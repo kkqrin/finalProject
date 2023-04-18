@@ -291,7 +291,7 @@ public class ProductController {
 	public String productView(int productNo, Model model, @SessionAttribute(required=false) Member m) {
 		
 		System.out.println("controller1 : " + productNo);
-		Product p = service.selectProductByProductNo(productNo, m);
+		Product p = service.selectProductByProductNo(productNo);
 		ArrayList<Inquiry> list = iqService.selectInquiryList(productNo);
 		ArrayList<Option> optionList = service.selectOptionList(productNo);
 		model.addAttribute("p",p);
@@ -304,14 +304,14 @@ public class ProductController {
 //		System.out.println("optionList : " + optionList);
 		
 		
-//		if(m!=null) {
-//			int memberNo = m.getMemberNo();
-//		
-//			// 최근 본 상품 insert
-//			int result = service.insertRecentProduct(memberNo, productNo);
-//			
-//			System.out.println("최근 본 상품 result : " + result);
-//		}		
+		if(m!=null) {
+			int memberNo = m.getMemberNo();
+		
+			// 최근 본 상품 insert
+			int result = service.insertRecentProduct(memberNo, productNo);
+			
+			System.out.println("최근 본 상품 result : " + result);
+		}		
 		System.out.println("controller2 : " + productNo);
 		return "product/productView";			
 	}
