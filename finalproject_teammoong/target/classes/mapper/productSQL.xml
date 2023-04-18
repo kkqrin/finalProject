@@ -155,20 +155,23 @@
 	</insert>
 	
 	<select id="selectBasketList" parameterType="_int" resultType="basket">
-		select
-			p.product_no AS productNo,
-			(SELECT FILEPATH FROM PRODUCT_IMG WHERE P_IMG_NO=(SELECT MIN(P_IMG_NO) FROM PRODUCT_IMG where product_no=b.product_no)) AS thumbnail,
-			p.product_name AS productName,
-			p.product_price AS productPrice,
-			product_discount AS productDiscount,
-			OI.OPTION_INFO_NO AS optionNo,
-			OI.OPTION_DATEAIL AS optionDetailName,
-			OI.OPTION_PRICE AS optionPrice
-		from basket_tbl b
-		left join product_tbl p on b.product_no = p.product_no
-		left join option_group_tbl og on b.product_no = og.product_no
-		left join basket_option_tbl bo on og.option_group_no = bo.option_group_no
-		left join option_info_tbl oi on bo.option_info_no = oi.option_info_no
-		where member_no = #{_parameter}
+		SELECT ROWNUM AS RNUM, B.* FROM
+       	(select
+				p.product_no AS productNo,
+				(SELECT FILEPATH FROM PRODUCT_IMG WHERE P_IMG_NO=(SELECT MIN(P_IMG_NO) FROM PRODUCT_IMG where product_no=b.product_no)) AS thumbnail,
+				p.product_name AS productName,
+				p.product_price AS productPrice,
+				product_discount AS productDiscount,
+				OI.OPTION_INFO_NO AS optionNo,
+				OI.OPTION_DATEAIL AS optionDetailName,
+				OI.OPTION_PRICE AS optionPrice
+			from basket_tbl b
+			left join product_tbl p on b.product_no = p.product_no
+			left join option_group_tbl og on b.product_no = og.product_no
+			left join basket_option_tbl bo on og.option_group_no = bo.option_group_no
+			left join option_info_tbl oi on bo.option_info_no = oi.option_info_no
+			where member_no = #{_parameter}
+			order by 1
+		) B
 	</select>
 </mapper>

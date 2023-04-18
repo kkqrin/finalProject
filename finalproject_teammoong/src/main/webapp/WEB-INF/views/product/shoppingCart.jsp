@@ -15,7 +15,7 @@
 	
 	<div class="content-wrap">
 	<pre>
-		남은 일 : 체크박스 전체선택 / 선택삭제 / form버튼 스티키안에 있는 걸로 동작되게
+		남은 일 : 체크박스 전체선택 / 선택삭제 /
 	</pre>
 		<div class="cart-title">
 			<h4>${sessionScope.m.memberName }님의 장바구니</h4>
