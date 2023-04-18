@@ -63,6 +63,10 @@ public class BoardDao {
 		System.out.println(result);
 		return result;
 	}
+	public ArrayList<BoardJoin> selectBoardJoinList(int memberNo) {
+		List list = sqlSession.selectList("board.selectBoardJoinList",memberNo);
+		return (ArrayList<BoardJoin>)list;
+	}
 	
 
 }

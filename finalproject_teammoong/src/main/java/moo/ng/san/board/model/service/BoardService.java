@@ -131,4 +131,12 @@ public class BoardService {
 		return result;
 	}
 
+
+
+
+	public ArrayList<BoardJoin> selectBoardJoinList(int memberNo) {
+		ArrayList<BoardJoin> list = dao.selectBoardJoinList(memberNo);
+		return list;
+	}
+
 }

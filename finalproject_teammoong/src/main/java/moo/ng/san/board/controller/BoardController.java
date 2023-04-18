@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import common.FileManager;
@@ -17,6 +18,7 @@ import moo.ng.san.board.model.vo.BoardJoin;
 import moo.ng.san.board.model.vo.BoardOption;
 import moo.ng.san.board.model.vo.BoardPageData;
 import moo.ng.san.board.model.vo.FileVO;
+import moo.ng.san.member.model.vo.Member;
 
 @Controller
 public class BoardController {
@@ -89,5 +91,14 @@ public class BoardController {
 	@RequestMapping(value="/myPageRequestDeposit.do")
 	public String myPageRequestDeposit() {
 		return"board/myPageRequestDeposit";
+	}
+	@RequestMapping(value="/myJoinList.do")
+	public String myJoinList(int reqPage, Model model, @SessionAttribute(required=false) Member m) {
+//		BoardPageData bpd = service.selectBoardList(reqPage);
+		ArrayList<BoardJoin> list = service.selectBoardJoinList(m.getMemberNo());
+		model.addAttribute("list", list);
+		
+		System.out.println(list);
+		return"board/myJoinList";
 	}
 }

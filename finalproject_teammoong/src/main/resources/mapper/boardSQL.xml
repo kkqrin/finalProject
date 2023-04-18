@@ -22,6 +22,8 @@
 		select count(*) from board_tbl
 	</select>
 	
+	
+	
 	<insert id="insertBoardJoin" parameterType="bj">
 		insert into board_join values(
 		board_join_seq.nextval,
@@ -76,6 +78,18 @@
 		select
 			*
 		from board_tbl where board_no = #{_parameter}	
+	</select>
+	
+	<select id="selectBoardJoinList" parameterType="_int" resultType="bj">
+		select
+			 b.board_no as boardNo,
+                (SELECT FILEPATH FROM file_tbl WHERE file_no=(SELECT MIN(file_NO) FROM file_tbl where board_no=b.board_no)) AS thumbnail,
+                b.board_name as boardName,
+                b.board_status as boardStatus,
+                join_no as joinNo,
+                payer_date as payerDate,
+                deposit_price as depositPrice
+		from board_tbl b left join board_join bj on b.board_no = bj.board_no where member_no = #{_parameter}
 	</select>
 	
 	<select id="selectOptionList" parameterType="_int" resultType="bo">
