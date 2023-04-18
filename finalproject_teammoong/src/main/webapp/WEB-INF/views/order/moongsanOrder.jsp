@@ -44,7 +44,7 @@
         </pre>
         <div class="order-sheet-wrap">
             <h1>뭉쳐야산다!</h1>
-            <form action="#" method="post">
+            <form action="/gongguOrder.do" method="post">
                 <div class="order-product-box">
                     <h4>
                         주문 상품
@@ -65,6 +65,8 @@
                     
                     <!-- 상품 리스트 -->
                     <c:forEach items="${orderProductList }" var="i">
+                        <input type="hidden" name="productNo" value="${i.productNo}">
+                        <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
                         <div class="order-product-item">
                             <div class="order-product-img">
                                 <a href="/productView.do?productNo=${i.productNo}">
@@ -178,11 +180,12 @@
                                     <th>적립금</th>
                                     <td colspan="2" class="saved-money-box">
                                         <div>
-                                            <input type="text" id="input-saved-money" placeholder="사용 가능한 적립금 <fmt:formatNumber value="${point.pointEa }"/>원">
+                                            내적립금${point.pointEa }
+                                            <!-- <input type="text" id="input-saved-money" placeholder="사용 가능한 적립금 <fmt:formatNumber value="${point.pointEa }"/>원">
                                             <button type="button" class="btn btn-pri size01" id="do-saved-money">적용</button>
                                             <button type="button" class="btn btn-pri size01" id="all-saved-money">모두 사용</button>
                                             <input type="hidden" id="hidden-total-point" value="${point.pointEa }">
-                                            <input type="hidden" id="hidden-current-point" value="0">
+                                            <input type="hidden" id="hidden-current-point" value="0"> -->
                                         </div>
                                     </td>
                                 </tr>

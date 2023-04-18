@@ -14,4 +14,29 @@
 		LEFT JOIN DETAIL_GONGGU_TBL USING(GONGGU_NO)
 		WHERE PRODUCT_NO = #{_parameter}
 	</select>
+	
+	<insert id="insertGonggu" parameterType="g">
+		INSERT INTO GONGGU_TBL VALUES(GONGGU_SEQ.NEXTVAL,
+		#{productNo},
+		#{memberNo})
+	</insert>
+	
+	<select id="selectInsertGonggu" resultType="g">
+		SELECT 
+			GONGGU_NO AS gongguNo,
+			MEMBER_NO AS memberNo 
+		FROM GONGGU_TBL
+		WHERE GONGGU_NO IN(SELECT MAX(GONGGU_NO) FROM GONGGU_TBL)
+	</select>
+	
+	<insert id="insertDetailGonggu" parameterType="g">
+		INSERT INTO DETAIL_GONGGU_TBL VALUES(DETAIL_GONGGU_SEQ.NEXTVAL,
+		#{gongguNo},
+		#{memberNo},
+		1)
+	</insert>
+	
+	<select id="selectCountNumber" resultType="gai">
+		SELECT SUM(COUNT_NUMBER) AS countNumber FROM DETAIL_GONGGU_TBL
+	</select>
 </mapper>
