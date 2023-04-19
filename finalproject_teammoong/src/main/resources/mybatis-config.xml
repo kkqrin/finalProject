@@ -37,14 +37,19 @@
 		
 		<typeAlias type="moo.ng.san.basket.model.vo.Basket" alias="basket" />
 		
+
 		<typeAlias type="moo.ng.san.gonggu.model.vo.Gonggu" alias="g" />
 		<typeAlias type="moo.ng.san.gonggu.model.vo.DetailGonggu" alias="dg" />
 		<typeAlias type="moo.ng.san.gonggu.model.vo.GongguAllInfo" alias="gai" />
+
+		<typeAlias type="moo.ng.san.admin.model.vo.CouponData" alias="cd" /> <!-- 쿠폰 통합 -->
+		<typeAlias type="moo.ng.san.admin.model.vo.SalesData" alias="sd" /> <!-- 매출/원가 -->
+
 		
 	</typeAliases>
 	<!-- 
 	<typeAliases>
 		<typeAlias type="kr.or.member.model.vo.Member" alias="m" />
 	</typeAliases>
-	 -->
+	-->
 </configuration>

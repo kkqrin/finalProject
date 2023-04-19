@@ -8,8 +8,8 @@
     <title>Document</title>
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <!-- chart -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+	<!-- Chart.js -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- google icon -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 	
@@ -146,77 +146,108 @@
     	</div>
     </div>
     
-    <!-- chart 부트스트랩 -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   
-  <script>
+<script>
 	  
-  	$.ajax({
-  		url : "/ajaxTotalSalesChart.do",
-  		type : "get",
-  		success : function(data){
-		    var ctx = document.getElementById('myChart');
-		    var myChart = new Chart(ctx, {
-		      type: 'bar',
-		      data: {
-		        labels: ['패션', '뷰티', '식품', '생활용품', '가전/디지털', '가구', '침구', '인테리어', '공구','스포츠/레저/취미','출산/유아동','반려용품','명품관'],
-		        datasets: [{
-		          label: '# of Votes',
-		          data: [data[0], data[1], data[2], data[3], data[4], data[5],data[6],data[7],data[8],data[9],data[10],data[11],data[12],data[13]],
-		          backgroundColor: [
-		            'rgba(255, 99, 132, 0.2)',
-		            'rgba(54, 162, 235, 0.2)',
-		            'rgba(255, 206, 86, 0.2)',
-		            'rgba(75, 192, 192, 0.2)',
-		            'rgba(153, 102, 255, 0.2)',
-		            'rgba(255, 99, 132, 0.2)',
-		            'rgba(54, 162, 235, 0.2)',
-		            'rgba(255, 206, 86, 0.2)',
-		            'rgba(75, 192, 192, 0.2)',
-		            'rgba(153, 102, 255, 0.2)',
-		            'rgba(153, 102, 255, 0.2)',
-		            'rgba(153, 102, 255, 0.2)',
-		            'rgba(255, 159, 64, 0.2)'
-		          ],
-		          borderColor: [
-		            'rgba(255, 99, 132, 1)',
-		            'rgba(54, 162, 235, 1)',
-		            'rgba(255, 206, 86, 1)',
-		            'rgba(75, 192, 192, 1)',
-		            'rgba(153, 102, 255, 1)',
-		            'rgba(255, 99, 132, 1)',
-		            'rgba(54, 162, 235, 1)',
-		            'rgba(255, 206, 86, 1)',
-		            'rgba(75, 192, 192, 1)',
-		            'rgba(153, 102, 255, 1)',
-		            'rgba(153, 102, 255, 1)',
-		            'rgba(255, 206, 86, 1)',
-		            'rgba(255, 159, 64, 1)'
-		          ],
-		          borderWidth: 1
-		        }]
-		      },
-		      options: {
-		        scales: {
-		          yAxes: [{
-		            ticks: {
-		              beginAtZero: true
-		            }
-		          }]
-		        }
-		      }
-		    });
-  		},error{
-  			console.log("다시해보세요")
-  		}
-  		
-  	});
-  	
+  const chartDataUrl = "https://example.com/data.json";
+  
+  $(document).ready(function() {
 	  
-    
-	</script>
-    
+	  $.ajax({
+		    url: 'ajaxTotalSalesManage.do',
+		    dataType: 'json',
+		    success: function(data) {
+		    	console.log(data);
+			      // Chart.js 옵션 설정
+			      const options = {
+			        // 옵션 설정 내용
+			    	responsive: true, // 차트 크기 자동으로 조정할지?
+			    	maintainAspectRatio: false, // 종횡비를 유지할지?
+			    	title: { // 차트 제목 관련 옵션 설정
+			            display: true, // 제목 표시?
+			            text: '총 매출액', // 제목
+			            fontSize: 20, // 제목 글꼴 사이즈
+			            fontColor: '#333' // 제목 글꼴 색상
+			        },
+			        legend: { // 범례 옵션 설정
+			            display: true, // 범례 표시?
+			            position: 'bottom', // 범례 위치는 어디?
+			            labels: { // 범례 라벨 관련 옵션
+			                fontColor: '#333', // 범례 글꼴 색상
+			                fontSize: 14 // 범례 글꼴 사이즈
+			            }
+			        },
+			        scales: { // 축 관련 옵션 설정
+			            xAxes: [{ // x축 관련 옵션
+			                gridLines: { // x축 그리드 라인 옵션
+			                    display: true, // 그리드 라인 표시?
+			                    color: '#ddd', // 그리드 라인 색상
+			                    drawBorder: false // 축과 그리드 라인 사이의 경계선 넣어?
+			                },
+			                ticks: { // x축 눈금선 관련 옵션
+			                    fontColor: '#333',
+			                    fontSize: 14
+			                }
+			            }],
+			            yAxes: [{
+			                gridLines: {
+			                    display: true,
+			                    color: '#ddd',
+			                    drawBorder: false
+			                },
+			                ticks: {
+			                    fontColor: '#333',
+			                    fontSize: 14,
+			                    beginAtZero: true
+			                }
+			            }]
+			        }
+			
+			      }; // option
+			
+			      // Chart.js 데이터 설정
+			      const chartData = {
+		    		  labels: [data[0].monthNo, data[1].monthNo, data[2].monthNo,data[3].monthNo, 
+		    			  data[4].monthNo,data[5].monthNo,data[6].monthNo,data[7].monthNo,data[8].monthNo,
+		    			  data[9].monthNo,data[10].monthNo,data[11].monthNo], // x 축에 표시되는 레이블
+		    		  
+		    		  datasets: [{
+		    		    label: '월 매출액',
+		    		    data: [data[0].totalSales,data[1].totalSales,data[2].totalSales,data[3].totalSales,
+		    		    	data[4].totalSales,data[5].totalSales,data[6].totalSales,data[7].totalSales,data[8].totalSales,
+		    		    	data[9].totalSales,data[10].totalSales,data[11].totalSales],
+		    		    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+		    		    borderColor: 'rgba(255,99,132,1)',
+		    		    borderWidth: 1
+		    		  },
+		    		  {
+		    		    label: '매출 원가',
+		    		    type : 'line', // 데이터 표시방법
+		    		    data: [data[0].totalCost,data[1].totalCost,data[2].totalCost,data[3].totalCost,data[4].totalCost,
+		    		    	data[5].totalCost,data[6].totalCost,data[7].totalCost,data[8].totalCost,data[9].totalCost,data[10].totalCost,
+		    		    	data[11].totalCost], 
+		    		    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+		    		    borderColor: 'rgba(54, 162, 235, 1)',
+		    		    borderWidth: 1
+		    		  }]
+			      
+			      }; //chartData
+			
+			      // 차트 렌더링
+			      const ctx = $("#myChart")[0].getContext("2d");
+			      const myChart = new Chart(ctx, {
+			        type: data.type,
+			        data: chartData,
+			        options: options
+			        
+			      }); // myChart
+		    	
+		    }
+	  });
+	  
+    });
+  
+  </script>
+	  
 </body>
 </html>
