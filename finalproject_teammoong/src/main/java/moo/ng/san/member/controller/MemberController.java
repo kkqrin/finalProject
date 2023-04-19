@@ -151,7 +151,7 @@ public class MemberController {
 	
 	@RequestMapping(value = "/myPageMemberDelete.do")
 	public String myPageMemberDelete() {
-		return "member/myPageMemberDelete";
+		return "member/myPageDeleteMember";
 	}//myPageMemberDelete(회원탈퇴)
 
 	
@@ -203,7 +203,7 @@ public class MemberController {
 	@RequestMapping(value = "/updateNewPwMemberFrm.do")
 	public String updateNewPwMemberFrm(String hideMemberId,Model model) {
 		model.addAttribute("memberId", hideMemberId);
-		return "member/myPageUpdatePw";
+		return "member/updatePwFrm";
 	}
 	
 	
