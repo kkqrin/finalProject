@@ -30,9 +30,9 @@
 				</div><!--one-menu-->
 				<div class="one-menu">
 					<a class="one-menu-title">쪽지함</a>
-					<a href="/myPageDmWriteFrm.do">쪽지 보내기</a>
-					<a href="/myPageDmReceive.do">받은 쪽지함(<span>0</span>)</a>
-					<a href="/myPageDmSend.do">보낸 쪽지함</a>
+					<a href="/dmWriteFrm.do">쪽지 보내기</a>
+					<a href="/sendDmList.do">받은 쪽지함(<span>0</span>)</a>
+					<a href="/receiveDmList.do">보낸 쪽지함</a>
 				</div><!--one-menu-->
 			</div><!--mypage-menu-->
 			<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
