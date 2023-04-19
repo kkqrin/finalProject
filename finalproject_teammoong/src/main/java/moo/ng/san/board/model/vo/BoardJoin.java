@@ -21,8 +21,10 @@ public class BoardJoin {
 	private String refundName;
 	private int orderCount;
 	private int depositPrice;
-	
+	private String accountBank;
+	private String accountName;
 	private String thumbnail;
 	private String boardName;
 	private int boardStatus;
+	private String accountWriter;
 }

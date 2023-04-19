@@ -26,7 +26,7 @@
 				<div class="one-menu">
 					<a class="one-menu-title">여기여기붙어라</a>
 					<a href="#">내가 주최한 공구</a>
-					<a href="#">참가중인 공구</a>
+					<a href="/myJoinList.do?reqPage=1">참가중인 공구</a>
 				</div><!--one-menu-->
 				<div class="one-menu">
 					<a class="one-menu-title">쪽지함</a>

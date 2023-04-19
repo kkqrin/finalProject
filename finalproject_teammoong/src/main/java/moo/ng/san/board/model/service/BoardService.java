@@ -139,4 +139,11 @@ public class BoardService {
 		return list;
 	}
 
+
+
+
+	public BoardJoin selectOneBoardJoin(int joinNo) {
+		return dao.selectOneBoardJoin(joinNo);
+	}
+
 }

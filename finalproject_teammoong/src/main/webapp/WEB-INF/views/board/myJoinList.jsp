@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,22 +35,24 @@ table tr th {
 					<thead>
 						<tr>
 							<th scope="row">No</th>
+							<th scope="row">상품</th>
 							<th scope="row">제목</th>
-							<th scope="row">작성시간</th>
 							<th scope="row">입금날짜</th>
+							<th scope="row">입금금액</th>
 						</tr>
 					</thead>
 					<tbody>
 					<c:forEach items="${list }" var="b">
 						<tr>
 							<td>
-								<a href="/boardView.do?${b.boardNo }">${b.boardNo }</a>
+								<a href="/myPageRequestDeposit.do?joinNo=${b.joinNo }">${b.boardNo }</a>
 							</td>
+							<td><img src="/resources/upload/board/${b.thumbnail }" style="width:100px; height:100px"></td>
 							<td>
-								<a href="/boardView.do?${b.boardName }">${b.boardName }</a>
+								<a href="/myPageRequestDeposit.do?joinNo=${b.joinNo }">${b.boardName }</a>
 							</td>
-							<td>${b.thumbnail }</td>
-							<td>${b.payerDate }</td>	
+							<td>${b.payerDate }</td>
+							<td><fmt:formatNumber value= "${b.depositPrice }"  pattern="#,###"/>원</td>
 						</tr>
 					</c:forEach>
 					</tbody>

@@ -88,8 +88,35 @@
                 b.board_status as boardStatus,
                 join_no as joinNo,
                 payer_date as payerDate,
-                deposit_price as depositPrice
+                deposit_price as depositPrice,
+                account_name as accountName,
+                receiver_name as receiverName,
+                receiver_phone as receiverPhone,
+                account_bank as accountBank
 		from board_tbl b left join board_join bj on b.board_no = bj.board_no where member_no = #{_parameter}
+	</select>
+	
+	<select id="selectOneBoardJoin" parameterType="map" resultType="bj">
+		select
+			b.board_no as boardNo,
+			(SELECT FILEPATH FROM file_tbl WHERE file_no=(SELECT MIN(file_NO) FROM file_tbl where board_no=b.board_no)) AS thumbnail,
+            b.board_name as boardName,
+            b.board_status as boardStatus,
+            join_no as joinNo,
+            payer_date as payerDate,
+            deposit_price as depositPrice,
+            account_name as accountName,
+            receiver_name as receiverName,
+            receiver_phone as receiverPhone,
+            account_bank as accountBank,
+            account_writer as accountWriter,
+            refund_bank	as refundBank,
+            refund_account as refundAccount,
+            refund_name as refundName,
+            order_count as orderCount,
+            payer_name as payerName
+		from board_tbl b left join board_join bj on b.board_no = bj.board_no
+		where join_no = #{_parameter}
 	</select>
 	
 	<select id="selectOptionList" parameterType="_int" resultType="bo">
