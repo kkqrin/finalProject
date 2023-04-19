@@ -322,6 +322,7 @@
         $('#checkRegNo').val('');
         $("#regInsertBtn").hide();
         $("#resultMsg").text("");
+        $("#checkRegNo").attr("readonly",false);
     }
 	
 	$("#checkRegBtn").on("click",function(){
@@ -348,6 +349,7 @@
     			      	$("#resultMsg").text("유효한 사업자입니다.");
     			      	$("#resultMsg").css("color","green");
     			      	$("#regInsertBtn").show();
+    			      	$("#checkRegNo").attr("readonly",true);
 	    	     	}
 	    	  },
 	    	  	error: function(result) {
@@ -358,6 +360,7 @@
 	$("#regInsertBtn").on("click",function(){
 		const regNo = $("#checkRegNo").val();
 		$('[name=regNo]').val(regNo);
+		resetInput();
 		$("#close").click();
 	});
 	

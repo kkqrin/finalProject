@@ -23,7 +23,7 @@ public class CouponController {
 	@Autowired
 	private CouponService service;
 	
-	@Scheduled(cron="0 0 0 * * *")
+	@Scheduled(cron="0 10 0 * * *")
 	public void sendBirthdayCoupon() {	
 		LocalDate today = LocalDate.now();
 		String[] dateParts = today.toString().split("-");
@@ -48,7 +48,7 @@ public class CouponController {
 
 		}
 	}
-	@Scheduled(cron="0 0 0 * * *")
+	@Scheduled(cron="0 10 0 * * *")
 	public void EndCoupon() {
 		LocalDate today = LocalDate.now();
 		String date = today.toString();
