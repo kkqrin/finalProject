@@ -87,11 +87,12 @@
                 b.board_name as boardName,
                 b.board_status as boardStatus,
                 join_no as joinNo,
-                payer_date as payerDate,
+                to_char(payer_date,'""YYYY"년"MM"월"DD"일"') as payerDate,
                 deposit_price as depositPrice,
                 account_name as accountName,
                 receiver_name as receiverName,
                 receiver_phone as receiverPhone,
+                receiver_phone as receiverAddr,
                 account_bank as accountBank
 		from board_tbl b left join board_join bj on b.board_no = bj.board_no where member_no = #{_parameter}
 	</select>
@@ -103,7 +104,7 @@
             b.board_name as boardName,
             b.board_status as boardStatus,
             join_no as joinNo,
-            payer_date as payerDate,
+            to_char(payer_date,'""YYYY"년"MM"월"DD"일"') as payerDate,
             deposit_price as depositPrice,
             account_name as accountName,
             receiver_name as receiverName,

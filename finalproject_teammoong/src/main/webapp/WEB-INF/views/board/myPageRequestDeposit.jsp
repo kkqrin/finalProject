@@ -217,7 +217,7 @@ img, figure {
 							</li>
 							<li>
 								<strong>입금일</strong>
-								<span>2023-04-13</span>
+								<span>${bj.payerDate }</span>
 							</li>
 						</ul>
 					</div>
@@ -235,11 +235,12 @@ img, figure {
 							<ul>
 								<li>
 									<strong>연락처</strong>
-									<span class="delivery_1" style="display: block;">01094702229</span>
+									<span class="delivery_1" style="display: block;">${sessionScope.m.memberPhone}</span>
 								</li>
 								<li>
 									<strong>배송지</strong>
 									<span class="line delivery_1" style="display: block;">
+									${bj.receiverAddr }
 									08350
 									<br>
 									서울 구로구 오리로
