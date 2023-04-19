@@ -140,6 +140,7 @@
 	<context:component-scan base-package="moo.ng.san.dayCheck" />
 	<context:component-scan base-package="moo.ng.san.askItem" />
 	<context:component-scan base-package="moo.ng.san.coupon" />
+	<context:component-scan base-package="moo.ng.san.pay" />
 	
 	
 	

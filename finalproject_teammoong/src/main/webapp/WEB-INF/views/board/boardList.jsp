@@ -61,9 +61,35 @@
     
        <c:if test="${not empty sessionScope.m}">
            <div class="area-btn right" style="padding-top : 25px;">
-              <button class="btn btn-sec size02" onclick="location.href='/boardWriteFrm.do'">글쓰기</button>
+              <button class="btn btn-sec size02"  data-modal="#modalBasic" style="color: #3a3a3a">여기여기붙어봐<span class="material-symbols-outlined" style="color: #3a3a3a; font-size: 24px; padding-bottom: 3px;">recommend</span></button>
          </div>
        </c:if>
+    
+    <!-- modal-basic -->
+                <div id="modalBasic" class="modal modal-pri">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h6>판매자 준수사항</h6>
+                        </div>
+                        <div class="modal-body" style="font-size: 12px; margin-left: 2px; margin-bottom: 2px;">
+                            <!--내용영역-->
+                            <h6>판매자님, 약속해 주세요!</h6>
+                            <p>1 배송이 지연된다면 구매자에게 꼭 안내를 해야해요. </p>
+                            <p>2 구매자와의 연락 수단은 쪽지를 필수로 사용해 주세요. </p>
+                            <p>3 구매자의 개인정보는 마케팅 등의 다른 목적으로 사용 할 수 없어요. </p>
+                            <p>4 개인정보는 배송/반품/환불 또는 고객 상담이 완료되는 즉시 삭제해 주세요. </p>
+                            <div style="padding: 20px 0 ; background-color: #f8f8f8;">
+                            <h6 style="text-align: center;">위 사항을 성실히 이행하지 않을시,</h6>
+                            <h6 style="text-align: center;">관련법에 의거하여 법적인 조치를 받을 수 있음을 인지하였습니다. </h6>
+                            </div>
+                            <!--//내용영역-->
+                        </div>
+                        <div class="area-btn right">
+                            <button class="btn btn-pri size01" type="button" onclick="location.href='/boardWriteFrm.do'" style="margin: 0 auto;">동의 합니다.</button>
+                        </div>
+                    </div>
+                </div>
+    
     
         <div class="board-wrap-header">
             <h4>최근 등록 상품</h4>
@@ -106,7 +132,7 @@
                         <div class="sail-box popular board-seller-profile-box">
                             <div class="sail-box-popular">
                                 <div class="board-seller-profile">
-                                   <img src="/resources/upload/member/common/moongs.png">
+                                   <img src="/resources/upload/member/moongs.png">
                                 </div>
                                 <div class="board-seller-id">뭉산오렌지</div>
                             </div>
@@ -651,5 +677,29 @@
     <!-- 상품 js -->
     <script type="text/javascript" src="/resources/slick/slick.min.js"></script>
     <script src="/resources/js/product.js"></script>
+    <script>
+  //모달 관련 기능
+    $(function () {
+        $('[data-modal]').click(function (event) {
+            const modalId = $(this).data('modal');
+            if ($(modalId).hasClass('modal-pri')) {
+                $($(this).data('modal')).modal({
+                    fadeDuration: 100
+                });
+                return false;
+            } else if ($(modalId).hasClass('modal-sec')) {
+                $($(this).data('modal')).modal({
+                    escapeClose: false,
+                    showClose: false,
+                    fadeDuration: 100
+                });
+                return false;
+            } else {
+                return false;
+            }
+        });
+        
+    });
+    </script>
 </body>
 </html>

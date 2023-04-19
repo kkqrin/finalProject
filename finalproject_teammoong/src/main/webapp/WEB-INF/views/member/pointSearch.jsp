@@ -52,7 +52,7 @@
 							<table>
 								<tr>
 									<th>포인트번호</th>
-									<th>포인트</th>
+									<th style="width:40%;">포인트</th>
 									<th>포인트 적립 / 사용일</th>
 									<th>상태</th>
 								</tr>
