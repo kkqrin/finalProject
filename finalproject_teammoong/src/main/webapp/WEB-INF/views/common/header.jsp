@@ -102,7 +102,7 @@
 		                <div><a href="#">인기상품</a></div>
 		                <div><a href="/insertProductFrm.do">물품등록(예비버튼)</a></div>
 		                <c:if test="${!empty sessionScope.m}">
-		                	<div data-modal="#modalBasic"><a href="#">충전하기</a></div>
+		                	<div id="payModal" data-modal="#modalBasic"><a href="#">충전하기</a></div>
 		                </c:if>
 		                <div><a href="#">오늘의상품</a></div>
 		                <div class="together">
@@ -135,7 +135,7 @@
             </section>
 
             
-            <div id="modalBasic" class="modal modal-sec">
+            <div id="modalBasic" class="modal modal-pri">
             	<div class="modal-content">
                 	<div class="modal-header">
                     	<h6>Moong 충전하기</h6>
@@ -168,7 +168,7 @@
 	
 	<script>
 		$(function () {
-	        $('[data-modal]').click(function (event) {
+	        $('#payModal').click(function (event) {
 	            const modalId = $(this).data('modal');
 	            if ($(modalId).hasClass('modal-pri')) {
 	                $($(this).data('modal')).modal({
