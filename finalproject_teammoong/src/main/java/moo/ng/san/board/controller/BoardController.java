@@ -89,7 +89,9 @@ public class BoardController {
 		return "board/boardOrderAfter";
 	}
 	@RequestMapping(value="/myPageRequestDeposit.do")
-	public String myPageRequestDeposit() {
+	public String myPageRequestDeposit(Model model, int joinNo) {
+		BoardJoin bj = service.selectOneBoardJoin(joinNo);
+		model.addAttribute("bj",bj);
 		return"board/myPageRequestDeposit";
 	}
 	@RequestMapping(value="/myJoinList.do")
@@ -97,8 +99,6 @@ public class BoardController {
 //		BoardPageData bpd = service.selectBoardList(reqPage);
 		ArrayList<BoardJoin> list = service.selectBoardJoinList(m.getMemberNo());
 		model.addAttribute("list", list);
-		
-		System.out.println(list);
 		return"board/myJoinList";
 	}
 }
