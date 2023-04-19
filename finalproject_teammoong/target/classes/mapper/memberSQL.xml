@@ -57,16 +57,16 @@
 			<if test="memberPw != null">
 			and member_pw=#{memberPw}
 			</if>
-			<if test="memberName != null and memberPhone != null">
+			<if test="memberNo==0 and memberName != null and memberPhone != null"> <!-- 이름&폰번으로 아이디찾기 -->
 			member_name=#{memberName} and member_phone=#{memberPhone}
 			</if>
-			<if test="memberName != null and memberEmail != null">
+			<if test="memberNo==0 and memberName != null and memberEmail != null"> <!-- 이름&이메일로 아이디찾기 -->
 			member_name=#{memberName} and member_email=#{memberEmail}
 			</if>
-			<if test="memberPhone != null">
+			<if test="memberPhone != null"> <!-- 아이디&폰번호로 비번찾기 -->
 			and member_phone=#{memberPhone}
 			</if>
-			<if test="memberEmail != null">
+			<if test="memberEmail != null"> <!-- 아이디&이메일로 비번찾기 -->
 			and member_email=#{memberEmail}
 			</if>
 			</trim>

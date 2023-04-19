@@ -21,6 +21,8 @@
 		<typeAlias type="moo.ng.san.askItem.model.vo.AskItemCategory" alias="ac" />
 		<typeAlias type="moo.ng.san.coupon.model.vo.Coupon" alias="cp" />
 		<typeAlias type="moo.ng.san.coupon.model.vo.IssueCoupon" alias="ic" />
+		<typeAlias type="moo.ng.san.pay.model.vo.OrderDetail" alias="od" />
+		
 		<typeAlias type="moo.ng.san.board.model.vo.Board" alias="b" />
 		<typeAlias type="moo.ng.san.board.model.vo.FileVO" alias="bf" />
 		<typeAlias type="moo.ng.san.board.model.vo.BoardOption" alias="bo" />

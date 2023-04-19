@@ -109,15 +109,7 @@
 							loginBtn.attr("onclick","location.href='/loginFrm.do'");
 							loginBtn.addClass("btn btn-pri size02");
 							loginBtn.css("margin-top","30px");
-							$(".toPhone-view").children('div').append(loginBtn);
-
-							const a = $("<a>").text("비밀번호 찾기");
-							a.attr("href","/searchPwFrm.do");
-							a.css("display","block");
-							a.css("text-align","center");
-							a.css("margin-top","10px");
-							a.css("text-decoration","underline");
-							$(".toPhone-view").append(a);
+							$(".toPhone-view").children('div').eq(0).append(loginBtn);
 						}
 					}//success
 				})//ajax
@@ -160,17 +152,9 @@
 							
 							const loginBtn = $("<button>").text("로그인하기");
 							loginBtn.attr("onclick","location.href='/loginFrm.do'");
-							loginBtn.addClass("btn btn-sec size02");
+							loginBtn.addClass("btn btn-pri size02");
 							loginBtn.css("margin-top","30px");
-							$(".toEmail-view").children('div').append(loginBtn);
-							
-							const a = $("<a>").text("비밀번호 찾기");
-							a.attr("href","/searchPwFrm.do");
-							a.css("display","block");
-							a.css("text-align","center");
-							a.css("margin-top","10px");
-							a.css("text-decoration","underline");
-							$(".toEmail-view").append(a);
+							$(".toEmail-view").children('div').eq(0).append(loginBtn);
 						}
 					}//success
 				})//ajax

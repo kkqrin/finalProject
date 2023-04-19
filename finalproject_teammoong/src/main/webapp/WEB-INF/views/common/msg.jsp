@@ -25,10 +25,10 @@
 	<input id="loc" type="hidden" value="${msg.loc }">
 	<div id="modalBasic" class="modal modal-pri">
 		<div class="modal-content">
-			<div class="modal-header">
+			<div class="modal-header" style="text-align: center;">
 				<h5>${msg.title }</h5>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body" style="text-align: center;">
 				<p>
 					${msg.msg }
 				</p>

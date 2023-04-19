@@ -60,7 +60,7 @@
 										<td>${ic.issueNo}</td>
 										<td>
 											<c:if test="${ic.couponNo == 1}">
-												생일 축하 쿠폰
+												생일 축하 쿠폰 5,000원
 											</c:if>
 										</td>
 										<td>${ic.issueDate}</td>
