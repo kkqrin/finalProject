@@ -82,7 +82,7 @@ public class MemberService {
 		
 		
 		String subject = "뭉쳐야산다 인증코드";
-		String content = "<h2>안녕하세요. 뭉쳐야산다입니다.</h2> 인증번호는 [ "+code+" ]입니다.";
+		String content = "<h2>🍊안녕하세요. 뭉쳐야산다입니다.<br>비밀번호 인증코드:<br>"+code+"</h2>";
 		String from = "janetcode65@gmail.com";
 		String to = memberEmail;
 		
