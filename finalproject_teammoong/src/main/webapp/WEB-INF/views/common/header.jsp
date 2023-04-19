@@ -25,7 +25,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css">
     <!--모달 and 알럿-->
-<!--     <script src="/resources/js/modal-alert.js"></script> -->
+	<!-- <script src="/resources/js/modal-alert.js"></script> -->
     <!-- 디폴트 커스텀 CSS -->
     <link rel="stylesheet" href="/resources/css/common/default.css" />
     <!--헤더 css-->
@@ -91,7 +91,9 @@
 						</form>
 		            </div>
 	                <div class="middle-right">
-		                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">notifications</span></a>
+		                <a href="#">
+		                	<span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">notifications</span>
+		                </a>
 		                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">favorite</span></a>
 		                <a href="/shoppingCart.do"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">shopping_cart</span></a>
 	            	</div>
@@ -139,7 +141,7 @@
             <div id="payModalBasic" class="payModal">
             	<div class="payModal-content"  style="width: 80%;">
                 	<div class="payModal-header">
-                    	<h6>Moong 충전하기</h6>
+                    	<h6>🍊 Moong 충전하기 🍊</h6>
                     </div>
                     <div class="payModal-body">
                     	<input type="radio" name="pointEa" id="point1" value="1000">

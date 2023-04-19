@@ -9,7 +9,7 @@
 
 
 /*결제모달*/
-#payModalBasic{background-color:var(--secondary); min-width: 600px !important;}
+#payModalBasic{background-color: rgba( 248, 128, 0, 0.8	 ); min-width: 600px !important;}
 .payModal-content {background-color: #fff;margin: 10% auto;padding: 20px;border: 1px solid var(--bg-tertiary);border-radius: 4px;}
 .payModal-header {text-align: center;height: 58px;padding: 16px 16px 16px 20px;border-bottom: 1px solid var(--bg-tertiary);}
 .payModal-header h6 {font-size: 18px;font-weight: bold; margin: 0;}
