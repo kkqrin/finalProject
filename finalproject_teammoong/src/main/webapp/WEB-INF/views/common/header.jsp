@@ -91,12 +91,14 @@
 						</form>
 		            </div>
 	                <div class="middle-right">
-		                <a class="alram-zone" href="#">
+	                <c:if test="${!empty sessionScope.m}">
+		                <a class="alram-zone" href="/sendDmList.do">
 		                	<span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;">notifications</span>
-		                	<span class="alram-circle">10+</span>
+		                		<span class="alram-circle">10+</span>
 		                </a>
 		                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">favorite</span></a>
 		                <a href="/shoppingCart.do"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">shopping_cart</span></a>
+	            	</c:if>
 	            	</div>
             	</div><!-- header-top -->
             	

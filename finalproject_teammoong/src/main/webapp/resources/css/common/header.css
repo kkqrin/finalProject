@@ -68,7 +68,7 @@ section{
 	font-size:28px;
 	padding: 5px 10px 0px 10px;
 }
-.middle-right>a>span:hover{
+.middle-right>a>span:not(.alram-circle):hover{
 	color: var(--primary);
 }
 .middle-right>a.alram-zone{
