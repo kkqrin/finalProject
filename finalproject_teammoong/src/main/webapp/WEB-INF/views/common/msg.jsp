@@ -23,7 +23,7 @@
 </head>
 <body>
 	<input id="loc" type="hidden" value="${msg.loc }">
-	<div id="modalBasic" class="modal modal-pri">
+	<div id="modalSec" class="modal modal-pri">
 		<div class="modal-content">
 			<div class="modal-header" style="text-align: center;">
 				<h5>${msg.title }</h5>
@@ -43,7 +43,7 @@
 		const loc = $("#loc").val();
 	
 		$(function () {
-			$("#modalBasic").modal({
+			$("#modalSec").modal({
 				fadeDuration: 100
 			});
 			return false;

@@ -66,7 +66,7 @@ public class MemberController {
 			m.setMemberPw(null);
 			Member loginMember = service.selectOneMember(m);
 			session.setAttribute("m", loginMember);
-			
+			System.out.println(loginMember);
 			MsgVO msg = new MsgVO();
 			msg.setTitle("가입을 환영합니다");
 			msg.setMsg("뭉쳐야산다에서 저렴하게 구매해보세요 :)");

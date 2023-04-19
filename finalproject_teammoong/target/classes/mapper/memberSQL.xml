@@ -63,10 +63,10 @@
 			<if test="memberNo==0 and memberName != null and memberEmail != null"> <!-- 이름&이메일로 아이디찾기 -->
 			member_name=#{memberName} and member_email=#{memberEmail}
 			</if>
-			<if test="memberPhone != null"> <!-- 아이디&폰번호로 비번찾기 -->
+			<if test="memberNo==0 and memberPhone != null"> <!-- 아이디&폰번호로 비번찾기 -->
 			and member_phone=#{memberPhone}
 			</if>
-			<if test="memberEmail != null"> <!-- 아이디&이메일로 비번찾기 -->
+			<if test="memberNo==0 and memberEmail != null"> <!-- 아이디&이메일로 비번찾기 -->
 			and member_email=#{memberEmail}
 			</if>
 			</trim>
