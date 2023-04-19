@@ -469,9 +469,14 @@
             $("#put-in-cart-btn").on("click", function(){
                 const productNo = $("#productNo").val();
                 const optionNo = $( ".product-option" ).val();
-
-                // alert 띄우고 insert -> OK 누르면 insert 되게 하기 위해 함수 생성해서 번호들 넘겨줌
-                jQueryAlert('warning',"", productNo, optionNo);
+                
+                if(optionNo == 0 && $(".info-content").find("option").length > 1){
+                    optionjQueryAlert('info'); 
+                    // alert("옵션을 선택하세요");
+                }else{
+                    // alert 띄우고 insert -> OK 누르면 insert 되게 하기 위해 함수 생성해서 번호들 넘겨줌
+                    jQueryAlert('warning',"", productNo, optionNo);
+                }
 
             });
             function processResult(result, productNo, optionNo) {
@@ -497,7 +502,9 @@
                 
                 if(optionNo == 0 && $(".info-content").find("option").length > 1){
                     // 옵션 선택 안됐을 때 && 옵션이 있는 상품
-					alert("옵션을 선택하세요");       
+                    optionjQueryAlert('info');
+					// alert("옵션을 선택하세요");
+
 					// 폼 제출 막음
 					e.preventDefault();
                     return false;
@@ -536,11 +543,8 @@
                     // messageBox = $.parseHTML('<div class="alert__error"></div>');
                     // break;
                     case 'warning':
-                    messageBox = $.parseHTML('<div class="alert__warning" style="line-height:100px;text-align:center;"><div class="title" style="margin-bottom:10px;color:var(--primary);padding:0;">뭉쳐야산다</div><br>장바구니에 담았어요!</div>');
+                    messageBox = $.parseHTML('<div class="alert__warning" style="line-height:100px;text-align:center;"><div class="title" style="margin-bottom:10px;color:var(--primary);padding:0;">뭉쳐야산다</div><br>장바구니에 담으시겠습니까?</div>');
                     break;
-                    // case 'info':
-                    // messageBox = $.parseHTML('<div class="alert__info"></div>');
-                    // break;
                 }
                 $("body").append(messageBox);
                 $(messageBox).dialog({
@@ -548,12 +552,55 @@
                     open: $(messageBox).append(msg),
                     draggable: false,
                     modal: true,
-                    buttons: {
-                        "OK": function () {
-                            $(this).dialog("close");
+                    buttons: [
+                        {
+                            text: "담기",
+                            style: "margin-right:5px",
+                            click: function(){
+                                $(this).dialog("close");
 
-                            // OK 버튼 눌렀을 때 insert 하기 위해 콜백함수 실행
-                            processResult(true, p, o);
+                                // OK 버튼 눌렀을 때 insert 하기 위해 콜백함수 실행
+                                processResult(true, p, o);
+                            }
+                        },
+                        {
+                            text: "취소",
+                            click: function(){
+                                $(this).dialog("close");
+                            }
+                        }
+                    ],
+                    show: {
+                        effect: 'fade',
+                        duration: 200 //at your convenience
+                    },
+                    hide: {
+                        effect: 'fade',
+                        duration: 200 //at your convenience
+                    }
+                });
+            };
+
+
+
+            // 옵션 선택 안됐을때 alert
+            function optionjQueryAlert(type) {
+                let $type = type;
+                // let messageBox = msg;
+                switch ($type) {
+                    case 'info':
+                    messageBox = $.parseHTML('<div class="alert__info" style="line-height:100px;text-align:center;"><div class="title" style="margin-bottom:10px;color:var(--info);padding:0;">뭉쳐야산다</div><br>옵션을 선택해주세요!</div>');
+                    break;
+                }
+                $("body").append(messageBox);
+                $(messageBox).dialog({
+                    dialogClass :$type,
+                    // open: $(messageBox).append(msg),
+                    draggable: false,
+                    modal: true,
+                    buttons: {
+                        "닫기": function () {
+                            $(this).dialog("close");
                         }
                     },
                     show: {
@@ -566,7 +613,8 @@
                     }
                 });
             };
-        // });
+
+
         </script>
         
 </html>
