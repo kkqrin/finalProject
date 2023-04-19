@@ -15,7 +15,7 @@
 	
 	<div class="content-wrap">
 	<pre>
-		남은 일 : 체크박스 전체선택 / 선택삭제 / 입력한 수량에 맞게 주문 되게
+		남은 일 : 체크박스 전체선택 / 선택삭제 / 입력한 수량에 맞게 주문 되게 / 아무것도 없을때 디자인
 	</pre>
 		<div class="cart-title">
 			<h4>${sessionScope.m.memberName }님의 장바구니</h4>

@@ -180,12 +180,12 @@
                                     <th>적립금</th>
                                     <td colspan="2" class="saved-money-box">
                                         <div>
-                                            내적립금${point.pointEa }
+                                            내 적립금 <input type="hidden" id="hidden-current-point" value="${point.pointEa }">
                                             <!-- <input type="text" id="input-saved-money" placeholder="사용 가능한 적립금 <fmt:formatNumber value="${point.pointEa }"/>원">
                                             <button type="button" class="btn btn-pri size01" id="do-saved-money">적용</button>
                                             <button type="button" class="btn btn-pri size01" id="all-saved-money">모두 사용</button>
-                                            <input type="hidden" id="hidden-total-point" value="${point.pointEa }">
-                                            <input type="hidden" id="hidden-current-point" value="0"> -->
+                                            <input type="hidden" id="hidden-total-point" value="${point.pointEa }"> -->
+                                            
                                         </div>
                                     </td>
                                 </tr>
@@ -242,13 +242,17 @@
                             <div>쿠폰 할인</div>
                             <div><span>0</span>원</div>
                         </div>
-                        <div class="total-order-saved-money">
+                        <!-- <div class="total-order-saved-money">
                             <div>적립금 사용</div>
                             <div><span>0</span>원</div>
-                        </div>
+                        </div> -->
 
                         <div class="total-order-pay">
                             <div>최종 결제 금액</div>
+                            <div><span></span>원</div>
+                        </div>
+                        <div class="total-order-point">
+                            <div>결제 후 뭉 잔액</div>
                             <div><span></span>원</div>
                         </div>
                         <input type="hidden" id="hidden-total-pay">
@@ -365,7 +369,6 @@
             productPriceSum = Number(productPriceSum) + Number(productPrice);
             $(".total-order-amount-2>div").last().children().text((productPriceSum).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
-
             // 할인되는 금액(할인금액)
             discountPrice = Number(discountPrice) + Number(productPrice-(Math.floor(productPrice*(100 - productDiscount)/1000)*10));
             $(".total-order-amount-3>div").last().children().text(discountPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
@@ -393,7 +396,7 @@
             $("#number-coupon").val($(this).val());
             // 최종 결제 금액 : 주문금액 - 쿠폰 - 적립금
             // 현재 적용된 쿠폰 및 적립금 빼서 계산
-            $(".total-order-pay>div").last().children().text(($("#number-pay-price").val()-$(this).val()-$("#hidden-current-point").val()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            $(".total-order-pay>div").last().children().text(($("#number-pay-price").val()-$(this).val()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
             // 최종 결제 금액 hidden에 숨김
             $("#hidden-total-pay").val(($("#number-pay-price").val()-$(this).val()-$("#hidden-current-point").val())).trigger('change');
