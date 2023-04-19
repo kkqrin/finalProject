@@ -19,4 +19,7 @@ public class Basket {
 	private int optionNo;
 	private String optionDetailName;
 	private int optionPrice;
+	
+	// 장바구니 안 상품 수량
+	private int basketCount;
 }

@@ -102,7 +102,7 @@ public class ProductDao {
 	public int selectOptionGroupNo(int productNo) {
 		int optionGroupNo = sqlSession.selectOne("product.selectOptionGroupNo", productNo);
 		
-		System.out.println("Dao의 optionGroupNo : "+optionGroupNo);
+//		System.out.println("Dao의 optionGroupNo : "+optionGroupNo);
 		
 		return optionGroupNo;
 	}
@@ -145,6 +145,18 @@ public class ProductDao {
 
 	public int deletRecentProduct(HashMap<String, Object> map) {
 		int result = sqlSession.insert("product.deleteRecentProduct", map);
+		
+		return result;
+	}
+
+	public Basket selectBasketCount(HashMap<String, Object> map) {
+		Basket b = sqlSession.selectOne("product.selectBasketCount", map);
+		
+		return b;
+	}
+
+	public int updateBasketCount(int basketNo) {
+		int result = sqlSession.update("product.updateBasketCount", basketNo);
 		
 		return result;
 	}

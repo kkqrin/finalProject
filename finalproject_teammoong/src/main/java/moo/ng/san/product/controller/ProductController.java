@@ -164,24 +164,44 @@ public class ProductController {
 		// 세션에서 가져옴
 		int memberNo = m.getMemberNo();
 		
+		// 옵션 있으면 옵션 값, 없으면 0
 		int optionNumber = Integer.parseInt(optionNo);
+				
+		// 장바구니 담기 전에 이미 있는 상품과 옵션인지 체크.. 옵션까지 확인해야함
+		// 이미 있으면 수량 불러와서 +1, 없으면 insert
+		Basket b = service.selectBasketCount(memberNo, productNo, optionNumber);
 		
-		// 장바구니 담기
-		int result = service.insertShoppingCart(memberNo, productNo);
-		
-		if(result>0 && optionNumber != 0) {
-			// 옵션이 있는 상품은 장바구니 옵션 테이블에 insert
+		// 장바구니에 없을때
+		if(b == null) {
 			
-			// 옵션 그룹 넘버 조회
-			int optionGroupNo = service.selectOptionGroupNo(productNo);			
-			// 최근에 insert된 장바구니 번호(max)
-			int recentBasketNo = service.selectRecentBasketNo();
+			// 장바구니 담기
+			int result = service.insertShoppingCart(memberNo, productNo);
 			
-			// 장바구니 옵션 테이블 insert
-			result = service.insertShoppingCartOption(recentBasketNo, optionGroupNo, optionNumber);
+			if(result>0 && optionNumber != 0) {
+				// 옵션이 있는 상품은 장바구니 옵션 테이블에 insert
+				
+				// 옵션 그룹 넘버 조회
+				int optionGroupNo = service.selectOptionGroupNo(productNo);			
+				// 최근에 insert된 장바구니 번호(max)
+				int recentBasketNo = service.selectRecentBasketNo();
+				
+				// 장바구니 옵션 테이블 insert
+				result = service.insertShoppingCartOption(recentBasketNo, optionGroupNo, optionNumber);
+			}
+		}else {
 			
+			// 수량 + 1
+			int result = service.updateBasketCount(b.getBasketNo());
+			
+			if(result>0) {
+				return "redirect:/productView.do?productNo="+productNo;
+			}else {
+				return "redirect:/";
+			}
 			
 		}
+		
+		
 		
 		return "redirect:/productView.do?productNo="+productNo;
 	}

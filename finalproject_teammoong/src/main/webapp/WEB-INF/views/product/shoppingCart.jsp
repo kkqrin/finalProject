@@ -15,7 +15,7 @@
 	
 	<div class="content-wrap">
 	<pre>
-		남은 일 : 체크박스 전체선택 / 선택삭제 /
+		남은 일 : 체크박스 전체선택 / 선택삭제 / 입력한 수량에 맞게 주문 되게
 	</pre>
 		<div class="cart-title">
 			<h4>${sessionScope.m.memberName }님의 장바구니</h4>
@@ -49,7 +49,7 @@
 							</div>
 							<div class="cart-product-volume">
 								<button type="button" class="minus-count">-</button>
-								<input type="text" name="pop_out" value="1" readonly="readonly" style="text-align:center;"/>
+								<input type="text" name="pop_out" value="${i.basketCount}" readonly="readonly" style="text-align:center;"/>
 								<button type ="button" class="plus-count">+</button>
 							</div>
 							<div class="cart-product-price"><span></span>원</div>
