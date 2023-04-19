@@ -235,8 +235,9 @@ public class MemberController {
 		m = service.selectOneMember(m);
 		if(m!=null) {
 			return "dup";
+		}else {
+			return "ok";
 		}
-		return "ok";
 	}//idDoubleCheck
 	
 	

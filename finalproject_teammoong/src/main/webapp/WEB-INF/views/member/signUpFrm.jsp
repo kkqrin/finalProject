@@ -42,7 +42,7 @@
 					</tr>
 					<tr>
 						<td><label for="pw"><span>*</span>비밀번호</label></td>
-						<td colspan="3"><input type="password" name="memberPw" id="pw" placeholder="비밀번호를 입력해주세요"></td>
+						<td colspan="3"><input type="password" autoComplete="off" name="memberPw" id="pw" placeholder="비밀번호를 입력해주세요"></td>
 					</tr>
 					<tr class="caution-tr">
 						<td></td>
@@ -50,7 +50,7 @@
 					</tr>
 					<tr>
 						<td><label for="pwRe"><span>*</span>비밀번호확인</label></td>
-						<td colspan="3"><input type="password" id="pwRe" placeholder="비밀번호를 한번 더 입력해주세요"></td>
+						<td colspan="3"><input type="password" autoComplete="off" id="pwRe" placeholder="비밀번호를 한번 더 입력해주세요"></td>
 					</tr>
 					<tr class="caution-tr">
 						<td></td>
@@ -211,32 +211,8 @@
 	</div><!--content-wrap-->
 
 
-<!-- <tr> -->
-<!-- 	<td><label for="email"><span>*</span>이메일</label></td> -->
-<!-- 	<td colspan="3"><input type="text" name="memberEmail" id="email" placeholder="예시) moongsan@google.com"></td> -->
-<!-- 	<td><button type="button" id="emailCerSend" class="btn btn-sec size02">이메일 인증</button></td>	 -->
-<!-- </tr> -->
-<!-- <tr class="caution-tr"> -->
-<!-- 	<td></td> -->
-<!-- 	<td class="caution" colspan="3"></td> -->
-<!-- </tr> -->
-<!-- <tr class="emailChk" style="display: none;"> -->
-<!-- 	<td></td> -->
-<!-- 	<td colspan="3"><input type="text" id="cerNum" placeholder="인증번호를 입력해주세요"></td> -->
-<!-- 	<td><button type="button" id="emailChk" class="btn btn-ter size02">인증번호 확인</button></td>	 -->
-<!-- </tr> -->
-<!-- <tr class="caution-tr"> -->
-<!-- 	<td></td> -->
-<!-- 	<td class="caution" colspan="3"></td> -->
-<!-- </tr> -->
-
-
-
 	<script type="text/javascript"
 		src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-
-
-
 
 
 	<script>
@@ -291,18 +267,18 @@
 					url: "/idDoubleCheck.do",
 					type: "get",
 					data: {memberId : inputId},
-					success : function(result){
-						if(result=="dup"){
+					success : function(data){
+						if(data=="dup"){
 							$(this).addClass("error");
 							$(".caution-tr").eq(0).css("display","table-row");
-							$(".caution").eq(0).children().css("color","var(--secondary)");
+							$(".caution").eq(0).children().css("color","var(--primary)");
 							$(".caution").eq(0).html("<a>중복된 아이디입니다.</a>");
 							result[0] = false;
-						}else{
+						}else if(data=="ok" && result[0]==true){
 							$(this).removeClass("error");
 							$(".caution-tr").eq(0).css("display","table-row");
 							$(".caution").eq(0).html("<a>사용 가능한 아이디 입니다.</a>");
-							$(".caution").eq(0).children().css("color","var(--secondary)");
+							$(".caution").eq(0).children().css("color","#3a3a3a");
 					        result[0] = true;
 						}
 					}//ajax success구문
@@ -593,6 +569,14 @@
 				let agree1 = $("#agree1").prop('checked');
 				if(!resultChk){
 					alert("누락된 항목이 없는지 다시 한 번 확인해주세요");
+					const signUpInputs = $(".signUp-form").find("input");
+					console.log(signUpInputs.length);
+					$.each(signUpInputs,function(index,item){
+						if(index<12 && $(item).val()==""){
+							$(item).focus();
+							return false;
+						}
+					});
 					event.preventDefault();
 				}else if(!agree1){
 					alert("필수 이용약관에 동의해주세요");
@@ -619,7 +603,7 @@
 					};
 					reader.readAsDataURL(input.files[0]);
 				} else {
-					document.getElementById('preview').src = "/resources/upload/member/common/moongs.png";
+					document.getElementById('preview').src = "/resources/upload/member/moongs.png";
 					document.getElementsByName('memberPath')[0].value=null;
 					$(".deletePic").hide();	
 					$(".fileUpload").show();
