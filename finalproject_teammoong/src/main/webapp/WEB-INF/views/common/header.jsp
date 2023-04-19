@@ -42,6 +42,10 @@
 		.modal-body input{
 			width: 20%;
 		}
+		#payModalBasic{
+			display: none;
+		}
+		
 	</style>
 </head>
 <body>
@@ -102,7 +106,7 @@
 		                <div><a href="/bestProductList.do">인기상품</a></div>
 		                <div><a href="/insertProductFrm.do">물품등록(예비버튼)</a></div>
 		                <c:if test="${!empty sessionScope.m}">
-		                	<div id="payModal" data-modal="#modalBasic"><a href="#">충전하기</a></div>
+		                	<div id="payModal"><a href="#">충전하기</a></div>
 		                </c:if>
 		                <div><a href="#">오늘의상품</a></div>
 		                <div class="together">
@@ -135,12 +139,12 @@
             </section>
 
             
-            <div id="modalBasic" class="modal modal-pri">
-            	<div class="modal-content">
-                	<div class="modal-header">
+            <div id="payModalBasic" class="payModal">
+            	<div class="payModal-content"  style="width: 80%;">
+                	<div class="payModal-header">
                     	<h6>Moong 충전하기</h6>
                     </div>
-                    <div class="modal-body">
+                    <div class="payModal-body">
                     	<input type="radio" name="pointEa" id="point1" value="1000">
                     	<label for="point1">1,000</label>
                     	<input type="radio" name="pointEa" id="point2"value="5000">
@@ -167,26 +171,26 @@
 
 	
 	<script>
-		$(function () {
-	        $('#payModal').click(function (event) {
-	            const modalId = $(this).data('modal');
-	            if ($(modalId).hasClass('modal-pri')) {
-	                $($(this).data('modal')).modal({
-	                    fadeDuration: 100
-	                });
-	                return false;
-	            } else if ($(modalId).hasClass('modal-sec')) {
-	                $($(this).data('modal')).modal({
-	                    escapeClose: false,
-	                    showClose: false,
-	                    fadeDuration: 100
-	                });
-	                return false;
-	            } else {
-	                return false;
-	            }
-	        });
+	$(document).ready(function() {
+	    // 모달 열기 버튼 클릭 이벤트
+	    $("#payModal").on("click", function() {
+	        $("#payModalBasic").modal();
 	    });
+
+	    // 충전하기 버튼 클릭 이벤트
+	    $("#payBtn").on("click", function() {
+	        // 여기에 충전 처리를 위한 로직을 작성하면 됩니다.
+	        // 예를 들어, 선택된 라디오 버튼의 값을 가져와서 서버로 전송하는 등의 작업을 수행할 수 있습니다.
+
+	        // 모달 닫기
+	        $("#payModalBasic").modal("close");
+	    });
+
+	    // 모달 닫기 버튼 클릭 이벤트
+	    $("#close").on("click", function() {
+	        $("#payModalBasic").modal("close");
+	    });
+	});
 		
 		$("#payBtn").on("click",function(){
 			const price = $("input[name=pointEa]:checked").val();
