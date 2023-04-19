@@ -30,6 +30,8 @@
     <link rel="stylesheet" href="/resources/css/common/default.css" />
     <!--헤더 css-->
     <link rel="stylesheet" href="/resources/css/common/header.css" />
+    <!--결제 모달 css-->
+    <link rel="stylesheet" href="/resources/css/common/modal.css" />
     <!--date range picker css-->
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 	<style>
@@ -157,7 +159,6 @@
                    	<input type="hidden" id="memberNo" value="${m.memberNo }">
                     <div class="area-btn right">
                     	<button class="btn btn-pri size01" type="button" id="payBtn">충전하기</button>
-                        <a href="" rel="modal:close" class="btn btn-sec size01" id="close">닫기</a>
                     </div>
                 </div>
             </div>
