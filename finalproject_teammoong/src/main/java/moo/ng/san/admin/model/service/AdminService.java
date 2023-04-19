@@ -14,6 +14,7 @@ import moo.ng.san.admin.model.vo.AdminOrderPageData;
 import moo.ng.san.admin.model.vo.AdminProductPageData;
 import moo.ng.san.admin.model.vo.AdminReportBoardPageData;
 import moo.ng.san.admin.model.vo.CouponData;
+import moo.ng.san.admin.model.vo.SalesData;
 import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.board.model.vo.BoardOption;
 import moo.ng.san.board.model.vo.Notify;
@@ -540,6 +541,74 @@ public class AdminService {
 		ArrayList<CouponData> list = dao.selectUseMoongList(memberNo);
 		return list;
 	}
+
+	public SalesData selectCountMonthSalesData(int i) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		switch (i) {
+		
+		case 1:
+			map.put("start","2023-01-01");
+			map.put("end","2023-01-31");
+			break;
+		case 2:
+			map.put("start","2023-02-01");
+			map.put("end","2023-02-28");
+			break;
+		case 3:
+			map.put("start","2023-03-01");
+			map.put("end","2023-03-31");
+			break;
+		case 4:
+			map.put("start","2023-04-01");
+			map.put("end","2023-04-30");
+			break;
+		case 5:
+			map.put("start","2023-05-01");
+			map.put("end","2023-05-31");
+			break;
+		case 6:
+			map.put("start","2023-06-01");
+			map.put("end","2023-06-30");
+			break;
+		case 7:
+			map.put("start","2023-07-01");
+			map.put("end","2023-07-31");
+			break;
+		case 8:
+			map.put("start","2023-08-01");
+			map.put("end","2023-08-31");
+			break;
+		case 9:
+			map.put("start","2023-09-01");
+			map.put("end","2023-09-30");
+			break;
+		case 10:
+			map.put("start","2023-10-01");
+			map.put("end","2023-10-31");
+			break;
+		case 11:
+			map.put("start","2023-11-01");
+			map.put("end","2023-11-30");
+			break;
+		case 12:
+			map.put("start","2023-12-01");
+			map.put("end","2023-12-31");
+			break;
+		}
+		
+		SalesData sd = dao.selectCountMonthSalesData(map);
+		
+		return sd;
+	}
+
+	
+	public SalesData selectCountMonthCategorySalesData(int i) { 
+		SalesData sd = dao.selectCountMonthCategorySalesData(i);
+		
+		return sd; 
+	}
+	
 
 
 

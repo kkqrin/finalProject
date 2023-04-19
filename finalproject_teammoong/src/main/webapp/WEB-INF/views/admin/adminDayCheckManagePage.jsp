@@ -151,15 +151,16 @@
     /* data tables 적용해보자 */
     $(document).ready(function() {
 	    $('#dataTables').DataTable({
-	        searching: true,
-	        fixedHeader: true,
+	        searching: true, // 검색 input 세팅
+	        fixedHeader: true, // 헤더 설정
 	        columns: [
 	            null,
 	            { searchable: true },
 	            { searchable: true },
 	            { searchable: true },
 	            { searchable: true },
-	        ]
+	        ], // 검색 조건 설정, 컬럼에 true 값을 주면 해당 컬럼적용
+	        "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ] // 조회 개수 설정
 	    });
 	    
 	    $('#dataTables').on('click', 'td', function() {

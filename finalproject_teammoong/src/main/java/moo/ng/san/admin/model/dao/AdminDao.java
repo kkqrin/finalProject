@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import moo.ng.san.admin.model.vo.CouponData;
+import moo.ng.san.admin.model.vo.SalesData;
 import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.board.model.vo.BoardJoin;
 import moo.ng.san.board.model.vo.BoardOption;
@@ -257,6 +258,18 @@ public class AdminDao {
 		List list = sqlSession.selectList("admin.selectUseMoongList", memberNo);
 		
 		return (ArrayList<CouponData>)list;
+	}
+
+	public SalesData selectCountMonthSalesData(HashMap<String, Object> map) {
+		SalesData sd = sqlSession.selectOne("admin.selectCountMonthSalesData",map);
+		
+		return sd;
+	}
+
+	public SalesData selectCountMonthCategorySalesData(int i) {
+		SalesData sd = sqlSession.selectOne("admin.selectCountMonthCategorySalesData",i);
+		
+		return sd;
 	}
 
 
