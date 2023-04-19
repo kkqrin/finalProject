@@ -47,7 +47,7 @@ table tr th {
 							<td>
 								<a href="/myPageRequestDeposit.do?joinNo=${b.joinNo }">${b.boardNo }</a>
 							</td>
-							<td><img src="/resources/upload/board/${b.thumbnail }" style="width:100px; height:100px"></td>
+							<td><a href="/myPageRequestDeposit.do?joinNo=${b.joinNo }"><img src="/resources/upload/board/${b.thumbnail }" style="width:100px; height:100px"></a></td>
 							<td>
 								<a href="/myPageRequestDeposit.do?joinNo=${b.joinNo }">${b.boardName }</a>
 							</td>
