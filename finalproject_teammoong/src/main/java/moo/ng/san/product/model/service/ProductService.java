@@ -145,7 +145,15 @@ public class ProductService {
 		return result;
 	}
 
-
+	public Basket selectBasketCount(int memberNo, int productNo, int optionNo) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("productNo", productNo);
+		map.put("optionNo", optionNo);
+		
+		return dao.selectBasketCount(map);
+	}
 	
 	
 	
@@ -257,6 +265,13 @@ public class ProductService {
 		}
 		return list;
 	}
+
+	public int updateBasketCount(int basketNo) {
+		
+		return dao.updateBasketCount(basketNo);
+	}
+
+
 
 
 

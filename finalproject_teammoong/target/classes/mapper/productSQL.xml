@@ -139,7 +139,11 @@
 	</select>
 	
 	<insert id="insertShoppingCart" parameterType="map">
-		insert into basket_tbl values(basket_seq.nextval, #{memberNo}, #{productNo})
+		insert into basket_tbl values(basket_seq.nextval, #{memberNo}, #{productNo}, 1)
+	</insert>
+	
+	<insert id="insertShoppingCartOption" parameterType="map">
+		insert into basket_option_tbl values(#{recentBasketNo}, #{optionGroupNo}, #{optionNo})
 	</insert>
 	
 	<select id="selectOptionGroupNo" parameterType="_int" resultType="_int">
@@ -150,13 +154,10 @@
 		select max(basket_no) from basket_tbl
 	</select>
 	
-	<insert id="insertShoppingCartOption" parameterType="map">
-		insert into basket_option_tbl values(#{recentBasketNo}, #{optionGroupNo}, #{optionNo})
-	</insert>
-	
 	<select id="selectBasketList" parameterType="_int" resultType="basket">
 		SELECT ROWNUM AS RNUM, B.* FROM
        	(select
+                B.BASKET_NO AS basketNo,
 				p.product_no AS productNo,
 				(SELECT FILEPATH FROM PRODUCT_IMG WHERE P_IMG_NO=(SELECT MIN(P_IMG_NO) FROM PRODUCT_IMG where product_no=b.product_no)) AS thumbnail,
 				p.product_name AS productName,
@@ -164,11 +165,11 @@
 				product_discount AS productDiscount,
 				OI.OPTION_INFO_NO AS optionNo,
 				OI.OPTION_DATEAIL AS optionDetailName,
+                B.BASKET_COUNT AS basketCount,
 				OI.OPTION_PRICE AS optionPrice
 			from basket_tbl b
 			left join product_tbl p on b.product_no = p.product_no
-			left join option_group_tbl og on b.product_no = og.product_no
-			left join basket_option_tbl bo on og.option_group_no = bo.option_group_no
+			left join basket_option_tbl bo on b.basket_no = bo.basket_no
 			left join option_info_tbl oi on bo.option_info_no = oi.option_info_no
 			where member_no = #{_parameter}
 			order by 1
@@ -204,4 +205,23 @@
 	<delete id="deleteRecentProduct" parameterType="map">
 		delete from RECENT_PRODUCT_TBL WHERE MEMBER_NO = #{memberNo} AND PRODUCT_NO = #{productNo}
 	</delete>
+	
+	<select id="selectBasketCount" parameterType="map" resultType="basket">
+        select
+        	 B.BASKET_NO AS basketNo,
+	         B.BASKET_COUNT AS basketCount
+		from basket_tbl b
+		left join product_tbl p on b.product_no = p.product_no
+		left join basket_option_tbl bo on b.basket_no = bo.basket_no
+		left join option_info_tbl oi on bo.option_info_no = oi.option_info_no
+		where member_no = #{memberNo} and b.product_no = #{productNo}
+		<if test="optionNo != 0">
+		and oi.option_info_no = #{optionNo}
+		</if>
+	</select>
+	
+	<update id="updateBasketCount" parameterType="_int">
+		UPDATE BASKET_TBL SET BASKET_COUNT = BASKET_COUNT + 1
+		WHERE BASKET_NO = #{_parameter}
+	</update>
 </mapper>
