@@ -25,11 +25,13 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css">
     <!--모달 and 알럿-->
-<!--     <script src="/resources/js/modal-alert.js"></script> -->
+	<!-- <script src="/resources/js/modal-alert.js"></script> -->
     <!-- 디폴트 커스텀 CSS -->
     <link rel="stylesheet" href="/resources/css/common/default.css" />
     <!--헤더 css-->
     <link rel="stylesheet" href="/resources/css/common/header.css" />
+    <!--결제 모달 css-->
+    <link rel="stylesheet" href="/resources/css/common/modal.css" />
     <!--date range picker css-->
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 	<style>
@@ -89,9 +91,19 @@
 						</form>
 		            </div>
 	                <div class="middle-right">
-		                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">notifications</span></a>
+	                <c:choose>
+	                <c:when test="${!empty sessionScope.m}">
+		                <a class="alram-zone" href="/sendDmList.do">
+		                	<span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;">notifications</span>
+		                	<span class="alram-circle">10+</span>
+		                </a>
 		                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">favorite</span></a>
 		                <a href="/shoppingCart.do"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">shopping_cart</span></a>
+	            	</c:when>
+	            	<c:otherwise>
+	            		<a style="display: inline-block; width: 155px;"></a>
+	            	</c:otherwise>
+	            	</c:choose>
 	            	</div>
             	</div><!-- header-top -->
             	
@@ -137,7 +149,7 @@
             <div id="payModalBasic" class="payModal">
             	<div class="payModal-content"  style="width: 80%;">
                 	<div class="payModal-header">
-                    	<h6>Moong 충전하기</h6>
+                    	<h6>🍊 Moong 충전하기 🍊</h6>
                     </div>
                     <div class="payModal-body">
                     	<input type="radio" name="pointEa" id="point1" value="1000">
@@ -157,7 +169,6 @@
                    	<input type="hidden" id="memberNo" value="${m.memberNo }">
                     <div class="area-btn right">
                     	<button class="btn btn-pri size01" type="button" id="payBtn">충전하기</button>
-                        <a href="" rel="modal:close" class="btn btn-sec size01" id="close">닫기</a>
                     </div>
                 </div>
             </div>

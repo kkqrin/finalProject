@@ -202,7 +202,6 @@ public class MemberController {
 	
 	@RequestMapping(value = "/updateNewPwMemberFrm.do")
 	public String updateNewPwMemberFrm(String hideMemberId,Model model) {
-		System.out.println("숨겨져서 비번 바꾸기 폼으로 넘어가는 아이디 : "+hideMemberId);
 		model.addAttribute("memberId", hideMemberId);
 		return "member/myPageUpdatePw";
 	}
@@ -214,7 +213,6 @@ public class MemberController {
 	public String updateNewPwMember(String memberId, String memberPw, String memberNewPw) {
 			Member member = new Member();
 			member.setMemberId(memberId);
-			System.out.println("비번 변경할때 넘어가는 아이디 : "+memberId);
 		if(memberPw!=null) {//마이페이지 [회원정보수정]을 통해 수정하는 경우
 			member.setMemberPw(memberPw);
 			Member m = service.selectOneMember(member);
@@ -224,7 +222,6 @@ public class MemberController {
 		}
 			// && [비밀번호 찾기]를 통해 수정하는 경우
 			member.setMemberPw(memberNewPw);
-			System.out.println(memberNewPw);
 			service.updateNewPwMember(member);
 			return "ok";
 	}//updateNewPwMember
@@ -238,8 +235,9 @@ public class MemberController {
 		m = service.selectOneMember(m);
 		if(m!=null) {
 			return "dup";
+		}else {
+			return "ok";
 		}
-		return "ok";
 	}//idDoubleCheck
 	
 	

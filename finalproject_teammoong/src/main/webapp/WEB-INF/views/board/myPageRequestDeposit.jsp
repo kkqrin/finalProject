@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -102,18 +103,12 @@ img, figure {
 			<div class="mypage-right-title">입금 참여내역</div>
 			<div class="mypage-content">
 			       <div class="goods">
- 			       	<a href="/boardView.do?${b.boardNo}"> 
+ 			       	<a href="/boardView.do?boardNo=${bj.boardNo}"> 
 			       		<span>
-			       		<img src="/resources/img/product/orange.jpeg">
-			       			<c:forEach items="${b.fileList }" var="i">
-								<c:if test="${b.boardNo eq i.boardNo && oneFile eq 0}">
-									<img src="/resources/upload/board/${i.filepath}">
-									<c:set var="oneFile" value="1" />
-								</c:if>
-							</c:forEach>
+			       		<img src="/resources/upload/board/${bj.thumbnail }" style="width:100px; height:100px">
 						</span>
 						<span class="auto_confir_title">
-							<strong>${b.boardName}</strong> 
+							<strong>${bj.boardName}</strong> 
 						</span>
 			       	</a> 
 			       </div>
@@ -128,15 +123,15 @@ img, figure {
 			       			</li>
 			       			<li>
 			       				<strong>입금은행</strong>
-			       				<span>${b.accountBank}</span>
+			       				<span>${bj.accountBank}</span>
 			       			</li>
 			       			<li>
 			       				<strong>입금계좌</strong>
-			       				<span><a id="account-link" href="javascript:copy_account();" style="text-decoration:underline;">${b.accountWriter}</a></span>
+			       				<span><a id="account-link" href="javascript:copy_account();" style="text-decoration:underline;">${bj.accountWriter}</a></span>
 			       			</li>
 			       			<li>
 			       				<strong>입금주</strong>
-			       				<span>${b.accountName}</span>
+			       				<span>${bj.accountName}</span>
 			       			</li>
 						</ul>
 			       </div>
@@ -153,7 +148,7 @@ img, figure {
 			       		</li>
 			       		<li>
 			       			<strong>이메일</strong>
-			       			<span>${sessionScope.m.memberEamil}</span>
+			       			<span>${sessionScope.m.memberEmail}</span>
 			       		</li>
 			       	</ul>
 			       </div>
@@ -165,19 +160,19 @@ img, figure {
 							<li>
 								<strong>환불은행</strong>
 								<span>
-									<input class="form-control" type="text" id="refundBank" name="refundBank" value="우리은행" placeholder="환불은행">
+									${bj.refundBank }
 								</span>
 							</li>
 							<li>
 								<strong>환불계좌</strong>
 								<span>
-									<input class="form-control" type="text" id="refundAccount" name="refundAccount" value="1002848010968" placeholder="환불계좌">
+									${bj.refundAccount }
 								</span>
 							</li>
 							<li>
 								<strong>환불예금주</strong>
 								<span>
-									<input class="form-control" type="text" id="refundName" name="refundName" value="이화정" placeholder="환불예금주">
+									${bj.refundName }
 								</span>
 							</li>
 						</ul>
@@ -188,14 +183,14 @@ img, figure {
 					<div class="ul_table">
 						<ul>
 							<li>
-								<strong>킨더(12,000원 / 1개)</strong>
-								<span class="bold">1개</span>
+								<strong>${bj.boardName }(<fmt:formatNumber value= "${bj.depositPrice }"  pattern="#,###"/>원 / ${bj.orderCount }개)</strong>
+								<span class="bold">${bj.orderCount }개</span>
 							</li>
 						</ul>
 						<ul>
 							<li>
 								<strong>상품가격</strong>
-								<span>12,000원</span>
+								<span><fmt:formatNumber value= "${bj.depositPrice }"  pattern="#,###"/>원</span>
 							</li>
 							<li>
 								<strong>배송비</strong>
@@ -203,7 +198,7 @@ img, figure {
 							</li>
 							<li>
 								<strong>총 주문금액</strong>
-								<span class="bold">14,000원</span>
+								<span class="bold"><fmt:formatNumber value= "${bj.depositPrice+3000 }"  pattern="#,###"/>원</span>
 							</li>
 						</ul>
 					</div>
@@ -214,15 +209,15 @@ img, figure {
 						<ul>
 							<li>
 								<strong>입금자명</strong>
-								<span>이화정</span>
+								<span>${bj.payerName }</span>
 							</li>
 							<li>
 								<strong>입금액</strong>
-								<span>14,000원</span>
+								<span class="bold"><fmt:formatNumber value= "${bj.depositPrice+3000 }"  pattern="#,###"/>원</span>
 							</li>
 							<li>
 								<strong>입금일</strong>
-								<span>2023-04-13</span>
+								<span>${bj.payerDate }</span>
 							</li>
 						</ul>
 					</div>
@@ -234,17 +229,18 @@ img, figure {
 							<ul>
 								<li>
 									<strong>수령인</strong>
-									<span class="delivery_1" style="display: block;">이화정</span>
+									<span class="delivery_1" style="display: block;">${bj.receiverName }</span>
 								</li>
 							</ul>
 							<ul>
 								<li>
 									<strong>연락처</strong>
-									<span class="delivery_1" style="display: block;">01094702229</span>
+									<span class="delivery_1" style="display: block;">${sessionScope.m.memberPhone}</span>
 								</li>
 								<li>
 									<strong>배송지</strong>
 									<span class="line delivery_1" style="display: block;">
+									${bj.receiverAddr }
 									08350
 									<br>
 									서울 구로구 오리로

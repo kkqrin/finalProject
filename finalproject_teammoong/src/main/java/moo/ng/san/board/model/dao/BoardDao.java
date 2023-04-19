@@ -67,6 +67,10 @@ public class BoardDao {
 		List list = sqlSession.selectList("board.selectBoardJoinList",memberNo);
 		return (ArrayList<BoardJoin>)list;
 	}
+	public BoardJoin selectOneBoardJoin(int joinNo) {
+		BoardJoin bj = sqlSession.selectOne("board.selectOneBoardJoin", joinNo);
+		return bj;
+	}
 	
 
 }
