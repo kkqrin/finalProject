@@ -81,8 +81,7 @@
 
     
 
-	<div class="content-wrap">
-
+<div class="content-wrap">
 	<c:if test="${not empty sessionScope.m }">
 			<!-- <form action="/orderSheet.do" method="post">
 				<input type="hidden" name="productNo">
@@ -92,7 +91,6 @@
 			</form> -->
 		<button type="button" id="put-in-cart-btn">장바구니 담기</button>
 	</c:if>
-    
         <div class="top-info-box">
             <div class="img-box">
             <c:forEach items="${p.fileList }" var="i">
