@@ -91,8 +91,9 @@
 						</form>
 		            </div>
 	                <div class="middle-right">
-		                <a href="#">
-		                	<span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">notifications</span>
+		                <a class="alram-zone" href="#">
+		                	<span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;">notifications</span>
+		                	<span class="alram-circle">10+</span>
 		                </a>
 		                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">favorite</span></a>
 		                <a href="/shoppingCart.do"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">shopping_cart</span></a>
