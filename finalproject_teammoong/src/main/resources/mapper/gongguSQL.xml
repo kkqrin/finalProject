@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN
+" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="gonggu">
+	<select id="selectGongguList" parameterType="_int" resultType="gai">
+		SELECT
+			MEMBER_PATH AS memberPath,
+			MEMBER_ID AS memberId,
+			GONGGU_NUMBER AS gongguNumber,
+			COUNT_NUMBER AS countNumber
+		FROM PRODUCT_TBL
+		LEFT JOIN GONGGU_TBL USING(PRODUCT_NO)
+		LEFT JOIN MEMBER_TBL USING(MEMBER_NO)
+		LEFT JOIN DETAIL_GONGGU_TBL USING(GONGGU_NO)
+		WHERE PRODUCT_NO = #{_parameter}
+	</select>
+	
+	<insert id="insertGonggu" parameterType="g">
+		INSERT INTO GONGGU_TBL VALUES(GONGGU_SEQ.NEXTVAL,
+		#{productNo},
+		#{memberNo})
+	</insert>
+	
+	<select id="selectInsertGonggu" resultType="g">
+		SELECT 
+			GONGGU_NO AS gongguNo,
+			MEMBER_NO AS memberNo 
+		FROM GONGGU_TBL
+		WHERE GONGGU_NO IN(SELECT MAX(GONGGU_NO) FROM GONGGU_TBL)
+	</select>
+	
+	<insert id="insertDetailGonggu" parameterType="g">
+		INSERT INTO DETAIL_GONGGU_TBL VALUES(DETAIL_GONGGU_SEQ.NEXTVAL,
+		#{gongguNo},
+		#{memberNo},
+		1)
+	</insert>
+	
+	<select id="selectCountNumber" resultType="gai">
+		SELECT SUM(COUNT_NUMBER) AS countNumber FROM DETAIL_GONGGU_TBL
+	</select>
+</mapper>

@@ -16,6 +16,7 @@
 		<typeAlias type="moo.ng.san.product.model.vo.Product" alias="p" />
 		<typeAlias type="moo.ng.san.product.model.vo.Option" alias="po" />
 		<typeAlias type="moo.ng.san.product.model.vo.FileVO" alias="pf" />
+		<typeAlias type="moo.ng.san.product.model.vo.RecentProduct" alias="rp" />
 		<typeAlias type="moo.ng.san.order.model.vo.Order" alias="o" />
 		<typeAlias type="moo.ng.san.askItem.model.vo.AskItemCategory" alias="ac" />
 		<typeAlias type="moo.ng.san.coupon.model.vo.Coupon" alias="cp" />
@@ -35,6 +36,10 @@
 		<typeAlias type="moo.ng.san.inquiry.model.vo.InquiryAdmin" alias="iqa" />
 		
 		<typeAlias type="moo.ng.san.basket.model.vo.Basket" alias="basket" />
+		
+		<typeAlias type="moo.ng.san.gonggu.model.vo.Gonggu" alias="g" />
+		<typeAlias type="moo.ng.san.gonggu.model.vo.DetailGonggu" alias="dg" />
+		<typeAlias type="moo.ng.san.gonggu.model.vo.GongguAllInfo" alias="gai" />
 		
 	</typeAliases>
 	<!-- 

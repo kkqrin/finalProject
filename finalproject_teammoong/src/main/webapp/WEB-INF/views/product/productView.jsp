@@ -73,7 +73,9 @@
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<jsp:include page="/WEB-INF/views/common/stickyRight.jsp" />
+    <c:if test="${not empty sessionScope.m }">
+        <jsp:include page="/WEB-INF/views/common/stickyRight.jsp" />
+    </c:if>
 
 
 
@@ -206,21 +208,28 @@
         </div>
         <div class="gonggu-board-logo"><h3>뭉쳐야 산다!</h3></div>
         <div class="gonggu-board">
+            <c:forEach items="${gongguList }" var="g">
             <div class="all-flex-wrap">
                 <div class="left-flex-wrap">
-                    <div class="user-img"><img src="/resources/upload/member/${sessionScope.m.memberPath}" style="width: 50px; height: 50px;"></div>
-                    <div class="user-id">${sessionScope.m.memberId}</div>
-                    <div class="gonggu-number">(1/2)</div>
+                    <div class="user-img"><img src="/resources/upload/member/${g.memberPath}" style="width: 50px; height: 50px;"></div>
+                    <div class="user-id">${g.memberId}</div>
+                    <div class="gonggu-number">(${g.countNumber }/${g.gongguNumber })</div>
                 </div>
                 <div class="right-flex-wrap">
                     <div class="right-flex-info">
-                        <div class="number-info">1명 남음</div>
-                        <div class="time-limit" id="timer"></div>
+                        <div class="number-info">${g.countNumber }명 남음</div>
                     </div>
+                    <c:if test="${sessionScope.m.memberId eq g.memberId }">
+                    <button type="button" class="btn btn-pri size01" id="orderBtn">뭉산취소</button>
+                    </c:if>
+                    <c:if test="${sessionScope.m.memberId ne g.memberId }">
                     <button type="button" class="btn btn-pri size01" id="orderBtn">주문참여</button>
+                    </c:if>
                 </div>
             </div>
+        </c:forEach>
         </div>
+        
         <div class="quick-scroll-bar">
             <table>
                 <tr>
@@ -231,6 +240,11 @@
                 </tr>
             </table>
         </div>
+        <div class="product-content-logo class="product-info-box""><h3>상품설명</h3></div>
+        <div class="product-content-wrap">
+            ${p.productContent}
+        </div>
+        <div class="product-review-logo product-review"><h3>리뷰</h3></div>
         <div class="review-wrap">
             <form action="/reviewWrite.do" method="post" enctype="multipart/form-data"></form>
             <table>
@@ -263,6 +277,7 @@
         <div class="gonggu-content-wrap">
             <div class="gonggu-content-title">
             </div>
+            <div class="product-inquiry-logo product-inquiry"><h3>문의사항</h3></div>
             <div class="inquiry-box">
                 <table class="inquiry-table">
                     <tr>
@@ -423,7 +438,7 @@
 <input type="hidden" id="loginMemberId" value="${sessionScope.m.memberId}">
 <input type="hidden" id="productNo" value="${p.productNo}">
 <input type="hidden" id="likeNo" value="${l.likeNo}">
-<input type="hidden" id="productContent" value="${p.productContent}">
+<!-- <input type="hidden" id="productContent" value="${p.productContent}"> -->
 
 
 

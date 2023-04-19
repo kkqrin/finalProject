@@ -53,6 +53,6 @@
 	display: none;
 }
 
-[name='memberName']{
+[name='memberName'],[name="memberId"],[name='memberNewPw']{
 	margin-bottom: 20px;
 }

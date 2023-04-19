@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -213,20 +214,22 @@ body .top-icon.hide-icon{
         <div class="recent-product-title">최근 본 상품</div>
         <div class="recent-product-content">
             <ul>
+            	<c:forEach items="${recentProductList}" var="i">
                 <li>
                     <a href="#">
                         <span>
-                            <img src="/resources/img/product/lactofit.jpg">
+                            <img src="/resources/upload/product/${i.thumbnail }">
                         </span>
                     </a>
                 </li>
-                <li>
-                    <a href="#">
-                        <span>
-                            <img src="/resources/img/product/bubble_tomato.jpg">
-                        </span>
-                    </a>
-                </li>
+            	</c:forEach>
+<!--                 <li> -->
+<!--                     <a href="#"> -->
+<!--                         <span> -->
+<!--                             <img src="/resources/img/product/bubble_tomato.jpg"> -->
+<!--                         </span> -->
+<!--                     </a> -->
+<!--                 </li> -->
                 <!-- <li>
                     <a href="#">
                         <span>

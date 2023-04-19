@@ -8,10 +8,40 @@
 <title>Insert title here</title>
 	<!-- 상품 css -->
 	<link rel="stylesheet" href="/resources/css/product/product.css"/>
+    <!-- 슬릭 슬라이더 -->
+    <link rel="stylesheet" href="/resources/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="/resources/slick/slick.css"/>
+	<!-- 슬라이더 화살표 아이콘 arrow -->
+	<script src="https://kit.fontawesome.com/285f888d1c.js" crossorigin="anonymous"></script>
+
+	<style>
+		.slick-prev:before, .slick-next:before {
+        	/* 슬릭 슬라이더 아이콘 */
+            color: #565656;
+			font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+        }
+        .slick-next:before{
+			content: '\f054' !important;
+		}
+		.slick-prev:before{
+			content: '\f053' !important;
+		}
+        .popular-product-wrap>.slick-prev.slick-disabled,
+		.popular-product-wrap>.slick-next.slick-disabled
+		{
+			/* 슬릭 슬라이더 첫,마지막페이지 이전,다음 아이콘 숨김 */
+    		/* opacity: .25; */
+			opacity: 0;
+			cursor: default;
+		}
+	</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<jsp:include page="/WEB-INF/views/common/stickyRight.jsp" />
+	<c:if test="${not empty sessionScope.m }">
+        <jsp:include page="/WEB-INF/views/common/stickyRight.jsp" />
+    </c:if>
 	
 <div class="content-wrap">
 
@@ -549,6 +579,8 @@
 </div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />	
 
+	<!-- 슬릭 슬라이더 js -->
+	<script type="text/javascript" src="/resources/slick/slick.min.js"></script>
     <!-- 상품 js -->
     <script src="/resources/js/product.js"></script>
     
