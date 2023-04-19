@@ -170,7 +170,7 @@
 					<div class="one-line changePw">
 							<div class="name-tag">비밀번호 변경하기</div>
 							<div class="subDiv" style="width: 360px;">
-								<a data-modal="#modelChangePw" style="text-align: left; line-height: 38px;">비밀번호 변경하기</a>
+								<a data-modal="#modelChangePw" style="text-align: left; line-height: 38px; cursor: pointer;">비밀번호 변경하기</a>
 							</div>
 					</div>
 							<div id="modelChangePw" class="modal modal-sec">

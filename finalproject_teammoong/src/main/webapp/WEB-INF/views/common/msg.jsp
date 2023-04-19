@@ -44,6 +44,7 @@
 	
 		$(function () {
 			$("#modalSec").modal({
+				showClose: false,
 				fadeDuration: 100
 			});
 			return false;

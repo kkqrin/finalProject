@@ -1,0 +1,37 @@
+.mypage-content .note-title{
+	background-color: #FCE3E7;
+	border-radius: 5px;
+	padding: 10px;
+}
+.fake_hr{
+    border: 1px solid var(--bg-secondary);
+	margin: 20px 0;
+}
+
+.mypage-content .note{
+	margin: 20px 0;
+}
+.note a{
+	display: block;
+}
+
+.note .check{
+	background: url(/resources/img/common/orange-pick.png) no-repeat 0 3px;
+	padding-left: 25px;
+	font-weight: bold;
+}
+
+.mypage-content .note.agree{
+	text-align: right;
+}
+.mypage-content .note.agree .area-btn{
+	margin-top:5px;
+}
+
+
+/*====step2=================*/
+#step2 .step2-td{
+	font-size: 18px;
+	font-weight: bold;
+	margin-right: 20px;
+}
