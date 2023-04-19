@@ -18,10 +18,10 @@
 			<div class="toPhone-view">
 				<input type="hidden" name="memberId" value="${memberId }">
 				<a>새로운 비밀번호</a>
-				<input type="password" name="memberNewPw" placeholder="영문,숫자,특수문자(공백 제외)조합으로 8글자 이상">
+				<input type="password" autoComplete="off" name="memberNewPw" placeholder="영문,숫자,특수문자(공백 제외)조합으로 8글자 이상">
 				<a class="caution">영문,숫자,특수문자(공백 제외)조합으로 8글자 이상</a>
 				<a style="display:block;margin-top:20px;">비밀번호 확인</a>
-				<input type="password" name="memberNewPwRe" placeholder="비밀번호를 다시 한 번 입력해주세요">
+				<input type="password" autoComplete="off" name="memberNewPwRe" placeholder="비밀번호를 다시 한 번 입력해주세요">
 				<a class="caution">비밀번호가 동일하지 않습니다</a>
 				<div class="area-btn full">
 				<button class="btn btn-pri size02 ChangePw">비밀번호 변경</button>

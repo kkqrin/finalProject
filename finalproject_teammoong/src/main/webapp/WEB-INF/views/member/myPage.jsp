@@ -182,12 +182,12 @@
 											
 											
 											<div class="name-tag">현재 비밀번호</div>
-											<input type="password" name="memberPw" placeholder="현재 비밀번호를 입력하세요">
+											<input type="password" autoComplete="off" name="memberPw" placeholder="현재 비밀번호를 입력하세요">
 											<div class="name-tag">새로운 비밀번호</div>
-											<input type="password" id="memberNewPw" placeholder="영문,숫자,특수문자(공백 제외)조합으로 8글자 이상">
+											<input type="password" autoComplete="off" id="memberNewPw" placeholder="영문,숫자,특수문자(공백 제외)조합으로 8글자 이상">
 											<a class="caution">영문,숫자,특수문자(공백 제외)조합으로 8글자 이상</a>
 											<div class="name-tag">새로운 비밀번호 확인</div>
-											<input type="password" id="memberNewPwRe" placeholder="새로운 비밀번호를 다시 한 번 입력하세요">
+											<input type="password" autoComplete="off" id="memberNewPwRe" placeholder="새로운 비밀번호를 다시 한 번 입력하세요">
 											<a class="caution">값이 동일하지 않습니다</a>
 											
 											
@@ -424,10 +424,9 @@
 			}else if(!pwReg.test(memberNewPw)){
 				$(".modal-body").children('a').eq(0).show();
 			}else if(pwReg.test(memberNewPw) && memberNewPw != $("#memberNewPwRe").val()){
-				$(".modal-body").children('a').eq(1).show();
-			}else if(pwReg.test(memberNewPw)){
 				$(".modal-body").children('a').eq(0).hide();
-			}else{
+				$(".modal-body").children('a').eq(1).show();
+			}else if(pwReg.test(memberNewPw) && memberNewPw == $("#memberNewPwRe").val()){
 				$(".modal-body").children('a').hide();
 			}
 		})//[변경하기] 버튼
