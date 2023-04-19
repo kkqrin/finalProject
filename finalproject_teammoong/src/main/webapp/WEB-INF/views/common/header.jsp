@@ -36,12 +36,7 @@
 		.categoryGroup ul li{
 			font-size: 10px;
 		}
-		.modal-body{
-			display:flex;
-		}
-		.modal-body input{
-			width: 20%;
-		}
+		
 		#payModalBasic{
 			display: none;
 		}
