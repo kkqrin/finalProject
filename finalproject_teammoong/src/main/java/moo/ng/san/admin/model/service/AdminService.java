@@ -5,23 +5,21 @@ import java.util.HashMap;
 import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import moo.ng.san.admin.model.dao.AdminDao;
 import moo.ng.san.admin.model.vo.AdminBoardPageData;
-import moo.ng.san.admin.model.vo.AdminCouponPageData;
 import moo.ng.san.admin.model.vo.AdminMemberPageData;
 import moo.ng.san.admin.model.vo.AdminOrderPageData;
 import moo.ng.san.admin.model.vo.AdminProductPageData;
 import moo.ng.san.admin.model.vo.AdminReportBoardPageData;
+import moo.ng.san.admin.model.vo.CouponData;
+import moo.ng.san.admin.model.vo.SalesData;
 import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.board.model.vo.BoardOption;
 import moo.ng.san.board.model.vo.Notify;
-import moo.ng.san.coupon.model.vo.IssueCoupon;
-import moo.ng.san.dayCheck.model.vo.DayCheck;
-import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.member.model.vo.Member;
+import moo.ng.san.order.model.vo.Order;
 import moo.ng.san.product.model.vo.Product;
 
 @Service
@@ -225,6 +223,7 @@ public class AdminService {
 	}
 
 	// 페이지 네비 주소 수정 필요
+	
 	public AdminOrderPageData selectAllOrderList(int reqPage) {
 		// 한 페이지 당 보여줄 게시물 수 : 10개
 		int numPerPage = 10;
@@ -278,6 +277,7 @@ public class AdminService {
 		if (pageNo <= totalPage) {
 			pageNavi += "<a href='/boardList.do?reqPage=" + pageNo + "'>[다음]</a>";
 		}
+		
 		AdminOrderPageData aopd = new AdminOrderPageData(list, pageNavi);
 
 		return aopd;
@@ -531,25 +531,84 @@ public class AdminService {
 
 	}
 
-	public AdminCouponPageData selectCouponList() {
-		AdminCouponPageData acpd = new AdminCouponPageData();
-		ArrayList<IssueCoupon> couponList = dao.selectAllCouponList();
-		ArrayList<DayCheck> dcList = dao.selectAllDcList();
-		ArrayList<Point> pointList = dao.selectPointList();
-		acpd.setCouponList(couponList);
-		acpd.setDcList(dcList);
-		acpd.setPointList(pointList);
+	public ArrayList<CouponData> selectCouponList() {
+		ArrayList<CouponData> list = dao.selectAllCouponList();
 		
-		/*
-		for(IssueCoupon issueCoupon : couponList) {
-			int couponNo = issueCoupon.getCouponNo();
-			ArrayList<Point> pointList = dao.selectAllPointList(couponNo);
-			acpd.setPointList(pointList);
-		}
-		*/
-		
-		return acpd;
+		return list;
 	}
+
+	public ArrayList<CouponData> selectUseMoongList(int memberNo) {
+		ArrayList<CouponData> list = dao.selectUseMoongList(memberNo);
+		return list;
+	}
+
+	public SalesData selectCountMonthSalesData(int i) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		switch (i) {
+		
+		case 1:
+			map.put("start","2023-01-01");
+			map.put("end","2023-01-31");
+			break;
+		case 2:
+			map.put("start","2023-02-01");
+			map.put("end","2023-02-28");
+			break;
+		case 3:
+			map.put("start","2023-03-01");
+			map.put("end","2023-03-31");
+			break;
+		case 4:
+			map.put("start","2023-04-01");
+			map.put("end","2023-04-30");
+			break;
+		case 5:
+			map.put("start","2023-05-01");
+			map.put("end","2023-05-31");
+			break;
+		case 6:
+			map.put("start","2023-06-01");
+			map.put("end","2023-06-30");
+			break;
+		case 7:
+			map.put("start","2023-07-01");
+			map.put("end","2023-07-31");
+			break;
+		case 8:
+			map.put("start","2023-08-01");
+			map.put("end","2023-08-31");
+			break;
+		case 9:
+			map.put("start","2023-09-01");
+			map.put("end","2023-09-30");
+			break;
+		case 10:
+			map.put("start","2023-10-01");
+			map.put("end","2023-10-31");
+			break;
+		case 11:
+			map.put("start","2023-11-01");
+			map.put("end","2023-11-30");
+			break;
+		case 12:
+			map.put("start","2023-12-01");
+			map.put("end","2023-12-31");
+			break;
+		}
+		
+		SalesData sd = dao.selectCountMonthSalesData(map);
+		
+		return sd;
+	}
+
+	
+	public SalesData selectCountMonthCategorySalesData(int i) { 
+		SalesData sd = dao.selectCountMonthCategorySalesData(i);
+		
+		return sd; 
+	}
+	
 
 
 

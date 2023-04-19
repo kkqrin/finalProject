@@ -34,7 +34,7 @@
 		</div>
 	
 	
-	<div class="modal-ground">
+	<div class="modal-ground" id="loginFail">
 		<div id="modalSec" class="modal modal-sec">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -101,7 +101,7 @@
 						location.href="/main.do";
 					}else{
 						$(".modal").css("display","flex");
-						$(".modal-ground").css("display","flex");			
+						$("#loginFail").css("display","flex");			
 					}
 				}//ajax success구문
 			})//ajax
@@ -112,7 +112,7 @@
 		
 		//모달 관련 기능
         $(function () {
-            $('[data-modal]').click(function (event) {
+            $('#loginFail').click(function (event) {
                 $($(this).data('modal')).modal({
                     fadeDuration: 100
                 });

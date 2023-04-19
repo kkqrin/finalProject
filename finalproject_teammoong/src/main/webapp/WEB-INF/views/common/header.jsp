@@ -25,23 +25,24 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css">
     <!--모달 and 알럿-->
-<!--     <script src="/resources/js/modal-alert.js"></script> -->
+	<!-- <script src="/resources/js/modal-alert.js"></script> -->
     <!-- 디폴트 커스텀 CSS -->
     <link rel="stylesheet" href="/resources/css/common/default.css" />
     <!--헤더 css-->
     <link rel="stylesheet" href="/resources/css/common/header.css" />
+    <!--결제 모달 css-->
+    <link rel="stylesheet" href="/resources/css/common/modal.css" />
     <!--date range picker css-->
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 	<style>
 		.categoryGroup ul li{
 			font-size: 10px;
 		}
-		.modal-body{
-			display:flex;
+		
+		#payModalBasic{
+			display: none;
 		}
-		.modal-body input{
-			width: 20%;
-		}
+		
 	</style>
 </head>
 <body>
@@ -90,19 +91,29 @@
 						</form>
 		            </div>
 	                <div class="middle-right">
-		                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">notifications</span></a>
+	                <c:choose>
+	                <c:when test="${!empty sessionScope.m}">
+		                <a class="alram-zone" href="/sendDmList.do">
+		                	<span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;">notifications</span>
+		                	<span class="alram-circle">10+</span>
+		                </a>
 		                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">favorite</span></a>
 		                <a href="/shoppingCart.do"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">shopping_cart</span></a>
+	            	</c:when>
+	            	<c:otherwise>
+	            		<a style="display: inline-block; width: 155px;"></a>
+	            	</c:otherwise>
+	            	</c:choose>
 	            	</div>
             	</div><!-- header-top -->
             	
             	
             	<div class="header-bottom">
             		<div class="menu-product">
-		                <div><a href="#">인기상품</a></div>
+		                <div><a href="/bestProductList.do">인기상품</a></div>
 		                <div><a href="/insertProductFrm.do">물품등록(예비버튼)</a></div>
 		                <c:if test="${!empty sessionScope.m}">
-		                	<div data-modal="#modalBasic"><a href="#">충전하기</a></div>
+		                	<div id="payModal"><a href="#">충전하기</a></div>
 		                </c:if>
 		                <div><a href="#">오늘의상품</a></div>
 		                <div class="together">
@@ -135,12 +146,12 @@
             </section>
 
             
-            <div id="modalBasic" class="modal modal-sec">
-            	<div class="modal-content">
-                	<div class="modal-header">
-                    	<h6>Moong 충전하기</h6>
+            <div id="payModalBasic" class="payModal">
+            	<div class="payModal-content"  style="width: 80%;">
+                	<div class="payModal-header">
+                    	<h6>🍊 Moong 충전하기 🍊</h6>
                     </div>
-                    <div class="modal-body">
+                    <div class="payModal-body">
                     	<input type="radio" name="pointEa" id="point1" value="1000">
                     	<label for="point1">1,000</label>
                     	<input type="radio" name="pointEa" id="point2"value="5000">
@@ -158,7 +169,6 @@
                    	<input type="hidden" id="memberNo" value="${m.memberNo }">
                     <div class="area-btn right">
                     	<button class="btn btn-pri size01" type="button" id="payBtn">충전하기</button>
-                        <a href="" rel="modal:close" class="btn btn-sec size01" id="close">닫기</a>
                     </div>
                 </div>
             </div>
@@ -167,26 +177,26 @@
 
 	
 	<script>
-		$(function () {
-	        $('[data-modal]').click(function (event) {
-	            const modalId = $(this).data('modal');
-	            if ($(modalId).hasClass('modal-pri')) {
-	                $($(this).data('modal')).modal({
-	                    fadeDuration: 100
-	                });
-	                return false;
-	            } else if ($(modalId).hasClass('modal-sec')) {
-	                $($(this).data('modal')).modal({
-	                    escapeClose: false,
-	                    showClose: false,
-	                    fadeDuration: 100
-	                });
-	                return false;
-	            } else {
-	                return false;
-	            }
-	        });
+	$(document).ready(function() {
+	    // 모달 열기 버튼 클릭 이벤트
+	    $("#payModal").on("click", function() {
+	        $("#payModalBasic").modal();
 	    });
+
+	    // 충전하기 버튼 클릭 이벤트
+	    $("#payBtn").on("click", function() {
+	        // 여기에 충전 처리를 위한 로직을 작성하면 됩니다.
+	        // 예를 들어, 선택된 라디오 버튼의 값을 가져와서 서버로 전송하는 등의 작업을 수행할 수 있습니다.
+
+	        // 모달 닫기
+	        $("#payModalBasic").modal("close");
+	    });
+
+	    // 모달 닫기 버튼 클릭 이벤트
+	    $("#close").on("click", function() {
+	        $("#payModalBasic").modal("close");
+	    });
+	});
 		
 		$("#payBtn").on("click",function(){
 			const price = $("input[name=pointEa]:checked").val();

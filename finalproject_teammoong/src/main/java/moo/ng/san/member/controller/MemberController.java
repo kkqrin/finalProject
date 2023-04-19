@@ -78,8 +78,15 @@ public class MemberController {
 	}
 	
 	
-	
-	
+	@RequestMapping(value = "/goToMsg.do")
+	public String goToMsg(Model model) {
+		MsgVO msg = new MsgVO();
+		msg.setTitle("비밀번호가 변경되었습니다");
+		msg.setMsg("변경된 비밀번호로 로그인해주세요");
+		msg.setLoc("/");
+		model.addAttribute("msg", msg);
+		return "common/msg";
+	}//goToMsg
 	
 	
 	
@@ -152,18 +159,7 @@ public class MemberController {
 	
 	@RequestMapping(value = "/updateMember.do")
 	public String updateMember(Member member, MultipartFile memberPropic, HttpServletRequest request, @SessionAttribute(required=false) Member m) {
-//		System.out.println("memberNo : "+member.getMemberNo());
-//		System.out.println("memberPhone : "+member.getMemberPhone());
-//		System.out.println("memberEmail : "+member.getMemberEmail());
-//		System.out.println("memberZoneCode : "+member.getMemberZoneCode());
-//		System.out.println("memberAddr : "+member.getMemberAddr());
-//		System.out.println("memberBank : "+member.getMemberBank());
-//		System.out.println("memberAccount : "+member.getMemberAccount());
-//		System.out.println("memberBday : "+member.getMemberBday());
-//		System.out.println("memberPropic : "+memberPropic);
-//		System.out.println("세션에 있는거 : "+m.getMemberPath());
-		System.out.println("memberAgree : "+member.getMemberAgree());
-		
+
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member/");
 		String filePath="";
 
@@ -206,7 +202,6 @@ public class MemberController {
 	
 	@RequestMapping(value = "/updateNewPwMemberFrm.do")
 	public String updateNewPwMemberFrm(String hideMemberId,Model model) {
-		System.out.println(hideMemberId);
 		model.addAttribute("memberId", hideMemberId);
 		return "member/myPageUpdatePw";
 	}
@@ -216,19 +211,19 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value = "/updateNewPwMember.do")
 	public String updateNewPwMember(String memberId, String memberPw, String memberNewPw) {
-		Member member = new Member();
-		member.setMemberId(memberId);
-		member.setMemberPw(memberPw);
-		
-		Member m = service.selectOneMember(member);
-		
-		if(m==null) {
-			return "fail";
-		}else {
+			Member member = new Member();
+			member.setMemberId(memberId);
+		if(memberPw!=null) {//마이페이지 [회원정보수정]을 통해 수정하는 경우
+			member.setMemberPw(memberPw);
+			Member m = service.selectOneMember(member);
+			if(m==null) {
+				return "fail";
+			}
+		}
+			// && [비밀번호 찾기]를 통해 수정하는 경우
 			member.setMemberPw(memberNewPw);
 			service.updateNewPwMember(member);
 			return "ok";
-		}
 	}//updateNewPwMember
 	
 	

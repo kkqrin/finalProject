@@ -26,9 +26,11 @@
 				<input type="text" name="memberPhone" placeholder="가입시 등록한 핸드폰번호를 입력해주세요('-'없이 숫자만)">
 				<a class="caution">핸드폰 번호를 확인해주세요</a>
 				<div class="area-btn full">
-				<button class="btn btn-sec size02 sendPhone">아이디 찾기</button>
+				<button class="btn btn-pri size02 sendPhone">아이디 찾기</button>
 				</div>
-				<a href="/searchPwFrm.do" style="display:block; text-align:center;text-decoration:underline; margin-top:10px;">비밀번호 찾기</a>
+				<div style="text-align:center;margin-top:10px;">
+					<a href="/searchPwFrm.do" style="text-decoration:underline;cursor:pointer;">비밀번호 찾기</a>
+				</div>
 			</div>
 			<div class="toEmail-view">
 				<a>이름</a>
@@ -37,9 +39,11 @@
 				<input type="text" name="memberEmail" placeholder="가입시 등록한 이메일을 입력해주세요">
 				<a class="caution">이메일 형식을 확인해주세요</a>
 				<div class="area-btn full">
-				<button class="btn btn-sec size02 sendEmail">아이디 찾기</button>
+				<button class="btn btn-pri size02 sendEmail">아이디 찾기</button>
 				</div>
-				<a href="/searchPwFrm.do" style="display:block; text-align:center;text-decoration:underline; margin-top:10px;">비밀번호 찾기</a>
+				<div style="text-align:center;margin-top:10px;">
+					<a href="/searchPwFrm.do" style="text-decoration:underline;cursor:pointer;">비밀번호 찾기</a>
+				</div>
 			</div>
 		</div>
 	</div><!-- content-wrap -->
@@ -103,7 +107,7 @@
 							
 							const loginBtn = $("<button>").text("로그인하기");
 							loginBtn.attr("onclick","location.href='/loginFrm.do'");
-							loginBtn.addClass("btn btn-sec size02");
+							loginBtn.addClass("btn btn-pri size02");
 							loginBtn.css("margin-top","30px");
 							$(".toPhone-view").children('div').append(loginBtn);
 

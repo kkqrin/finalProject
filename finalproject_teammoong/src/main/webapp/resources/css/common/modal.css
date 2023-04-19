@@ -1,6 +1,18 @@
-.jquery-modal.blocker {background:var(--bg-dim);z-index:210!important;}
-.jquery-modal .modal {position:relative;max-height:90vh;padding:0;box-shadow:0px 6px 12px rgba(0, 0, 0, 0.25);border-radius:4px;}
-.jquery-modal .modal .close-modal {display:none;top:17px;right:16px;width:24px;height:24px;z-index:10;}
-.modal-content .modal-header {text-align:center;height:58px;padding:16px 16px 16px 20px;border-bottom:1px solid var(--bg-tertiary);}
-.modal-content .modal-body {padding:20px;font-weight:400;font-size:15px;line-height:24px;color:#253033;overflow-y:auto;}
-.modal-content .modal-body p{text-align: center;}
+/* .jquery-modal.blocker {background:var(--bg-dim);z-index:210!important;} */
+/* .jquery-modal .modal {position:relative;max-height:90vh;padding:0;box-shadow:0px 6px 12px rgba(0, 0, 0, 0.25);border-radius:4px;} */
+/* .jquery-modal .modal .close-modal {display:none;top:17px;right:16px;width:24px;height:24px;z-index:10;} */
+/* .modal-content .modal-header {text-align:center;height:58px;padding:16px 16px 16px 20px;border-bottom:1px solid var(--bg-tertiary);} */
+/* .modal-content .modal-body {padding:20px;font-weight:400;font-size:15px;line-height:24px;color:#253033;overflow-y:auto;} */
+/* .modal-content .modal-body p{text-align: center;} */
+
+
+
+
+/*결제모달*/
+#payModalBasic{background-color: rgba( 248, 128, 0, 0.8	 ); min-width: 600px !important;}
+.payModal-content {background-color: #fff;margin: 10% auto;padding: 20px;border: 1px solid var(--bg-tertiary);border-radius: 4px;}
+.payModal-header {text-align: center;height: 58px;padding: 16px 16px 16px 20px;border-bottom: 1px solid var(--bg-tertiary);}
+.payModal-header h6 {font-size: 18px;font-weight: bold; margin: 0;}
+.payModal-body { padding: 20px;font-weight: 400; font-size: 15px; line-height: 24px; color: #253033; overflow-y: auto; text-align: center;}
+.payModal-body p { text-align: center;}
+#payBtn{width: 100%;}

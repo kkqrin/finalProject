@@ -10,6 +10,7 @@
 }
 .searchId-wrap a{
 	font-size: 16px;
+	cursor: default;
 }
 .searchId-wrap .searchId-title{
 	text-align: center;
@@ -31,10 +32,10 @@
 }
 
 .searchId-wrap .menu-bar>div:hover{
-	color : var(--secondary);
+	color : var(--primary);
 }
 .focus{
-	border-top: 5px solid var(--secondary) !important;
+	border-top: 5px solid var(--primary) !important;
 }
 
 .caution{
@@ -42,7 +43,7 @@
 	color: var(--primary);
 }
 
-.sendPhone, .sendEmail{
+.sendPhone, .sendEmail, .ChangePw{
 	margin-top: 20px;
 }
 
@@ -53,6 +54,6 @@
 	display: none;
 }
 
-[name='memberName'],[name="memberId"],[name='memberNewPw']{
+[name='memberName'],[name="memberId"]{
 	margin-bottom: 20px;
 }

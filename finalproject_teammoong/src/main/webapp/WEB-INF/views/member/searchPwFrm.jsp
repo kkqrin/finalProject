@@ -20,30 +20,36 @@
 				<div class="toEmail"><h6>이메일로 찾기</h6></div>
 			</div>
 			<div class="toPhone-view">
-				<form action="/updateNewPwMember.do" method="post">
 				<a>아이디</a>
 				<input type="text" name="memberId" placeholder="아이디를 입력해주세요">
 				<a>핸드폰 번호</a>
 				<input type="text" name="memberPhone" placeholder="가입시 등록한 핸드폰번호를 입력해주세요('-'없이 숫자만)">
 				<a class="caution">핸드폰 번호를 확인해주세요</a>
 				<div class="area-btn full">
-				<button type="button" class="btn btn-sec size02 sendPhone">인증번호 발송</button>
+				<button type="button" class="btn btn-pri size02 sendPhone">인증번호 발송</button>
 				</div>
-				<a href="/searchIdFrm.do" style="display:block; text-align:center;text-decoration:underline; margin-top:10px;">아이디 찾기</a>
-				</form>
+				<div style="text-align:center;margin-top:10px;">
+					<a href="/searchIdFrm.do" style="text-decoration:underline;cursor:pointer;">아이디 찾기</a>
+				</div>
 			</div>
 			<div class="toEmail-view">
 				<a>아이디</a>
-				<input type="text" name="memberId" placeholder="이름을 입력해주세요">
+				<input type="text" name="memberId" placeholder="아이디를 입력해주세요">
 				<a>이메일</a>
 				<input type="text" name="memberEmail" placeholder="가입시 등록한 이메일을 입력해주세요">
 				<a class="caution">이메일 형식을 확인해주세요</a>
 				<div class="area-btn full">
-				<button class="btn btn-sec size02 sendEmail">인증번호 발송</button>
+				<button class="btn btn-pri size02 sendEmail">인증번호 발송</button>
 				</div>
-				<a href="/searchIdFrm.do" style="display:block; text-align:center;text-decoration:underline; margin-top:10px;">아이디 찾기</a>
+				<div style="text-align:center;margin-top:10px;">
+					<a href="/searchIdFrm.do" style="text-decoration:underline;cursor:pointer;">아이디 찾기</a>
+				</div>
 			</div>
 		</div>
+		<form action="/updateNewPwMemberFrm.do" type="post">
+			<input type="hidden" name="hideMemberId" value="">
+			<button class="submitBtn"></button>
+		</form>
 	</div><!-- content-wrap -->
 	
 	
@@ -122,7 +128,7 @@
 							const cerNumChk = $("<button>").text("인증번호 확인");
 							cerNumChk.addClass("btn btn-ter size02 cerNumChk");
 							cerNumChk.css("margin-top","30px");
-							$(".toPhone-view").find('div').append(cerNumChk);
+							$(".toPhone-view").find('.area-btn').append(cerNumChk);
 						}
 					}//success
 				})//ajax
@@ -157,12 +163,11 @@
 							alert("일치하는 회원 정보가 없습니다");
 						}else{
 							alert("인증번호를 전송합니다. 잠시만 기다려주세요!");	
+							$("[name='memberId']").eq(1).attr('readonly',true);
 							$.ajax({
 								url:"/sendEmailMember.do",
 								data:{memberEmail:inputEmail},
 								success: function(code){//★메일 인증번호 쏴줌
-									$("[name='memberId']").attr('readonly',true);
-									
 									$(".toEmail-view").find('a').eq(1).text('인증번호 입력')
 									$(".toEmail-view").find('input').eq(1).attr('placeholder','인증번호를 입력해주세요');
 									$(".toEmail-view").find('input').eq(1).val("");
@@ -181,12 +186,13 @@
 									const cerNumChk = $("<button>").text("인증번호 확인");
 									cerNumChk.addClass("btn btn-ter size02 cerNumChk");
 									cerNumChk.css("margin-top","30px");
-									$(".toEmail-view").find('div').append(cerNumChk);
+									$(".toEmail-view").find('.area-btn').append(cerNumChk);
 									
 									
 									$(".cerNumChk").on("click",function(){
 										if(code == $("[name='inputCode']").val()){//★인증성공
-											const memberId = $("[name='memberId']").val();
+											console.log("멤버 아이디는:"+memberId)
+											/* 
 											const form = $("<form>");
 											form.attr('action','/updateNewPwMemberFrm.do');
 											form.attr('method','post');
@@ -198,9 +204,13 @@
 											
 											form.append(hideInput);
 											form.append(submitBtn);
+											console.log(hideInput)
+											alert(hideInput)
+											$(".toEmail-view").append(form); 
+											*/
+											$("[name='hideMemberId']").val(memberId);
+											$(".submitBtn").click();
 											
-											$(".toEmail-view").append(form);
-											submitBtn.click();
 										}else{//★인증실패
 											alert("인증번호가 틀립니다");
 											location.reload(true);

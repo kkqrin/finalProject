@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import moo.ng.san.gonggu.model.service.GongguService;
+import moo.ng.san.gonggu.model.vo.Gonggu;
 
 @Controller
 public class GongguController {
@@ -13,8 +14,10 @@ public class GongguController {
 	private GongguService service;
 	
 	@RequestMapping(value="/gongguOrder.do")
-	public String gongguOrderPage(int productNo) {
-		return "order/moongsanOrder";
+	public String gongguOrderPage(Gonggu g) {
+		System.out.println("GongguController에서 g값 :"+g);
+		int result = service.insertGonggu(g);
+		return "redirect:/";
 	}
 	
 }
