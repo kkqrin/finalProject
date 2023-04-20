@@ -33,10 +33,10 @@
 	
 	<div class="content-wrap">
 	
-	<input type="hidden" id="session-member-name" value="${sessionScope.m.memberName}">
-	<input type="hidden" id="session-member-phone" value="${sessionScope.m.memberPhone}">
-	<input type="hidden" id="session-member-zonecode" value="${sessionScope.m.memberZoneCode}">
-	<input type="hidden" id="session-member-addr" value="${sessionScope.m.memberAddr}">
+		<input type="hidden" id="session-member-name" value="${sessionScope.m.memberName}">
+		<input type="hidden" id="session-member-phone" value="${sessionScope.m.memberPhone}">
+		<input type="hidden" id="session-member-zonecode" value="${sessionScope.m.memberZoneCode}">
+		<input type="hidden" id="session-member-addr" value="${sessionScope.m.memberAddr}">
 	
 	
         <pre>
@@ -44,7 +44,7 @@
         </pre>
         <div class="order-sheet-wrap">
             <h1>주문서</h1>
-            <form action="#" method="post">
+            <form action="/insertPay.do" method="post">
                 <div class="order-product-box">
                     <h4>
                         주문 상품
@@ -79,13 +79,15 @@
                             </div>
                             <div class="order-product-volume">1개</div>
                             <div class="order-product-price"><span></span>원</div>
-                            <input type="hidden" class="product-price" value="${i.productPrice }">
+                            <input type="hidden" name="productPrice" class="product-price" value="${i.productPrice }">
 							<input type="hidden" class="product-discount" value="${i.productDiscount }">
+							<input type="hidden" name="productNo" class="product-no" value="${i.productNo }">
+							<input type="hidden" name="optionInfoNo" value="${i.optionNo }">
                             <!-- ${i.productPrice } * ( 100 - ${i.productDiscount }) / 100 -->
                             <!-- .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") -->
                         </div>
                     </c:forEach>
-
+					
                 </div>
                 <div class="order-member-box">
                     <h4>주문자 정보</h4>
@@ -114,13 +116,13 @@
                         <tr>
                             <th><label for="deli-member">받으실분</label></th>
                             <td colspan="2">
-                                <input type="text" id="deli-member" class="input-noborder" placeholder="이름을 입력해주세요">
+                                <input type="text" name="deliveryReceiver" id="deli-member" class="input-noborder" placeholder="이름을 입력해주세요">
                             </td>
                         </tr>
                         <tr>
                             <th><label for="deli-phone">휴대폰</label></th>
                             <td colspan="2">
-                                <input type="text" id="deli-phone" class="input-noborder" placeholder="'-' 제외 숫자만 입력해주세요">
+                                <input type="text" name="deliveryPhone" id="deli-phone" class="input-noborder" placeholder="'-' 제외 숫자만 입력해주세요">
                             </td>
                         </tr>
                         <tr>
@@ -132,8 +134,8 @@
                                     <input type="text" id="deli-post-number" class="input-noborder" placeholder="우편번호">
                                     <button type="button" class="btn btn-pri size01">주소검색</button>
                                 </div>
-                                <input type="text" id="deli-addr" class="input-noborder" placeholder="주소를 입력해주세요">
-                                <input type="text" id="deli-addr2" class="input-noborder" placeholder="상세주소를 입력해주세요">
+                                <input type="text" name="deliveryAddress" id="deli-addr" class="input-noborder" placeholder="주소를 입력해주세요">
+                                <input type="text" name="deliAddr2" id="deli-addr2" class="input-noborder" placeholder="상세주소를 입력해주세요">
                             </td>
                         </tr>
                         <tr>
@@ -148,7 +150,7 @@
                                         <option value="4">무인택배함에 놔주세요</option>
                                         <option value="5" id="direct-deli-request">직접 입력</option>
                                     </select>
-                                    <input type="text" class="input-noborder direct-input-deli-request" placeholder="요청 사항을 직접 입력해주세요" style="display:none; margin-top: 10px;">
+                                    <input type="text" name="deliveryRequest" class="input-noborder direct-input-deli-request" placeholder="요청 사항을 직접 입력해주세요" style="display:none; margin-top: 10px;">
                                 </div>
                             </td>
                         </tr>
@@ -181,7 +183,7 @@
                                             <input type="text" id="input-saved-money" placeholder="사용 가능한 적립금 <fmt:formatNumber value="${point.pointEa }"/>원">
                                             <button type="button" class="btn btn-pri size01" id="do-saved-money">적용</button>
                                             <button type="button" class="btn btn-pri size01" id="all-saved-money">모두 사용</button>
-                                            <input type="hidden" id="hidden-total-point" value="${point.pointEa }">
+                                            <input type="hidden" name="minusPointEa" id="hidden-total-point" value="${point.pointEa }">
                                             <input type="hidden" id="hidden-current-point" value="0">
                                         </div>
                                     </td>
@@ -255,15 +257,23 @@
                             <button type="button" class="btn btn-pri">적립</button>
                             <div style="margin-right: 5px;">구매시</div>
                             <div><span></span>원 (10%)</div>
+                            <input type="hidden" name="plusPointEa" value="">
                         </div>
                     </div>
                 </div>
-
+				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 
                 <div class="order-complete-box area-btn full">
-                    <button class="btn btn-pri size03 order-complete-btn"><span></span>원 결제하기</button>
+                    <button type="button" id="payDirectBtn" class="btn btn-pri size03 order-complete-btn"><span></span>원 결제하기</button>
                 </div>
+           		<div class="area-btn left" style="display:none;">
+            	    <button class="btn btn-border-pri size01" type="button" id="alert01">성공</button>
+					<button class="btn btn-border-sec size01" type="button" id="alert02">에러</button>
+					
+           		</div>
+           		<button type="submit">제출</button>
             </form>
+            
 
 
 
@@ -346,7 +356,7 @@
 			const productPrice = $(".product-price").eq(i).val();
 			const productDiscount = $(".product-discount").eq(i).val();
 			
-			// Math.floor(productPrice*(100 - productDiscount)/1000)*10)
+			// Math.floor(productPrice*(100 - productDiscount)/1000)*10);
 			$(".order-product-price").eq(i).children().text((Math.floor(productPrice*(100 - productDiscount)/1000)*10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		};
 
@@ -388,7 +398,9 @@
 
             // 최종 결제 금액
             $("#hidden-total-pay").val(payPrice);
-        
+        	
+            const plusPoint = $(".total-order-buy-save-point>div").last().children().text();
+            $("[name=plusPointEa]").val(plusPoint);
 
         // 쿠폰 할인
         $( ".order-coupon" ).on("selectmenuchange", function(){
@@ -496,8 +508,83 @@
             // 결제버튼에 최종 결제 금액 표시
             $(".order-complete-btn>span").text($(".total-order-pay>div").last().children().text());
         })
+		
+        //결제엔진
+        $("#payDirectBtn").on("click",function(){
+			const price = $("#hidden-total-pay").val();
+			
+			const d = new Date();
+			
+			const memberMail = $("[name=memberMail]").val();
+			const memberName = $("[name=memberName]").val();
+			const memberPhone = $("[name=memberPhone]").val();
+			
+			const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
+			
+			IMP.init("imp35435215");
+			IMP.request_pay({
+				pg : "html5_inicis",
+				pay_method : "card",
+				merchant_uid: "상품번호_"+date,//상점에서 관리하는 주문번호
+				name: "뭉쳐야산다",//결제이름
+				amount : price,
+				buyer_email: memberMail,
+				buyer_name: memberName,
+				buyer_tel: memberPhone
+			},function(rsp){
+				if(rsp.success){
+					$("#alert01").click();
+		            
+				}else{
+					$("#alert02").click();
+				}
+			});
+		});
+        //결제 완료 메세지버튼
+        $(function () {
+            $("#alert01").on("click", function () {
+                jQueryAlert('success',"결제 완료");
+            });
+            $("#alert02").on("click", function () {
+                jQueryAlert('error',"결제 실패");
+            });
 
+            function jQueryAlert(type, msg) {
+                let $type = type;
+                let messageBox = msg;
+                switch ($type) {
+                    case 'success':
+                    messageBox = $.parseHTML('<div class="alert__success"></div>');
+                    break;
+                    case 'error':
+                    messageBox = $.parseHTML('<div class="alert__error"></div>');
+                    break;
+                }
+                $("body").append(messageBox);
+                $(messageBox).dialog({
+                    dialogClass :$type,
+                    open: $(messageBox).append(msg),
+                    draggable: false,
+                    modal: true,
+                    buttons: {
+                        "OK": function () {
+                            $(this).dialog("close");
+                            $("#submit").click();
+                            
+                        }
+                    },
+                    show: {
+                        effect: 'fade',
+                        duration: 200 //at your convenience
+                    },
+                    hide: {
+                        effect: 'fade',
+                        duration: 200 //at your convenience
+                    }
+                });
+            };
         
+        });
     </script>
 </body>
 </html>

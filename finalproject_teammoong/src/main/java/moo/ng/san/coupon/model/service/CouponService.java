@@ -67,13 +67,13 @@ public class CouponService {
 		
 		String pageNavi = "";
 		if(pageNo != 1) {
-			pageNavi += "<a href = '/pointSearch.do?reqPage="+(pageNo -1)+"'class='btn-pagi ctrl'>[이전]</a>";
+			pageNavi += "<a href = '/pointSearch.do?reqPage="+(pageNo -1)+"&memberNo="+memberNo+"'class='btn-pagi ctrl'>[이전]</a>";
 		}
 		for(int i=0;i<pageNaviSize;i++) {
 			if(pageNo == reqPage) {
 				pageNavi += "<span class='btn-pagi page-active'>"+pageNo+"</span>";
 			}else {
-				pageNavi += "<a href='/pointSearch.do?reqPage="+pageNo+"'class='btn-pagi'>"+pageNo+"</a>";
+				pageNavi += "<a href='/pointSearch.do?reqPage="+pageNo+"&memberNo="+memberNo+"'class='btn-pagi'>"+pageNo+"</a>";
 			}
 			pageNo++;
 			if(pageNo > totalPage) {
@@ -81,7 +81,7 @@ public class CouponService {
 			}
 		}
 		if(pageNo <= totalPage) {
-			pageNavi += "<a href = '/pointSearch.do?reqPage="+pageNo+"'class='btn-pagi ctrl'>[다음]</a>";
+			pageNavi += "<a href = '/pointSearch.do?reqPage="+pageNo+"&memberNo="+memberNo+"'class='btn-pagi ctrl'>[다음]</a>";
 		}
 		PointPageData ppd = new PointPageData(pointList, pageNavi);
 		
