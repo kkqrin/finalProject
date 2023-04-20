@@ -143,7 +143,7 @@
 						<td colspan="4">
 							<div class="area-btn right">
 								<button type="button" id="goods-plus"
-									class="btn btn-border-sec size01">상품추가</button>
+									class="btn btn-pri size01">상품추가</button>
 							</div>
 						</td>
 					</tr>
@@ -185,7 +185,7 @@
 
 	<script>
 	
-	let result = [false, false, false]; //정규표현식 검사
+	let result = [false, false]; //정규표현식 검사
 	//0제목, 1계좌이름, 2계좌번호
 	
 	
@@ -193,7 +193,14 @@
 		$("#goods-plus").on(
 				"click",
 				function() {
-
+					
+					const minusBtn = $('<button>');
+					minusBtn.text('상품삭제');
+					minusBtn.addClass('btn minBtn btn-border-sec size01 ');
+					$("#goods-plus").after(minusBtn);
+					
+					
+					
 					const tr0 = $('<tr>');
 					const td0 = $('<td>').attr('colspan', 4);
 					let count = "상품" + (i + 1);
@@ -425,17 +432,17 @@
 			}
 		});//제목 정규표현식
 		
-		$("[name='accountName']").on("change",function(){
-		    const nameReg = /^[가-힣]{1,}$/;
-		    const nameValue = $(this).val();
-		    if(nameReg.test(nameValue)){
-		        result[1] = true;
-		    }else{
-		        $(this).next().text("1글자이상(한글)입력가능합니다.")
-		        $(this).next().css("color","var(--secondary)");
-		        result[1] = false;
-		    }
-		});//계좌 이름 정규표현식
+// 		$("[name='accountName']").on("change",function(){
+// 		    const nameReg = /^[가-힣]{1,}$/;
+// 		    const nameValue = $(this).val();
+// 		    if(nameReg.test(nameValue)){
+// 		        result[1] = true;
+// 		    }else{
+// 		        $(this).next().text("1글자이상(한글)입력가능합니다.")
+// 		        $(this).next().css("color","var(--secondary)");
+// 		        result[1] = false;
+// 		    }
+// 		});//계좌 이름 정규표현식
 		
 		$("[name='accountWriter']").keyup(function(){
 			const inputAccount = $("[name='accountWriter']").val();

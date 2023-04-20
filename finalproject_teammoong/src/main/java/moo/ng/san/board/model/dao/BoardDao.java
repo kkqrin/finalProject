@@ -71,6 +71,14 @@ public class BoardDao {
 		BoardJoin bj = sqlSession.selectOne("board.selectOneBoardJoin", joinNo);
 		return bj;
 	}
+	public int boardDelete(int boardNo) {
+		int result = sqlSession.delete("board.boardDelete",boardNo);
+		return result;
+	}
+	public int updateBoardCount(Board b) {
+		int result = sqlSession.update("board.boardReadCount",b);
+		return result;
+	}
 	
 
 }
