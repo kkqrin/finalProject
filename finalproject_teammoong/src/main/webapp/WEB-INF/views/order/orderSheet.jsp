@@ -417,7 +417,7 @@
             const myPoint = $("#hidden-total-point").val();
 
             // 최종 결제 금액보다 보유중인 총 적립금이 적으면 최종 결제 금액만 사용됨
-            if(totalPay > myPoint){
+            if(totalPay < myPoint){
                 // hidden-total-point
                 $(".total-order-saved-money>div").last().children().text("-"+totalPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 // input창도 동기화
