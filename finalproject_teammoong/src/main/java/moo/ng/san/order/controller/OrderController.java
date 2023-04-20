@@ -29,9 +29,11 @@ public class OrderController {
 	private ProductService productService;
 	
 	@RequestMapping(value="/orderSheet.do")
-	public String orderSheet(int[] productNo, int[] optionNo, @SessionAttribute(required=false) Member m, Model model) {
+	public String orderSheet(int[] productNo, int[] optionNo, int page, @SessionAttribute(required=false) Member m, Model model) {
 		// 세션에서 가져옴
 		int memberNo = m.getMemberNo();
+		
+		model.addAttribute("page", page);
 		
 		// 구매하려는 상품 조회
 		ArrayList<Order> orderProductList = service.selectOrderProductList(productNo, optionNo);

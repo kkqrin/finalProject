@@ -28,7 +28,6 @@
 					<span class="custom-checkbox"></span>
 					전체선택
 				</label>
-				(<span>0</span>/<span>10</span>)
 			</div>
 			<div>선택삭제</div>
 		</div>
@@ -44,8 +43,12 @@
 									<input type="checkbox" name="chk">
 									<span class="custom-checkbox"></span>
 								</label>
-								<input type="hidden" name="productNo" value="${i.productNo}" disabled>
-								<input type="hidden" name="optionNo" value="${i.optionNo}" disabled>
+								<!-- <input type="hidden" name="productNo" value="${i.productNo}" disabled>
+								<input type="hidden" name="optionNo" value="${i.optionNo}" disabled> -->
+								<input type="text" name="productNo" value="${i.productNo}" disabled>
+								<input type="text" name="optionNo" value="${i.optionNo}" disabled>
+								<input type="text" name="orderDetailCnt" value="${i.basketCount}" disabled>
+								<input type="hidden" name="page" value="0">
 							</div>
 							<div class="cart-product-img">
 								<a href="/productView.do?productNo=${i.productNo}">
@@ -128,11 +131,13 @@
 		$("[name=chk]").on("change", function(){
 			if($(this).is(":checked")){
 				// 선택 안 된 체크박스는 주문서 페이지로 전달안되게
-				$(this).next().prop("disabled", false);
-				$(this).next().next().prop("disabled", false);
+				$(this).parent().next().prop("disabled", false);
+				$(this).parent().next().next().prop("disabled", false);
+				$(this).parent().next().next().next().prop("disabled", false);
 			}else{
-				$(this).next().prop("disabled", true);
-				$(this).next().next().prop("disabled", true);
+				$(this).parent().next().prop("disabled", true);
+				$(this).parent().next().next().prop("disabled", true);
+				$(this).parent().next().next().next().prop("disabled", true);
 			}
 		})
 		
