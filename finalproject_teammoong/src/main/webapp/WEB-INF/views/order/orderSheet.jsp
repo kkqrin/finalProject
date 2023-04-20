@@ -371,7 +371,9 @@
             // 주문금액 (결제할 금액)
             payPrice = Number(payPrice) + Number((Math.floor(productPrice*(100 - productDiscount)/1000)*10));
             $(".total-order-amount-1>div").last().children().text(payPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            
+        
+        }
+        
             // 최종 결제 금액 계산을 위해 hidden에 넣어둠
             $("#number-pay-price").val(payPrice);
 
@@ -386,7 +388,7 @@
 
             // 최종 결제 금액
             $("#hidden-total-pay").val(payPrice);
-        }
+        
 
         // 쿠폰 할인
         $( ".order-coupon" ).on("selectmenuchange", function(){
