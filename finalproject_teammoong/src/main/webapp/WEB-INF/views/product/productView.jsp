@@ -205,6 +205,7 @@
             </div>
         </div>
         <div class="gonggu-board-logo"><h3>뭉쳐야 산다!</h3></div>
+        	<c:if test="${gongguList ne null }">
         <div class="gonggu-board">
             <c:forEach items="${gongguList }" var="g">
             <div class="all-flex-wrap">
@@ -221,12 +222,13 @@
                     <button type="button" class="btn btn-pri size01" id="orderBtn">뭉산취소</button>
                     </c:if>
                     <c:if test="${sessionScope.m.memberId ne g.memberId }">
-                    <button type="button" class="btn btn-pri size01" id="orderBtn">주문참여</button>
+                    <button type="button" class="btn btn-pri size01" id="orderBtn"><a href="/orderJoin.do">주문참여</a></button>
                     </c:if>
                 </div>
             </div>
         </c:forEach>
         </div>
+        </c:if>
         
         <div class="quick-scroll-bar">
             <table>
@@ -247,25 +249,28 @@
             <form action="/reviewWrite.do" method="post" enctype="multipart/form-data"></form>
             <table>
                 <tr>
-                    <th>사진</th>
-                    <th colspan="5">내용</th>
+                    <th style="background-color: #f88000;">사진</th>
+                    <th style="background-color: #f88000;" colspan="5">내용</th>
                 </tr>
                 <tr>
-                    <th><input type="file" name="reviewFile" multiple></th>
-                    <td colspan="5"><textarea style="height: 200px;"></textarea></td>
+                    <td >
+                        <input type="file" name="reviewFile" multiple onchange="readURL(this)">
+                        <img id="preview">
+                    </td>
+                    <td colspan="5"><textarea style="height: 200px; border: none;"></textarea></td>
                 </tr>
                 <tr>
                     <th>별점</th>
-                    <td style="color:black">
+                    <td style="color:gold">
                         <div>
                           <label for="star1">★</label>
                         </div>
                         <input type="radio" name="star" id="star1">
                       </td>
-                    <td style="color:black">★★<div><input type="radio" name="star"></div></td>
-                    <td style="color:black">★★★<div><input type="radio" name="star"></div></td>
-                    <td style="color:black">★★★★<div><input type="radio" name="star"></div></td>
-                    <td style="color:black">★★★★★<div><input type="radio" name="star"></div></td>
+                    <td style="color:gold">★★<div><input type="radio" name="star"></div></td>
+                    <td style="color:gold">★★★<div><input type="radio" name="star"></div></td>
+                    <td style="color:gold">★★★★<div><input type="radio" name="star"></div></td>
+                    <td style="color:gold">★★★★★<div><input type="radio" name="star"></div></td>
                 </tr>
                 <tr>
                     <td colspan="6"><div class="area-btn full"><button class="btn btn-pri size02">리뷰작성</button></div></td>
