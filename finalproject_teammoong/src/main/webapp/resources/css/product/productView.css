@@ -1,13 +1,14 @@
 .top-info-box{
 display: flex;
+align-items: center;
 }
 .img-box{
     width: 500px;
-    height: 570px;
+    height: 650px;
 }
 .img-box img{
     width: 500px;
-    height: 570px;
+    height: 650px;
     object-fit: cover;
 }
 .quick-scroll-bar>ul{
@@ -73,6 +74,8 @@ display: flex;
     padding-top: 30px;
     padding-bottom: 30px;
     border-bottom: 1px solid #e1e4e5;
+    justify-content: space-between;
+    align-items: center;
 }
 .info-title-box{
     line-height: 65px;
@@ -84,7 +87,7 @@ display: flex;
 }
 .info-content{
     font-size: 15px;
-    padding-left: 200px;
+    padding-right: 80px;
 }
 .arrive-box{
     display: flex;
@@ -93,7 +96,7 @@ display: flex;
     display: flex;
 }
 .delivery-info{
-    padding-top: 15px;
+    /* padding-top: 15px; */
     font-weight: bold;
     color: #f88000;
 }
@@ -210,10 +213,25 @@ display: flex;
 }
 .flex-btn{
     display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 10px;
 }
+.flex-btn>div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+.cart-btn{
+    width: 60px;
+}
+.cart-btn>span{
+    font-size: 32px;
+    cursor: pointer;
+}
 .one-btn{
-    padding-left: 100px;
+    /* padding-left: 100px; */
 }
 .moong-btn{
     padding-left: 5px;
@@ -277,4 +295,34 @@ input[type="radio"]:checked + label {
     width: 1200px;
     margin: 0 auto;
     text-align: center;
+}
+
+#preview{
+    width: 180px;
+    height: 180px;
+    border: 1px solid #3A3A3A;
+    border-radius: 20px;
+}
+
+
+
+/* 수량 */
+.product-view-volume{
+    width: 200px;
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+}
+
+.product-view-volume>button{
+    width: 50px;
+    background-color: #ccc;
+    font-size: 16px;
+    border-radius: 3px;
+}
+
+.product-view-volume>[name="pop_out"]{
+    margin: 0px 3px;
 }
