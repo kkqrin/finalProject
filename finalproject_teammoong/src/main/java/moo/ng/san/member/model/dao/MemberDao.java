@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.member.model.vo.Member;
+import moo.ng.san.member.model.vo.Out;
 
 @Repository
 public class MemberDao {
@@ -38,6 +39,14 @@ public class MemberDao {
 
 	public int updateNewPwMember(Member member) {
 		return sqlSession.update("member.updateNewPwMember",member);
+	}
+
+	public int insertOutReason(Out o) {
+		return sqlSession.insert("member.insertOutReason",o);
+	}
+
+	public int updateMemberStatus(String memberId) {
+		return sqlSession.update("member.updateMemberStatus",memberId);
 	}
 
 }

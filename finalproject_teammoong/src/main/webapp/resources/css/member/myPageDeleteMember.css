@@ -35,3 +35,47 @@
 	font-weight: bold;
 	margin-right: 20px;
 }
+#step2 table{
+	margin-bottom : 20px;
+}
+#step2 table tbody tr td{
+	text-align: left;
+}
+
+
+/*====step3=================*/
+#step3>div:first-child{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 20px;
+}
+#step3>div>.img{
+	width : 64px;
+	height : 64px;
+	background: url(/resources/img/common/sad.png) no-repeat center;
+}
+#step3 .note-title{
+	margin : 20px 0;
+}
+
+#step3 form>div{
+	margin: 10px 0;
+}
+
+
+
+
+
+#step2, #step3{
+	display: none;
+}
+
+
+
+
+
+
+
+
+

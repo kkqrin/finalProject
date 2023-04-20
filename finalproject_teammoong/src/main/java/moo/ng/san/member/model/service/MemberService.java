@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.member.model.dao.MemberDao;
 import moo.ng.san.member.model.vo.Member;
+import moo.ng.san.member.model.vo.Out;
 
 @Service
 public class MemberService {
@@ -120,6 +121,16 @@ public class MemberService {
 		return code.toString();
 		
 	}//sendMail
+
+	
+
+	public int processOutMember(Out o) {
+		int result = dao.insertOutReason(o);
+		if(result>0) {
+			result += dao.updateMemberStatus(o.getMemberId());
+		}
+		return result;
+	}//processOutMember
 
 
 	

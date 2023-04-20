@@ -25,6 +25,7 @@ import lombok.val;
 import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.member.model.service.MemberService;
 import moo.ng.san.member.model.vo.Member;
+import moo.ng.san.member.model.vo.Out;
 import net.nurigo.sdk.NurigoApp;
 import net.nurigo.sdk.message.exception.NurigoMessageNotReceivedException;
 import net.nurigo.sdk.message.model.Message;
@@ -274,6 +275,44 @@ public class MemberController {
 		String code = service.sendMail(memberEmail);
 		return code;
 	}//sendEmailMember
+	
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/chkBeforeOutMember.do")
+	public String chkBeforeOutMember(String memberId, String memberPw) {
+		Member member = new Member();
+		member.setMemberId(memberId);
+		member.setMemberPw(memberPw);
+		Member m = service.selectOneMember(member);
+		if(m!=null) {
+			return "ok";
+		}
+		return "null";
+	}//chkBeforeOutMember
+	
+	@RequestMapping(value = "/updateMemberOut.do")
+	public String updateMemberOut(String memberId, int outReason, String outContent, Model model, HttpSession session) {
+		Out o = new Out(memberId, outReason, outContent);
+		int result = service.processOutMember(o);
+		if(result>1) {
+			session.invalidate();
+			MsgVO msg = new MsgVO();
+			msg.setTitle("탈퇴처리가 완료되었습니다");
+			msg.setMsg("그동안 뭉쳐야산다를 이용해주셔서 감사합니다.");
+			msg.setLoc("/");
+			model.addAttribute("msg", msg);
+			return "common/msg";
+		}else {
+			session.invalidate();
+			MsgVO msg = new MsgVO();
+			msg.setTitle("탈퇴처리중 오류가 발생하였습니다");
+			msg.setMsg("탈퇴 실패. 관리자에게 문의해주세요");
+			msg.setLoc("/");
+			model.addAttribute("msg", msg);
+			return "common/msg";
+		}
+	}//updateMemberOut
 	
 	
 }//MemberController

@@ -52,22 +52,22 @@
 			from member_tbl
 			<trim prefix="where" prefixOverrides="and/or" > 
 			<if test="memberId != null">
-			member_id=#{memberId}
+			member_id=#{memberId} and member_status!=3
 			</if>
 			<if test="memberPw != null">
 			and member_pw=#{memberPw}
 			</if>
 			<if test="memberNo==0 and memberName != null and memberPhone != null"> <!-- 이름&폰번으로 아이디찾기 -->
-			member_name=#{memberName} and member_phone=#{memberPhone}
+			member_name=#{memberName} and member_phone=#{memberPhone} and member_status!=3
 			</if>
 			<if test="memberNo==0 and memberName != null and memberEmail != null"> <!-- 이름&이메일로 아이디찾기 -->
-			member_name=#{memberName} and member_email=#{memberEmail}
+			member_name=#{memberName} and member_email=#{memberEmail} and member_status!=3
 			</if>
 			<if test="memberNo==0 and memberPhone != null"> <!-- 아이디&폰번호로 비번찾기 -->
-			and member_phone=#{memberPhone}
+			and member_phone=#{memberPhone} and member_status!=3
 			</if>
 			<if test="memberNo==0 and memberEmail != null"> <!-- 아이디&이메일로 비번찾기 -->
-			and member_email=#{memberEmail}
+			and member_email=#{memberEmail} and member_status!=3
 			</if>
 			</trim>
 		</select> 
@@ -108,8 +108,22 @@
 		
 		
 		
+		<insert id="insertOutReason" parameterType="out">
+			insert into member_out values(
+				#{memberId},
+				#{outReason},
+				#{outContent}
+			)
+		</insert>
 		
 		
+		<update id="updateMemberStatus" parameterType="string">
+			update member_tbl
+			set
+				member_status = 3
+			where 
+				member_id = #{parameter}
+		</update>
 		
 		
 		

@@ -46,7 +46,7 @@
 
 		<typeAlias type="moo.ng.san.admin.model.vo.CouponData" alias="cd" /> <!-- 쿠폰 통합 -->
 		<typeAlias type="moo.ng.san.admin.model.vo.SalesData" alias="sd" /> <!-- 매출/원가 -->
-
+		<typeAlias type="moo.ng.san.member.model.vo.Out" alias="out" /><!-- 탈퇴 이유 -->
 		
 	</typeAliases>
 	<!-- 
