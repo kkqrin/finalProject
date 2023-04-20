@@ -101,4 +101,6 @@ public class BoardController {
 		model.addAttribute("list", list);
 		return"board/myJoinList";
 	}
+	
+	
 }

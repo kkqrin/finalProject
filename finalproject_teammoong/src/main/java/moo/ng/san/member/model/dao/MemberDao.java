@@ -1,10 +1,15 @@
 package moo.ng.san.member.model.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.member.model.vo.Out;
@@ -52,6 +57,20 @@ public class MemberDao {
 
 	public int updateMemberStatus(String memberId) {
 		return sqlSession.update("member.updateMemberStatus",memberId);
+	}
+
+	public ArrayList<String> selectBoardImg(String memberId) {
+		List list = sqlSession.selectList("member.selectMyBoardImg",memberId);
+		return (ArrayList<String>)list;
+	}
+
+	public int selectBoardCount(String memberId) {
+		return sqlSession.selectOne("member.myTotalCount",memberId);
+	}
+
+	public ArrayList<Board> selectMyBoardList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("member.selectMyBoardList",map);
+		return (ArrayList<Board>)list;
 	}
 
 	

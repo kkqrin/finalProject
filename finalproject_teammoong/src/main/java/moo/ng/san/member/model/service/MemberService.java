@@ -1,5 +1,7 @@
 package moo.ng.san.member.model.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 import javax.mail.MessagingException;
@@ -11,6 +13,9 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import moo.ng.san.board.model.dao.BoardDao;
+import moo.ng.san.board.model.vo.Board;
+import moo.ng.san.board.model.vo.BoardPageData;
 import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.member.model.dao.MemberDao;
 import moo.ng.san.member.model.vo.Member;
@@ -23,6 +28,7 @@ public class MemberService {
 	private MemberDao dao;
 	@Autowired
 	private JavaMailSender mailSender;
+	
 	
 	public Member selectOneMember(Member member) {
 		return dao.selectOneMember(member);
@@ -136,6 +142,65 @@ public class MemberService {
 		}
 		return result;
 	}//processOutMember
+
+
+	
+	
+	
+	
+	
+	
+	public BoardPageData selectMyWriteList(int reqPage, String memberId) {
+				// 한 페이지당 보여줄 게시물 수 : 5
+				int numPerPage = 5;
+				int end = reqPage * numPerPage;
+				int start = end - numPerPage + 1;
+				String id = memberId;
+				//계산된 start, end를 가지고 게시물 목록 조회
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put("start", start);
+				map.put("end", end);
+				map.put("memberId", id);
+				ArrayList<Board> list = dao.selectMyBoardList(map);
+				
+				//pageNavi 제작시작
+				//전체페이지 수 계산필요 -> 전체 게시물 수 조회
+				int totalCount = dao.selectBoardCount(memberId);
+				//전체게시물로 전체페이지수 계산
+				int totalPage = (int)Math.ceil(totalCount/(double)numPerPage);
+				//페이지 네비 사이즈
+				int pageNaviSize = 5;
+				
+				int pageNo =1;
+				if(reqPage>3) {
+					pageNo = reqPage-2;
+				}
+				//페이지네비 생성시작
+				String pageNavi = "";
+				//이전버튼
+				if(pageNo != 1) {
+					pageNavi +="<a href='/boardList.do?reqPage="+(pageNo-1)+"'>[이전]</a>";
+				}
+				//페이지 숫자 생성
+				for(int i=0;i<pageNaviSize;i++) {
+					if(pageNo == reqPage) {
+						pageNavi +=	"<span>"+pageNo+"</span>";
+					}else {
+						pageNavi += "<a href='/boardList.do>reqPage="+pageNo+"'>"+pageNo+"</a>";
+					}
+					pageNo++;
+					if(pageNo > totalPage) {
+						break;
+					}
+				}
+				//다음 버튼
+				if(pageNo <= totalPage) {
+					pageNavi +="<a href='/boardList.do?reqPage="+pageNo+"'>[다음]</a>";
+				}
+				BoardPageData bpd = new BoardPageData(list, pageNavi);
+//				bpd.setFileList(fileList);
+				return bpd;
+	}//selectMyWriteList
 
 	
 

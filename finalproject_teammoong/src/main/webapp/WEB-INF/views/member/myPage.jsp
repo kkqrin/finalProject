@@ -54,7 +54,7 @@
 							<h4>${sessionScope.m.memberName }</h4>
 						</div>
 						<div class="point-zone">
-							<p class="tag">현재 포인트</p>
+							<p class="tag">뭉 포인트</p>
 							<h4>${p.pointEa }</h4>
 						</div>
 						<div>

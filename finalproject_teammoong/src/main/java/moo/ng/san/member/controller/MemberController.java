@@ -2,6 +2,7 @@ package moo.ng.san.member.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
@@ -22,6 +23,8 @@ import common.FileManager;
 import common.MsgVO;
 import common.PhoneCertify;
 import lombok.val;
+import moo.ng.san.board.model.service.BoardService;
+import moo.ng.san.board.model.vo.BoardPageData;
 import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.member.model.service.MemberService;
 import moo.ng.san.member.model.vo.Member;
@@ -42,6 +45,7 @@ public class MemberController {
 	private FileManager fm; 
 	@Autowired
 	private JavaMailSender mailSender;
+
 	
 	@ResponseBody
 	@RequestMapping(value = "/memberPhoneCheck.do")
@@ -311,6 +315,22 @@ public class MemberController {
 			return "common/msg";
 		}
 	}//updateMemberOut
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping(value="/myWriteList.do")
+	public String myWriteList(int reqPage, Model model, @SessionAttribute(required=false) Member m) {
+		BoardPageData bpd = service.selectMyWriteList(reqPage,m.getMemberId());
+		model.addAttribute("list", bpd.getList());
+		model.addAttribute("pageNavi", bpd.getPageNavi());
+		return "board/myWriteList";
+	}
+	
+	
 	
 	
 }//MemberController
