@@ -154,6 +154,8 @@ public class ProductController {
 		ArrayList<Basket> basketList = service.selectBasketList(memberNo);
 		model.addAttribute("basketList", basketList);
 		
+		System.out.println(basketList);
+		
 		return "product/shoppingCart";
 	}
 	
@@ -224,9 +226,18 @@ public class ProductController {
 	}
 	
 	
-	
-	
-	
+	// 장바구니 삭제
+	@RequestMapping(value="/deleteCart.do")
+	public String deleteCart(int[] basketNo) {
+		
+		int result = service.deleteCart(basketNo);
+		
+		if(result == basketNo.length) {
+			return "redirect:/shoppingCart.do";
+		}else {
+			return "redirect:/";
+		}		
+	}
 	
 	
 	

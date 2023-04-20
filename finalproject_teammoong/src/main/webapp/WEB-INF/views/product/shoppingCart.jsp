@@ -29,13 +29,21 @@
 					전체선택
 				</label>
 			</div>
-			<div>선택삭제</div>
+			<form action="/deleteCart.do" method="post" id="form-delet-cart">
+				<button id="delete-cart">선택삭제</button>
+				<c:forEach items="${basketList}" var="i">
+					<input type="text" name="basketNo" value="${i.basketNo}" disabled>
+				</c:forEach>
+			</form>
 		</div>
 
 		<div class="order-payment-wrap">
 			<div>
+				<c:if test="${basketList eq null}">
+
+				</c:if>
 				<form action="/orderSheet.do" method="post">
-					<c:forEach items="${basketList}" var="i">
+					<c:forEach items="${basketList}" var="i" varStatus="status">
 						<div class="cart-product-item">
 							<div>
 								<!-- <input type="checkbox" name="chk"> -->
@@ -49,6 +57,7 @@
 								<input type="text" name="optionNo" value="${i.optionNo}" disabled>
 								<input type="text" name="orderDetailCnt" value="${i.basketCount}" disabled>
 								<input type="hidden" name="page" value="0">
+								<input type="text" name="chk-index" value="${status.index}">
 							</div>
 							<div class="cart-product-img">
 								<a href="/productView.do?productNo=${i.productNo}">
@@ -134,10 +143,19 @@
 				$(this).parent().next().prop("disabled", false);
 				$(this).parent().next().next().prop("disabled", false);
 				$(this).parent().next().next().next().prop("disabled", false);
+
+				// 인덱스 가져오기
+				const index = $(this).parent().next().next().next().next().next().val();
+				$("#form-delet-cart input[name=basketNo]").eq(index).prop("disabled", false);
+
 			}else{
 				$(this).parent().next().prop("disabled", true);
 				$(this).parent().next().next().prop("disabled", true);
 				$(this).parent().next().next().next().prop("disabled", true);
+
+				// 인덱스 가져오기
+				const index = $(this).parent().next().next().next().next().next().val();
+				$("#form-delet-cart input[name=basketNo]").eq(index).prop("disabled", true);
 			}
 		})
 		
@@ -249,6 +267,9 @@
 			$("form").submit();
 		});
 
+		$("#form-delete-cart").submit(function (e) {
+			
+		});
 
 	</script>
 </body>

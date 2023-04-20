@@ -77,7 +77,7 @@
                                 </div>
                                 <div class="order-product-option">${i.optionDetailName }</div>
                             </div>
-                            <!-- 뷰 page 1 , 장바구니 2 -->
+                            <!-- 뷰 page : 상품 하나의 수량들 , 장바구니 : 0 -->
                             <c:choose>
                                 <c:when test="${page eq 0}">
                                     <div class="order-product-volume">${i.basketCount}개</div>
