@@ -12,8 +12,13 @@
 						board_name as boardName,
 						board_writer as boardWriter,
 						board_date as boardDate,
-						to_char(board_start,'""YYYY"년"MM"월"DD"일"') as boardStart,
-						to_char(board_end,'""YYYY"년"MM"월"DD"일"') as boardEnd
+
+						
+						
+						
+						
+						board_count as boardCount
+
 					from board_tbl 
 					order by 1 desc)b)
 			where rnum between #{start} and #{end}
@@ -163,6 +168,15 @@
 					javaType="java.util.ArrayList"
 		/>
 	</resultMap>
+	<delete id="boardDelete" parameterType="_int">
+		delete
+		form file_tbl where board_no = #{_parameter}
+	</delete>
+	<update id="boardReadCount" parameterType="b">
+		update board_tbl set
+		board_count = #{boardCount}
+		where board_no = #{boardNo}
+	</update>	
 	
 	<select id="selectBoardImg" resultType="bf" >
 		SELECT 

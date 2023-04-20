@@ -85,7 +85,7 @@ sup{
 					<td style="text-align:left;" colspan="4">-상품 설명<sup>*</sup></td>
 				</tr> 
 				<tr>
-					<td colspan="4"><input type="text" value="${b.boardContent }" readonly style="text-align: center;"></td>
+					<td colspan="4">${b.boardContent }</td>
 				</tr>
 				<tr>
 					<td style="text-align:left;" colspan="4">-입금 정보<sup>*</sup></td>
@@ -230,7 +230,7 @@ sup{
 			<c:choose>
 			<c:when test="${sessionScope.m.memberId eq b.boardWriter }">
 			<div style="display: flex;">
-			<input class="btn btn-border-sec size01" type="button"  value="삭제" style="background-color: var(--primary); border-color: var(--primary); color: #fff; cursor: pointer; padding: 20px 50px 20px 50px; margin-top: 15px; width: 100%">
+			<input class="btn btn-border-sec size01" name="delete" type="button"  value="삭제" style="background-color: var(--primary); border-color: var(--primary); color: #fff; cursor: pointer; padding: 20px 50px 20px 50px; margin-top: 15px; width: 100%">
 			</div>
 			</c:when>
 			<c:when test="${empty sessionScope.m.memberId}">
@@ -279,7 +279,11 @@ sup{
 		}
 	});
 	
+		
 	
+	$("[name='delete']").on("click",function(){
+		location.href="/boardDelete.do?boardNo=${b.boardNo}"
+	});
 
 	$( function() {
 				$( ".select-custom" ).selectmenu();

@@ -65,6 +65,8 @@ public class BoardController {
 	@RequestMapping(value="/boardView.do")
 	public String boardView(int boardNo, Model model) {
 		Board b = service.selectOneBoard(boardNo);
+		b.setBoardCount(b.getBoardCount()+1);
+		int result = service.updateBoardCount(b);
 		ArrayList<BoardOption> optionList = service.selectOneBoardOptionList(boardNo);
 		ArrayList<FileVO> fileList = service.selectFileList(boardNo);
 		model.addAttribute("f",fileList);
@@ -101,6 +103,20 @@ public class BoardController {
 		model.addAttribute("list", list);
 		return"board/myJoinList";
 	}
-	
-	
-}
+
+	@RequestMapping(value = "/boardDelete.do")
+	public String boardDelete(int boardNo, HttpServletRequest request) {
+		//db 삭제하고, 서버에 업로드 되어있는 파일을 지우기 위해 파일 목록을 가져옴
+		ArrayList<FileVO> list = service.boardDelete(boardNo);
+		
+		if(list == null) {
+			return "redirect:/boardView.do?boardNo="+boardNo;//다시 상세보기로			
+		}else {
+			//업로드 되어있는 파일도 삭제{request 있어야함)
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/board/");
+			for(FileVO file : list) {
+				manager.deleteFile(savePath, file.getFilepath());
+			}
+			return "redirect:/boardList.do?reqPage=1";
+		}
+	}

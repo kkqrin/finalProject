@@ -146,4 +146,25 @@ public class BoardService {
 		return dao.selectOneBoardJoin(joinNo);
 	}
 
+
+
+
+	public ArrayList<FileVO> boardDelete(int boardNo) {
+		ArrayList<FileVO> delFileList = dao.selectFileList(boardNo);
+		
+		int result = dao.boardDelete(boardNo);
+		if(result > 0) {
+			return delFileList;
+		}
+		return null;
+	}
+
+
+
+
+	public int updateBoardCount(Board b) {
+		int result = dao.updateBoardCount(b);
+		return result;
+	}
+
 }

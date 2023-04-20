@@ -134,12 +134,12 @@
                                 <div class="board-seller-profile">
                                    <img src="/resources/upload/member/moongs.png">
                                 </div>
-                                <div class="board-seller-id">뭉산오렌지</div>
+                                <div class="board-seller-id">${b.boardWriter }</div>
                             </div>
                             <div class="board-view-count">
                                 <!-- <div class="material-symbols-outlined star-rate">star</div> -->
                                 <div class="rating-average">조회수</div>
-                                <div class="review-count">1,551</div>
+                                <div class="review-count">${b.boardCount }</div>
                             </div>
                         </div>
                     </div>
