@@ -54,7 +54,7 @@
 							<h4>${sessionScope.m.memberName }</h4>
 						</div>
 						<div class="point-zone">
-							<p class="tag">현재 포인트</p>
+							<p class="tag">뭉 포인트</p>
 							<h4>${p.pointEa }</h4>
 						</div>
 						<div>
@@ -170,7 +170,7 @@
 					<div class="one-line changePw">
 							<div class="name-tag">비밀번호 변경하기</div>
 							<div class="subDiv" style="width: 360px;">
-								<a data-modal="#modelChangePw" style="text-align: left; line-height: 38px;">비밀번호 변경하기</a>
+								<a data-modal="#modelChangePw" style="text-align: left; line-height: 38px; cursor: pointer;">비밀번호 변경하기</a>
 							</div>
 					</div>
 							<div id="modelChangePw" class="modal modal-sec">
@@ -182,12 +182,12 @@
 											
 											
 											<div class="name-tag">현재 비밀번호</div>
-											<input type="password" name="memberPw" placeholder="현재 비밀번호를 입력하세요">
+											<input type="password" autoComplete="off" name="memberPw" placeholder="현재 비밀번호를 입력하세요">
 											<div class="name-tag">새로운 비밀번호</div>
-											<input type="password" id="memberNewPw" placeholder="새로운 비밀번호를 입력하세요">
+											<input type="password" autoComplete="off" id="memberNewPw" placeholder="영문,숫자,특수문자(공백 제외)조합으로 8글자 이상">
 											<a class="caution">영문,숫자,특수문자(공백 제외)조합으로 8글자 이상</a>
 											<div class="name-tag">새로운 비밀번호 확인</div>
-											<input type="password" id="memberNewPwRe" placeholder="새로운 비밀번호를 다시 한 번 입력하세요">
+											<input type="password" autoComplete="off" id="memberNewPwRe" placeholder="새로운 비밀번호를 다시 한 번 입력하세요">
 											<a class="caution">값이 동일하지 않습니다</a>
 											
 											
@@ -403,8 +403,10 @@
 			const memberId = $('[name=memberId]').val();
 			const memberPw = $('[name=memberPw]').val();
 			const memberNewPw = $("#memberNewPw").val();
+			const pwReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~+@$!%*#?&])[A-Za-z\d~+@$!%*#?&]{8,}$/;
 			
-			if(memberPw!="" && $("#memberNewPw").val()!="" && $("#memberNewPw").val() == $("#memberNewPwRe").val()){
+			if(pwReg.test(memberNewPw) && memberPw!="" && memberNewPw!="" && memberNewPw == $("#memberNewPwRe").val()){
+				$(".modal-body").children('a').eq(0).hide();
 				$(".modal-body").children('a').eq(1).hide();
 				$.ajax({
 					url : "/updateNewPwMember.do",
@@ -419,13 +421,13 @@
 						}
 					}//ajax success문
 				});
-			}else if(memberPw==""){
-				$('[name=memberPw]').focus();
-			}else if($("#memberNewPw").val()=="" && $("#memberNewPwRe").val()==""){
-				$(".modal-body").children('a').eq(1).hide();
-				$("#memberNewPw").focus();
-			}else{
+			}else if(!pwReg.test(memberNewPw)){
+				$(".modal-body").children('a').eq(0).show();
+			}else if(pwReg.test(memberNewPw) && memberNewPw != $("#memberNewPwRe").val()){
+				$(".modal-body").children('a').eq(0).hide();
 				$(".modal-body").children('a').eq(1).show();
+			}else if(pwReg.test(memberNewPw) && memberNewPw == $("#memberNewPwRe").val()){
+				$(".modal-body").children('a').hide();
 			}
 		})//[변경하기] 버튼
 		

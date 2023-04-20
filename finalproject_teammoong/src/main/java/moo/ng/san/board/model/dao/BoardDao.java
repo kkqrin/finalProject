@@ -19,6 +19,7 @@ public class BoardDao {
 	private SqlSessionTemplate sqlSession;
 	
 	public ArrayList<Board> selectBoardList(HashMap<String, Object> map) {
+		System.out.println(map);
 		List list = sqlSession.selectList("board.selectBoardList",map);
 		return (ArrayList<Board>)list;
 	}

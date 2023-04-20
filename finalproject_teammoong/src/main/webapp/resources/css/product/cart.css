@@ -6,10 +6,19 @@
 }
 
 .cart-header{
+    width: 200px;
     background-color: #eee;
     display: flex;
+    justify-content: space-between;
 }
 
+.cart-header *{
+    /* padding: 10px; */
+}
+
+.cart-header input[type=checkbox]{
+    margin-right: 10px;
+}
 
 
 
@@ -75,12 +84,12 @@
     display: flex;
 }
 
-.cart-product-volume>button{
+/* .cart-product-volume>button{
     width: 50px;
     background-color: #ccc;
     font-size: 16px;
     border-radius: 3px;
-}
+} */
 
 .cart-product-volume>[name="pop_out"]{
     margin: 0px 3px;
@@ -170,3 +179,63 @@
         font-size: 18px;
         font-weight: 600;
     }
+
+
+
+
+
+
+
+
+
+
+/* 체크박스 */
+/* 체크박스 컨테이너 스타일 */
+.checkbox-container {
+    /* display: inline-block; */
+    vertical-align: middle;
+    /* margin-right: 10px; */
+    display: flex;
+    align-items: center;
+  }
+  
+  /* 실제 체크박스 숨기기 */
+  .checkbox-container input[type="checkbox"] {
+    display: none;
+  }
+  
+  /* 커스텀 체크박스 스타일 */
+  .checkbox-container .custom-checkbox {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    margin-right: 5px;
+  }
+  
+  /* 체크된 커스텀 체크박스 스타일 */
+  .checkbox-container input[type="checkbox"]:checked + .custom-checkbox {
+    background-color: #f88000;
+    border-color: #f88000;
+  }
+  
+  /* 체크된 커스텀 체크박스 내부 아이콘 스타일 */
+  .checkbox-container input[type="checkbox"]:checked + .custom-checkbox::before {
+    content: "";
+    display: block;
+    width: 5px;
+    height: 8px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -6px 0 0 -4px;
+  }
+  

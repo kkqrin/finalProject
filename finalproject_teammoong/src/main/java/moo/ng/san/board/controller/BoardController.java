@@ -103,6 +103,7 @@ public class BoardController {
 		model.addAttribute("list", list);
 		return"board/myJoinList";
 	}
+
 	@RequestMapping(value = "/boardDelete.do")
 	public String boardDelete(int boardNo, HttpServletRequest request) {
 		//db 삭제하고, 서버에 업로드 되어있는 파일을 지우기 위해 파일 목록을 가져옴
@@ -119,4 +120,3 @@ public class BoardController {
 			return "redirect:/boardList.do?reqPage=1";
 		}
 	}
-}

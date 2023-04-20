@@ -2,6 +2,7 @@ package moo.ng.san.member.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
@@ -22,9 +23,12 @@ import common.FileManager;
 import common.MsgVO;
 import common.PhoneCertify;
 import lombok.val;
+import moo.ng.san.board.model.service.BoardService;
+import moo.ng.san.board.model.vo.BoardPageData;
 import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.member.model.service.MemberService;
 import moo.ng.san.member.model.vo.Member;
+import moo.ng.san.member.model.vo.Out;
 import net.nurigo.sdk.NurigoApp;
 import net.nurigo.sdk.message.exception.NurigoMessageNotReceivedException;
 import net.nurigo.sdk.message.model.Message;
@@ -41,6 +45,7 @@ public class MemberController {
 	private FileManager fm; 
 	@Autowired
 	private JavaMailSender mailSender;
+
 	
 	@ResponseBody
 	@RequestMapping(value = "/memberPhoneCheck.do")
@@ -66,7 +71,7 @@ public class MemberController {
 			m.setMemberPw(null);
 			Member loginMember = service.selectOneMember(m);
 			session.setAttribute("m", loginMember);
-			
+			System.out.println(loginMember);
 			MsgVO msg = new MsgVO();
 			msg.setTitle("가입을 환영합니다");
 			msg.setMsg("뭉쳐야산다에서 저렴하게 구매해보세요 :)");
@@ -151,7 +156,7 @@ public class MemberController {
 	
 	@RequestMapping(value = "/myPageMemberDelete.do")
 	public String myPageMemberDelete() {
-		return "member/myPageMemberDelete";
+		return "member/myPageDeleteMember";
 	}//myPageMemberDelete(회원탈퇴)
 
 	
@@ -203,7 +208,7 @@ public class MemberController {
 	@RequestMapping(value = "/updateNewPwMemberFrm.do")
 	public String updateNewPwMemberFrm(String hideMemberId,Model model) {
 		model.addAttribute("memberId", hideMemberId);
-		return "member/myPageUpdatePw";
+		return "member/updatePwFrm";
 	}
 	
 	
@@ -230,9 +235,7 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value = "/idDoubleCheck.do")
 	public String idDoubleCheck(String memberId) {
-		Member m = new Member();
-		m.setMemberId(memberId);
-		m = service.selectOneMember(m);
+		Member m = service.selectOneMember(memberId);
 		if(m!=null) {
 			return "dup";
 		}else {
@@ -274,6 +277,60 @@ public class MemberController {
 		String code = service.sendMail(memberEmail);
 		return code;
 	}//sendEmailMember
+	
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/chkBeforeOutMember.do")
+	public String chkBeforeOutMember(String memberId, String memberPw) {
+		Member member = new Member();
+		member.setMemberId(memberId);
+		member.setMemberPw(memberPw);
+		Member m = service.selectOneMember(member);
+		if(m!=null) {
+			return "ok";
+		}
+		return "null";
+	}//chkBeforeOutMember
+	
+	@RequestMapping(value = "/updateMemberOut.do")
+	public String updateMemberOut(String memberId, int outReason, String outContent, Model model, HttpSession session) {
+		Out o = new Out(memberId, outReason, outContent);
+		int result = service.processOutMember(o);
+		if(result>1) {
+			session.invalidate();
+			MsgVO msg = new MsgVO();
+			msg.setTitle("탈퇴처리가 완료되었습니다");
+			msg.setMsg("그동안 뭉쳐야산다를 이용해주셔서 감사합니다.");
+			msg.setLoc("/");
+			model.addAttribute("msg", msg);
+			return "common/msg";
+		}else {
+			session.invalidate();
+			MsgVO msg = new MsgVO();
+			msg.setTitle("탈퇴처리중 오류가 발생하였습니다");
+			msg.setMsg("탈퇴 실패. 관리자에게 문의해주세요");
+			msg.setLoc("/");
+			model.addAttribute("msg", msg);
+			return "common/msg";
+		}
+	}//updateMemberOut
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping(value="/myWriteList.do")
+	public String myWriteList(int reqPage, Model model, @SessionAttribute(required=false) Member m) {
+		BoardPageData bpd = service.selectMyWriteList(reqPage,m.getMemberId());
+		model.addAttribute("list", bpd.getList());
+		model.addAttribute("pageNavi", bpd.getPageNavi());
+		return "board/myWriteList";
+	}
+	
+	
 	
 	
 }//MemberController

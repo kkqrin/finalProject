@@ -1,0 +1,81 @@
+.mypage-content .note-title{
+	background-color: #FCE3E7;
+	border-radius: 5px;
+	padding: 10px;
+}
+.fake_hr{
+    border: 1px solid var(--bg-secondary);
+	margin: 20px 0;
+}
+
+.mypage-content .note{
+	margin: 20px 0;
+}
+.note a{
+	display: block;
+}
+
+.note .check{
+	background: url(/resources/img/common/orange-pick.png) no-repeat 0 3px;
+	padding-left: 25px;
+	font-weight: bold;
+}
+
+.mypage-content .note.agree{
+	text-align: right;
+}
+.mypage-content .note.agree .area-btn{
+	margin-top:5px;
+}
+
+
+/*====step2=================*/
+#step2 .step2-td{
+	font-size: 18px;
+	font-weight: bold;
+	margin-right: 20px;
+}
+#step2 table{
+	margin-bottom : 20px;
+}
+#step2 table tbody tr td{
+	text-align: left;
+}
+
+
+/*====step3=================*/
+#step3>div:first-child{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 20px;
+}
+#step3>div>.img{
+	width : 64px;
+	height : 64px;
+	background: url(/resources/img/common/sad.png) no-repeat center;
+}
+#step3 .note-title{
+	margin : 20px 0;
+}
+
+#step3 form>div{
+	margin: 10px 0;
+}
+
+
+
+
+
+#step2, #step3{
+	display: none;
+}
+
+
+
+
+
+
+
+
+

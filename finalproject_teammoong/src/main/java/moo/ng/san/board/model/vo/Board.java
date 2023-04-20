@@ -34,6 +34,10 @@ public class Board {
 	private ArrayList<Notify> notifyList;
 	private int reportCount;
 	
+	
+	//홍미 추가
+	private int rnum;
+	private int joinCnt;
 }
 
 

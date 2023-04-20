@@ -192,22 +192,6 @@
 									$(".cerNumChk").on("click",function(){
 										if(code == $("[name='inputCode']").val()){//★인증성공
 											console.log("멤버 아이디는:"+memberId)
-											/* 
-											const form = $("<form>");
-											form.attr('action','/updateNewPwMemberFrm.do');
-											form.attr('method','post');
-											const hideInput = $("<input>");
-											hideInput.attr('type','hidden');
-											hideInput.attr('name','hideMemberId');
-											hideInput.val(memberId);
-											const submitBtn = $("<button>");
-											
-											form.append(hideInput);
-											form.append(submitBtn);
-											console.log(hideInput)
-											alert(hideInput)
-											$(".toEmail-view").append(form); 
-											*/
 											$("[name='hideMemberId']").val(memberId);
 											$(".submitBtn").click();
 											

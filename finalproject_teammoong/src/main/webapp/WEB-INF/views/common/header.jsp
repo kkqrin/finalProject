@@ -74,7 +74,7 @@
 							<a class="helloMsg">${sessionScope.m.memberName }님 환영합니다!</a>
 						</c:when>
 						<c:when test="${sessionScope.m.memberStatus eq 0}">
-							<a class="staffMsg">관리자 버전으로 접속중입니다.</a>
+							<a class="staffMsg">관리자 버전으로 접속중입니다.<span><a href="/myPage.do" class="staffMsg">[내정보]</a></span></a>
 						</c:when>
 					</c:choose>
 				</div><!-- header-info -->

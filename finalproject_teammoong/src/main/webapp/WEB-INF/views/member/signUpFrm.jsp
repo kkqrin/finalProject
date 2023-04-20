@@ -568,7 +568,7 @@
 				
 				let agree1 = $("#agree1").prop('checked');
 				if(!resultChk){
-					alert("누락된 항목이 없는지 다시 한 번 확인해주세요");
+					alert("누락되거나 잘못 입력한 항목이 없는지 확인해주세요");
 					const signUpInputs = $(".signUp-form").find("input");
 					console.log(signUpInputs.length);
 					$.each(signUpInputs,function(index,item){

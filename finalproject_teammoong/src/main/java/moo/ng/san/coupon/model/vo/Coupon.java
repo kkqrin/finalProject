@@ -12,4 +12,5 @@ public class Coupon {
 	private String couponTitle;
 	private int couponPrice;
 	private int couponEnd;
+	private int leastPrice;
 }

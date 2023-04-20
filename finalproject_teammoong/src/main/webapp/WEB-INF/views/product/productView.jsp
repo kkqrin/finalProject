@@ -89,7 +89,7 @@
 				<button>주문하기</button>
                 <input type="hidden" id="option-list-null" value="${optionList}">
 			</form> -->
-		<button type="button" id="put-in-cart-btn">장바구니 담기</button>
+		<!-- <button type="button" id="put-in-cart-btn">장바구니 담기</button> -->
 	</c:if>
         <div class="top-info-box">
             <div class="img-box">
@@ -155,7 +155,7 @@
                         </div>
                     </div>
                     
-                    <div class="flex-box">
+                    <!-- <div class="flex-box">
                         <div class="info-title-box">
                             <a class="info-title">적립금액</a>
                         </div>
@@ -166,7 +166,7 @@
                                 <li>5일내 도착 확률 : 97%</li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="flex-box option-list-box">
                         <div class="info-title-box">
@@ -183,28 +183,49 @@
                             </ul>
                         </div>
                     </div>
+                    <div class="flex-box">
+                        <div class="info-title-box">
+                            <a class="info-title">수량</a>
+                        </div>
+                        <div class="info-content">
+                            <div class="product-view-volume">
+                                <button type="button" class="minus-count">-</button>
+                                <input type="text" name="pop_out" value="1" readonly="readonly" style="text-align:center;"/>
+                                <button type ="button" class="plus-count">+</button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="flex-btn">
-                        <div class="one-btn">
-                            <form action="/orderSheet.do" method="post">
+                        <div>
+                            <div class="cart-btn">
+                                <!-- <button type="button" id="put-in-cart-btn">장바구니 담기</button> -->
+                                <span id="put-in-cart-btn" class="material-symbols-outlined" style="font-variation-settings:'FILL' 0">add_shopping_cart</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="one-btn">
+                                <form action="/orderSheet.do" method="post">
                                 <input type="hidden" name="productNo">
                                 <input type="hidden" name="optionNo">
                                 <button class="btn btn-white size02">혼자구매하기</button>
                                 <input type="hidden" id="option-list-null" value="${optionList}">
                             </form>
-                        </div>
-                        <div class="moong-btn">
-                            <form action="/moongsanOrder.do" method="post">
-                                <input type="hidden" name="productNo">
-                                <input type="hidden" name="optionNo">
-                                <button class="btn btn-pri size02">뭉쳐야산다</button>
-                                <input type="hidden" id="option-list-null" value="${optionList}">
-                            </form>
+                            </div>
+                            <div class="moong-btn">
+                                <form action="/moongsanOrder.do" method="post">
+                                    <input type="hidden" name="productNo">
+                                    <input type="hidden" name="optionNo">
+                                    <button class="btn btn-pri size02">뭉쳐야산다</button>
+                                    <input type="hidden" id="option-list-null" value="${optionList}">
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="gonggu-board-logo"><h3>뭉쳐야 산다!</h3></div>
+        	<c:if test="${gongguList ne null }">
         <div class="gonggu-board">
             <c:forEach items="${gongguList }" var="g">
             <div class="all-flex-wrap">
@@ -221,12 +242,13 @@
                     <button type="button" class="btn btn-pri size01" id="orderBtn">뭉산취소</button>
                     </c:if>
                     <c:if test="${sessionScope.m.memberId ne g.memberId }">
-                    <button type="button" class="btn btn-pri size01" id="orderBtn">주문참여</button>
+                    <button type="button" class="btn btn-pri size01" id="orderBtn"><a href="/orderJoin.do">주문참여</a></button>
                     </c:if>
                 </div>
             </div>
         </c:forEach>
         </div>
+        </c:if>
         
         <div class="quick-scroll-bar">
             <table>
@@ -247,25 +269,28 @@
             <form action="/reviewWrite.do" method="post" enctype="multipart/form-data"></form>
             <table>
                 <tr>
-                    <th>사진</th>
-                    <th colspan="5">내용</th>
+                    <th style="background-color: #f88000;">사진</th>
+                    <th style="background-color: #f88000;" colspan="5">내용</th>
                 </tr>
                 <tr>
-                    <th><input type="file" name="reviewFile" multiple></th>
-                    <td colspan="5"><textarea style="height: 200px;"></textarea></td>
+                    <td >
+                        <input type="file" name="reviewFile" multiple onchange="readURL(this)">
+                        <img id="preview">
+                    </td>
+                    <td colspan="5"><textarea style="height: 200px; border: none;"></textarea></td>
                 </tr>
                 <tr>
                     <th>별점</th>
-                    <td style="color:black">
+                    <td style="color:gold">
                         <div>
                           <label for="star1">★</label>
                         </div>
                         <input type="radio" name="star" id="star1">
                       </td>
-                    <td style="color:black">★★<div><input type="radio" name="star"></div></td>
-                    <td style="color:black">★★★<div><input type="radio" name="star"></div></td>
-                    <td style="color:black">★★★★<div><input type="radio" name="star"></div></td>
-                    <td style="color:black">★★★★★<div><input type="radio" name="star"></div></td>
+                    <td style="color:gold">★★<div><input type="radio" name="star"></div></td>
+                    <td style="color:gold">★★★<div><input type="radio" name="star"></div></td>
+                    <td style="color:gold">★★★★<div><input type="radio" name="star"></div></td>
+                    <td style="color:gold">★★★★★<div><input type="radio" name="star"></div></td>
                 </tr>
                 <tr>
                     <td colspan="6"><div class="area-btn full"><button class="btn btn-pri size02">리뷰작성</button></div></td>
@@ -469,9 +494,14 @@
             $("#put-in-cart-btn").on("click", function(){
                 const productNo = $("#productNo").val();
                 const optionNo = $( ".product-option" ).val();
-
-                // alert 띄우고 insert -> OK 누르면 insert 되게 하기 위해 함수 생성해서 번호들 넘겨줌
-                jQueryAlert('warning',"", productNo, optionNo);
+                
+                if(optionNo == 0 && $(".info-content").find("option").length > 1){
+                    optionjQueryAlert('info'); 
+                    // alert("옵션을 선택하세요");
+                }else{
+                    // alert 띄우고 insert -> OK 누르면 insert 되게 하기 위해 함수 생성해서 번호들 넘겨줌
+                    jQueryAlert('warning',"", productNo, optionNo);
+                }
 
             });
             function processResult(result, productNo, optionNo) {
@@ -497,7 +527,9 @@
                 
                 if(optionNo == 0 && $(".info-content").find("option").length > 1){
                     // 옵션 선택 안됐을 때 && 옵션이 있는 상품
-					alert("옵션을 선택하세요");       
+                    optionjQueryAlert('info');
+					// alert("옵션을 선택하세요");
+
 					// 폼 제출 막음
 					e.preventDefault();
                     return false;
@@ -536,11 +568,8 @@
                     // messageBox = $.parseHTML('<div class="alert__error"></div>');
                     // break;
                     case 'warning':
-                    messageBox = $.parseHTML('<div class="alert__warning" style="line-height:100px;text-align:center;"><div class="title" style="margin-bottom:10px;color:var(--primary);padding:0;">뭉쳐야산다</div><br>장바구니에 담았어요!</div>');
+                    messageBox = $.parseHTML('<div class="alert__warning" style="line-height:100px;text-align:center;"><div class="title" style="margin-bottom:10px;color:var(--primary);padding:0;">뭉쳐야산다</div><br>장바구니에 담으시겠습니까?</div>');
                     break;
-                    // case 'info':
-                    // messageBox = $.parseHTML('<div class="alert__info"></div>');
-                    // break;
                 }
                 $("body").append(messageBox);
                 $(messageBox).dialog({
@@ -548,12 +577,55 @@
                     open: $(messageBox).append(msg),
                     draggable: false,
                     modal: true,
-                    buttons: {
-                        "OK": function () {
-                            $(this).dialog("close");
+                    buttons: [
+                        {
+                            text: "담기",
+                            style: "margin-right:5px",
+                            click: function(){
+                                $(this).dialog("close");
 
-                            // OK 버튼 눌렀을 때 insert 하기 위해 콜백함수 실행
-                            processResult(true, p, o);
+                                // OK 버튼 눌렀을 때 insert 하기 위해 콜백함수 실행
+                                processResult(true, p, o);
+                            }
+                        },
+                        {
+                            text: "취소",
+                            click: function(){
+                                $(this).dialog("close");
+                            }
+                        }
+                    ],
+                    show: {
+                        effect: 'fade',
+                        duration: 200 //at your convenience
+                    },
+                    hide: {
+                        effect: 'fade',
+                        duration: 200 //at your convenience
+                    }
+                });
+            };
+
+
+
+            // 옵션 선택 안됐을때 alert
+            function optionjQueryAlert(type) {
+                let $type = type;
+                // let messageBox = msg;
+                switch ($type) {
+                    case 'info':
+                    messageBox = $.parseHTML('<div class="alert__info" style="line-height:100px;text-align:center;"><div class="title" style="margin-bottom:10px;color:var(--info);padding:0;">뭉쳐야산다</div><br>옵션을 선택해주세요!</div>');
+                    break;
+                }
+                $("body").append(messageBox);
+                $(messageBox).dialog({
+                    dialogClass :$type,
+                    // open: $(messageBox).append(msg),
+                    draggable: false,
+                    modal: true,
+                    buttons: {
+                        "닫기": function () {
+                            $(this).dialog("close");
                         }
                     },
                     show: {
@@ -566,7 +638,27 @@
                     }
                 });
             };
-        // });
+
+
+
+            // 주문 수량 증감
+            $(".product-view-volume>button").on("click", function(){
+                let inputCount = $(this).parent().find("input[name='pop_out']");
+                let inputCountVal = Number(inputCount.val());
+                // 상품 재고
+                const productEa = 10;
+
+                if($(this).hasClass("plus-count")){
+                    if(inputCountVal < productEa){
+                        inputCount.val(Number(inputCountVal)+1).trigger('change');
+                    }
+                }else{
+                    if(inputCountVal > 0 ){
+                        inputCount.val(Number(inputCountVal)-1).trigger('change');
+                    }
+                }
+            });
+
         </script>
         
 </html>
