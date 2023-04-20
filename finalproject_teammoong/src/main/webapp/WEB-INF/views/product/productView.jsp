@@ -89,7 +89,7 @@
 				<button>주문하기</button>
                 <input type="hidden" id="option-list-null" value="${optionList}">
 			</form> -->
-		<button type="button" id="put-in-cart-btn">장바구니 담기</button>
+		<!-- <button type="button" id="put-in-cart-btn">장바구니 담기</button> -->
 	</c:if>
         <div class="top-info-box">
             <div class="img-box">
@@ -155,7 +155,7 @@
                         </div>
                     </div>
                     
-                    <div class="flex-box">
+                    <!-- <div class="flex-box">
                         <div class="info-title-box">
                             <a class="info-title">적립금액</a>
                         </div>
@@ -166,7 +166,7 @@
                                 <li>5일내 도착 확률 : 97%</li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="flex-box option-list-box">
                         <div class="info-title-box">
@@ -183,22 +183,42 @@
                             </ul>
                         </div>
                     </div>
+                    <div class="flex-box">
+                        <div class="info-title-box">
+                            <a class="info-title">수량</a>
+                        </div>
+                        <div class="info-content">
+                            <div class="product-view-volume">
+                                <button type="button" class="minus-count">-</button>
+                                <input type="text" name="pop_out" value="1" readonly="readonly" style="text-align:center;"/>
+                                <button type ="button" class="plus-count">+</button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="flex-btn">
-                        <div class="one-btn">
-                            <form action="/orderSheet.do" method="post">
+                        <div>
+                            <div class="cart-btn">
+                                <!-- <button type="button" id="put-in-cart-btn">장바구니 담기</button> -->
+                                <span id="put-in-cart-btn" class="material-symbols-outlined" style="font-variation-settings:'FILL' 0">add_shopping_cart</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="one-btn">
+                                <form action="/orderSheet.do" method="post">
                                 <input type="hidden" name="productNo">
                                 <input type="hidden" name="optionNo">
                                 <button class="btn btn-white size02">혼자구매하기</button>
                                 <input type="hidden" id="option-list-null" value="${optionList}">
                             </form>
-                        </div>
-                        <div class="moong-btn">
-                            <form action="/moongsanOrder.do" method="post">
-                                <input type="hidden" name="productNo">
-                                <input type="hidden" name="optionNo">
-                                <button class="btn btn-pri size02">뭉쳐야산다</button>
-                                <input type="hidden" id="option-list-null" value="${optionList}">
-                            </form>
+                            </div>
+                            <div class="moong-btn">
+                                <form action="/moongsanOrder.do" method="post">
+                                    <input type="hidden" name="productNo">
+                                    <input type="hidden" name="optionNo">
+                                    <button class="btn btn-pri size02">뭉쳐야산다</button>
+                                    <input type="hidden" id="option-list-null" value="${optionList}">
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -614,6 +634,25 @@
                 });
             };
 
+
+
+            // 주문 수량 증감
+            $(".product-view-volume>button").on("click", function(){
+                let inputCount = $(this).parent().find("input[name='pop_out']");
+                let inputCountVal = Number(inputCount.val());
+                // 상품 재고
+                const productEa = 10;
+
+                if($(this).hasClass("plus-count")){
+                    if(inputCountVal < productEa){
+                        inputCount.val(Number(inputCountVal)+1).trigger('change');
+                    }
+                }else{
+                    if(inputCountVal > 0 ){
+                        inputCount.val(Number(inputCountVal)-1).trigger('change');
+                    }
+                }
+            });
 
         </script>
         

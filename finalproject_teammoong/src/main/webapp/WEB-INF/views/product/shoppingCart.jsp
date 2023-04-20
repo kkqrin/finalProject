@@ -21,16 +21,28 @@
 			<h4>${sessionScope.m.memberName }님의 장바구니</h4>
 		</div>
 		<div class="cart-header">
-			<div><label><input type="checkbox" id="all-product">전체선택</label></div>
+			<div>
+				<!-- <label><input type="checkbox" id="all-product">전체선택</label> -->
+				<label class="checkbox-container">
+					<input type="checkbox" id="all-product">
+					<span class="custom-checkbox"></span>
+					전체 선택
+				</label>
+			</div>
 			<div>선택삭제</div>
 		</div>
+
 		<div class="order-payment-wrap">
 			<div>
 				<form action="/orderSheet.do" method="post">
 					<c:forEach items="${basketList}" var="i">
 						<div class="cart-product-item">
 							<div>
-								<input type="checkbox" name="chk">
+								<!-- <input type="checkbox" name="chk"> -->
+								<label class="checkbox-container">
+									<input type="checkbox" name="chk">
+									<span class="custom-checkbox"></span>
+								</label>
 								<input type="hidden" name="productNo" value="${i.productNo}" disabled>
 								<input type="hidden" name="optionNo" value="${i.optionNo}" disabled>
 							</div>
@@ -48,9 +60,9 @@
 								<div class="cart-product-option">${i.optionDetailName }</div>
 							</div>
 							<div class="cart-product-volume">
-								<button type="button" class="minus-count">-</button>
+								<!-- <button type="button" class="minus-count">-</button> -->
 								<input type="text" name="pop_out" value="${i.basketCount}" readonly="readonly" style="text-align:center;"/>
-								<button type ="button" class="plus-count">+</button>
+								<!-- <button type ="button" class="plus-count">+</button> -->
 							</div>
 							<div class="cart-product-price"><span></span>원</div>
 							<input type="hidden" class="product-price" value="${i.productPrice }">
@@ -123,23 +135,23 @@
 			}
 		})
 		
-		// 주문 수량
-		$(".cart-product-volume>button").on("click", function(){
-			let inputCount = $(this).parent().find("input[name='pop_out']");
-			let inputCountVal = Number(inputCount.val());
-			// 상품 재고
-			const productEa = 10;
+		// // 주문 수량 증감
+		// $(".cart-product-volume>button").on("click", function(){
+		// 	let inputCount = $(this).parent().find("input[name='pop_out']");
+		// 	let inputCountVal = Number(inputCount.val());
+		// 	// 상품 재고
+		// 	const productEa = 10;
 
-			if($(this).hasClass("plus-count")){
-				if(inputCountVal < productEa){
-					inputCount.val(Number(inputCountVal)+1);
-				}
-			}else{
-				if(inputCountVal > 0 ){
-					inputCount.val(Number(inputCountVal)-1);
-				}
-			}
-		});
+		// 	if($(this).hasClass("plus-count")){
+		// 		if(inputCountVal < productEa){
+		// 			inputCount.val(Number(inputCountVal)+1).trigger('change');
+		// 		}
+		// 	}else{
+		// 		if(inputCountVal > 0 ){
+		// 			inputCount.val(Number(inputCountVal)-1).trigger('change');
+		// 		}
+		// 	}
+		// });
 
 		// 상품리스트 상품 가격 + 화폐 단위
 		for(let i=0;i<$(".cart-product-price").length;i++){
@@ -158,16 +170,18 @@
 			$("#all-product").click(function() {
 				// 상품 전체 선택
 				if($("#all-product").is(":checked")){
-					$("input[name=chk]").prop("checked", true);
+					$("input[name=chk]").prop("checked", true).trigger('change');
 				}else{
-					$("input[name=chk]").prop("checked", false);
+					$("input[name=chk]").prop("checked", false).trigger('change');
 				} 
 			});
 
-			$("input[name=chk]").click(function() {
+			$("input[name=chk]").change(function() {
 				// 체크박스 하나
 				var total = $("input[name=chk]").length;
 				var checked = $("input[name=chk]:checked").length;
+				// let productCount = $(this).parent().parent().find($("[name=pop_out]")).val();
+				let productCount = $(this).parent().parent().next().next().next().children().eq(1).val();
 
 				if(total != checked){
 					$("#all-product").prop("checked", false);
@@ -178,43 +192,49 @@
 				if($(this).is(":checked")){
 					// 할인전 상품금액
 					const amount2 = Number($(".total-order-amount-2>div").last().children().val());
-					const price = Number($(this).parent().parent().children().last().prev().val());
+					const price = Number($(this).parent().parent().parent().children().last().prev().val());
 					// input hidden에 number 넣어놓고 change 이벤트 발생시 span에 단위 표시한 string 보여줌
-					$(".total-order-amount-2>div").last().children().val(amount2+price).trigger('change');
+					$(".total-order-amount-2>div").last().children().val(amount2+price*productCount).trigger('change');
 					
 					// 할인되는 금액
 					const amount3 = Number($(".total-order-amount-3>div").last().children().val());
-					const discount = Number($(this).parent().parent().children().last().val());
-					$(".total-order-amount-3>div").last().children().val(amount3+price-(Math.floor(price*(100 - discount)/1000)*10)).trigger('change');
+					const discount = Number($(this).parent().parent().parent().children().last().val());
+					$(".total-order-amount-3>div").last().children().val(amount3+price*productCount-(Math.floor(price*(100 - discount)/1000)*10)).trigger('change');
 
 					// 주문금액 (결제할 금액)
 					const amount1 = Number($(".total-order-amount-1>div").last().children().val());
-					$(".total-order-amount-1>div").last().children().val(amount1+(Math.floor(price*(100 - discount)/1000)*10)).trigger('change');
+					$(".total-order-amount-1>div").last().children().val(amount1+(Math.floor(price*productCount*(100 - discount)/1000)*10)).trigger('change');
 				}else{
 					// 선택해제시 빼야됨ㅋㅋ
 					// 할인전 상품금액
 					const amount2 = Number($(".total-order-amount-2>div").last().children().val());
-					const price = Number($(this).parent().parent().children().last().prev().val());
-					$(".total-order-amount-2>div").last().children().val(amount2-price).trigger('change');
+					const price = Number($(this).parent().parent().parent().children().last().prev().val());
+					$(".total-order-amount-2>div").last().children().val(amount2-price*productCount).trigger('change');
 					
 					// 할인되는 금액
 					const amount3 = Number($(".total-order-amount-3>div").last().children().val());
-					const discount = Number($(this).parent().parent().children().last().val());
-					$(".total-order-amount-3>div").last().children().val(amount3-(price-(Math.floor(price*(100 - discount)/1000)*10))).trigger('change');
+					const discount = Number($(this).parent().parent().parent().children().last().val());
+					$(".total-order-amount-3>div").last().children().val(amount3-(price*productCount-(Math.floor(price*(100 - discount)/1000)*10))).trigger('change');
 
 					// 주문금액 (결제할 금액)
 					const amount1 = Number($(".total-order-amount-1>div").last().children().val());
-					$(".total-order-amount-1>div").last().children().val(amount1-(Math.floor(price*(100 - discount)/1000)*10)).trigger('change');
-
-
+					$(".total-order-amount-1>div").last().children().val(amount1-(Math.floor(price*productCount*(100 - discount)/1000)*10)).trigger('change');
 
 				}
 			});
 		});
 
+
+
+
+
+
+
+
+
 		// 페이박스 화폐 단위 표시
 		$(".hidden-product-price").on("change", function(){
-			console.log("change!");
+			// console.log("change!");
 			$(this).next().text($(this).val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		});
 
