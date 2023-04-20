@@ -1,13 +1,14 @@
 .top-info-box{
 display: flex;
+align-items: center;
 }
 .img-box{
     width: 500px;
-    height: 570px;
+    height: 650px;
 }
 .img-box img{
     width: 500px;
-    height: 570px;
+    height: 650px;
     object-fit: cover;
 }
 .quick-scroll-bar>ul{
