@@ -119,4 +119,6 @@ public class BoardController {
 			}
 			return "redirect:/boardList.do?reqPage=1";
 		}
+
 	}
+}
