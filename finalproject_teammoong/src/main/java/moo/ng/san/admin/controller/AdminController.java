@@ -97,7 +97,6 @@ public class AdminController {
 		return "admin/adminTotalSalesPage";
 	}
 	
-	
 	/* 1년 판매/원가 차트, x축 1~12월 */
 	@ResponseBody
 	@RequestMapping(value="/ajaxTotalSalesManage.do", produces = "application/json;charset=utf-8")
@@ -110,7 +109,6 @@ public class AdminController {
 			list.add(sd);
 		}
 		
-		
 		Gson gson = new Gson();
 		String result = gson.toJson(list);
 		return result;
@@ -121,20 +119,69 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping(value="/ajaxTotalCategorySalesManage.do", produces = "application/json;charset=utf-8" ) 
 	public String ajaxTotalCategorySalesManage() { 
-	ArrayList<SalesData> list = new ArrayList<SalesData>();
-	 
-	for(int i=1;i<14;i++) { // 카테고리 개수 
-		SalesData sd = service.selectCountMonthCategorySalesData(i); 
-		sd.setCategoryNo(i);
-		list.add(sd); 
-	 }
-	 
-	 Gson gson = new Gson(); 
-	 String result = gson.toJson(list); 
-	 return result;
-	  
-	 }
-	 
+		ArrayList<SalesData> list = new ArrayList<SalesData>();
+		 
+		for(int i=1;i<14;i++) { // 카테고리 개수 
+			SalesData sd = service.selectCountMonthCategorySalesData(i); 
+			sd.setCategoryNo(i);
+			list.add(sd); 
+		}
+		
+		Gson gson = new Gson(); 
+		String result = gson.toJson(list); 
+		return result;
+		  
+	}
+	
+	/* select 창에서 월 입력 받아서 해당 매출내역 뽑기*/
+	@ResponseBody
+	@RequestMapping(value="/ajaxSelectMonthSales.do", produces = "application/json;charset=utf-8")
+	public String ajaxVariationMonthSales(int monthNo) {
+		ArrayList<SalesData> list = service.selectMonthSalesData(monthNo);
+		
+		Gson gson = new Gson(); 
+		String result = gson.toJson(list); 
+		return result;
+		
+	}
+	
+	/* 홈페이지 사용자 성별에 따른 매출 */
+	@ResponseBody
+	@RequestMapping(value="/ajaxGenderSalesCount.do", produces = "application/json;charset=utf-8")
+	public String ajaxGenderSalesCount() {
+		ArrayList<SalesData> list = service.selectGenderSalesData();
+		Gson gson = new Gson(); 
+		String result = gson.toJson(list); 
+		return result;
+	}
+	
+	
+	/* 매출보고서 출력 새창 경로*/
+	@RequestMapping(value="salesReportPrint.do")
+	public String salesReportPrint() {
+		return "admin/salesReport";
+	}
+	
+	
+	/* 매출보고서 작성 */
+	@ResponseBody
+	@RequestMapping(value="ajaxSalesReportPrint.do", produces = "application/json;charset=utf-8")
+	public String ajaxSalesReportPrint() {
+		ArrayList<SalesData> list = new ArrayList<SalesData>();
+		 
+		for(int i=1;i<14;i++) { // 카테고리 개수 
+			SalesData sd = service.selectCountMonthCategorySalesData(i); 
+			sd.setCategoryNo(i);
+			list.add(sd); 
+		}
+		
+		Gson gson = new Gson(); 
+		String result = gson.toJson(list); 
+		return result;
+		
+		
+	}
+	
 	
 	
 	
