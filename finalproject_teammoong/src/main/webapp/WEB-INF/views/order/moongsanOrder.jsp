@@ -244,24 +244,24 @@
                         <input type="hidden" id="number-pay-price">
                         <div class="total-order-amount-1">
                             <div>주문금액</div>
-                            <div><span></span>원</div>
+                            <div><span></span> 원</div>
                         </div>
                         <div class="total-order-amount-2">
                             <div>└ 상품 금액</div>
-                            <div><span></span>원</div>
+                            <div><span></span> 원</div>
                         </div>
                         <div class="total-order-amount-3">
                             <div>└ 상품 할인 금액</div>
-                            <div>-<span></span>원</div>
+                            <div>-<span></span> 원</div>
                         </div>
 
                         <div class="total-order-delivery-fee">
                             <div>배송비</div>
-                            <div>0원</div>
+                            <div>0 원</div>
                         </div>
                         <div class="total-order-coupon">
                             <div>쿠폰 할인</div>
-                            <div><span>0</span>원</div>
+                            <div><span>0</span> 원</div>
                         </div>
                         <!-- <div class="total-order-saved-money">
                             <div>적립금 사용</div>
@@ -270,11 +270,18 @@
 
                         <div class="total-order-pay">
                             <div>최종 결제 금액</div>
-                            <div><span></span>원</div>
+                            <div><span></span> 원</div>
                         </div>
+<hr>
+                        <div class="total-order-pay-point">
+                            <div><span class="moong-font">MOONG</span></div>
+                            <div style="font-size: 16px;"><span><fmt:formatNumber value="${point.pointEa }"/></span> 원</div>
+                        </div>
+
                         <div class="total-order-point">
                             <div>결제 후 <span class="moong-font">MOONG</span> 잔액</div>
-                            <div><span></span>원</div>
+                            <div style="font-size: 16px;"><span></span> 원</div>
+                            <div id="point-need" style="display: none; color: red;">잔액 부족</div>
                         </div>
                         <input type="hidden" id="hidden-total-pay">
 
@@ -413,8 +420,13 @@
             // 최종 결제 금액
             $("#hidden-total-pay").val(payPrice);
         
-            // 뭉 잔액
-            $(".total-order-point>div").last().children().text(($("#hidden-total-pay").val()-$("#hidden-total-point").val()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            // 뭉 잔액 (최종결제금액보다 적립금이 적으면 '부족')
+            if(payPrice > $("#hidden-total-point").val()){
+                $("#point-need").show();
+                $("#point-need").prev().hide();
+            }else{
+                $(".total-order-point>div").eq(1).children().text(($("#hidden-total-pay").val()-$("#hidden-total-point").val()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            }
 
 
 
@@ -493,8 +505,34 @@
 
             // 결제버튼에 최종 결제 금액 표시
             $(".order-complete-btn>span").text($(".total-order-pay>div").last().children().text());
-        })
 
+            // 최종 결제 금액이 달라지면 (쿠폰 사용시) 결제후 뭉 잔액 표시
+            // 뭉 잔액 (최종결제금액보다 적립금이 적으면 '부족')
+            if($(this).val() > $("#hidden-total-point").val()){
+                $("#point-need").show();
+                $("#point-need").prev().hide();
+            }else{
+                $(".total-order-point>div").eq(1).children().text(($("#hidden-total-point").val()-$("#hidden-total-pay").val()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                $("#point-need").hide();
+                $("#point-need").prev().show();
+            }
+        })
+        
+        // $(".order-complete-btn").on("click", function(){
+        //     if($("#hidden-total-pay").val() > $("#hidden-total-point").val()){
+        //         alert("결제 불가 !");
+        //     }
+        // });
+
+        // 폼 제출
+        $("form").submit(function (e) {
+            if($("#hidden-total-pay").val() > $("#hidden-total-point").val()){
+                alert("결제 불가 !");
+                // 폼 제출 막음
+                e.preventDefault();
+                return false;
+            }
+        });
         
     </script>
 </body>
