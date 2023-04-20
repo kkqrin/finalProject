@@ -15,19 +15,20 @@
 	
 	<div class="content-wrap">
 	<pre>
-		남은 일 : 체크박스 전체선택 / 선택삭제 / 입력한 수량에 맞게 주문 되게 / 아무것도 없을때 디자인
+		남은 일 : 장바구니 상품 수 / 선택삭제 / 아무것도 없을때 디자인
 	</pre>
 		<div class="cart-title">
 			<h4>${sessionScope.m.memberName }님의 장바구니</h4>
 		</div>
 		<div class="cart-header">
-			<div>
+			<div style="display: flex;">
 				<!-- <label><input type="checkbox" id="all-product">전체선택</label> -->
 				<label class="checkbox-container">
 					<input type="checkbox" id="all-product">
 					<span class="custom-checkbox"></span>
-					전체 선택
+					전체선택
 				</label>
+				(<span>0</span>/<span>10</span>)
 			</div>
 			<div>선택삭제</div>
 		</div>
@@ -181,7 +182,7 @@
 				var total = $("input[name=chk]").length;
 				var checked = $("input[name=chk]:checked").length;
 				// let productCount = $(this).parent().parent().find($("[name=pop_out]")).val();
-				let productCount = $(this).parent().parent().next().next().next().children().eq(1).val();
+				let productCount = $(this).parent().parent().next().next().next().children().val();
 
 				if(total != checked){
 					$("#all-product").prop("checked", false);
