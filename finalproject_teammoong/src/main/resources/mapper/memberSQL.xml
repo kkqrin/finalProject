@@ -72,7 +72,11 @@
 			</trim>
 		</select> 
 	
-
+		<select id="selectDupMember" parameterType="string" resultType="m">
+			select member_id as memberId
+			from member_tbl
+			where member_id=#{parameter}
+		</select>
 		
 		
 		

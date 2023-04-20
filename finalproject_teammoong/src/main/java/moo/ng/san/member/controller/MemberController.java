@@ -231,9 +231,7 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value = "/idDoubleCheck.do")
 	public String idDoubleCheck(String memberId) {
-		Member m = new Member();
-		m.setMemberId(memberId);
-		m = service.selectOneMember(m);
+		Member m = service.selectOneMember(memberId);
 		if(m!=null) {
 			return "dup";
 		}else {

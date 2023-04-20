@@ -28,6 +28,11 @@ public class MemberService {
 		return dao.selectOneMember(member);
 	}//selectOneMember
 
+	
+	public Member selectOneMember(String memberId) {
+		return dao.selectOneMember(memberId);
+	}//아이디 중복확인을 위한
+	
 	@Transactional
 	public int insertMember(Member m) {
 		int result = 0;
@@ -131,6 +136,8 @@ public class MemberService {
 		}
 		return result;
 	}//processOutMember
+
+	
 
 
 	

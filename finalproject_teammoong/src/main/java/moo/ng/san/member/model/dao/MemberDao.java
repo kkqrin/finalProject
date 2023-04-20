@@ -20,6 +20,11 @@ public class MemberDao {
 		Member m = sqlSession.selectOne("member.selectOneMember",member);
 		return m;
 	}
+	
+	public Member selectOneMember(String memberId) {
+		return sqlSession.selectOne("member.selectDupMember",memberId);
+	}//아이디 중복확인을 위한
+	
 
 	public int insertMember(Member m) {
 		return sqlSession.insert("member.insertMember", m);
@@ -48,5 +53,7 @@ public class MemberDao {
 	public int updateMemberStatus(String memberId) {
 		return sqlSession.update("member.updateMemberStatus",memberId);
 	}
+
+	
 
 }
