@@ -183,7 +183,7 @@
                 <div class="order-payment-wrap">
                     <div>
                         <div class="order-coupon-box">
-                            <h4>쿠폰 / 적립금</h4>
+                            <h4>결제수단</h4>
                             <table class="tbl-box" style="margin-top: 20px;">
                                 <tr>
                                     <th>쿠폰</th>
@@ -201,7 +201,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><span class="moong-font">MOONG</span></th>
+                                    <th><span class="moong-font">MY MOONG</span></th>
                                     <td colspan="2" class="saved-money-box">
                                         <div>
                                             <fmt:formatNumber value="${point.pointEa }"/>원
@@ -425,7 +425,7 @@
                 $("#point-need").show();
                 $("#point-need").prev().hide();
             }else{
-                $(".total-order-point>div").eq(1).children().text(($("#hidden-total-pay").val()-$("#hidden-total-point").val()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                $(".total-order-point>div").eq(1).children().text(($("#hidden-total-point").val()-$("#hidden-total-pay").val()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             }
 
 
