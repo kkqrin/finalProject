@@ -261,7 +261,7 @@
 
 
                 <div class="order-complete-box area-btn full">
-                    <button class="btn btn-pri size03 order-complete-btn">00원 결제하기</button>
+                    <button class="btn btn-pri size03 order-complete-btn"><span></span>원 결제하기</button>
                 </div>
             </form>
 
@@ -380,69 +380,109 @@
 
             // 적립금
             $(".total-order-buy-save-point>div").last().children().text(Math.ceil(Number($("#number-pay-price").val())*10/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
+            // 최종 결제 버튼
+            $(".order-complete-btn>span").text($(".total-order-pay>div").last().children().text());
+
+            // 최종 결제 금액
+            $("#hidden-total-pay").val(payPrice);
         }
 
         // 쿠폰 할인
         $( ".order-coupon" ).on("selectmenuchange", function(){
-            $(".total-order-coupon>div").last().children().text("-"+$(this).val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            // console.log($(this).val());
+            const couponVal = $(this).val();
+            const totalPay =  $("#hidden-total-pay").val();
 
-            // 현재 적용된 쿠폰 가격, 계산을 위해 hidden에 넣어둠
-            $("#number-coupon").val($(this).val());
-            // 최종 결제 금액 : 주문금액 - 쿠폰 - 적립금
-            // 현재 적용된 쿠폰 및 적립금 빼서 계산
-            $(".total-order-pay>div").last().children().text(($("#number-pay-price").val()-$(this).val()-$("#hidden-current-point").val()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-
-            // 최종 결제 금액 hidden에 숨김
-            $("#hidden-total-pay").val(($("#number-pay-price").val()-$(this).val()-$("#hidden-current-point").val())).trigger('change');
+            if(couponVal > totalPay){
+                alert("안된다!");
+            }else{
+                $(".total-order-coupon>div").last().children().text("-"+$(this).val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                // console.log($(this).val());
+                
+                // 현재 적용된 쿠폰 가격, 계산을 위해 hidden에 넣어둠
+                $("#number-coupon").val($(this).val());
+                // 최종 결제 금액 : 주문금액 - 쿠폰 - 적립금
+                // 현재 적용된 쿠폰 및 적립금 빼서 계산
+                $(".total-order-pay>div").last().children().text(($("#number-pay-price").val()-$(this).val()-$("#hidden-current-point").val()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                
+                // 최종 결제 금액 hidden에 숨김
+                $("#hidden-total-pay").val(($("#number-pay-price").val()-$(this).val()-$("#hidden-current-point").val())).trigger('change');
+            }
         });
 
 
         // 적립금 모두 사용
         $("#all-saved-money").on("click", function(){
-            // hidden-total-point
-            $(".total-order-saved-money>div").last().children().text("-"+$("#hidden-total-point").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            // input창도 동기화
-            $("#input-saved-money").val($("#hidden-total-point").val());
+            const totalPay =  $("#hidden-total-pay").val();
+            const myPoint = $("#hidden-total-point").val();
 
-            // 최종 결제 금액 : 주문금액 - 쿠폰 - 적립금
-            $(".total-order-pay>div").last().children().text(($("#number-pay-price").val()-$("#number-coupon").val()-$("#hidden-total-point").val()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            // 계산을 위해 hidden에 넣어둠
-            $("#hidden-current-point").val($("#hidden-total-point").val());
-            // 최종 결제 금액 hidden에 숨김
-            $("#hidden-total-pay").val($("#number-pay-price").val()-$("#number-coupon").val()-$("#hidden-total-point").val()).trigger('change');
-        });
-
-        // 적립금 일부 사용
-        $("#do-saved-money").on("click", function(){
-            const input = Number($("#input-saved-money").val());
-            const total = Number($("#hidden-total-point").val());
-
-            if(input < total){
-                $(".total-order-saved-money>div").last().children().text("-"+$("#input-saved-money").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            // 최종 결제 금액보다 보유중인 총 적립금이 적으면 최종 결제 금액만 사용됨
+            if(totalPay < myPoint){
+                // hidden-total-point
+                $(".total-order-saved-money>div").last().children().text("-"+totalPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 // input창도 동기화
-                $("#input-saved-money").val($("#input-saved-money").val());
-
-                // 계산을 위해 hidden에 넣어둠
-                $("#hidden-current-point").val($("#input-saved-money").val());
-
+                $("#input-saved-money").val(totalPay);
+                
                 // 최종 결제 금액 : 주문금액 - 쿠폰 - 적립금
-                $(".total-order-pay>div").last().children().text(($("#number-pay-price").val()-$("#number-coupon").val()-input).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                $(".total-order-pay>div").last().children().text(($("#number-pay-price").val()-$("#number-coupon").val()-totalPay).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                // 계산을 위해 hidden에 넣어둠
+                $("#hidden-current-point").val(totalPay);
                 // 최종 결제 금액 hidden에 숨김
-                $("#hidden-total-pay").val($("#number-pay-price").val()-$("#number-coupon").val()-input).trigger('change');
+                $("#hidden-total-pay").val($("#number-pay-price").val()-$("#number-coupon").val()-totalPay).trigger('change');
             }else{
-                // 보유 적립금보다 많으면 총 적립금 적용
+                // hidden-total-point
                 $(".total-order-saved-money>div").last().children().text("-"+$("#hidden-total-point").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 // input창도 동기화
                 $("#input-saved-money").val($("#hidden-total-point").val());
-
-                // 계산을 위해 hidden에 넣어둠
-                $("#hidden-current-point").val($("#hidden-total-point").val());
-
+                
                 // 최종 결제 금액 : 주문금액 - 쿠폰 - 적립금
                 $(".total-order-pay>div").last().children().text(($("#number-pay-price").val()-$("#number-coupon").val()-$("#hidden-total-point").val()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                // 계산을 위해 hidden에 넣어둠
+                $("#hidden-current-point").val($("#hidden-total-point").val());
                 // 최종 결제 금액 hidden에 숨김
                 $("#hidden-total-pay").val($("#number-pay-price").val()-$("#number-coupon").val()-$("#hidden-total-point").val()).trigger('change');
+            }
+        });
+
+        
+        // 적립금 일부 사용
+        $("#do-saved-money").on("click", function(){
+
+            const input = Number($("#input-saved-money").val());
+            const total = Number($("#hidden-total-point").val());
+
+            const totalPay =  $("#hidden-total-pay").val(); // 최종 결제 금액
+
+
+            // && 모든 로직은 최종 결제 금액을 넘으면 안됨!
+            if(input <= totalPay){
+                // 입력한 포인트가 보유중인 총 적립금보다 적으면 입력한 포인트 적용
+                if(input < total){
+                    $(".total-order-saved-money>div").last().children().text("-"+$("#input-saved-money").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        
+                    // 계산을 위해 hidden에 넣어둠
+                    $("#hidden-current-point").val($("#input-saved-money").val());
+
+                    // 최종 결제 금액 : 주문금액 - 쿠폰 - 적립금
+                    $(".total-order-pay>div").last().children().text(($("#number-pay-price").val()-$("#number-coupon").val()-input).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    // 최종 결제 금액 hidden에 숨김
+                    $("#hidden-total-pay").val($("#number-pay-price").val()-$("#number-coupon").val()-input).trigger('change');
+                }else{
+                    // 보유 적립금보다 많으면 총 적립금 적용
+                    $(".total-order-saved-money>div").last().children().text("-"+$("#hidden-total-point").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    // input창도 동기화
+                    $("#input-saved-money").val($("#hidden-total-point").val());
+                    
+                    // 계산을 위해 hidden에 넣어둠
+                    $("#hidden-current-point").val($("#hidden-total-point").val());
+                    
+                    // 최종 결제 금액 : 주문금액 - 쿠폰 - 적립금
+                    $(".total-order-pay>div").last().children().text(($("#number-pay-price").val()-$("#number-coupon").val()-$("#hidden-total-point").val()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    // 최종 결제 금액 hidden에 숨김
+                    $("#hidden-total-pay").val($("#number-pay-price").val()-$("#number-coupon").val()-$("#hidden-total-point").val()).trigger('change');
+                }
+            }else{
+                alert("최종 결제 금액보다 많은 포인트를 입력하셨습니다.");
             }
             
         });
@@ -450,6 +490,9 @@
         // 최종 결제 금액에 따라 적립 포인트 계산
         $("#hidden-total-pay").on("change", function(){
             $(".total-order-buy-save-point>div").last().children().text(Math.ceil(Number($(this).val())*10/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
+            // 결제버튼에 최종 결제 금액 표시
+            $(".order-complete-btn>span").text($(".total-order-pay>div").last().children().text());
         })
 
         

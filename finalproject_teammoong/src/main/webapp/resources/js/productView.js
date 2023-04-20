@@ -458,7 +458,7 @@ $(document).ready(function() {
                     buttons: {
                         "OK": function () {
                             $(this).dialog("close");
-                             location.reload()
+                            location.reload();
                         }
                     },
                     show: {
