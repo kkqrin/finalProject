@@ -47,7 +47,7 @@
 								<a style="cursor:pointer;" data-modal="#modalBasic">${dm.dmContent }</a>
 								</div>
 							</td>
-							<td>${dm.dmSender }</td>
+							<td>${dm.dmSenderName }</td>
 							<td>${dm.dmDate }</td>
 							<td>
 								<c:choose>
@@ -65,7 +65,7 @@
 				        <div id="modalBasic" class="modal modal-pri">
 				            <div class="modal-content">
 				                <div class="modal-header">
-				                    <h6>보낸 사람 : ${dm.dmSender }</h6>
+				                    <h6>보낸 사람 : ${dm.dmSenderName }(${dm.dmSender })</h6>
 				                    <input type="hidden" name="toReply" value="${dm.dmSender }">
 				                    <a>보낸 시간 : [ ${dm.dmDateHour } ]</a>
 				                </div>

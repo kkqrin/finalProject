@@ -11,11 +11,18 @@ public class DirectMessage {
 
 	private int rnum;
 	private int dmNo;
+	
 	private String dmSender;
+	private String dmSenderName;
+	
 	private String dmReceiver;
+	private String dmReceiverName;
+	
 	private String dmContent;
+	
 	private String dmDate;
 	private String dmDateHour;
+	
 	private int dmReadChk;
 	
 	public String getDmContentBr() {

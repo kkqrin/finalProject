@@ -16,19 +16,23 @@
 	</insert>
 
 	<select id="selectReceiveAllDm" resultType="dm" parameterType="string">
-		select
-			rownum as rnum, 
-			dm_sender as dmSender,
-			dm_receiver as dmReceiver,
-			dm_content as dmContent,
-			to_char(dm_date,'yyyy-mm-dd') as dmDate,
-			to_char(dm_date,'yyyy-mm-dd hh24:mi') as dmDateHour,
-			dm_readchk as dmReadChk
-		from
-			member_dm
-		where
-			dm_receiver = #{memberId}	
-		order by 1 desc
+			select
+			    rownum as rnum, 
+			    dm_sender as dmSender,
+			    s.member_name as dmSenderName,
+			    dm_receiver as dmReceiver,
+			    r.member_name as dmReceiverName,
+			    dm_content as dmContent,
+			    to_char(dm_date,'yyyy-mm-dd') as dmDate,
+			    to_char(dm_date,'yyyy-mm-dd hh24:mi') as dmDateHour,
+			    dm_readchk as dmReadChk
+			from
+			    member_dm d  
+			    join member_tbl s on (d.dm_sender = s.member_id)
+			    join member_tbl r on (d.dm_receiver = r.member_id)
+			where
+			    dm_receiver = #{memberId}
+			order by 1 desc
 	</select>
 
 </mapper>
