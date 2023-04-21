@@ -18,6 +18,19 @@
 			<div class="mypage-right-title">쪽지 보내기</div>
 			<div class="mypage-content">
 			
+				<table>
+					<tr>
+						<th>보내는 사람</th>
+						<td>${sessionScope.m.memberName }(${sessionScope.m.memberId })</td>
+					</tr>
+					<tr>
+						<th>받을 사람</th>
+					</tr>
+				
+				</table>
+			
+			
+			
 			</div>
 		</div>
 		
