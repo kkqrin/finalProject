@@ -13,31 +13,10 @@
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css"/>
 <!-- google icon -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+	<!--  -->
+	<link rel="stylesheet" href="/resources/css/admin/admin.css" />
 </head>
 <style>
-    .adminPage-wrapper{
-        background-color: #111;
-		width: 1200px;
-        margin-top: 300px;
-        
-    }
-    .adminPage-header{
-        margin-left: 30px;
-    }
-    .adminPage-back{
-        background-color: lightyellow;
-        overflow: hidden;
-    }
-    .adminPage-sidebar{
-        float: left;
-        width: 300px;
-        background-color: lightcoral;
-        height: 2000px;
-
-    }
-    .adminPage-sidebar>ul>li{
-        list-style-type: none;
-    }
     .adminPage-main{
         background-color: lightgreen;
     }
@@ -46,7 +25,7 @@
         overflow: hidden;
     }
     .material-symbols-outlined{
-        font-size: 150px;
+        font-size: 150px !important;
         
     }
     .mainContent{
