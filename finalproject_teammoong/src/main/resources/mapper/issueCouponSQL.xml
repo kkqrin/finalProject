@@ -47,7 +47,10 @@
 	<select id="totalCount" parameterType="_int" resultType="_int">
 		select count(*) from issue_coupon where member_no = #{memberNo}
 	</select>
-	
+	<update id="updateUseCoupon" parameterType="_int">
+		update issue_coupon 
+		set coupon_status = 0 where issue_no = #{issueNo}
+	</update>
 	
 	
 	
