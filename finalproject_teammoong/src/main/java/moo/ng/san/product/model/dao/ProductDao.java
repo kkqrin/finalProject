@@ -161,6 +161,12 @@ public class ProductDao {
 		return result;
 	}
 
+	public int deleteCart(int no) {
+		int result = sqlSession.delete("product.deleteCart", no);
+		
+		return result;
+	}
+
 	
 	
 	

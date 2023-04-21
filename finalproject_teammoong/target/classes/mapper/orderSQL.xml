@@ -26,10 +26,11 @@
 			p.product_discount AS productDiscount,
 			oi.option_info_no AS optionNo,
 			oi.option_dateail AS optionDetailName,
-			oi.option_price AS optionPrice
+			b.basket_count AS basketCount
 		from product_tbl p
 		left join OPTION_GROUP_TBL og on p.product_no = og.product_no
 		left join OPTION_INFO_TBL oi on OG.OPTION_GROUP_NO = OI.OPTION_GROUP_NO
+		left join basket_tbl b on p.product_no = b.product_no
 		where p.product_no=#{productNo}
 		<if test="optionNo != 0">
 		and option_info_no = #{optionNo}

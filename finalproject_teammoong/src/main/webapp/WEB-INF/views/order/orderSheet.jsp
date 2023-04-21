@@ -77,7 +77,16 @@
                                 </div>
                                 <div class="order-product-option">${i.optionDetailName }</div>
                             </div>
-                            <div class="order-product-volume">1개</div>
+                            <!-- 뷰 page : 상품 하나의 수량들 , 장바구니 : 0 -->
+                            <c:choose>
+                                <c:when test="${page eq 0}">
+                                    <div class="order-product-volume">${i.basketCount}개</div>
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="order-product-volume">${page}개</div>
+                                </c:otherwise>
+                            </c:choose>
+
                             <div class="order-product-price"><span></span>원</div>
                             <input type="hidden" name="productPrice" class="product-price" value="${i.productPrice }">
 							<input type="hidden" class="product-discount" value="${i.productDiscount }">

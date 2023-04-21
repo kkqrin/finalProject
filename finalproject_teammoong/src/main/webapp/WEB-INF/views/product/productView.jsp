@@ -209,6 +209,7 @@
                                 <input type="hidden" name="optionNo">
                                 <button class="btn btn-white size02">혼자구매하기</button>
                                 <input type="hidden" id="option-list-null" value="${optionList}">
+                                <input type="hidden" name="page" value="0">
                             </form>
                             </div>
                             <div class="moong-btn">
@@ -537,7 +538,8 @@
                     // 옵션이 없거나 옵션 선택된 경우 제출
                     $("[name=productNo]").val(productNo);
                     $("[name=optionNo]").val(optionNo);
-
+                    // 수량
+                    $("[name=page]").val($("[name=pop_out]").val());
                 }
 			});
 

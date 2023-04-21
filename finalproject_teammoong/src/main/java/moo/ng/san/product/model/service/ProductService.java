@@ -271,6 +271,18 @@ public class ProductService {
 		return dao.updateBasketCount(basketNo);
 	}
 
+	public int deleteCart(int[] basketNo) {
+		
+		int result = 0;
+		
+		for(int no : basketNo) {
+			result += dao.deleteCart(no);
+		}
+		
+		
+		return result;
+	}
+
 
 
 

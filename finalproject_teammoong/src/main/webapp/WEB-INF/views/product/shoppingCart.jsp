@@ -28,15 +28,22 @@
 					<span class="custom-checkbox"></span>
 					전체선택
 				</label>
-				(<span>0</span>/<span>10</span>)
 			</div>
-			<div>선택삭제</div>
+			<form action="/deleteCart.do" method="post" id="form-delet-cart">
+				<button id="delete-cart">선택삭제</button>
+				<c:forEach items="${basketList}" var="i">
+					<input type="text" name="basketNo" value="${i.basketNo}" disabled>
+				</c:forEach>
+			</form>
 		</div>
 
 		<div class="order-payment-wrap">
 			<div>
+				<c:if test="${basketList eq null}">
+
+				</c:if>
 				<form action="/orderSheet.do" method="post">
-					<c:forEach items="${basketList}" var="i">
+					<c:forEach items="${basketList}" var="i" varStatus="status">
 						<div class="cart-product-item">
 							<div>
 								<!-- <input type="checkbox" name="chk"> -->
@@ -44,8 +51,13 @@
 									<input type="checkbox" name="chk">
 									<span class="custom-checkbox"></span>
 								</label>
-								<input type="hidden" name="productNo" value="${i.productNo}" disabled>
-								<input type="hidden" name="optionNo" value="${i.optionNo}" disabled>
+								<!-- <input type="hidden" name="productNo" value="${i.productNo}" disabled>
+								<input type="hidden" name="optionNo" value="${i.optionNo}" disabled> -->
+								<input type="text" name="productNo" value="${i.productNo}" disabled>
+								<input type="text" name="optionNo" value="${i.optionNo}" disabled>
+								<input type="text" name="orderDetailCnt" value="${i.basketCount}" disabled>
+								<input type="hidden" name="page" value="0">
+								<input type="text" name="chk-index" value="${status.index}">
 							</div>
 							<div class="cart-product-img">
 								<a href="/productView.do?productNo=${i.productNo}">
@@ -128,11 +140,22 @@
 		$("[name=chk]").on("change", function(){
 			if($(this).is(":checked")){
 				// 선택 안 된 체크박스는 주문서 페이지로 전달안되게
-				$(this).next().prop("disabled", false);
-				$(this).next().next().prop("disabled", false);
+				$(this).parent().next().prop("disabled", false);
+				$(this).parent().next().next().prop("disabled", false);
+				$(this).parent().next().next().next().prop("disabled", false);
+
+				// 인덱스 가져오기
+				const index = $(this).parent().next().next().next().next().next().val();
+				$("#form-delet-cart input[name=basketNo]").eq(index).prop("disabled", false);
+
 			}else{
-				$(this).next().prop("disabled", true);
-				$(this).next().next().prop("disabled", true);
+				$(this).parent().next().prop("disabled", true);
+				$(this).parent().next().next().prop("disabled", true);
+				$(this).parent().next().next().next().prop("disabled", true);
+
+				// 인덱스 가져오기
+				const index = $(this).parent().next().next().next().next().next().val();
+				$("#form-delet-cart input[name=basketNo]").eq(index).prop("disabled", true);
 			}
 		})
 		
@@ -244,6 +267,9 @@
 			$("form").submit();
 		});
 
+		$("#form-delete-cart").submit(function (e) {
+			
+		});
 
 	</script>
 </body>

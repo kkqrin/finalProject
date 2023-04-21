@@ -22,4 +22,6 @@ public class Order {
 	private int optionNo;
 	private String optionDetailName;
 	private int optionPrice;
+	
+	private int basketCount;
 }
