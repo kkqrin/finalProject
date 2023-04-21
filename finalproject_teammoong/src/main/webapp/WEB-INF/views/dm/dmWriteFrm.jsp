@@ -88,7 +88,6 @@
 		
 		$(".sendBtn").on("click",function(e){
 			const dmContent = $("[name='dmContent']").val();
-			
 			if(!sendChk){
 				e.preventDefault();
 				alert("[확인] 버튼을 눌러 받을 사람을 확인해주세요");
@@ -99,7 +98,6 @@
 				$("[name='dmContent']").focus();
 			}else{
 				const dmReceiver = $("[name='dmReceiver']").val();
-				
 				$.ajax({
 					url:"/insertDm.do",
 					type:"post",

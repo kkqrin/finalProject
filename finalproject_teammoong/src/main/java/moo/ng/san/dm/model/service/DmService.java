@@ -18,8 +18,8 @@ public class DmService {
 		return dao.insertDm(dm);
 	}
 
-	public ArrayList<DirectMessage> selectAllDm(String memberId) {
-		ArrayList<DirectMessage> list = dao.selectAllDm(memberId);
+	public ArrayList<DirectMessage> selectReceiveAllDm(String memberId) {
+		ArrayList<DirectMessage> list = dao.selectReceiveAllDm(memberId);
 		return list;
 	}
 	

@@ -21,7 +21,7 @@ public class DmController {
 
 	@RequestMapping(value = "/receiveDmList.do")
 	public String myPageDmReceive(@SessionAttribute(required=false) Member m, Model model) {
-		ArrayList<DirectMessage> list = service.selectAllDm(m.getMemberId());
+		ArrayList<DirectMessage> list = service.selectReceiveAllDm(m.getMemberId());
 		model.addAttribute("list", list);
 		return "dm/receiveDmList";
 	}

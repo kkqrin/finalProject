@@ -9,22 +9,25 @@
 			#{dmReceiver},
 			#{dmContent},
 			sysdate,
+			0,
+			0,
 			0
 		)
 	</insert>
 
-	<select id="selectAllDm" resultType="dm" parameterType="_int">
+	<select id="selectReceiveAllDm" resultType="dm" parameterType="string">
 		select
 			rownum as rnum, 
 			dm_sender as dmSender,
 			dm_receiver as dmReceiver,
 			dm_content as dmContent,
-			to_char(dm_date,'""YYYY"년 "MM"월 "DD"일"') as dmDate,
+			to_char(dm_date,'yyyy-mm-dd') as dmDate,
+			to_char(dm_date,'yyyy-mm-dd hh24:mi') as dmDateHour,
 			dm_readchk as dmReadChk
 		from
 			member_dm
 		where
-			member_id = #{memberId}	
+			dm_receiver = #{memberId}	
 		order by 1 desc
 	</select>
 
