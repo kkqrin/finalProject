@@ -24,22 +24,6 @@
     .saved-money-box>input[type=text]{
         height: auto;
     }
-    @font-face{
-        font-family:'bitbit';
-        src:url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2') ;
-    }
-    @font-face {
-        font-family: 'DungGeunMo';
-        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
-        font-weight: normal;
-        font-style: normal;
-    }
-    @font-face {
-        font-family: 'DOSGothic';
-        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/DOSGothic.woff') format('woff');
-        font-weight: normal;
-        font-style: normal;
-    }
     @font-face {
         font-family: 'SaenggeoJincheon';
         src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/SaenggeoJincheon.woff2') format('woff2');
