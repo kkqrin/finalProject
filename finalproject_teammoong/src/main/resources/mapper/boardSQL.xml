@@ -12,7 +12,7 @@
 						board_name as boardName,
 						board_writer as boardWriter,
 						board_date as boardDate,
-
+						
 						
 						
 						
@@ -80,9 +80,25 @@
 	<insert id="insertOption" parameterType="bo">
 		insert into board_option values(board_option_seq.nextval, #{boardNo}, #{detailName}, #{detailPrice}, #{detailCount})
 	</insert>
-	<select id="selectOneBoard" parameterType="_int" resultMap="getBoard">
+	<select id="selectOneBoard" parameterType="_int" resultType="b">
 		select
-			*
+			board_no as boardNo,
+			board_writer as boardWriter,
+			board_name as boardName,
+			d_category_no as detailCategoryNo,
+			board_content as boardContent,
+			to_char(board_date,'"20"YY"년"MM"월"DD"일"') as boardDate,
+			account_writer as accountWriter,
+			account_name as accountName,
+			account_bank as accountBank,
+			board_start as boardStart,
+			board_end as boardEnd,
+			reference_link as referenceLink,
+			delivery_date as deliveryDate,
+			board_etc as boardEtc,
+			board_status as boardStatus,
+			board_count as boardCount,
+			report_count as reportCount
 		from board_tbl where board_no = #{_parameter}	
 	</select>
 	
@@ -170,7 +186,12 @@
 	</resultMap>
 	<delete id="boardDelete" parameterType="_int">
 		delete
-		form file_tbl where board_no = #{_parameter}
+		from board_tbl where board_no = #{_parameter}
+	</delete>
+	
+	<delete id="boardFileDelete" parameterType="_int">
+		delete
+		from file_tbl where board_no = #{_parameter}
 	</delete>
 	<update id="boardReadCount" parameterType="b">
 		update board_tbl set

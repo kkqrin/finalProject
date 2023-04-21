@@ -63,10 +63,11 @@ sup{
 				<c:choose>
 					<c:when test="${empty sessionScope.m.memberId}">
 						<div style="border: 2px solid var(--secondary);background-color:var(--primary); text-align: center; font-size: 25px; color: #fff; font-weight: bold; margin: 0 auto;">
-							<a>로그인 후 주문 가능합니다</a>
+							<a>로그인 후 주문 가능합니다</a>	
 						</div>
 					</c:when>
 					<c:otherwise>
+						<div>작성자 : ${b.boardWriter }</div>
 						<div style="background-color: var(--primary); color: #fff; width: 100%; height: 80px; text-align: center; font-size: 23px; line-height: 80px;">
 							${b.boardName }
 						</div>
