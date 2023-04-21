@@ -755,7 +755,7 @@
                         inputCount.val(Number(inputCountVal)+1).trigger('change');
                     }
                 }else{
-                    if(inputCountVal > 0 ){
+                    if(inputCountVal > 1 ){
                         inputCount.val(Number(inputCountVal)-1).trigger('change');
                     }
                 }

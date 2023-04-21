@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,23 +21,10 @@
     <div class="category-wrap">
 		<h3>인기 상품</h3>
 		<ul class="subcategory-name-list">
-			<li><a href="#">식품</a></li>
-            <li><a href="#">식품</a></li>
-            <li><a href="#">식품</a></li>
-            <li><a href="#">식품</a></li>
-            <li><a href="#">식품</a></li>
-            <li><a href="#">식품</a></li>
-            <li><a href="#">식품</a></li>
-
-            <li><a href="#">식품</a></li>
-            <li><a href="#">식품</a></li>
-            <li><a href="#">식품</a></li>
-            <li><a href="#">식품</a></li>
-            <li><a href="#">식품</a></li>
-            <li><a href="#">식품</a></li>
-            <li><a href="#">식품</a></li>
-            <li><a href="#">식품</a></li>
-            <li><a href="#">식품</a></li>
+            <li><a href="#">전체보기</a></li>
+            <c:forEach items="${categoryList}" var="c">
+            <li><a href="#">${c.categoryName}</a></li>
+            </c:forEach>
 		</ul>
 	</div>
 

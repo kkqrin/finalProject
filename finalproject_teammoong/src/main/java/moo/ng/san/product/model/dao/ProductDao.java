@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import moo.ng.san.basket.model.vo.Basket;
+import moo.ng.san.category.model.vo.Category;
 import moo.ng.san.category.model.vo.DetailCategory;
 import moo.ng.san.product.model.vo.FileVO;
 import moo.ng.san.product.model.vo.Option;
@@ -165,6 +166,15 @@ public class ProductDao {
 		int result = sqlSession.delete("product.deleteCart", no);
 		
 		return result;
+	}
+
+	public ArrayList<Category> selectCategoryList() {
+		
+		List list = sqlSession.selectList("category.selectCategoryList");
+		
+		System.out.println("dao : "+list);
+		
+		return (ArrayList<Category>)list;
 	}
 
 	

@@ -224,7 +224,16 @@ public class ProductController {
 	
 	// 인기 상품 리스트
 	@RequestMapping(value="/bestProductList.do")
-	public String bestProductList(@SessionAttribute(required=false) Member m, Model model) {
+	public String bestProductList(Model model) {
+		
+		// 카테고리 리스트
+		ArrayList<Category> categoryList = service.selectCategoryList();
+		
+		System.out.println("컨트롤러 : "+categoryList);
+		model.addAttribute("categoryList", categoryList);
+		
+		// 인기 상품 리스트
+		
 		
 		return "product/bestProductList";
 	}

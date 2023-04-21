@@ -36,4 +36,10 @@
 		 where category_no=#{_parameter}
 		 order by 2
 	</select>
+	<select id="selectCategoryList" resultType="c">
+		select 
+            category_no AS categoryNo,
+            category_name AS categoryName
+       from PRODUCT_CATEGORY
+	</select>
 </mapper>
