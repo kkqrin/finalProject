@@ -80,10 +80,10 @@
                             <!-- 뷰 page : 상품 하나의 수량들 , 장바구니 : 0 -->
                             <c:choose>
                                 <c:when test="${page eq 0}">
-                                    <div class="order-product-volume">${i.basketCount}개</div>
+                                    <div class="order-product-volume"><span>${i.basketCount}</span>개</div>
                                 </c:when>
                                 <c:otherwise>
-                                    <div class="order-product-volume">${page}개</div>
+                                    <div class="order-product-volume"><span>${page}</span>개</div>
                                 </c:otherwise>
                             </c:choose>
 
@@ -92,6 +92,7 @@
 							<input type="hidden" class="product-discount" value="${i.productDiscount }">
 							<input type="hidden" name="productNo" class="product-no" value="${i.productNo }">
 							<input type="hidden" name="optionInfoNo" value="${i.optionNo }">
+                            <input type="text" name="orderDetailCnt">
                             <!-- ${i.productPrice } * ( 100 - ${i.productDiscount }) / 100 -->
                             <!-- .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") -->
                         </div>
@@ -179,8 +180,9 @@
                                                 <option value="0" selected>사용 가능한 쿠폰 ${couponCount }장</option>
                                                 <c:forEach items="${couponList }" var="i">
                                                 <option value="${i.couponPrice }">${i.couponTitle }( <fmt:formatNumber value="${i.couponPrice }"/>원 할인 / ~ ${i.endDate } )</option>
+                                                <input type="hidden" name="issueNo" value="${i.issueNo}">
                                                 </c:forEach>
-                                                <option value="2" disabled>5만원이상 1천원 할인</option>
+                                                <!-- <option value="2" disabled>5만원이상 1천원 할인</option> -->
                                             </select>
                                         </div>
                                     </td>
@@ -364,52 +366,69 @@
 
 			const productPrice = $(".product-price").eq(i).val();
 			const productDiscount = $(".product-discount").eq(i).val();
+            const orderDetailCnt = $(".order-product-volume>span").eq(i).text();
 			
 			// Math.floor(productPrice*(100 - productDiscount)/1000)*10);
-			$(".order-product-price").eq(i).children().text((Math.floor(productPrice*(100 - productDiscount)/1000)*10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+			$(".order-product-price").eq(i).children().text(((Math.floor(productPrice*(100 - productDiscount)/1000)*10)*orderDetailCnt).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		};
 
 
-        // 결제 금액
+        // 결제 금액 (기본 세팅)
         let productPriceSum = 0;
         let discountPrice = 0;
         let payPrice = 0;
+
+
+
+
         for(let i=0;i<$(".product-price").length;i++){
             const productPrice = $(".product-price").eq(i).val();
             const productDiscount = $(".product-discount").eq(i).val();
+            // 수량
+            const orderDetailCnt = $(".order-product-volume>span").eq(i).text();
+
+            
+            // 수량 hidden
+            $("[name=orderDetailCnt]").val(orderDetailCnt);
 
             // 할인 전 원래 가격(상품금액)
-            productPriceSum = Number(productPriceSum) + Number(productPrice);
+            productPriceSum = (Number(productPriceSum) + Number(productPrice)) * orderDetailCnt;
             $(".total-order-amount-2>div").last().children().text((productPriceSum).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
-
             // 할인되는 금액(할인금액)
-            discountPrice = Number(discountPrice) + Number(productPrice-(Math.floor(productPrice*(100 - productDiscount)/1000)*10));
+            discountPrice = ( Number(discountPrice) + Number(productPrice-(Math.floor(productPrice*(100 - productDiscount)/1000)*10)) ) * orderDetailCnt;
             $(".total-order-amount-3>div").last().children().text(discountPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
             // 주문금액 (결제할 금액)
-            payPrice = Number(payPrice) + Number((Math.floor(productPrice*(100 - productDiscount)/1000)*10));
+            payPrice = ( Number(payPrice) + Number((Math.floor(productPrice*(100 - productDiscount)/1000)*10)) ) * orderDetailCnt;
             $(".total-order-amount-1>div").last().children().text(payPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
         
         }
         
-            // 최종 결제 금액 계산을 위해 hidden에 넣어둠
-            $("#number-pay-price").val(payPrice);
+        // 최종 결제 금액 계산을 위해 hidden에 넣어둠
+        $("#number-pay-price").val(payPrice);
 
-            // 최종 결제 금액 = 주문금액 (- 쿠폰(0) - 적립금(0))
-            $(".total-order-pay>div").last().children().text($(".total-order-amount-1>div").last().children().text());
+        // 최종 결제 금액 = 주문금액 (- 쿠폰(0) - 적립금(0))
+        $(".total-order-pay>div").last().children().text($(".total-order-amount-1>div").last().children().text());
 
-            // 적립금
-            $(".total-order-buy-save-point>div").last().children().text(Math.ceil(Number($("#number-pay-price").val())*10/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        // 적립금
+        $(".total-order-buy-save-point>div").last().children().text(Math.ceil(Number($("#number-pay-price").val())*10/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
-            // 최종 결제 버튼
-            $(".order-complete-btn>span").text($(".total-order-pay>div").last().children().text());
+        // 최종 결제 버튼
+        $(".order-complete-btn>span").text($(".total-order-pay>div").last().children().text());
 
-            // 최종 결제 금액
-            $("#hidden-total-pay").val(payPrice);
-        	
-            const plusPoint = $(".total-order-buy-save-point>div").last().children().text();
-            $("[name=plusPointEa]").val(plusPoint);
+        // 최종 결제 금액 hidden
+        $("#hidden-total-pay").val(payPrice);
+
+        const plusPoint = $(".total-order-buy-save-point>div").last().children().text();
+        $("[name=plusPointEa]").val(plusPoint);
+        
+
+
+
+
+
+
 
         // 쿠폰 할인
         $( ".order-coupon" ).on("selectmenuchange", function(){
@@ -430,6 +449,10 @@
                 
                 // 최종 결제 금액 hidden에 숨김
                 $("#hidden-total-pay").val(($("#number-pay-price").val()-$(this).val()-$("#hidden-current-point").val())).trigger('change');
+
+                // 선택된 쿠폰의 이슈쿠폰 번호
+                console.log($(this).prop("issueNo"));
+                // $("[name=issueNo]").val()
             }
         });
 
@@ -594,6 +617,9 @@
             };
         
         });
+
+
+
     </script>
 </body>
 </html>

@@ -154,7 +154,11 @@ public class ProductController {
 		ArrayList<Basket> basketList = service.selectBasketList(memberNo);
 		model.addAttribute("basketList", basketList);
 		
-		System.out.println(basketList);
+		if(basketList.size() == 0) {
+			System.out.println(basketList);			
+		}else {
+			System.out.println(basketList+"!!");
+		}
 		
 		return "product/shoppingCart";
 	}
