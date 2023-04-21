@@ -6,10 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- jquery -->
+	<!-- jquery -->
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<!-- google icon -->
+	<!-- google icon -->	
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+	<!--  -->
+	<link rel="stylesheet" href="/resources/css/admin/admin.css" />
+	<link rel="stylesheet" href="/resources/css/common/default.css" />
+	
 </head>
 <style>
     .adminPage-wrapper{
@@ -63,6 +67,22 @@
     .searchForm{
     	display: none;
     }
+    .moreResult{
+		float: right;
+	    top: 130px;
+	    position: absolute;
+	    right: 294px;
+	    text-align: right;
+	    background-color: brown;
+	    width: 400px;
+	    height: 1000px;
+	    display: none;
+    }
+    .moreResult>div>span{
+    	font-size: 40px;
+    	cursor: pointer;
+    }
+
     
 
 
@@ -88,6 +108,7 @@
                         </select>
                         <input type="text" name="memberSearchBox" id="searchOption">
                         <button type="button" name="searchSubmitBtn">검색</button>
+                        <button type="button" class="goList">목록</button>
                     </div>
                     <div class="adminPage-result">
                         <table class="table">
@@ -96,18 +117,13 @@
                                 <th>회원번호</th>
                                 <th>회원아이디</th>
                                 <th>이름</th>
-                                <th>이메일</th>
-                                <th>전화번호</th>
-                                <th>주소</th>
                                 <th>성별</th>
-                                <th>생년월일</th>
-                                <th>은행정보</th>
-                                <th>계좌번호</th>
                                 <th>회원등급</th>
                                 <th>마케팅 동의 여부</th>
                                 <th>가입일</th>
                                 <th>회원등급 변경</th>
                                 <th>확정버튼</th>
+                                <th>상세보기</th>
                             </tr>
                             <c:forEach items="${memberList }" var="m">
                                 <tr>
@@ -115,9 +131,6 @@
                                     <td>${m.memberNo }<input type="hidden" class="memberNo" value="${m.memberNo }"></td>
                                     <td>${m.memberId }<input type="hidden" class="memberId" value="${m.memberId }"></td>
                                     <td>${m.memberName }</td>
-                                    <td>${m.memberEmail }</td>
-                                    <td>${m.memberPhone }</td>
-                                    <td>${m.memberAddr }</td>
                                     <c:choose>
                                     	<c:when test="${m.memberGender == 1 }">
                                     		<td>남성</td>
@@ -129,9 +142,6 @@
                                     		<td>성별없음</td>
                                     	</c:when>
                                     </c:choose>
-                                    <td>${m.memberBday }</td>
-                                    <td>${m.memberBank }</td>
-                                    <td>${m.memberAccount }</td>
                                     <c:choose>
                                         <c:when test="${m.memberStatus == 0}">
                                             <td>관리자</td>
@@ -195,6 +205,9 @@
                                     <td>
                                     	<button type="button" class="changeMemberStatusBtn">회원등급 변경</button>
                                     </td>
+                                    <td>
+                                    	<button type="button" class="moreInfo">상세보기</button>
+                                    </td>
                                 </tr>
                             </c:forEach>
                             <tr>
@@ -202,12 +215,18 @@
                             </tr>
                             <tr>
                                 <th colspan="2"><button type="button" name="allChangeMemberStatus">일괄 변경</th>
+                                <th>
+			                        <form name="searchForm" method="POST" action="" class="">
+			                       		<button type="button" onclick="exportToExcel();">엑셀출력</button>
+			                        </form><!--  -->
+		                        </th>
                             </tr>
-	                        <form name="searchForm" method="POST" action="" class="">
-	                       		<button type="button" onclick="exportToExcel();">엑셀출력</button>
-	                        </form><!--  -->
                         </table>
                         <!-- 엑셀용 -->
+                    </div>
+                    <div class="moreResult">
+						<div><span id="closeBtn" class="material-symbols-outlined">cancel</span></div>                    
+                    	<div class="moreResultContent"></div>
                     </div>
                     <div id="ajaxResult" class="table"></div>
                 </div>
@@ -218,6 +237,53 @@
 
 <!-- 스크립트를 넣어봅시다 -->
     <script>
+    /*목록으로*/
+    $(".goList").on("click",function(){
+    	location.reload();
+    })
+    
+    /* 상세보기 */
+   	$(".moreInfo").on("click",function(){
+   		var memberNo = $(this).parent().parent().parent().children().eq(1).children().eq(1).text();
+   		const moreInfo = $(".moreInfo");
+   		const moreResult = $(".moreResult");
+   		const moreResultContent = $(".moreResultContent");
+   		const closeBtn = $(".material-symbols-outlined");
+   		
+   		moreResultContent.empty();
+   		moreResult.show();
+   		
+   		$.ajax({
+   			url: "/ajaxMemberView.do",
+   			type:"post",
+   			data:{memberNo : memberNo},
+   			success: function(data){
+   				console.log(data);
+   				const ul = $("<ul>");
+   				ul.append("<li>"+data.memberName+"님의 개인정보 내역</li>");
+   				ul.append("<li>"+data.memberEmail+"</li>");
+   				ul.append("<li>"+data.memberPhone+"</li>");
+   				ul.append("<li>"+data.memberAddr+"</li>");
+   				ul.append("<li>"+data.memberBday+"</li>");
+   				ul.append("<li>"+data.memberBank+"</li>");
+   				ul.append("<li>"+data.memberAccount+"</li>");
+   				moreResultContent.append(ul);
+				   				
+   			}
+   			
+   		})
+   		
+   	})
+   	
+   	/*닫기 버튼*/
+	$("#closeBtn").on("click",function(){
+		const moreResult = $(".moreResult");
+   		
+   		moreResult.hide();
+		
+	})
+   	
+   	
     /* 등급 변경 */
     	$(".changeMemberStatusBtn").on("click",function(){
     		var memberNo = $(this).parent().parent().children().eq(1).text();
