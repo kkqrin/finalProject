@@ -15,13 +15,18 @@
 		<jsp:include page="/WEB-INF/views/common/myPageMenu.jsp" />
 		
 		<div class="mypage-right">
-			<div class="mypage-right-title">보낸 쪽지함</div>
+			<div class="mypage-right-title">받은 쪽지함</div>
 			<div class="mypage-content">
-			
-			</div>
+				
+				<table>
+				
+				
+				</table>
+				
+			</div><!-- mypage-content -->
 		</div>
 		
-		</div>
+		</div><!-- mypage-right -->
 	</div>
 	
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

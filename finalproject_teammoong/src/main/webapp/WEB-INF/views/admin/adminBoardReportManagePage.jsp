@@ -65,7 +65,7 @@
             <h1><a href="#">Admin-Page</a></h1>
         </div>
         <div class="adminPage-back">
-            <jsp:include page="/WEB-INF/views/admin/adminSideNavi.jsp" />
+            <jsp:include page="/WEB-INF/views/admin/adminSideNavi.jsp"/>
             <div class="adminPage-main">
                 <div class="adminPage-content">
                     <div class="adminPage-search">

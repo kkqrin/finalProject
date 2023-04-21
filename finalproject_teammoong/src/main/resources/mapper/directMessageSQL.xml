@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="directMessage">
+
+	<insert id="insertDm" parameterType="dm">
+		insert into member_dm values(
+			member_dm_seq.nextval,
+			#{dmSender},
+			#{dmReceiver},
+			#{dmContent},
+			sysdate,
+			0
+		)
+	</insert>
+
+	<select id="selectAllDm" resultType="dm" parameterType="_int">
+		select
+			rownum as rnum, 
+			dm_sender as dmSender,
+			dm_receiver as dmReceiver,
+			dm_content as dmContent,
+			to_char(dm_date,'""YYYY"년 "MM"월 "DD"일"') as dmDate,
+			dm_readchk as dmReadChk
+		from
+			member_dm
+		where
+			member_id = #{memberId}	
+		order by 1 desc
+	</select>
+
+</mapper>

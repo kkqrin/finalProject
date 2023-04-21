@@ -9,128 +9,145 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" href="/resources/css/product/cart.css"/>
+<style>
+	@font-face {
+    font-family: 'Shilla_CultureB-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/Shilla_CultureB-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+	}
+	.empty{
+		font-family: 'Shilla_CultureB-Bold';
+		font-size: 150px;
+		margin: 150px auto;
+	}
+</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	
 	<div class="content-wrap">
-	<pre>
-		남은 일 : 장바구니 상품 수 / 선택삭제 / 아무것도 없을때 디자인
-	</pre>
+
 		<div class="cart-title">
 			<h4>${sessionScope.m.memberName }님의 장바구니</h4>
 		</div>
-		<div class="cart-header">
-			<div style="display: flex;">
-				<!-- <label><input type="checkbox" id="all-product">전체선택</label> -->
-				<label class="checkbox-container">
-					<input type="checkbox" id="all-product">
-					<span class="custom-checkbox"></span>
-					전체선택
-				</label>
-			</div>
-			<form action="/deleteCart.do" method="post" id="form-delet-cart">
-				<button id="delete-cart">선택삭제</button>
-				<c:forEach items="${basketList}" var="i">
-					<input type="text" name="basketNo" value="${i.basketNo}" disabled>
-				</c:forEach>
-			</form>
-		</div>
 
-		<div class="order-payment-wrap">
-			<div>
-				<c:if test="${basketList eq null}">
+		<c:choose>
+			<c:when test="${basketList.size() eq 0}">
+				<div class="order-payment-wrap" style="justify-content: center;">
+					<h1 class="empty">텅 ~</h1>
+				</div>
+			</c:when>
+			<c:otherwise>
 
-				</c:if>
-				<form action="/orderSheet.do" method="post">
-					<c:forEach items="${basketList}" var="i" varStatus="status">
-						<div class="cart-product-item">
-							<div>
-								<!-- <input type="checkbox" name="chk"> -->
-								<label class="checkbox-container">
-									<input type="checkbox" name="chk">
-									<span class="custom-checkbox"></span>
-								</label>
-								<!-- <input type="hidden" name="productNo" value="${i.productNo}" disabled>
-								<input type="hidden" name="optionNo" value="${i.optionNo}" disabled> -->
-								<input type="text" name="productNo" value="${i.productNo}" disabled>
-								<input type="text" name="optionNo" value="${i.optionNo}" disabled>
-								<input type="text" name="orderDetailCnt" value="${i.basketCount}" disabled>
-								<input type="hidden" name="page" value="0">
-								<input type="text" name="chk-index" value="${status.index}">
-							</div>
-							<div class="cart-product-img">
-								<a href="/productView.do?productNo=${i.productNo}">
-									<img src="/resources/upload/product/${i.thumbnail }" />
-								</a>
-							</div>
-							<div class="cart-product-info">
-								<div class="cart-product-title">
-									<a href="/productView.do?productNo=${i.productNo}">
-										${i.productName }
-									</a>
+				<div class="cart-header">
+					<div style="display: flex;">
+						<!-- <label><input type="checkbox" id="all-product">전체선택</label> -->
+						<label class="checkbox-container">
+							<input type="checkbox" id="all-product">
+							<span class="custom-checkbox"></span>
+							전체선택
+						</label>
+					</div>
+					<form action="/deleteCart.do" method="post" id="form-delet-cart">
+						<button id="delete-cart">선택삭제</button>
+						<c:forEach items="${basketList}" var="i">
+							<input type="hidden" name="basketNo" value="${i.basketNo}" disabled>
+						</c:forEach>
+					</form>
+				</div>
+
+				<div class="order-payment-wrap">
+					<div>
+						<form action="/orderSheet.do" method="post">
+							<c:forEach items="${basketList}" var="i" varStatus="status">
+								<div class="cart-product-item">
+									<div>
+										<!-- <input type="checkbox" name="chk"> -->
+										<label class="checkbox-container">
+											<input type="checkbox" name="chk">
+											<span class="custom-checkbox"></span>
+										</label>
+										<!-- <input type="hidden" name="productNo" value="${i.productNo}" disabled>
+										<input type="hidden" name="optionNo" value="${i.optionNo}" disabled> -->
+										<input type="hidden" name="productNo" value="${i.productNo}" disabled>
+										<input type="hidden" name="optionNo" value="${i.optionNo}" disabled>
+										<input type="hidden" name="orderDetailCnt" value="${i.basketCount}" disabled>
+										<input type="hidden" name="page" value="0">
+										<input type="hidden" name="chk-index" value="${status.index}">
+									</div>
+									<div class="cart-product-img">
+										<a href="/productView.do?productNo=${i.productNo}">
+											<img src="/resources/upload/product/${i.thumbnail }" />
+										</a>
+									</div>
+									<div class="cart-product-info">
+										<div class="cart-product-title">
+											<a href="/productView.do?productNo=${i.productNo}">
+												${i.productName }
+											</a>
+										</div>
+										<div class="cart-product-option">${i.optionDetailName }</div>
+									</div>
+									<div class="cart-product-volume">
+										<!-- <button type="button" class="minus-count">-</button> -->
+										<input type="text" name="pop_out" value="${i.basketCount}" readonly="readonly" style="text-align:center;"/>
+										<!-- <button type ="button" class="plus-count">+</button> -->
+									</div>
+									<div class="cart-product-price"><span></span>원</div>
+									<input type="hidden" class="product-price" value="${i.productPrice }">
+									<input type="hidden" class="product-discount" value="${i.productDiscount }">
 								</div>
-								<div class="cart-product-option">${i.optionDetailName }</div>
-							</div>
-							<div class="cart-product-volume">
-								<!-- <button type="button" class="minus-count">-</button> -->
-								<input type="text" name="pop_out" value="${i.basketCount}" readonly="readonly" style="text-align:center;"/>
-								<!-- <button type ="button" class="plus-count">+</button> -->
-							</div>
-							<div class="cart-product-price"><span></span>원</div>
-							<input type="hidden" class="product-price" value="${i.productPrice }">
-							<input type="hidden" class="product-discount" value="${i.productDiscount }">
+							</c:forEach>
+							<!-- <button>주문하기</button> -->
+						</form>
+					</div>
+					<div class="total-pay-box">
+						<h5>결제 금액</h5>
+
+						<!-- <div class="total-order-amount-box"> -->
+						<div class="total-order-amount-1">
+							<div>주문금액</div>
+							<div><input type="hidden" class="hidden-product-price"><span>0</span> 원</div>
 						</div>
-					</c:forEach>
-					<!-- <button>주문하기</button> -->
-				</form>
-			</div>
-			<div class="total-pay-box">
-				<h5>결제 금액</h5>
+						<div class="total-order-amount-2">
+							<div>└ 상품 금액</div>
+							<div><input type="hidden" class="hidden-product-price"><span>0</span> 원</div>
+						</div>
+						<div class="total-order-amount-3">
+							<div>└ 상품 할인 금액</div>
+							<div><input type="hidden" class="hidden-product-price">-<span>0</span> 원</div>
+						</div>
+						<!-- </div> -->
+						<!-- <div class="total-order-delivery-fee">
+							<div>무료배송</div>
+							<div>0 원</div>
+						</div> -->
+						<!-- <div class="total-order-coupon">
+							<div>쿠폰 할인</div>
+							<div>0원</div>
+						</div>
+						<div class="total-order-saved-money">
+							<div>적립금 사용</div>
+							<div>0원</div>
+						</div> -->
+						<!-- <div class="total-order-pay">
+							<div>최종 결제 금액</div>
+							<div><span></span>원</div>
+						</div> -->
 
-				<!-- <div class="total-order-amount-box"> -->
-				<div class="total-order-amount-1">
-					<div>주문금액</div>
-					<div><input type="hidden" class="hidden-product-price"><span>0</span> 원</div>
+						<div class="total-order-buy-save-point">
+							<button type="button" class="btn btn-pri">적립</button>
+							<div>구매시 </div>
+							<div>2,180원 (5%)</div>
+						</div>
+						<div class="cart-pay-box area-btn full" style="margin-top: 30px;">
+							<button class="btn btn-pri size02" id="form-submit-order-btn">주문하기</button>
+						</div>
+					</div>
 				</div>
-				<div class="total-order-amount-2">
-					<div>└ 상품 금액</div>
-					<div><input type="hidden" class="hidden-product-price"><span>0</span> 원</div>
-				</div>
-				<div class="total-order-amount-3">
-					<div>└ 상품 할인 금액</div>
-					<div><input type="hidden" class="hidden-product-price">-<span>0</span> 원</div>
-				</div>
-				<!-- </div> -->
-				<!-- <div class="total-order-delivery-fee">
-					<div>무료배송</div>
-					<div>0 원</div>
-				</div> -->
-				<!-- <div class="total-order-coupon">
-					<div>쿠폰 할인</div>
-					<div>0원</div>
-				</div>
-				<div class="total-order-saved-money">
-					<div>적립금 사용</div>
-					<div>0원</div>
-				</div> -->
-				<!-- <div class="total-order-pay">
-					<div>최종 결제 금액</div>
-					<div><span></span>원</div>
-				</div> -->
-
-				<div class="total-order-buy-save-point">
-					<button type="button" class="btn btn-pri">적립</button>
-					<div>구매시 </div>
-					<div>2,180원 (5%)</div>
-				</div>
-				<div class="cart-pay-box area-btn full" style="margin-top: 30px;">
-                    <button class="btn btn-pri size02" id="form-submit-order-btn">주문하기</button>
-                </div>
-			</div>
-		</div>
-		
-
+			</c:otherwise>
+		</c:choose>
 
 	</div>
 	
@@ -157,7 +174,60 @@
 				const index = $(this).parent().next().next().next().next().next().val();
 				$("#form-delet-cart input[name=basketNo]").eq(index).prop("disabled", true);
 			}
-		})
+		});
+
+		$("form#form-delet-cart").submit(function (e) {
+				cartjQueryAlert('error', this);
+
+				e.preventDefault();
+				return false;
+		});
+		
+		// 장바구니에서 선택삭제 alert
+		function cartjQueryAlert(type, form) {
+		let $type = type;
+		switch ($type) {
+			case 'error':
+			messageBox = $.parseHTML('<div class="alert__error" style="text-align:center;"><div class="title" style="margin-bottom:10px;color:var(--error);padding:0;">뭉쳐야산다</div><div style="margin: 50px auto;"><div style="margin-top:10px;">선택한 상품을 장바구니에서 삭제하시겠습니까?</div></div></div>');			
+			break;
+		}
+		$("body").append(messageBox);
+		$(messageBox).dialog({
+			dialogClass :$type,
+			// open: $(messageBox).append(msg),
+			draggable: false,
+			modal: true,
+			width: 400,
+			buttons: [
+				{
+					text: "삭제",
+					style: "margin-right:5px",
+					click: function(){
+						$(this).dialog("close");
+
+						form.submit();
+					}
+				},
+				{
+					text: "취소",
+					click: function(){
+						$(this).dialog("close");
+					}
+				}
+			],
+			show: {
+				effect: 'fade',
+				duration: 200 //at your convenience
+			},
+			hide: {
+				effect: 'fade',
+				duration: 200 //at your convenience
+			}
+		});
+	};
+
+
+
 		
 		// // 주문 수량 증감
 		// $(".cart-product-volume>button").on("click", function(){
@@ -264,7 +334,7 @@
 
 		// 폼 제출
 		$("#form-submit-order-btn").on("click", function(){
-			$("form").submit();
+			$(".order-payment-wrap form").submit();
 		});
 
 		$("#form-delete-cart").submit(function (e) {

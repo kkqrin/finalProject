@@ -272,6 +272,18 @@ public class AdminDao {
 		return sd;
 	}
 
+	public ArrayList<SalesData> selectMonthSalesData(int monthNo) {
+		List list = sqlSession.selectList("admin.selectMonthSalesData",monthNo);
+		
+		return (ArrayList<SalesData>)list;
+	}
+
+	public ArrayList<SalesData> selectGenderSalesData() {
+		List list = sqlSession.selectList("admin.selectGenderSalesData");
+
+		return (ArrayList<SalesData>)list;
+	}
+
 
 
 

@@ -223,7 +223,6 @@ public class AdminService {
 	}
 
 	// 페이지 네비 주소 수정 필요
-	
 	public AdminOrderPageData selectAllOrderList(int reqPage) {
 		// 한 페이지 당 보여줄 게시물 수 : 10개
 		int numPerPage = 10;
@@ -258,14 +257,14 @@ public class AdminService {
 		String pageNavi = "";
 		// 이전버튼
 		if (pageNo != 1) {
-			pageNavi += "<a href='/boardList.do?reqPage=" + (pageNo - 1) + "'>[이전]</a>";
+			pageNavi += "<a href='/adminDeliveryManagePage.do?reqPage=" + (pageNo - 1) + "'>[이전]</a>";
 		}
 		// 페이지 숫자 생성
 		for (int i = 0; i < pageNaviSize; i++) {
 			if (pageNo == reqPage) {
 				pageNavi += "<span>" + pageNo + "</span>";
 			} else {
-				pageNavi += "<a href='/boardList.do?reqPage=" + pageNo + "'>" + pageNo + "</a>";
+				pageNavi += "<a href='/adminDeliveryManagePage.do?reqPage=" + pageNo + "'>" + pageNo + "</a>";
 			}
 			pageNo++;
 
@@ -275,13 +274,14 @@ public class AdminService {
 		}
 		// 다음버튼
 		if (pageNo <= totalPage) {
-			pageNavi += "<a href='/boardList.do?reqPage=" + pageNo + "'>[다음]</a>";
+			pageNavi += "<a href='/adminDeliveryManagePage.do?reqPage=" + pageNo + "'>[다음]</a>";
 		}
 		
 		AdminOrderPageData aopd = new AdminOrderPageData(list, pageNavi);
 
 		return aopd;
 	}
+	
 
 	public int updateDeliveryStatus(Product p) {
 		int result = dao.updateDeliveryStatus(p);
@@ -541,6 +541,10 @@ public class AdminService {
 		ArrayList<CouponData> list = dao.selectUseMoongList(memberNo);
 		return list;
 	}
+	
+	
+	
+	
 
 	public SalesData selectCountMonthSalesData(int i) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -607,6 +611,18 @@ public class AdminService {
 		SalesData sd = dao.selectCountMonthCategorySalesData(i);
 		
 		return sd; 
+	}
+
+	public ArrayList<SalesData> selectMonthSalesData(int monthNo) {
+		ArrayList<SalesData> list = dao.selectMonthSalesData(monthNo);
+		
+		return list;
+	}
+
+	public ArrayList<SalesData> selectGenderSalesData() {
+		ArrayList<SalesData> list = dao.selectGenderSalesData();
+		
+		return list;
 	}
 	
 
