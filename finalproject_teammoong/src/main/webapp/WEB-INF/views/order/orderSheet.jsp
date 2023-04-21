@@ -180,8 +180,9 @@
                                                 <option value="0" selected>사용 가능한 쿠폰 ${couponCount }장</option>
                                                 <c:forEach items="${couponList }" var="i">
                                                 <option value="${i.couponPrice }">${i.couponTitle }( <fmt:formatNumber value="${i.couponPrice }"/>원 할인 / ~ ${i.endDate } )</option>
+                                                <input type="hidden" name="issueNo" value="${i.issueNo}">
                                                 </c:forEach>
-                                                <option value="2" disabled>5만원이상 1천원 할인</option>
+                                                <!-- <option value="2" disabled>5만원이상 1천원 할인</option> -->
                                             </select>
                                         </div>
                                     </td>
@@ -448,6 +449,10 @@
                 
                 // 최종 결제 금액 hidden에 숨김
                 $("#hidden-total-pay").val(($("#number-pay-price").val()-$(this).val()-$("#hidden-current-point").val())).trigger('change');
+
+                // 선택된 쿠폰의 이슈쿠폰 번호
+                console.log($(this).prop("issueNo"));
+                // $("[name=issueNo]").val()
             }
         });
 
