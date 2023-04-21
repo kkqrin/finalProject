@@ -624,6 +624,12 @@ public class AdminService {
 		
 		return list;
 	}
+
+	public Member ajaxMemberView(int memberNo) {
+		Member m = dao.ajaxMemberView(memberNo);
+		// TODO Auto-generated method stub
+		return m;
+	}
 	
 
 

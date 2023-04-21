@@ -284,6 +284,12 @@ public class AdminDao {
 		return (ArrayList<SalesData>)list;
 	}
 
+	public Member ajaxMemberView(int memberNo) {
+		Member m = sqlSession.selectOne("admin.ajaxMemberView",memberNo);
+		// TODO Auto-generated method stub
+		return m;
+	}
+
 
 
 
