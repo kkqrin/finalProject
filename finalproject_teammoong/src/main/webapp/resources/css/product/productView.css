@@ -229,9 +229,7 @@ display: flex;
     font-size: 32px;
     cursor: pointer;
 }
-.one-btn{
-    /* padding-left: 100px; */
-}
+
 .moong-btn{
     padding-left: 5px;
     width: 200px;
@@ -325,3 +323,126 @@ input[type="radio"]:checked + label {
 .product-view-volume>[name="pop_out"]{
     margin: 0px 3px;
 }
+
+/* @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+       .rate { display: inline-block;border: 0;margin-right: 15px;}
+.rate > input {display: none;}
+.rate > label {float: right;color: #ddd}
+.rate > label:before {display: inline-block;font-size: 1rem;padding: .3rem .2rem;margin: 0;cursor: pointer;font-family: FontAwesome;content: "\f005 ";}
+.rate .half:before {content: "\f089 "; position: absolute;padding-right: 0;}
+.rate input:checked ~ label, 
+.rate label:hover,.rate label:hover ~ label { color: #f88000 !important;  } 
+.rate input:checked + .rate label:hover,
+.rate input input:checked ~ label:hover,
+.rate input:checked ~ .rate label:hover ~ label,  
+.rate label:hover ~ input:checked ~ label { color: #f88000 !important;  } */
+
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+.rate { display: inline-block;border: 0;margin-right: 15px;}
+.rate > input 
+{display: none;}
+
+.rate > label 
+{float: right;color: #ddd}
+
+.rate > label:before 
+{display: inline-block;font-size: 2rem;padding: .3rem .2rem;margin: 0;cursor: pointer;font-family: FontAwesome;content: "\f005 ";}
+
+.rate .half:before 
+{content: "\f089 "; position: absolute;padding-right: 0;}
+
+.rate input:checked ~ label, 
+.rate label:hover,
+.rate label:hover ~ label 
+{ color: gold !important;  } 
+
+.rate input:checked + .rate label:hover,
+.rate input input:checked ~ label:hover,
+.rate input:checked ~ .rate label:hover ~ label,  
+.rate label:hover ~ input:checked ~ label 
+{ color: gold !important;  } 
+
+#root {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 800px;
+  }
+  
+  .title {
+    text-align: center;
+  }
+  
+  .contents {
+    display: flex;
+    flex-direction: row;
+  }
+  .contents .upload-box {
+    width: 100%;
+    margin-right: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .contents .upload-box .drag-file {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px dashed #dbdbdb;
+  }
+  .contents .upload-box .drag-file.highlight {
+    border: 3px dashed red;
+  }
+  .contents .upload-box .drag-file .image {
+    width: 40px;
+  }
+  .contents .upload-box .drag-file .message {
+    margin-bottom: 0;
+  }
+  .contents .upload-box .drag-file .preview {
+    display: none;
+    position: absolute;
+    left: 0;
+    height: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .contents .upload-box .file-label {
+    margin-top: 10px;
+    background-color: #f88000;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    width: 65%;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .contents .upload-box .file {
+    display: none;
+  }
+  
+  @media (max-width: 700px) {
+    .contents {
+      display: flex;
+      flex-direction: column;
+    }
+    .contents .upload-box {
+      width: 100%;
+      box-sizing: border-box;
+      margin-right: 0;
+    }
+    .contents .upload-box .drag-file {
+      height: 150px;
+    }
+    .contents .files {
+      width: 100%;
+      box-sizing: border-box;
+      margin-right: 0;
+      overflow: initial;
+    }
+  }
