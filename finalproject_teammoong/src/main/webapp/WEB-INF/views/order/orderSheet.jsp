@@ -92,6 +92,7 @@
 							<input type="hidden" class="product-discount" value="${i.productDiscount }">
 							<input type="hidden" name="productNo" class="product-no" value="${i.productNo }">
 							<input type="hidden" name="optionInfoNo" value="${i.optionNo }">
+							<input type="hidden" name="orderDetailCnt" value="${page }">
                             <!-- ${i.productPrice } * ( 100 - ${i.productDiscount }) / 100 -->
                             <!-- .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") -->
                         </div>

@@ -228,4 +228,7 @@
 	<delete id="deleteCart" parameterType="_int">
 		delete from BASKET_TBL where basket_no = #{_parameter}
 	</delete>
+	<select id="selectProductCost" parameterType="_int" resultType="_int">
+		select product_cost from product_tbl where product_no = #{productNo}
+	</select>
 </mapper>
