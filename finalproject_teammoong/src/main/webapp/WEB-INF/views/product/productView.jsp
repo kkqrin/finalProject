@@ -202,7 +202,7 @@
                                 <span id="put-in-cart-btn" class="material-symbols-outlined" style="font-variation-settings:'FILL' 0">add_shopping_cart</span>
                             </div>
                         </div>
-                        <div>
+                        <div class="form-box">
                             <div class="one-btn">
                                 <form action="/orderSheet.do" method="post">
                                 <input type="hidden" name="productNo">
@@ -268,6 +268,28 @@
         <div class="product-review-logo product-review"><h3>리뷰</h3></div>
         <div class="review-wrap">
             <form action="/reviewWrite.do" method="post" enctype="multipart/form-data"></form>
+            <!-- <div class="top-info">
+                <div class="img-title">사진</div>
+                <div class="content-title">내용</div>
+            </div>
+            <div class="middle-content">
+                <div class="middle-left-content">
+                    <input type="file" name="reviewFile" multiple onchange="readURL(this)">
+                    <img id="preview">
+                    <fieldset class="rate">
+                        <input type="radio" id="rating10" name="rating" value="10"><label for="rating10" title="5점"></label>
+                        <input type="radio" id="rating9" name="rating" value="9"><label class="half" for="rating9" title="4.5점"></label>
+                        <input type="radio" id="rating8" name="rating" value="8"><label for="rating8" title="4점"></label>
+                        <input type="radio" id="rating7" name="rating" value="7"><label class="half" for="rating7" title="3.5점"></label>
+                        <input type="radio" id="rating6" name="rating" value="6"><label for="rating6" title="3점"></label>
+                        <input type="radio" id="rating5" name="rating" value="5"><label class="half" for="rating5" title="2.5점"></label>
+                        <input type="radio" id="rating4" name="rating" value="4"><label for="rating4" title="2점"></label>
+                        <input type="radio" id="rating3" name="rating" value="3"><label class="half" for="rating3" title="1.5점"></label>
+                        <input type="radio" id="rating2" name="rating" value="2"><label for="rating2" title="1점"></label>
+                        <input type="radio" id="rating1" name="rating" value="1"><label class="half" for="rating1" title="0.5점"></label>
+                    </fieldset>
+                </div>
+            </div> -->
             <table>
                 <tr>
                     <th style="background-color: #f88000;">사진</th>
@@ -278,20 +300,36 @@
                         <input type="file" name="reviewFile" multiple onchange="readURL(this)">
                         <img id="preview">
                     </td>
-                    <td colspan="5"><textarea style="height: 200px; border: none;"></textarea></td>
+                    <td colspan="5" rowspan="3"><textarea style="height: 200px; border: none;"></textarea></td>
                 </tr>
-                <tr>
-                    <th>별점</th>
-                    <td style="color:gold">
+                <tr >
+                    <td>별점</td>
+                    <!-- <td style="color:gold">
                         <div>
                           <label for="star1">★</label>
                         </div>
-                        <input type="radio" name="star" id="star1">
+                        <input type="radio" name="star" id="star1" value="1">
                       </td>
-                    <td style="color:gold">★★<div><input type="radio" name="star"></div></td>
-                    <td style="color:gold">★★★<div><input type="radio" name="star"></div></td>
-                    <td style="color:gold">★★★★<div><input type="radio" name="star"></div></td>
-                    <td style="color:gold">★★★★★<div><input type="radio" name="star"></div></td>
+                    <td style="color:gold">★★<div><input type="radio" name="star" value="2"></div></td>
+                    <td style="color:gold">★★★<div><input type="radio" name="star" value="3"></div></td>
+                    <td style="color:gold">★★★★<div><input type="radio" name="star" value="1"></div></td>
+                    <td style="color:gold">★★★★★<div><input type="radio" name="star" value="1"></div></td> -->
+                </tr>
+                <!-- <fieldset class="rate">
+                    <input type="radio" id="rating10" name="rating" value="10"><label for="rating10" title="5점"></label>
+                    <input type="radio" id="rating9" name="rating" value="9"><label class="half" for="rating9" title="4.5점"></label>
+                    <input type="radio" id="rating8" name="rating" value="8"><label for="rating8" title="4점"></label>
+                    <input type="radio" id="rating7" name="rating" value="7"><label class="half" for="rating7" title="3.5점"></label>
+                    <input type="radio" id="rating6" name="rating" value="6"><label for="rating6" title="3점"></label>
+                    <input type="radio" id="rating5" name="rating" value="5"><label class="half" for="rating5" title="2.5점"></label>
+                    <input type="radio" id="rating4" name="rating" value="4"><label for="rating4" title="2점"></label>
+                    <input type="radio" id="rating3" name="rating" value="3"><label class="half" for="rating3" title="1.5점"></label>
+                    <input type="radio" id="rating2" name="rating" value="2"><label for="rating2" title="1점"></label>
+                    <input type="radio" id="rating1" name="rating" value="1"><label class="half" for="rating1" title="0.5점"></label>
+                </fieldset> -->
+                <tr>
+                    <td>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="6"><div class="area-btn full"><button class="btn btn-pri size02">리뷰작성</button></div></td>
@@ -354,6 +392,7 @@
             <div class="insertInquiry">
                 <!-- 문의하기 작성 버튼 -->
                 <button type="button" id="insertInquiry" class="btn btn-pri size01" data-modal="#modalBasic2">문의하기</button>
+                <button type="button" id="insertReview" class="btn btn-pri size01" data-modal="#modalReview">리뷰하기</button>
             </div>
         </div>
     </div>
@@ -374,6 +413,66 @@
         <div class="product-inquiry" style="height: 500px;">문의하기</div>
     </div> -->
      <!--구매버튼-->
+     <!--리뷰작성 모달 시작-->
+     <form action="/insertReview.do" method="post" enctype="multipart/form-data">
+     <div id="modalReview" class="modal modal-pri" style="max-width: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6>리뷰작성</h6>
+            </div>
+                <input type="hidden" name="reviewWriter" value="${sessionScope.m.memberId}">
+                <input type="hidden" name="productNo" value="${p.productNo}">
+            <div class="modal-body">
+                <!--내용영역-->
+                <div style="display: flex;">
+                    <div>
+                        <!-- <h5>사진첨부</h5> -->
+                        <div id="root">
+                            <h5>사진등록</h5>
+                            <div class="contents">
+                              <div class="upload-box">
+                                <div id="drop-file" class="drag-file">
+                                  <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image" >
+                                  <p class="message">사진 드래그 업로드</p>
+                                  <img src="" alt="미리보기 이미지" class="preview">
+                                </div>
+                                <label class="file-label" for="chooseFile">사진선택</label>
+                                <input class="file" id="chooseFile" type="file" onchange="dropFile.handleFiles(this.files)" accept="image/png, image/jpeg, image/gif" multiple>
+                              </div>
+                            </div>
+                          </div>
+                        <!-- <input type="file" name="reviewFile" multiple onchange="readURL(this)"> -->
+                        <!-- <img id="preview"> -->
+                    </div>
+                    <div style="width: 100%; margin-left: 10px;">
+                        <div>
+                        <fieldset class="rate" style="padding: 0;"><h5 style="padding-bottom: 10px;">별점</h5>
+                            <input type="radio" id="rating10" name="rating" value="10"><label for="rating10" title="5점"></label>
+                            <input type="radio" id="rating9" name="rating" value="9"><label class="half" for="rating9" title="4.5점"></label>
+                            <input type="radio" id="rating8" name="rating" value="8"><label for="rating8" title="4점"></label>
+                            <input type="radio" id="rating7" name="rating" value="7"><label class="half" for="rating7" title="3.5점"></label>
+                            <input type="radio" id="rating6" name="rating" value="6"><label for="rating6" title="3점"></label>
+                            <input type="radio" id="rating5" name="rating" value="5"><label class="half" for="rating5" title="2.5점"></label>
+                            <input type="radio" id="rating4" name="rating" value="4"><label for="rating4" title="2점"></label>
+                            <input type="radio" id="rating3" name="rating" value="3"><label class="half" for="rating3" title="1.5점"></label>
+                            <input type="radio" id="rating2" name="rating" value="2"><label for="rating2" title="1점"></label>
+                            <input type="radio" id="rating1" name="rating" value="1"><label class="half" for="rating1" title="0.5점"></label>
+                        </fieldset>
+                        </div>
+                        <br>
+                        <h5>리뷰내용</h5>
+                        <textarea name="reviewContent" style="height:65%; "></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="area-btn right">
+                <!-- class="btn btn-pri size01 reviewInsertBtn" id="reviewInsertBtn" -->
+                <button>작성</button>
+                <a href="" rel="modal:close" class="btn btn-sec size01">닫기</a>
+            </div>
+        </div>
+    </div>
+</form>
      <!-- 문의사항 삭제 모달 시작 -->
      <div id="modalDelete" class="modal modal-pri">
         <div class="modal-content">
@@ -523,7 +622,7 @@
             });
 
             // 폼 제출
-            $("form").submit(function (e) {
+            $(".form-box>div>form").submit(function (e) {
                 const productNo = $("#productNo").val();
                 const optionNo = $( ".product-option" ).val();
                 
