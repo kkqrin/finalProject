@@ -21,13 +21,15 @@ public class DmController {
 
 	@RequestMapping(value = "/receiveDmList.do")
 	public String myPageDmReceive(@SessionAttribute(required=false) Member m, Model model) {
-		ArrayList<DirectMessage> list = service.selectReceiveAllDm(m.getMemberId());
+		ArrayList<DirectMessage> list = service.selectAllDm(m.getMemberId(),"imReceiver");
 		model.addAttribute("list", list);
 		return "dm/receiveDmList";
 	}
 	
 	@RequestMapping(value = "/sendDmList.do")
-	public String myPageDmSend() {
+	public String myPageDmSend(@SessionAttribute(required=false) Member m, Model model) {
+		ArrayList<DirectMessage> list = service.selectAllDm(m.getMemberId(),"imSender");
+		model.addAttribute("list", list);
 		return "dm/sendDmList";
 	}
 	

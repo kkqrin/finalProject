@@ -1,6 +1,7 @@
 package moo.ng.san.dm.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -18,11 +19,11 @@ public class DmDao {
 		return sqlSession.insert("directMessage.insertDm",dm);
 	}
 
-	public ArrayList<DirectMessage> selectReceiveAllDm(String memberId) {
-		List list = sqlSession.selectList("directMessage.selectReceiveAllDm", memberId);
+	public ArrayList<DirectMessage> selectAllDm(HashMap<String, String> map) {
+		List list = sqlSession.selectList("directMessage.selectAllDm", map);
 		return (ArrayList<DirectMessage>)list;
 	}
-	
+
 	
 	
 	

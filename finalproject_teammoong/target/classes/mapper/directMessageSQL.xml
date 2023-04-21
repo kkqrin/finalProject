@@ -15,7 +15,7 @@
 		)
 	</insert>
 
-	<select id="selectReceiveAllDm" resultType="dm" parameterType="string">
+	<select id="selectAllDm" resultType="dm" parameterType="map">
 			select
 			    rownum as rnum, 
 			    dm_sender as dmSender,
@@ -30,8 +30,14 @@
 			    member_dm d  
 			    join member_tbl s on (d.dm_sender = s.member_id)
 			    join member_tbl r on (d.dm_receiver = r.member_id)
+		<if test="flag.equals('imReceiver')">
 			where
 			    dm_receiver = #{memberId}
+		</if>
+		<if test="flag.equals('imSender')">
+			where
+			    dm_sender = #{memberId}
+		</if>
 			order by 1 desc
 	</select>
 
