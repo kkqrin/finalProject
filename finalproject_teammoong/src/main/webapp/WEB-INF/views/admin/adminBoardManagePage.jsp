@@ -13,31 +13,10 @@
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css"/>
 <!-- google icon -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+	<!--  -->
+	<link rel="stylesheet" href="/resources/css/admin/admin.css" />
 </head>
 <style>
-    .adminPage-wrapper{
-        background-color: #111;
-		width: 1200px;
-        margin-top: 300px;
-        
-    }
-    .adminPage-header{
-        margin-left: 30px;
-    }
-    .adminPage-back{
-        background-color: lightyellow;
-        overflow: hidden;
-    }
-    .adminPage-sidebar{
-        float: left;
-        width: 300px;
-        background-color: lightcoral;
-        height: 2000px;
-
-    }
-    .adminPage-sidebar>ul>li{
-        list-style-type: none;
-    }
     .adminPage-main{
         background-color: lightgreen;
     }
@@ -46,7 +25,7 @@
         overflow: hidden;
     }
     .material-symbols-outlined{
-        font-size: 150px;
+        font-size: 150px !important;
         
     }
     .mainContent{
@@ -83,33 +62,7 @@
             <h1><a href="#">Admin-Page</a></h1>
         </div>
         <div class="adminPage-back">
-            <div class="adminPage-sidebar">
-                <ul>
-                    <li>회원 관리</li>
-                    <il><a href="/adminMemberPage.do?reqPage=1">회원 관리</a></il><!-- jsp 생성완료 -->
-                </ul>
-                <ul>
-                    <li>매출 관리</li>
-                    <li><a href="/adminTotalSalesManage.do?reqPage=1">전체 매출 관리</a></li><!-- jsp 생성완료 -->
-                    <li><a href="/categorySalesManage.do">카테고리별 매출관리</a></li>
-                </ul>
-                <ul>
-                    <li>상품 관리</li>
-                    <li><a href="/adminTotalProductList.do?reqPage=1">상품 관리</li><!-- jsp 생성완료 -->
-                    <li><a href="/adminProductRegist.do"></a>상품 등록</li>
-                    <li><a href="/adminDeliveryManagePage.do?reqPage=1"></a>배송 관리</li>
-                </ul>
-                <ul>
-                    <a>이벤트 관리</a>
-                    <li>쿠폰 발행 관리</li>
-                </ul>
-                <ul>
-                    <li>여기여기붙어라 관리</li>
-                    <li><a href="/adminBoardManagePage.do?reqPage=1">여기여기붙어라 게시판 관리</a></li><!-- jsp 생성완료 -->
-                    <li><a href="/adminBoardReportManagePage.do?reqPage=1">여기여기붙어라 신고 관리</a></li><!-- jsp 생성완료 -->
-                    <li>카테고리별 매출관리</li>
-                </ul>
-            </div>
+            <jsp:include page="/WEB-INF/views/admin/adminSideNavi.jsp"/>
             <div class="adminPage-main">
                 <div class="adminPage-content">
                     <div class="adminPage-search">

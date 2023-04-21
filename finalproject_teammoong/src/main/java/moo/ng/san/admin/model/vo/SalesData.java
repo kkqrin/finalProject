@@ -12,5 +12,8 @@ public class SalesData {
 	private int categoryNo;
 	private int totalSales;
 	private int totalCost;
+	private int gender;
 	
 }
+
+

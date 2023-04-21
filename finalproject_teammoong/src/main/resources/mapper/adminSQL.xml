@@ -467,7 +467,8 @@
 		select 
             pc.category_no as cateogoryNo,
 			sum(od.order_detail_cnt * od.order_detail_price * (pt.product_discount)/100) as totalSales,
-            pt.product_cost as totalCost
+            pt.product_cost as totalCost,
+            mt.member_gender as gender
             
 			from order_detail od 
 			join product_tbl pt on (od.product_no = pt.product_no)
@@ -475,9 +476,10 @@
 			join product_category pc on (dc.category_no = pc.category_no)
 			join order_tbl ot on (od.order_no = ot.order_no) 
 			join pay_tbl pt on (ot.pay_no = pt.pay_no)
+			join member_tbl mt on(ot.member_no = mt.member_no)
 			
 		where ot.order_status = 1 and pt.pay_status = 1 and to_char(ot.order_date,'yyyy-mm-dd') between #{start} and #{end}
-        group by pc.category_no, pt.product_cost	
+        group by pc.category_no, pt.product_cost, mt.member_gender
 	</select>
 	
 	<select id="selectCountMonthCategorySalesData" parameterType="_int" resultType="sd">
@@ -494,6 +496,25 @@
 			
 		where ot.order_status = 1 and pt.pay_status = 1 and dc.category_no = ${_parameter}
         group by pc.category_no, pt.product_cost
+	</select>
+	
+	<select id="selectGenderSalesData" resultType="sd">
+		select 
+            pc.category_no as cateogoryNo,
+			sum(od.order_detail_cnt * od.order_detail_price * (pt.product_discount)/100) as totalSales,
+            pt.product_cost as totalCost,
+            mt.member_gender as gender
+            
+			from order_detail od 
+			join product_tbl pt on (od.product_no = pt.product_no)
+			join detail_category dc on (pt.d_category_no = dc.d_category_no)
+			join product_category pc on (dc.category_no = pc.category_no)
+			join order_tbl ot on (od.order_no = ot.order_no) 
+			join pay_tbl pt on (ot.pay_no = pt.pay_no)
+			join member_tbl mt on(ot.member_no = mt.member_no)
+			
+		where ot.order_status = 1 and pt.pay_status = 1
+        group by pc.category_no, pt.product_cost, mt.member_gender
 	</select>
 	<!-- <select id="selectAllCouponList" resultType="ic">
 		select
