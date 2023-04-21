@@ -66,13 +66,14 @@
 				            <div class="modal-content">
 				                <div class="modal-header">
 				                    <h6>보낸 사람 : ${dm.dmSender }</h6>
+				                    <input type="hidden" name="toReply" value="${dm.dmSender }">
 				                    <a>보낸 시간 : [ ${dm.dmDateHour } ]</a>
 				                </div>
 				                <div class="modal-body">
 			                    	${dm.dmContentBr }
 				                </div>
 				                <div style="display: flex; justify-content: space-between; padding: 0 20px 20px 20px;">
-				                	<button class="btn btn-sec	 size01" type="button">답장</button>
+				                	<button class="btn btn-sec size01 reply" type="button">답장</button>
 				                    <a href="" rel="modal:close" class="btn btn-pri size01">확인</a>
 				                </div>
 				            </div>
@@ -101,10 +102,13 @@
 	        });
 	    });
 	
+		$(".reply").on("click",function(){
+			const receiver = $("[name='toReply']").val();
+			location.href="/dmReply.do?receiver="+receiver;
+		});
+		
+		
 	</script>
-	
-	
-	
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

@@ -34,9 +34,11 @@ public class DmController {
 	@RequestMapping(value = "/dmWriteFrm.do")
 	public String myPageDmWriteFrm(Model model, @SessionAttribute(required=false) Member m) {
 		model.addAttribute("memberId", m.getMemberId());
+		model.addAttribute("receiver", "");
 		return "dm/dmWriteFrm";
 	}
 	
+
 	@ResponseBody
 	@RequestMapping(value = "/insertDm.do")
 	public String insertDm(String dmSender, String dmReceiver, String dmContent) {
@@ -51,6 +53,15 @@ public class DmController {
 			return "error";
 		}
 	}//insertDm
+	
+	
+	@RequestMapping(value = "/dmReply.do")
+	public String dmReply(Model model, @SessionAttribute(required=false) Member m, String receiver) {
+		model.addAttribute("memberId", m.getMemberId());
+		model.addAttribute("receiver", receiver);
+		return "dm/dmWriteFrm";
+	}
+	
 	
 	
 }//DmController

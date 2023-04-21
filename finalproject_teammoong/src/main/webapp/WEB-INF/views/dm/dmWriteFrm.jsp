@@ -29,7 +29,7 @@
 							<th>받을 사람</th>
 							<td>
 								<div class="horiz" style="justify-content: center;">
-									<input type="text" name="dmReceiver" placeholder="받으실 분의 아이디를 입력하세요" style="width: 80%; height: 38px;">
+									<input type="text" name="dmReceiver" placeholder="받으실 분의 아이디를 입력하세요" value="${receiver }" style="width: 80%; height: 38px;">
 									<button type="button" class="btn btn-dkgray size01 memberChkBtn" style="margin: 0 5px;">확인</button>
 								</div>
 							</td>
