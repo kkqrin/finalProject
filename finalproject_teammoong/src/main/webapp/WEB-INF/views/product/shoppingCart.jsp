@@ -174,7 +174,60 @@
 				const index = $(this).parent().next().next().next().next().next().val();
 				$("#form-delet-cart input[name=basketNo]").eq(index).prop("disabled", true);
 			}
-		})
+		});
+
+		$("form#form-delet-cart").submit(function (e) {
+				cartjQueryAlert('error', this);
+
+				e.preventDefault();
+				return false;
+		});
+		
+		// 장바구니에서 선택삭제 alert
+		function cartjQueryAlert(type, form) {
+		let $type = type;
+		switch ($type) {
+			case 'error':
+			messageBox = $.parseHTML('<div class="alert__error" style="text-align:center;"><div class="title" style="margin-bottom:10px;color:var(--error);padding:0;">뭉쳐야산다</div><div style="margin: 50px auto;"><div style="margin-top:10px;">선택한 상품을 장바구니에서 삭제하시겠습니까?</div></div></div>');			
+			break;
+		}
+		$("body").append(messageBox);
+		$(messageBox).dialog({
+			dialogClass :$type,
+			// open: $(messageBox).append(msg),
+			draggable: false,
+			modal: true,
+			width: 400,
+			buttons: [
+				{
+					text: "삭제",
+					style: "margin-right:5px",
+					click: function(){
+						$(this).dialog("close");
+
+						form.submit();
+					}
+				},
+				{
+					text: "취소",
+					click: function(){
+						$(this).dialog("close");
+					}
+				}
+			],
+			show: {
+				effect: 'fade',
+				duration: 200 //at your convenience
+			},
+			hide: {
+				effect: 'fade',
+				duration: 200 //at your convenience
+			}
+		});
+	};
+
+
+
 		
 		// // 주문 수량 증감
 		// $(".cart-product-volume>button").on("click", function(){
@@ -281,7 +334,7 @@
 
 		// 폼 제출
 		$("#form-submit-order-btn").on("click", function(){
-			$("form").submit();
+			$(".order-payment-wrap form").submit();
 		});
 
 		$("#form-delete-cart").submit(function (e) {

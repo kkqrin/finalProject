@@ -139,7 +139,7 @@
 	</select>
 	
 	<insert id="insertShoppingCart" parameterType="map">
-		insert into basket_tbl values(basket_seq.nextval, #{memberNo}, #{productNo}, 1)
+		insert into basket_tbl values(basket_seq.nextval, #{memberNo}, #{productNo}, #{cnt})
 	</insert>
 	
 	<insert id="insertShoppingCartOption" parameterType="map">
@@ -220,9 +220,9 @@
 		</if>
 	</select>
 	
-	<update id="updateBasketCount" parameterType="_int">
-		UPDATE BASKET_TBL SET BASKET_COUNT = BASKET_COUNT + 1
-		WHERE BASKET_NO = #{_parameter}
+	<update id="updateBasketCount" parameterType="map">
+		UPDATE BASKET_TBL SET BASKET_COUNT = BASKET_COUNT + #{cnt}
+		WHERE BASKET_NO = #{basketNo}
 	</update>
 	
 	<delete id="deleteCart" parameterType="_int">

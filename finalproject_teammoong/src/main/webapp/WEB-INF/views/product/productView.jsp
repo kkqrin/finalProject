@@ -495,19 +495,20 @@
             $("#put-in-cart-btn").on("click", function(){
                 const productNo = $("#productNo").val();
                 const optionNo = $( ".product-option" ).val();
+                const cnt = $("[name=pop_out]").val();
                 
                 if(optionNo == 0 && $(".info-content").find("option").length > 1){
                     optionjQueryAlert('info'); 
                     // alert("옵션을 선택하세요");
                 }else{
                     // alert 띄우고 insert -> OK 누르면 insert 되게 하기 위해 함수 생성해서 번호들 넘겨줌
-                    jQueryAlert('warning',"", productNo, optionNo);
+                    jQueryAlert('warning',"", productNo, optionNo, cnt);
                 }
 
             });
-            function processResult(result, productNo, optionNo) {
+            function processResult(result, productNo, optionNo, cnt) {
                 // 페이지 이동 및 db처리
-                location.href="/putInShoppingCart.do?productNo="+productNo+"&optionNo="+optionNo;
+                location.href="/putInShoppingCart.do?productNo="+productNo+"&optionNo="+optionNo+"&cnt="+cnt;
             }
 
 
@@ -543,6 +544,7 @@
                 }
 			});
 
+            // 공동구매 폼 제출
             $(".moong-btn>form").submit(function (e) {
                 if($("[name=pop_out]").val() != 1){
                     gongujQueryAlert('error');
@@ -556,7 +558,6 @@
                     e.preventDefault();
                     return false;
                 }
-
             });
 
             // 장바구니 담기시 성공 alert 띄우고 페이지 이동
@@ -575,7 +576,7 @@
             //     jQueryAlert('info',"정보내용정보내용정보내용정보내용");
             // });
 
-            function jQueryAlert(type, msg, p, o) {
+            function jQueryAlert(type, msg, p, o, c) {
                 let $type = type;
                 let messageBox = msg;
                 switch ($type) {
@@ -603,7 +604,7 @@
                                 $(this).dialog("close");
 
                                 // OK 버튼 눌렀을 때 insert 하기 위해 콜백함수 실행
-                                processResult(true, p, o);
+                                processResult(true, p, o, c);
                             }
                         },
                         {
