@@ -15,71 +15,7 @@
 
 </head>
 <style>
-	.adminPage-wrapper{
-        /* background-color: #54185c; */
-        width: 1200px;
-        margin: auto;
-    }
-    .adminPage-header{
-        margin-left: 30px;
-    }
-    .adminPage-header>div{
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-    .adminPage-header>div>a{
-        color: #54185c;
-        list-style: none;
-        text-align: center;
-        font-size: 40px;
-        font-weight: bold;
 
-    }
-    .adminPage-back{
-        background-color: lightyellow;
-        overflow: hidden;
-    }
-    .adminPage-sidebar{
-        float: left;
-        width: 300px;
-        background-color: #c6cacc;
-        height: 2000px;
-        text-align: center;
-        
-    }
-    .adminPage-sidebar>ul{
-        padding: 0;
-        margin: 0;
-        list-style: none;
-        text-align: left;
-        margin-top: 20px;
-        
-
-    }
-    .adminPage-sidebar>ul>li{
-        /* border: 1px solid black; */
-        font-size: 20px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        
-        
-    }
-    .adminPage-sidebar>ul :hover{
-        color: #f88000;
-        background-color: white;
-        
-    }
-    
-    .adminPage-sidebar>ul>li>a{
-        text-decoration: none;
-        color: #54185c;
-        font-weight: bold;
-        margin-left: 30px;
-    }
-    .adminPage-back>ul>li{
-        text-decoration: none;
-        
-    }
     
 </style>
 <body>
