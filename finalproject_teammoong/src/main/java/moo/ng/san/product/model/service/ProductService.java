@@ -83,11 +83,12 @@ public class ProductService {
 		return dao.selectOptionList(productNo);
 	}
 
-	public int insertShoppingCart(int memberNo, int productNo) {
+	public int insertShoppingCart(int memberNo, int productNo, int cnt) {
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("memberNo", memberNo);
 		map.put("productNo", productNo);
+		map.put("cnt", cnt);
 
 		return dao.insertShoppingCart(map);
 	}
@@ -155,7 +156,25 @@ public class ProductService {
 		return dao.selectBasketCount(map);
 	}
 	
-	
+	public int updateBasketCount(int basketNo, int cnt) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("basketNo", basketNo);
+		map.put("cnt", cnt);
+		
+		return dao.updateBasketCount(basketNo);
+	}
+
+	public int deleteCart(int[] basketNo) {
+		
+		int result = 0;
+		
+		for(int no : basketNo) {
+			result += dao.deleteCart(no);
+		}
+		
+		return result;
+	}
 	
 	
 	
@@ -266,22 +285,7 @@ public class ProductService {
 		return list;
 	}
 
-	public int updateBasketCount(int basketNo) {
-		
-		return dao.updateBasketCount(basketNo);
-	}
 
-	public int deleteCart(int[] basketNo) {
-		
-		int result = 0;
-		
-		for(int no : basketNo) {
-			result += dao.deleteCart(no);
-		}
-		
-		
-		return result;
-	}
 
 
 

@@ -261,7 +261,7 @@
                 </tr>
             </table>
         </div>
-        <div class="product-content-logo class="product-info-box""><h3>상품설명</h3></div>
+        <div class="product-content-logo product-info-box"><h3>상품설명</h3></div>
         <div class="product-content-wrap">
             ${p.productContent}
         </div>
@@ -495,19 +495,20 @@
             $("#put-in-cart-btn").on("click", function(){
                 const productNo = $("#productNo").val();
                 const optionNo = $( ".product-option" ).val();
+                const cnt = $("[name=pop_out]").val();
                 
                 if(optionNo == 0 && $(".info-content").find("option").length > 1){
                     optionjQueryAlert('info'); 
                     // alert("옵션을 선택하세요");
                 }else{
                     // alert 띄우고 insert -> OK 누르면 insert 되게 하기 위해 함수 생성해서 번호들 넘겨줌
-                    jQueryAlert('warning',"", productNo, optionNo);
+                    jQueryAlert('warning',"", productNo, optionNo, cnt);
                 }
 
             });
-            function processResult(result, productNo, optionNo) {
+            function processResult(result, productNo, optionNo, cnt) {
                 // 페이지 이동 및 db처리
-                location.href="/putInShoppingCart.do?productNo="+productNo+"&optionNo="+optionNo;
+                location.href="/putInShoppingCart.do?productNo="+productNo+"&optionNo="+optionNo+"&cnt="+cnt;
             }
 
 
@@ -543,6 +544,22 @@
                 }
 			});
 
+            // 공동구매 폼 제출
+            $(".moong-btn>form").submit(function (e) {
+                if($("[name=pop_out]").val() != 1){
+                    gongujQueryAlert('error');
+
+                    e.preventDefault();
+                    return false;
+                }else if($("[name=pop_out]").val() == 1){
+
+                    // console.log("Adsfasdf");
+                    gonguTwojQueryAlert('error', this);
+                    e.preventDefault();
+                    return false;
+                }
+            });
+
             // 장바구니 담기시 성공 alert 띄우고 페이지 이동
             //알림 관련 기능
         // $(function () {
@@ -559,7 +576,7 @@
             //     jQueryAlert('info',"정보내용정보내용정보내용정보내용");
             // });
 
-            function jQueryAlert(type, msg, p, o) {
+            function jQueryAlert(type, msg, p, o, c) {
                 let $type = type;
                 let messageBox = msg;
                 switch ($type) {
@@ -587,7 +604,7 @@
                                 $(this).dialog("close");
 
                                 // OK 버튼 눌렀을 때 insert 하기 위해 콜백함수 실행
-                                processResult(true, p, o);
+                                processResult(true, p, o, c);
                             }
                         },
                         {
@@ -640,6 +657,89 @@
                     }
                 });
             };
+
+
+            // 공동구매 (뭉산) 수량 1개만 가능하므로 그 이외를 입력했을때
+            function gongujQueryAlert(type) {
+                let $type = type;
+                // let messageBox = msg;
+                switch ($type) {
+                    case 'error':
+                    messageBox = $.parseHTML('<div class="alert__error" style="text-align:center;"><div class="title" style="margin-bottom:10px;color:var(--error);padding:0;">뭉쳐야산다</div><div style="margin: 50px auto;"><div>공동구매 제품은 1인 1개 구매제한 입니다.</div><div style="margin-top:10px;">수량을 1개만 선택해주세요 !</div></div></div>');
+                    break;
+                }
+                $("body").append(messageBox);
+                $(messageBox).dialog({
+                    dialogClass :$type,
+                    // open: $(messageBox).append(msg),
+                    draggable: false,
+                    modal: true,
+                    buttons: {
+                        "닫기": function () {
+                            $(this).dialog("close");
+                        }
+                    },
+                    show: {
+                        effect: 'fade',
+                        duration: 200 //at your convenience
+                    },
+                    hide: {
+                        effect: 'fade',
+                        duration: 200 //at your convenience
+                    }
+                });
+            };
+
+            // 공동구매 진행시 기본 alert
+            function gonguTwojQueryAlert(type, form) {
+                let $type = type;
+                // let messageBox = msg;
+                switch ($type) {
+                    // case 'success':
+                    // messageBox = $.parseHTML('<div class="alert__success"></div>');
+                    // break;
+                    // case 'error':
+                    // messageBox = $.parseHTML('<div class="alert__error"></div>');
+                    // break;
+                    case 'error':
+                    messageBox = $.parseHTML('<div class="alert__error" style="text-align:center;"><div class="title" style="margin-bottom:10px;color:var(--error);padding:0;">뭉쳐야산다</div><div style="margin-bottom: 50px;margin-top: 20px;"><h6 style="margin-bottom:40px;">< 공동구매 안내 ></h6><div>상품하단에 위치한 뭉쳐야산다 게시판에서 <button type="button" class="btn btn-pri size01" style="display:inline-block;cursor:auto;">주문참여</button><br>버튼 클릭시 더욱 빠르게 배송받아보실수 있습니다.</div><div style="margin-top:20px;">진행 버튼 클릭시 뭉쳐야산다 게시글이 생성됩니다.</div></div></div>');
+                    break;
+                }
+                $("body").append(messageBox);
+                $(messageBox).dialog({
+                    dialogClass :$type,
+                    // open: $(messageBox).append(msg),
+                    draggable: false,
+                    modal: true,
+                    width: 500,
+                    buttons: [
+                        {
+                            text: "진행",
+                            style: "margin-right:5px",
+                            click: function(){
+                                $(this).dialog("close");
+
+                                form.submit();
+                            }
+                        },
+                        {
+                            text: "취소",
+                            click: function(){
+                                $(this).dialog("close");
+                            }
+                        }
+                    ],
+                    show: {
+                        effect: 'fade',
+                        duration: 200 //at your convenience
+                    },
+                    hide: {
+                        effect: 'fade',
+                        duration: 200 //at your convenience
+                    }
+                });
+            };
+
 
 
 

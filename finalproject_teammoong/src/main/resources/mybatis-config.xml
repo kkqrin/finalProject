@@ -49,6 +49,7 @@
 		<typeAlias type="moo.ng.san.member.model.vo.Out" alias="out" /><!-- 탈퇴 이유 -->
 		<typeAlias type="moo.ng.san.dm.model.vo.DirectMessage" alias="dm" />
 		
+		
 	</typeAliases>
 	<!-- 
 	<typeAliases>

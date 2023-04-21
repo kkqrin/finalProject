@@ -154,7 +154,11 @@ public class ProductController {
 		ArrayList<Basket> basketList = service.selectBasketList(memberNo);
 		model.addAttribute("basketList", basketList);
 		
-		System.out.println(basketList);
+		if(basketList.size() == 0) {
+			System.out.println(basketList);			
+		}else {
+			System.out.println(basketList+"!!");
+		}
 		
 		return "product/shoppingCart";
 	}
@@ -162,7 +166,7 @@ public class ProductController {
 	
 		
 	@RequestMapping(value="/putInShoppingCart.do")
-	public String putInShoppingCart(int productNo, String optionNo, @SessionAttribute(required=false) Member m) {
+	public String putInShoppingCart(int productNo, String optionNo, int cnt, @SessionAttribute(required=false) Member m) {
 		// 세션에서 가져옴
 		int memberNo = m.getMemberNo();
 		
@@ -177,7 +181,7 @@ public class ProductController {
 		if(b == null) {
 			
 			// 장바구니 담기
-			int result = service.insertShoppingCart(memberNo, productNo);
+			int result = service.insertShoppingCart(memberNo, productNo, cnt);
 			
 			if(result>0 && optionNumber != 0) {
 				// 옵션이 있는 상품은 장바구니 옵션 테이블에 insert
@@ -192,8 +196,8 @@ public class ProductController {
 			}
 		}else {
 			
-			// 수량 + 1
-			int result = service.updateBasketCount(b.getBasketNo());
+			// 현재 수량 + cnt
+			int result = service.updateBasketCount(b.getBasketNo(), cnt);
 			
 			if(result>0) {
 				return "redirect:/productView.do?productNo="+productNo;
