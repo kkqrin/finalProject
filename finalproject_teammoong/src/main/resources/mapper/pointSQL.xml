@@ -47,4 +47,12 @@
 	<select id="selectAllPointMember" parameterType="_int">
 		select * from point_tbl where member_no = #{memberNo}
 	</select>
+	<insert id="insertMinusPoint" parameterType="point">
+		insert into point_tbl values
+		(point_tbl_seq.nextval, #{memberNo}, #{pointEa}, sysdate, 3)
+	</insert>
+	<insert id="insertPlusPoint" parameterType="point">
+		insert into point_tbl values
+		(point_tbl_seq.nextval, #{memberNo}, #{pointEa}, sysdate, 2)
+	</insert>
 </mapper>

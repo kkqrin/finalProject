@@ -80,6 +80,10 @@ public class BoardDao {
 		int result = sqlSession.update("board.boardReadCount",b);
 		return result;
 	}
+	public int boardFileDelete(int boardNo) {
+		int result = sqlSession.delete("board.boardFileDelete",boardNo);
+		return result;
+	}
 	
 
 }

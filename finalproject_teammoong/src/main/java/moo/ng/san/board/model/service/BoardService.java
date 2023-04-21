@@ -154,6 +154,7 @@ public class BoardService {
 		
 		int result = dao.boardDelete(boardNo);
 		if(result > 0) {
+			result += dao.boardFileDelete(boardNo);
 			return delFileList;
 		}
 		return null;
