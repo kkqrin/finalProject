@@ -1,6 +1,7 @@
     <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,11 +65,11 @@
     <h1>인기상품</h1>
     <div class="popular-product-wrap">
     <!-- 인기상품 wrap -->
-       <c:forEach items="${productList }" var="p">
+    <c:forEach items="${productList }" var="p">
         <div class="posting-item popular">
             <div class="posting-img popular">
                 <a href="/productView.do?productNo=${p.productNo }">
-           		<c:forEach var="pf" items="${p.fileList}" begin="0" end="0" step="1">
+                <c:forEach var="pf" items="${p.fileList}" begin="0" end="0" step="1">
                     <img src="/resources/upload/product/${pf.filepath }" />
                 </c:forEach>
                 </a>
@@ -77,15 +78,15 @@
             <div class="posting-content popular">
                 <p class="posting-title">
                     <a href="/productView.do?productNo=${p.productNo }">
-                        [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
+                        ${p.productName}
                     </a>
                 </p>
                 <div class="posting-price-box">
-                    <p class="price-through">70,000원</p>
+                    <p class="price-through"><fmt:formatNumber value="${ p.productPrice * p.productDiscount / 100}"/> 원</p>
                     <div class="sail-box popular">
                         <div class="sail-box-popular">
-                            <p class="sail-percent">62%</p>
-                            <p class="price-sail">26,900원</p>
+                            <p class="sail-percent">${p.productDiscount}%</p>
+                            <p class="price-sail"><fmt:formatNumber value="${p.productPrice}"/> 원</p>
                         </div>
                         <div class="star-rating">
                             <div class="material-symbols-outlined star-rate">star</div>
@@ -104,414 +105,11 @@
                 </div>
             </div>
         </div>
-       </c:forEach>
-        <div class="posting-item popular">
-            <div class="posting-img popular">
-                <a href="#">
-                    <img src="/resources/img/product/lactofit.jpg" />
-                </a>
-                <div class="gonggu-info">2인 공동구매</div>
-            </div>
-            <div class="posting-content popular">
-                <p class="posting-title">
-                    <a href="#">
-                        [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
-                    </a>
-                </p>
-                <div class="posting-price-box">
-                    <p class="price-through">70,000원</p>
-                    <div class="sail-box popular">
-                        <div class="sail-box-popular">
-                            <p class="sail-percent">62%</p>
-                            <p class="price-sail">26,900원</p>
-                        </div>
-                        <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="posting-detail">
-                    <div class="posting-icon">
-                    </div>
-                    <div class="posting-info">
-                        <div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="posting-item popular">
-            <div class="posting-img popular">
-                <a href="#">
-                    <img src="/resources/img/product/lactofit.jpg" />
-                </a>
-                <div class="gonggu-info">2인 공동구매</div>
-            </div>
-            <div class="posting-content popular">
-                <p class="posting-title">
-                    <a href="#">
-                        [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
-                    </a>
-                </p>
-                <div class="posting-price-box">
-                    <p class="price-through">70,000원</p>
-                    <div class="sail-box popular">
-                        <div class="sail-box-popular">
-                            <p class="sail-percent">62%</p>
-                            <p class="price-sail">26,900원</p>
-                        </div>
-                        <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="posting-detail">
-                    <div class="posting-icon">
-                    </div>
-                    <div class="posting-info">
-                        <div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="posting-item popular">
-            <div class="posting-img popular">
-                <a href="#">
-                    <img src="/resources/img/product/lactofit.jpg" />
-                </a>
-                <div class="gonggu-info">2인 공동구매</div>
-            </div>
-            <div class="posting-content popular">
-                <p class="posting-title">
-                    <a href="#">
-                        [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
-                    </a>
-                </p>
-                <div class="posting-price-box">
-                    <p class="price-through">70,000원</p>
-                    <div class="sail-box popular">
-                        <div class="sail-box-popular">
-                            <p class="sail-percent">62%</p>
-                            <p class="price-sail">26,900원</p>
-                        </div>
-                        <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="posting-detail">
-                    <div class="posting-icon">
-                    </div>
-                    <div class="posting-info">
-                        <div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="posting-item popular">
-            <div class="posting-img popular">
-                <a href="#">
-                    <img src="/resources/img/product/lactofit.jpg" />
-                </a>
-                <div class="gonggu-info">2인 공동구매</div>
-            </div>
-            <div class="posting-content popular">
-                <p class="posting-title">
-                    <a href="#">
-                        [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
-                    </a>
-                </p>
-                <div class="posting-price-box">
-                    <p class="price-through">70,000원</p>
-                    <div class="sail-box popular">
-                        <div class="sail-box-popular">
-                            <p class="sail-percent">62%</p>
-                            <p class="price-sail">26,900원</p>
-                        </div>
-                        <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="posting-detail">
-                    <div class="posting-icon">
-                    </div>
-                    <div class="posting-info">
-                        <div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="posting-item popular">
-            <div class="posting-img popular">
-                <a href="#">
-                    <img src="/resources/img/product/lactofit.jpg" />
-                </a>
-                <div class="gonggu-info">2인 공동구매</div>
-            </div>
-            <div class="posting-content popular">
-                <p class="posting-title">
-                    <a href="#">
-                        [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
-                    </a>
-                </p>
-                <div class="posting-price-box">
-                    <p class="price-through">70,000원</p>
-                    <div class="sail-box popular">
-                        <div class="sail-box-popular">
-                            <p class="sail-percent">62%</p>
-                            <p class="price-sail">26,900원</p>
-                        </div>
-                        <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="posting-detail">
-                    <div class="posting-icon">
-                    </div>
-                    <div class="posting-info">
-                        <div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="posting-item popular">
-            <div class="posting-img popular">
-                <a href="#">
-                    <img src="/resources/img/product/lactofit.jpg" />
-                </a>
-                <div class="gonggu-info">2인 공동구매</div>
-            </div>
-            <div class="posting-content popular">
-                <p class="posting-title">
-                    <a href="#">
-                        [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
-                    </a>
-                </p>
-                <div class="posting-price-box">
-                    <p class="price-through">70,000원</p>
-                    <div class="sail-box popular">
-                        <div class="sail-box-popular">
-                            <p class="sail-percent">62%</p>
-                            <p class="price-sail">26,900원</p>
-                        </div>
-                        <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="posting-detail">
-                    <div class="posting-icon">
-                    </div>
-                    <div class="posting-info">
-                        <div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="posting-item popular">
-            <div class="posting-img popular">
-                <a href="#">
-                    <img src="/resources/img/product/lactofit.jpg" />
-                </a>
-                <div class="gonggu-info">2인 공동구매</div>
-            </div>
-            <div class="posting-content popular">
-                <p class="posting-title">
-                    <a href="#">
-                        [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
-                    </a>
-                </p>
-                <div class="posting-price-box">
-                    <p class="price-through">70,000원</p>
-                    <div class="sail-box popular">
-                        <div class="sail-box-popular">
-                            <p class="sail-percent">62%</p>
-                            <p class="price-sail">26,900원</p>
-                        </div>
-                        <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="posting-detail">
-                    <div class="posting-icon">
-                    </div>
-                    <div class="posting-info">
-                        <div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="posting-item popular">
-            <div class="posting-img popular">
-                <a href="#">
-                    <img src="/resources/img/product/lactofit.jpg" />
-                </a>
-                <div class="gonggu-info">2인 공동구매</div>
-            </div>
-            <div class="posting-content popular">
-                <p class="posting-title">
-                    <a href="#">
-                        [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
-                    </a>
-                </p>
-                <div class="posting-price-box">
-                    <p class="price-through">70,000원</p>
-                    <div class="sail-box popular">
-                        <div class="sail-box-popular">
-                            <p class="sail-percent">62%</p>
-                            <p class="price-sail">26,900원</p>
-                        </div>
-                        <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="posting-detail">
-                    <div class="posting-icon">
-                    </div>
-                    <div class="posting-info">
-                        <div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="posting-item popular">
-            <div class="posting-img popular">
-                <a href="#">
-                    <img src="/resources/img/product/lactofit.jpg" />
-                </a>
-                <div class="gonggu-info">2인 공동구매</div>
-            </div>
-            <div class="posting-content popular">
-                <p class="posting-title">
-                    <a href="#">
-                        [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
-                    </a>
-                </p>
-                <div class="posting-price-box">
-                    <p class="price-through">70,000원</p>
-                    <div class="sail-box popular">
-                        <div class="sail-box-popular">
-                            <p class="sail-percent">62%</p>
-                            <p class="price-sail">26,900원</p>
-                        </div>
-                        <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="posting-detail">
-                    <div class="posting-icon">
-                    </div>
-                    <div class="posting-info">
-                        <div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="posting-item popular">
-            <div class="posting-img popular">
-                <a href="#">
-                    <img src="/resources/img/product/lactofit.jpg" />
-                </a>
-                <div class="gonggu-info">2인 공동구매</div>
-            </div>
-            <div class="posting-content popular">
-                <p class="posting-title">
-                    <a href="#">
-                        [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
-                    </a>
-                </p>
-                <div class="posting-price-box">
-                    <p class="price-through">70,000원</p>
-                    <div class="sail-box popular">
-                        <div class="sail-box-popular">
-                            <p class="sail-percent">62%</p>
-                            <p class="price-sail">26,900원</p>
-                        </div>
-                        <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="posting-detail">
-                    <div class="posting-icon">
-                    </div>
-                    <div class="posting-info">
-                        <div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="posting-item popular">
-            <div class="posting-img popular">
-                <a href="#">
-                    <img src="/resources/img/product/lactofit.jpg" />
-                </a>
-                <div class="gonggu-info">2인 공동구매</div>
-            </div>
-            <div class="posting-content popular">
-                <p class="posting-title">
-                    <a href="#">
-                        [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
-                    </a>
-                </p>
-                <div class="posting-price-box">
-                    <p class="price-through">70,000원</p>
-                    <div class="sail-box popular">
-                        <div class="sail-box-popular">
-                            <p class="sail-percent">62%</p>
-                            <p class="price-sail">26,900원</p>
-                        </div>
-                        <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="posting-detail">
-                    <div class="posting-icon">
-                    </div>
-                    <div class="posting-info">
-                        <div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </c:forEach>
+
+
+
+        <!-- 혹시 몰라 예시용 남겨둠 -->
         <div class="posting-item popular">
             <div class="posting-img popular">
                 <a href="#">

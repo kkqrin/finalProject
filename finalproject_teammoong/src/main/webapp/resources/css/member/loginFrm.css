@@ -54,6 +54,7 @@ input{
 	min-width: 100%;
 	min-height: 100%;
 	background: var(--bg-dim);
+	z-index:101;
 }
 
 #modalSec{

@@ -13,12 +13,12 @@
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css"/>
 <!-- google icon -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-	<!--  -->
+	<!-- css -->
 	<link rel="stylesheet" href="/resources/css/admin/admin.css" />
 </head>
 <style>
     .adminPage-main{
-        background-color: lightgreen;
+        background-color: #D8EAF0;
     }
     .adminPage-content{
         background-color: #fff;
@@ -34,8 +34,13 @@
         height: 400px;
         text-align: center;
     }
+    .adminPage-content{
+    	background-color: #D8EAF0;
+    }
+    
     .table{
     	border: 1px solid black;
+    	
     }
     .table>tbody>tr>th{
     	border: 1px solid black;
@@ -59,7 +64,7 @@
     </c:if>
     <div class="adminPage-wrapper">
         <div class="adminPage-header">
-            <h1><a href="#">Admin-Page</a></h1>
+            <div class="adminPage-title"><a>Moong's Admin</a></div>
         </div>
         <div class="adminPage-back">
             <jsp:include page="/WEB-INF/views/admin/adminSideNavi.jsp"/>

@@ -29,7 +29,7 @@
 							<th>받을 사람</th>
 							<td>
 								<div class="horiz" style="justify-content: center;">
-									<input type="text" name="dmReceiver" placeholder="받으실 분의 아이디를 입력하세요" style="width: 80%; height: 38px;">
+									<input type="text" name="dmReceiver" placeholder="받으실 분의 아이디를 입력하세요" value="${receiver }" style="width: 80%; height: 38px;">
 									<button type="button" class="btn btn-dkgray size01 memberChkBtn" style="margin: 0 5px;">확인</button>
 								</div>
 							</td>
@@ -88,7 +88,6 @@
 		
 		$(".sendBtn").on("click",function(e){
 			const dmContent = $("[name='dmContent']").val();
-			
 			if(!sendChk){
 				e.preventDefault();
 				alert("[확인] 버튼을 눌러 받을 사람을 확인해주세요");
@@ -99,7 +98,6 @@
 				$("[name='dmContent']").focus();
 			}else{
 				const dmReceiver = $("[name='dmReceiver']").val();
-				
 				$.ajax({
 					url:"/insertDm.do",
 					type:"post",

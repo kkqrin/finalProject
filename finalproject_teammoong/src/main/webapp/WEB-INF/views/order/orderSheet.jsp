@@ -93,6 +93,7 @@
 							<input type="hidden" name="productNo" class="product-no" value="${i.productNo }">
 							<input type="hidden" name="optionInfoNo" value="${i.optionNo }">
                             <input type="hidden" name="orderDetailCnt">
+
                             <!-- ${i.productPrice } * ( 100 - ${i.productDiscount }) / 100 -->
                             <!-- .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") -->
                         </div>
@@ -179,11 +180,12 @@
                                             <select class="select-custom order-coupon" id="order-coupon">
                                                 <option value="0" selected>사용 가능한 쿠폰 ${couponCount }장</option>
                                                 <c:forEach items="${couponList }" var="i">
-                                                <option value="${i.couponPrice }">${i.couponTitle }( <fmt:formatNumber value="${i.couponPrice }"/>원 할인 / ~ ${i.endDate } )</option>
-                                                <input type="hidden" name="issueNo" value="${i.issueNo}">
+                                                <option value="${i.couponPrice }" issueNo="${i.issueNo}">${i.couponTitle }( <fmt:formatNumber value="${i.couponPrice }"/>원 할인 / ~ ${i.endDate } )</option>
+                                                <!-- <input type="hidden" name="issueNo" value="${i.issueNo}"> -->
                                                 </c:forEach>
                                                 <!-- <option value="2" disabled>5만원이상 1천원 할인</option> -->
                                             </select>
+                                            <input type="hidden" name="issueNo">
                                         </div>
                                     </td>
                                 </tr>
@@ -451,7 +453,7 @@
                 $("#hidden-total-pay").val(($("#number-pay-price").val()-$(this).val()-$("#hidden-current-point").val())).trigger('change');
 
                 // 선택된 쿠폰의 이슈쿠폰 번호
-                console.log($(this).prop("issueNo"));
+                $("[name=issueNo]").val($(this).children(":selected").attr("issueNo"));
                 // $("[name=issueNo]").val()
             }
         });
@@ -462,8 +464,13 @@
             const totalPay =  $("#hidden-total-pay").val();
             const myPoint = $("#hidden-total-point").val();
 
+
+            // 1. 결제금액 > 적립금 : 적립금 전체 사용
+            // 2. 결제금액 < 적립금 : 결제금액만큼 사용
+
+
             // 최종 결제 금액보다 보유중인 총 적립금이 적으면 최종 결제 금액만 사용됨
-            if(totalPay < myPoint){
+            if(totalPay > myPoint){
                 // hidden-total-point
                 $(".total-order-saved-money>div").last().children().text("-"+totalPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 // input창도 동기화

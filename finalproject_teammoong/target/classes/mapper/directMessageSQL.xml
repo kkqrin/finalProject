@@ -9,23 +9,36 @@
 			#{dmReceiver},
 			#{dmContent},
 			sysdate,
+			0,
+			0,
 			0
 		)
 	</insert>
 
-	<select id="selectAllDm" resultType="dm" parameterType="_int">
-		select
-			rownum as rnum, 
-			dm_sender as dmSender,
-			dm_receiver as dmReceiver,
-			dm_content as dmContent,
-			to_char(dm_date,'""YYYY"년 "MM"월 "DD"일"') as dmDate,
-			dm_readchk as dmReadChk
-		from
-			member_dm
-		where
-			member_id = #{memberId}	
-		order by 1 desc
+	<select id="selectAllDm" resultType="dm" parameterType="map">
+			select
+			    rownum as rnum, 
+			    dm_sender as dmSender,
+			    s.member_name as dmSenderName,
+			    dm_receiver as dmReceiver,
+			    r.member_name as dmReceiverName,
+			    dm_content as dmContent,
+			    to_char(dm_date,'yyyy-mm-dd') as dmDate,
+			    to_char(dm_date,'yyyy-mm-dd hh24:mi') as dmDateHour,
+			    dm_readchk as dmReadChk
+			from
+			    member_dm d  
+			    join member_tbl s on (d.dm_sender = s.member_id)
+			    join member_tbl r on (d.dm_receiver = r.member_id)
+		<if test="flag.equals('imReceiver')">
+			where
+			    dm_receiver = #{memberId}
+		</if>
+		<if test="flag.equals('imSender')">
+			where
+			    dm_sender = #{memberId}
+		</if>
+			order by 1 desc
 	</select>
 
 </mapper>

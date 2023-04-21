@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import moo.ng.san.basket.model.vo.Basket;
+import moo.ng.san.category.model.vo.Category;
 import moo.ng.san.category.model.vo.DetailCategory;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.product.model.dao.ProductDao;
@@ -282,6 +283,15 @@ public class ProductService {
 			ArrayList<String> productFileList = dao.selectProductFiles(p.getProductNo());
 			p.setFileList(productFileList);
 		}
+		return list;
+	}
+
+	public ArrayList<Category> selectCategoryList() {
+		
+		ArrayList<Category> list = dao.selectCategoryList();
+		
+		System.out.println("서비스 : "+list);
+		
 		return list;
 	}
 

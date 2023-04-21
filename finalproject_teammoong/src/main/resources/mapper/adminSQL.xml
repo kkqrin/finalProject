@@ -56,22 +56,22 @@
 	<select id="selectAllMemberList" parameterType="map"
 		resultType="m">
 		select * from
-		(select rownum as rnum, b.* from
-			(select
-				member_no as memberNo,
-				member_id as memberId,
-				member_name as memberName,
-				member_email as memberEmail,
-				member_phone as memberPhone,
-				member_addr as memberAddr,
-				member_gender as memberGender,
-				member_bday as memberBday,
-				member_bank as memberBank,
-				member_account as memberAccount,
-				member_status as memberStatus,
-				member_agree as memberAgree,
-				reg_date as regDate
-			from member_tbl order by 1 desc)b)
+			(select rownum as rnum, b.* from
+				(select
+					member_no as memberNo,
+					member_id as memberId,
+					member_name as memberName,
+					member_email as memberEmail,
+					member_phone as memberPhone,
+					member_addr as memberAddr,
+					member_gender as memberGender,
+					member_bday as memberBday,
+					member_bank as memberBank,
+					member_account as memberAccount,
+					member_status as memberStatus,
+					member_agree as memberAgree,
+					to_date(reg_date,'yyyy-mm-dd') as regDate
+				from member_tbl order by 1 desc)b)
 		where rnum between #{start} and #{end}
 	</select>
 
@@ -100,7 +100,7 @@
 			member_account as memberAccount,
 			member_status as memberStatus,
 			member_agree as memberAgree,
-			reg_date as regDate
+			to_date(reg_date,'yyyy-mm-dd') as regDate
 		from member_tbl
 		<choose>
 			<when test="memberNo == 0 and memberId == ''">
@@ -114,7 +114,25 @@
 			</when>
 		</choose>
 	</select>
-
+	
+	<select id="ajaxMemberView" parameterType="_int" resultType="m">
+		select 
+			member_no as memberNo,
+			member_id as memberId,
+			member_name as memberName,
+			member_email as memberEmail,
+			member_phone as memberPhone,
+			member_addr as memberAddr,
+			member_gender as memberGender,
+			member_bday as memberBday,
+			member_bank as memberBank,
+			member_account as memberAccount,
+			member_status as memberStatus,
+			member_agree as memberAgree
+		from member_tbl
+		where member_no = #{_parameter}
+	</select>
+	
 	<select id="selectMonthCount" resultType="_int">
 		select
 			sum(product_price) from product_tbl pt 

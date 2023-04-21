@@ -8,4 +8,13 @@
 			select max(pay_no) from pay_tbl
 		</selectKey>
 	</insert>
+	<select id="selectPay" parameterType="_int" resultType="pay">
+		select 
+			pay_no as payNo,
+			member_no as memberNo,
+			product_no as productNo,
+			pay_date as payDate,
+			pay_status as payStatus
+			from pay_tbl where pay_no = #{payNo} 
+	</select>
 </mapper>

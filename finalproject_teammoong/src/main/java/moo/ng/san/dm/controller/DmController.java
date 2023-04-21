@@ -21,22 +21,26 @@ public class DmController {
 
 	@RequestMapping(value = "/receiveDmList.do")
 	public String myPageDmReceive(@SessionAttribute(required=false) Member m, Model model) {
-		ArrayList<DirectMessage> list = service.selectAllDm(m.getMemberId());
+		ArrayList<DirectMessage> list = service.selectAllDm(m.getMemberId(),"imReceiver");
 		model.addAttribute("list", list);
 		return "dm/receiveDmList";
 	}
 	
 	@RequestMapping(value = "/sendDmList.do")
-	public String myPageDmSend() {
+	public String myPageDmSend(@SessionAttribute(required=false) Member m, Model model) {
+		ArrayList<DirectMessage> list = service.selectAllDm(m.getMemberId(),"imSender");
+		model.addAttribute("list", list);
 		return "dm/sendDmList";
 	}
 	
 	@RequestMapping(value = "/dmWriteFrm.do")
 	public String myPageDmWriteFrm(Model model, @SessionAttribute(required=false) Member m) {
 		model.addAttribute("memberId", m.getMemberId());
+		model.addAttribute("receiver", "");
 		return "dm/dmWriteFrm";
 	}
 	
+
 	@ResponseBody
 	@RequestMapping(value = "/insertDm.do")
 	public String insertDm(String dmSender, String dmReceiver, String dmContent) {
@@ -51,6 +55,15 @@ public class DmController {
 			return "error";
 		}
 	}//insertDm
+	
+	
+	@RequestMapping(value = "/dmReply.do")
+	public String dmReply(Model model, @SessionAttribute(required=false) Member m, String receiver) {
+		model.addAttribute("memberId", m.getMemberId());
+		model.addAttribute("receiver", receiver);
+		return "dm/dmWriteFrm";
+	}
+	
 	
 	
 }//DmController
