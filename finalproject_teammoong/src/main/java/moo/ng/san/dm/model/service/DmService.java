@@ -1,5 +1,7 @@
 package moo.ng.san.dm.model.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,11 @@ public class DmService {
 
 	public int insertDm(DirectMessage dm) {
 		return dao.insertDm(dm);
+	}
+
+	public ArrayList<DirectMessage> selectAllDm(String memberId) {
+		ArrayList<DirectMessage> list = dao.selectAllDm(memberId);
+		return list;
 	}
 	
 	

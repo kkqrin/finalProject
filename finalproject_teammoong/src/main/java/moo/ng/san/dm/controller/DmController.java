@@ -1,5 +1,7 @@
 package moo.ng.san.dm.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +20,9 @@ public class DmController {
 	private DmService service; 
 
 	@RequestMapping(value = "/receiveDmList.do")
-	public String myPageDmReceive() {
+	public String myPageDmReceive(@SessionAttribute(required=false) Member m, Model model) {
+		ArrayList<DirectMessage> list = service.selectAllDm(m.getMemberId());
+		model.addAttribute("list", list);
 		return "dm/receiveDmList";
 	}
 	

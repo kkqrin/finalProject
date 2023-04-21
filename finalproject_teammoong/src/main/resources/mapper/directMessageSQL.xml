@@ -13,6 +13,19 @@
 		)
 	</insert>
 
-
+	<select id="selectAllDm" resultType="dm" parameterType="_int">
+		select
+			rownum as rnum, 
+			dm_sender as dmSender,
+			dm_receiver as dmReceiver,
+			dm_content as dmContent,
+			to_char(dm_date,'""YYYY"년 "MM"월 "DD"일"') as dmDate,
+			dm_readchk as dmReadChk
+		from
+			member_dm
+		where
+			member_id = #{memberId}	
+		order by 1 desc
+	</select>
 
 </mapper>

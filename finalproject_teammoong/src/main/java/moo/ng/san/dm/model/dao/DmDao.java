@@ -1,5 +1,8 @@
 package moo.ng.san.dm.model.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,6 +16,11 @@ public class DmDao {
 
 	public int insertDm(DirectMessage dm) {
 		return sqlSession.insert("directMessage.insertDm",dm);
+	}
+
+	public ArrayList<DirectMessage> selectAllDm(String memberId) {
+		List list = sqlSession.selectList("directMessage.selectAllDm", memberId);
+		return (ArrayList<DirectMessage>)list;
 	}
 	
 	
