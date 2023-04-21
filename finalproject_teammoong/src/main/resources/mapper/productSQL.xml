@@ -231,4 +231,11 @@
 	<select id="selectProductCost" parameterType="_int" resultType="_int">
 		select product_cost from product_tbl where product_no = #{productNo}
 	</select>
+	<select id="selectOptionNo" parameterType="_int" resultType="_int">
+		select
+			option_info_no AS optionInfoNo
+			from OPTION_GROUP_TBL
+			left join OPTION_INFO_TBL using (option_group_no)
+		where product_no=#{productNo}
+	</select>
 </mapper>

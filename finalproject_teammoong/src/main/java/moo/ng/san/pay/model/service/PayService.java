@@ -1,5 +1,7 @@
 package moo.ng.san.pay.model.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,31 +26,34 @@ public class PayService {
 		pay.setMemberNo(memberNo);
 		pay.setProductNo(productNo);
 		int productCost = dao.selectProductCost(productNo);
+		
 		int result = dao.insertPay(pay);
 			if(result > 0) {
 				order.setMemberNo(memberNo);
 				order.setProductNo(productNo);
 				order.setPayNo(pay.getPayNo());
+				
 				int result2 = dao.insertOrder(order);
 				if(result2>0) {
-					orderDetail.setOrderDetailNo(order.getOrderNo());
-					orderDetail.setOptionInfoNo(option.getOptionInfoNo());
+					
+					orderDetail.setOrderNo(order.getOrderNo());
 					orderDetail.setOrderDetailPrice(productCost);
+					System.out.println(orderDetail);
 					int result3 = dao.insertOrderDetail(orderDetail);
 					Point point = new Point();
 					point.setMemberNo(memberNo);
 					if(result3>0) {
 						if(minusPointEa != 0) {							
-								point.setPointEa(minusPointEa);
+							point.setPointEa(minusPointEa);
 						int result4 = dao.insertMinusPointEa(point);
 						}
-						point.setPointEa(plusPointEa);
-						int result5 = dao.insertPlusPointEa(point);
-						if(result5>0) {
-							if(issueNo != 0) {								
-								int result6 = dao.updateUseCoupon(issueNo);
+							point.setPointEa(plusPointEa);
+							int result5 = dao.insertPlusPointEa(point);
+							if(result5>0) {
+								if(issueNo != 0) {								
+									int result6 = dao.updateUseCoupon(issueNo);
+								}
 							}
-						}
 					}
 				}
 			}

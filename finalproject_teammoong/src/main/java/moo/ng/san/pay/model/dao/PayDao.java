@@ -1,5 +1,8 @@
 package moo.ng.san.pay.model.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -9,6 +12,7 @@ import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.order.model.vo.Order;
 import moo.ng.san.pay.model.vo.OrderDetail;
 import moo.ng.san.pay.model.vo.Pay;
+import moo.ng.san.product.model.vo.Option;
 
 @Repository
 public class PayDao {
@@ -27,8 +31,8 @@ public class PayDao {
 	}
 
 	public int insertOrderDetail(OrderDetail orderDetail) {
-		int result = sqlSession.insert("orderDetail.insertOrderDetail", orderDetail);
-		return result;
+	    int result = sqlSession.insert("orderDetail.insertOrderDetail", orderDetail);
+	    return result;
 	}
 
 	public int selectProductCost(int productNo) {
@@ -55,5 +59,6 @@ public class PayDao {
 		Pay p = sqlSession.selectOne("pay.selectPay",payNo);
 		return p;
 	}
+
 
 }
