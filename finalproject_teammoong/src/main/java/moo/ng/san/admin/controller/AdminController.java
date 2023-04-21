@@ -85,6 +85,16 @@ public class AdminController {
 		}
 	}
 	
+	// member 선택시 추가 정보 출력
+	@ResponseBody
+	@RequestMapping(value="/ajaxMemberView.do", produces = "application/json;charset=utf-8")
+	public String ajaxMemberView(int memberNo, Model model) {
+		Member m = service.ajaxMemberView(memberNo);
+		Gson gson = new Gson();
+		String result = gson.toJson(m);
+		return result;
+	}
+	
 	
 	
 	

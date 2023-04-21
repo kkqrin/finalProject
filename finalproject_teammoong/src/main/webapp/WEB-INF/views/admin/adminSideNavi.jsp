@@ -41,8 +41,8 @@
 	     </ul>
 	     <ul>
 	         <li><a>여기여기붙어라 관리</a></li>
-	         <li><a href="/adminBoardManagePage.do?reqPage=1">여기여기붙어라 게시판 관리</a></li><!-- jsp 생성완료 -->
-	         <li><a href="/adminBoardReportManagePage.do?reqPage=1">여기여기붙어라 신고 관리</a></li><!-- jsp 생성완료 -->
+	         <li><a href="/adminBoardManagePage.do?reqPage=1">여여붙게시판 관리</a></li><!-- jsp 생성완료 -->
+	         <li><a href="/adminBoardReportManagePage.do?reqPage=1">여여붙 신고 관리</a></li><!-- jsp 생성완료 -->
 	         <li><a>카테고리별 매출관리</a></li>
 	     </ul>
 	 </div>
