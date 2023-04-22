@@ -19,19 +19,14 @@ public class DmController {
 	@Autowired
 	private DmService service; 
 
-	@RequestMapping(value = "/receiveDmList.do")
-	public String myPageDmReceive(@SessionAttribute(required=false) Member m, Model model) {
-		ArrayList<DirectMessage> list = service.selectAllDm(m.getMemberId(),"imReceiver");
-		model.addAttribute("list", list);
+	@ResponseBody
+	@RequestMapping(value = "/myDmList.do",produces = "application/json;charset=utf-8")
+	public String myPageDmReceive(DirectMessage dm) {
+		ArrayList<DirectMessage> list = service.selectAllDm(dm);
 		return "dm/receiveDmList";
 	}
 	
-	@RequestMapping(value = "/sendDmList.do")
-	public String myPageDmSend(@SessionAttribute(required=false) Member m, Model model) {
-		ArrayList<DirectMessage> list = service.selectAllDm(m.getMemberId(),"imSender");
-		model.addAttribute("list", list);
-		return "dm/sendDmList";
-	}
+
 	
 	@RequestMapping(value = "/dmWriteFrm.do")
 	public String myPageDmWriteFrm(Model model, @SessionAttribute(required=false) Member m) {

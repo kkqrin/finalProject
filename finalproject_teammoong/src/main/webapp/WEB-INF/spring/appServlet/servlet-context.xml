@@ -182,12 +182,12 @@
 		</beans:property>
 	</beans:bean>
 	
-	
-	
-	
-	
-	
-	
+	<!-- ☆☆☆ 실시간 쪽지를 처리할 객체 생성 -->
+	<beans:bean id ="dmCount" class="moo.ng.san.dm.model.service.DirectMessageHandler" />
+	<!-- 웹소켓 매핑 -->
+	<websocket:handlers>
+		<websocket:mapping handler="dmCount" path="/dm.do"/>
+	</websocket:handlers>
 	
 	
 	

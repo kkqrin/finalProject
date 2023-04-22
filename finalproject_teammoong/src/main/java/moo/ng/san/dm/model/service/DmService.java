@@ -1,7 +1,6 @@
 package moo.ng.san.dm.model.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,14 +18,14 @@ public class DmService {
 		return dao.insertDm(dm);
 	}
 
-	public ArrayList<DirectMessage> selectAllDm(String memberId, String flag) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("memberId",memberId);
-		map.put("flag",flag);
-		ArrayList<DirectMessage> list = dao.selectAllDm(map);
+	public ArrayList<DirectMessage> selectAllDm(DirectMessage dm) {
+		ArrayList<DirectMessage> list = dao.selectAllDm(dm);
 		return list;
 	}
 
-	
-	
+	public int selectDmCount(String memberId) {
+		return dao.selectDmCount(memberId);
+	}
+
+
 }//DmService

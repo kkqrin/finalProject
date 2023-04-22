@@ -77,6 +77,7 @@
 							<a class="staffMsg">관리자 버전으로 접속중입니다.<span><a href="/myPage.do" class="staffMsg">[내정보]</a></span></a>
 						</c:when>
 					</c:choose>
+					<input type="hidden" id="memberId" value="${sessionScope.m.memberId }">
 				</div><!-- header-info -->
 				<div class="header-top">
 	            	<div class="middle-left">
@@ -95,7 +96,7 @@
 	                <c:when test="${!empty sessionScope.m}">
 		                <a class="alram-zone" href="/sendDmList.do">
 		                	<span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;">notifications</span>
-		                	<span class="alram-circle">10+</span>
+		                	<span class="alram-circle" id="dmCount"></span>
 		                </a>
 		                <a href="#"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">favorite</span></a>
 		                <a href="/shoppingCart.do"><span class="material-symbols-outlined"  style="font-variation-settings:'FILL' 0">shopping_cart</span></a>
@@ -234,6 +235,6 @@
 
 	
     <script src="/resources/js/header.js"></script>
-
+	<script src="/resources/js/forDm.js"></script>
 </body>
 </html>

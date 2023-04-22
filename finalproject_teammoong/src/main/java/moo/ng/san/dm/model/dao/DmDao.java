@@ -19,10 +19,15 @@ public class DmDao {
 		return sqlSession.insert("directMessage.insertDm",dm);
 	}
 
-	public ArrayList<DirectMessage> selectAllDm(HashMap<String, String> map) {
-		List list = sqlSession.selectList("directMessage.selectAllDm", map);
+	public ArrayList<DirectMessage> selectAllDm(DirectMessage dm) {
+		List list = sqlSession.selectList("directMessage.selectAllDm", dm);
 		return (ArrayList<DirectMessage>)list;
 	}
+
+	public int selectDmCount(String memberId) {
+		return sqlSession.selectOne("directMessage.selectDmCount",memberId);
+	}
+
 
 	
 	
