@@ -42,6 +42,9 @@
 	
 	
 	<script src="/resources/js/myPageDm.js"></script>
+	<script>
+		getReceiveDm();
+	</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

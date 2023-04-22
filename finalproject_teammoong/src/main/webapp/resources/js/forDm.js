@@ -24,9 +24,6 @@ let ws;
 		
 		if(result.type=="myDmCount"){
 			$("#dmCount").text(result.dmCount);
-			getReceiveDm();
-		}else if(result.type=="readDm"){
-			getSendDm();
 		}
 	}
 	

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.google.gson.Gson;
+
 import moo.ng.san.dm.model.service.DmService;
 import moo.ng.san.dm.model.vo.DirectMessage;
 import moo.ng.san.member.model.vo.Member;
@@ -19,11 +21,21 @@ public class DmController {
 	@Autowired
 	private DmService service; 
 
+	@RequestMapping(value = "/receiveDmList.do")
+	public String receiveDmList() {
+		return "dm/receiveDmList";
+	}
+	
+	@RequestMapping(value = "/sendDmList.do")
+	public String sendDmList() {
+		return "dm/sendDmList";
+	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/myDmList.do",produces = "application/json;charset=utf-8")
 	public String myPageDmReceive(DirectMessage dm) {
 		ArrayList<DirectMessage> list = service.selectAllDm(dm);
-		return "dm/receiveDmList";
+		return new Gson().toJson(list);
 	}
 	
 
