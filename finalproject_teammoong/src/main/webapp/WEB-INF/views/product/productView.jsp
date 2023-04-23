@@ -204,7 +204,7 @@
                         </div>
                         <div class="form-box">
                             <div class="one-btn">
-                                <form action="/orderSheet.do" name="one-order-form" method="post">
+                                <form action="/orderSheet.do" method="post">
                                 <input type="hidden" name="productNo">
                                 <input type="hidden" name="optionNo">
                                 <button class="btn btn-white size02">혼자구매하기</button>
@@ -213,7 +213,7 @@
                             </form>
                             </div>
                             <div class="moong-btn">
-                                <form action="/moongsanOrder.do" name="gongu-order-form" method="post">
+                                <form action="/moongsanOrder.do" method="post">
                                     <input type="hidden" name="productNo">
                                     <input type="hidden" name="optionNo">
                                     <button class="btn btn-pri size02">뭉쳐야산다</button>
@@ -611,6 +611,9 @@
             }
 
 
+
+
+
             // 옵션 없는 상품은 출력 안함
             $(document).ready(function(){
                 if($(".info-content").find("option").length == 1){
@@ -618,12 +621,8 @@
                 }
             });
 
-
-
-
-
             // 폼 제출
-            $("[name=one-order-form]").submit(function (e) {
+            $(".form-box>div>form").submit(function (e) {
                 const productNo = $("#productNo").val();
                 const optionNo = $( ".product-option" ).val();
                 
@@ -645,39 +644,20 @@
 			});
 
             // 공동구매 폼 제출
-            $("[name=gongu-order-form]").submit(function (e) {
+            $(".moong-btn>form").submit(function (e) {
+                if($("[name=pop_out]").val() != 1){
+                    gongujQueryAlert('error');
 
-                const productNo = $("#productNo").val();
-                const optionNo = $( ".product-option" ).val();
-                
-                if(optionNo == 0 && $(".info-content").find("option").length > 1){
-                    // 옵션 선택 안됐을 때 && 옵션이 있는 상품
-                    optionjQueryAlert('info');
-					// alert("옵션을 선택하세요");
-
-					// 폼 제출 막음
-					e.preventDefault();
+                    e.preventDefault();
                     return false;
-                }else{
-                    if($("[name=pop_out]").val() != 1){
-                        gongujQueryAlert('error');
+                }else if($("[name=pop_out]").val() == 1){
 
-                        e.preventDefault();
-                        return false;
-                    }else if($("[name=pop_out]").val() == 1){
-
-                        // console.log("Adsfasdf");
-                        gonguTwojQueryAlert('error', this);
-                        e.preventDefault();
-                        return false;
-                    }
+                    // console.log("Adsfasdf");
+                    gonguTwojQueryAlert('error', this);
+                    e.preventDefault();
+                    return false;
                 }
             });
-
-
-
-
-
 
             // 장바구니 담기시 성공 alert 띄우고 페이지 이동
             //알림 관련 기능

@@ -461,16 +461,21 @@
 
         // 적립금 모두 사용
         $("#all-saved-money").on("click", function(){
-            const totalPay =  $("#hidden-total-pay").val();
-            const myPoint = $("#hidden-total-point").val();
+            const totalPay =  Number($("#hidden-total-pay").val());
+            const myPoint = Number($("#hidden-total-point").val());
 
+            // 1. 내적립금 만원 / 상품 5천원일때
+            // [모두사용] 상품가격만 (내적립금>상품)
 
-            // 1. 결제금액 > 적립금 : 적립금 전체 사용
-            // 2. 결제금액 < 적립금 : 결제금액만큼 사용
-
+            // 2. 내적립금 5천원 / 상품 만원일때
+            // [모두사용] 내적립금만 (내적립금<상품)
+            
+            console.log("totalPay : "+totalPay);
+            console.log("myPoint :"+myPoint);
 
             // 최종 결제 금액보다 보유중인 총 적립금이 적으면 최종 결제 금액만 사용됨
-            if(totalPay > myPoint){
+            if(myPoint > totalPay){
+                console.log("myPoint > totalPay");
                 // hidden-total-point
                 $(".total-order-saved-money>div").last().children().text("-"+totalPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 // input창도 동기화
@@ -483,6 +488,7 @@
                 // 최종 결제 금액 hidden에 숨김
                 $("#hidden-total-pay").val($("#number-pay-price").val()-$("#number-coupon").val()-totalPay).trigger('change');
             }else{
+                console.log("myPoint < totalPay");
                 // hidden-total-point
                 $(".total-order-saved-money>div").last().children().text("-"+$("#hidden-total-point").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 // input창도 동기화
