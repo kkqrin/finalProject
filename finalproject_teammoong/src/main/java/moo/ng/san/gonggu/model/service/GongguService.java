@@ -29,10 +29,11 @@ public class GongguService {
 	public int insertGonggu(Gonggu g, Point p, GongguPay gp) {
 //		alert문구 : 상품아래의 뭉쳐야산다 대기자를 확인 하셨나요? 주문참여를 통하여 빠르게 공동구매를 진행 할 수 있습니다.
 //		공구테이블 인서트(최초 1인에 한해서 공구테이블을 생성)
-		int result = dao.insertGonggu(g);
+		int resultGongguNo = dao.insertGonggu(g);
+		g.setGongguNo(resultGongguNo);
 //		디테일공구테이블 인서트(공구테이블이 생성되면서 공구주또한 인원수에 포함시키기위해 디테일 공구테이블에 인서트)
-		if(result > 0) {
-			Gonggu gonggu = dao.selectInsertGonggu();
+		if(resultGongguNo > 0) {
+			Gonggu gonggu = dao.selectInsertGonggu(resultGongguNo);
 			System.out.println("gongguService에서 gonggu값"+gonggu);
 			int DetailGongguResult = dao.insertDetailGonggu(gonggu);
 			int pointResult = dao.insertPoint(p);
@@ -41,7 +42,11 @@ public class GongguService {
 				int gongguPayResult = dao.insertGongguPay(gp);
 			}
 		}
-		return result;
+		int DetailGongguResult = dao.insertDetailGonggu(g);
+		return resultGongguNo;
+		/* Gonggu gonggu = dao.selectInsertGonggu(resultGngguNo); */
+		//System.out.println("gongguService에서 gonggu값"+gonggu);
+		
 	}
 	
 	public int selectGongguPayCount(int gongguNo) {
