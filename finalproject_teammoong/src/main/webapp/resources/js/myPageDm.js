@@ -14,9 +14,12 @@ function getReceiveDm(){
                 td1.text(dm.rnum);
                 
                 const td2 = $("<td>");
-                td2.text(dm.dmContent);
-                td2.css("cursor","pointer");
-                td2.attr("onclick","dmDetail("+dm.dmNo+");");
+                const td2Div = $("<div>");
+                td2Div.css({"width":"478px","height":"20px","overflow":"hidden","cursor":"pointer","white-space": "nowrap","text-overflow": "ellipsis"});
+                td2Div.text(dm.dmContent);
+                td2.attr("onclick","dmView("+dm.dmNo+");");
+                td2.append(td2Div);
+                
                 
                 const td3 = $("<td>");
                 td3.text(dm.dmSenderName);
@@ -57,9 +60,11 @@ function getSendDm(){
                 td1.text(dm.rnum);
                 
                 const td2 = $("<td>");
-                td2.text(dm.dmContent);
-                td2.css("cursor","pointer");
-                td2.attr("onclick","dmDetail("+dm.dmNo+");");
+                const td2Div = $("<div>");
+                td2Div.css({"width":"478px","height":"20px","overflow":"hidden","cursor":"pointer","white-space": "nowrap","text-overflow": "ellipsis"});
+                td2Div.text(dm.dmContent);
+                td2.attr("onclick","dmView("+dm.dmNo+");");
+                td2.append(td2Div);
                 
                 const td3 = $("<td>");
                 td3.text(dm.dmReceiverName);
@@ -77,10 +82,10 @@ function getSendDm(){
 
 
 
-function dmDetail(dmNo){
+function dmView(dmNo){
     $.ajax({
         url : "/dmView.do",
-        data : {dmNo:dmNo},
+        data : {dmNo:dmNo,memberId:memberId},
         success : function(dm){
             $("#viewSender").text("보낸 사람 : "+dm.dmSenderName+"("+dm.dmSender+")");
             $("#replyToId").val(dm.dmSender);
@@ -91,7 +96,10 @@ function dmDetail(dmNo){
 				 showClose: false,
 	             fadeDuration: 100
 	        });
-            getReceiveDm();
+            getReceiveDm();//읽음확인 갱신시켜줘야함
+            //상세화면 표시된 후 알림에 있는 수 깎아줘야 함
+            const sendData = {type:"readCheck",dmSender:dm.dmSender,dmReceiver:dm.dmReceiver};
+            ws.send(JSON.stringify(sendData));
         }
     })
 }
@@ -103,3 +111,4 @@ function replyDm(){
 	const memberId = $("#replyToId").val();
 	location.href="/dmReply.do?receiver="+memberId;
 }
+

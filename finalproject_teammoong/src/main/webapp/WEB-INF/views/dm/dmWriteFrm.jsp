@@ -21,7 +21,6 @@
 						<tr>
 							<th style="width: 30%;">보내는 사람</th>
 							<td>
-								<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 								${sessionScope.m.memberName }(${memberId})
 							</td>
 						</tr>
@@ -59,8 +58,6 @@
 	
 	<script>
 		let sendChk = false;
-		const memberId = $("[name='memberId']").val();
-		
 	
 		$(".memberChkBtn").on("click",function(){
 			const dmReceiver = $("[name='dmReceiver']").val();

@@ -54,7 +54,18 @@ public class DirectMessageHandler extends TextWebSocketHandler{
 			String resultStr = new Gson().toJson(obj); //<--보내주는건 String타입이어야 하므로 객체를 스트링타입으로 변형
 			TextMessage tm = new TextMessage(resultStr); //전송양식
 			session.sendMessage(tm);
-		}
+		}else if(type.equals("readCheck")) {
+			String dmReceiver = element.getAsJsonObject().get("dmReceiver").getAsString(); //<--읽은쪽지 개수가 줄어야 하는 사람
+			int dmCount = service.selectDmCount(dmReceiver);
+			
+			JsonObject obj = new JsonObject();
+			obj.addProperty("type", "myDmCount");
+			obj.addProperty("dmCount", dmCount);
+			String resultStr = new Gson().toJson(obj);
+			TextMessage tm = new TextMessage(resultStr);
+			session.sendMessage(tm); //<-- 여기까지 . 쪽지를 읽은 회원의 읽지 않은 쪽지 수를 갱신함
+
+		}//else if. type이 readCheck일때
 	}
 	
 	@Override

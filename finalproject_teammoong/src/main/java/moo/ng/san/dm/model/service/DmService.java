@@ -27,8 +27,12 @@ public class DmService {
 		return dao.selectDmCount(memberId);
 	}
 
-	public DirectMessage selectOneDm(int dmNo) {
-		return dao.selectOneDm(dmNo);
+	public DirectMessage selectOneDm(int dmNo, String memberId) {
+		DirectMessage dm = dao.selectOneDm(dmNo);
+		if(dm.getDmReadChk()==0 && memberId!=dm.getDmSender()) {
+			dao.updateReadChk(dmNo);
+		}
+		return dm;
 	}
 
 

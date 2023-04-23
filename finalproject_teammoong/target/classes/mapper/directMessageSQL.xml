@@ -74,6 +74,12 @@
 			    dm_no = #{parameter}
 	</select>
 	
-	
+	<update id="updateReadChk" parameterType="_int">
+		update member_dm
+		set
+			dm_readchk = 1
+		where
+			dm_no = #{_parameter}
+	</update>
 
 </mapper>

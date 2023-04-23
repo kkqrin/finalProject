@@ -2,6 +2,7 @@ package moo.ng.san.dm.controller;
 
 import java.util.ArrayList;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,10 +42,8 @@ public class DmController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/dmView.do",produces = "application/json;charset=utf-8")
-	public String dmView(int dmNo) {
-		System.out.println(dmNo);
-		DirectMessage dm = service.selectOneDm(dmNo);
-		System.out.println(dm);
+	public String dmView(int dmNo,String memberId) {
+		DirectMessage dm = service.selectOneDm(dmNo,memberId);
 		return new Gson().toJson(dm);
 	}
 	

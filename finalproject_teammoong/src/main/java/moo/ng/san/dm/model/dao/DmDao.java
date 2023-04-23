@@ -32,6 +32,10 @@ public class DmDao {
 		return sqlSession.selectOne("directMessage.selectOneDm",dmNo);
 	}
 
+	public void updateReadChk(int dmNo) {
+		sqlSession.update("directMessage.updateReadChk",dmNo);
+	}
+
 
 	
 	
