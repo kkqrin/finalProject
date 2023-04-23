@@ -89,6 +89,7 @@
                     </div>
                     <div class="mainContent c-2">
                         <div class="product title"><h3>상품 관리</h3></div>
+                        
                         <div class="product icon"><span class="material-symbols-outlined">redeem</span></div>
                         <div class="product subTitle"><h4>오늘 판매된 상품</h4></div>
                         <div class="product totalCount"><span id="productTotalCount"></span><span>개</span></div>
@@ -137,7 +138,7 @@
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
-    <script>
+<script>
     $(document).ready(function(){
         var memberTotalCount = $("#memberTotalCount");
         var productTotalCount = $("#productTotalCount");
@@ -145,24 +146,66 @@
         var orderTotalCount = $("#orderTotalcount");
         var bestProductTotalCount = $("#bestProductTotalCount");
         var couponTotalCount = $("#couponTotalCount");
+        
+        var memberSpan = $(".member .variationCount");
+        var productSpan = $(".product .variationCount");
+        var boardSpan = $(".board .variationCount");
+        var orderSpan = $(".order .variationCount");
 
         $.ajax({
             url : "/ajaxTotalCount.do",
             method : "get",
             dataType : "json",
             success : function(data){
-            	console.log("통신성공");
             	console.log(data);
                 memberTotalCount.text(data[0]);
-                productTotalCount.text(data[1]);
-                boardTotalCount.text(data[2]);
-                orderTotalCount.text(data[3]);
-                bestProductTotalCount.text(data[4]);
-                couponTotalCount.text(data[5]); 
+                if(data[1] > 0){
+	                memberSpan.text("+"+data[1]);
+	                memberSpan.css("color","blue")
+                }else if(data[1] == 0){
+                	memberSpan.text(0);
+                }else if(data[1] < 0){
+                	memberSpan.text("-"+data[1]);
+                	memberSpan.css("color","red")
+                }
+                productTotalCount.text(data[2]);
+                if(data[3] > 0){
+	                productSpan.text("+"+data[3]);
+	                productSpan.css("color","blue")
+                }else if(data[3] == 0){
+                	productSpan.text(0);
+                }else if(data[3] < 0){
+                	productSpan.text("-"+data[3]);
+                	productSpan.css("color","red")
+                }
+                boardTotalCount.text(data[4]);
+                if(data[5] > 0){
+	                boardSpan.text("+"+data[5]);
+	                boardSpan.css("color","blue")
+                }else if(data[5] == 0){
+                	boardSpan.text(0);
+                }else if(data[5] < 0){
+                	boardSpan.text("-"+data[3]);
+                	boardSpan.css("color","red")
+                }
+                orderTotalCount.text(data[6]);
+                if(data[7] > 0){
+	                orderSpan.text("+"+data[5]);
+	                orderSpan.css("color","blue")
+                }else if(data[7] == 0){
+                	orderSpan.text(0);
+                }else if(data[7] < 0){
+                	orderSpan.text("-"+data[3]);
+                	orderSpan.css("color","red")
+                }
+                /* bestProductTotalCount.text(data[8]);
+                couponTotalCount.text(data[5]);  */
             }
             
         })
-    	
+        
+    })
+    	/* 
         $(".checkBtn").on("click",function(){
 	        $.ajax({
 	            url : "/ajaxTotalCount.do",
@@ -181,9 +224,8 @@
 	            
 	        })
         	
-        })
+        }) */
         
-    }
         
         
         

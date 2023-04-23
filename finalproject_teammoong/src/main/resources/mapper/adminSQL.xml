@@ -6,18 +6,58 @@
 		select count(*)	from member_tbl
 	</select>
 
+	<select id="selectVariationMemberCount" resultType="_int">
+		select count(*) from member_tbl
+		where reg_date between sysdate-1 and sysdate
+	</select>
+
 	<select id="selectAllOrderCount" resultType="_int">
 		select count(*) from order_tbl
 	</select>
+	
+	<select id="selectVariationOrderCount" parameterType="map" resultType="_int">
+		select count(*) from order_tbl
+		where order_date between #{start} and #{end}
+	</select>
 
+
+	<!-- 예전버전 -->
+	<!-- <select id="selectVariationOrderCount" resultType="_int">
+		select count(*) from order_tbl 
+		where order_date between sysdate-1 and sysdate
+	</select> -->
+	
 	<select id="selectAllBoardCount" resultType="_int">
 		select count(*) from board_tbl
 	</select>
+	
+	<select id="selectVariationBoardCount" parameterType="map" resultType="_int">
+		select count(*) from board_tbl
+		where board_date between #{start} and #{end}
+	</select>
 
 	<select id="selectAllSalesCount" resultType="_int">
-		select
-		sum(product_price) from product_tbl pt join order_tbl ot on
-		(pt.product_no = ot.product_no) where ot.order_status = 4
+		select 
+			sum(od.order_detail_cnt * pdt.product_price * (1-((pdt.product_discount)/100))) as totalSales
+            
+			from order_detail od 
+			join product_tbl pdt on (od.product_no = pdt.product_no)
+			join order_tbl ot on (od.order_no = ot.order_no) 
+			join pay_tbl pt on (ot.pay_no = pt.pay_no) 
+			
+		where ot.order_status = 1 and pt.pay_status = 1
+	</select>
+	
+	<select id="selectVariationSalesCount" parameterType="map" resultType="_int">
+		select 
+			sum(od.order_detail_cnt * pdt.product_price * (1-((pdt.product_discount)/100))) as totalSales
+            
+			from order_detail od 
+			join product_tbl pdt on (od.product_no = pdt.product_no)
+			join order_tbl ot on (od.order_no = ot.order_no) 
+			join pay_tbl pt on (ot.pay_no = pt.pay_no)
+			
+		where ot.order_status = 1 and pt.pay_status = 1 and pt.pay_date between #{start} and #{end}
 	</select>
 
 	<select id="selectBestSalesCount" resultType="_int"> <!-- 판매량 기준 1~5 사이의 금액을 뽑아옴 -->
@@ -35,23 +75,23 @@
 
 
 
-	<select id="selectBeforeMember" resultType="_int">
+	<!-- <select id="selectBeforeMember" resultType="_int">
 		select count(*) from member_tbl where reg_date between '2023-03-20' and sysdate-1
 	</select>
-
+ -->
 
 	<!-- <select id="selectAllOrderCount" resultType="_int"> -->
 	<!-- select count(*) from product_tbl -->
 	<!-- </select> -->
 
-
+<!-- 
 	<select id="selectBeforeOrder" resultType="_int">
 		select count(*) from order_tbl where order_date between '2023-03-20' and sysdate-1
 	</select>
 
 	<select id="selectBeforeBoard" resultType="_int">
 		select count(*) from board_tbl where board_start between '2023-03-20' and sysdate-1
-	</select>
+	</select> -->
 
 	<select id="selectAllMemberList" parameterType="map"
 		resultType="m">
@@ -497,7 +537,7 @@
 		where ot.order_status = 1 and pt.pay_status = 1 and to_char(ot.order_date,'yyyy-mm-dd') between #{start} and #{end}
 	</select>
 	
-	<select id="selectCountMonthCategorySalesData" parameterType="_int" resultType="sd">
+	<select id="selectCountMonthCategorySalesData" parameterType="_int" resultType="sd"> <!-- 매출보고서 작성 -->
 		select 
 			pc.category_no as categoryNo,
 			sum(od.order_detail_cnt * pdt.product_price * (1-((pdt.product_discount)/100))) as totalSales,
@@ -512,6 +552,23 @@
 			
 		where ot.order_status = 1 and pt.pay_status = 1 and dc.category_no = ${_parameter}
         group by pc.category_no
+	</select>
+	
+	<select id="selectMonthSalesData" parameterType="_int" resultType="sd"> 
+		select 
+			pc.category_no as categoryNo,
+			sum(od.order_detail_cnt * pdt.product_price * (1-((pdt.product_discount)/100))) as totalSales,
+            sum(pdt.product_cost * od.order_detail_cnt) as totalCost
+            
+			from order_detail od 
+			join product_tbl pdt on (od.product_no = pdt.product_no)
+			join detail_category dc on (pdt.d_category_no = dc.d_category_no)
+			join product_category pc on (dc.category_no = pc.category_no)
+			join order_tbl ot on (od.order_no = ot.order_no) 
+			join pay_tbl pt on (ot.pay_no = pt.pay_no)
+			
+		where ot.order_status = 1 and pt.pay_status = 1 and dc.category_no = ${_parameter}
+        group by pc.category_no 
 	</select>
 	
 	<select id="selectGenderSalesData" resultType="sd">

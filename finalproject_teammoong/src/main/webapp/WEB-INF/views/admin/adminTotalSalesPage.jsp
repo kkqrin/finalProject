@@ -125,8 +125,22 @@
 		        	<div class="monthSalesChart chart">
 		        		<canvas id="monthChart"></canvas>
 		        	</div>
-		        	<div class="selectMonthSalesChart chart">
-		        		<canvas id="selectMonthChart"></canvas>
+		        	<div>
+			        	<select id="monthSelect" class="monthSelect">
+						    <option value="1">1월</option>
+						    <option value="2">2월</option>
+						    <option value="3">3월</option>
+						    <option value="4">4월</option>
+						    <option value="5">5월</option>
+						    <option value="6">6월</option>
+						    <option value="7">7월</option>
+						    <option value="8">8월</option>
+						    <option value="9">9월</option>
+						    <option value="10">10월</option>
+						    <option value="11">11월</option>
+						    <option value="12">12월</option>
+						</select>
+						<canvas id="salesChart"></canvas>
 		        	</div>
 	        	</div>
 	        </div>
@@ -136,10 +150,8 @@
 <script>
 	  
   const chartDataUrl = "https://example.com/data.json";
-  
-
 	$(document).ready(function() {
-
+		
 				$.ajax({
 					url: 'ajaxTotalSalesManage.do',
 				    dataType: 'json',
@@ -306,64 +318,95 @@
 				
 	            
 	            // 월 select / 카테고리 매출
-	            var context = document.getElementById('selectMonthChart').getContext('2d');
-	            var myChart = new Chart(context, {
-	                type: 'doughnut', // 차트의 형태
-	                data: { // 차트에 들어갈 데이터
-	                    labels: [
-	                        // 카테고리 명
-	                        '1','2','3','4','5','6','7'
-	                    ],
-	                    datasets: [
-	                        { //데이터
-	                            label: 'test1', //차트 제목
-	                            fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-	                            data: [
-	                                21,19,25,20,23,26,25 // 그래프 각각의 값
-	                            ],
-	                            backgroundColor: [
-	                                //색상
-	                                'rgba(255, 99, 132, 0.2)',
-	                                'rgba(54, 162, 235, 0.2)',
-	                                'rgba(255, 206, 86, 0.2)',
-	                                'rgba(75, 192, 192, 0.2)',
-	                                'rgba(153, 102, 255, 0.2)',
-	                                'rgba(255, 159, 64, 0.2)'
-	                            ],
-	                            borderColor: [
-	                                //경계선 색상
-	                                'rgba(255, 99, 132, 1)',
-	                                'rgba(54, 162, 235, 1)',
-	                                'rgba(255, 206, 86, 1)',
-	                                'rgba(75, 192, 192, 1)',
-	                                'rgba(153, 102, 255, 1)',
-	                                'rgba(255, 159, 64, 1)'
-	                            ],
-	                            borderWidth: 1 //경계선 굵기
-	                        }/* ,
-	                        {
-	                            label: 'test2',
-	                            fill: false,
-	                            data: [
-	                                8, 34, 12, 24
-	                            ],
-	                            backgroundColor: 'rgb(157, 109, 12)',
-	                            borderColor: 'rgb(157, 109, 12)'
-	                        } */
-	                    ]
-	                },
-	                options: {
-	                    scales: {
-	                        yAxes: [
-	                            {
-	                                ticks: {
-	                                    beginAtZero: true
-	                                }
-	                            }
-	                        ]
-	                    }
-	                }
-	            }); // 월 select / 카테고리 매출
+	            
+	            $("#monthSelect").on("change",function(){
+		            var monthNo = $("#monthSelect option:selected").val();
+	
+		            $.ajax({
+		            	url : "ajaxSelectMonthSales.do",
+		            	type : "post",
+		            	data : {monthNo : monthNo},
+						success : function(data){
+							const months = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
+				            
+				            var ctx = document.getElementById('salesChart').getContext('2d');
+				            var myChart = new Chart(ctx, {
+				                type: 'doughnut', // 차트의 형태
+				                data: { // 차트에 들어갈 데이터
+				                    labels: months,
+				                    datasets: [
+				                        { //데이터
+				                            label: '선택한 월의 매출액', //차트 제목
+				                            fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+				                            data: [
+				                            	data[0].totalSales, data[1].totalSales, data[2].totalSales, data[3].totalSales, data[4].totalSales, data[5].totalSales,
+												data[6].totalSales, data[7].totalSales, data[8].totalSales, data[9].totalSales, data[10].totalSales, data[11].totalSales
+												 // 그래프 각각의 값
+				                            ],
+				                            backgroundColor: [
+				                                //색상
+				                                'rgba(255, 99, 132, 0.2)',
+				                                'rgba(54, 162, 235, 0.2)',
+				                                'rgba(255, 206, 86, 0.2)',
+				                                'rgba(75, 192, 192, 0.2)',
+				                                'rgba(153, 102, 255, 0.2)',
+				                                'rgba(255, 159, 64, 0.2)',
+				                                'rgba(255, 99, 132, 0.2)',
+				                                'rgba(54, 162, 235, 0.2)',
+				                                'rgba(255, 206, 86, 0.2)',
+				                                'rgba(75, 192, 192, 0.2)',
+				                                'rgba(153, 102, 255, 0.2)',
+				                                'rgba(255, 159, 64, 0.2)'
+				                            ],
+				                            borderColor: [
+				                                //경계선 색상
+				                                'rgba(255, 99, 132, 1)',
+				                                'rgba(54, 162, 235, 1)',
+				                                'rgba(255, 206, 86, 1)',
+				                                'rgba(75, 192, 192, 1)',
+				                                'rgba(153, 102, 255, 1)',
+				                                'rgba(255, 159, 64, 1)',
+				                                'rgba(255, 99, 132, 1)',
+				                                'rgba(54, 162, 235, 1)',
+				                                'rgba(255, 206, 86, 1)',
+				                                'rgba(75, 192, 192, 1)',
+				                                'rgba(153, 102, 255, 1)',
+				                                'rgba(255, 159, 64, 1)'
+				                            ],
+				                            borderWidth: 1 //경계선 굵기
+				                        }/* ,
+				                        {
+				                            label: 'test2',
+				                            fill: false,
+				                            data: [
+				                                8, 34, 12, 24
+				                            ],
+				                            backgroundColor: 'rgb(157, 109, 12)',
+				                            borderColor: 'rgb(157, 109, 12)'
+				                        } */
+				                    ]
+				                },
+				                options: {
+				                    scales: {
+				                        yAxes: [
+				                            {
+				                                ticks: {
+				                                    beginAtZero: true
+				                                }
+				                            }
+				                        ]
+				                    }
+				                }
+				            });
+						}            	
+		            })
+	            }) // 월 select 차트
+	            
+	            
+	            
+	            
+	            
+	            // 월 select / 카테고리 매출
 	            
 	            // 구매자 성별
 	            var context = document.getElementById('selectMonthChart').getContext('2d');
