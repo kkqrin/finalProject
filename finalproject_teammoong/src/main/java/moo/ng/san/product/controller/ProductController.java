@@ -30,6 +30,7 @@ import moo.ng.san.category.model.vo.Category;
 import moo.ng.san.category.model.vo.DetailCategory;
 import moo.ng.san.gonggu.model.service.GongguService;
 import moo.ng.san.gonggu.model.vo.Gonggu;
+import moo.ng.san.gonggu.model.vo.GongguAllInfo;
 import moo.ng.san.inquiry.model.service.InquiryService;
 import moo.ng.san.inquiry.model.vo.Inquiry;
 import moo.ng.san.member.model.vo.Member;
@@ -224,16 +225,21 @@ public class ProductController {
 	
 	// 인기 상품 리스트
 	@RequestMapping(value="/bestProductList.do")
-	public String bestProductList(Model model) {
+	public String bestProductList(String categoryNo, Model model) {
+		System.out.println("categoryNo : "+categoryNo);
 		
 		// 카테고리 리스트
-		ArrayList<Category> categoryList = service.selectCategoryList();
-		
-		System.out.println("컨트롤러 : "+categoryList);
+		ArrayList<Category> categoryList = service.selectCategoryList();		
 		model.addAttribute("categoryList", categoryList);
 		
-		// 인기 상품 리스트
+		int iCategoryNo = 0;
+		if(categoryNo != null) {
+			iCategoryNo = Integer.parseInt(categoryNo);			
+		}
 		
+		// 인기 상품 리스트
+		ArrayList<Product> bestProductList = service.selectBestProductList(iCategoryNo);
+		model.addAttribute("bestProductList", bestProductList);
 		
 		return "product/bestProductList";
 	}
@@ -354,7 +360,11 @@ public class ProductController {
 		model.addAttribute("iqList", list);
 		
 		// 명훈이임
-		ArrayList<Gonggu> gongguList = gongguService.selectGongguList(productNo);
+		ArrayList<GongguAllInfo> gongguList = gongguService.selectGongguList(productNo);
+		for (int i = 0; i<gongguList.size(); i++) {
+			int cnt = gongguService.selectGongguPayCount(gongguList.get(i).getGongguNo());
+			gongguList.get(i).setUseCnt(cnt);
+		}
 		model.addAttribute("gongguList",gongguList);
 		// 옵션 조회 (규린)
 		ArrayList<Option> optionList = service.selectOptionList(productNo);

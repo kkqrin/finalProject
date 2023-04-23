@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN
+" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="gongguPay">
+	<insert id="insertGongguPay" parameterType="gp">
+		INSERT INTO GONGGU_PAY_TBL(
+		
+			GONGGU_PAY_NO,
+			GONGGU_NO,
+			PRODUCT_NO,
+			GONGGU_PAY_DATE,
+			GONGGU_PAY_STATUS 
+			
+			)VALUES(
+			
+			GONGGU_PAY_SEQ.NEXTVAL,
+			#{gongguNo},
+			#{productNo},
+			sysdate,
+			1 
+			
+			)
+	</insert>
+</mapper>

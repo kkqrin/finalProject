@@ -204,7 +204,7 @@
                         </div>
                         <div class="form-box">
                             <div class="one-btn">
-                                <form action="/orderSheet.do" name="one-order-form" method="post">
+                                <form action="/orderSheet.do" method="post">
                                 <input type="hidden" name="productNo">
                                 <input type="hidden" name="optionNo">
                                 <button class="btn btn-white size02">혼자구매하기</button>
@@ -213,9 +213,10 @@
                             </form>
                             </div>
                             <div class="moong-btn">
-                                <form action="/moongsanOrder.do" name="gongu-order-form" method="post">
+                                <form action="/moongsanOrder.do" method="post">
                                     <input type="hidden" name="productNo">
                                     <input type="hidden" name="optionNo">
+                                    <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
                                     <button class="btn btn-pri size02">뭉쳐야산다</button>
                                     <input type="hidden" id="option-list-null" value="${optionList}">
                                 </form>
@@ -233,11 +234,11 @@
                 <div class="left-flex-wrap">
                     <div class="user-img"><img src="/resources/upload/member/${g.memberPath}" style="width: 50px; height: 50px;"></div>
                     <div class="user-id">${g.memberId}</div>
-                    <div class="gonggu-number">(${g.countNumber }/${g.gongguNumber })</div>
+                    <div class="gonggu-number">(${g.useCnt}/${g.gongguNumber })</div>
                 </div>
                 <div class="right-flex-wrap">
                     <div class="right-flex-info">
-                        <div class="number-info">${g.countNumber }명 남음</div>
+                        <div class="number-info">${g.gongguNumber-g.useCnt}명 남음</div>
                     </div>
                     <c:if test="${sessionScope.m.memberId eq g.memberId }">
                     <button type="button" class="btn btn-pri size01" id="orderBtn">뭉산취소</button>
@@ -611,6 +612,9 @@
             }
 
 
+
+
+
             // 옵션 없는 상품은 출력 안함
             $(document).ready(function(){
                 if($(".info-content").find("option").length == 1){
@@ -618,12 +622,8 @@
                 }
             });
 
-
-
-
-
             // 폼 제출
-            $("[name=one-order-form]").submit(function (e) {
+            $(".form-box>div>form").submit(function (e) {
                 const productNo = $("#productNo").val();
                 const optionNo = $( ".product-option" ).val();
                 
@@ -645,39 +645,35 @@
 			});
 
             // 공동구매 폼 제출
-            $("[name=gongu-order-form]").submit(function (e) {
+            $(".moong-btn>form").submit(function (e) {
 
-                const productNo = $("#productNo").val();
                 const optionNo = $( ".product-option" ).val();
-                
-                if(optionNo == 0 && $(".info-content").find("option").length > 1){
-                    // 옵션 선택 안됐을 때 && 옵션이 있는 상품
-                    optionjQueryAlert('info');
-					// alert("옵션을 선택하세요");
 
-					// 폼 제출 막음
-					e.preventDefault();
+                if(Number($("[name=pop_out]").val()) != 1){
+                    // 수량이 1이 아닐때
+                    gongujQueryAlert('error'); // 수량 체크
+
+                    e.preventDefault();
                     return false;
                 }else{
-                    if($("[name=pop_out]").val() != 1){
-                        gongujQueryAlert('error');
+                    // 수량이 1이면
 
+                    if(optionNo == 0 && $(".info-content").find("option").length > 1){
+                        // 옵션 선택 안됐을 때 && 옵션이 있는 상품
+
+                        optionjQueryAlert('info'); // 옵션 체크
+
+                        // 폼 제출 막음
                         e.preventDefault();
                         return false;
-                    }else if($("[name=pop_out]").val() == 1){
-
-                        // console.log("Adsfasdf");
+                    }else{
                         gonguTwojQueryAlert('error', this);
+
                         e.preventDefault();
                         return false;
                     }
                 }
             });
-
-
-
-
-
 
             // 장바구니 담기시 성공 alert 띄우고 페이지 이동
             //알림 관련 기능

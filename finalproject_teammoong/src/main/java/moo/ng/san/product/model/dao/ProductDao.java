@@ -177,6 +177,12 @@ public class ProductDao {
 		return (ArrayList<Category>)list;
 	}
 
+	public ArrayList<Product> selectBestProductList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("product.selectBestProductList", map);
+		
+		return (ArrayList<Product>)list;
+	}
+
 	
 	
 	

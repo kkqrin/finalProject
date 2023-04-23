@@ -178,14 +178,14 @@
                                     <td colspan="2">
                                         <div class="selectBox-widht-explain" style="width: 100%;">
                                             <select class="select-custom order-coupon" id="order-coupon">
-                                                <option value="0" selected>사용 가능한 쿠폰 ${couponCount }장</option>
+                                                <option value="0" issueNo="0" selected>사용 가능한 쿠폰 ${couponCount }장</option>
                                                 <c:forEach items="${couponList }" var="i">
                                                 <option value="${i.couponPrice }" issueNo="${i.issueNo}">${i.couponTitle }( <fmt:formatNumber value="${i.couponPrice }"/>원 할인 / ~ ${i.endDate } )</option>
                                                 <!-- <input type="hidden" name="issueNo" value="${i.issueNo}"> -->
                                                 </c:forEach>
                                                 <!-- <option value="2" disabled>5만원이상 1천원 할인</option> -->
                                             </select>
-                                            <input type="hidden" name="issueNo">
+                                            <input type="hidden" name="issueNo" value="0">
                                         </div>
                                     </td>
                                 </tr>
@@ -387,7 +387,7 @@
             const productPrice = $(".product-price").eq(i).val();
             const productDiscount = $(".product-discount").eq(i).val();
             // 수량
-            const orderDetailCnt = $(".order-product-volume>span").eq(i).text();
+            const orderDetailCnt = Number($(".order-product-volume>span").eq(i).text());
 
             
             // 수량 hidden
@@ -434,8 +434,8 @@
 
         // 쿠폰 할인
         $( ".order-coupon" ).on("selectmenuchange", function(){
-            const couponVal = $(this).val();
-            const totalPay =  $("#hidden-total-pay").val();
+            const couponVal = Number($(this).val());
+            const totalPay =  Number($("#hidden-total-pay").val());
 
             if(couponVal > totalPay){
                 alert("안된다!");
@@ -461,16 +461,21 @@
 
         // 적립금 모두 사용
         $("#all-saved-money").on("click", function(){
-            const totalPay =  $("#hidden-total-pay").val();
-            const myPoint = $("#hidden-total-point").val();
+            const totalPay =  Number($("#hidden-total-pay").val());
+            const myPoint = Number($("#hidden-total-point").val());
 
+            // 1. 내적립금 만원 / 상품 5천원일때
+            // [모두사용] 상품가격만 (내적립금>상품)
 
-            // 1. 결제금액 > 적립금 : 적립금 전체 사용
-            // 2. 결제금액 < 적립금 : 결제금액만큼 사용
-
+            // 2. 내적립금 5천원 / 상품 만원일때
+            // [모두사용] 내적립금만 (내적립금<상품)
+            
+            console.log("totalPay : "+totalPay);
+            console.log("myPoint :"+myPoint);
 
             // 최종 결제 금액보다 보유중인 총 적립금이 적으면 최종 결제 금액만 사용됨
-            if(totalPay > myPoint){
+            if(myPoint > totalPay){
+                console.log("myPoint > totalPay");
                 // hidden-total-point
                 $(".total-order-saved-money>div").last().children().text("-"+totalPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 // input창도 동기화
@@ -483,6 +488,7 @@
                 // 최종 결제 금액 hidden에 숨김
                 $("#hidden-total-pay").val($("#number-pay-price").val()-$("#number-coupon").val()-totalPay).trigger('change');
             }else{
+                console.log("myPoint < totalPay");
                 // hidden-total-point
                 $(".total-order-saved-money>div").last().children().text("-"+$("#hidden-total-point").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 // input창도 동기화

@@ -177,7 +177,20 @@ public class ProductService {
 		return result;
 	}
 	
-	
+	public ArrayList<Category> selectCategoryList() {
+		
+		ArrayList<Category> list = dao.selectCategoryList();
+		
+		return list;
+	}
+
+	public ArrayList<Product> selectBestProductList(int categoryNo) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("categoryNo", categoryNo);
+		
+		return dao.selectBestProductList(map);
+	}
 	
 	
 	
@@ -286,14 +299,7 @@ public class ProductService {
 		return list;
 	}
 
-	public ArrayList<Category> selectCategoryList() {
-		
-		ArrayList<Category> list = dao.selectCategoryList();
-		
-		System.out.println("서비스 : "+list);
-		
-		return list;
-	}
+
 
 
 
