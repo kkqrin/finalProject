@@ -115,8 +115,10 @@ public class AdminController {
 		
 		for(int i=1;i<13;i++) {
 			SalesData sd = service.selectCountMonthSalesData(i);
-			sd.setMonthNo(i);
-			list.add(sd);
+			if(sd != null) {
+				sd.setMonthNo(i);
+				list.add(sd);
+			}
 		}
 		
 		Gson gson = new Gson();

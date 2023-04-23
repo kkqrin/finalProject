@@ -24,6 +24,10 @@
 	<!-- Bootstrap JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
 	
+	<!-- css -->
+	<link rel="stylesheet" href="/resources/css/admin/admin.css" />
+	<link rel="stylesheet" href="/resources/css/common/default.css" />
+	
 </head>
 <style>
     .adminPage-wrapper{

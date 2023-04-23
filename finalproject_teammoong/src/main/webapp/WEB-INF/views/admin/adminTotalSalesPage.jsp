@@ -12,6 +12,9 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <!-- google icon -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- css -->
+	<link rel="stylesheet" href="/resources/css/admin/admin.css" />
+	<link rel="stylesheet" href="/resources/css/common/default.css" />
 	
 	
     
@@ -138,11 +141,11 @@
 	$(document).ready(function() {
 
 				$.ajax({
-					/* url: 'ajaxTotalSalesManage.do', */
+					url: 'ajaxTotalSalesManage.do',
 				    dataType: 'json',
 				    success: function(data){
 				    	console.log(data);
-						var context = $('#totalChart').getContext('2d');
+						var context = document.getElementById('totalChart').getContext('2d');
 				    	var myChart = new Chart(context, {
 							type : 'bar', // 차트의 형태
 							data : { // 차트에 들어갈 데이터
