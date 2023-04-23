@@ -224,16 +224,21 @@ public class ProductController {
 	
 	// 인기 상품 리스트
 	@RequestMapping(value="/bestProductList.do")
-	public String bestProductList(Model model) {
+	public String bestProductList(String categoryNo, Model model) {
+		System.out.println("categoryNo : "+categoryNo);
 		
 		// 카테고리 리스트
-		ArrayList<Category> categoryList = service.selectCategoryList();
-		
-		System.out.println("컨트롤러 : "+categoryList);
+		ArrayList<Category> categoryList = service.selectCategoryList();		
 		model.addAttribute("categoryList", categoryList);
 		
-		// 인기 상품 리스트
+		int iCategoryNo = 0;
+		if(categoryNo != null) {
+			iCategoryNo = Integer.parseInt(categoryNo);			
+		}
 		
+		// 인기 상품 리스트
+		ArrayList<Product> bestProductList = service.selectBestProductList(iCategoryNo);
+		model.addAttribute("bestProductList", bestProductList);
 		
 		return "product/bestProductList";
 	}

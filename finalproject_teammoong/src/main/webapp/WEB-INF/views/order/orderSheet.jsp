@@ -178,14 +178,14 @@
                                     <td colspan="2">
                                         <div class="selectBox-widht-explain" style="width: 100%;">
                                             <select class="select-custom order-coupon" id="order-coupon">
-                                                <option value="0" selected>사용 가능한 쿠폰 ${couponCount }장</option>
+                                                <option value="0" issueNo="0" selected>사용 가능한 쿠폰 ${couponCount }장</option>
                                                 <c:forEach items="${couponList }" var="i">
                                                 <option value="${i.couponPrice }" issueNo="${i.issueNo}">${i.couponTitle }( <fmt:formatNumber value="${i.couponPrice }"/>원 할인 / ~ ${i.endDate } )</option>
                                                 <!-- <input type="hidden" name="issueNo" value="${i.issueNo}"> -->
                                                 </c:forEach>
                                                 <!-- <option value="2" disabled>5만원이상 1천원 할인</option> -->
                                             </select>
-                                            <input type="hidden" name="issueNo">
+                                            <input type="hidden" name="issueNo" value="0">
                                         </div>
                                     </td>
                                 </tr>
@@ -387,7 +387,7 @@
             const productPrice = $(".product-price").eq(i).val();
             const productDiscount = $(".product-discount").eq(i).val();
             // 수량
-            const orderDetailCnt = $(".order-product-volume>span").eq(i).text();
+            const orderDetailCnt = Number($(".order-product-volume>span").eq(i).text());
 
             
             // 수량 hidden
@@ -434,8 +434,8 @@
 
         // 쿠폰 할인
         $( ".order-coupon" ).on("selectmenuchange", function(){
-            const couponVal = $(this).val();
-            const totalPay =  $("#hidden-total-pay").val();
+            const couponVal = Number($(this).val());
+            const totalPay =  Number($("#hidden-total-pay").val());
 
             if(couponVal > totalPay){
                 alert("안된다!");
