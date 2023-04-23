@@ -298,12 +298,12 @@
 	/*=======핸드폰 모달 관련 기능==================================*/
 		$(function () {
             $('[data-modal]').click(function (event) {
-                    $($(this).data('modal')).modal({
-						showClose: false,
-                        fadeDuration: 100
-                    });
-                    return false;
-            });
+                 $($(this).data('modal')).modal({
+						 showClose: false,
+	                     fadeDuration: 100
+	                 });
+	                 return false;
+         		});
         });
 
 		$(".close").on("click",function(){

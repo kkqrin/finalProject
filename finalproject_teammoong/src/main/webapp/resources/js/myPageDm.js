@@ -73,3 +73,33 @@ function getSendDm(){
         }
     })
 }
+
+
+
+
+function dmDetail(dmNo){
+    $.ajax({
+        url : "/dmView.do",
+        data : {dmNo:dmNo},
+        success : function(dm){
+            $("#viewSender").text("보낸 사람 : "+dm.dmSenderName+"("+dm.dmSender+")");
+            $("#replyToId").val(dm.dmSender);
+            $("#viewReceiver").text("받은 사람 : "+dm.dmReceiverName+"("+dm.dmReceiver+")");
+            $("#viewDate").text("보낸 날짜 : "+dm.dmDateHour);
+            $("#viewContent").text(dm.dmContent);
+            $("#dmViewer").modal({
+				 showClose: false,
+	             fadeDuration: 100
+	        });
+            getReceiveDm();
+        }
+    })
+}
+
+
+
+
+function replyDm(){
+	const memberId = $("#replyToId").val();
+	location.href="/dmReply.do?receiver="+memberId;
+}

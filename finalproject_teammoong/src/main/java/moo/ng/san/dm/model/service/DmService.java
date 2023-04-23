@@ -27,5 +27,9 @@ public class DmService {
 		return dao.selectDmCount(memberId);
 	}
 
+	public DirectMessage selectOneDm(int dmNo) {
+		return dao.selectOneDm(dmNo);
+	}
+
 
 }//DmService

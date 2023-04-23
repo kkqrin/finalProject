@@ -17,7 +17,8 @@
 
 	<select id="selectAllDm" resultType="dm" parameterType="dm">
 			select
-			    rownum as rnum, 
+			    rownum as rnum,
+			    dm_no as dmNo, 
 			    dm_sender as dmSender,
 			    s.member_name as dmSenderName,
 			    dm_receiver as dmReceiver,
@@ -52,6 +53,27 @@
 		where
 			dm_receiver=#{_parameter} and dm_readchk=0 
 	</select>
+	
+	
+	<select id="selectOneDm" resultType="dm" parameterType="_int">
+		select
+			    rownum as rnum, 
+			    dm_sender as dmSender,
+			    s.member_name as dmSenderName,
+			    dm_receiver as dmReceiver,
+			    r.member_name as dmReceiverName,
+			    dm_content as dmContent,
+			    to_char(dm_date,'yyyy-mm-dd') as dmDate,
+			    to_char(dm_date,'yyyy-mm-dd hh24:mi') as dmDateHour,
+			    dm_readchk as dmReadChk
+			from
+			    member_dm d  
+			    join member_tbl s on (d.dm_sender = s.member_id)
+			    join member_tbl r on (d.dm_receiver = r.member_id)
+			where
+			    dm_no = #{parameter}
+	</select>
+	
 	
 
 </mapper>

@@ -28,6 +28,10 @@ public class DmDao {
 		return sqlSession.selectOne("directMessage.selectDmCount",memberId);
 	}
 
+	public DirectMessage selectOneDm(int dmNo) {
+		return sqlSession.selectOne("directMessage.selectOneDm",dmNo);
+	}
+
 
 	
 	

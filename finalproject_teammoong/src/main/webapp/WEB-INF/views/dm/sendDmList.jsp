@@ -34,9 +34,29 @@
 				</table>
 				
 			</div><!-- mypage-content -->
+		</div><!-- mypage-right -->
+		
 		</div>
 		
-		</div><!-- mypage-right -->
+		
+		
+			<!-- 쪽지상세보기 모달 -->
+		<div id="dmViewer" class="modal modal-sec">
+				<div class="modal-content">
+					<div class="modal-header" style="height: auto;">
+						<h6 id="viewReceiver"></h6>
+						<a id="viewDate"></a>
+					</div>
+					<div class="modal-body" style="display: flex; flex-direction: column;">
+						<div id="viewContent"></div>
+					</div>
+					<div class="area-btn right" style="padding-bottom: 0;">
+						<a rel="modal:close" class="btn btn-sec size01" style="cursor: pointer;">닫기</a>
+					</div>
+				</div>
+		</div><!--모달창-->
+		
+		
 	</div>
 	
 	

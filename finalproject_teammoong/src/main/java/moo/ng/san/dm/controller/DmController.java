@@ -38,6 +38,19 @@ public class DmController {
 		return new Gson().toJson(list);
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping(value = "/dmView.do",produces = "application/json;charset=utf-8")
+	public String dmView(int dmNo) {
+		System.out.println(dmNo);
+		DirectMessage dm = service.selectOneDm(dmNo);
+		System.out.println(dm);
+		return new Gson().toJson(dm);
+	}
+	
+	
+	
+	
 
 	
 	@RequestMapping(value = "/dmWriteFrm.do")
