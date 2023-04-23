@@ -216,6 +216,7 @@
                                 <form action="/moongsanOrder.do" method="post">
                                     <input type="hidden" name="productNo">
                                     <input type="hidden" name="optionNo">
+                                    <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
                                     <button class="btn btn-pri size02">뭉쳐야산다</button>
                                     <input type="hidden" id="option-list-null" value="${optionList}">
                                 </form>

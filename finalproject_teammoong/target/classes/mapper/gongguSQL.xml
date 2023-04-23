@@ -15,18 +15,25 @@
 		WHERE PRODUCT_NO = #{_parameter}
 	</select>
 	
-	<insert id="insertGonggu" parameterType="g">
+	<insert id="insertGonggu" parameterType="g"  useGeneratedKeys="true"
+        keyProperty="gongguNo" keyColumn="GONGGU_NO">
 		INSERT INTO GONGGU_TBL VALUES(GONGGU_SEQ.NEXTVAL,
 		#{productNo},
 		#{memberNo})
 	</insert>
 	
-	<select id="selectInsertGonggu" resultType="g">
-		SELECT 
+	<select id="selectInsertGonggu" parameterType="_int" resultType="g">
+		<!-- SELECT 
 			GONGGU_NO AS gongguNo,
 			MEMBER_NO AS memberNo 
 		FROM GONGGU_TBL
 		WHERE GONGGU_NO IN(SELECT MAX(GONGGU_NO) FROM GONGGU_TBL)
+		 -->
+		SELECT  
+			GONGGU_NO AS gongguNo,
+			MEMBER_NO AS memberNo
+		FROM GONGGU_TBL
+		WHERE GONGGU_NO = #{gNo}
 	</select>
 	
 	<insert id="insertDetailGonggu" parameterType="g">

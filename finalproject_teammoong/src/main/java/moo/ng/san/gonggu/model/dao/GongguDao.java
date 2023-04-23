@@ -20,12 +20,12 @@ public class GongguDao {
 	}
 
 	public int insertGonggu(Gonggu g) {
-		int result = sqlSession.insert("gonggu.insertGonggu",g);
-		return result;
+		sqlSession.insert("gonggu.insertGonggu",g);
+		return g.getGongguNo();
 	}
 
-	public Gonggu selectInsertGonggu() {
-		Gonggu gonggu = sqlSession.selectOne("gonggu.selectInsertGonggu");
+	public Gonggu selectInsertGonggu(int gNo) {
+		Gonggu gonggu = sqlSession.selectOne("gonggu.selectInsertGonggu", gNo);
 		return gonggu;
 	}
 
