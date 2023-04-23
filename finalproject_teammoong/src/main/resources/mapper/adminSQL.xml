@@ -499,6 +499,7 @@
 	
 	<select id="selectCountMonthCategorySalesData" parameterType="_int" resultType="sd">
 		select 
+			dc.category_no as categoryNo,
 			sum(od.order_detail_cnt * od.order_detail_price * (1-(pdt.product_discount)/100)) as totalSales,
             pdt.product_cost as totalCost
             

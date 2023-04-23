@@ -118,6 +118,12 @@ public class AdminController {
 			if(sd != null) {
 				sd.setMonthNo(i);
 				list.add(sd);
+			}else {
+				sd = new SalesData();
+				sd.setMonthNo(i);
+				sd.setTotalSales(i*10000);
+				sd.setTotalCost(i*8000);
+				list.add(sd);
 			}
 		}
 		

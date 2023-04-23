@@ -150,14 +150,13 @@
 							type : 'bar', // 차트의 형태
 							data : { // 차트에 들어갈 데이터
 								labels : [ //x 축
-								data[0].monthNo, data[1].monthNo,data[2].monthNo,data[3].monthNo,data[4].monthNo,data[5].monthNo,data[6].monthNo,
-								data[7].monthNo,data[8].monthNo,data[9].monthNo,data[10].monthNo,data[11].monthNo],
+									'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
 								datasets : [ { //데이터
 								label : '매출', //차트 제목
 								fill : false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
 								data : //x축 label에 대응되는 데이터 값
-									[ data[0].totalSales,data[1].totalSales,data[2].totalSales,data[3].totalSales,data[4].totalSales,data[5].totalSales,
-										data[6].totalSales,data[7].totalSales,data[8].totalSales,data[9].totalSales,data[10].totalSales,data[11].totalSales
+									[ data[0].totalSale,data[1].totalSales,data[2].totalSales,data[3].totalSales,data[4].totalSales,data[5].totalSales,
+										data[6].totalSales,data[7].totalSales,data[8].totalSales,data[9].totalSales,data[10].totalSales,data[11].totalSales 
 								],
 								backgroundColor : [
 										//색상
@@ -196,8 +195,8 @@
 				                  type: 'line',
 				                  fill: false,
 				                  data: [
-				                      data[0].totalCost,data[1].totalCost,data[2].totalCost,data[3].totalCost,data[4].totalCost,data[5].totalCost,
-				                      data[6].totalCost,data[7].totalCost,data[8].totalCost,data[9].totalCost,data[10].totalCost,data[11].totalCost
+				                      data[0].totalCost, data[1].totalCost, data[2].totalCost, data[3].totalCost, data[4].totalCost, data[5].totalCost,
+				                      data[6].totalCost, data[7].totalCost, data[8].totalCost, data[9].totalCost, data[10].totalCost, data[11].totalCost
 				                  ],
 				                  backgroundColor: 'rgb(157, 109, 12)', // 라인이니까 색상은 한개
 				                  borderColor: 'rgb(157, 109, 12)' // 라인이니까 색상 한개
