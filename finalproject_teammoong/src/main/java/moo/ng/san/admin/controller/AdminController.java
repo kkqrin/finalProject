@@ -141,8 +141,16 @@ public class AdminController {
 		 
 		for(int i=1;i<14;i++) { // 카테고리 개수 
 			SalesData sd = service.selectCountMonthCategorySalesData(i); 
-			sd.setCategoryNo(i);
-			list.add(sd); 
+			if(sd != null) {
+				sd.setCategoryNo(i);
+				list.add(sd); 
+			}else {
+				sd = new SalesData();
+				sd.setCategoryNo(i);
+				sd.setTotalCost(i*1000);
+				sd.setTotalSales(i*12000);
+				list.add(sd);
+			}
 		}
 		
 		Gson gson = new Gson(); 

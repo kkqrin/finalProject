@@ -499,19 +499,19 @@
 	
 	<select id="selectCountMonthCategorySalesData" parameterType="_int" resultType="sd">
 		select 
-			dc.category_no as categoryNo,
-			sum(od.order_detail_cnt * od.order_detail_price * (1-(pdt.product_discount)/100)) as totalSales,
-            pdt.product_cost as totalCost
+			pc.category_no as categoryNo,
+			sum(od.order_detail_cnt * pdt.product_price * (1-((pdt.product_discount)/100))) as totalSales,
+            sum(pdt.product_cost * od.order_detail_cnt) as totalCost
             
 			from order_detail od 
 			join product_tbl pdt on (od.product_no = pdt.product_no)
-			join detail_category dc on (pt.d_category_no = dc.d_category_no)
+			join detail_category dc on (pdt.d_category_no = dc.d_category_no)
 			join product_category pc on (dc.category_no = pc.category_no)
 			join order_tbl ot on (od.order_no = ot.order_no) 
 			join pay_tbl pt on (ot.pay_no = pt.pay_no)
 			
 		where ot.order_status = 1 and pt.pay_status = 1 and dc.category_no = ${_parameter}
-        group by pc.category_no, pdt.product_cost
+        group by pc.category_no
 	</select>
 	
 	<select id="selectGenderSalesData" resultType="sd">
