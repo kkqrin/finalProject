@@ -646,22 +646,32 @@
 
             // 공동구매 폼 제출
             $(".moong-btn>form").submit(function (e) {
-                if($("[name=pop_out]").val() != 1){
-                    gongujQueryAlert('error');
+
+                const optionNo = $( ".product-option" ).val();
+
+                if(Number($("[name=pop_out]").val()) != 1){
+                    // 수량이 1이 아닐때
+                    gongujQueryAlert('error'); // 수량 체크
 
                     e.preventDefault();
                     return false;
                 }else{
-                    // 옵션이 없거나 옵션 선택된 경우 제출
-                    $("[name=productNo]").val(productNo);
-                    $("[name=optionNo]").val(optionNo);
-                    if($("[name=pop_out]").val() != 1){
-                        gongujQueryAlert('error');
+                    // 수량이 1이면
 
-                    // console.log("Adsfasdf");
-                    gonguTwojQueryAlert('error', this);
-                    e.preventDefault();
-                    return false;
+                    if(optionNo == 0 && $(".info-content").find("option").length > 1){
+                        // 옵션 선택 안됐을 때 && 옵션이 있는 상품
+
+                        optionjQueryAlert('info'); // 옵션 체크
+
+                        // 폼 제출 막음
+                        e.preventDefault();
+                        return false;
+                    }else{
+                        gonguTwojQueryAlert('error', this);
+
+                        e.preventDefault();
+                        return false;
+                    }
                 }
             });
 
