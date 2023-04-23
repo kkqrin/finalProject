@@ -31,6 +31,7 @@ public class PayDao {
 	}
 
 	public int insertOrderDetail(OrderDetail orderDetail) {
+		System.out.println("insertOrderDetail : "+orderDetail);
 	    int result = sqlSession.insert("orderDetail.insertOrderDetail", orderDetail);
 	    return result;
 	}

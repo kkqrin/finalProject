@@ -238,4 +238,33 @@
 			left join OPTION_INFO_TBL using (option_group_no)
 		where product_no=#{productNo}
 	</select>
+	<select id="selectBestProductList" parameterType="map" resultType="p">
+		SELECT * FROM
+		(SELECT ROWNUM AS RNUM, r.* FROM(
+			SELECT *
+			FROM (
+			  SELECT 
+						PRODUCT_NO AS productNo,
+						D_CATEGORY_NO AS detailCategoryNo,
+						PRODUCT_NAME AS productName,
+						PRODUCT_EA AS productEa,
+						PRODUCT_PRICE AS productPrice,
+						PRODUCT_STATUS AS productStatus,
+						PRODUCT_COST AS productCost,
+						GONGGU_NUMBER AS  gongguNumber,
+						PRODUCT_CONTENT AS productContent,
+						PRODUCT_DISCOUNT AS productDiscount,
+			                  (SELECT FILEPATH FROM PRODUCT_IMG WHERE P_IMG_NO=(SELECT MIN(P_IMG_NO) FROM PRODUCT_IMG  WHERE PRODUCT_NO=p.PRODUCT_NO))  AS thumbnail,
+			                  (SELECT SUM(order_detail_cnt) FROM order_detail WHERE product_no = p.product_no) AS purchasedVolume
+			  FROM product_tbl p
+			  join DETAIL_CATEGORY using(D_CATEGORY_NO)
+			  <if test="categoryNo != 0">
+			  where category_no = #{categoryNo}
+			  </if>
+			  ) od
+			WHERE od.purchasedVolume IS NOT NULL
+			ORDER BY od.purchasedVolume DESC) 
+		r)
+		WHERE RNUM BETWEEN 1 AND 20
+	</select>
 </mapper>
