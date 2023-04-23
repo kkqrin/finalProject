@@ -7,16 +7,19 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.gonggu.model.vo.Gonggu;
+import moo.ng.san.gonggu.model.vo.GongguAllInfo;
+import moo.ng.san.gonggu.model.vo.GongguPay;
 
 @Repository
 public class GongguDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public ArrayList<Gonggu> selectGongguList(int productNo) {
+	public ArrayList<GongguAllInfo> selectGongguList(int productNo) {
 		List list = sqlSession.selectList("gonggu.selectGongguList",productNo);
-		return (ArrayList<Gonggu>)list;
+		return (ArrayList<GongguAllInfo>)list;
 	}
 
 	public int insertGonggu(Gonggu g) {
@@ -31,6 +34,24 @@ public class GongguDao {
 
 	public int insertDetailGonggu(Gonggu gonggu) {
 		int result = sqlSession.insert("gonggu.insertDetailGonggu",gonggu);
+		return result;
+	}
+
+	public int insertPoint(Point p) {
+		int result = sqlSession.insert("point.insertGongguPoint",p);
+		return result;
+	}
+
+	public int insertGongguPay(GongguPay gp) {
+		System.out.println("gongguDao에서 gp값"+gp);
+		int result = sqlSession.insert("gongguPay.insertGongguPay",gp);
+		return result;
+	}
+	
+	public int selectGongguPayCount(int gongguNo) {
+		System.out.println("Sysout극혐");
+		int result = sqlSession.selectOne("gonggu.selectGongguPayCount",gongguNo);
+		System.out.println(result);
 		return result;
 	}
 

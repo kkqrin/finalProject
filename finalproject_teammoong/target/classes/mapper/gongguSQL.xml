@@ -6,13 +6,22 @@
 		SELECT
 			MEMBER_PATH AS memberPath,
 			MEMBER_ID AS memberId,
+			GONGGU_NO AS gongguNo,
 			GONGGU_NUMBER AS gongguNumber,
 			COUNT_NUMBER AS countNumber
 		FROM PRODUCT_TBL
-		LEFT JOIN GONGGU_TBL USING(PRODUCT_NO)
+		INNER JOIN GONGGU_TBL USING(PRODUCT_NO)
 		LEFT JOIN MEMBER_TBL USING(MEMBER_NO)
 		LEFT JOIN DETAIL_GONGGU_TBL USING(GONGGU_NO)
 		WHERE PRODUCT_NO = #{_parameter}
+	</select>
+	
+	<select id="selectGongguPayCount" parameterType="_int" resultType="_int">
+		SELECT COUNT(*)
+		FROM DETAIL_GONGGU_TBL A
+        INNER JOIN GONGGU_PAY_TBL B ON A.DETAIL_GONGGU_NO = B.DETAIL_GONGGU_NO
+		WHERE B.GONGGU_PAY_STATUS = '1'
+        AND A.GONGGU_NO = #{gongguNo}
 	</select>
 	
 	<insert id="insertGonggu" parameterType="g">

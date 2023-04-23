@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 public class GongguAllInfo {
 	private String memberPath;
 	private String memberId;
-	private int gongguNumber;
-	private int countNumber;
+	private Integer gongguNumber;
+	private Integer gongguNo;
+	private Integer countNumber;
+	private Integer useCnt;
 }

@@ -233,11 +233,11 @@
                 <div class="left-flex-wrap">
                     <div class="user-img"><img src="/resources/upload/member/${g.memberPath}" style="width: 50px; height: 50px;"></div>
                     <div class="user-id">${g.memberId}</div>
-                    <div class="gonggu-number">(${g.countNumber }/${g.gongguNumber })</div>
+                    <div class="gonggu-number">(${g.useCnt}/${g.gongguNumber })</div>
                 </div>
                 <div class="right-flex-wrap">
                     <div class="right-flex-info">
-                        <div class="number-info">${g.countNumber }명 남음</div>
+                        <div class="number-info">${g.gongguNumber-g.useCnt}명 남음</div>
                     </div>
                     <c:if test="${sessionScope.m.memberId eq g.memberId }">
                     <button type="button" class="btn btn-pri size01" id="orderBtn">뭉산취소</button>
@@ -659,6 +659,9 @@
 					e.preventDefault();
                     return false;
                 }else{
+                    // 옵션이 없거나 옵션 선택된 경우 제출
+                    $("[name=productNo]").val(productNo);
+                    $("[name=optionNo]").val(optionNo);
                     if($("[name=pop_out]").val() != 1){
                         gongujQueryAlert('error');
 

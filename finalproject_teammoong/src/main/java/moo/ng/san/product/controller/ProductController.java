@@ -30,6 +30,7 @@ import moo.ng.san.category.model.vo.Category;
 import moo.ng.san.category.model.vo.DetailCategory;
 import moo.ng.san.gonggu.model.service.GongguService;
 import moo.ng.san.gonggu.model.vo.Gonggu;
+import moo.ng.san.gonggu.model.vo.GongguAllInfo;
 import moo.ng.san.inquiry.model.service.InquiryService;
 import moo.ng.san.inquiry.model.vo.Inquiry;
 import moo.ng.san.member.model.vo.Member;
@@ -354,7 +355,11 @@ public class ProductController {
 		model.addAttribute("iqList", list);
 		
 		// 명훈이임
-		ArrayList<Gonggu> gongguList = gongguService.selectGongguList(productNo);
+		ArrayList<GongguAllInfo> gongguList = gongguService.selectGongguList(productNo);
+		for (int i = 0; i<gongguList.size(); i++) {
+			int cnt = gongguService.selectGongguPayCount(gongguList.get(i).getGongguNo());
+			gongguList.get(i).setUseCnt(cnt);
+		}
 		model.addAttribute("gongguList",gongguList);
 		// 옵션 조회 (규린)
 		ArrayList<Option> optionList = service.selectOptionList(productNo);

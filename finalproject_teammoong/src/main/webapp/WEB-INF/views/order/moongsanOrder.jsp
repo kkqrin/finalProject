@@ -225,7 +225,7 @@
                     <div class="total-pay-box" style="height: 460px;">
                         <h5>결제 금액</h5>
 
-                        <input type="hidden" id="number-pay-price">
+                        <input type="hidden" id="number-pay-price" name="pointEa">
                         <div class="total-order-amount-1">
                             <div>주문금액</div>
                             <div><span></span> 원</div>
@@ -464,7 +464,7 @@
 
         // 폼 제출
         $("form").submit(function (e) {
-            if($("#hidden-total-pay").val() > $("#hidden-total-point").val()){
+            if($("#hidden-total-pay").val() < $("#hidden-total-point").val()){
                 alert("결제 불가 !");
                 // 폼 제출 막음
                 e.preventDefault();
