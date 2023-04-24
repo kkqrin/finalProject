@@ -407,12 +407,23 @@ public class ProductController {
 	}
 	@GetMapping("/main.do")
 	public String selectProductList(Model model, @SessionAttribute(required=false) Member m) {
-		ArrayList<Product> list = service.selectProductList();
-		model.addAttribute("productList",list);
 		
+		// (임시) 상품리스트
+		ArrayList<Product> productList = service.selectProductList();
+		model.addAttribute("productList",productList);
 
 		// 최근 본 상품 select
 		selectRecentProduct(m, model);
+		
+		// 핫딜
+		
+		// 재고 없는 상품 리스트
+		ArrayList<Product> soldOutList = service.selectSoldOutProductList();
+		model.addAttribute("soldOutList", soldOutList);
+		
+		// 할인률 높은 상품 리스트
+		ArrayList<Product> highSaleList = service.selectHighSaleProductList();
+		model.addAttribute("highSaleList", highSaleList);
 		
 		
 		return "common/main";

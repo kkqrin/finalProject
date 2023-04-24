@@ -204,8 +204,19 @@ public class ProductService {
 		
 		return dao.selectBestProductList(map);
 	}
-	
-	
+
+	public ArrayList<Product> selectHighSaleProductList() {
+		
+		return dao.selectHighSaleProductList();
+	}
+
+
+	public ArrayList<Product> selectSoldOutProductList() {
+		
+		return dao.selectSoldOutProductList();
+	}
+
+
 	
 	
 	
@@ -311,8 +322,6 @@ public class ProductService {
 		}
 		return list;
 	}
-
-
 
 
 
