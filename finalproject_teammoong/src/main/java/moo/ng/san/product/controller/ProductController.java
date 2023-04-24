@@ -370,6 +370,7 @@ public class ProductController {
 			int cnt = gongguService.selectGongguPayCount(gongguList.get(i).getGongguNo());
 			gongguList.get(i).setUseCnt(cnt);
 		}
+		
 		model.addAttribute("gongguList",gongguList);
 		// 옵션 조회 (규린)
 		ArrayList<Option> optionList = service.selectOptionList(productNo);
