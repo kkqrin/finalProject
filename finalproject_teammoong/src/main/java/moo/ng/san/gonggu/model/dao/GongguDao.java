@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import moo.ng.san.dayCheck.model.vo.Point;
+import moo.ng.san.gonggu.model.vo.DetailGonggu;
 import moo.ng.san.gonggu.model.vo.Gonggu;
 import moo.ng.san.gonggu.model.vo.GongguAllInfo;
 import moo.ng.san.gonggu.model.vo.GongguPay;
@@ -27,14 +28,15 @@ public class GongguDao {
 		return g.getGongguNo();
 	}
 
-	public Gonggu selectInsertGonggu(int gNo) {
-		Gonggu gonggu = sqlSession.selectOne("gonggu.selectInsertGonggu", gNo);
-		return gonggu;
+	public DetailGonggu selectInsertGonggu(int gNo) {
+		DetailGonggu dg = sqlSession.selectOne("gonggu.selectInsertGonggu", gNo);
+		return dg;
 	}
 
-	public int insertDetailGonggu(Gonggu gonggu) {
-		int result = sqlSession.insert("gonggu.insertDetailGonggu",gonggu);
-		return result;
+	public int insertDetailGonggu(DetailGonggu detailGonggu) {
+		sqlSession.insert("gonggu.insertDetailGonggu",detailGonggu);
+		
+		return detailGonggu.getDetailGongguNo();
 	}
 
 	public int insertPoint(Point p) {
