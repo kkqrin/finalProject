@@ -464,7 +464,7 @@
 
         // 폼 제출
         $("form").submit(function (e) {
-            if($("#hidden-total-pay").val() < $("#hidden-total-point").val()){
+            if(Number($("#hidden-total-pay").val()) > Number($("#hidden-total-point").val())){
                 alert("결제 불가 !");
                 // 폼 제출 막음
                 e.preventDefault();
