@@ -35,7 +35,6 @@ public class GongguDao {
 
 	public int insertDetailGonggu(DetailGonggu detailGonggu) {
 		sqlSession.insert("gonggu.insertDetailGonggu",detailGonggu);
-		
 		return detailGonggu.getDetailGongguNo();
 	}
 
@@ -45,20 +44,17 @@ public class GongguDao {
 	}
 
 	public int insertGongguPay(GongguPay gp) {
-		System.out.println("gongguDao에서 gp값"+gp);
 		int result = sqlSession.insert("gongguPay.insertGongguPay",gp);
 		return result;
 	}
 	
 	public int selectGongguPayCount(int gongguNo) {
-		System.out.println("Sysout극혐");
 		int result = sqlSession.selectOne("gonggu.selectGongguPayCount",gongguNo);
-		System.out.println(result);
 		return result;
 	}
 
-//	public int selectCount() {
-//		int countNumber = sqlSession.selectOne("gonggu.selectCountNumber");
-//		return countNumber;
-//	}
+	public int updateGonggu(int gongguPayNo) {
+		int result = sqlSession.update("gonggu.updateGonggu",gongguPayNo);
+		return result;
+	}
 }
