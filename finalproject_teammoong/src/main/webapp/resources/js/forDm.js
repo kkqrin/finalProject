@@ -29,5 +29,5 @@ let ws;
 	
 	
 	function endDm(){
-		console.log("DM 소켓 연결 종료");
+		//안쓸거여도 함수 선언은 해 둬야 함
 	}
