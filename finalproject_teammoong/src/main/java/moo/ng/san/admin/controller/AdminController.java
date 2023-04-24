@@ -1,5 +1,7 @@
 package moo.ng.san.admin.controller;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +37,7 @@ public class AdminController {
 	/* 페이징 처리 */
 	@RequestMapping(value="/admin.do")
 	public String admin() {
+
 		return "admin/admin";
 	}
 	// ========================================================================
@@ -144,13 +147,6 @@ public class AdminController {
 	@RequestMapping(value="/adminTotalSalesManage.do")
 	public String adminTotalSalesPage(int reqPage, Model model) {
 		
-		return "admin/adminTotalSalesPage";
-	}
-	
-	/* 1년 판매/원가 차트, x축 1~12월 */
-	@ResponseBody
-	@RequestMapping(value="/ajaxTotalSalesManage.do", produces = "application/json;charset=utf-8")
-	public String ajaxTotalSalesManage() {
 		ArrayList<SalesData> list = new ArrayList<SalesData>();
 		
 		for(int i=1;i<13;i++) {
@@ -166,6 +162,50 @@ public class AdminController {
 				list.add(sd);
 			}
 		}
+		
+		int totalSales = 0;
+		for(SalesData sd : list) {
+			totalSales += sd.getTotalSales();
+		}
+		
+		LocalDate today = LocalDate.now();  // 오늘 날짜
+		YearMonth thisMonth = YearMonth.from(today);  // 이번 달
+		int monthValue = thisMonth.getMonthValue();  // 이번 달의 숫자값 (1~12)
+		
+		SalesData sd = service.selectCountMonthSalesData(monthValue);
+		
+		model.addAttribute("monthSales",sd.getTotalSales());
+		model.addAttribute("totalSales",totalSales);
+		
+		return "admin/adminTotalSalesPage";
+	}
+	
+	/* 1년 판매/원가 차트, x축 1~12월 */
+	@ResponseBody
+	@RequestMapping(value="/ajaxTotalSalesManage.do", produces = "application/json;charset=utf-8")
+	public String ajaxTotalSalesManage(Model model) {
+		ArrayList<SalesData> list = new ArrayList<SalesData>();
+		
+		for(int i=1;i<13;i++) {
+			SalesData sd = service.selectCountMonthSalesData(i);
+			if(sd != null) {
+				sd.setMonthNo(i);
+				list.add(sd);
+			}else {
+				sd = new SalesData();
+				sd.setMonthNo(i);
+				sd.setTotalSales(i*10000);
+				sd.setTotalCost(i*8000);
+				list.add(sd);
+			}
+		}
+		
+		int totalSales = 0;
+		for(SalesData sd : list) {
+			totalSales += sd.getTotalSales();
+		}
+		
+		model.addAttribute("totalSales",totalSales);
 		
 		Gson gson = new Gson();
 		String result = gson.toJson(list);

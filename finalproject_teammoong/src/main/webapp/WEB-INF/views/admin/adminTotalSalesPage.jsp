@@ -22,7 +22,6 @@
 <style>
     .adminPage-wrapper{
         background-color: lightblue;
-        width: 1200px;
         margin: auto;
     }
     .adminPage-header{
@@ -104,14 +103,14 @@
 	        			<div class="sales icon"><span class="material-symbols-outlined">monitoring</span></div>
 	        			<div class="salesContent">
 	        				<span class="salesTitle">총 매출액</span>
-	        				<span class="totalSalesCount"></span>
+	        				<span class="totalSalesCount">${totalSales }원</span>
 	        			</div>
 	        		</div>
 	        		<div class="monthSales">
 	        			<div class="sales icon"><span class="material-symbols-outlined">trending_up</span></div>
 	        			<div class="salesContent">
 	        				<span class="salesTitle">월 매출액</span>
-	        				<span class="monthSalesCount"></span>
+	        				<span class="monthSalesCount">${monthSales }원</span>
 	        			</div>
 	        		</div>
 	        		<div class="salesReport">
@@ -156,12 +155,6 @@
 					url: 'ajaxTotalSalesManage.do',
 				    dataType: 'json',
 				    success: function(data){
-				    	salesCount =+ 
-				    		for(int i=0;i<data.size();i++){
-				    			salesCount =+ data[i].totalSales;
-				    		}
-				    	totalSalesCount.text(salesCount+"원");
-				    	
 						var context = document.getElementById('totalChart').getContext('2d');
 				    	var myChart = new Chart(context, {
 							type : 'bar', // 차트의 형태
@@ -414,6 +407,7 @@
 	            // 월 select / 카테고리 매출
 	            
 	            // 구매자 성별
+	            /*
 	            var context = document.getElementById('selectMonthChart').getContext('2d');
 	            var myChart = new Chart(context, {
 	                type: 'doughnut', // 차트의 형태
@@ -458,6 +452,7 @@
 	                            backgroundColor: 'rgb(157, 109, 12)',
 	                            borderColor: 'rgb(157, 109, 12)'
 	                        } */
+	                        /*
 	                    ]
 	                },
 	                options: {
@@ -472,7 +467,7 @@
 	                    }
 	                }
 	            }); 
-	            
+	            */
 	            
 	            
 

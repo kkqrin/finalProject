@@ -1,9 +1,13 @@
 @charset "UTF-8";
+	default{
+		margin: 0;
+		padding: 0;
+	}
     .adminPage-wrapper{
         background-color: #D8EAF0;
         width: 1900px;
         margin: auto;
-        margin-left: 0;
+        
     }
     .adminPage-header{
         margin-left: 30px;

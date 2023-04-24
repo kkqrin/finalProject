@@ -8,8 +8,10 @@
 	
 	<!-- 필요한것만 -->
 	 <div class="adminPage-sidebar">
+	 	 <ul>
+	 	 	<li><a href="/admin.do">대시보드</a></li>
+	 	 </ul>
 	     <ul>
-	         <li><a href="/admin.do">회원 관리</a></li>
 	         <li><a href="/adminMemberPage.do?reqPage=1">회원 관리</a></li><!-- jsp 생성완료 -->
 	     </ul>
 	     <ul>
