@@ -1,5 +1,6 @@
 package moo.ng.san.admin.model.dao;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -64,19 +65,21 @@ public class AdminDao {
 		return Integer.toString(result);
 
 	}
-
-	public String selectVariationOrder() {
+	
+	
+	//이전 버전. 
+	/*
+	public String selectVariationOrder(LocalDate firstDayOfMonth, LocalDate lastDayOfMonth) {
 		int beforeOrder = sqlSession.selectOne("admin.selectBeforeOrder");
 		int allOrder = sqlSession.selectOne("admin.selectAllOrder");
 		int result = allOrder - beforeOrder;
 		
 		return Integer.toString(result);
 	}
+	*/
 
-	public String selectVariationBoard() {
-		int beforeBoard = sqlSession.selectOne("admin.selectBeforeBoard");
-		int allBoard = sqlSession.selectOne("admin.selectAllBoardCount");
-		int result = allBoard - beforeBoard;
+	public String selectVariationBoardCount(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("admin.selectVariationBoardCount",map);
 		
 		return Integer.toString(result);
 	}
@@ -288,6 +291,30 @@ public class AdminDao {
 		Member m = sqlSession.selectOne("admin.ajaxMemberView",memberNo);
 		// TODO Auto-generated method stub
 		return m;
+	}
+
+	public String selectVariationMemberCount() {
+		int memberCount = sqlSession.selectOne("admin.selectVariationMemberCount");
+		// TODO Auto-generated method stub
+		return Integer.toString(memberCount);
+	}
+
+	/* 예전버전
+	 * public String selectVariationOrderCount() { String orderCount =
+	 * sqlSession.selectOne("admin.selectVariationOrderCount"); // TODO
+	 * Auto-generated method stub return null; }
+	 */
+
+	public String selectVariationOrderCount(HashMap<String, Object> map) {
+		int orderCount = sqlSession.selectOne("admin.selectVariationOrderCount", map);
+		
+		return Integer.toString(orderCount);
+	}
+
+	public String selectVariationSalesCount(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("admin.selectVariationSalesCount",map);
+		// TODO Auto-generated method stub
+		return Integer.toString(result);
 	}
 
 

@@ -47,6 +47,45 @@ public class AdminController {
 		return "admin/adminMemberPage";
 	}
 	
+	// 전체 카운트
+	@ResponseBody
+	@RequestMapping(value="/ajaxTotalCount.do", produces="application/json;charset=utf-8")
+	public String ajaxTotalCountSelect(Model model) {
+		String memberCount = service.selectAllMemberCount();
+		String memberVariation = service.selectVariationMemberCount();
+		String orderCount = service.selectAllOrderCount();
+		String orderVariation = service.selectVariationOrderCount();
+		String boardCount = service.selectAllBoardCount();
+		String boardVariation = service.selectVariationBoardCount();
+		String salesCount = service.selectAllSalesCount(); 
+		String salesVariation = service.selectVariationSalesCount();
+		//하단부터는 논의가 필요함
+		/*
+		String bestSalesCount = service.selectBestSalesCount();
+		String couponCount = service.selectEventCount(); 
+		*/
+		
+		String[] total = new String[10];
+		total[0] = memberCount;
+		total[1] = memberVariation;
+		total[2] = orderCount;
+		total[3] = orderVariation; 
+		total[4] = boardCount;
+		total[5] = boardVariation;
+		total[6] = salesCount;
+		total[7] = salesVariation;
+		// 하단은 논의가 필요
+		/*
+		total[8] = bestSalesCount;
+		total[9] = couponCount;
+		*/
+		
+		Gson gson = new Gson();
+		String result = gson.toJson(total);
+		return result;
+		
+	}
+	
 	// 개별 회원 등급 변경
 	@ResponseBody
 	@RequestMapping(value="/ajaxChangeMemberStatus.do")
@@ -115,8 +154,16 @@ public class AdminController {
 		
 		for(int i=1;i<13;i++) {
 			SalesData sd = service.selectCountMonthSalesData(i);
-			sd.setMonthNo(i);
-			list.add(sd);
+			if(sd != null) {
+				sd.setMonthNo(i);
+				list.add(sd);
+			}else {
+				sd = new SalesData();
+				sd.setMonthNo(i);
+				sd.setTotalSales(i*10000);
+				sd.setTotalCost(i*8000);
+				list.add(sd);
+			}
 		}
 		
 		Gson gson = new Gson();
@@ -133,8 +180,16 @@ public class AdminController {
 		 
 		for(int i=1;i<14;i++) { // 카테고리 개수 
 			SalesData sd = service.selectCountMonthCategorySalesData(i); 
-			sd.setCategoryNo(i);
-			list.add(sd); 
+			if(sd != null) {
+				sd.setCategoryNo(i);
+				list.add(sd); 
+			}else {
+				sd = new SalesData();
+				sd.setCategoryNo(i);
+				sd.setTotalCost(i*10000);
+				sd.setTotalSales(i*12000);
+				list.add(sd);
+			}
 		}
 		
 		Gson gson = new Gson(); 
@@ -398,29 +453,7 @@ public class AdminController {
 	 * String result = service.selectEventCount(); return result; }
 	 */
 	
-	// 전체 카운트
-	@ResponseBody
-	@RequestMapping(value="/ajaxTotalCount.do", produces="application/json;charset=utf-8")
-	public String ajaxTotalCountSelect(Model model) {
-		String memberCount = service.selectAllMemberCount();
-		String orderCount = service.selectAllOrderCount();
-		String boardCount = service.selectAllBoardCount();
-		String salesCount = service.selectAllSalesCount(); 
-		String bestSalesCount = service.selectBestSalesCount();
-		String couponCount = service.selectEventCount(); 
-		
-		String[] total = new String[6];
-		total[0] = memberCount;
-		total[1] = orderCount;
-		total[2] = boardCount;
-		total[3] = salesCount;
-		total[4] = bestSalesCount;
-		total[5] = couponCount;
-		Gson gson = new Gson();
-		String result = gson.toJson(total);
-		return result;
-		
-	}
+
 		
 	
 	// 증감
@@ -431,21 +464,21 @@ public class AdminController {
 		String result = service.selectVariationMember();
 		return result;
 	}
-	
-	@ResponseBody
-	@RequestMapping(value="/ajaxVariationOrder.do")// 숫자 하나 넘겨주는거니까 json은 없어도 될 듯, produces = "application/json;charset=utf-8"
-	public String orderVariationSelect() {
-		String result = service.selectVariationOrder();
-		return result;
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="/ajaxVariationBoard.do")// 숫자 하나 넘겨주는거니까 json은 없어도 될 듯, produces = "application/json;charset=utf-8"
-	public String boardVariationSelect() {
-		String result = service.selectVariationBoard();
-		return result;
-	}
-
+	/*
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value="/ajaxVariationOrder.do")// 숫자 하나 넘겨주는거니까 json은 없어도 될
+	 * 듯, produces = "application/json;charset=utf-8" public String
+	 * orderVariationSelect() { String result = service.selectVariationOrder();
+	 * return result; }
+	 * 
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value="/ajaxVariationBoard.do")// 숫자 하나 넘겨주는거니까 json은 없어도 될
+	 * 듯, produces = "application/json;charset=utf-8" public String
+	 * boardVariationSelect() { String result = service.selectVariationBoard();
+	 * return result; }
+	 */
 	
 	/* 회원관리 페이지*/
 	

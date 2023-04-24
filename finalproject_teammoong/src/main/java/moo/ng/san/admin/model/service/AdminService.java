@@ -1,5 +1,7 @@
 package moo.ng.san.admin.model.service;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.StringTokenizer;
@@ -64,14 +66,29 @@ public class AdminService {
 		return result;
 	}
 
-	public String selectVariationOrder() {
-		String result = dao.selectVariationOrder();
+	public String selectVariationOrderCount() {
+		LocalDate today = LocalDate.now();  // 오늘 날짜
+		YearMonth thisMonth = YearMonth.from(today);  // 이번 달
+		LocalDate firstDayOfMonth = thisMonth.atDay(1);  // 이번 달의 첫째 날
+		LocalDate lastDayOfMonth = thisMonth.atEndOfMonth();  // 이번 달의 마지막 날
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", firstDayOfMonth);
+		map.put("end", lastDayOfMonth);
+		
+		String result = dao.selectVariationOrderCount(map);
 
 		return result;
 	}
 
-	public String selectVariationBoard() {
-		String result = dao.selectVariationBoard();
+	public String selectVariationBoardCount() {
+		LocalDate today = LocalDate.now();  // 오늘 날짜
+		YearMonth thisMonth = YearMonth.from(today);  // 이번 달
+		LocalDate firstDayOfMonth = thisMonth.atDay(1);  // 이번 달의 첫째 날
+		LocalDate lastDayOfMonth = thisMonth.atEndOfMonth();  // 이번 달의 마지막 날
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", firstDayOfMonth);
+		map.put("end", lastDayOfMonth);
+		String result = dao.selectVariationBoardCount(map);
 
 		return result;
 	}
@@ -629,6 +646,32 @@ public class AdminService {
 		Member m = dao.ajaxMemberView(memberNo);
 		// TODO Auto-generated method stub
 		return m;
+	}
+
+	public String selectVariationMemberCount() {
+		String memberCount = dao.selectVariationMemberCount();
+		
+		return memberCount;
+	}
+
+	/* 예전버전
+	 * public String selectVariationOrderCount() { String orderCount =
+	 * dao.selectVariationOrderCount(); // TODO Auto-generated method stub return
+	 * orderCount; }
+	 */
+
+	public String selectVariationSalesCount() {
+		LocalDate today = LocalDate.now();  // 오늘 날짜
+		YearMonth thisMonth = YearMonth.from(today);  // 이번 달
+		LocalDate firstDayOfMonth = thisMonth.atDay(1);  // 이번 달의 첫째 날
+		LocalDate lastDayOfMonth = thisMonth.atEndOfMonth();  // 이번 달의 마지막 날
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", firstDayOfMonth);
+		map.put("end", lastDayOfMonth);
+		
+		String result = dao.selectVariationSalesCount(map);
+		
+		return result;
 	}
 	
 

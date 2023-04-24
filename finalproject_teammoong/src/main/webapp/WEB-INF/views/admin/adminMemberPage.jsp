@@ -12,81 +12,12 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 	<!--  -->
 	<link rel="stylesheet" href="/resources/css/admin/admin.css" />
+	<link rel="stylesheet" href="/resources/css/admin/adminMemberPageCss.css" />
 	<link rel="stylesheet" href="/resources/css/common/default.css" />
 	
 </head>
 <style>
-    .adminPage-wrapper{
-        background-color: #111;
-        margin-top: 300px;
-        
-    }
-    .adminPage-header{
-        margin-left: 30px;
-    }
-    .adminPage-back{
-        background-color: lightyellow;
-        overflow: hidden;
-    }
-    .adminPage-sidebar{
-        float: left;
-        width: 300px;
-        background-color: lightcoral;
-        height: 2000px;
-
-    }
-    .adminPage-sidebar>ul>li{
-        list-style-type: none;
-    }
-    .adminPage-main{
-        background-color: lightgreen;
-    }
-    .adminPage-content{
-        background-color: #fff;
-        overflow: hidden;
-    }
-    .material-symbols-outlined{
-        font-size: 150px;
-        
-    }
-    .mainContent{
-        float: left;
-        width: 300px;
-        height: 400px;
-        text-align: center;
-    }
-    .table{
-    	border: 1px solid black;
-    }
-    .table>tbody>tr>th{
-    	border: 1px solid black;
-    }
-    .table>tbody>tr>td{
-    	border: 1px solid black;
-    }
-    .searchForm{
-    	display: none;
-    }
-    .moreResult{
-		float: right;
-	    top: 130px;
-	    position: absolute;
-	    right: 294px;
-	    text-align: right;
-	    background-color: brown;
-	    width: 400px;
-	    height: 1000px;
-	    display: none;
-    }
-    .moreResult>div>span{
-    	font-size: 40px;
-    	cursor: pointer;
-    }
-
     
-
-
-
 </style>
 <body>
     <c:if test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
@@ -107,11 +38,11 @@
                             <option id="searchMemberName" value="memberName">회원 이름 검색</option>
                         </select>
                         <input type="text" name="memberSearchBox" id="searchOption">
-                        <button type="button" name="searchSubmitBtn">검색</button>
-                        <button type="button" class="goList">목록</button>
+                        <div class="area-btn left"><button type="button" name="searchSubmitBtn" class="searchSubmit Btn">검색</button></div>
+                        <div class="area-btn left"><button type="button" class="goList" class="goList Btn">목록</button></div>
                     </div>
                     <div class="adminPage-result">
-                        <table class="table">
+                        <table class="table .tbl-box">
                             <tr>
                             	<th>구분</th>
                                 <th>회원번호</th>
@@ -156,7 +87,7 @@
                                             <td>탈퇴회원</td>
                                         </c:when>
                                     </c:choose>
-                    				<input type="hidden" class="memberStatus" value="${m.memberStatus }">
+                    					<input type="hidden" class="memberStatus" value="${m.memberStatus }">
                                     <c:choose>
                                         <c:when test="${m.memberAgree == 0}">
                                             <td>동의안함</td>
@@ -203,29 +134,31 @@
 	                                    </c:choose>
                                     </td>
                                     <td>
-                                    	<button type="button" class="changeMemberStatusBtn">회원등급 변경</button>
+                                    	<div class="changeMemberStatusBtn">회원등급 변경</div>
                                     </td>
                                     <td>
-                                    	<button type="button" class="moreInfo">상세보기</button>
+                                    	<div class="moreInfo">상세보기</div>
                                     </td>
                                 </tr>
                             </c:forEach>
                             <tr>
-                                <th colspan="16">${pageNavi}</th>
+                                <td colspan="11"><div class="pagination">${pageNavi}</div></td>
                             </tr>
                             <tr>
-                                <th colspan="2"><button type="button" name="allChangeMemberStatus">일괄 변경</th>
-                                <th>
+                                <td colspan="2"><div name="allChangeMemberStatus">일괄 변경</div></td>
+                                <td>
 			                        <form name="searchForm" method="POST" action="" class="">
 			                       		<button type="button" onclick="exportToExcel();">엑셀출력</button>
 			                        </form><!--  -->
-		                        </th>
+		                        </td>
                             </tr>
                         </table>
                         <!-- 엑셀용 -->
                     </div>
                     <div class="moreResult">
-						<div><span id="closeBtn" class="material-symbols-outlined">cancel</span></div>                    
+						<div>
+							<span id="closeBtn" class="material-symbols-outlined">cancel</span>
+						</div>                    
                     	<div class="moreResultContent"></div>
                     </div>
                     <div id="ajaxResult" class="table"></div>
@@ -237,6 +170,19 @@
 
 <!-- 스크립트를 넣어봅시다 -->
     <script>
+    
+    $(document).ready(function(){
+    	const changeMemberStatusBtnTd = $(".changeMemberStatusBtn").parent();
+    	changeMemberStatusBtnTd.css("background-color","#f0a718");
+    	
+    	const moreInfoTd = $(".moreInfo").parent();
+    	moreInfoTd.css("background-color","#f0a718");
+    	
+    	$('tr td[colspan="11"]').css("font-size","30px");
+   
+    	
+    	
+    })
     /*목록으로*/
     $(".goList").on("click",function(){
     	location.reload();
