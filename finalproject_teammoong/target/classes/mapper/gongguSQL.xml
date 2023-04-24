@@ -8,12 +8,15 @@
 			MEMBER_ID AS memberId,
 			GONGGU_NO AS gongguNo,
 			GONGGU_NUMBER AS gongguNumber,
-			COUNT_NUMBER AS countNumber
+			COUNT_NUMBER AS countNumber,
+			GONGGU_PAY_NO AS gongguPayNo,
+			GONGGU_PAY_STATUS AS gongguPayStatus
 		FROM PRODUCT_TBL
 		INNER JOIN GONGGU_TBL USING(PRODUCT_NO)
 		LEFT JOIN MEMBER_TBL USING(MEMBER_NO)
 		LEFT JOIN DETAIL_GONGGU_TBL USING(GONGGU_NO)
-		WHERE PRODUCT_NO = #{_parameter}
+		LEFT JOIN GONGGU_PAY_TBL USING(DETAIL_GONGGU_NO)
+		WHERE PRODUCT_NO = #{_parameter} AND GONGGU_PAY_STATUS = 1
 	</select>
 	
 	<select id="selectGongguPayCount" parameterType="_int" resultType="_int">
@@ -57,4 +60,12 @@
 	<select id="selectCountNumber" resultType="gai">
 		SELECT SUM(COUNT_NUMBER) AS countNumber FROM DETAIL_GONGGU_TBL
 	</select>
+	
+	<update id="updateGonggu" parameterType="_int">
+		UPDATE GONGGU_PAY_TBL SET
+		 
+			GONGGU_PAY_STATUS = '2'
+			 
+		WHERE GONGGU_PAY_NO = #{_parameter}
+	</update>
 </mapper>
