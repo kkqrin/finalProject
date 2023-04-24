@@ -589,6 +589,40 @@
 		where ot.order_status = 1 and pt.pay_status = 1
         group by pc.category_no, pt.product_cost, mt.member_gender
 	</select>
+	
+	<!-- ================================================================== askItems -->
+	
+	<select id="selectAskItemList" parameterType="map" resultType="a">
+		select * from
+		(select rownum rnum, b.* from
+		(select
+			at.corp_no as corpNo,
+			at.corp_name as corpName,
+			at.rep_name as reqName,
+            at.reg_no as regNo,
+			at.corp_addr1 as corpAddr1,
+			at.corp_addr2 as corpAddr2,
+			at.cont_name as contName,
+			at.cont_phone as contPhone,
+			at.cont_mail as contMail,
+			at.ask_title as askTitle,
+			at.ask_content as askContent,
+			at.ask_date as askDate,
+			ac.category_name as categoryName,
+			df.docu_name  as docuName,
+			df.docupath as docuPath
+		from askitem_tbl at
+		left join askitem_category ac on (at.corp_no = ac.corp_no)
+		left join docu_file df on (ac.corp_no = df.corp_no))b)
+		where rnum between #{start} and #{end}
+	</select>
+	
+	<select id="selectAskItemCount" resultType="_int">
+		select count(*) from askitem_tbl
+	</select>
+	
+	
+	
 	<!-- <select id="selectAllCouponList" resultType="ic">
 		select
 			ic.issue_no as issueNo,

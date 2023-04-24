@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import moo.ng.san.admin.model.dao.AdminDao;
+import moo.ng.san.admin.model.vo.AdminAskItemPageData;
 import moo.ng.san.admin.model.vo.AdminBoardPageData;
 import moo.ng.san.admin.model.vo.AdminMemberPageData;
 import moo.ng.san.admin.model.vo.AdminOrderPageData;
@@ -17,6 +18,7 @@ import moo.ng.san.admin.model.vo.AdminProductPageData;
 import moo.ng.san.admin.model.vo.AdminReportBoardPageData;
 import moo.ng.san.admin.model.vo.CouponData;
 import moo.ng.san.admin.model.vo.SalesData;
+import moo.ng.san.askItem.model.vo.AskItem;
 import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.board.model.vo.BoardOption;
 import moo.ng.san.board.model.vo.Notify;
@@ -672,6 +674,64 @@ public class AdminService {
 		String result = dao.selectVariationSalesCount(map);
 		
 		return result;
+	}
+
+	public AdminAskItemPageData selectAskItemList(int reqPage) {
+		int numPerPage = 10;
+		// reqPage = 1 : 1~2 , reqPage = 2 3~4
+		int end = reqPage * numPerPage;
+		int start = end - numPerPage + 1;
+		// start , end 계산완료, 계산된 start, end 가지고 게시글 목록 조회
+		// mybatis 는 매개변수로 한 개만 설정이 가능하므로, 필요한 값이 여러개면 여러개로 묶어야 함. (VO or map)
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		ArrayList<AskItem> list = dao.selectAskItemList(map);
+
+		// pageNavi 제작 시작
+		// 전체 페이지 수 계산 필요 => 전체 게시물 수 조회
+		int totalCount = dao.selectAskItemCount();
+		// 전체게시물로 전체 페이지수 계산
+
+		int totalPage = (int) Math.ceil(totalCount / (double) numPerPage);
+		// 실수 연산해서 올림연산을 하자 , 정수가 나오면 올림 해당 안된다. 소숫점이 있을때만 올림 연산이 됨
+
+		// 페이지 네비 사이즈
+		int pageNaviSize = 5;
+
+		int pageNo = 1;
+
+		if (reqPage > 3) {
+			pageNo = reqPage - 2;
+		}
+
+		// 페이지네비 생성시작
+		String pageNavi = "";
+		// 이전버튼
+		if (pageNo != 1) {
+			pageNavi += "<a href='/adminProductRegist.do?reqPage=" + (pageNo - 1) + "'>[이전]</a>";
+		}
+		// 페이지 숫자 생성
+		for (int i = 0; i < pageNaviSize; i++) {
+			if (pageNo == reqPage) {
+				pageNavi += "<span>" + pageNo + "</span>";
+			} else {
+				pageNavi += "<a href='/adminProductRegist.do?reqPage=" + pageNo + "'>" + pageNo + "</a>";
+			}
+			pageNo++;
+
+			if (pageNo > totalPage) {
+				break;
+			}
+		}
+		// 다음버튼
+		if (pageNo <= totalPage) {
+			pageNavi += "<a href='/adminProductRegist.do?reqPage=" + pageNo + "'>[다음]</a>";
+		}
+		
+		AdminAskItemPageData aapd = new AdminAskItemPageData(list, pageNavi);
+
+		return aapd;
 	}
 	
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import moo.ng.san.admin.model.service.AdminService;
+import moo.ng.san.admin.model.vo.AdminAskItemPageData;
 import moo.ng.san.admin.model.vo.AdminBoardPageData;
 import moo.ng.san.admin.model.vo.AdminMemberPageData;
 import moo.ng.san.admin.model.vo.AdminOrderPageData;
@@ -20,6 +21,7 @@ import moo.ng.san.admin.model.vo.AdminProductPageData;
 import moo.ng.san.admin.model.vo.AdminReportBoardPageData;
 import moo.ng.san.admin.model.vo.CouponData;
 import moo.ng.san.admin.model.vo.SalesData;
+import moo.ng.san.askItem.model.vo.AskItem;
 import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.order.model.vo.Order;
@@ -340,6 +342,18 @@ public class AdminController {
 		String result = gson.toJson(list);
 		return result;
 	}
+	
+	/* 입점 문의 */
+	@RequestMapping(value="adminProductRegist.do")
+	public String adminProductRegistList(Model model, int reqPage) {
+		AdminAskItemPageData aapd = service.selectAskItemList(reqPage);
+		model.addAttribute("askList",aapd.getList());
+		model.addAttribute("pageNavi",aapd.getPageNavi());
+		
+		return "admin/adminProductRegist";
+	}
+	
+	
 	
 	
 	//===========================================================================

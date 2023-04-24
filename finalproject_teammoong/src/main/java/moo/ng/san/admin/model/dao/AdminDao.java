@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import moo.ng.san.admin.model.vo.CouponData;
 import moo.ng.san.admin.model.vo.SalesData;
+import moo.ng.san.askItem.model.vo.AskItem;
 import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.board.model.vo.BoardJoin;
 import moo.ng.san.board.model.vo.BoardOption;
@@ -315,6 +316,18 @@ public class AdminDao {
 		int result = sqlSession.selectOne("admin.selectVariationSalesCount",map);
 		// TODO Auto-generated method stub
 		return Integer.toString(result);
+	}
+
+	public ArrayList<AskItem> selectAskItemList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("admin.selectAskItemList",map);
+		// TODO Auto-generated method stub
+		return (ArrayList<AskItem>)list;
+	}
+
+	public int selectAskItemCount() {
+		int count = sqlSession.selectOne("admin.selectAskItemCount");
+		// TODO Auto-generated method stub
+		return count;
 	}
 
 

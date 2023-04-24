@@ -32,7 +32,7 @@
 	     <ul>
 	         <li><a>상품 관리</a></li>
 	         <li><a href="/adminTotalProductList.do?reqPage=1">상품 관리</a></li><!-- jsp 생성완료 -->
-	         <li><a href="/adminProductRegist.do">상품 등록</a></li>
+	         <li><a href="/adminProductRegist.do?reqPage=1">상품 등록</a></li>
 	         <li><a href="/adminDeliveryManagePage.do?reqPage=1">배송 관리</a></li>
 	     </ul>
 	     <ul>
