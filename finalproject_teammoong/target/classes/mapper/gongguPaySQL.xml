@@ -6,16 +6,14 @@
 		INSERT INTO GONGGU_PAY_TBL(
 		
 			GONGGU_PAY_NO,
-			GONGGU_NO,
-			PRODUCT_NO,
+			DETAIL_GONGGU_NO,
 			GONGGU_PAY_DATE,
 			GONGGU_PAY_STATUS 
 			
 			)VALUES(
 			
 			GONGGU_PAY_SEQ.NEXTVAL,
-			#{gongguNo},
-			#{productNo},
+			#{detailGongguNo},
 			sysdate,
 			1 
 			

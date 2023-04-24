@@ -8,9 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GongguPay {
-	private int gongguPayNO;
-	private int gongguNo;
-	private int productNo;
+	private int gongguPayNo;
+	private int detailGongguNo;
 	private String gongguPayDate;
 	private String gongguPayStatus;
 }

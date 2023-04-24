@@ -31,7 +31,7 @@
 		#{memberNo})
 	</insert>
 	
-	<select id="selectInsertGonggu" parameterType="_int" resultType="g">
+	<select id="selectInsertGonggu" parameterType="_int" resultType="dg">
 		<!-- SELECT 
 			GONGGU_NO AS gongguNo,
 			MEMBER_NO AS memberNo 
@@ -39,13 +39,15 @@
 		WHERE GONGGU_NO IN(SELECT MAX(GONGGU_NO) FROM GONGGU_TBL)
 		 -->
 		SELECT  
+			DETAIL_GONGGU_NO AS detailGongguNo,
 			GONGGU_NO AS gongguNo,
 			MEMBER_NO AS memberNo
-		FROM GONGGU_TBL
+		FROM DETAIL_GONGGU_TBL
 		WHERE GONGGU_NO = #{gNo}
 	</select>
 	
-	<insert id="insertDetailGonggu" parameterType="g">
+	<insert id="insertDetailGonggu" parameterType="dg" useGeneratedKeys="true"
+        keyProperty="detailGongguNo" keyColumn="DETAIL_GONGGU_NO">
 		INSERT INTO DETAIL_GONGGU_TBL VALUES(DETAIL_GONGGU_SEQ.NEXTVAL,
 		#{gongguNo},
 		#{memberNo},
