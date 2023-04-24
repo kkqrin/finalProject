@@ -104,14 +104,14 @@
 	        			<div class="sales icon"><span class="material-symbols-outlined">monitoring</span></div>
 	        			<div class="salesContent">
 	        				<span class="salesTitle">총 매출액</span>
-	        				<span class="salesCount">원</span>
+	        				<span class="totalSalesCount"></span>
 	        			</div>
 	        		</div>
 	        		<div class="monthSales">
 	        			<div class="sales icon"><span class="material-symbols-outlined">trending_up</span></div>
 	        			<div class="salesContent">
 	        				<span class="salesTitle">월 매출액</span>
-	        				<span class="salesCount"></span>
+	        				<span class="monthSalesCount"></span>
 	        			</div>
 	        		</div>
 	        		<div class="salesReport">
@@ -151,12 +151,17 @@
 	  
   const chartDataUrl = "https://example.com/data.json";
 	$(document).ready(function() {
-		
+		var totalSalesCount = (".totalSalesCount");
 				$.ajax({
 					url: 'ajaxTotalSalesManage.do',
 				    dataType: 'json',
 				    success: function(data){
-				    	console.log(data);
+				    	salesCount =+ 
+				    		for(int i=0;i<data.size();i++){
+				    			salesCount =+ data[i].totalSales;
+				    		}
+				    	totalSalesCount.text(salesCount+"원");
+				    	
 						var context = document.getElementById('totalChart').getContext('2d');
 				    	var myChart = new Chart(context, {
 							type : 'bar', // 차트의 형태

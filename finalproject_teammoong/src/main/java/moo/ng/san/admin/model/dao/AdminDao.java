@@ -330,6 +330,18 @@ public class AdminDao {
 		return count;
 	}
 
+	public SalesData selectBestSalesCategory() {
+		SalesData list = sqlSession.selectOne("admin.selectBestSalesCategory");
+		
+		return list;
+	}
+
+	public ArrayList<SalesData> selectOtherSalesCategory() {
+		List list = sqlSession.selectList("admin.selectOtherSalesCategory");
+		
+		return (ArrayList<SalesData>)list;
+	}
+
 
 
 

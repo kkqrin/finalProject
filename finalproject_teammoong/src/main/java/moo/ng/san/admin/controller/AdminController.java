@@ -21,7 +21,6 @@ import moo.ng.san.admin.model.vo.AdminProductPageData;
 import moo.ng.san.admin.model.vo.AdminReportBoardPageData;
 import moo.ng.san.admin.model.vo.CouponData;
 import moo.ng.san.admin.model.vo.SalesData;
-import moo.ng.san.askItem.model.vo.AskItem;
 import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.order.model.vo.Order;
@@ -177,7 +176,7 @@ public class AdminController {
 	
 	@ResponseBody
 	@RequestMapping(value="/ajaxTotalCategorySalesManage.do", produces = "application/json;charset=utf-8" ) 
-	public String ajaxTotalCategorySalesManage() { 
+	public String ajaxTotalCategorySalesManage(Model model) { 
 		ArrayList<SalesData> list = new ArrayList<SalesData>();
 		 
 		for(int i=1;i<14;i++) { // 카테고리 개수 
@@ -193,7 +192,7 @@ public class AdminController {
 				list.add(sd);
 			}
 		}
-		
+
 		Gson gson = new Gson(); 
 		String result = gson.toJson(list); 
 		return result;
@@ -249,14 +248,35 @@ public class AdminController {
 		
 	}
 	
-	
-	
-	
-	
-	/* 전체 매출 차트*/
-	
-	
 	/* 카테고리별 매출관리 */
+	// 카테고리별 매출 중 연간 카테고리 매출
+	
+	@RequestMapping(value="/adminCategorySalesManage.do")
+	public String adminCategorySalesManage(Model model) {
+		SalesData bestSales = service.selectBestSalesCategory();
+		ArrayList<SalesData> otherSalesList = service.selectOtherSalesCategory();
+		int bestSal = bestSales.getTotalSales();
+		int bestCos = bestSales.getTotalCost();
+		double bestProfit = Math.floor((1-(bestCos/(double)bestSal))*100);
+		double [] otherProfit = new double[otherSalesList.size()];
+		
+		for(int i=0;i < otherSalesList.size();i++) {
+			int otherSal = otherSalesList.get(i).getTotalSales();
+			int otherCos = otherSalesList.get(i).getTotalCost();
+			otherProfit[i] = Math.floor((1-(otherCos / (double)otherSal))*100);
+		}
+		
+		model.addAttribute("bestSales",bestSales);
+		model.addAttribute("otherSalesList",otherSalesList);
+		model.addAttribute("bestProfit",bestProfit);
+		model.addAttribute("otherProfit",otherProfit);
+		
+		return "admin/adminCategorySalesManage";
+	}
+	
+	
+	
+	
 	
 	// ========================================================================
 	/* 상품관리 */
@@ -303,9 +323,9 @@ public class AdminController {
 		boolean result = service.updateChangeProductStatus(no, level);
 		
 		if(result) {
-			return "redirect:/";
+			return "admin/adminProductManagePage";
 		}else {
-			return "redirect:/";
+			return "redirect:/admin/admin";
 		}
 	}
 	

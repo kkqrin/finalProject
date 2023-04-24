@@ -70,7 +70,7 @@
                     	</div>
                     </div>
                     <div class="adminPage-result">
-                        <table class="table guide-board">
+                        <table class="table guide-board tbl-box">
                             <tr>
                             	<td>구분</td>
                            		<td>사업자명</td>

@@ -733,6 +733,19 @@ public class AdminService {
 
 		return aapd;
 	}
+
+	public SalesData selectBestSalesCategory() {
+		SalesData bestSales = dao.selectBestSalesCategory();
+		
+		return bestSales;
+		
+	}
+
+	public ArrayList<SalesData> selectOtherSalesCategory() {
+		ArrayList<SalesData> list = dao.selectOtherSalesCategory();
+		// TODO Auto-generated method stub
+		return list;
+	}
 	
 
 

@@ -9,13 +9,13 @@
 	<!-- 필요한것만 -->
 	 <div class="adminPage-sidebar">
 	     <ul>
-	         <li><a>회원 관리</a></li>
+	         <li><a href="/admin.do">회원 관리</a></li>
 	         <li><a href="/adminMemberPage.do?reqPage=1">회원 관리</a></li><!-- jsp 생성완료 -->
 	     </ul>
 	     <ul>
 	         <li><a>매출 관리</a></li>
 	         <li><a href="/adminTotalSalesManage.do?reqPage=1">전체 매출 관리</a></li><!-- jsp 생성완료 -->
-	         <li><a href="/categorySalesManage.do">카테고리별 매출관리</a></li>
+	         <li><a href="/adminCategorySalesManage.do">카테고리별 매출관리</a></li>
 	     </ul>
 	     <ul>
 	         <li><a>상품 관리</a></li>
@@ -31,6 +31,6 @@
 	         <li><a>여기여기붙어라 관리</a></li>
 	         <li><a href="/adminBoardManagePage.do?reqPage=1">여여붙게시판 관리</a></li><!-- jsp 생성완료 -->
 	         <li><a href="/adminBoardReportManagePage.do?reqPage=1">여여붙 신고 관리</a></li><!-- jsp 생성완료 -->
-	         <li><a>카테고리별 매출관리</a></li>
+	         <li><a href="/adminBoardCategorySales.do">카테고리별 매출관리</a></li>
 	     </ul>
 	 </div>
