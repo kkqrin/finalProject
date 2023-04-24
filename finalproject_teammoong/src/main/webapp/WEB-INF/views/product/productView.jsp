@@ -687,36 +687,8 @@
                     }
                 }
             });
-            // 공동구매참여버튼 폼 제출
-            $(".subMoongsanOrderBtn").submit(function (e) {
 
-            const optionNo = $( ".product-option" ).val();
 
-            if(Number($("[name=pop_out]").val()) != 1){
-                // 수량이 1이 아닐때
-                gongujQueryAlert('error'); // 수량 체크
-
-                e.preventDefault();
-                return false;
-            }else{
-                // 수량이 1이면
-
-                if(optionNo == 0 && $(".info-content").find("option").length > 1){
-                    // 옵션 선택 안됐을 때 && 옵션이 있는 상품
-
-                    optionjQueryAlert('info'); // 옵션 체크
-
-                    // 폼 제출 막음
-                    e.preventDefault();
-                    return false;
-                }else{
-                    gonguTwojQueryAlert('error', this);
-
-                    e.preventDefault();
-                    return false;
-                }
-            }
-            });
 
             // 장바구니 담기시 성공 alert 띄우고 페이지 이동
             //알림 관련 기능
