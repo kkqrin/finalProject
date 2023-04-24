@@ -104,6 +104,8 @@
 							alert("쪽지를 발송하였습니다.");
 							$("[name='dmReceiver']").val("");
 							$("[name='dmContent']").val("");
+							const sendData = {type:"sendDm",dmReceiver:dmReceiver};
+				            ws.send(JSON.stringify(sendData));
 						}else{
 							alert("쪽지 전송에 실패했습니다. 관리자에게 문의해주세요.");
 						}
