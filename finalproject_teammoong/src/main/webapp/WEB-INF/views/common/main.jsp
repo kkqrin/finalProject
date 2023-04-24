@@ -82,11 +82,11 @@
                     </a>
                 </p>
                 <div class="posting-price-box">
-                    <p class="price-through"><fmt:formatNumber value="${ p.productPrice * p.productDiscount / 100}"/> 원</p>
+                    <p class="price-through"><fmt:formatNumber value="${p.productPrice}"/> 원</p>
                     <div class="sail-box popular">
                         <div class="sail-box-popular">
                             <p class="sail-percent">${p.productDiscount}%</p>
-                            <p class="price-sail"><fmt:formatNumber value="${p.productPrice}"/> 원</p>
+                            <p class="price-sail"><fmt:formatNumber value="${(Math.floor(p.productPrice*(100 - p.productDiscount)/1000)*10)}"/>원</p>
                         </div>
                         <div class="star-rating">
                             <div class="material-symbols-outlined star-rate">star</div>
