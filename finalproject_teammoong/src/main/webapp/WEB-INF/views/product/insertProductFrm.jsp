@@ -12,13 +12,13 @@
 		text-align: left;
 		background-color: #fff;
 	}
-	input[type=radio],input[type=checkbox]{
+	input[type=radio]:not(.notPointStyle),input[type=checkbox]{
 		width: auto;
         display: inline-block;
         min-height: auto;
         margin-left : 20px;
     }
-	label{
+	label:not(.notPointStyle){
 		margin-right : 130px;
 	}
     
