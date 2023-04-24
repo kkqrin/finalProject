@@ -632,8 +632,28 @@ public class AdminService {
 		return sd; 
 	}
 
-	public ArrayList<SalesData> selectMonthSalesData(int monthNo) {
-		ArrayList<SalesData> list = dao.selectMonthSalesData(monthNo);
+	public ArrayList<SalesData> selectMonthSalesData(int monthNo) { // 이거 왜 null 이니?!!!!
+		ArrayList<SalesData> list = new ArrayList<SalesData>();
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int startYear = 2023; // 시작연도
+		LocalDate startDate = LocalDate.of(startYear, monthNo, 1);
+	    LocalDate endDate = startDate.withDayOfMonth(startDate.lengthOfMonth());	
+	    map.put("start", startDate);
+	    map.put("end", endDate);
+	    
+		for(int i=0;i<14;i++) {
+	        map.put("categoryNo", i);
+	        SalesData sd = dao.selectMonthSalesData(map);
+	        if(Integer.valueOf(sd.getTotalSales()) == null) {
+	            sd.setTotalSales(0);
+	        }
+	        
+	        list.add(sd);
+		}
+		
+		System.out.println(list);
 		
 		return list;
 	}

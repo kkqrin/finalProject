@@ -276,10 +276,10 @@ public class AdminDao {
 		return sd;
 	}
 
-	public ArrayList<SalesData> selectMonthSalesData(int monthNo) {
-		List list = sqlSession.selectList("admin.selectMonthSalesData",monthNo);
+	public SalesData selectMonthSalesData(HashMap<String, Object> map) {
+		SalesData sd = sqlSession.selectOne("admin.selectMonthSalesData",map);
 		
-		return (ArrayList<SalesData>)list;
+		return sd;
 	}
 
 	public ArrayList<SalesData> selectGenderSalesData() {

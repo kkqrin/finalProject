@@ -86,6 +86,9 @@
 	}
 	.chart{
 		margin-top: 150px;
+		width: 500px;
+		/* 높이를 주면 왜 사라지는걸까? 이유가 머이지? */
+		
 	}
 
 </style>
@@ -119,9 +122,11 @@
 	        	</div>
 	        	<div class="chartDiv">
 		        	<div class="totalSalesChart chart">
+		        		<div class="totalChartTitle"><span>Total Sales Chart</span></div>
 		        		<canvas id="totalChart"></canvas>
 		        	</div>
 		        	<div class="monthSalesChart chart">
+		        		<div class="monthChartTitle"><span>Month Sales Chart</span></div>
 		        		<canvas id="monthChart"></canvas>
 		        	</div>
 		        	<div>
@@ -318,13 +323,14 @@
 	            // 월 select / 카테고리 매출
 	            
 	            $("#monthSelect").on("change",function(){
-		            var monthNo = $("#monthSelect option:selected").val();
+		            var monthNo = $("#monthSelect option:selected").val(); // 입력확인
 	
 		            $.ajax({
 		            	url : "ajaxSelectMonthSales.do",
 		            	type : "post",
 		            	data : {monthNo : monthNo},
 						success : function(data){
+							console.log(data);
 							const months = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
 				            
 				            var ctx = document.getElementById('salesChart').getContext('2d');

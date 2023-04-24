@@ -244,7 +244,6 @@ public class AdminController {
 	@RequestMapping(value="/ajaxSelectMonthSales.do", produces = "application/json;charset=utf-8")
 	public String ajaxVariationMonthSales(int monthNo) {
 		ArrayList<SalesData> list = service.selectMonthSalesData(monthNo);
-		
 		Gson gson = new Gson(); 
 		String result = gson.toJson(list); 
 		return result;
