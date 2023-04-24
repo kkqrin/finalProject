@@ -140,6 +140,44 @@
 	        						<th>카테고리 베스트 이익률</th>
 	        					</tr>
 	        					<tr>
+	        						<c:choose>
+	        							<c:when test="">
+	        							
+	        							</c:when>
+	        							<c:when test="">
+	        							
+	        							</c:when>
+	        							<c:when test="">
+	        							
+	        							</c:when>
+	        							<c:when test="">
+	        							
+	        							</c:when>
+	        							<c:when test="">
+	        							
+	        							</c:when>
+	        							<c:when test="">
+	        							
+	        							</c:when>
+	        							<c:when test="">
+	        							
+	        							</c:when>
+	        							<c:when test="">
+	        							
+	        							</c:when>
+	        							<c:when test="">
+	        							
+	        							</c:when>
+	        							<c:when test="">
+	        							
+	        							</c:when>
+	        							<c:when test="">
+	        							
+	        							</c:when>
+	        							<c:when test="">
+	        							
+	        							</c:when>
+	        						</c:choose>
 	        						<td>${bestSales.categoryNo }</td>
 	        						<td>${bestSales.totalSales }</td>
 	        						<td>${bestSales.totalCost }</td>
