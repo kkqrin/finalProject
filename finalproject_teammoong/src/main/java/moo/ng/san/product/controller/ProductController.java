@@ -230,7 +230,7 @@ public class ProductController {
 		
 		// 카테고리 리스트
 		ArrayList<Category> categoryList = service.selectCategoryList();		
-		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("categoryList", categoryList);		
 		
 		int iCategoryNo = 0;
 		if(categoryNo != null) {
@@ -240,6 +240,11 @@ public class ProductController {
 		// 인기 상품 리스트
 		ArrayList<Product> bestProductList = service.selectBestProductList(iCategoryNo);
 		model.addAttribute("bestProductList", bestProductList);
+		
+		// 카테고리 구분
+		model.addAttribute("sCategory", iCategoryNo);
+
+		
 		
 		return "product/bestProductList";
 	}

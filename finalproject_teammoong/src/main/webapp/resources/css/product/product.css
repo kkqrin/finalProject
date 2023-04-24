@@ -27,6 +27,7 @@ a {
 /*     background-color: aqua; */
 /*     margin: 0 auto; */
 /* 	overflow: hidden; */
+padding-bottom: 10px;
 }
 
 .popular-product-wrap{
@@ -39,12 +40,19 @@ a {
 
 .posting-item{
     float: left;
-    width: 400px;
+    width: 390px;
     /* height: 605px; */
-    background-color: #eee;
+    /* background-color: #eee; */
     /* border: 1px solid #ccc; */
     padding: 20px;
     box-sizing: border-box;
+
+    /* margin: 5px; */
+    transition: all 0.5s ease-in-out;
+}
+
+.posting-item:hover {
+    box-shadow: 0px 2px 5px rgba(90, 90, 90, 0.3);
 }
 
 .posting-item.hotdeal{
@@ -53,6 +61,7 @@ a {
 
 .posting-item.popular{
     /* background-color: lavender; */
+    height: 395px;
 }
 
 
