@@ -688,7 +688,12 @@
     <script type="text/javascript" src="/resources/slick/slick.min.js"></script>
     <script src="/resources/js/product.js"></script>
 
-
+    <script>
+    // 슬릭 padding-bottom
+    $(document).ready(function(){
+        $(".popular-product-wrap .slick-list").attr("style", "padding-bottom: 10px");
+    });
+    </script>
 </body>
 	
 </html>

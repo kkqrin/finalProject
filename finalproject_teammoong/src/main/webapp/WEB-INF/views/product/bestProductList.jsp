@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,13 @@
 
 	<!-- 상품 css -->
 	<link rel="stylesheet" href="/resources/css/product/product.css"/>
+    <style>
+        .material-symbols-outlined.star-rate{
+        	/* 구글 아이콘 (별점) */
+            font-variation-settings:
+            'FILL' 1
+        }
+    </style>
 </head>
 <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -18,12 +26,15 @@
 	
 <div class="content-wrap">
 
+    <!-- 카테고리 구분 -->
+    <input type="hidden" id="sCategoryNo" value="${sCategory }">
+
     <div class="category-wrap">
 		<h3>인기 상품</h3>
 		<ul class="subcategory-name-list">
-            <li><a href="/bestProductList.do">전체보기</a></li>
+            <li><a href="/bestProductList.do" class="all-category">전체보기</a></li>
             <c:forEach items="${categoryList}" var="c">
-            <li><a href="/bestProductList.do?categoryNo=${c.categoryNo}">${c.categoryName}</a></li>
+            <li><a href="/bestProductList.do?categoryNo=${c.categoryNo}" class="sub-category">${c.categoryName}</a></li>
             </c:forEach>
 		</ul>
 	</div>
@@ -34,22 +45,22 @@
 		<c:forEach items="${bestProductList }" var="p">
 			<div class="posting-item">
 				<div class="posting-img">
-					<a href="#">
+					<a href="/productView.do?productNo=${p.productNo}">
 						<img src="/resources/upload/product/${p.thumbnail }" />
 					</a>
 					<div class="gonggu-info">${p.gongguNumber}인 공동구매</div>
 				</div>
 				<div class="posting-content">
 					<p class="posting-title">
-						<a href="#">
+						<a href="/productView.do?productNo=${p.productNo}">
 							${p.productName}
 						</a>
 					</p>
 					<div class="posting-price-box">
-						<p class="price-through">70,000원</p>
+						<p class="price-through"><fmt:formatNumber value="${p.productPrice }"/>원</p>
 						<div class="sail-box">
 							<p class="sail-percent">${p.productDiscount}%</p>
-							<p class="price-sail">${p.productPrice}원</p>
+							<p class="price-sail"><fmt:formatNumber value="${(Math.floor(p.productPrice*(100 - p.productDiscount)/1000)*10)}"/>원</p>
 						</div>
 					</div>
 					<div class="posting-detail">
@@ -71,7 +82,25 @@
 
 
 </div>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />	
 
+<script>
+    // 액티브 카테고리
+    $(document).ready(function(){
+        // class="active-category-name"
 
+        const categoryNo = Number($("#sCategoryNo").val());
+
+        console.log(categoryNo);
+
+        if(categoryNo == 0){
+            $(".all-category").addClass("active-category-name");
+        }else{
+            $(".all-category").removeClass("active-category-name");
+            $(".sub-category").eq(categoryNo-1).addClass("active-category-name");
+        }
+    });	
+
+</script>
 </body>
 </html>
