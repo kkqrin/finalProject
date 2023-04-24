@@ -153,16 +153,16 @@
                     	<h6>🍊 Moong 충전하기 🍊</h6>
                     </div>
                     <div class="payModal-body">
-                    	<input type="radio" name="pointEa" id="point1" value="1000">
-                    	<label for="point1">1,000</label>
-                    	<input type="radio" name="pointEa" id="point2"value="5000">
-                    	<label for="point2">5,000</label>
-                    	<input type="radio" name="pointEa" id="point3"value="10000">
-                    	<label for="point3">10,000</label>
-                    	<input type="radio" name="pointEa" id="point4"value="30000">
-                    	<label for="point4">30,000</label>
-                    	<input type="radio" name="pointEa" id="point5"value="50000">
-                    	<label for="point5">50,000</label>
+                    	<input type="radio" name="pointEa" id="point1" value="1000" class="notPointStyle">
+                    	<label for="point1" class="notPointStyle">1,000</label>
+                    	<input type="radio" name="pointEa" id="point2" value="5000" class="notPointStyle">
+                    	<label for="point2" class="notPointStyle">5,000</label>
+                    	<input type="radio" name="pointEa" id="point3" value="10000" class="notPointStyle">
+                    	<label for="point3" class="notPointStyle">10,000</label>
+                    	<input type="radio" name="pointEa" id="point4" value="30000" class="notPointStyle">
+                    	<label for="point4" class="notPointStyle">30,000</label>
+                    	<input type="radio" name="pointEa" id="point5" value="50000" class="notPointStyle">
+                    	<label for="point5" class="notPointStyle">50,000</label>
                    	</div>
                    	<input type="hidden" id="email" value="${m.memberEmail }">
                    	<input type="hidden" id="memberName" value="${m.memberName }">
