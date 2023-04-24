@@ -183,6 +183,18 @@ public class ProductDao {
 		return (ArrayList<Product>)list;
 	}
 
+	public ArrayList<Product> selectHighSaleProductList() {
+		List list = sqlSession.selectList("product.selectHighSaleProductList");
+		
+		return (ArrayList<Product>)list;
+	}
+
+	public ArrayList<Product> selectSoldOutProductList() {
+		List list = sqlSession.selectList("product.selectSoldOutProductList");
+		
+		return (ArrayList<Product>)list;
+	}
+
 	
 	
 	
