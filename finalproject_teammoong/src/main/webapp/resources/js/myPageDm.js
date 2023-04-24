@@ -97,9 +97,11 @@ function dmView(dmNo){
 	             fadeDuration: 100
 	        });
             getReceiveDm();//읽음확인 갱신시켜줘야함
-            //상세화면 표시된 후 알림에 있는 수 깎아줘야 함
-            const sendData = {type:"readCheck",dmSender:dm.dmSender,dmReceiver:dm.dmReceiver};
-            ws.send(JSON.stringify(sendData));
+            //상세화면 표시된 후 알림에 있는 수 깎아줘야 함-받은 사람의 헤더만
+            if(memberId==dm.dmReceiver){
+	            const sendData = {type:"readCheck",dmReceiver:dm.dmReceiver};
+	            ws.send(JSON.stringify(sendData));
+            }
         }
     })
 }

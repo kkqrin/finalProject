@@ -64,12 +64,13 @@ public class DirectMessageHandler extends TextWebSocketHandler{
 			String resultStr = new Gson().toJson(obj);
 			TextMessage tm = new TextMessage(resultStr);
 			session.sendMessage(tm); //<-- 여기까지 . 쪽지를 읽은 회원의 읽지 않은 쪽지 수를 갱신함
-
 		}//else if. type이 readCheck일때
 	}
 	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+		//접속을 끊었을 때 접속이 끊긴 회원을 HashMap에서 삭제해주기
+		connectionMemberList.values().remove(session);
 	}
 	
 }//DirectMessageHandler
