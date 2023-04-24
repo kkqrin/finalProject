@@ -598,7 +598,7 @@
 		(select
 			at.corp_no as corpNo,
 			at.corp_name as corpName,
-			at.rep_name as reqName,
+			at.rep_name as repName,
             at.reg_no as regNo,
 			at.corp_addr1 as corpAddr1,
 			at.corp_addr2 as corpAddr2,

@@ -9,6 +9,15 @@
 	<!-- default 적용 -->
 	<link rel="stylesheet" href="/resources/css/common/default.css" />
 </head>
+<style>
+	.adminPage-main{
+		overflow: hidden;
+	}
+
+	.adminPage-content{
+		float: left;
+	}
+</style>
 <body>
 <c:if test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
         <!-- 관리자일때만 페이지 보이게 세팅 -->
@@ -61,7 +70,7 @@
                     	</div>
                     </div>
                     <div class="adminPage-result">
-                        <table class="table tbl-box">
+                        <table class="table guide-board">
                             <tr>
                             	<td>구분</td>
                            		<td>사업자명</td>
@@ -74,18 +83,17 @@
                                 <td>사업자등록증 다운로드</td>
                             	<td>요청 제목</td>
                             </tr>
-                            <c:forEach items="${askItemList }" var="a">
-                            	<%-- <c:forEach items="${a.askItemList. }" var="bo"> --%> 
+                            <c:forEach items="${askList }" var="a">
                                 <tr>
                                 	<td><input type="checkBox" id="checkBox"></td>
                                     <td>${a.corpName }<input type="hidden" class="corpName" value="${a.corpName }"></td>
                                     <td>${a.regNo }</td>
-                                    <td>${a.regName }</td>
+                                    <td>${a.repName }</td>
                                     <td>${a.corpAddr1 }</td>
                                     <td>${a.corpAddr2 }</td>
-                                    <td>${a.corpContName }</td>
+                                    <td>${a.contName }</td>
                                     <td>${a.contPhone }</td>
-                                    <td>${a.corpMail }</td>
+                                    <td>${a.contMail }</td>
                                     <%-- <c:choose>
                                     	<c:when test="${a.detailCategoryNo == 1}">
                                     		<td>패션</td>
@@ -167,8 +175,7 @@
                                    	</c:choose> --%>
 		                             <td>${a.askTitle }</td>
 		                             <td>${a.askDate }</td>
-		                             </c:forEach>
-                            	<!-- </c:forEach> -->
+	                            </c:forEach>
                                 </tr>
                             <tr>
                                 <th colspan="10">${pageNavi}</th>
@@ -180,7 +187,6 @@
             </div>
         </div>
     </div>
-
 
 
 </body>

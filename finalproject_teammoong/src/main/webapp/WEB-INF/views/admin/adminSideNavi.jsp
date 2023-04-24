@@ -1,24 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Document</title>
-<head>
-    <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!-- google icon -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     	<!--  -->
 	<link rel="stylesheet" href="/resources/css/admin/admin.css" />
-
-</head>
-<style>
-
-    
-</style>
-<body>
+	
+	<!-- 필요한것만 -->
 	 <div class="adminPage-sidebar">
 	     <ul>
 	         <li><a>회원 관리</a></li>
@@ -46,5 +34,3 @@
 	         <li><a>카테고리별 매출관리</a></li>
 	     </ul>
 	 </div>
-</body>
-</html>
