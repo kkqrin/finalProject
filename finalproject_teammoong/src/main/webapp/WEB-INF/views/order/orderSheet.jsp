@@ -422,8 +422,6 @@
         // 최종 결제 금액 hidden
         $("#hidden-total-pay").val(payPrice);
 
-        const plusPoint = $(".total-order-buy-save-point>div").last().children().text();
-        $("[name=plusPointEa]").val(plusPoint);
         
 
 
@@ -549,6 +547,11 @@
         // 최종 결제 금액에 따라 적립 포인트 계산
         $("#hidden-total-pay").on("change", function(){
             $(".total-order-buy-save-point>div").last().children().text(Math.ceil(Number($(this).val())*10/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
+            // number값 hidden에 숨김
+            $("[name=plusPointEa]").val(Math.ceil(Number($(this).val())*10/100));
+            // const plusPoint = $(".total-order-buy-save-point>div").last().children().text();
+            // Math.ceil(Number($(this).val())*10/100)
 
             // 결제버튼에 최종 결제 금액 표시
             $(".order-complete-btn>span").text($(".total-order-pay>div").last().children().text());

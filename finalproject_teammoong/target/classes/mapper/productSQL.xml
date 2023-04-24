@@ -267,4 +267,44 @@
 		r)
 		WHERE RNUM BETWEEN 1 AND 20
 	</select>
+	
+	<select id="selectHighSaleProductList" resultType="p">
+		SELECT * FROM
+			(SELECT ROWNUM AS RNUM, P.* FROM
+			(select 
+	                p.PRODUCT_NO AS productNo,
+					p.D_CATEGORY_NO AS detailCategoryNo,
+					p.PRODUCT_NAME AS productName,
+					p.PRODUCT_EA AS productEa,
+					p.PRODUCT_PRICE AS productPrice,
+					p.PRODUCT_STATUS AS productStatus,
+					p.PRODUCT_COST AS productCost,
+					p.GONGGU_NUMBER AS  gongguNumber,
+					p.PRODUCT_CONTENT AS productContent,
+					p.PRODUCT_DISCOUNT AS productDiscount,
+					(SELECT FILEPATH FROM PRODUCT_IMG WHERE P_IMG_NO=(SELECT MIN(P_IMG_NO) FROM PRODUCT_IMG  WHERE PRODUCT_NO=p.PRODUCT_NO))  AS thumbnail
+		from product_tbl p
+		order by p.PRODUCT_DISCOUNT desc)p)
+		WHERE RNUM BETWEEN 1 AND 2
+	</select>
+	
+	<select id="selectSoldOutProductList" resultType="p">
+		SELECT * FROM
+			(SELECT ROWNUM AS RNUM, P.* FROM
+			(select 
+	                p.PRODUCT_NO AS productNo,
+					p.D_CATEGORY_NO AS detailCategoryNo,
+					p.PRODUCT_NAME AS productName,
+					p.PRODUCT_EA AS productEa,
+					p.PRODUCT_PRICE AS productPrice,
+					p.PRODUCT_STATUS AS productStatus,
+					p.PRODUCT_COST AS productCost,
+					p.GONGGU_NUMBER AS  gongguNumber,
+					p.PRODUCT_CONTENT AS productContent,
+					p.PRODUCT_DISCOUNT AS productDiscount,
+					(SELECT FILEPATH FROM PRODUCT_IMG WHERE P_IMG_NO=(SELECT MIN(P_IMG_NO) FROM PRODUCT_IMG  WHERE PRODUCT_NO=p.PRODUCT_NO))  AS thumbnail
+		from product_tbl p
+		order by p.PRODUCT_ea )p)
+		WHERE RNUM BETWEEN 1 AND 2
+	</select>
 </mapper>
