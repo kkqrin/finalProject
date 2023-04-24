@@ -16,6 +16,33 @@
             font-variation-settings:
             'FILL' 1
         }
+        .current-category-name{
+            margin-top: 10px;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        /* 인기상품 간격 조정 */
+        .product-wrap{
+            margin-top: 150px;
+        }
+        .posting-item{
+            /* margin-bottom: 100px; */
+        }
+
+        /* 순위 */
+        .best-product-ranking{
+            width: 60px;
+            height: 35px;
+            line-height: 35px;
+            background-color: rgba(248, 128, 0, 0.9);
+            border-radius: 50%;
+            color: #fff;
+            text-align: center;
+            position: absolute;
+            z-index: 2;
+            margin: 15px;
+        }
     </style>
 </head>
 <body>
@@ -31,6 +58,7 @@
 
     <div class="category-wrap">
 		<h3>인기 상품</h3>
+        <h5 class="current-category-name"></h5>
 		<ul class="subcategory-name-list">
             <li><a href="/bestProductList.do" class="all-category">전체보기</a></li>
             <c:forEach items="${categoryList}" var="c">
@@ -42,8 +70,9 @@
 
     <div class="product-wrap">
         <!-- 전체 상품 wrap -->
-		<c:forEach items="${bestProductList }" var="p">
+		<c:forEach items="${bestProductList }" var="p" varStatus="status">
 			<div class="posting-item">
+                <div class="best-product-ranking">BEST ${status.index+1}</div>
 				<div class="posting-img">
 					<a href="/productView.do?productNo=${p.productNo}">
 						<img src="/resources/upload/product/${p.thumbnail }" />
@@ -98,6 +127,8 @@
         }else{
             $(".all-category").removeClass("active-category-name");
             $(".sub-category").eq(categoryNo-1).addClass("active-category-name");
+
+            $(".current-category-name").text($(".active-category-name").text());
         }
     });	
 

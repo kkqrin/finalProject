@@ -116,7 +116,6 @@ public class ProductController {
 //		System.out.println(list);
 //		System.out.println(detailCategoryList);
 		
-		
 		// 최근 본 상품 select
 		selectRecentProduct(m, model);
 		
@@ -136,6 +135,7 @@ public class ProductController {
 		
 		System.out.println("sCategoryNo : "+sCategoryNo);
 		System.out.println(sortType);
+		
 		ArrayList<Product> list = service.selectInfiniteScrollProductList(start, amount, fCategoryNo, sCategoryNo, sortType);
 		
 		System.out.println(list);
@@ -225,7 +225,7 @@ public class ProductController {
 	
 	// 인기 상품 리스트
 	@RequestMapping(value="/bestProductList.do")
-	public String bestProductList(String categoryNo, Model model) {
+	public String bestProductList(String categoryNo, Model model, @SessionAttribute(required=false) Member m) {
 		System.out.println("categoryNo : "+categoryNo);
 		
 		// 카테고리 리스트
@@ -244,7 +244,8 @@ public class ProductController {
 		// 카테고리 구분
 		model.addAttribute("sCategory", iCategoryNo);
 
-		
+		// 최근 본 상품 select
+		selectRecentProduct(m, model);
 		
 		return "product/bestProductList";
 	}

@@ -53,6 +53,8 @@ public class ProductService {
 //			
 //		}
 		
+		ArrayList<Product> list = null;
+		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
@@ -60,7 +62,18 @@ public class ProductService {
 		map.put("detailCategoryNo", detailCategoryNo);
 		map.put("sortType", sortType);
 		
-		ArrayList<Product> list = dao.selectInfiniteScrollProductList(map);
+		if(sortType.equals("popular-sort")) {
+			
+			map.put("categoryNo", firstCategoryNo);
+			list = dao.selectBestProductList(map);
+			
+		}else if(sortType.equals("review-sort")) {
+
+			
+		}else {
+			list = dao.selectInfiniteScrollProductList(map);			
+		}
+		
 		
 		return list;
 	}
