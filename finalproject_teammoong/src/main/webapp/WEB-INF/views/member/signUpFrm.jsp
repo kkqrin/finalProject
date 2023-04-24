@@ -189,11 +189,11 @@
 							</li>
 							<li>
 								<input type="checkbox" id="agree1" class="agree">
-								<label for="agree1">이용약관 동의(필수)</label><a>약관보기></a>
+								<label for="agree1">이용약관 동의(필수)</label><a id="terms1" style="cursor: pointer;">약관보기></a>
 							</li>
 							<li>
 								<input type="checkbox" name="memberAgree" id="agree2" value=1 class="agree">
-								<label for="agree2">마케팅 활용동의(선택)</label><a>약관보기></a>
+								<label for="agree2">마케팅 활용동의(선택)</label><a id="terms2" style="cursor: pointer;">약관보기></a>
 							</li>
 						</ul>
 					</div>
@@ -204,10 +204,10 @@
 			</form>
 		</div><!--signUp-form-->
 
+		
 
-
-
-
+	<jsp:include page="/WEB-INF/views/member/terms1.jsp" />
+	<jsp:include page="/WEB-INF/views/member/terms2.jsp" />
 	</div><!--content-wrap-->
 
 
@@ -627,6 +627,24 @@
 			    	  monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] // 월의 한글 형식.
 			    });
 			} );
+			
+			
+/*=========약관보기========================================================*/				
+			
+			$("#terms1").on("click",function(){
+	            $("#termsModal1").modal({
+					 showClose: false,
+		             fadeDuration: 100
+		        });
+			});
+			
+			$("#terms2").on("click",function(){
+				 $("#termsModal2").modal({
+					 showClose: false,
+		             fadeDuration: 100
+		        });
+			});
+			
 			
 	</script>
 
