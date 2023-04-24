@@ -91,7 +91,7 @@ function dmView(dmNo){
             $("#replyToId").val(dm.dmSender);
             $("#viewReceiver").text("받은 사람 : "+dm.dmReceiverName+"("+dm.dmReceiver+")");
             $("#viewDate").text("보낸 날짜 : "+dm.dmDateHour);
-            $("#viewContent").text(dm.dmContent);
+            $("#viewContent").html(dm.dmContent.replaceAll("\n", "<br>"));
             $("#dmViewer").modal({
 				 showClose: false,
 	             fadeDuration: 100

@@ -3,7 +3,7 @@ let ws;
 
 	$(function(){
 		memberId = $("#memberId").val();
-		ws = new WebSocket("ws://192.168.123.102/dm.do");
+		ws = new WebSocket("ws://192.168.10.41/dm.do");
 		ws.onopen = startDm;
 		ws.onmessage = receiveMsg;
 		ws.onclose = endDm;
