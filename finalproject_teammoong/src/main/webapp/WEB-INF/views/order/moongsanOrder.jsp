@@ -277,10 +277,18 @@
                     </div>
                 </div>
 
-
+                <c:if test="${btnDivision eq 'main'}">
                 <div class="order-complete-box area-btn full">
-                    <button class="btn btn-pri size03 order-complete-btn"><span></span>원 결제하기</button>
+                    <button class="btn btn-pri size03 order-complete-btn"><span></span>원 뭉쳐야산다 생성하기</button>
                 </div>
+                <input type="hidden" id="btnDivision" value="main">
+                </c:if>
+                <c:if test="${btnDivision eq 'sub'}">
+                <div class="order-complete-box area-btn full">
+                    <button class="btn btn-pri size03 order-complete-btn"><span></span>원 뭉쳐야산다 참여하기</button>
+                </div>
+                <input type="hidden" id="btnDivision" value="sub">
+                </c:if>
             </form>
 
 
@@ -306,6 +314,7 @@
     <script src="/resources/js/order.js"></script>
 
     <script>
+        console.log($("#btnDivision").val())
         $( function() {
 			$( ".deli-request" ).selectmenu();
             $( ".order-coupon" ).selectmenu();
