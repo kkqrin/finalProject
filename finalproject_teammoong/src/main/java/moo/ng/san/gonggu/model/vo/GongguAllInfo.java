@@ -14,4 +14,6 @@ public class GongguAllInfo {
 	private Integer gongguNo;
 	private Integer countNumber;
 	private Integer useCnt;
+	private Integer gongguPayNo;
+	private Integer gongguPayStautus;
 }

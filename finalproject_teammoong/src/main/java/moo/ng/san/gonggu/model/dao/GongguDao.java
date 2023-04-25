@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import moo.ng.san.dayCheck.model.vo.Point;
+import moo.ng.san.gonggu.model.vo.DetailGonggu;
 import moo.ng.san.gonggu.model.vo.Gonggu;
 import moo.ng.san.gonggu.model.vo.GongguAllInfo;
 import moo.ng.san.gonggu.model.vo.GongguPay;
@@ -27,14 +28,14 @@ public class GongguDao {
 		return g.getGongguNo();
 	}
 
-	public Gonggu selectInsertGonggu(int gNo) {
-		Gonggu gonggu = sqlSession.selectOne("gonggu.selectInsertGonggu", gNo);
-		return gonggu;
+	public DetailGonggu selectInsertGonggu(int gNo) {
+		DetailGonggu dg = sqlSession.selectOne("gonggu.selectInsertGonggu", gNo);
+		return dg;
 	}
 
-	public int insertDetailGonggu(Gonggu gonggu) {
-		int result = sqlSession.insert("gonggu.insertDetailGonggu",gonggu);
-		return result;
+	public int insertDetailGonggu(DetailGonggu detailGonggu) {
+		sqlSession.insert("gonggu.insertDetailGonggu",detailGonggu);
+		return detailGonggu.getDetailGongguNo();
 	}
 
 	public int insertPoint(Point p) {
@@ -43,20 +44,17 @@ public class GongguDao {
 	}
 
 	public int insertGongguPay(GongguPay gp) {
-		System.out.println("gongguDao에서 gp값"+gp);
 		int result = sqlSession.insert("gongguPay.insertGongguPay",gp);
 		return result;
 	}
 	
 	public int selectGongguPayCount(int gongguNo) {
-		System.out.println("Sysout극혐");
 		int result = sqlSession.selectOne("gonggu.selectGongguPayCount",gongguNo);
-		System.out.println(result);
 		return result;
 	}
 
-//	public int selectCount() {
-//		int countNumber = sqlSession.selectOne("gonggu.selectCountNumber");
-//		return countNumber;
-//	}
+	public int updateGonggu(int gongguPayNo) {
+		int result = sqlSession.update("gonggu.updateGonggu",gongguPayNo);
+		return result;
+	}
 }

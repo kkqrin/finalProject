@@ -1,5 +1,7 @@
 package moo.ng.san.admin.model.service;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.StringTokenizer;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import moo.ng.san.admin.model.dao.AdminDao;
+import moo.ng.san.admin.model.vo.AdminAskItemPageData;
 import moo.ng.san.admin.model.vo.AdminBoardPageData;
 import moo.ng.san.admin.model.vo.AdminMemberPageData;
 import moo.ng.san.admin.model.vo.AdminOrderPageData;
@@ -15,6 +18,7 @@ import moo.ng.san.admin.model.vo.AdminProductPageData;
 import moo.ng.san.admin.model.vo.AdminReportBoardPageData;
 import moo.ng.san.admin.model.vo.CouponData;
 import moo.ng.san.admin.model.vo.SalesData;
+import moo.ng.san.askItem.model.vo.AskItem;
 import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.board.model.vo.BoardOption;
 import moo.ng.san.board.model.vo.Notify;
@@ -64,14 +68,29 @@ public class AdminService {
 		return result;
 	}
 
-	public String selectVariationOrder() {
-		String result = dao.selectVariationOrder();
+	public String selectVariationOrderCount() {
+		LocalDate today = LocalDate.now();  // 오늘 날짜
+		YearMonth thisMonth = YearMonth.from(today);  // 이번 달
+		LocalDate firstDayOfMonth = thisMonth.atDay(1);  // 이번 달의 첫째 날
+		LocalDate lastDayOfMonth = thisMonth.atEndOfMonth();  // 이번 달의 마지막 날
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", firstDayOfMonth);
+		map.put("end", lastDayOfMonth);
+		
+		String result = dao.selectVariationOrderCount(map);
 
 		return result;
 	}
 
-	public String selectVariationBoard() {
-		String result = dao.selectVariationBoard();
+	public String selectVariationBoardCount() {
+		LocalDate today = LocalDate.now();  // 오늘 날짜
+		YearMonth thisMonth = YearMonth.from(today);  // 이번 달
+		LocalDate firstDayOfMonth = thisMonth.atDay(1);  // 이번 달의 첫째 날
+		LocalDate lastDayOfMonth = thisMonth.atEndOfMonth();  // 이번 달의 마지막 날
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", firstDayOfMonth);
+		map.put("end", lastDayOfMonth);
+		String result = dao.selectVariationBoardCount(map);
 
 		return result;
 	}
@@ -613,8 +632,23 @@ public class AdminService {
 		return sd; 
 	}
 
-	public ArrayList<SalesData> selectMonthSalesData(int monthNo) {
-		ArrayList<SalesData> list = dao.selectMonthSalesData(monthNo);
+	public ArrayList<SalesData> selectMonthSalesData(int monthNo) { 
+		ArrayList<SalesData> list = new ArrayList<SalesData>();
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int startYear = 2023; // 설정연도
+		LocalDate startDate = LocalDate.of(startYear, monthNo, 1);
+	    LocalDate endDate = startDate.withDayOfMonth(startDate.lengthOfMonth());	
+	    map.put("start", startDate);
+	    map.put("end", endDate);
+	    
+		for(int i=1;i<14;i++) {
+	        map.put("categoryNo", i);
+	        SalesData sd = dao.selectMonthSalesData(map);
+	        sd.setCategoryNo(i);
+	        list.add(sd);
+		}
 		
 		return list;
 	}
@@ -629,6 +663,103 @@ public class AdminService {
 		Member m = dao.ajaxMemberView(memberNo);
 		// TODO Auto-generated method stub
 		return m;
+	}
+
+	public String selectVariationMemberCount() {
+		String memberCount = dao.selectVariationMemberCount();
+		
+		return memberCount;
+	}
+
+	/* 예전버전
+	 * public String selectVariationOrderCount() { String orderCount =
+	 * dao.selectVariationOrderCount(); // TODO Auto-generated method stub return
+	 * orderCount; }
+	 */
+
+	public String selectVariationSalesCount() {
+		LocalDate today = LocalDate.now();  // 오늘 날짜
+		YearMonth thisMonth = YearMonth.from(today);  // 이번 달
+		LocalDate firstDayOfMonth = thisMonth.atDay(1);  // 이번 달의 첫째 날
+		LocalDate lastDayOfMonth = thisMonth.atEndOfMonth();  // 이번 달의 마지막 날
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", firstDayOfMonth);
+		map.put("end", lastDayOfMonth);
+		
+		String result = dao.selectVariationSalesCount(map);
+		
+		return result;
+	}
+
+	public AdminAskItemPageData selectAskItemList(int reqPage) {
+		int numPerPage = 10;
+		// reqPage = 1 : 1~2 , reqPage = 2 3~4
+		int end = reqPage * numPerPage;
+		int start = end - numPerPage + 1;
+		// start , end 계산완료, 계산된 start, end 가지고 게시글 목록 조회
+		// mybatis 는 매개변수로 한 개만 설정이 가능하므로, 필요한 값이 여러개면 여러개로 묶어야 함. (VO or map)
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		ArrayList<AskItem> list = dao.selectAskItemList(map);
+
+		// pageNavi 제작 시작
+		// 전체 페이지 수 계산 필요 => 전체 게시물 수 조회
+		int totalCount = dao.selectAskItemCount();
+		// 전체게시물로 전체 페이지수 계산
+
+		int totalPage = (int) Math.ceil(totalCount / (double) numPerPage);
+		// 실수 연산해서 올림연산을 하자 , 정수가 나오면 올림 해당 안된다. 소숫점이 있을때만 올림 연산이 됨
+
+		// 페이지 네비 사이즈
+		int pageNaviSize = 5;
+
+		int pageNo = 1;
+
+		if (reqPage > 3) {
+			pageNo = reqPage - 2;
+		}
+
+		// 페이지네비 생성시작
+		String pageNavi = "";
+		// 이전버튼
+		if (pageNo != 1) {
+			pageNavi += "<a href='/adminProductRegist.do?reqPage=" + (pageNo - 1) + "'>[이전]</a>";
+		}
+		// 페이지 숫자 생성
+		for (int i = 0; i < pageNaviSize; i++) {
+			if (pageNo == reqPage) {
+				pageNavi += "<span>" + pageNo + "</span>";
+			} else {
+				pageNavi += "<a href='/adminProductRegist.do?reqPage=" + pageNo + "'>" + pageNo + "</a>";
+			}
+			pageNo++;
+
+			if (pageNo > totalPage) {
+				break;
+			}
+		}
+		// 다음버튼
+		if (pageNo <= totalPage) {
+			pageNavi += "<a href='/adminProductRegist.do?reqPage=" + pageNo + "'>[다음]</a>";
+		}
+		
+		AdminAskItemPageData aapd = new AdminAskItemPageData(list, pageNavi);
+
+		return aapd;
+	}
+
+	public SalesData selectBestSalesCategory() {
+		SalesData bestSales = dao.selectBestSalesCategory();
+		
+		return bestSales;
+		
+	}
+
+	public ArrayList<SalesData> selectOtherSalesCategory() {
+		ArrayList<SalesData> list = dao.selectOtherSalesCategory();
+		// TODO Auto-generated method stub
+		return list;
 	}
 	
 

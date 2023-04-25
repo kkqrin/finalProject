@@ -10,6 +10,9 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <!-- google icon -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+	<!-- css -->
+	<link rel="stylesheet" href="/resources/css/admin/admin.css" />
+	<link rel="stylesheet" href="/resources/css/common/default.css" />
 </head>
 <style>
     .adminPage-wrapper{
@@ -90,7 +93,7 @@
                         <button type="button" name="searchSubmitBtn">검색</button>
                     </div>
                     <div class="adminPage-result">
-                        <table class="table">
+                        <table class="table tbl-box">
                             <tr>
                             	<td>구분</td>
                                 <td>상품번호</td>
@@ -100,7 +103,6 @@
                                 <td>상품가격</td>
                                 <td>원가</td>
                                 <td>공동구매인원수</td>
-                                <td>상품내용</td>
                                 <td>상품할인률</td>
                                 <td>상품상태</td> 
                                 <td>상품상태변경</td>
@@ -116,8 +118,7 @@
                                     <td>${p.productPrice }</td>
                                     <td>${p.productCost }</td>
                                     <td>${p.gongguNumber }</td>
-                                    <td>${p.productContent }</td>
-                                    <td>${p.productDiscount }</td>
+                                    <td>${p.productDiscount }%</td>
                                    	<c:choose>
                                    		<c:when test="${p.productStatus == 1 }">
                                    			<td>대기</td>
@@ -174,7 +175,7 @@
                                 </tr>
                             </c:forEach>
                             <tr>
-                                <th colspan="13">${pageNavi}</th>
+                                <th colspan="12">${pageNavi}</th>
                             </tr>
                             <tr>
                                 <th colspan="2"><button type="button" name="allChangeProductStatus">일괄 변경</button></th>

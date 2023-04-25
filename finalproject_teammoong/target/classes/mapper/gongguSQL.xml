@@ -8,12 +8,15 @@
 			MEMBER_ID AS memberId,
 			GONGGU_NO AS gongguNo,
 			GONGGU_NUMBER AS gongguNumber,
-			COUNT_NUMBER AS countNumber
+			COUNT_NUMBER AS countNumber,
+			GONGGU_PAY_NO AS gongguPayNo,
+			GONGGU_PAY_STATUS AS gongguPayStatus
 		FROM PRODUCT_TBL
 		INNER JOIN GONGGU_TBL USING(PRODUCT_NO)
 		LEFT JOIN MEMBER_TBL USING(MEMBER_NO)
 		LEFT JOIN DETAIL_GONGGU_TBL USING(GONGGU_NO)
-		WHERE PRODUCT_NO = #{_parameter}
+		LEFT JOIN GONGGU_PAY_TBL USING(DETAIL_GONGGU_NO)
+		WHERE PRODUCT_NO = #{_parameter} AND GONGGU_PAY_STATUS = 1
 	</select>
 	
 	<select id="selectGongguPayCount" parameterType="_int" resultType="_int">
@@ -31,7 +34,7 @@
 		#{memberNo})
 	</insert>
 	
-	<select id="selectInsertGonggu" parameterType="_int" resultType="g">
+	<select id="selectInsertGonggu" parameterType="_int" resultType="dg">
 		<!-- SELECT 
 			GONGGU_NO AS gongguNo,
 			MEMBER_NO AS memberNo 
@@ -39,13 +42,15 @@
 		WHERE GONGGU_NO IN(SELECT MAX(GONGGU_NO) FROM GONGGU_TBL)
 		 -->
 		SELECT  
+			DETAIL_GONGGU_NO AS detailGongguNo,
 			GONGGU_NO AS gongguNo,
 			MEMBER_NO AS memberNo
-		FROM GONGGU_TBL
+		FROM DETAIL_GONGGU_TBL
 		WHERE GONGGU_NO = #{gNo}
 	</select>
 	
-	<insert id="insertDetailGonggu" parameterType="g">
+	<insert id="insertDetailGonggu" parameterType="dg" useGeneratedKeys="true"
+        keyProperty="detailGongguNo" keyColumn="DETAIL_GONGGU_NO">
 		INSERT INTO DETAIL_GONGGU_TBL VALUES(DETAIL_GONGGU_SEQ.NEXTVAL,
 		#{gongguNo},
 		#{memberNo},
@@ -55,4 +60,12 @@
 	<select id="selectCountNumber" resultType="gai">
 		SELECT SUM(COUNT_NUMBER) AS countNumber FROM DETAIL_GONGGU_TBL
 	</select>
+	
+	<update id="updateGonggu" parameterType="_int">
+		UPDATE GONGGU_PAY_TBL SET
+		 
+			GONGGU_PAY_STATUS = '2'
+			 
+		WHERE GONGGU_PAY_NO = #{_parameter}
+	</update>
 </mapper>

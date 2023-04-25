@@ -1,0 +1,101 @@
+@charset "UTF-8";
+
+.adminPage-wrapper{
+        background-color: #111;
+        margin-top: 300px;
+        
+    }
+    .adminPage-header{
+        margin-left: 30px;
+    }
+    .adminPage-back{
+        background-color: lightyellow;
+        overflow: hidden;
+    }
+    .adminPage-sidebar{
+        float: left;
+        width: 300px;
+        background-color: lightcoral;
+        height: 2000px;
+
+    }
+    .adminPage-sidebar>ul>li{
+        list-style-type: none;
+    }
+    .adminPage-main{
+        background-color: lightgreen;
+    }
+    .adminPage-content{
+        background-color: #fff;
+        overflow: hidden;
+    }
+    .material-symbols-outlined{
+        font-size: 150px;
+        
+    }
+    .mainContent{
+        float: left;
+        width: 300px;
+        height: 400px;
+        text-align: center;
+    }
+
+    .searchForm{
+    	display: none;
+    }
+    .moreResult{
+		float: right;
+	    top: 130px;
+	    position: absolute;
+	    right: 294px;
+	    text-align: right;
+	    background-color: brown;
+	    width: 400px;
+	    height: 1000px;
+	    display: none;
+    }
+    .moreResult>div>span{
+    	font-size: 40px;
+    	cursor: pointer;
+    }
+    /* 구분 사이즈 다운 아아아아아아 */
+    .table tr:nth-child(0) th:nth-child(0) {
+		width: 50px !important;
+	}
+	
+	.table tr td{
+		padding: 0;
+	}
+	.changeMemberStatusBtn{
+		/* background-color: #f0a718; */
+		padding: 2px;
+		cursor: pointer;
+	}
+	
+	.changeMemberStatusBtn:active{
+		box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+	    transform: translateY(4px);
+	}
+	
+	.moreInfo{
+		/* background-color: #f0a718; */
+		padding: 3px;
+		cursor: pointer;
+	}
+	
+	.moreInfo:active {
+	    box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+	    transform: translateY(4px);
+     }
+	
+    
+    #searchOption{
+    	display: inline-block;
+    	width: 300px;
+    }
+    
+    .pagination{
+    	margin: 1px;
+    }
+
+

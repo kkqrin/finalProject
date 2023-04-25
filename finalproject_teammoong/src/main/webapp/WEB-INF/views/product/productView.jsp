@@ -205,12 +205,12 @@
                         <div class="form-box">
                             <div class="one-btn">
                                 <form action="/orderSheet.do" method="post">
-                                <input type="hidden" name="productNo">
-                                <input type="hidden" name="optionNo">
-                                <button class="btn btn-white size02">혼자구매하기</button>
-                                <input type="hidden" id="option-list-null" value="${optionList}">
-                                <input type="hidden" name="page" value="0">
-                            </form>
+                                    <input type="hidden" name="productNo">
+                                    <input type="hidden" name="optionNo">
+                                    <button class="btn btn-white size02">혼자구매하기</button>
+                                    <input type="hidden" id="option-list-null" value="${optionList}">
+                                    <input type="hidden" name="page" value="0">
+                                </form>
                             </div>
                             <div class="moong-btn">
                                 <form action="/moongsanOrder.do" method="post">
@@ -241,10 +241,23 @@
                         <div class="number-info">${g.gongguNumber-g.useCnt}명 남음</div>
                     </div>
                     <c:if test="${sessionScope.m.memberId eq g.memberId }">
-                    <button type="button" class="btn btn-pri size01" id="orderBtn">뭉산취소</button>
+                    <form action="/updateGonggu.do" method="post">
+                    <input type="hidden" name="gongguPayNo" value="${g.gongguPayNo}">
+                    <button type="submit" class="btn btn-pri size01" id="orderBtn">뭉산취소</button>
+                    </form>
                     </c:if>
                     <c:if test="${sessionScope.m.memberId ne g.memberId }">
-                    <button type="button" class="btn btn-pri size01" id="orderBtn"><a href="/orderJoin.do">주문참여</a></button>
+                        <div class="form-box">
+                            <div>
+                                <form action="/subMoongsanOrder.do" method="post" class="subMoongsanOrderBtn">
+                                    <input type="hidden" name="productNo">
+                                    <input type="hidden" name="optionNo">
+                                    <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
+                                    <button class="btn btn-pri size01" id="orderBtn">주문참여</button>
+                                    <input type="hidden" id="option-list-null" value="${optionList}">
+                                </form>
+                            </div>
+                        </div>
                     </c:if>
                 </div>
             </div>
@@ -674,6 +687,8 @@
                     }
                 }
             });
+
+
 
             // 장바구니 담기시 성공 alert 띄우고 페이지 이동
             //알림 관련 기능

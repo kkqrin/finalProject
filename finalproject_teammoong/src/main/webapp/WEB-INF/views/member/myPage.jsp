@@ -17,7 +17,6 @@
 		'GRAD' -25,
 		'opsz' 20;
 	}
-
 	</style>
 </head>
 <body>
@@ -42,7 +41,7 @@
 							<img src="/resources/upload/member/${sessionScope.m.memberPath }">
 							<div class="modify-propic">
 								<label for="fileUpload" class="fileUpload">
-								<span class="material-symbols-outlined camera" style="cursor: pointer;">
+								<span class="material-symbols-outlined camera" style="cursor: pointer; vertical-align: baseline;">
 									photo_camera
 								</span>
 								</label>
@@ -208,7 +207,17 @@
 	</div><!-- content-wrap -->
 	
 
-	
+	<!-- 알림 모달 -->
+	<div id="alertModal" class="modal modal-sec">
+				<div class="modal-content">
+					<div class="modal-header" style="padding: 40px; height: auto;">
+						<h6 id="alertTitle" style="text-align: center;"></h6>
+					</div>
+					<div class="area-btn center">
+						<a rel="modal:close" class="btn btn-sec size01" style="cursor: pointer;">확인</a>
+					</div>
+				</div>
+	</div><!--모달창-->
 
 
 
@@ -543,7 +552,11 @@
 				$(".propic").children('img').attr('src',e.target.result);
 			};
 			reader.readAsDataURL(input.files[0]);
-			alert("[정보 수정하기]버튼을 눌러주셔야 새로운 이미지가 반영됩니다!");
+			$("#alertTitle").html("[정보 수정하기]버튼을 눌러주셔야<br>새로운 이미지가 반영됩니다!");
+            $("#alertModal").modal({
+				 showClose: false,
+	             fadeDuration: 100
+	        });
 		}
 		//파일 이미지
 

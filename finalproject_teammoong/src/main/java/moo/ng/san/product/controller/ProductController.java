@@ -116,7 +116,6 @@ public class ProductController {
 //		System.out.println(list);
 //		System.out.println(detailCategoryList);
 		
-		
 		// 최근 본 상품 select
 		selectRecentProduct(m, model);
 		
@@ -136,6 +135,7 @@ public class ProductController {
 		
 		System.out.println("sCategoryNo : "+sCategoryNo);
 		System.out.println(sortType);
+		
 		ArrayList<Product> list = service.selectInfiniteScrollProductList(start, amount, fCategoryNo, sCategoryNo, sortType);
 		
 		System.out.println(list);
@@ -225,12 +225,12 @@ public class ProductController {
 	
 	// 인기 상품 리스트
 	@RequestMapping(value="/bestProductList.do")
-	public String bestProductList(String categoryNo, Model model) {
+	public String bestProductList(String categoryNo, Model model, @SessionAttribute(required=false) Member m) {
 		System.out.println("categoryNo : "+categoryNo);
 		
 		// 카테고리 리스트
 		ArrayList<Category> categoryList = service.selectCategoryList();		
-		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("categoryList", categoryList);		
 		
 		int iCategoryNo = 0;
 		if(categoryNo != null) {
@@ -240,6 +240,12 @@ public class ProductController {
 		// 인기 상품 리스트
 		ArrayList<Product> bestProductList = service.selectBestProductList(iCategoryNo);
 		model.addAttribute("bestProductList", bestProductList);
+		
+		// 카테고리 구분
+		model.addAttribute("sCategory", iCategoryNo);
+
+		// 최근 본 상품 select
+		selectRecentProduct(m, model);
 		
 		return "product/bestProductList";
 	}
@@ -365,6 +371,7 @@ public class ProductController {
 			int cnt = gongguService.selectGongguPayCount(gongguList.get(i).getGongguNo());
 			gongguList.get(i).setUseCnt(cnt);
 		}
+		
 		model.addAttribute("gongguList",gongguList);
 		// 옵션 조회 (규린)
 		ArrayList<Option> optionList = service.selectOptionList(productNo);
@@ -400,12 +407,23 @@ public class ProductController {
 	}
 	@GetMapping("/main.do")
 	public String selectProductList(Model model, @SessionAttribute(required=false) Member m) {
-		ArrayList<Product> list = service.selectProductList();
-		model.addAttribute("productList",list);
 		
+		// (임시) 상품리스트
+		ArrayList<Product> productList = service.selectProductList();
+		model.addAttribute("productList",productList);
 
 		// 최근 본 상품 select
 		selectRecentProduct(m, model);
+		
+		// 핫딜
+		
+		// 재고 없는 상품 리스트
+		ArrayList<Product> soldOutList = service.selectSoldOutProductList();
+		model.addAttribute("soldOutList", soldOutList);
+		
+		// 할인률 높은 상품 리스트
+		ArrayList<Product> highSaleList = service.selectHighSaleProductList();
+		model.addAttribute("highSaleList", highSaleList);
 		
 		
 		return "common/main";

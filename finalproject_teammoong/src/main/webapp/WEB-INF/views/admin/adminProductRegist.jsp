@@ -6,64 +6,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- jquery -->
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<!-- 여여붙 data tables -->
-	<script type="text/javascript" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css"/>
-<!-- google icon -->
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-	<!-- css -->
-	<link rel="stylesheet" href="/resources/css/admin/admin.css" />
+	<!-- default 적용 -->
 	<link rel="stylesheet" href="/resources/css/common/default.css" />
 </head>
 <style>
-    .adminPage-main{
-        background-color: #D8EAF0;
-    }
-    .adminPage-content{
-        background-color: #fff;
-        overflow: hidden;
-    }
-    .material-symbols-outlined{
-        font-size: 150px !important;
-        
-    }
-    .mainContent{
-        float: left;
-        width: 300px;
-        height: 400px;
-        text-align: center;
-    }
-    .adminPage-content{
-    	background-color: #D8EAF0;
-    }
-    
-    .table{
-    	border: 1px solid black;
-    	
-    }
-    .table>tbody>tr>th{
-    	border: 1px solid black;
-    }
-    .table>tbody>tr>td{
-    	border: 1px solid black;
-    }
-    .searchForm{
-    	display: none;
-    }
-    #categorySelect{
-    	display: none;
-    }
-    #searchOption{
-    	width: 300px !important;
-    }
+	.adminPage-main{
+		overflow: hidden;
+	}
 
-
-
+	.adminPage-content{
+		float: left;
+	}
 </style>
 <body>
-    <c:if test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
+<c:if test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
         <!-- 관리자일때만 페이지 보이게 세팅 -->
     </c:if>
     <div class="adminPage-wrapper">
@@ -114,26 +70,32 @@
                     	</div>
                     </div>
                     <div class="adminPage-result">
-                        <table class="table">
+                        <table class="table guide-board tbl-box">
                             <tr>
-                           		<td>구분</td>
-                            	<td>게시글 번호</td>
-                                <td>카테고리 번호</td>
-                            	<td>작성자</td>
-                                <td>게시일자</td>
-                                <td>공구 시작일</td>
-                                <td>공구 마감일</td>
-                                <td>공구 진행여부</td>
-                            	<td>상품명</td>
-                                <td>상품가격</td>
+                            	<td>구분</td>
+                           		<td>사업자명</td>
+                            	<td>사업자등록번호</td>
+                                <td>대표 전화번호</td>
+                            	<td>사업장 주소</td>
+                                <td>담당자명</td>
+                                <td>담당자 연락처</td>
+                                <td>카테고리</td>
+                                <td>사업자등록증 다운로드</td>
+                            	<td>요청 제목</td>
                             </tr>
-                            <c:forEach items="${boardList }" var="b">
-                            	<c:forEach items="${b.boardOptionList }" var="bo">
+                            <c:forEach items="${askList }" var="a">
                                 <tr>
                                 	<td><input type="checkBox" id="checkBox"></td>
-                                    <td>${b.boardNo }<input type="hidden" class="boardNo" value="${b.boardNo }"></td>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo == 1}">
+                                    <td>${a.corpName }<input type="hidden" class="corpName" value="${a.corpName }"></td>
+                                    <td>${a.regNo }</td>
+                                    <td>${a.repName }</td>
+                                    <td>${a.corpAddr1 }</td>
+                                    <td>${a.corpAddr2 }</td>
+                                    <td>${a.contName }</td>
+                                    <td>${a.contPhone }</td>
+                                    <td>${a.contMail }</td>
+                                    <%-- <c:choose>
+                                    	<c:when test="${a.detailCategoryNo == 1}">
                                     		<td>패션</td>
                                     	</c:when>
                                     </c:choose>
@@ -202,10 +164,7 @@
                                     		<td>테스트용인듯</td>
                                     	</c:when>
                                     </c:choose>
-                                    <td>${b.boardWriter }</td>
-                                    <td>${b.boardDate }</td>
-                                    <td>${b.boardStart }</td>
-                                    <td>${b.boardEnd }</td>
+                                    
                                     <c:choose>
                                     	<c:when test="${b.boardStatus == 1 }">
                                     		<td>진행</td>
@@ -213,11 +172,10 @@
                                     	<c:when test="${b.boardStatus == 2 }">
                                     		<td>마감</td>
                                     	</c:when>
-                                   	</c:choose>
-		                             <td>${bo.detailName }</td>
-		                             <td>${bo.detailPrice }원</td>
-		                             </c:forEach>
-                            	</c:forEach>
+                                   	</c:choose> --%>
+		                             <td>${a.askTitle }</td>
+		                             <td>${a.askDate }</td>
+	                            </c:forEach>
                                 </tr>
                             <tr>
                                 <th colspan="10">${pageNavi}</th>
@@ -231,136 +189,5 @@
     </div>
 
 
-<!-- 스크립트를 넣어봅시다 -->
-    <script>
-
-    /* 검색기능 */
-    
-    //첫번째 셀렉트 창 변경시 
-    $("#boardSearchSelect").on("change",function(){
-    	
-	   	 var boardSearchOption = $("#boardSearchSelect option:selected").val();
-		 
-	     var detailCategoryNo = $("#searchCategoryNo").val();
-	   	 var detailName = $("#searchDetailName").val();
-	   	 var boardStatus = $("#searchBoardStatus").val();
-	   	 
-	   	 var boardSearchBox = $("[name=boardSearchBox]"); // 검색 박스
-	   	 var boardSearchBoxVal = $("[name=boardSearchBox]").val(); // 검색박스 값
-	   	 
-	   	 var categorySelectBox = $("[name=categorySelectBox]"); // 추가 카테고리 셀렉트 박스
-	   	 var categorySelectVal = $("[name=categorySelectBox]").val(); // 추가 카테고리 셀렉트 박스 value
-	   	
-	   	detailCategoryNo = '';
-	   	detailName= '';
-	   	boardStatus= '';
-	   	 
-	   	if(boardSearchOption == 'categoryNo'){
-	   		boardSearchBox.hide();
-	   		categorySelectBox.show();
-		}else if(boardSearchOption == 'detailName'){
-	   		boardSearchBox.hide();
-	   		categorySelectBox.hide();
-	   		boardSearchBox.show();
-		}else if(boardSearchOption == 'boardStatus'){
-			boardSearchBox.hide();
-	   		categorySelectBox.hide();
-	   		boardSearchBox.show();
-		}
-    });
-	   	 
-    //검색 버튼을 눌렀을때
-	    $("[name=searchSubmitBtn]").on("click",function(){
-	    	 boardSearchOption = $("#boardSearchSelect option:selected").val();
-			 
-	         detailCategoryNo = $("#searchCategoryNo").val();
-	       	 detailName = $("#searchDetailName").val();
-	       	 boardStatus = $("#searchBoardStatus").val();
-	       	 
-	       	 boardSearchBox = $("[name=boardSearchBox]"); // 검색 박스
-	       	 boardSearchBoxVal = $("[name=boardSearchBox]").val(); // 검색박스 값
-	       	 
-	       	 categorySelectBox = $("[name=categorySelectBox]"); // 추가 카테고리 셀렉트 박스
-	       	 categorySelectVal = $("[name=categorySelectBox]").val(); // 추가 카테고리 셀렉트 박스 value
-	   	 
-	  	 	if(boardSearchOption == 'categoryNo'){
-				if(categorySelectBox.on("change")){
-				 	categorySelectVal = $(this).prev().prev().val();
-				}
-				
-		   		detailCategoryNo = categorySelectVal;
-		   		detailName = '';
-		   		boardStatus = '0';
-		   		
-		   	 }else if(boardSearchOption == 'detailName'){
-		   		detailCategoryNo = '0';
-		   		detailName = boardSearchBoxVal;
-		   		boardStatus = '0';
-		   		
-		   	 }else if(boardSearchOption == 'boardStatus'){
-		   		 
-		   		 if(boardSearchBoxVal == '진행'){
-		       		boardStatus = 1;
-		       		
-		   		 }else if(boardSearchBoxVal == '마감'){
-		   			boardStatus = 2; 
-		   		 }
-		       		detailCategoryNo = '0';
-		   			detailName = '';
-		   	 }
-	  	 	
-	    	 $.ajax({
-	            url: "/ajaxAdminSearchBoard.do",
-	            type: "POST",
-	            data: {detailCategoryNo : detailCategoryNo, detailName : detailName, boardStatus : boardStatus},
-	            success: function(data) {
-	            	if(data){
-	            		$("#ajaxResult").empty();
-	            			$(".adminPage-result").hide();
-							console.log(data);
-							const table =$("<table>");
-							const titleTr = $("<tr>");
-							titleTr.html("<th>구분</th><th>게시글 번호</th><th>카테고리 번호</th><th>작성자</th><th>게시일자</th><th>공구 시작일</th><th>공구 마감일</th><th>공구 진행여부</th><th>상품명</th><th>상품가격</th>");
-							table.append(titleTr);
-							for(let i=0;i<data.length;i++){
-								for(let j=0;j<data[i].boardOptionList.length;j++){
-								const tr = $("<tr>");
-								tr.append("<td>"+"</td>")
-								tr.append("<td>"+data[i].boardNo+"</td>");
-								tr.append("<td>"+data[i].detailCategoryNo+"</td>");
-								tr.append("<td>"+data[i].boardWriter+"</td>");
-								tr.append("<td>"+data[i].boardDate+"</td>");
-								tr.append("<td>"+data[i].boardStart+"</td>");
-								tr.append("<td>"+data[i].boardEnd+"</td>");
-								
-								if(data[i].boardStatus == 1){
-									tr.append("<td>진행</td>");
-								}else if(data[i].boardStatus == 2){
-									tr.append("<td>마감</td>");
-								}
-								
-								tr.append("<td>"+data[i].boardOptionList[j].detailName+"</td>");
-								tr.append("<td>"+data[i].boardOptionList[j].detailPrice+"원</td>");
-								table.append(tr);
-								
-								} 
-								
-						}
-						$("#ajaxResult").append(table);
-	            		
-	            	}else{
-	    				console.log("다시 시도");
-	            	}
-	            }
-	        })
-	   		 
-	    });
-	   	
-    
-    
-    
-        
-    </script>
-    
 </body>
 </html>

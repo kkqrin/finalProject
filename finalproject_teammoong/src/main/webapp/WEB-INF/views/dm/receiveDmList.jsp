@@ -9,31 +9,6 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-<style>
-	.modal-wrapper{
-		display:none;
-	    position: fixed;
-	    width: 100vw;
-	    height: 100vh;
-	    background-color: rgb(0, 0,0,0.5);
-	    top:0;
-	    left:0;
-	    justify-content: center;
-	    align-items: center;
-	}
-	
-	.custom-modal{
-	    width: 350px;
-	    background-color: #fff;
-	}
-	.modal-header{
-	    padding: 10px;
-	}
-	.modal-content{
-	    padding: 20px;
-	}
-
-</style>
 	<div class="content-wrap">
 		<div class="mypage-wrap">
 		

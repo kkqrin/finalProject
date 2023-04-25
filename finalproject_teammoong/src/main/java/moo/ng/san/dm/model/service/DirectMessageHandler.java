@@ -54,6 +54,18 @@ public class DirectMessageHandler extends TextWebSocketHandler{
 			String resultStr = new Gson().toJson(obj); //<--보내주는건 String타입이어야 하므로 객체를 스트링타입으로 변형
 			TextMessage tm = new TextMessage(resultStr); //전송양식
 			session.sendMessage(tm);
+		}else if(type.equals("sendDm")) {//쪽지 받을 사람이 접속해있다면, 실시간으로 알림을 갱신해준다
+			String memberId = element.getAsJsonObject().get("dmReceiver").getAsString();
+			WebSocketSession dmReceiver = connectionMemberList.get(memberId);
+			if(dmReceiver!=null) {//dmReceiver가 현재 접속중일 때만 코드 실행한다
+				int dmCount = service.selectDmCount(memberId);
+				JsonObject obj = new JsonObject();
+				obj.addProperty("type", "myDmCount");
+				obj.addProperty("dmCount", dmCount); //<--받아온 결과(dmCount)를 사용해서 객체처리 완
+				String resultStr = new Gson().toJson(obj); //<--보내주는건 String타입이어야 하므로 객체를 스트링타입으로 변형
+				TextMessage tm = new TextMessage(resultStr); //전송양식
+				dmReceiver.sendMessage(tm);
+			}//if
 		}else if(type.equals("readCheck")) {
 			String dmReceiver = element.getAsJsonObject().get("dmReceiver").getAsString(); //<--읽은쪽지 개수가 줄어야 하는 사람
 			int dmCount = service.selectDmCount(dmReceiver);
@@ -64,12 +76,13 @@ public class DirectMessageHandler extends TextWebSocketHandler{
 			String resultStr = new Gson().toJson(obj);
 			TextMessage tm = new TextMessage(resultStr);
 			session.sendMessage(tm); //<-- 여기까지 . 쪽지를 읽은 회원의 읽지 않은 쪽지 수를 갱신함
-
 		}//else if. type이 readCheck일때
 	}
 	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+		//접속을 끊었을 때 접속이 끊긴 회원을 HashMap에서 삭제해주기
+		connectionMemberList.values().remove(session);
 	}
 	
 }//DirectMessageHandler

@@ -1,5 +1,6 @@
 package moo.ng.san.admin.model.dao;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import moo.ng.san.admin.model.vo.CouponData;
 import moo.ng.san.admin.model.vo.SalesData;
+import moo.ng.san.askItem.model.vo.AskItem;
 import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.board.model.vo.BoardJoin;
 import moo.ng.san.board.model.vo.BoardOption;
@@ -64,19 +66,21 @@ public class AdminDao {
 		return Integer.toString(result);
 
 	}
-
-	public String selectVariationOrder() {
+	
+	
+	//이전 버전. 
+	/*
+	public String selectVariationOrder(LocalDate firstDayOfMonth, LocalDate lastDayOfMonth) {
 		int beforeOrder = sqlSession.selectOne("admin.selectBeforeOrder");
 		int allOrder = sqlSession.selectOne("admin.selectAllOrder");
 		int result = allOrder - beforeOrder;
 		
 		return Integer.toString(result);
 	}
+	*/
 
-	public String selectVariationBoard() {
-		int beforeBoard = sqlSession.selectOne("admin.selectBeforeBoard");
-		int allBoard = sqlSession.selectOne("admin.selectAllBoardCount");
-		int result = allBoard - beforeBoard;
+	public String selectVariationBoardCount(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("admin.selectVariationBoardCount",map);
 		
 		return Integer.toString(result);
 	}
@@ -272,10 +276,17 @@ public class AdminDao {
 		return sd;
 	}
 
-	public ArrayList<SalesData> selectMonthSalesData(int monthNo) {
-		List list = sqlSession.selectList("admin.selectMonthSalesData",monthNo);
+	public SalesData selectMonthSalesData(HashMap<String, Object> map) {
+		SalesData sd = sqlSession.selectOne("admin.selectMonthSalesData",map);
 		
-		return (ArrayList<SalesData>)list;
+		if(sd == null) {
+			sd = new SalesData();
+			sd.setTotalSales(0);
+        	sd.setTotalCost(0);
+        	
+		}
+		
+		return sd;
 	}
 
 	public ArrayList<SalesData> selectGenderSalesData() {
@@ -288,6 +299,54 @@ public class AdminDao {
 		Member m = sqlSession.selectOne("admin.ajaxMemberView",memberNo);
 		// TODO Auto-generated method stub
 		return m;
+	}
+
+	public String selectVariationMemberCount() {
+		int memberCount = sqlSession.selectOne("admin.selectVariationMemberCount");
+		// TODO Auto-generated method stub
+		return Integer.toString(memberCount);
+	}
+
+	/* 예전버전
+	 * public String selectVariationOrderCount() { String orderCount =
+	 * sqlSession.selectOne("admin.selectVariationOrderCount"); // TODO
+	 * Auto-generated method stub return null; }
+	 */
+
+	public String selectVariationOrderCount(HashMap<String, Object> map) {
+		int orderCount = sqlSession.selectOne("admin.selectVariationOrderCount", map);
+		
+		return Integer.toString(orderCount);
+	}
+
+	public String selectVariationSalesCount(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("admin.selectVariationSalesCount",map);
+		// TODO Auto-generated method stub
+		return Integer.toString(result);
+	}
+
+	public ArrayList<AskItem> selectAskItemList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("admin.selectAskItemList",map);
+		// TODO Auto-generated method stub
+		return (ArrayList<AskItem>)list;
+	}
+
+	public int selectAskItemCount() {
+		int count = sqlSession.selectOne("admin.selectAskItemCount");
+		// TODO Auto-generated method stub
+		return count;
+	}
+
+	public SalesData selectBestSalesCategory() {
+		SalesData list = sqlSession.selectOne("admin.selectBestSalesCategory");
+		
+		return list;
+	}
+
+	public ArrayList<SalesData> selectOtherSalesCategory() {
+		List list = sqlSession.selectList("admin.selectOtherSalesCategory");
+		
+		return (ArrayList<SalesData>)list;
 	}
 
 

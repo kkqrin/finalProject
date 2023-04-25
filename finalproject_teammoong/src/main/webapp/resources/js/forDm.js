@@ -3,7 +3,7 @@ let ws;
 
 	$(function(){
 		memberId = $("#memberId").val();
-		ws = new WebSocket("ws://192.168.123.102/dm.do");
+		ws = new WebSocket("ws://192.168.10.41/dm.do");
 		ws.onopen = startDm;
 		ws.onmessage = receiveMsg;
 		ws.onclose = endDm;
@@ -29,5 +29,5 @@ let ws;
 	
 	
 	function endDm(){
-		console.log("DM 소켓 연결 종료");
+		//안쓸거여도 함수 선언은 해 둬야 함
 	}

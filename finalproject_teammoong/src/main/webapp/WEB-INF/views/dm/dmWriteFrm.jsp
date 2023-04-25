@@ -52,6 +52,20 @@
 		</div><!-- mypage-right -->
 		
 		</div>
+		
+		
+		<!-- 알림 모달 -->
+		<div id="dmAlertModal" class="modal modal-sec">
+				<div class="modal-content">
+					<div class="modal-header" style="padding: 40px; height: auto;">
+						<h6 id="alertTitle" style="text-align: center;"></h6>
+					</div>
+					<div class="area-btn center">
+						<a rel="modal:close" class="btn btn-sec size01" style="cursor: pointer;">확인</a>
+					</div>
+				</div>
+		</div><!--모달창-->
+		
 	</div><!-- content-wrap -->
 	
 	
@@ -71,10 +85,18 @@
 					data:{memberId:dmReceiver},
 					success:function(result){
 						if(result=="dup"){
-							alert('쪽지 보내기가 가능한 회원입니다');
+							$("#alertTitle").text("쪽지 보내기가 가능한 회원입니다");
+				            $("#dmAlertModal").modal({
+								 showClose: false,
+					             fadeDuration: 100
+					        });
 							sendChk = true;
 						}else{
-							alert('존재하지 않는 회원입니다');
+							$("#alertTitle").text("존재하지 않는 회원입니다");
+				            $("#dmAlertModal").modal({
+								 showClose: false,
+					             fadeDuration: 100
+					        });
 							sendChk = false;
 						}
 					}
@@ -87,11 +109,19 @@
 			const dmContent = $("[name='dmContent']").val();
 			if(!sendChk){
 				e.preventDefault();
-				alert("[확인] 버튼을 눌러 받을 사람을 확인해주세요");
+				$("#alertTitle").text("[확인] 버튼을 눌러 받을 사람을 확인해주세요");
+	            $("#dmAlertModal").modal({
+					 showClose: false,
+		             fadeDuration: 100
+		        });
 				$("[name='dmReceiver']").focus();
 			}else if(dmContent==""){
 				e.preventDefault();
-				alert("쪽지 내용을 작성해주세요");
+				$("#alertTitle").text("쪽지 내용을 입력해주세요");
+	            $("#dmAlertModal").modal({
+					 showClose: false,
+		             fadeDuration: 100
+		        });
 				$("[name='dmContent']").focus();
 			}else{
 				const dmReceiver = $("[name='dmReceiver']").val();
@@ -101,11 +131,24 @@
 					data:{dmSender:memberId, dmReceiver:dmReceiver, dmContent:dmContent},
 					success:function(result){
 						if(result=="ok"){
-							alert("쪽지를 발송하였습니다.");
+
+							$("#alertTitle").text("쪽지를 발송하였습니다");
+				            $("#dmAlertModal").modal({
+								 showClose: false,
+					             fadeDuration: 100
+					        });
+							
+							
 							$("[name='dmReceiver']").val("");
 							$("[name='dmContent']").val("");
+							const sendData = {type:"sendDm",dmReceiver:dmReceiver};
+				            ws.send(JSON.stringify(sendData));
 						}else{
-							alert("쪽지 전송에 실패했습니다. 관리자에게 문의해주세요.");
+							$("#alertTitle").text("쪽지 전송에 실패하였습니다. 관리자에게 문의해주세요");
+				            $("#dmAlertModal").modal({
+								 showClose: false,
+					             fadeDuration: 100
+					        });
 						}
 					}
 				})//ajax

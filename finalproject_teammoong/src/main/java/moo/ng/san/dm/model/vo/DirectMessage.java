@@ -24,9 +24,5 @@ public class DirectMessage {
 	private String dmDateHour;
 	
 	private int dmReadChk;
-	
-	public String getDmContentBr() {
-		return dmContent.replaceAll("\n", "<br>");
-	}
-	
+
 }

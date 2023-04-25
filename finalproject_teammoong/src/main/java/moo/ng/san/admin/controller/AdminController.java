@@ -1,5 +1,7 @@
 package moo.ng.san.admin.controller;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import moo.ng.san.admin.model.service.AdminService;
+import moo.ng.san.admin.model.vo.AdminAskItemPageData;
 import moo.ng.san.admin.model.vo.AdminBoardPageData;
 import moo.ng.san.admin.model.vo.AdminMemberPageData;
 import moo.ng.san.admin.model.vo.AdminOrderPageData;
@@ -34,6 +37,7 @@ public class AdminController {
 	/* 페이징 처리 */
 	@RequestMapping(value="/admin.do")
 	public String admin() {
+
 		return "admin/admin";
 	}
 	// ========================================================================
@@ -45,6 +49,45 @@ public class AdminController {
 		model.addAttribute("pageNavi",ampd.getPageNavi());
 		
 		return "admin/adminMemberPage";
+	}
+	
+	// 전체 카운트
+	@ResponseBody
+	@RequestMapping(value="/ajaxTotalCount.do", produces="application/json;charset=utf-8")
+	public String ajaxTotalCountSelect(Model model) {
+		String memberCount = service.selectAllMemberCount();
+		String memberVariation = service.selectVariationMemberCount();
+		String orderCount = service.selectAllOrderCount();
+		String orderVariation = service.selectVariationOrderCount();
+		String boardCount = service.selectAllBoardCount();
+		String boardVariation = service.selectVariationBoardCount();
+		String salesCount = service.selectAllSalesCount(); 
+		String salesVariation = service.selectVariationSalesCount();
+		//하단부터는 논의가 필요함
+		/*
+		String bestSalesCount = service.selectBestSalesCount();
+		String couponCount = service.selectEventCount(); 
+		*/
+		
+		String[] total = new String[10];
+		total[0] = memberCount;
+		total[1] = memberVariation;
+		total[2] = orderCount;
+		total[3] = orderVariation; 
+		total[4] = boardCount;
+		total[5] = boardVariation;
+		total[6] = salesCount;
+		total[7] = salesVariation;
+		// 하단은 논의가 필요
+		/*
+		total[8] = bestSalesCount;
+		total[9] = couponCount;
+		*/
+		
+		Gson gson = new Gson();
+		String result = gson.toJson(total);
+		return result;
+		
 	}
 	
 	// 개별 회원 등급 변경
@@ -104,20 +147,65 @@ public class AdminController {
 	@RequestMapping(value="/adminTotalSalesManage.do")
 	public String adminTotalSalesPage(int reqPage, Model model) {
 		
+		ArrayList<SalesData> list = new ArrayList<SalesData>();
+		
+		for(int i=1;i<13;i++) {
+			SalesData sd = service.selectCountMonthSalesData(i);
+			if(sd != null) {
+				sd.setMonthNo(i);
+				list.add(sd);
+			}else {
+				sd = new SalesData();
+				sd.setMonthNo(i);
+				sd.setTotalSales(i*10000);
+				sd.setTotalCost(i*8000);
+				list.add(sd);
+			}
+		}
+		
+		int totalSales = 0;
+		for(SalesData sd : list) {
+			totalSales += sd.getTotalSales();
+		}
+		
+		LocalDate today = LocalDate.now();  // 오늘 날짜
+		YearMonth thisMonth = YearMonth.from(today);  // 이번 달
+		int monthValue = thisMonth.getMonthValue();  // 이번 달의 숫자값 (1~12)
+		
+		SalesData sd = service.selectCountMonthSalesData(monthValue);
+		
+		model.addAttribute("monthSales",sd.getTotalSales());
+		model.addAttribute("totalSales",totalSales);
+		
 		return "admin/adminTotalSalesPage";
 	}
 	
 	/* 1년 판매/원가 차트, x축 1~12월 */
 	@ResponseBody
 	@RequestMapping(value="/ajaxTotalSalesManage.do", produces = "application/json;charset=utf-8")
-	public String ajaxTotalSalesManage() {
+	public String ajaxTotalSalesManage(Model model) {
 		ArrayList<SalesData> list = new ArrayList<SalesData>();
 		
 		for(int i=1;i<13;i++) {
 			SalesData sd = service.selectCountMonthSalesData(i);
-			sd.setMonthNo(i);
-			list.add(sd);
+			if(sd != null) {
+				sd.setMonthNo(i);
+				list.add(sd);
+			}else {
+				sd = new SalesData();
+				sd.setMonthNo(i);
+				sd.setTotalSales(i*10000);
+				sd.setTotalCost(i*8000);
+				list.add(sd);
+			}
 		}
+		
+		int totalSales = 0;
+		for(SalesData sd : list) {
+			totalSales += sd.getTotalSales();
+		}
+		
+		model.addAttribute("totalSales",totalSales);
 		
 		Gson gson = new Gson();
 		String result = gson.toJson(list);
@@ -128,15 +216,23 @@ public class AdminController {
 	
 	@ResponseBody
 	@RequestMapping(value="/ajaxTotalCategorySalesManage.do", produces = "application/json;charset=utf-8" ) 
-	public String ajaxTotalCategorySalesManage() { 
+	public String ajaxTotalCategorySalesManage(Model model) { 
 		ArrayList<SalesData> list = new ArrayList<SalesData>();
 		 
 		for(int i=1;i<14;i++) { // 카테고리 개수 
 			SalesData sd = service.selectCountMonthCategorySalesData(i); 
-			sd.setCategoryNo(i);
-			list.add(sd); 
+			if(sd != null) {
+				sd.setCategoryNo(i);
+				list.add(sd); 
+			}else {
+				sd = new SalesData();
+				sd.setCategoryNo(i);
+				sd.setTotalCost(i*10000);
+				sd.setTotalSales(i*12000);
+				list.add(sd);
+			}
 		}
-		
+
 		Gson gson = new Gson(); 
 		String result = gson.toJson(list); 
 		return result;
@@ -148,7 +244,6 @@ public class AdminController {
 	@RequestMapping(value="/ajaxSelectMonthSales.do", produces = "application/json;charset=utf-8")
 	public String ajaxVariationMonthSales(int monthNo) {
 		ArrayList<SalesData> list = service.selectMonthSalesData(monthNo);
-		
 		Gson gson = new Gson(); 
 		String result = gson.toJson(list); 
 		return result;
@@ -168,7 +263,8 @@ public class AdminController {
 	
 	/* 매출보고서 출력 새창 경로*/
 	@RequestMapping(value="salesReportPrint.do")
-	public String salesReportPrint() {
+	public String salesReportPrint(Model model) {
+		
 		return "admin/salesReport";
 	}
 	
@@ -192,14 +288,35 @@ public class AdminController {
 		
 	}
 	
-	
-	
-	
-	
-	/* 전체 매출 차트*/
-	
-	
 	/* 카테고리별 매출관리 */
+	// 카테고리별 매출 중 연간 카테고리 매출
+	
+	@RequestMapping(value="/adminCategorySalesManage.do")
+	public String adminCategorySalesManage(Model model) {
+		SalesData bestSales = service.selectBestSalesCategory();
+		ArrayList<SalesData> otherSalesList = service.selectOtherSalesCategory();
+		int bestSal = bestSales.getTotalSales();
+		int bestCos = bestSales.getTotalCost();
+		double bestProfit = Math.floor((1-(bestCos/(double)bestSal))*100);
+		double [] otherProfit = new double[otherSalesList.size()];
+		
+		for(int i=0;i < otherSalesList.size();i++) {
+			int otherSal = otherSalesList.get(i).getTotalSales();
+			int otherCos = otherSalesList.get(i).getTotalCost();
+			otherProfit[i] = Math.floor((1-(otherCos / (double)otherSal))*100);
+		}
+		
+		model.addAttribute("bestSales",bestSales);
+		model.addAttribute("otherSalesList",otherSalesList);
+		model.addAttribute("bestProfit",bestProfit);
+		model.addAttribute("otherProfit",otherProfit);
+		
+		return "admin/adminCategorySalesManage";
+	}
+	
+	
+	
+	
 	
 	// ========================================================================
 	/* 상품관리 */
@@ -246,9 +363,9 @@ public class AdminController {
 		boolean result = service.updateChangeProductStatus(no, level);
 		
 		if(result) {
-			return "redirect:/";
+			return "admin/adminProductManagePage";
 		}else {
-			return "redirect:/";
+			return "redirect:/admin/admin";
 		}
 	}
 	
@@ -285,6 +402,20 @@ public class AdminController {
 		String result = gson.toJson(list);
 		return result;
 	}
+	
+	/* 입점 문의 */
+	@RequestMapping(value="adminProductRegist.do")
+	public String adminProductRegistList(Model model, int reqPage) {
+		AdminAskItemPageData aapd = service.selectAskItemList(reqPage);
+		model.addAttribute("askList",aapd.getList());
+		model.addAttribute("pageNavi",aapd.getPageNavi());
+		
+		return "admin/adminProductRegist";
+	}
+	
+	
+	
+	
 	
 	
 	//===========================================================================
@@ -398,29 +529,7 @@ public class AdminController {
 	 * String result = service.selectEventCount(); return result; }
 	 */
 	
-	// 전체 카운트
-	@ResponseBody
-	@RequestMapping(value="/ajaxTotalCount.do", produces="application/json;charset=utf-8")
-	public String ajaxTotalCountSelect(Model model) {
-		String memberCount = service.selectAllMemberCount();
-		String orderCount = service.selectAllOrderCount();
-		String boardCount = service.selectAllBoardCount();
-		String salesCount = service.selectAllSalesCount(); 
-		String bestSalesCount = service.selectBestSalesCount();
-		String couponCount = service.selectEventCount(); 
-		
-		String[] total = new String[6];
-		total[0] = memberCount;
-		total[1] = orderCount;
-		total[2] = boardCount;
-		total[3] = salesCount;
-		total[4] = bestSalesCount;
-		total[5] = couponCount;
-		Gson gson = new Gson();
-		String result = gson.toJson(total);
-		return result;
-		
-	}
+
 		
 	
 	// 증감
@@ -431,21 +540,21 @@ public class AdminController {
 		String result = service.selectVariationMember();
 		return result;
 	}
-	
-	@ResponseBody
-	@RequestMapping(value="/ajaxVariationOrder.do")// 숫자 하나 넘겨주는거니까 json은 없어도 될 듯, produces = "application/json;charset=utf-8"
-	public String orderVariationSelect() {
-		String result = service.selectVariationOrder();
-		return result;
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="/ajaxVariationBoard.do")// 숫자 하나 넘겨주는거니까 json은 없어도 될 듯, produces = "application/json;charset=utf-8"
-	public String boardVariationSelect() {
-		String result = service.selectVariationBoard();
-		return result;
-	}
-
+	/*
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value="/ajaxVariationOrder.do")// 숫자 하나 넘겨주는거니까 json은 없어도 될
+	 * 듯, produces = "application/json;charset=utf-8" public String
+	 * orderVariationSelect() { String result = service.selectVariationOrder();
+	 * return result; }
+	 * 
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value="/ajaxVariationBoard.do")// 숫자 하나 넘겨주는거니까 json은 없어도 될
+	 * 듯, produces = "application/json;charset=utf-8" public String
+	 * boardVariationSelect() { String result = service.selectVariationBoard();
+	 * return result; }
+	 */
 	
 	/* 회원관리 페이지*/
 	
