@@ -24,6 +24,7 @@
 			(SELECT FILEPATH FROM PRODUCT_IMG WHERE P_IMG_NO=(SELECT MIN(P_IMG_NO) FROM PRODUCT_IMG where product_no=p.product_no)) AS thumbnail,
 			p.product_name AS productName,
 			p.product_price AS productPrice,
+			p.PRODUCT_COST AS productCost,
 			p.product_discount AS productDiscount,
 			oi.option_info_no AS optionNo,
 			oi.option_dateail AS optionDetailName,
