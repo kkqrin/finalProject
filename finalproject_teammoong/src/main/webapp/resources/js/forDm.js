@@ -1,8 +1,8 @@
-let memberId;
+let forDmMemberId;
 let ws;
 
 	$(function(){
-		memberId = $("#memberId").val();
+		forDmMemberId = $("#memberId").val();
 		ws = new WebSocket("ws://192.168.10.41/dm.do");
 		ws.onopen = startDm;
 		ws.onmessage = receiveMsg;
@@ -11,7 +11,7 @@ let ws;
 	
 	
 	function startDm(){
-		const data = {type:"enter",memberId:memberId};
+		const data = {type:"enter",memberId:forDmMemberId};
 		ws.send(JSON.stringify(data)); //객체를 긴 문자열로 바꿔서 보내줘야 함
 	}
 	

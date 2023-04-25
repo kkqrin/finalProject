@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import moo.ng.san.dm.model.vo.DirectMessage;
+import moo.ng.san.notice.model.vo.Notice;
 
 @Repository
 public class DmDao {
@@ -19,10 +20,10 @@ public class DmDao {
 		return sqlSession.insert("directMessage.insertDm",dm);
 	}
 
-	public ArrayList<DirectMessage> selectAllDm(DirectMessage dm) {
-		List list = sqlSession.selectList("directMessage.selectAllDm", dm);
-		return (ArrayList<DirectMessage>)list;
-	}
+//	public ArrayList<DirectMessage> selectAllDm(DirectMessage dm) {
+//		List list = sqlSession.selectList("directMessage.selectAllDm", dm);
+//		return (ArrayList<DirectMessage>)list;
+//	}
 
 	public int selectDmCount(String memberId) {
 		return sqlSession.selectOne("directMessage.selectDmCount",memberId);
@@ -34,6 +35,15 @@ public class DmDao {
 
 	public void updateReadChk(int dmNo) {
 		sqlSession.update("directMessage.updateReadChk",dmNo);
+	}
+
+	public ArrayList<DirectMessage> selectDmList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("directMessage.selectAllDm",map);
+		return (ArrayList<DirectMessage>)list;
+	}
+
+	public int selectDmTotalCount(DirectMessage dm) {
+		return sqlSession.selectOne("directMessage.selectDmTotalCount",dm);
 	}
 
 

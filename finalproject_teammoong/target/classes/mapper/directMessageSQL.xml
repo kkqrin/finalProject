@@ -15,37 +15,48 @@
 		)
 	</insert>
 
-	<select id="selectAllDm" resultType="dm" parameterType="dm">
-			select rownum as rnum, t.*
-			    from(
-			        select
-			            dm_no as dmNo, 
-			            dm_sender as dmSender,
-			            s.member_name as dmSenderName,
-			            dm_receiver as dmReceiver,
-			            r.member_name as dmReceiverName,
-			            dm_content as dmContent,
-			            to_char(dm_date,'yyyy-mm-dd') as dmDate,
-			            to_char(dm_date,'yyyy-mm-dd hh24:mi') as dmDateHour,
-			            dm_readchk as dmReadChk
-			        from
-			            member_dm d  
-			            join member_tbl s on (d.dm_sender = s.member_id)
-			            join member_tbl r on (d.dm_receiver = r.member_id)
-			        <if test="dmReceiver != null">
-						where
-						    dm_receiver = #{dmReceiver}
-					</if>
-					<if test="dmSender != null">
-						where
-						    dm_sender = #{dmSender}
-					</if>
-			        order by 8)t
-			order by 1 desc
+	<select id="selectAllDm" resultType="dm" parameterType="map">
+			select r.*
+			from
+			    (select rownum as rnum, t.*
+			        from(
+			            select
+			                dm_no as dmNo, 
+			                dm_sender as dmSender,
+			                s.member_name as dmSenderName,
+			                dm_receiver as dmReceiver,
+			                r.member_name as dmReceiverName,
+			                dm_content as dmContent,
+			                to_char(dm_date,'yyyy-mm-dd') as dmDate,
+			                to_char(dm_date,'yyyy-mm-dd hh24:mi') as dmDateHour,
+			                dm_readchk as dmReadChk
+			            from
+			                member_dm d  
+			                join member_tbl s on (d.dm_sender = s.member_id)
+			                join member_tbl r on (d.dm_receiver = r.member_id)
+			                <if test="dm.dmReceiver != null">
+								where
+								    dm_receiver = #{dm.dmReceiver}
+							</if>
+							<if test="dm.dmSender != null">
+								where
+								    dm_sender = #{dm.dmSender}
+							</if>
+			            order by 8 desc)t)r
+			where rnum between #{start} and #{end}
 	</select>
 	
+	<select id="selectDmTotalCount" parameterType="dm" resultType="_int">
+		select
+			count(*)
+		from
+			member_dm
+		where
+			dm_receiver=#{dmReceiver}
+	</select>
 	
-	
+
+
 	
 	<select id="selectDmCount" parameterType="string" resultType="_int">
 		select
