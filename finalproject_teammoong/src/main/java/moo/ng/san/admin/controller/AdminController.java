@@ -65,8 +65,8 @@ public class AdminController {
 		String salesVariation = service.selectVariationSalesCount();
 		//하단부터는 논의가 필요함
 		/*
-		String bestSalesCount = service.selectBestSalesCount();
-		String couponCount = service.selectEventCount(); 
+		String bestSalesCount = service.selectBestSalesCount(); 쿼리문 대기
+		String couponCount = service.selectEventCount();  쿼리문 대기
 		*/
 		
 		String[] total = new String[10];
@@ -578,6 +578,7 @@ public class AdminController {
 	
 	//총 매출액은 첫 페이지꺼 쓰는걸로. 필요하다면 query 문 조건 수정
 	
+	//이거 필요 없는거 같은데?????
 	@ResponseBody
 	@RequestMapping(value="/ajaxMonthSalesCount.do")
 	public String salesMonthCount() {
