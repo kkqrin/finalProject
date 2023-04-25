@@ -51,6 +51,107 @@
             font-size: 50px;
             font-weight: 900;
         }
+
+
+
+        @font-face {
+        font-family: 'ClimateCrisisKRVF';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/ClimateCrisisKRVF.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+        }
+        @font-face {
+        font-family: 'EF_MACHO';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/EF_MACHO.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+        }
+        @font-face {
+        font-family: 'OAGothic-ExtraBold';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-ExtraBold.woff2') format('woff2');
+        font-weight: 800;
+        font-style: normal;
+        }
+        @font-face {
+        font-family: 'SEBANG_Gothic_Bold';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/SEBANG_Gothic_Bold.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+        }
+
+        
+        .bookmark {
+        width: 50px;
+        height: 70px;
+        line-height: 70px;
+        position: relative;
+        /* background-color: #f88000; */
+        background: #f12711;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to top, #f5af19, #f12711);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to top, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+        color: #fffff6;
+        margin-left: 15px;
+        border-radius: 5%;
+        box-shadow: 1px 2px 6px 0px #9f9f9f;
+        font-family: 'SEBANG_Gothic_Bold';
+        font-weight: 100;
+        top: -5px;
+        /* width: 70px;
+    height: 80px;
+    line-height: 90px;
+    position: relative;
+    background-color: #f88000;
+    color: #fffff6;
+    margin-left: 15px;
+    border-radius: 5%;
+    box-shadow: 1px 2px 6px 0px #9f9f9f;
+    font-family: 'SEBANG_Gothic_Bold'; */
+        }
+
+        .bookmark::before {
+        /* content: "";
+        position: absolute;
+        bottom: -19px;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 20px 20px 20px;
+        border-color: #f88000 #f88000 transparent #f88000; */
+
+        content: "";
+        position: absolute;
+        bottom: -23px;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 25px 25px 25px;
+        border-color: #f5af19 #f5af19 transparent #f5af19;
+        
+        /* content: "";
+    position: absolute;
+    bottom: -34px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 35px 35px 35px;
+    border-color: #f88000 #f88000 transparent #f88000; */
+
+        }
+
+        /* wrap 타이틀 */
+        .wrap-title{
+            text-align: center;
+            margin-top: 100px;
+            margin-bottom: 30px;
+        }
+
+
+
     </style>
 </head>
 <body>
@@ -60,7 +161,7 @@
     </c:if>
 
 <div class="main-content-wrap">
-    
+
     
     <h1>인기상품</h1>
     <div class="popular-product-wrap">
@@ -159,10 +260,11 @@
 
 
 
+    
 
 
 
-    <h1>핫딜</h1>
+    <h3 class="wrap-title"># 핫딜</h3>
     <div class="product-wrap hotdeal">
         <!-- 핫딜 상품 wrap -->
 
@@ -240,7 +342,7 @@
 
 
 
-    <h1>품절 임박</h1>
+    <h3 class="wrap-title"># 품절 임박</h3>
     <div class="product-wrap soldout">
         <div class="posting-item soldout">
             <div class="hotdeal-info">
@@ -258,8 +360,12 @@
 					</a>
                     <div class="gonggu-info">${p.gongguNumber}인 공동구매</div>
                     <div class="end-hotdeal soldout color-v06">
-                        남은 재고 : ${p.productEa}개
+                        <div class="bookmark">
+                            ${p.productEa}개
+                            <!-- 품절임박 -->
+                        </div>
                     </div>
+                    
                 </div>
                 <div class="posting-content">
                     <p class="posting-title">
@@ -297,7 +403,7 @@
 
 
 
-    <h1>할인률 높은 상품</h1>
+    <h3 class="wrap-title"># 할인률 높은 상품</h3>
     <div class="product-wrap highsale">
         <div class="posting-item highsale">
             <div class="hotdeal-info">
@@ -315,7 +421,10 @@
 					</a>
                     <div class="gonggu-info">${p.gongguNumber}인 공동구매</div>
                     <div class="end-hotdeal highsale color-v06">
-                        할인률 ${p.productDiscount}%
+                        <div class="bookmark">
+                            ${p.productDiscount}%
+                            <!-- SALE -->
+                        </div>
                     </div>
                 </div>
                 <div class="posting-content">
