@@ -179,7 +179,7 @@
 		$("form#form-delet-cart").submit(function (e) {
 			if(($("input[name=chk]:checked")).length == 0){
 				// 선택한 상품이 없을때
-				alert("선택하신 상품이 없습니다");
+				nocheckjQueryAlert('error');
 			}else{
 				// 선택삭제 alert
 				cartjQueryAlert('error', this);
@@ -230,6 +230,36 @@
 			}
 		});
 	};
+
+		// 선택삭제 클릭시 선택한 상품 없을때
+		function nocheckjQueryAlert(type) {
+			let $type = type;
+			switch ($type) {
+				case 'error':
+				messageBox = $.parseHTML('<div class="alert__error" style="text-align:center;"><div class="title" style="margin-bottom:10px;color:var(--error);padding:0;">뭉쳐야산다</div><div style="margin: 50px auto;"><div style="margin-top:10px;">선택하신 상품이 없습니다.</div></div></div>');			
+				break;
+			}
+			$("body").append(messageBox);
+			$(messageBox).dialog({
+				dialogClass :$type,
+				draggable: false,
+				modal: true,
+				buttons: {
+					"닫기": function () {
+						$(this).dialog("close");
+					}
+				},
+				show: {
+					effect: 'fade',
+					duration: 200 //at your convenience
+				},
+				hide: {
+					effect: 'fade',
+					duration: 200 //at your convenience
+				}
+			});
+		};
+
 
 
 
