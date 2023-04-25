@@ -65,6 +65,7 @@ public class CouponDao {
 
 	public ArrayList<Point> selectAllPointMember(int memberNo) {
 		List list = sqlSession.selectList("point.selectAllPointMember",memberNo);
+		System.out.println(list);
 		return (ArrayList<Point>) list;
 	}
 

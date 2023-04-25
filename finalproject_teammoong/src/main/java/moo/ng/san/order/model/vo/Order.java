@@ -11,9 +11,14 @@ public class Order {
 	private int orderNo;
 	private int memberNo;
 	private int productNo;
-	private int payNo;
+	private int totalPrice;
 	private String orderDate;
 	private int orderStatus;
+	private String deliRecevier;
+	private String deliPhone;
+	private String deliAddr;
+	private String deliRequest;
+	
 	
 	private String thumbnail;
 	private String productName;
@@ -24,4 +29,9 @@ public class Order {
 	private int optionPrice;
 	
 	private int basketCount;
+	private int totalPrice;
+	private String deliReceiver;
+	private String deliPhone;
+	private String deliAddr;
+	private String deliRequest;
 }

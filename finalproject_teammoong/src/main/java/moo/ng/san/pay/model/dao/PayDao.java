@@ -11,7 +11,7 @@ import moo.ng.san.coupon.model.vo.IssueCoupon;
 import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.order.model.vo.Order;
 import moo.ng.san.pay.model.vo.OrderDetail;
-import moo.ng.san.pay.model.vo.Pay;
+
 import moo.ng.san.product.model.vo.Option;
 
 @Repository
@@ -19,10 +19,7 @@ public class PayDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public int insertPay(Pay pay) {
-		int result = sqlSession.insert("pay.insertPay",pay);
-		return result;
-	}
+	
 
 	public int insertOrder(Order order) {
 		int result = sqlSession.insert("order.insertOrder",order);
@@ -56,9 +53,11 @@ public class PayDao {
 		return result;
 	}
 
-	public Pay selectPay(int payNo) {
-		Pay p = sqlSession.selectOne("pay.selectPay",payNo);
-		return p;
+	
+
+	public String selectProductName(int productNo) {
+		String productName = sqlSession.selectOne("product.selectProductName", productNo);
+		return productName;
 	}
 
 
