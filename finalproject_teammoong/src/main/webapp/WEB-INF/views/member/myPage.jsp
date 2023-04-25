@@ -17,7 +17,6 @@
 		'GRAD' -25,
 		'opsz' 20;
 	}
-
 	</style>
 </head>
 <body>
@@ -42,7 +41,7 @@
 							<img src="/resources/upload/member/${sessionScope.m.memberPath }">
 							<div class="modify-propic">
 								<label for="fileUpload" class="fileUpload">
-								<span class="material-symbols-outlined camera" style="cursor: pointer;">
+								<span class="material-symbols-outlined camera" style="cursor: pointer; vertical-align: baseline;">
 									photo_camera
 								</span>
 								</label>
