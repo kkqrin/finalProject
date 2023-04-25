@@ -632,7 +632,7 @@ public class AdminService {
 		return sd; 
 	}
 
-	public ArrayList<SalesData> selectMonthSalesData(int monthNo) { // 이거 왜 null 이니?!!!!
+	public ArrayList<SalesData> selectMonthSalesData(int monthNo) { 
 		ArrayList<SalesData> list = new ArrayList<SalesData>();
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -647,8 +647,6 @@ public class AdminService {
 	        map.put("categoryNo", i);
 	        SalesData sd = dao.selectMonthSalesData(map);
 	        sd.setCategoryNo(i);
-	        sd.setGender(3);
-	        sd.setMonthNo(i);
 	        list.add(sd);
 		}
 		

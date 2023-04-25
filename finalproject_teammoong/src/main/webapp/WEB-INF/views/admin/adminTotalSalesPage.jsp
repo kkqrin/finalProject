@@ -72,7 +72,6 @@
     }
     .totalSalesChart{
     	float: left;
-
     }
     
     

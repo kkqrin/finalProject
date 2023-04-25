@@ -263,7 +263,8 @@ public class AdminController {
 	
 	/* 매출보고서 출력 새창 경로*/
 	@RequestMapping(value="salesReportPrint.do")
-	public String salesReportPrint() {
+	public String salesReportPrint(Model model) {
+		
 		return "admin/salesReport";
 	}
 	
