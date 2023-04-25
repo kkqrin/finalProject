@@ -23,8 +23,8 @@
 			<table id="dataTables" class="table table-bordered">
 				<tr>매출요약</tr>
 				<tr>
-					<td><canvas id="yearChart"></canvas></td>
-					<td><canvas id="monthChart"></canvas></td>
+					<td><div><canvas id="yearChart"></canvas></div></td>
+					<td><div><canvas id="monthChart"></canvas></div></td>
 				</tr>
 			</table>
 			<table id="sumTables" class="table table-bordered">

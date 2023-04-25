@@ -177,8 +177,13 @@
 		});
 
 		$("form#form-delet-cart").submit(function (e) {
+			if(($("input[name=chk]:checked")).length == 0){
+				// 선택한 상품이 없을때
+				alert("선택하신 상품이 없습니다");
+			}else{
+				// 선택삭제 alert
 				cartjQueryAlert('error', this);
-
+			}
 				e.preventDefault();
 				return false;
 		});
@@ -337,9 +342,7 @@
 			$(".order-payment-wrap form").submit();
 		});
 
-		$("#form-delete-cart").submit(function (e) {
-			
-		});
+		
 
 	</script>
 </body>

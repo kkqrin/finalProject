@@ -22,7 +22,6 @@
 <style>
     .adminPage-wrapper{
         background-color: lightblue;
-        width: 1200px;
         margin: auto;
     }
     .adminPage-header{
@@ -73,7 +72,6 @@
     }
     .totalSalesChart{
     	float: left;
-
     }
     
     
@@ -87,6 +85,13 @@
 	}
 	.chart{
 		margin-top: 150px;
+		width: 500px;
+		/* 높이를 주면 왜 사라지는걸까? 이유가 머이지? */
+		
+	}
+	.selectCategoryChart{
+		margin: 0;
+		padding: 0;
 	}
 
 </style>
@@ -104,14 +109,14 @@
 	        			<div class="sales icon"><span class="material-symbols-outlined">monitoring</span></div>
 	        			<div class="salesContent">
 	        				<span class="salesTitle">총 매출액</span>
-	        				<span class="salesCount">원</span>
+	        				<span class="totalSalesCount">${totalSales }원</span>
 	        			</div>
 	        		</div>
 	        		<div class="monthSales">
 	        			<div class="sales icon"><span class="material-symbols-outlined">trending_up</span></div>
 	        			<div class="salesContent">
 	        				<span class="salesTitle">월 매출액</span>
-	        				<span class="salesCount"></span>
+	        				<span class="monthSalesCount">${monthSales }원</span>
 	        			</div>
 	        		</div>
 	        		<div class="salesReport">
@@ -120,12 +125,14 @@
 	        	</div>
 	        	<div class="chartDiv">
 		        	<div class="totalSalesChart chart">
+		        		<div class="totalChartTitle"><span>Total Sales Chart</span></div>
 		        		<canvas id="totalChart"></canvas>
 		        	</div>
 		        	<div class="monthSalesChart chart">
+		        		<div class="monthChartTitle"><span>Month Sales Chart</span></div>
 		        		<canvas id="monthChart"></canvas>
 		        	</div>
-		        	<div>
+		        	<div class="selectCategoryChart chart">
 			        	<select id="monthSelect" class="monthSelect">
 						    <option value="1">1월</option>
 						    <option value="2">2월</option>
@@ -151,12 +158,11 @@
 	  
   const chartDataUrl = "https://example.com/data.json";
 	$(document).ready(function() {
-		
+		var totalSalesCount = (".totalSalesCount");
 				$.ajax({
 					url: 'ajaxTotalSalesManage.do',
 				    dataType: 'json',
 				    success: function(data){
-				    	console.log(data);
 						var context = document.getElementById('totalChart').getContext('2d');
 				    	var myChart = new Chart(context, {
 							type : 'bar', // 차트의 형태
@@ -320,20 +326,21 @@
 	            // 월 select / 카테고리 매출
 	            
 	            $("#monthSelect").on("change",function(){
-		            var monthNo = $("#monthSelect option:selected").val();
+		            var monthNo = $("#monthSelect option:selected").val(); // 입력확인
 	
 		            $.ajax({
 		            	url : "ajaxSelectMonthSales.do",
 		            	type : "post",
 		            	data : {monthNo : monthNo},
 						success : function(data){
-							const months = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
+							console.log(data);
+							const category = ['패션','뷰티','식품','생활용품','가전/디지털','가구','침구','인테리어','공구','스포츠/레저/취미','출산/유아동','반려용품','명품관'];
 				            
 				            var ctx = document.getElementById('salesChart').getContext('2d');
 				            var myChart = new Chart(ctx, {
 				                type: 'doughnut', // 차트의 형태
 				                data: { // 차트에 들어갈 데이터
-				                    labels: months,
+				                    labels: category,
 				                    datasets: [
 				                        { //데이터
 				                            label: '선택한 월의 매출액', //차트 제목
@@ -409,6 +416,7 @@
 	            // 월 select / 카테고리 매출
 	            
 	            // 구매자 성별
+	            /*
 	            var context = document.getElementById('selectMonthChart').getContext('2d');
 	            var myChart = new Chart(context, {
 	                type: 'doughnut', // 차트의 형태
@@ -453,6 +461,7 @@
 	                            backgroundColor: 'rgb(157, 109, 12)',
 	                            borderColor: 'rgb(157, 109, 12)'
 	                        } */
+	                        /*
 	                    ]
 	                },
 	                options: {
@@ -467,7 +476,7 @@
 	                    }
 	                }
 	            }); 
-	            
+	            */
 	            
 	            
 
