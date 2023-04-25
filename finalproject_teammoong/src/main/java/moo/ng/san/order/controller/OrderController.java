@@ -84,5 +84,11 @@ public class OrderController {
 			return "order/moongsanOrder";
 			
 	}
+
+	@RequestMapping(value="/myOrderList.do")
+	public String myOrderList() {
+		
+		return "member/myOrderList";
+	}
 	
 }
