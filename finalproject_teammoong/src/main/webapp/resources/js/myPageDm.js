@@ -83,6 +83,7 @@ function getSendDm(){
 
 
 function dmView(dmNo){
+	const memberId = $("#memberId").val();
     $.ajax({
         url : "/dmView.do",
         data : {dmNo:dmNo,memberId:memberId},
