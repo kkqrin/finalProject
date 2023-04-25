@@ -62,4 +62,9 @@ public class PayService {
 		return p;
 	}
 
+	public String selectProductName(int productNo) {
+		String productName = dao.selectProductName(productNo);
+		return productName;
+	}
+
 }

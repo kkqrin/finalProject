@@ -25,7 +25,6 @@
 		line-height: 70px;
 		text-align:center;
 		font-size: 30px;
-		display:none;
 	}
 </style>
 </head>
@@ -47,7 +46,7 @@
 							</div>
 						</div>
 						<div class="point-view">
-							${sessionScope.m.memberName}님의 총 적립금은 <span id="totalPoint"></span>p 입니다.
+							${sessionScope.m.memberName}님의 총 적립금은 <span id="totalPoint"></span> Moong 입니다.
 						</div>
 							<table>
 								<tr>
@@ -65,6 +64,9 @@
 													<c:when test="${point.pointStatus == 3}">
 														- ${point.pointEa}
 													</c:when>
+													<c:when test="${point.pointStatus == 6}">
+														- ${point.pointEa}
+													</c:when>
 													<c:otherwise>
 														${point.pointEa}
 													</c:otherwise>
@@ -77,16 +79,22 @@
 													출석체크
 												</c:if>
 												<c:if test="${point.pointStatus == 1}">
-													가입축하 지급포인트
+													가입축하 뭉머니
 												</c:if>
 												<c:if test="${point.pointStatus == 2}">
-													포인트 적립
+													뭉머니 적립
 												</c:if>
 												<c:if test="${point.pointStatus == 3}">
-													포인트 사용
+													뭉머니 사용
 												</c:if>
 												<c:if test="${point.pointStatus == 4}">
-													포인트 충전
+													뭉머니 충전
+												</c:if>
+												<c:if test="${point.pointStatus == 5}">
+													뭉머니 환불
+												</c:if>
+												<c:if test="${point.pointStatus == 6}">
+													공동구매 결제
 												</c:if>
 											</td>
 										</tr>
@@ -101,8 +109,20 @@
 				</div>
 			</div>
 		</div>
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <script>
+	$(document).ready(function(){
+		const memberNo = $("[name=memberNo]").val();
+		$.ajax({
+			url:'/pointCheck.do',
+			type: 'get',
+			data:{memberNo:memberNo},
+			success: function(data){
+				console.log(data);
+				$("#totalPoint").text(data);
+			}
+		});
+	});
 	$("#coupon-bar").on("click",function(){
 		const memberNo = $("[name=memberNo]").val();
 		$(".point-view").hide();

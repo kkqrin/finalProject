@@ -21,17 +21,11 @@ public class PayController {
 	
 	@RequestMapping(value="/insertPay.do")
 	public String insertPay(int issueNo,int memberNo, Order order, int plusPointEa, int minusPointEa, OrderDetail orderDetail, Product product, Option option, Model model) {
-		System.out.println(memberNo);
-		System.out.println(order);
-		System.out.println(plusPointEa);
-		System.out.println(minusPointEa);
-		System.out.println(orderDetail);
-		System.out.println(product);
-		System.out.println(option);
-		System.out.println(issueNo);
 		Pay pay = service.insertpay(issueNo, memberNo, order, plusPointEa, minusPointEa, orderDetail, product, option);
 			System.out.println(pay);
+		String productName = service.selectProductName(orderDetail.getProductNo());
 			model.addAttribute("pay", pay);
+			model.addAttribute("productName",productName);
 		return "/order/payComplite";
 	}
 }

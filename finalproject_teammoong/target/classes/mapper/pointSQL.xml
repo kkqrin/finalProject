@@ -44,8 +44,11 @@
 	<select id="totalCount" resultType="_int">
 		select count(*) from point_tbl where member_no = #{memberNo}
 	</select>
-	<select id="selectAllPointMember" parameterType="_int">
-		select * from point_tbl where member_no = #{memberNo}
+	<select id="selectAllPointMember" parameterType="_int" resultType="point">
+		select
+			point_ea as pointEa,
+			point_status as pointStatus
+		from point_tbl where member_no = #{memberNo}
 	</select>
 	<insert id="insertMinusPoint" parameterType="point">
 		insert into point_tbl values

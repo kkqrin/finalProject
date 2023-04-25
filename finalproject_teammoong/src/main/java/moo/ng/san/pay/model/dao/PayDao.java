@@ -61,5 +61,10 @@ public class PayDao {
 		return p;
 	}
 
+	public String selectProductName(int productNo) {
+		String productName = sqlSession.selectOne("product.selectProductName", productNo);
+		return productName;
+	}
+
 
 }

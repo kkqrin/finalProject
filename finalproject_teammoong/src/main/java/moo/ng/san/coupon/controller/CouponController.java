@@ -97,12 +97,13 @@ public class CouponController {
 	@RequestMapping(value="/pointCheck.do")
 	public int pointCheck(int memberNo) {
 		ArrayList<Point> list = service.selectAllPointMember(memberNo);
+		
 		int totalPoint = 0;
 		if(!list.isEmpty()) {
 			for(Point p: list) {
 				int pointStatus = p.getPointStatus();
-				int pointEa = p.getPointEa(); // pointEa 변수는 if문 밖에서 선언해야 함
-				if(pointStatus == 3) {
+				int pointEa = p.getPointEa();
+				if(pointStatus == 3 || pointStatus == 6) {
 					totalPoint -= pointEa; // minusPoint를 따로 선언하지 않고 바로 totalPoint에 빼줌
 				} else {
 					totalPoint += pointEa; // plusPoint를 따로 선언하지 않고 바로 totalPoint에 더해줌

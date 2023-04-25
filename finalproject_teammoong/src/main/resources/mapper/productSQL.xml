@@ -267,4 +267,8 @@
 		r)
 		WHERE RNUM BETWEEN 1 AND 20
 	</select>
+	<select id="selectProductName" parameterType="_int" resultType="string">
+		select product_name as productName
+		from product_tbl where product_no = #{productNo}
+	</select>
 </mapper>
