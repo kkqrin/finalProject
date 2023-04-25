@@ -72,7 +72,7 @@
 			</div>
 			<div class="area-btn" style="display: flex; justify-content: space-between;">
 				<button onclick="replyDm();" class="btn btn-sec size01">답장</button>
-				<a rel="modal:close" class="btn btn-sec size01" style="cursor: pointer;">확인</a>
+				<a rel="modal:close" class="btn btn-sec size01" style="cursor: pointer;" id="readOk">확인</a>
 			</div>
 		</div>
 	</div>
