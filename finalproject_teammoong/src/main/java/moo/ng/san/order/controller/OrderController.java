@@ -79,6 +79,7 @@ public class OrderController {
 		
 		return "order/moongsanOrder";
 	}
+	
 	@RequestMapping(value="/subMoongsanOrder.do")
 	public String subMoongsanOrder(int[] productNo, int[] optionNo, @SessionAttribute(required=false) Member m, Model model) {
 		// 세션에서 가져옴
@@ -102,5 +103,12 @@ public class OrderController {
 		model.addAttribute("point", point);
 		
 		return "order/subMoongsanOrder";
+	}
+	
+	@RequestMapping(value="/myOrderList.do")
+	public String myOrderList() {
+		
+		
+		return "member/myOrderList";
 	}
 }
