@@ -15,28 +15,8 @@
 	<link rel="stylesheet" href="/resources/css/common/default.css" />
 </head>
 <style>
-    .adminPage-wrapper{
-        background-color: #111;
-		width: 1200px;
-        margin-top: 300px;
-        
-    }
-    .adminPage-header{
-        margin-left: 30px;
-    }
     .adminPage-back{
-        background-color: lightyellow;
         overflow: hidden;
-    }
-    .adminPage-sidebar{
-        float: left;
-        width: 300px;
-        background-color: lightcoral;
-        height: 2000px;
-
-    }
-    .adminPage-sidebar>ul>li{
-        list-style-type: none;
     }
     .adminPage-main{
         background-color: lightgreen;
@@ -65,7 +45,7 @@
     </c:if>
     <div class="adminPage-wrapper">
         <div class="adminPage-header">
-            <h1><a href="#">Admin-Page</a></h1>
+            <div class="adminPage-title"><a>Moong's Admin</a></div>
         </div>
         <div class="adminPage-back">
             <jsp:include page="/WEB-INF/views/admin/adminSideNavi.jsp"/>

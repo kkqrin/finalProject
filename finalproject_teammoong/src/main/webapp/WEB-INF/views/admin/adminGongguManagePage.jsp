@@ -30,7 +30,9 @@
 	
 </head>
 <style>
-    
+    .adminPage-back{
+        overflow: hidden;
+    }
     .adminPage-main{
         background-color: lightgreen;
     }
@@ -69,66 +71,74 @@
     <c:if test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
         <!-- 관리자일때만 페이지 보이게 세팅 -->
     </c:if>
-    <div class="adminPage-wrapper">
-        <div class="adminPage-header">
-            <h1><a href="#">Admin-Page</a></h1>
-        </div>
-        <div class="adminPage-back">
-            <div class="adminPage-sidebar">
-                <ul>
-			 	 	<li><a href="/admin.do">대시보드</a></li>
-			 	</ul>
-			    <ul>
-			         <li><a href="/adminMemberPage.do?reqPage=1">회원 관리</a></li><!-- jsp 생성완료 -->
-			    </ul>
-			    <ul>
-			         <li><a>매출 관리</a></li>
-			         <li><a href="/adminTotalSalesManage.do?reqPage=1">전체 매출 관리</a></li><!-- jsp 생성완료 -->
-			         <li><a href="/adminCategorySalesManage.do">카테고리별 매출관리</a></li>
-			    </ul>
-			    <ul>
-			         <li><a>상품 관리</a></li>
-			         <li><a href="/adminTotalProductList.do?reqPage=1">상품 관리</a></li><!-- jsp 생성완료 -->
-			         <li><a href="/adminProductRegist.do?reqPage=1">상품 등록</a></li>
-			         <li><a href="/adminDeliveryManagePage.do?reqPage=1">배송 관리</a></li>
-			    </ul>
-			    <ul>
-			         <li><a>이벤트 관리</a></li>
-			         <li><a href="/adminDaycheckManagePage.do">쿠폰 발행 관리</a></li>
-			         <li><a href="/adminGongguManagePage.do">쿠폰 발행 관리</a></li>
-			    </ul>
-			    <ul>
-			         <li><a href="#">여여붙 대시보드</a></li>
-			         <li><a href="/adminBoardManagePage.do?reqPage=1">여여붙게시판 관리</a></li><!-- jsp 생성완료 -->
-			         <li><a href="/adminBoardReportManagePage.do?reqPage=1">여여붙 신고 관리</a></li><!-- jsp 생성완료 -->
-			         <li><a href="/adminBoardCategorySales.do">카테고리별 매출관리</a></li>
-			    </ul>
-            </div>
+	    <div class="adminPage-wrapper">
+	        <div class="adminPage-header">
+	            <div class="adminPage-title"><a>Moong's Admin</a></div>
+	        </div>
+	        <div class="adminPage-back">
+		        <div class="adminPage-sidebar">
+				 	 <ul>
+				 	 	<li><a href="/admin.do">대시보드</a></li>
+				 	 </ul>
+				     <ul>
+				         <li><a href="/adminMemberPage.do?reqPage=1">회원 관리</a></li><!-- jsp 생성완료 -->
+				     </ul>
+				     <ul>
+				         <li><a>매출 관리</a></li>
+				         <li><a href="/adminTotalSalesManage.do?reqPage=1">전체 매출 관리</a></li><!-- jsp 생성완료 -->
+				         <li><a href="/adminCategorySalesManage.do">카테고리별 매출관리</a></li>
+				     </ul>
+				     <ul>
+				         <li><a>상품 관리</a></li>
+				         <li><a href="/adminTotalProductList.do?reqPage=1">상품 관리</a></li><!-- jsp 생성완료 -->
+				         <li><a href="/adminProductRegist.do?reqPage=1">상품 등록</a></li>
+				         <li><a href="/adminDeliveryManagePage.do?reqPage=1">배송 관리</a></li>
+				     </ul>
+				     <ul>
+				         <li><a>이벤트 관리</a></li>
+				         <li><a href="/adminDaycheckManagePage.do">쿠폰 발행 관리</a></li>
+				         <li><a href="/adminGongguManagePage.do">쿠폰 발행 관리</a></li>
+				     </ul>
+				     <ul>
+				         <li><a href="#">여여붙 대시보드</a></li>
+				         <li><a href="/adminBoardManagePage.do?reqPage=1">여여붙게시판 관리</a></li><!-- jsp 생성완료 -->
+				         <li><a href="/adminBoardReportManagePage.do?reqPage=1">여여붙 신고 관리</a></li><!-- jsp 생성완료 -->
+				         <li><a href="/adminBoardCategorySales.do">카테고리별 매출관리</a></li>
+				     </ul>
+				</div>
             <div class="adminPage-main">
                 <div class="adminPage-content">
                     <div class="adminPage-result">
                     	<div class="space"></div>
-                        <table id="dataTables" class="table-bordered">
+                        <table id="dataTables">
 	                        <thead>
 	                            <tr>
-	                            	<th>구분</th>
-	                                <th>회원아이디</th> 
-	                                <th>회원이름</th>
-	                                <th>뭉머니 사용금액</th>
-	                                <th>뭉머니 잔액</th>
+	                                <th>공구번호</th> 
+	                                <th>상품번호</th>
+	                                <th>회원번호</th>
+	                                <th>카운트넘버는 무엇임?</th>
+	                                <th>결제일자</th>
+	                                <th>결제상태
 	                            </tr>
 	                        </thead>
-	                            <c:forEach items="${mMoneyList }" var="ml">
+	                            <c:forEach items="${gList }" var="gl">
 	                            	<tr>
-	                                    <input type="hidden" name="memberNo" value="${ml.memberNo }">
-	                                	<td><input type="checkBox" id="checkBox"></td>
-	                                    <td>${ml.memberId }</td>
-	                                    <td>${ml.memberName }</td>
-	                                    <td>이것은 사용금액</td>
-	                                    <td>${ml.pointEa }</td>
+	                                    <td>${gl.gongguNo }</td>
+	                                    <input type="hidden" name="gongguNo" value="${gl.gongguNo }">
+	                                    <td>${gl.productNo }</td>
+	                                    <td>${gl.memberNo }</td>
+	                                    <td>${gl.countNumber }</td>
+	                                    <td>${gl.gongguPayDate }</td>
+	                                    <c:choose>
+	                                    	<c:when test="${gl.gongguPayStatus == 1}">
+	                                    		<td>결제완료</td>
+	                                    	</c:when>
+	                                    	<c:when test="${gl.gongguPayStatus == 2}">
+	                                    		<td>결제취소</td>
+	                                    	</c:when>
+	                                    </c:choose>
 	                          	 	</tr>
 								</c:forEach>
-		                        <!-- <div><button type="button">데이터 엑셀 출력</button></div> -->
 	                        </table>
                     </div>
                     <!-- 모달 -->
@@ -147,7 +157,7 @@
 				</div>
             </div>
         </div>
-    </div>
+   </div>
 
 
 <!-- 스크립트를 넣어봅시다 -->
@@ -159,7 +169,8 @@
 	        searching: true, // 검색 input 세팅
 	        fixedHeader: true, // 헤더 설정
 	        columns: [
-	            null,
+	        	{ searchable: true },
+	            { searchable: true },
 	            { searchable: true },
 	            { searchable: true },
 	            { searchable: true },
@@ -170,7 +181,7 @@
 	        
 	    }); // 테이블 옵션
 	    
-	    $('#dataTables').on('click', 'td', function() {
+	 /*   $('#dataTables').on('click', 'td', function() {
 	    	  
 	    	  var memberNo = $(this).closest('tr').find('input[name="memberNo"]').val();
 	    	  
@@ -199,7 +210,7 @@
 	    	    
     	  }); // ajax
 	    	  
-    	}); // 클릭 모달
+    	}); // 클릭 모달 */
     	
 	    $('#dataTables tbody').on('mouseenter', 'tr', function() {
 	        $(this).addClass('hover'); 
@@ -208,10 +219,13 @@
 	        $(this).removeClass('hover'); 
 	    }); // 호버 빠져나올시 CSS 클래스 제거
 	    
-	    
-	    
-	    
-	    
+	    $('table tbody td').each(function() { // 결제 취소 point
+	        var tdText = $(this).text();
+	        if (tdText.includes('취소')) {
+	          $(this).css('font-weight', 'bold');
+	          $(this).css('color','red');
+	        }
+	     });
 	    
 });
     

@@ -76,7 +76,7 @@
     </c:if>
     <div class="adminPage-wrapper" id="adminProductTable">
         <div class="adminPage-header">
-            <h1><a href="#">Admin-Page</a></h1>
+            <div class="adminPage-title"><a>Moong's Admin</a></div>
         </div>
         <div class="adminPage-back">
             <jsp:include page="/WEB-INF/views/admin/adminSideNavi.jsp"/>
@@ -100,6 +100,7 @@
                                 <td>세부카테고리번호</td>
                                 <td>상품이름</td>
                                 <td>상품수량</td>
+                                <td>남은수량</td><!-- 추가 -->
                                 <td>상품가격</td>
                                 <td>원가</td>
                                 <td>공동구매인원수</td>
@@ -112,9 +113,79 @@
                                 <tr>
                                 	<td><input type="checkBox" class="checkBox"></td>
                                     <td>${p.productNo }<input type="hidden" class="productNo" value="${p.productNo }"></td>
-                                    <td>${p.detailCategoryNo }</td>
+                                    <c:choose>
+                                    	<c:when test="${p.detailCategoryNo == 1}">
+                                    		<td>패션</td>
+                                    	</c:when>
+                                    </c:choose>
+                                    <c:choose>
+                                    	<c:when test="${p.detailCategoryNo == 2}">
+                                    		<td>뷰티</td>
+                                    	</c:when>
+                                    </c:choose>
+                                    <c:choose>
+                                    	<c:when test="${p.detailCategoryNo == 3}">
+                                    		<td>식품</td>
+                                    	</c:when>
+                                    </c:choose>
+                                    <c:choose>
+                                    	<c:when test="${p.detailCategoryNo == 4}">
+                                    		<td>생활용품</td>
+                                    	</c:when>
+                                    </c:choose>
+                                    <c:choose>
+                                    	<c:when test="${p.detailCategoryNo == 5}">
+                                    		<td>가전/디지털</td>
+                                    	</c:when>
+                                    </c:choose>
+                                    <c:choose>
+                                    	<c:when test="${p.detailCategoryNo == 6}">
+                                    		<td>가구</td>
+                                    	</c:when>
+                                    </c:choose>
+                                    <c:choose>
+                                    	<c:when test="${p.detailCategoryNo == 7}">
+                                    		<td>침구</td>
+                                    	</c:when>
+                                    </c:choose>
+                                    <c:choose>
+                                    	<c:when test="${p.detailCategoryNo == 8}">
+                                    		<td>인테리어</td>
+                                    	</c:when>
+                                    </c:choose>
+                                    <c:choose>
+                                    	<c:when test="${p.detailCategoryNo == 9}">
+                                    		<td>공구</td>
+                                    	</c:when>
+                                    </c:choose>
+                                    <c:choose>
+                                    	<c:when test="${p.detailCategoryNo == 10}">
+                                    		<td>스포츠/레저/취미</td>
+                                    	</c:when>
+                                    </c:choose>
+                                    <c:choose>
+                                    	<c:when test="${p.detailCategoryNo == 11}">
+                                    		<td>출산/유아동</td>
+                                    	</c:when>
+                                    </c:choose>
+                                    <c:choose>
+                                    	<c:when test="${p.detailCategoryNo == 12}">
+                                    		<td>반려용품</td>
+                                    	</c:when>
+                                    </c:choose>
+                                    <c:choose>
+                                    	<c:when test="${p.detailCategoryNo == 13}">
+                                    		<td>명품관</td>
+                                    	</c:when>
+                                    </c:choose>
+                                    <c:choose>
+                                    	<c:when test="${p.detailCategoryNo > 13}">
+                                    		<td>테스트용인듯</td>
+                                    	</c:when>
+                                    </c:choose>
                                     <td>${p.productName }<input type="hidden" class="productName" value="${p.productName }"></td>
                                     <td>${p.productEa }</td>
+                                    <td>${p.presentCnt }</td>
                                     <td>${p.productPrice }</td>
                                     <td>${p.productCost }</td>
                                     <td>${p.gongguNumber }</td>
@@ -175,7 +246,7 @@
                                 </tr>
                             </c:forEach>
                             <tr>
-                                <th colspan="12">${pageNavi}</th>
+                                <th colspan="13">${pageNavi}</th>
                             </tr>
                             <tr>
                                 <th colspan="2"><button type="button" name="allChangeProductStatus">일괄 변경</button></th>

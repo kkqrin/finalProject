@@ -124,10 +124,9 @@
 <%-- <jsp:include page="/WEB-INF/views/common/header.jsp" /> --%>
     <div class="adminPage-wrapper">
         <div class="adminPage-header">
-            <h1><a href="#">관리자 페이지 입니다.</a></h1>
+            <div class="adminPage-title"><a>Moong's Admin</a></div>
         </div>
         <div class="adminPage-back">
-            <jsp:include page="/WEB-INF/views/admin/adminSideNavi.jsp"/>
 	        <div class="adminPage-main">
 	        	<div class="adminPage-sales">
 	        		<div class="bestSales">

@@ -16,6 +16,7 @@ import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.board.model.vo.BoardJoin;
 import moo.ng.san.board.model.vo.BoardOption;
 import moo.ng.san.board.model.vo.Notify;
+import moo.ng.san.gonggu.model.vo.GongguAllInfo;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.order.model.vo.Order;
 import moo.ng.san.product.model.vo.Product;
@@ -347,6 +348,12 @@ public class AdminDao {
 		List list = sqlSession.selectList("admin.selectOtherSalesCategory");
 		
 		return (ArrayList<SalesData>)list;
+	}
+
+	public ArrayList<GongguAllInfo> selectGongguList() {
+		List list = sqlSession.selectList("admin.selectGongguList");
+		
+		return (ArrayList<GongguAllInfo>)list;
 	}
 
 

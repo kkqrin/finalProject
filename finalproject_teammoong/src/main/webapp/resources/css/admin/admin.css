@@ -4,9 +4,9 @@
 		padding: 0;
 	}
     .adminPage-wrapper{
-        background-color: #D8EAF0;
-        width: 1900px;
-        margin: auto;
+        background-color: #f88000; /* admin-page 상단 색상 */
+        width: ;
+        margin: 0;
         
     }
     .adminPage-header{
@@ -31,7 +31,7 @@
     .adminPage-sidebar{
         float: left;
         width: 220px;
-        background-color: #c6cacc;
+        background-color: #f88000; /* 사이드바 배경 */
         height: 2000px;
         text-align: center;
         
@@ -72,7 +72,7 @@
     }
     
     .adminPage-content{
-    	background-color: #D8EAF0;
+    	background-color: white; /* content 메인 배경색상 */
     }
     .adminPage-search{
     	margin-top: 20px;

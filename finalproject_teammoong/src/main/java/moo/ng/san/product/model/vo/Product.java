@@ -22,4 +22,6 @@ public class Product {
 	private int productDiscount;
 	private String thumbnail;
 	private ArrayList<String> fileList;
+	
+	private int presentCnt; // 현재 남은 수량
 }
