@@ -202,4 +202,26 @@
 			member_zonecode as memberZoneCode
 		from member_tbl where member_bday is not null
 	</select>
+	
+	
+	
+	
+	
+	<update id="updateMemberNewPhone" parameterType="m">
+		update member_tbl
+		   set
+			   member_phone = #{memberPhone}
+		 where
+		 	   member_no = #{memberNo}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

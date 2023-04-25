@@ -73,6 +73,10 @@ public class MemberDao {
 		return (ArrayList<Board>)list;
 	}
 
+	public void updateMemberNewPhone(Member member) {
+		sqlSession.update("member.updateMemberNewPhone",member);
+	}
+
 	
 
 }
