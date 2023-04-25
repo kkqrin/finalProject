@@ -71,7 +71,7 @@
     </c:if>
     <div class="adminPage-wrapper">
         <div class="adminPage-header">
-            <h1><a href="#">Admin-Page</a></h1>
+            <div class="adminPage-title"><a>Moong's Admin</a></div>
         </div>
         <div class="adminPage-back">
             <div class="adminPage-sidebar">
