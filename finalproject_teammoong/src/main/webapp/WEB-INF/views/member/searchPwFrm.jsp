@@ -53,6 +53,23 @@
 	</div><!-- content-wrap -->
 	
 	
+	<!-- 알림 모달 -->
+	<div id="alertModal" class="modal modal-sec">
+			<div class="modal-content">
+				<div class="modal-header" style="padding: 40px; height: auto;">
+					<h6 id="alertTitle" style="text-align: center;"></h6>
+				</div>
+				<div class="area-btn center">
+					<a rel="modal:close" class="btn btn-sec size01 closeBtn" style="cursor: pointer;">확인</a>
+				</div>
+			</div>
+	</div><!--모달창-->
+	
+	
+	
+	
+	
+	
 	<script>
 		$(".menu-bar>div").on("click",function(){
 			$(".menu-bar>div").removeClass("focus");
@@ -94,10 +111,13 @@
 		
 		
 		$(".sendPhone").on("click",function(){
-			const pwReg = /^0+\d{9,10}$/;
 			const inputPhone = $("[name='memberPhone']").val();
+			let replace = $("[name='memberPhone']").val().replaceAll("-","");
+			$("[name='memberPhone']").val(replace);
+			
+			const pwReg = /^0+\d{9,10}$/;
 
-			if(pwReg.test(inputPhone) && inputPhone!=""){
+			if(pwReg.test(replace)){
 				$("[name='memberPhone']").removeClass("error");
 				$(".caution").css("display","none");
 				
@@ -106,37 +126,68 @@
 				$.ajax({
 					url:"/selectMemberId.do",
 					type:"post",
-					data:{memberId:memberId, memberPhone:inputPhone},
+					data:{memberId:memberId, memberPhone:replace},
 					success: function(result){
 						if(result=="none"){
-							alert("일치하는 회원 정보가 없습니다");
+							$("#alertTitle").html("일치하는 회원 정보가 없습니다");
+				            $("#alertModal").modal({
+								 showClose: false,
+					             fadeDuration: 100
+					        });
 						}else{
 							$("[name='memberId']").attr('readonly',true);
 							
-							$(".toPhone-view").find('a').eq(1).text('인증번호 입력')
-							$(".toPhone-view").find('input').eq(1).attr('placeholder','인증번호를 입력해주세요');
-							$(".toPhone-view").find('input').eq(1).val("");
-							$(".toPhone-view").find('input').eq(1).focus();
-								
-							const a = $("<a>").html(inputPhone+"으로 인증번호를 전송했습니다");
-							a.addClass("caution");
-							a.css("display","block");
-							$(".toPhone-view").find('input').eq(1).before(a);
-							
-							
-							$(".toPhone-view").find('button').hide();
-							const cerNumChk = $("<button>").text("인증번호 확인");
-							cerNumChk.addClass("btn btn-ter size02 cerNumChk");
-							cerNumChk.css("margin-top","30px");
-							$(".toPhone-view").find('.area-btn').append(cerNumChk);
+							let cerCode="";
+							$.ajax({
+								url:"/memberPhoneCheck.do",
+								data:{memberPhone:inputPhone},
+								success : function(code) {
+									cerCode = code;
+									
+									$(".toPhone-view").find('a').eq(1).text('인증번호 입력')
+									$(".toPhone-view").find('input').eq(1).attr('placeholder','인증번호를 입력해주세요');
+									$(".toPhone-view").find('input').eq(1).val("");
+									$(".toPhone-view").find('input').eq(1).focus();
+									
+									const a = $("<a>").html(inputPhone+"으로 인증번호를 전송했습니다");
+									a.addClass("caution");
+									a.css("display","block");
+									$(".toPhone-view").find('input').eq(1).before(a);
+									
+									
+									$(".toPhone-view").find('button').hide();
+									const cerNumChk = $("<button>").text("인증번호 확인");
+									cerNumChk.addClass("btn btn-ter size02 cerNumChk");
+									cerNumChk.css("margin-top","30px");
+									$(".toPhone-view").find('.area-btn').append(cerNumChk);
+									
+									
+									$(".cerNumChk").on("click",function(){
+										if($("[name='memberPhone']").val()==cerCode){//인증번호가 일치할때
+											location.href="/updateNewPwMemberFrm.do";
+										}else{//인증번호가 다를때
+											$("#alertTitle").html("인증번호가 다릅니다");
+								            $("#alertModal").modal({
+												 showClose: false,
+									             fadeDuration: 100
+									        });
+								            $(".closeBtn").on("click",function(){
+								            	location.reload();
+								            })
+										}
+									})//인증번호 확인 기능
+									
+									
+								}//인증번호 발송 success
+							})//인증번호 발송 ajax
 						}
-					}//success
-				})//ajax
-			}else if($("[name='memberId']").val()==""){
-				$("[name='memberId']").focus();
-			}else if(!pwReg.test(inputPhone) || inputPhone==""){
+					}//일치하는 회원 success
+				})//일치하는 회원 ajax
+			}else if(!pwReg.test(replace) || inputPhone==""){
 				$("[name='memberPhone']").addClass("error");
 				$(".caution").css("display","block");
+			}else if($("[name='memberId']").val()==""){
+				$("[name='memberId']").focus();
 			}
 
 		}); //[핸드폰으로 비밀번호 찾기]
@@ -160,7 +211,11 @@
 					data:{memberId:memberId, memberEmail:inputEmail},
 					success: function(memberId){//★일치하는 회원정보가 있는지
 						if(memberId=="none"){
-							alert("일치하는 회원 정보가 없습니다");
+							$("#alertTitle").html("일치하는 회원 정보가 없습니다");
+				            $("#alertModal").modal({
+								 showClose: false,
+					             fadeDuration: 100
+					        });
 						}else{
 							alert("인증번호를 전송합니다. 잠시만 기다려주세요!");	
 							$("[name='memberId']").eq(1).attr('readonly',true);
@@ -191,7 +246,6 @@
 									
 									$(".cerNumChk").on("click",function(){
 										if(code == $("[name='inputCode']").val()){//★인증성공
-											console.log("멤버 아이디는:"+memberId)
 											$("[name='hideMemberId']").val(memberId);
 											$(".submitBtn").click();
 											
