@@ -38,36 +38,30 @@
 
 	<select id="selectAllSalesCount" resultType="_int">
 		select 
-			sum(od.order_detail_cnt * pdt.product_price * (1-((pdt.product_discount)/100))) as totalSales
+			sum(od.order_detail_cnt * od.order_sale_price) as totalSales
             
 			from order_detail od 
-			join product_tbl pdt on (od.product_no = pdt.product_no)
 			join order_tbl ot on (od.order_no = ot.order_no) 
-			join pay_tbl pt on (ot.pay_no = pt.pay_no) 
 			
-		where ot.order_status = 1 and pt.pay_status = 1
+		where ot.order_status = 1
 	</select>
 	
 	<select id="selectVariationSalesCount" parameterType="map" resultType="_int">
 		select 
-			sum(od.order_detail_cnt * pdt.product_price * (1-((pdt.product_discount)/100))) as totalSales
+			sum(od.order_detail_cnt * od.order_sale_price) as totalSales
             
 			from order_detail od 
-			join product_tbl pdt on (od.product_no = pdt.product_no)
 			join order_tbl ot on (od.order_no = ot.order_no) 
-			join pay_tbl pt on (ot.pay_no = pt.pay_no)
 			
-		where ot.order_status = 1 and pt.pay_status = 1 and pt.pay_date between #{start} and #{end}
+		where ot.order_status = 1 and ot.order_date between #{start} and #{end}
 	</select>
 
-	<select id="selectBestSalesCount" resultType="_int"> <!-- 판매량 기준 1~5 사이의 금액을 뽑아옴 -->
+	<select id="selectBestSalesCount" resultType="_int"> <!-- 판매량 기준 1~5 사이의 금액을 뽑아옴 /// 쿼리문 수정 필요 -->
 		select rownum as rnum, total_sales.* from
-		(select distinct
-		b1.board_no as items,
-		(select count(*) from board_join b2 where b2.board_no=b1.board_no) * (select
-		board_price from board_tbl b3 where b3.board_no=b1.board_no) as
-		total_count
-		from board_join b1 order by total_count desc) total_sales where rnum
+		(select distinct b1.board_no as items,
+				(select count(*) from board_join b2 where b2.board_no=b1.board_no) * 
+				(select	board_price from board_tbl b3 where b3.board_no=b1.board_no) as	total_count
+			from board_join b1 order by total_count desc) total_sales where rnum
 		between 1 and 5
 	</select>
 
@@ -173,9 +167,10 @@
 		where member_no = #{_parameter}
 	</select>
 	
-	<select id="selectMonthCount" resultType="_int">
+	<select id="selectMonthCount" resultType=""> <!-- 필요없는 query 같음 -->
 		select
-			sum(product_price) from product_tbl pt 
+			sum(product_price) 
+			from product_tbl pt 
 			join order_tbl ot on (pt.product_no = ot.product_no) 
 		where ot.order_status = 4 and ot.order_date between '2023-03-20' and '2023-03-31'
 	</select>
@@ -238,15 +233,16 @@
 				(select
 				ot.order_no as orderNo,
 				ot.member_No as memberNo,
-				mt.member_id, mt.member_phone,
+				mt.member_id, 
+				mt.member_phone,
 				ot.product_no as productNo,
-				ot.pay_no as payNo,
 				to_char(ot.order_date,'yyyy-mm-dd') as orderDate,
 				ot.order_status as orderStatus,
 				od.order_detail_cnt as orderDetailCnt,
-				od.order_detail_price as orderDetailPrice,
-				od.delivery_address as deliveryAddress,
-				dt.delivery_no, dt.delivery_status
+				od.order_sale_price as orderSalePrice,
+				od.deli_addr as deliAddr,
+				dt.delivery_no, 
+				dt.delivery_status
 			from order_tbl ot
 			join delivery_tbl dt on (ot.product_no = dt.product_no)
 			join member_tbl mt on (ot.member_no = mt.member_no)
@@ -296,17 +292,22 @@
 		select count(*) from order_tbl
 	</select>
 
-	<select id="selectAllBoardSalesCount" resultType="_int">
+	<select id="selectAllBoardSalesCount" resultType=""> <!-- 수정 필요 -->
 		select
-		sum(bt.board_price) from board_join bj join board_tbl bt on	(bj.board_no = bt.board_no)
+			sum(bo.detail_price) 
+		from board_join bj 
+		join board_tbl bt on (bj.board_no = bt.board_no)
+		join board_option bo on (bt.board_no = bo.board_no)
+		
+		
 	</select>
 
-	<select id="selectMonthBoardSalesCount" resultType="_int">
+	<select id="selectMonthBoardSalesCount" parameterMap="map" resultType=""> <!-- 수정 필요 -->
 		select
-			sum(bt.board_price) 
+			sum(bo.detail_price) 
 			from board_join bj 
 			join board_tbl bt on (bj.board_no = bt.board_no) 
-		where bt.board_date between '2023-03-01' and '2023-03-30 
+		where bt.board_date between #{start} and #{end}
 		and bt.board_status = 2
 	</select>
 
@@ -439,10 +440,10 @@
               board_status as boardStatus
         from board_tbl
 		<choose>
-			<when test="detailCategoryNo == 0">
+			<when test="d_category_no == 0">
 				where board_status = #{boardStatus}
 			</when>
-			<when test="boardStatus == 0">
+			<when test="board_status == 0">
 				where d_category_no = #{detailCategoryNo }
 			</when>
 		</choose>
@@ -508,75 +509,70 @@
 	<select id="selectCountTotalSalesData" resultType="sd">
 		select 
             pc.category_no as cateogoryNo,
-			sum(od.order_detail_cnt * od.order_detail_price * (pt.product_discount)/100) as totalSales,
-            pt.product_cost as totalCost
+			sum(od.order_detail_cnt * od.order_sale_price) as totalSales,
+            sum(od.order_detail_cnt * od.order_detail_cost) as totalCost
             
 			from order_detail od 
 			join product_tbl pt on (od.product_no = pt.product_no)
 			join detail_category dc on (pt.d_category_no = dc.d_category_no)
 			join product_category pc on (dc.category_no = pc.category_no)
 			join order_tbl ot on (od.order_no = ot.order_no) 
-			join pay_tbl pt on (ot.pay_no = pt.pay_no)
 			
-		where ot.order_status = 1 and pt.pay_status = 1
-        group by pc.category_no, pt.product_cost;
+		where ot.order_status = 1
+        group by pc.category_no
         
 	</select>
 	
 	<select id="selectCountMonthSalesData" parameterType="map" resultType="sd">
 		select 
-            sum(od.order_detail_cnt * pdt.product_price * (1-((pdt.product_discount)/100))) as totalSales,
-            sum(pdt.product_cost * od.order_detail_cnt) as totalCost
+            sum(od.order_detail_cnt * od.order_sale_price) as totalSales,
+            sum(or.order_detail_cost * od.order_detail_cnt) as totalCost
             
 			from order_detail od 
 			join product_tbl pdt on (od.product_no = pdt.product_no)
 			join order_tbl ot on (od.order_no = ot.order_no) 
-			join pay_tbl pt on (ot.pay_no = pt.pay_no)
 			join member_tbl mt on(ot.member_no = mt.member_no)
 			
-		where ot.order_status = 1 and pt.pay_status = 1 and to_char(ot.order_date,'yyyy-mm-dd') between #{start} and #{end}
+		where ot.order_status = 1 and to_char(ot.order_date,'yyyy-mm-dd') between #{start} and #{end}
 	</select>
 	
 	<select id="selectCountMonthCategorySalesData" parameterType="_int" resultType="sd"> <!-- 매출보고서 작성 -->
 		select 
 			pc.category_no as categoryNo,
-			sum(od.order_detail_cnt * pdt.product_price * (1-((pdt.product_discount)/100))) as totalSales,
-            sum(pdt.product_cost * od.order_detail_cnt) as totalCost
+			sum(od.order_detail_cnt * or.order_sale_price) as totalSales,
+            sum(od.order_detail_cost * od.order_detail_cnt) as totalCost
             
 			from order_detail od 
 			join product_tbl pdt on (od.product_no = pdt.product_no)
 			join detail_category dc on (pdt.d_category_no = dc.d_category_no)
 			join product_category pc on (dc.category_no = pc.category_no)
 			join order_tbl ot on (od.order_no = ot.order_no) 
-			join pay_tbl pt on (ot.pay_no = pt.pay_no)
 			
-		where ot.order_status = 1 and pt.pay_status = 1 and dc.category_no = #{_parameter}
+		where ot.order_status = 1 and dc.category_no = #{_parameter}
         group by pc.category_no
 	</select>
 	
 	<select id="selectMonthSalesData" parameterType="map" resultType="sd"> 
 		select 
 			pc.category_no as categoryNo,
-			sum(od.order_detail_cnt * pdt.product_price * (1-((pdt.product_discount)/100))) as totalSales,
-            sum(pdt.product_cost * od.order_detail_cnt) as totalCost
+			sum(od.order_detail_cnt * or.order_sale_price) as totalSales,
+            sum(od.order_detail_cost * od.order_detail_cnt) as totalCost
             
 			from order_detail od 
 			join product_tbl pdt on (od.product_no = pdt.product_no)
 			join detail_category dc on (pdt.d_category_no = dc.d_category_no)
 			join product_category pc on (dc.category_no = pc.category_no)
 			join order_tbl ot on (od.order_no = ot.order_no) 
-			join pay_tbl pt on (ot.pay_no = pt.pay_no)
 			
-		where ot.order_status = 1 and pt.pay_status = 1 and dc.category_no = #{categoryNo }
-		and pt.pay_date between #{start} and #{end}
+		where ot.order_status = 1 and dc.category_no = #{categoryNo } and or.order_date between #{start} and #{end}
         group by pc.category_no 
 	</select>
 	
 	<select id="selectGenderSalesData" resultType="sd">
 		select 
             pc.category_no as cateogoryNo,
-			sum(od.order_detail_cnt * od.order_detail_price * (pt.product_discount)/100) as totalSales,
-            pt.product_cost as totalCost,
+			sum(od.order_detail_cnt * or.order_sale_price) as totalSales,
+            sum(od.order_detail_cost * od.order_detail_cnt) as totalCost,
             mt.member_gender as gender
             
 			from order_detail od 
@@ -584,11 +580,10 @@
 			join detail_category dc on (pt.d_category_no = dc.d_category_no)
 			join product_category pc on (dc.category_no = pc.category_no)
 			join order_tbl ot on (od.order_no = ot.order_no) 
-			join pay_tbl pt on (ot.pay_no = pt.pay_no)
 			join member_tbl mt on(ot.member_no = mt.member_no)
 			
 		where ot.order_status = 1 and pt.pay_status = 1
-        group by pc.category_no, pt.product_cost, mt.member_gender
+        group by pc.category_no, mt.member_gender
 	</select>
 	
 	<select id="selectBestSalesCategory" resultType="sd">
@@ -597,20 +592,20 @@
         (select rownum as rnum, ord.* from
         (select 
 			pc.category_no as categoryNo,
-			sum(od.order_detail_cnt * pdt.product_price * (1-((pdt.product_discount)/100))) as totalSales,
-            sum(pdt.product_cost * od.order_detail_cnt) as totalCost
+			sum(od.order_detail_cnt * or.order_sale_price) as totalSales,
+            sum(od.order_detail_cost * od.order_detail_cnt) as totalCost
             
 			from order_detail od 
 			join product_tbl pdt on (od.product_no = pdt.product_no)
 			join detail_category dc on (pdt.d_category_no = dc.d_category_no)
 			join product_category pc on (dc.category_no = pc.category_no)
 			join order_tbl ot on (od.order_no = ot.order_no) 
-			join pay_tbl pt on (ot.pay_no = pt.pay_no)
 			
-		where ot.order_status = 1 and pt.pay_status = 1 
+		where ot.order_status = 1
         group by pc.category_no
         
         order by totalSales desc) ord) where rnum = 1
+        
 	</select>
 	
 	<select id="selectOtherSalesCategory" resultType="sd">
@@ -619,17 +614,16 @@
         (select rownum as rnum, ord.* from
         (select 
 			pc.category_no as categoryNo,
-			sum(od.order_detail_cnt * pdt.product_price * (1-((pdt.product_discount)/100))) as totalSales,
-            sum(pdt.product_cost * od.order_detail_cnt) as totalCost
+			sum(od.order_detail_cnt * or.order_sale_price) as totalSales,
+            sum(od.order_detail_cost * od.order_detail_cnt) as totalCost
             
 			from order_detail od 
 			join product_tbl pdt on (od.product_no = pdt.product_no)
 			join detail_category dc on (pdt.d_category_no = dc.d_category_no)
 			join product_category pc on (dc.category_no = pc.category_no)
 			join order_tbl ot on (od.order_no = ot.order_no) 
-			join pay_tbl pt on (ot.pay_no = pt.pay_no)
 			
-		where ot.order_status = 1 and pt.pay_status = 1 
+		where ot.order_status = 1
         group by pc.category_no
         
         order by totalSales desc) ord) where rnum != 1
