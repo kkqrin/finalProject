@@ -509,8 +509,8 @@
 	<select id="selectCountTotalSalesData" resultType="sd">
 		select 
             pc.category_no as cateogoryNo,
-			sum(od.order_detail_cnt * od.order_sale_price) as totalSales,
-            sum(od.order_detail_cnt * od.order_detail_cost) as totalCost
+			nvl(sum(od.order_detail_cnt * od.order_sale_price),0) as totalSales,
+            nvl(sum(od.order_detail_cost * od.order_detail_cnt),0) as totalCost
             
 			from order_detail od 
 			join product_tbl pt on (od.product_no = pt.product_no)
@@ -525,8 +525,8 @@
 	
 	<select id="selectCountMonthSalesData" parameterType="map" resultType="sd">
 		select 
-            sum(od.order_detail_cnt * od.order_sale_price) as totalSales,
-            sum(or.order_detail_cost * od.order_detail_cnt) as totalCost
+            nvl(sum(od.order_detail_cnt * od.order_sale_price),0) as totalSales,
+            nvl(sum(od.order_detail_cost * od.order_detail_cnt),0) as totalCost
             
 			from order_detail od 
 			join product_tbl pdt on (od.product_no = pdt.product_no)
@@ -539,8 +539,8 @@
 	<select id="selectCountMonthCategorySalesData" parameterType="_int" resultType="sd"> <!-- 매출보고서 작성 -->
 		select 
 			pc.category_no as categoryNo,
-			sum(od.order_detail_cnt * or.order_sale_price) as totalSales,
-            sum(od.order_detail_cost * od.order_detail_cnt) as totalCost
+			nvl(sum(od.order_detail_cnt * od.order_sale_price),0) as totalSales,
+            nvl(sum(od.order_detail_cost * od.order_detail_cnt),0) as totalCost
             
 			from order_detail od 
 			join product_tbl pdt on (od.product_no = pdt.product_no)
@@ -555,8 +555,8 @@
 	<select id="selectMonthSalesData" parameterType="map" resultType="sd"> 
 		select 
 			pc.category_no as categoryNo,
-			sum(od.order_detail_cnt * or.order_sale_price) as totalSales,
-            sum(od.order_detail_cost * od.order_detail_cnt) as totalCost
+			nvl(sum(od.order_detail_cnt * od.order_sale_price),0) as totalSales,
+            nvl(sum(od.order_detail_cost * od.order_detail_cnt),0) as totalCost
             
 			from order_detail od 
 			join product_tbl pdt on (od.product_no = pdt.product_no)
@@ -571,8 +571,8 @@
 	<select id="selectGenderSalesData" resultType="sd">
 		select 
             pc.category_no as cateogoryNo,
-			sum(od.order_detail_cnt * or.order_sale_price) as totalSales,
-            sum(od.order_detail_cost * od.order_detail_cnt) as totalCost,
+			nvl(sum(od.order_detail_cnt * od.order_sale_price),0) as totalSales,
+            nvl(sum(od.order_detail_cost * od.order_detail_cnt),0) as totalCost,
             mt.member_gender as gender
             
 			from order_detail od 
@@ -592,8 +592,8 @@
         (select rownum as rnum, ord.* from
         (select 
 			pc.category_no as categoryNo,
-			sum(od.order_detail_cnt * or.order_sale_price) as totalSales,
-            sum(od.order_detail_cost * od.order_detail_cnt) as totalCost
+			nvl(sum(od.order_detail_cnt * od.order_sale_price),0) as totalSales,
+            nvl(sum(od.order_detail_cost * od.order_detail_cnt),0) as totalCost
             
 			from order_detail od 
 			join product_tbl pdt on (od.product_no = pdt.product_no)
@@ -614,8 +614,8 @@
         (select rownum as rnum, ord.* from
         (select 
 			pc.category_no as categoryNo,
-			sum(od.order_detail_cnt * or.order_sale_price) as totalSales,
-            sum(od.order_detail_cost * od.order_detail_cnt) as totalCost
+			nvl(sum(od.order_detail_cnt * od.order_sale_price),0) as totalSales,
+            nvl(sum(od.order_detail_cost * od.order_detail_cnt),0) as totalCost
             
 			from order_detail od 
 			join product_tbl pdt on (od.product_no = pdt.product_no)
