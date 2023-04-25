@@ -167,13 +167,13 @@
 		where member_no = #{_parameter}
 	</select>
 	
-	<select id="selectMonthCount" resultType=""> <!-- 필요없는 query 같음 -->
+	<!-- <select id="selectMonthCount" resultType=""> 필요없는 query 같음
 		select
 			sum(product_price) 
 			from product_tbl pt 
 			join order_tbl ot on (pt.product_no = ot.product_no) 
 		where ot.order_status = 4 and ot.order_date between '2023-03-20' and '2023-03-31'
-	</select>
+	</select> -->
 
 	<select id="selectAllProductList" parameterType="map" resultType="p">
 		select * from
@@ -292,7 +292,7 @@
 		select count(*) from order_tbl
 	</select>
 
-	<select id="selectAllBoardSalesCount" resultType=""> <!-- 수정 필요 -->
+	<!-- <select id="selectAllBoardSalesCount" resultType=""> 수정 필요
 		select
 			sum(bo.detail_price) 
 		from board_join bj 
@@ -302,14 +302,14 @@
 		
 	</select>
 
-	<select id="selectMonthBoardSalesCount" parameterMap="map" resultType=""> <!-- 수정 필요 -->
+	<select id="selectMonthBoardSalesCount" parameterMap="map" resultType=""> 수정 필요
 		select
 			sum(bo.detail_price) 
 			from board_join bj 
 			join board_tbl bt on (bj.board_no = bt.board_no) 
 		where bt.board_date between #{start} and #{end}
 		and bt.board_status = 2
-	</select>
+	</select> -->
 
 <!-- 	<select id="selectAllBoardList" parameterType="map" resultType="b">
 		select * from
