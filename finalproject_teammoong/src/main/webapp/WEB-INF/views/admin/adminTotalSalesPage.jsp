@@ -90,6 +90,10 @@
 		/* 높이를 주면 왜 사라지는걸까? 이유가 머이지? */
 		
 	}
+	.selectCategoryChart{
+		margin: 0;
+		padding: 0;
+	}
 
 </style>
 <body>
@@ -129,7 +133,7 @@
 		        		<div class="monthChartTitle"><span>Month Sales Chart</span></div>
 		        		<canvas id="monthChart"></canvas>
 		        	</div>
-		        	<div>
+		        	<div class="selectCategoryChart chart">
 			        	<select id="monthSelect" class="monthSelect">
 						    <option value="1">1월</option>
 						    <option value="2">2월</option>
@@ -331,13 +335,13 @@
 		            	data : {monthNo : monthNo},
 						success : function(data){
 							console.log(data);
-							const months = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
+							const category = ['패션','뷰티','식품','생활용품','가전/디지털','가구','침구','인테리어','공구','스포츠/레저/취미','출산/유아동','반려용품','명품관'];
 				            
 				            var ctx = document.getElementById('salesChart').getContext('2d');
 				            var myChart = new Chart(ctx, {
 				                type: 'doughnut', // 차트의 형태
 				                data: { // 차트에 들어갈 데이터
-				                    labels: months,
+				                    labels: category,
 				                    datasets: [
 				                        { //데이터
 				                            label: '선택한 월의 매출액', //차트 제목

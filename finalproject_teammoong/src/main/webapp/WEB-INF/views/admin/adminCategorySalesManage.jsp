@@ -91,6 +91,9 @@
 		height: 400px;
 		width: 400px;
 	}
+	.chartDiv{
+		width: 800px;
+	}
 	.chart{
 		margin-top: 150px;
 	}

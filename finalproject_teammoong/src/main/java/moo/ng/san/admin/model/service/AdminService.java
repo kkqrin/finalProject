@@ -637,23 +637,20 @@ public class AdminService {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
-		int startYear = 2023; // 시작연도
+		int startYear = 2023; // 설정연도
 		LocalDate startDate = LocalDate.of(startYear, monthNo, 1);
 	    LocalDate endDate = startDate.withDayOfMonth(startDate.lengthOfMonth());	
 	    map.put("start", startDate);
 	    map.put("end", endDate);
 	    
-		for(int i=0;i<14;i++) {
+		for(int i=1;i<14;i++) {
 	        map.put("categoryNo", i);
 	        SalesData sd = dao.selectMonthSalesData(map);
-	        if(Integer.valueOf(sd.getTotalSales()) == null) {
-	            sd.setTotalSales(0);
-	        }
-	        
+	        sd.setCategoryNo(i);
+	        sd.setGender(3);
+	        sd.setMonthNo(i);
 	        list.add(sd);
 		}
-		
-		System.out.println(list);
 		
 		return list;
 	}

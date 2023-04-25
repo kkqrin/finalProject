@@ -279,6 +279,13 @@ public class AdminDao {
 	public SalesData selectMonthSalesData(HashMap<String, Object> map) {
 		SalesData sd = sqlSession.selectOne("admin.selectMonthSalesData",map);
 		
+		if(sd == null) {
+			sd = new SalesData();
+			sd.setTotalSales(0);
+        	sd.setTotalCost(0);
+        	
+		}
+		
 		return sd;
 	}
 
