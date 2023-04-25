@@ -219,6 +219,7 @@
                                     <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
                                     <button class="btn btn-pri size02">뭉쳐야산다</button>
                                     <input type="hidden" id="option-list-null" value="${optionList}">
+                                    <input type="hidden" name="btnDivision" value="main">
                                 </form>
                             </div>
                         </div>
@@ -249,12 +250,14 @@
                     <c:if test="${sessionScope.m.memberId ne g.memberId }">
                         <div class="form-box">
                             <div>
-                                <form action="/subMoongsanOrder.do" method="post" class="subMoongsanOrderBtn">
+                                <form action="/moongsanOrder.do" method="post" class="subMoongsanOrderBtn">
                                     <input type="hidden" name="productNo">
                                     <input type="hidden" name="optionNo">
                                     <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
                                     <button class="btn btn-pri size01" id="orderBtn">주문참여</button>
                                     <input type="hidden" id="option-list-null" value="${optionList}">
+                                    <input type="hidden" name="gongguNo" value="${g.gongguNo}">
+                                    <input type="hidden" name="btnDivision" value="sub">
                                 </form>
                             </div>
                         </div>
