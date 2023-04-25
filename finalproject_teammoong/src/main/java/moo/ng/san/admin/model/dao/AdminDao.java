@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import moo.ng.san.admin.model.vo.CouponData;
 import moo.ng.san.admin.model.vo.SalesData;
+import moo.ng.san.askItem.model.vo.AskItem;
 import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.board.model.vo.BoardJoin;
 import moo.ng.san.board.model.vo.BoardOption;
@@ -275,10 +276,17 @@ public class AdminDao {
 		return sd;
 	}
 
-	public ArrayList<SalesData> selectMonthSalesData(int monthNo) {
-		List list = sqlSession.selectList("admin.selectMonthSalesData",monthNo);
+	public SalesData selectMonthSalesData(HashMap<String, Object> map) {
+		SalesData sd = sqlSession.selectOne("admin.selectMonthSalesData",map);
 		
-		return (ArrayList<SalesData>)list;
+		if(sd == null) {
+			sd = new SalesData();
+			sd.setTotalSales(0);
+        	sd.setTotalCost(0);
+        	
+		}
+		
+		return sd;
 	}
 
 	public ArrayList<SalesData> selectGenderSalesData() {
@@ -315,6 +323,30 @@ public class AdminDao {
 		int result = sqlSession.selectOne("admin.selectVariationSalesCount",map);
 		// TODO Auto-generated method stub
 		return Integer.toString(result);
+	}
+
+	public ArrayList<AskItem> selectAskItemList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("admin.selectAskItemList",map);
+		// TODO Auto-generated method stub
+		return (ArrayList<AskItem>)list;
+	}
+
+	public int selectAskItemCount() {
+		int count = sqlSession.selectOne("admin.selectAskItemCount");
+		// TODO Auto-generated method stub
+		return count;
+	}
+
+	public SalesData selectBestSalesCategory() {
+		SalesData list = sqlSession.selectOne("admin.selectBestSalesCategory");
+		
+		return list;
+	}
+
+	public ArrayList<SalesData> selectOtherSalesCategory() {
+		List list = sqlSession.selectList("admin.selectOtherSalesCategory");
+		
+		return (ArrayList<SalesData>)list;
 	}
 
 
