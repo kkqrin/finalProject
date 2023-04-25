@@ -24,4 +24,9 @@ public class Order {
 	private int optionPrice;
 	
 	private int basketCount;
+	private int totalPrice;
+	private String deliReceiver;
+	private String deliPhone;
+	private String deliAddr;
+	private String deliRequest;
 }

@@ -10,7 +10,6 @@ import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.order.model.vo.Order;
 import moo.ng.san.pay.model.service.PayService;
 import moo.ng.san.pay.model.vo.OrderDetail;
-import moo.ng.san.pay.model.vo.Pay;
 import moo.ng.san.product.model.vo.Option;
 import moo.ng.san.product.model.vo.Product;
 
@@ -20,12 +19,12 @@ public class PayController {
 	private PayService service;
 	
 	@RequestMapping(value="/insertPay.do")
-	public String insertPay(int issueNo,int memberNo, Order order, int plusPointEa, int minusPointEa, OrderDetail orderDetail, Product product, Option option, Model model) {
-		Pay pay = service.insertpay(issueNo, memberNo, order, plusPointEa, minusPointEa, orderDetail, product, option);
-			System.out.println(pay);
-		String productName = service.selectProductName(orderDetail.getProductNo());
-			model.addAttribute("pay", pay);
-			model.addAttribute("productName",productName);
+	public String insertPay( Model model) {
+		//Order order = service.insertpay();
+			//System.out.println(order);
+		//String productName = service.selectProductName(orderDetail.getProductNo());
+			//model.addAttribute("order", order);
+			//model.addAttribute("productName",productName);
 		return "/order/payComplite";
 	}
 }

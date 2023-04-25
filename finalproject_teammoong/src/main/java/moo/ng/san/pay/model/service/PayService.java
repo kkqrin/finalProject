@@ -10,7 +10,6 @@ import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.order.model.vo.Order;
 import moo.ng.san.pay.model.dao.PayDao;
 import moo.ng.san.pay.model.vo.OrderDetail;
-import moo.ng.san.pay.model.vo.Pay;
 import moo.ng.san.product.model.vo.Option;
 import moo.ng.san.product.model.vo.Product;
 
@@ -19,25 +18,25 @@ public class PayService {
 	@Autowired
 	private PayDao dao;
 
-	public Pay insertpay(int issueNo, int memberNo, Order order, int plusPointEa, int minusPointEa, OrderDetail orderDetail,
+	public Order insertpay(int issueNo, int memberNo, Order order, int plusPointEa, int minusPointEa, OrderDetail orderDetail,
 			Product product, Option option) {
 		int productNo = option.getProductNo();
-		Pay pay = new Pay();
+		Order pay = new Order();
 		pay.setMemberNo(memberNo);
 		pay.setProductNo(productNo);
 		int productCost = dao.selectProductCost(productNo);
 		
-		int result = dao.insertPay(pay);
-			if(result > 0) {
+		//int result = dao.insertPay(pay);
+			//if(result > 0) {
 				order.setMemberNo(memberNo);
 				order.setProductNo(productNo);
-				order.setPayNo(pay.getPayNo());
+				//order.setPayNo(pay.getPayNo());
 				
 				int result2 = dao.insertOrder(order);
 				if(result2>0) {
 					
 					orderDetail.setOrderNo(order.getOrderNo());
-					orderDetail.setOrderDetailPrice(productCost);
+					//orderDetail.setOrderDetailPrice(productCost);
 					System.out.println(orderDetail);
 					int result3 = dao.insertOrderDetail(orderDetail);
 					Point point = new Point();
@@ -56,10 +55,10 @@ public class PayService {
 							}
 					}
 				}
-			}
-			Pay p = new Pay();
-			p = dao.selectPay(pay.getPayNo());
-		return p;
+			
+			//Order p = new Order();
+			//p = dao.selectPay(pay.getPayNo());
+		return null;
 	}
 
 	public String selectProductName(int productNo) {

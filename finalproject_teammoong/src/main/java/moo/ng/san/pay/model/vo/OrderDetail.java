@@ -13,9 +13,6 @@ public class OrderDetail {
 	private int productNo;
 	private Integer optionInfoNo;
 	private int orderDetailCnt;
-	private int orderDetailPrice;
-	private String deliveryReceiver;
-	private String deliveryPhone;
-	private String deliveryAddress;
-	private String deliveryRequest;
+	private int orderDetailCost;
+	private int orderSalePrice;
 }
