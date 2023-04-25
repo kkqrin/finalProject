@@ -34,7 +34,7 @@
 									${dm.dmContent }
 								</div>
 							</td>
-							<td>${dm.dmSender }</td>
+							<td>${dm.dmSenderName }</td>
 							<td>${dm.dmDate }</td>
 							<td>
 								<c:choose>

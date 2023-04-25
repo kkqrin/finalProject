@@ -34,7 +34,12 @@ public class DmController {
 	}
 	
 	@RequestMapping(value = "/sendDmList.do")
-	public String sendDmList() {
+	public String sendDmList(int reqPage, @SessionAttribute(required=false) Member m, Model model) {
+		DirectMessage dm = new DirectMessage();
+		dm.setDmSender(m.getMemberId());
+		DmPageData dpd = service.selectDmList(reqPage,dm);
+		model.addAttribute("list", dpd.getList());
+		model.addAttribute("pageNavi", dpd.getPageNavi());
 		return "dm/sendDmList";
 	}
 	
