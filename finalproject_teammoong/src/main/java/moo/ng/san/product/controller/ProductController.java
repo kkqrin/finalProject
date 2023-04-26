@@ -180,7 +180,6 @@ public class ProductController {
 		
 		// 장바구니에 없을때
 		if(b == null) {
-			
 			// 장바구니 담기
 			int result = service.insertShoppingCart(memberNo, productNo, cnt);
 			
@@ -196,7 +195,6 @@ public class ProductController {
 				result = service.insertShoppingCartOption(recentBasketNo, optionGroupNo, optionNumber);
 			}
 		}else {
-			
 			// 현재 수량 + cnt
 			int result = service.updateBasketCount(b.getBasketNo(), cnt);
 			

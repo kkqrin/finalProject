@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import moo.ng.san.board.model.vo.Board;
+import moo.ng.san.board.model.vo.BoardJoin;
 import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.member.model.vo.Out;
@@ -75,6 +76,11 @@ public class MemberDao {
 
 	public void updateMemberNewPhone(Member member) {
 		sqlSession.update("member.updateMemberNewPhone",member);
+	}
+
+	public ArrayList<BoardJoin> selectMyJoiner(int boardNo) {
+		List list = sqlSession.selectList("member.selectMyJoiner",boardNo);
+		return (ArrayList<BoardJoin>)list;
 	}
 
 	

@@ -19,8 +19,6 @@ public class PayDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	
-
 	public int insertOrder(Order order) {
 		int result = sqlSession.insert("order.insertOrder",order);
 				
@@ -28,7 +26,6 @@ public class PayDao {
 	}
 
 	public int insertOrderDetail(OrderDetail orderDetail) {
-		System.out.println("insertOrderDetail : "+orderDetail);
 	    int result = sqlSession.insert("orderDetail.insertOrderDetail", orderDetail);
 	    return result;
 	}
@@ -59,6 +56,8 @@ public class PayDao {
 		String productName = sqlSession.selectOne("product.selectProductName", productNo);
 		return productName;
 	}
+
+
 
 
 }

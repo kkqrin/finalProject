@@ -221,7 +221,7 @@
 	</select>
 	
 	<update id="updateBasketCount" parameterType="map">
-		UPDATE BASKET_TBL SET BASKET_COUNT = BASKET_COUNT + #{cnt}
+		UPDATE BASKET_TBL SET BASKET_COUNT = BASKET_COUNT + #{basketCount}
 		WHERE BASKET_NO = #{basketNo}
 	</update>
 	

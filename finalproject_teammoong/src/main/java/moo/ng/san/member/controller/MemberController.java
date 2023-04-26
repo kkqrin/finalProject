@@ -24,6 +24,7 @@ import common.MsgVO;
 import common.PhoneCertify;
 import lombok.val;
 import moo.ng.san.board.model.service.BoardService;
+import moo.ng.san.board.model.vo.BoardJoin;
 import moo.ng.san.board.model.vo.BoardPageData;
 import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.member.model.service.MemberService;
@@ -340,6 +341,12 @@ public class MemberController {
 	}
 	
 	
+	@RequestMapping(value = "/myPageJoiner.do")
+	public String myPageJoiner(int boardNo, Model model) {
+		ArrayList<BoardJoin> list = service.selectMyJoiner(boardNo);
+		model.addAttribute("list", list);
+		return "board/myPageJoiner";
+	}
 	
 	
 }//MemberController
