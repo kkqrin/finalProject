@@ -38,28 +38,56 @@
 			<table>
 				<tr>
 					<th>주문번호</th>
-					<th style="width: 40%;">상품명</th>
+					<th style="width: 40%;">주문건</th>
+					<th>총 결제금액</th>
 					<th>결제날짜</th>
 					<th>주문상태</th>
 					<th style="width: 9%;"></th>
 				</tr>
 				<tr>
-					<td>${pay.payNo }</td>
-					<td>${productName }</td>
-					<td>${pay.payDate }</td>
+					<td>${reOrder.orderNo }</td>
+					<td><a href="#" id="detailOrder">주문 상세</a></span></td>
+					<td>${reOrder.orderDate }</td>
 					<td>
-						<c:if test="${pay.payStatus == 1 }">
+						<c:if test="${reOrder.orderStatus == 1 }">
 							결제완료
 						</c:if>
-						<c:if test="${pay.payStatus == 2 }">
+						<c:if test="${reOrder.orderStatus == 2 }">
+							배송준비중
+						</c:if>
+						<c:if test="${reOrder.orderStatus == 3 }">
+							배송중
+						</c:if>
+						<c:if test="${reOrder.orderStatus == 4 }">
+							배송완료
+						</c:if>
+						<c:if test="${reOrder.orderStatus == 5 }">
 							결제취소
+						</c:if>
+						<c:if test="${reOrder.orderStatus == 6 }">
+							환불완료
 						</c:if>
 					</td>
 					<td>
 						<button type="button" id="cancelPay" class="btn size01 btn-border-pri">결제취소</button>
 					</td>
-				</tr>
+				</tr>				
 			</table>
+			<div class="order">
+				<table>
+					<tr>
+						<th>상품명</th>
+						<th>수량</th>
+						<th>가격</th>
+					</tr>
+					<c:forEach items="${reOrderDetail }" var="o">
+						
+					</c:forEach>
+				</table>
+			</div>
+			<div>
+					
+			</div>
 			<div id="myModal" class="modal">
         		<div class="modal-content">
             	<h3>결제 취소</h3>

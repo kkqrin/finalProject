@@ -22,6 +22,10 @@
     .adminPage-sidebar>ul>li{
         list-style-type: none;
     }
+    .topBtns>div{
+    	float: left;
+    }
+    
     .adminPage-main{
         background-color: lightgreen;
     }
@@ -29,6 +33,7 @@
         background-color: #fff;
         overflow: hidden;
     }
+    
     .material-symbols-outlined{
         font-size: 150px;
         
@@ -48,13 +53,15 @@
 	    top: 130px;
 	    position: absolute;
 	    right: 294px;
-	    text-align: right;
-	    background-color: brown;
+	    text-align: left;
+	    background-color: lightgray;
 	    width: 400px;
 	    height: 1000px;
 	    display: none;
     }
-    .moreResult>div>span{
+    
+    
+    .moreResult>div>div{
     	font-size: 40px;
     	cursor: pointer;
     }
@@ -94,8 +101,23 @@
     	width: 300px;
     }
     
-    .pagination{
-    	margin: 1px;
-    }
+    
+	
+	.highlight {
+	  animation: highlight 1s ease-in-out;
+	  background-color: #ffd900;
+	  color: #fff;
+	}
 
+	@keyframes highlight {
+	  0% {
+	    background-color: transparent;
+	  }
+	  50% {
+	    background-color: #ffd900;
+	  }
+	  100% {
+	    background-color: transparent;
+	  }
+	}
 

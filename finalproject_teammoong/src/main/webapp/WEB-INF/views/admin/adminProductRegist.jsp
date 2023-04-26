@@ -72,20 +72,20 @@
                     <div class="adminPage-result">
                         <table class="table guide-board tbl-box">
                             <tr>
-                            	<td>구분</td>
                            		<td>사업자명</td>
                             	<td>사업자등록번호</td>
                                 <td>대표 전화번호</td>
-                            	<td>사업장 주소</td>
+                            	<td>사업장 주소1</td>
+                            	<td>사업장 주소2</td>
                                 <td>담당자명</td>
                                 <td>담당자 연락처</td>
-                                <td>카테고리</td>
-                                <td>사업자등록증 다운로드</td>
-                            	<td>요청 제목</td>
+                                <td>담당자 메일</td>
+                                <!-- <td>카테고리</td> -->
+                            	<td>요청제목</td>
+                            	<td>요청일자</td>
                             </tr>
                             <c:forEach items="${askList }" var="a">
                                 <tr>
-                                	<td><input type="checkBox" id="checkBox"></td>
                                     <td>${a.corpName }<input type="hidden" class="corpName" value="${a.corpName }"></td>
                                     <td>${a.regNo }</td>
                                     <td>${a.repName }</td>

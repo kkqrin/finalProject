@@ -5,12 +5,11 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import moo.ng.san.coupon.model.vo.IssueCoupon;
 import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.order.model.vo.Order;
 import moo.ng.san.pay.model.dao.PayDao;
 import moo.ng.san.pay.model.vo.OrderDetail;
-import moo.ng.san.product.model.vo.Option;
+
 
 @Service
 public class PayService {
@@ -22,15 +21,14 @@ public class PayService {
 		String deliAddr1 = order.getDeliAddr1();
 		String deliAddr2 = order.getDeliAddr2();
 		String deliAddr = deliAddr1+deliAddr2;
-		System.out.println(deliAddr);
+		
 		order.setDeliAddr(deliAddr);
 		
 		int result = dao.insertOrder(order);
-		System.out.println(result);
+		
 		int result2 = 0;
 		if(result > 0) {
-			for(OrderDetail orderDetail: orderDetailList) {
-				System.out.println(order.getOrderNo());
+			for(OrderDetail orderDetail: orderDetailList) {		
 				orderDetail.setOrderNo(order.getOrderNo());
 				
 				result2 += dao.insertOrderDetail(orderDetail);
@@ -50,14 +48,13 @@ public class PayService {
 					}
 				}
 			}
-			
 		}
 		return	order;
 	}
 
-	public String selectProductName(int productNo) {
-		String productName = dao.selectProductName(productNo);
-		return productName;
+	public ArrayList<OrderDetail> selectOrderDetail(int reOrderNo) {
+		ArrayList<OrderDetail> reOrderDetail = dao.selectOrderDetail(reOrderNo);
+		return reOrderDetail;
 	}
 
 
