@@ -340,6 +340,10 @@ public class MemberController {
 	}
 	
 	
+	@RequestMapping(value = "/myPageJoiner.do")
+	public String myPageJoiner(int boardNo, Model model) {
+		return "board/myPageJoiner";
+	}
 	
 	
 }//MemberController
