@@ -52,11 +52,6 @@ public class PayService {
 		return	order;
 	}
 
-	public String selectProductName(int productNo) {
-		String productName = dao.selectProductName(productNo);
-		return productName;
-	}
-
 	public ArrayList<OrderDetail> selectOrderDetail(int reOrderNo) {
 		ArrayList<OrderDetail> reOrderDetail = dao.selectOrderDetail(reOrderNo);
 		return reOrderDetail;

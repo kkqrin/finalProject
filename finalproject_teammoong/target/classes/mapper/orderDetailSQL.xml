@@ -10,6 +10,18 @@
     	<if test="optionInfoNo != 0">
         	#{optionInfoNo}
     	</if>,
-    	#{orderDetailCnt}, #{orderDetailCost}, #{orderSalePrice})
+    	#{orderDetailCnt}, #{orderDetailCost}, #{orderSalePrice}, #{productName})
 	</insert>
+	<select id="selectOrderDetail" parameterType="_int" resultType="od">
+		select
+			order_detail_no as orderDetailNo,
+			order_no as orderNo,
+			product_no as productNo,
+			option_info_no as optionInfoNo,
+			order_detail_cnt as orderDetailCnt,
+			order_sale_price as orderSalePrice,
+			product_name as productName
+		from order_detail
+		where order_no = #{orderNo}
+	</select>
 </mapper>
