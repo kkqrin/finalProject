@@ -272,7 +272,7 @@ background: linear-gradient(to top, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Fir
         
 
 
-        <div class="posting-item popular">
+        <div class="posting-item popular all-product">
             전체보기
         </div>
     </div>
@@ -465,6 +465,10 @@ background: linear-gradient(to top, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Fir
                 </div>
             </div>
         </c:forEach>
+
+            <div class="posting-item popular all-product">
+                <a href="/bestProductList.do">전체보기</a>
+            </div>
     </div>
 
 
@@ -662,15 +666,17 @@ background: linear-gradient(to top, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Fir
     <script src="/resources/js/product.js"></script>
 
     <script>
-    // 슬릭 padding-bottom
-    $(document).ready(function(){
-        $(".popular-product-wrap .slick-list").attr("style", "padding-bottom: 10px");
+        $(document).ready(function(){
+        // 슬릭 padding-bottom
+        $(".popular-product-wrap .slick-list").attr("style", "padding-bottom: 10px; margin-bottom: 250px;");
+
+
         $(".slick-box").slick({
-        	autoplay: true,
-        	autoplaySpeed: 5000,
-        	infinite: true,
-        	fade: true,
-        	dots: true
+            autoplay: true,
+            autoplaySpeed: 5000,
+            infinite: true,
+            fade: true,
+            dots: true
         });
     });
     </script>

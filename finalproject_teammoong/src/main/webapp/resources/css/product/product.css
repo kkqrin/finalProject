@@ -557,3 +557,17 @@ padding-bottom: 10px;
     color: #3a3a3a;
     cursor: default;
 }
+
+/* 전체보기 */
+.posting-item.popular.all-product{
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: lemonchiffon; */
+}
+
+.all-product>a{
+    font-size: 22px;
+    font-weight: 600;
+}

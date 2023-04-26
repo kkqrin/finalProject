@@ -44,7 +44,9 @@
         </pre>
         <div class="order-sheet-wrap">
             <h1>주문서</h1>
-            <form action="/insertPay.do" method="post">
+            <!--  -->
+            <!-- <form action="/insertPay.do" method="post"> -->
+            <form action="/order.do" method="post">
                 <div class="order-product-box">
                     <h4>
                         주문 상품

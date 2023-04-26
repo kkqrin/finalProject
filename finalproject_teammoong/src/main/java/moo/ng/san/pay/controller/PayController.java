@@ -30,14 +30,14 @@ public class PayController {
 			orderDetailList.add(orderDetail);
 		}
 		Order reOrder = service.insertpay(memberNo, issueNo, minusPointEa, plusPointEa, order, orderDetailList);
-		int reOrderNo = reOrder.getOrderNo();
-		ArrayList<OrderDetail> reOrderDetail = service.selectOrderDetail(reOrderNo);
-		ArrayList<Order> productReName = new ArrayList<Order>();
-		
-		String productName = service.selectProductName(order.getProductNo());
-		model.addAttribute("order", reOrder);
-		model.addAttribute("reOrderDetail",reOrderDetail);
-		model.addAttribute("productName",productName);
+//		int reOrderNo = reOrder.getOrderNo();
+//		ArrayList<OrderDetail> reOrderDetail = service.selectOrderDetail(reOrderNo);
+//		ArrayList<Order> productReName = new ArrayList<Order>();
+//		
+//		String productName = service.selectProductName(order.getProductNo());
+//		model.addAttribute("order", reOrder);
+//		model.addAttribute("reOrderDetail",reOrderDetail);
+//		model.addAttribute("productName",productName);
 		return "/order/payComplite";
 	}
 }

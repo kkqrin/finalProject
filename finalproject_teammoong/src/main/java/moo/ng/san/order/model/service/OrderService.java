@@ -44,4 +44,17 @@ public class OrderService {
 //		System.out.println("service : "+list);
 		return list;
 	}
+
+	public int insertOrder(int memberNo, int totalPrice, String deliveryReceiver, String deliPhone, String deliAddr1, int productNo) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("totalPrice", totalPrice);
+		map.put("deliveryReceiver", deliveryReceiver);
+		map.put("deliPhone", deliPhone);
+		map.put("deliAddr1", deliAddr1);
+		map.put("productNo", productNo);
+		
+		return dao.insertOrder(map);
+	}
 }

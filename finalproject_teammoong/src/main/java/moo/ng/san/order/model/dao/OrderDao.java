@@ -34,5 +34,11 @@ public class OrderDao {
 		return o;
 	}
 
+	public int insertOrder(HashMap<String, Object> map) {
+		int result = sqlSession.insert("order.insertOrder", map);
+		
+		return result;
+	}
+
 
 }

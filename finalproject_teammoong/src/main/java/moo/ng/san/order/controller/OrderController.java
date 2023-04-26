@@ -62,7 +62,7 @@ public class OrderController {
 			// 세션에서 가져옴
 			int memberNo = m.getMemberNo();
 			
-			// 구매하려는 상품 조회
+			// 구매하려는 상품 조회 (배열)
 			ArrayList<Order> orderProductList = service.selectOrderProductList(productNo, optionNo);
 			model.addAttribute("orderProductList", orderProductList);
 			
@@ -97,5 +97,31 @@ public class OrderController {
 	public String myOrderView() {
 		
 		return "order/myOrderView";
+	}
+	
+	
+//	주문하기
+	@RequestMapping(value="/order.do")
+	public String order(@SessionAttribute(required=false) Member m, 
+			int totalPrice, String deliveryReceiver, String deliPhone, String deliAddr1, String deliAddr2
+			, int[] productNo, int[] optionInfoNo, int[] orderDetailCnt, int[] orderDetailCost, int[] orderSalePrice, Model model) {
+		
+//		order table
+		System.out.println("order.do의 totalPrice : " + totalPrice );
+		System.out.println("order.do의 deliveryReceiver : " + deliveryReceiver );
+		System.out.println("order.do의 deliPhone : " + deliPhone );
+		System.out.println("order.do의 deliAddr1 : " + deliAddr1 );
+		System.out.println("order.do의 deliAddr2 : " + deliAddr2 );
+		
+		int result = service.insertOrder(m.getMemberNo(),totalPrice, deliveryReceiver, deliPhone, deliAddr1, productNo[0]);
+		
+		if(result>0) {
+			System.out.println("order insert success");
+			
+			// order detail
+			
+		}
+		
+		return null;
 	}
 }
