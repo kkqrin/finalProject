@@ -12,8 +12,9 @@ public class GongguAllInfo {
 	private String memberId;
 	private Integer gongguNumber;
 	private Integer gongguNo;
-	private Integer countNumber;
-	private Integer useCnt;
+	private Integer totalCount;
+	private Integer joinCount;
 	private Integer gongguPayNo;
 	private Integer gongguPayStautus;
+	private Integer productNo;
 }
