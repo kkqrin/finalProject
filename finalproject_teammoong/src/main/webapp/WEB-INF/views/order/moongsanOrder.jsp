@@ -281,13 +281,14 @@
                 <div class="order-complete-box area-btn full">
                     <button class="btn btn-pri size03 order-complete-btn"><span></span>원 뭉쳐야산다 생성하기</button>
                 </div>
-                <input type="hidden" id="btnDivision" value="main">
+                <input type="hidden" name="btnDivision" value="main">
                 </c:if>
                 <c:if test="${btnDivision eq 'sub'}">
                 <div class="order-complete-box area-btn full">
                     <button class="btn btn-pri size03 order-complete-btn"><span></span>원 뭉쳐야산다 참여하기</button>
                 </div>
-                <input type="hidden" id="btnDivision" value="sub">
+                <input type="hidden" name="btnDivision" value="sub">
+                <input type="hidden" name="gongguNo" value="${g.gongguNo}">
                 </c:if>
             </form>
 
@@ -314,7 +315,7 @@
     <script src="/resources/js/order.js"></script>
 
     <script>
-        console.log($("#btnDivision").val())
+        console.log($("#gongguNo").val())
         $( function() {
 			$( ".deli-request" ).selectmenu();
             $( ".order-coupon" ).selectmenu();

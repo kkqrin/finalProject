@@ -56,7 +56,7 @@
 						<div class="myorder-order-date">2023/04/25</div>
 						<div class="myorder-product-total-count">총 8건</div>
 						<div class="myorder-order-detail">
-							<form action="#">
+							<form action="/myOrderView.do">
 								<button id="order-detail-btn">주문상세<div class="material-symbols-outlined">chevron_right</div></button>
 							</form>
 						</div>

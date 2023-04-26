@@ -235,11 +235,11 @@
                 <div class="left-flex-wrap">
                     <div class="user-img"><img src="/resources/upload/member/${g.memberPath}" style="width: 50px; height: 50px;"></div>
                     <div class="user-id">${g.memberId}</div>
-                    <div class="gonggu-number">(${g.useCnt}/${g.gongguNumber })</div>
+                    <div class="gonggu-number">(${g.joinCount}/${g.totalCount})</div>
                 </div>
                 <div class="right-flex-wrap">
                     <div class="right-flex-info">
-                        <div class="number-info">${g.gongguNumber-g.useCnt}명 남음</div>
+                        <div class="number-info">${g.totalCount - g.joinCount}명 남음</div>
                     </div>
                     <c:if test="${sessionScope.m.memberId eq g.memberId }">
                     <form action="/updateGonggu.do" method="post">
@@ -267,6 +267,7 @@
         </c:forEach>
         </div>
         </c:if>
+        
         
         <div class="quick-scroll-bar">
             <table>

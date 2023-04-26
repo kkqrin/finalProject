@@ -11,7 +11,7 @@ public class OrderDetail {
 	private int orderDetailNo;
 	private int orderNo;
 	private int productNo;
-	private Integer optionInfoNo;
+	private int optionInfoNo;
 	private int orderDetailCnt;
 	private int orderDetailCost;
 	private int orderSalePrice;

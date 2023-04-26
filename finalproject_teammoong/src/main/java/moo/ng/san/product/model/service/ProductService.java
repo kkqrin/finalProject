@@ -174,9 +174,9 @@ public class ProductService {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("basketNo", basketNo);
-		map.put("cnt", cnt);
+		map.put("basketCount", cnt);
 		
-		return dao.updateBasketCount(basketNo);
+		return dao.updateBasketCount(map);
 	}
 
 	public int deleteCart(int[] basketNo) {
