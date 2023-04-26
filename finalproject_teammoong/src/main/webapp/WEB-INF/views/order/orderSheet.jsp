@@ -90,7 +90,7 @@
                             </c:choose>
 
                             <div class="order-product-price"><span></span>원</div>
-                            <input type="text" name="orderDetailCost" class="product-price" value="${i.productPrice }">
+                            <input type="text" class="product-price" value="${i.productPrice }">
 							<input type="text" id="productDisCount" class="product-discount" value="${i.productDiscount }">
 							<input type="text" name="productNo" class="product-no" value="${i.productNo }">
 							<input type="text" name="optionInfoNo" value="${i.optionNo }">
