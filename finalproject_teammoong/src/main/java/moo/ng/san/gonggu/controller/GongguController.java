@@ -17,8 +17,8 @@ public class GongguController {
 	private GongguService service;
 	
 	@RequestMapping(value="/gongguOrder.do")
-	public String gongguOrderPage(Gonggu g, Point p, GongguPay gp) {
-		int result = service.insertGonggu(g,p, gp);
+	public String gongguOrderPage(Gonggu g, Point p, GongguPay gp, String btnDivision) {
+		int result = service.insertGonggu(g, p, gp, btnDivision);
 		return "redirect:/";
 	}
 	

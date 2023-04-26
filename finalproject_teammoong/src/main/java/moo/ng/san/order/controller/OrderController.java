@@ -12,6 +12,7 @@ import moo.ng.san.basket.model.vo.Basket;
 import moo.ng.san.coupon.model.service.CouponService;
 import moo.ng.san.coupon.model.vo.IssueCoupon;
 import moo.ng.san.dayCheck.model.vo.Point;
+import moo.ng.san.gonggu.model.vo.Gonggu;
 import moo.ng.san.member.model.service.MemberService;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.order.model.service.OrderService;
@@ -56,51 +57,45 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value="/moongsanOrder.do")
-	public String moongsanOrder(int[] productNo, int[] optionNo, @SessionAttribute(required=false) Member m, Model model) {
-		// 세션에서 가져옴
-		int memberNo = m.getMemberNo();
-		
-		// 구매하려는 상품 조회
-		ArrayList<Order> orderProductList = service.selectOrderProductList(productNo, optionNo);
-		model.addAttribute("orderProductList", orderProductList);
-		
+	public String moongsanOrder(int[] productNo, int[] optionNo, @SessionAttribute(required=false) Member m, Model model, String btnDivision, Gonggu g) {
+			
+			// 세션에서 가져옴
+			int memberNo = m.getMemberNo();
+			
+			// 구매하려는 상품 조회
+			ArrayList<Order> orderProductList = service.selectOrderProductList(productNo, optionNo);
+			model.addAttribute("orderProductList", orderProductList);
+			
 //		System.out.println(orderProductList);
-		
-		// 보유 쿠폰 개수
-		int couponCount = service.selectMemberCouponCount(memberNo);
-		model.addAttribute("couponCount", couponCount);
-		// 보유 쿠폰 리스트
-		ArrayList<IssueCoupon> couponList = service.selectMemberCouponList(memberNo);
-		model.addAttribute("couponList",couponList);
-		
-		// 현재 적립금 조회
-		Point point = memberService.selectTotalPoint(memberNo);
-		model.addAttribute("point", point);
-		
-		return "order/moongsanOrder";
+			
+			// 보유 쿠폰 개수
+			int couponCount = service.selectMemberCouponCount(memberNo);
+			model.addAttribute("couponCount", couponCount);
+			// 보유 쿠폰 리스트
+			ArrayList<IssueCoupon> couponList = service.selectMemberCouponList(memberNo);
+			model.addAttribute("couponList",couponList);
+			
+			// 현재 적립금 조회
+			Point point = memberService.selectTotalPoint(memberNo);
+			model.addAttribute("point", point);
+			
+			//버튼구분 보내기
+			model.addAttribute("btnDivision",btnDivision);
+			model.addAttribute("g",g);
+			
+			return "order/moongsanOrder";
+			
 	}
-	@RequestMapping(value="/subMoongsanOrder.do")
-	public String subMoongsanOrder(int[] productNo, int[] optionNo, @SessionAttribute(required=false) Member m, Model model) {
-		// 세션에서 가져옴
-		int memberNo = m.getMemberNo();
+
+	@RequestMapping(value="/myOrderList.do")
+	public String myOrderList() {
 		
-		// 구매하려는 상품 조회
-		ArrayList<Order> orderProductList = service.selectOrderProductList(productNo, optionNo);
-		model.addAttribute("orderProductList", orderProductList);
+		return "order/myOrderList";
+	}
+	
+	@RequestMapping(value="/myOrderView.do")
+	public String myOrderView() {
 		
-//		System.out.println(orderProductList);
-		
-		// 보유 쿠폰 개수
-		int couponCount = service.selectMemberCouponCount(memberNo);
-		model.addAttribute("couponCount", couponCount);
-		// 보유 쿠폰 리스트
-		ArrayList<IssueCoupon> couponList = service.selectMemberCouponList(memberNo);
-		model.addAttribute("couponList",couponList);
-		
-		// 현재 적립금 조회
-		Point point = memberService.selectTotalPoint(memberNo);
-		model.addAttribute("point", point);
-		
-		return "order/subMoongsanOrder";
+		return "order/myOrderView";
 	}
 }

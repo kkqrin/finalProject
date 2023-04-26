@@ -75,7 +75,7 @@
 							<div class="subDiv">
 								<input type="text" name="memberPhone" value="${sessionScope.m.memberPhone }" readonly>
 								<div>
-								<a data-modal="#modalBasic">번호 변경하기</a>
+								<a data-modal="#modalBasic" style="cursor: pointer;">번호 변경하기</a>
 								</div>
 							</div>
 							<div id="modalBasic" class="modal modal-sec">
@@ -96,7 +96,7 @@
 										</div>
 									</div>
 									<div class="area-btn right">
-										<a rel="modal:close" class="btn btn-ter size01 close">취소</a>
+										<a rel="modal:close" class="btn btn-ter size01 close" style="cursor: pointer;">취소</a>
 									</div>
 								</div>
 							</div><!--모달창-->
@@ -114,7 +114,7 @@
 								<input type="text" name="memberZoneCode" value="${sessionScope.m.memberZoneCode }" placeholder="우편번호를 입력하지 않았습니다" readonly>
 								<input type="text" name="memberAddr" value="${sessionScope.m.memberAddr }" placeholder="주소를 입력하지 않았습니다" readonly>
 								<div>
-								<a>주소 변경하기</a>
+								<a style="cursor: pointer;">주소 변경하기</a>
 								</div>
 							</div>
 						</div>
@@ -193,7 +193,7 @@
 										</div>
 										<div class="area-btn right">
 											<button id="pwSubmit" class="btn btn-sec size01" style="width: 85%;">변경하기</button>
-											<a rel="modal:close" class="btn btn-ter size01 close2" style="width: 15%; text-align: center;">취소</a>
+											<a rel="modal:close" class="btn btn-ter size01 close2" style="width: 15%; text-align: center; cursor: pointer;">취소</a>
 										</div>
 									</div>
 							</div><!--모달창-->
@@ -228,7 +228,7 @@
 	</div>
 	
 	<script>
-		
+		const memberNo = $('[name=memberNo]').val();
 	
 	
 	 	let result = [true, true];
@@ -242,66 +242,77 @@
 	
 	
 		/*=======핸드폰 번호 인증===============*/
-		let regCheck = false;
-		
 		$(".modal-body").children('#inputCerNum').css('display','none');
 		$(".modal-body").children('div').eq(1).css('display','none');
 
 		$(".modal-body").children().children('a').css('display','none');
 
 		$(".modal-body").children('div').eq(0).children('button').on("click",function(){
-			if(regCheck){
+			let replace = $("#newMemberPhone").val().replaceAll("-","");
+			$("#newMemberPhone").val(replace);
+			
+			//핸드폰 정규표현식
+			const pwReg = /^0+\d{9,10}$/;
+			const inputPhone = $("#newMemberPhone").val();
+
+			if(replace==$("[name='memberPhone']").val()){
+				$("#newMemberPhone").addClass("error");
+				$(".modal-body").children().children('a').eq(0).text('현재 번호와 동일합니다');
+				$(".modal-body").children().children('a').eq(0).css('display','block');
+				$(".modal-body").children('#inputCerNum').fadeOut();
+				$(".modal-body").children('div').eq(1).fadeOut();
+			}else if(pwReg.test(replace)){
+				$("#newMemberPhone").removeClass("error");
+				$(".modal-body").children().children('a').eq(0).text('');
+				$(".modal-body").children().children('a').eq(0).css('display','none');
+				
 				$(".modal-body").children().children('a').eq(0).text('인증번호가 전송되었습니다');
 				$(".modal-body").children().children('a').eq(0).css('display','block');
 				$(".modal-body").children('#inputCerNum').val('');
 				$(".modal-body").children('#inputCerNum').fadeIn();
 				$(".modal-body").children('div').eq(1).fadeIn();
-			}else{
-				return false;
-			}
-		});//[인증번호 발송] 클릭 시
+				
+				
+				const checkBtn = $("<button>");
+				checkBtn.text("확인");
+				checkBtn.addClass("btn btn-sec size01");
+				checkBtn.attr("id","checkBtn");
+				$("#inputCerNum").after(checkBtn);
+				
+				let cerCode=""; //★핸드폰 인증코드!!!
+				$.ajax({
+					url: "/memberPhoneCheck.do",
+					type: "post",
+					data: {memberPhone : replace},
+					success : function(code){
+						cerCode = code;
+					}//ajax success구문
+				})//문자메시지 보내기 + 코드 받기
+				
+				$("#checkBtn").on("click",function(){
+					
+					if(cerCode == $("#inputCerNum").val()){//인증번호 성공시
+						location.href="/updateMemberPhone.do?memberNo="+memberNo+"&memberPhone="+replace;
+					}else{
+						$("#inputCerNum").addClass("error");
+						const cerNumError = $("<a>");
+						cerNumError.addClass("cerNumError");
+						cerNumError.text("인증번호가 틀립니다");
+						checkBtn.before(cerNumError);
+					}
+					
+				});//전송된 인증번호 확인 버튼
 
-		
-		$("#newMemberPhone").on("change",function(){
-			//핸드폰 정규표현식
-			const pwReg = /^\d{3}-\d{3,4}-\d{4}$/;
-			const pwReg2 = /^0+\d{9,10}$/;
-			const inputPhone = $(this).val();
-
-			if(pwReg.test(inputPhone) || pwReg2.test(inputPhone) || inputPhone==""){
-				$(this).removeClass("error");
-				$(".modal-body").children().children('a').eq(0).text('');
-				$(".modal-body").children().children('a').eq(0).css('display','none');
-				let replace = $(this).val().replaceAll("-","");
-				$(this).val(replace);
-				regCheck = true;
+			}else if($("#newMemberPhone").val()==""){
+				$("#newMemberPhone").focus();
 			}else{
-				$(this).addClass("error");
+				$("#newMemberPhone").addClass("error");
 				$(".modal-body").children().children('a').eq(0).text('핸드폰 형식을 확인해주세요');
 				$(".modal-body").children().children('a').eq(0).css('display','block');
 				$(".modal-body").children('#inputCerNum').fadeOut();
 				$(".modal-body").children('div').eq(1).fadeOut();
-				regCheck = false;
 			}
-		})//핸드폰 형식 검사
-				
-				
-		let cerCode=""; //★핸드폰 인증코드!!!
-		$(".modal-body").children('div').eq(0).children('button').on("click",function(){
-			const memberPhone = $("#newMemberPhone").val();
-			console.log(memberPhone);
-// 			$.ajax({
-// 				url: "/memberPhoneCheck.do",
-// 				type: "post",
-// 				data: {memberPhone : replace},
-// 				success : function(code){
-// 					cerCode = code;
-// 				}//ajax success구문
-// 			})//ajax
-		})//문자메시지 보내기 + 코드 받기
-		
-
-		
+		});//[인증번호 발송] 클릭 시
 
 
 	/*=======핸드폰 모달 관련 기능==================================*/
@@ -321,6 +332,8 @@
 			$(".modal-body").children('div').eq(1).css('display','none');
 			$(".modal-body").children().children('a').css('display','none');
 			$(".modal-body").children('input').removeClass("error");
+			$("#checkBtn").remove();
+			$(".cerNumError").remove();
 		});
 
 		
@@ -450,7 +463,6 @@
 		
 	/*=======출석체크 관련================*/
 		$("#dayCheck").on("click",function(){
-			let memberNo = $('[name=memberNo]').val();
 			$.ajax({
 				url: "/dayCheck.do",
 				type: "get",

@@ -3,20 +3,16 @@
 " "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="gonggu">
 	<select id="selectGongguList" parameterType="_int" resultType="gai">
-		SELECT
-			MEMBER_PATH AS memberPath,
-			MEMBER_ID AS memberId,
-			GONGGU_NO AS gongguNo,
-			GONGGU_NUMBER AS gongguNumber,
-			COUNT_NUMBER AS countNumber,
-			GONGGU_PAY_NO AS gongguPayNo,
-			GONGGU_PAY_STATUS AS gongguPayStatus
-		FROM PRODUCT_TBL
-		INNER JOIN GONGGU_TBL USING(PRODUCT_NO)
-		LEFT JOIN MEMBER_TBL USING(MEMBER_NO)
-		LEFT JOIN DETAIL_GONGGU_TBL USING(GONGGU_NO)
-		LEFT JOIN GONGGU_PAY_TBL USING(DETAIL_GONGGU_NO)
-		WHERE PRODUCT_NO = #{_parameter} AND GONGGU_PAY_STATUS = 1
+SELECT 
+    GONGGU_NO AS gongguNo, 
+    PRODUCT_NO AS productNo, 
+    MEMBER_NO AS memberNo, 
+    (SELECT MEMBER_ID FROM MEMBER_TBL M WHERE M.MEMBER_NO=G.MEMBER_NO) AS memberId,
+    (SELECT MEMBER_PATH FROM MEMBER_TBL M WHERE M.MEMBER_NO=G.MEMBER_NO) AS memberPath,
+    (SELECT GONGGU_NUMBER FROM PRODUCT_TBL P WHERE P.PRODUCT_NO = G.PRODUCT_NO) AS totalCount,
+    (SELECT COUNT(*) FROM DETAIL_GONGGU_TBL D LEFT JOIN GONGGU_PAY_TBL GP ON (GP.DETAIL_GONGGU_NO = D.DETAIL_GONGGU_NO)
+    WHERE D.GONGGU_NO=G.GONGGU_NO AND GONGGU_PAY_STATUS=1) AS joinCount
+FROM GONGGU_TBL G WHERE PRODUCT_NO=#{_parameter}
 	</select>
 	
 	<select id="selectGongguPayCount" parameterType="_int" resultType="_int">

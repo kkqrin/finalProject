@@ -202,6 +202,11 @@ public class MemberService {
 				return bpd;
 	}//selectMyWriteList
 
+
+	public void updateMemberNewPhone(Member member) {
+		dao.updateMemberNewPhone(member);
+	}
+
 	
 
 

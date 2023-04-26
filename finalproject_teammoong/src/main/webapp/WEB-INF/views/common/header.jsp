@@ -94,7 +94,7 @@
 	                <div class="middle-right">
 	                <c:choose>
 	                <c:when test="${!empty sessionScope.m}">
-		                <a class="alram-zone" href="/receiveDmList.do">
+		                <a class="alram-zone" href="/receiveDmList.do?reqPage=1">
 		                	<span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;">notifications</span>
 		                	<span class="alram-circle" id="dmCount"></span>
 		                </a>

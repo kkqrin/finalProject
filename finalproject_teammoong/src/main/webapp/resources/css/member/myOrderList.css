@@ -1,0 +1,165 @@
+
+.myorder-order-item{
+    /* background-color: #eee; */
+    border-bottom: 1px solid #ddd;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.myorder-product-img{
+    width: 150px;
+    height: 150px;
+    margin: 20px;
+    position: relative;
+}
+
+.myorder-product-img>a>img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* box-shadow: 0px 0px 10px 0px #ccc; */
+}
+
+.myorder-order-title-box{
+    background-color: cornflowerblue;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.myorder-order-title-box>.myorder-product-title{
+    width: 300px;
+    font-size: 16px;
+    font-weight: 600;
+
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: keep-all;
+    /* height: 50px; */
+}   
+
+
+.myorder-order-title-box>.myorder-product-option{
+    padding-top: 10px;
+}
+
+.myorder-product-volume{
+    width: 100px;
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+}
+
+.myorder-total-price,
+.myorder-total-count{
+    width: 150px;
+    background-color: aliceblue;
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+
+
+/* 추가 css */
+
+.myorder-product-count{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 190px;
+}
+
+.myorder-order-info{
+	display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 190px;
+}
+
+.ab-product-count{
+    width: 30px;
+    height: 30px;
+    background-color: rgba(255, 105, 180, 0.6);
+    color: #f2f2f2;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10%;
+}
+
+.myorder-order-status{
+    width: 90px;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+    margin-left: 25px;
+}
+
+
+.myorder-order-date,
+.myorder-order-detail button,
+.myorder-product-total-count{
+    font-size: 16px;
+    padding: 10px;
+    text-align: center;
+}
+
+.myorder-order-detail>form>button>div{
+    font-size: 20px;
+    margin-top: 2px;
+}
+
+#order-detail-btn{
+    display: flex;
+    align-items: center;
+}
+
+
+
+
+
+
+/* 뷰 */
+
+/* .myorder-view-item{
+    border-bottom: 1px solid #ddd;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+} */
+
+.myorder-order-no{
+    background-color: lemonchiffon;
+}
+
+.myorder-order-content-title{
+    /* border-bottom: 1px solid #a0a0a0; */
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    border-bottom: 5px solid var(--content-secondary);
+    padding-bottom: 3px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.order-detail-info{
+    flex-direction: column;
+    align-items: flex-start;
+}

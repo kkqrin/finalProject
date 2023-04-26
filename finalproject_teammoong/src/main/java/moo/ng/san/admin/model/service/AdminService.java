@@ -321,7 +321,17 @@ public class AdminService {
 	}
 
 	public String selectMonthBoardSalesCount() {
-		String result = dao.selectMonthBoardSalesCount();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		LocalDate today = LocalDate.now();  // 오늘 날짜
+		YearMonth thisMonth = YearMonth.from(today);  // 이번 달
+		LocalDate firstDayOfMonth = thisMonth.atDay(1);  // 이번 달의 첫째 날
+		LocalDate lastDayOfMonth = thisMonth.atEndOfMonth();  // 이번 달의 마지막 날
+		
+	    map.put("start", firstDayOfMonth);
+	    map.put("end", lastDayOfMonth);
+	    
+		String result = dao.selectMonthBoardSalesCount(map);
 
 		return result;
 	}

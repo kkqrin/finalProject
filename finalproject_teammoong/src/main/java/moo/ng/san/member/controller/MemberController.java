@@ -332,7 +332,12 @@ public class MemberController {
 	
 	
 	
-	
+	@RequestMapping(value = "/updateMemberPhone.do")
+	public String updateMemberPhone(Member member,@SessionAttribute(required=false) Member m) {
+		service.updateMemberNewPhone(member);
+		m.setMemberPhone(member.getMemberPhone());
+		return "redirect:/myPage.do";
+	}
 	
 	
 	

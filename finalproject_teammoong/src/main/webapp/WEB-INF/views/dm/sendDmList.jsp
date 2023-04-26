@@ -18,21 +18,29 @@
 			<div class="mypage-right-title">보낸 쪽지함</div>
 			<div class="mypage-content">
 				<input type="hidden" id="memberId" value="${sessionScope.m.memberId }">
-				<table class="sendDmTbl">
-					<thead>
+				<table>
 					<tr>
 						<th style="width: 5%;">번호</th>
 						<th style="width: 55%;">쪽지</th>
 						<th>받은사람</th>
 						<th>보낸날짜</th>
 					</tr>
-					</thead>
-					
-					<tbody>
-					
-					</tbody>
+					<c:forEach items="${list }" var="dm">
+						<tr>
+							<td>${dm.rnum }</td>
+							<td onclick="dmView(${dm.dmNo})">
+								<div style="width: 478px; height: 20px; overflow: hidden;cursor: pointer;white-space: nowrap;text-overflow: ellipsis;">
+									${dm.dmContent }
+								</div>
+							</td>
+							<td>${dm.dmReceiverName }</td>
+							<td>${dm.dmDate }</td>
+						</tr>
+					</c:forEach>
 				</table>
-				
+				<div class="pagination">
+					${pageNavi }
+				</div>
 			</div><!-- mypage-content -->
 		</div><!-- mypage-right -->
 		
@@ -59,11 +67,7 @@
 		
 	</div>
 	
-	
 	<script src="/resources/js/myPageDm.js"></script>
-	<script>
-		getSendDm();
-	</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

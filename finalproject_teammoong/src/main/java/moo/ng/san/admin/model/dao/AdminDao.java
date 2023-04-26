@@ -164,8 +164,8 @@ public class AdminDao {
 		return Integer.toString(result);
 	}
 
-	public String selectMonthBoardSalesCount() {
-		int result = sqlSession.selectOne("admin.selectMonthBoardSalesCount");
+	public String selectMonthBoardSalesCount(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("admin.selectMonthBoardSalesCount",map);
 		
 		return Integer.toString(result);
 	}

@@ -68,7 +68,6 @@
 	</style>
 </head>
 <body>
-	<!-- <jsp:include page="/WEB-INF/views/common/header.jsp" /> -->
 	<div class="content-wrap">
 	<pre>
 		남은 거 : 포토후기 더보기 > 상세보기 이미지 왜 바로 안뜨는지? 나중에 뜨는지?

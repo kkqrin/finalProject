@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 
 import moo.ng.san.dm.model.service.DmService;
 import moo.ng.san.dm.model.vo.DirectMessage;
+import moo.ng.san.dm.model.vo.DmPageData;
 import moo.ng.san.member.model.vo.Member;
 
 @Controller
@@ -23,21 +24,31 @@ public class DmController {
 	private DmService service; 
 
 	@RequestMapping(value = "/receiveDmList.do")
-	public String receiveDmList() {
+	public String receiveDmList(int reqPage, @SessionAttribute(required=false) Member m, Model model) {
+		DirectMessage dm = new DirectMessage();
+		dm.setDmReceiver(m.getMemberId());
+		DmPageData dpd = service.selectDmList(reqPage,dm);
+		model.addAttribute("list", dpd.getList());
+		model.addAttribute("pageNavi", dpd.getPageNavi());
 		return "dm/receiveDmList";
 	}
 	
 	@RequestMapping(value = "/sendDmList.do")
-	public String sendDmList() {
+	public String sendDmList(int reqPage, @SessionAttribute(required=false) Member m, Model model) {
+		DirectMessage dm = new DirectMessage();
+		dm.setDmSender(m.getMemberId());
+		DmPageData dpd = service.selectDmList(reqPage,dm);
+		model.addAttribute("list", dpd.getList());
+		model.addAttribute("pageNavi", dpd.getPageNavi());
 		return "dm/sendDmList";
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/myDmList.do",produces = "application/json;charset=utf-8")
-	public String myPageDmReceive(DirectMessage dm) {
-		ArrayList<DirectMessage> list = service.selectAllDm(dm);
-		return new Gson().toJson(list);
-	}
+//	@ResponseBody
+//	@RequestMapping(value = "/myDmList.do",produces = "application/json;charset=utf-8")
+//	public String myPageDmReceive(DirectMessage dm) {
+//		ArrayList<DirectMessage> list = service.selectAllDm(dm);
+//		return new Gson().toJson(list);
+//	}
 	
 	
 	@ResponseBody
@@ -67,6 +78,7 @@ public class DmController {
 		dm.setDmSender(dmSender);
 		dm.setDmReceiver(dmReceiver);
 		dm.setDmContent(dmContent);
+		System.out.println(dm);
 		int result = service.insertDm(dm);
 		if(result==1) {
 			return "ok";
