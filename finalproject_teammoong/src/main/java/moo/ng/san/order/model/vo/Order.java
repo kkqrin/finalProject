@@ -26,6 +26,7 @@ public class Order {
 	private String thumbnail;
 	private String productName;
 	private int productPrice;
+	private int productCost;
 	private int productDiscount;
 	private int optionNo;
 	private String optionDetailName;
