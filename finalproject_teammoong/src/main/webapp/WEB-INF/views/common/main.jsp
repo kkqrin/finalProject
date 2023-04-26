@@ -283,7 +283,7 @@ background: linear-gradient(to top, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Fir
 
 
 
-    <h3 class="wrap-title"># 핫딜</h3>
+    <h3 class="wrap-title"># 핫딜 🔥</h3>
     <div class="product-wrap hotdeal">
         <!-- 핫딜 상품 wrap -->
 
@@ -361,7 +361,7 @@ background: linear-gradient(to top, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Fir
 
 
 
-    <h3 class="wrap-title"># 품절 임박</h3>
+    <h3 class="wrap-title"># 품절 임박 ⏰</h3>
     <div class="product-wrap soldout">
         <div class="posting-item soldout">
             <div class="hotdeal-info">
@@ -422,7 +422,7 @@ background: linear-gradient(to top, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Fir
 
 
 
-    <h3 class="wrap-title"># 할인률 높은 상품</h3>
+    <h3 class="wrap-title"># 할인률 높은 상품 ✨</h3>
     <div class="product-wrap highsale">
         <div class="posting-item highsale">
             <div class="hotdeal-info">
