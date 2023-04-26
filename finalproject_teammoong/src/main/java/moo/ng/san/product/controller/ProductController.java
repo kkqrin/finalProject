@@ -365,12 +365,16 @@ public class ProductController {
 		model.addAttribute("p",p);
 		model.addAttribute("iqList", list);
 		
-		// 명훈이임
+//		 명훈이임
 		ArrayList<GongguAllInfo> gongguList = gongguService.selectGongguList(productNo);
-		for (int i = 0; i<gongguList.size(); i++) {
-			int cnt = gongguService.selectGongguPayCount(gongguList.get(i).getGongguNo());
-			gongguList.get(i).setUseCnt(cnt);
-		}
+		System.out.println("productController에서 gongguList값 :"+gongguList);
+//		for (int i = 0; i<gongguList.size(); i++) {
+//			System.out.println("productController에서 gongguList값 :"+gongguList.get(i).getGongguNo());
+//			int cnt = gongguService.selectGongguPayCount(gongguList.get(i).getGongguNo());
+//			gongguList.get(i).setUseCnt(cnt);
+//			System.out.println("productController에서 cnt값 :"+cnt);
+			System.out.println("productController에서 gongguList값 :"+gongguList);
+//		}
 		
 		model.addAttribute("gongguList",gongguList);
 		// 옵션 조회 (규린)

@@ -12,6 +12,7 @@ import moo.ng.san.basket.model.vo.Basket;
 import moo.ng.san.coupon.model.service.CouponService;
 import moo.ng.san.coupon.model.vo.IssueCoupon;
 import moo.ng.san.dayCheck.model.vo.Point;
+import moo.ng.san.gonggu.model.vo.Gonggu;
 import moo.ng.san.member.model.service.MemberService;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.order.model.service.OrderService;
@@ -56,7 +57,7 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value="/moongsanOrder.do")
-	public String moongsanOrder(int[] productNo, int[] optionNo, @SessionAttribute(required=false) Member m, Model model, String btnDivision) {
+	public String moongsanOrder(int[] productNo, int[] optionNo, @SessionAttribute(required=false) Member m, Model model, String btnDivision, Gonggu g) {
 			
 			// 세션에서 가져옴
 			int memberNo = m.getMemberNo();
@@ -80,6 +81,7 @@ public class OrderController {
 			
 			//버튼구분 보내기
 			model.addAttribute("btnDivision",btnDivision);
+			model.addAttribute("g",g);
 			
 			return "order/moongsanOrder";
 			
