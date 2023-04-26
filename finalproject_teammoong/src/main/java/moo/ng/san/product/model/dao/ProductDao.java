@@ -156,8 +156,8 @@ public class ProductDao {
 		return b;
 	}
 
-	public int updateBasketCount(int basketNo) {
-		int result = sqlSession.update("product.updateBasketCount", basketNo);
+	public int updateBasketCount(HashMap<String, Object> map) {
+		int result = sqlSession.update("product.updateBasketCount", map);
 		
 		return result;
 	}
