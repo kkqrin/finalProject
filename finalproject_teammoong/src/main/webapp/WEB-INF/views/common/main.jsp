@@ -1,6 +1,7 @@
     <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -785,97 +786,37 @@ background: linear-gradient(to top, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Fir
                     </div>
                     
                 </div>
-            </div>
-            <div class="posting-content">
-                <p class="posting-title">
-                    <a href="#">
-                        [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
-                    </a>
-                </p>
-                <div class="posting-price-box">
-                    <p class="price-through">70,000원</p>
-                    <div class="sail-box">
-                        <p class="sail-percent">62%</p>
-                        <p class="price-sail">26,900원</p>
-                    </div>
-                </div>
-                <div class="posting-detail">
-                    <div class="posting-icon">
-                        <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
-                        </div> -->
-                        <!-- <div class="comment-div">
-                            <span class="material-symbols-outlined">chat_bubble</span>
-                            <span class="comment-count">3</span>
-                        </div> -->
-                    </div>
-                    <div class="posting-info">
-                        <div>
-                            <span class="posting-info-box today-close">오늘마감</span>
-                            <span class="posting-info-box">무료배송</span>
+                <div class="posting-content">
+                    <p class="posting-title">
+						<a href="/productView.do?productNo=${p.productNo}">
+							${p.productName}
+						</a>
+                    </p>
+					<div class="posting-price-box">
+						<p class="price-through"><fmt:formatNumber value="${p.productPrice }"/>원</p>
+						<div class="sail-box">
+							<p class="sail-percent">${p.productDiscount}%</p>
+							<p class="price-sail"><fmt:formatNumber value="${(Math.floor(p.productPrice*(100 - p.productDiscount)/1000)*10)}"/>원</p>
+						</div>
+					</div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
                         </div>
-                        <!-- <span class="posting-volume">0개 구매</span> -->
-                        <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
+                        <div class="posting-info">
+                            <div>
+                                <span class="posting-info-box today-close">오늘마감</span>
+                                <span class="posting-info-box">무료배송</span>
+                            </div>
+                            <div class="star-rating">
+                                <div class="material-symbols-outlined star-rate">star</div>
+                                <div class="rating-average">4.8</div>
+                                <div class="review-count">(152)</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="posting-item soldout">
-            <div class="posting-img soldout">
-                <a href="#">
-                    <img src="/resources/img/product/bubble_tomato.jpg" />
-                </a>
-                <div class="gonggu-info">2인 공동구매</div>
-                <div class="end-hotdeal soldout color-v06">
-                    남은 재고 : 2개
-                </div>
-            </div>
-            <div class="posting-content">
-                <p class="posting-title">
-                    <a href="#">
-                        [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
-                    </a>
-                </p>
-                <div class="posting-price-box">
-                    <p class="price-through">70,000원</p>
-                    <div class="sail-box">
-                        <p class="sail-percent">62%</p>
-                        <p class="price-sail">26,900원</p>
-                    </div>
-                </div>
-                <div class="posting-detail">
-                    <div class="posting-icon">
-                        <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
-                        </div> -->
-                        <!-- <div class="comment-div">
-                            <span class="material-symbols-outlined">chat_bubble</span>
-                            <span class="comment-count">3</span>
-                        </div> -->
-                    </div>
-                    <div class="posting-info">
-                        <div>
-                            <span class="posting-info-box today-close">오늘마감</span>
-                            <span class="posting-info-box">무료배송</span>
-                        </div>
-                        <!-- <span class="posting-volume">0개 구매</span> -->
-                        <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </c:forEach>
 
     </div>
 
@@ -969,34 +910,37 @@ background: linear-gradient(to top, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Fir
                         </div>
                     </div>
                 </div>
-                <div class="posting-detail">
-                    <div class="posting-icon">
-                        <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
-                        </div> -->
-                        <!-- <div class="comment-div">
-                            <span class="material-symbols-outlined">chat_bubble</span>
-                            <span class="comment-count">3</span>
-                        </div> -->
-                    </div>
-                    <div class="posting-info">
-                        <div>
-                            <span class="posting-info-box today-close">오늘마감</span>
-                            <span class="posting-info-box">무료배송</span>
+                <div class="posting-content">
+                    <p class="posting-title">
+						<a href="/productView.do?productNo=${p.productNo}">
+							${p.productName}
+						</a>
+                    </p>
+					<div class="posting-price-box">
+						<p class="price-through"><fmt:formatNumber value="${p.productPrice }"/>원</p>
+						<div class="sail-box">
+							<p class="sail-percent">${p.productDiscount}%</p>
+							<p class="price-sail"><fmt:formatNumber value="${(Math.floor(p.productPrice*(100 - p.productDiscount)/1000)*10)}"/>원</p>
+						</div>
+					</div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
                         </div>
-                        <!-- <span class="posting-volume">0개 구매</span> -->
-                        <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
+                        <div class="posting-info">
+                            <div>
+                                <span class="posting-info-box today-close">오늘마감</span>
+                                <span class="posting-info-box">무료배송</span>
+                            </div>
+                            <div class="star-rating">
+                                <div class="material-symbols-outlined star-rate">star</div>
+                                <div class="rating-average">4.8</div>
+                                <div class="review-count">(152)</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
+        </c:forEach>
 
     </div>
 
