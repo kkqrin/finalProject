@@ -104,18 +104,18 @@ public class OrderController {
 //	주문하기
 	@RequestMapping(value="/order.do")
 	public String order(@SessionAttribute(required=false) Member m, 
-			int totalPrice, String deliveryReceiver, String deliPhone, String deliAddr1, String deliAddr2
+			int totalPrice, String deliReceiver, String deliPhone, String deliAddr1, String deliAddr2, String deliRequest
 			, int[] productNo, int[] optionInfoNo, int[] orderDetailCnt, int[] orderDetailCost, int[] orderSalePrice, Model model) {
 		
 //		order table
-		System.out.println("order.do의 totalPrice : " + totalPrice );
-		System.out.println("order.do의 deliveryReceiver : " + deliveryReceiver );
-		System.out.println("order.do의 deliPhone : " + deliPhone );
-		System.out.println("order.do의 deliAddr1 : " + deliAddr1 );
-		System.out.println("order.do의 deliAddr2 : " + deliAddr2 );
+//		System.out.println("order.do의 totalPrice : " + totalPrice );
+//		System.out.println("order.do의 deliveryReceiver : " + deliReceiver );
+//		System.out.println("order.do의 deliPhone : " + deliPhone );
+//		System.out.println("order.do의 deliAddr1 : " + deliAddr1 );
+//		System.out.println("order.do의 deliAddr2 : " + deliAddr2 );
 		
 		// 오더 테이블엔 상품 번호 필요 없을 듯
-		int result = service.insertOrder(m.getMemberNo(),totalPrice, deliveryReceiver, deliPhone, deliAddr1, productNo[0]);
+		int result = service.insertOrder(m.getMemberNo(),totalPrice, deliReceiver, deliPhone, deliAddr1, deliRequest, productNo[0]);
 		
 		if(result>0) {
 			System.out.println("order insert success");

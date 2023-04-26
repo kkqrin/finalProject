@@ -131,7 +131,7 @@
                         <tr>
                             <th><label for="deli-member">받으실분</label></th>
                             <td colspan="2">
-                                <input type="text" name="deliveryReceiver" id="deli-member" class="input-noborder" placeholder="이름을 입력해주세요">
+                                <input type="text" name="deliReceiver" id="deli-member" class="input-noborder" placeholder="이름을 입력해주세요">
                             </td>
                         </tr>
                         <tr>
@@ -165,7 +165,8 @@
                                         <option value="4">무인택배함에 놔주세요</option>
                                         <option value="5" id="direct-deli-request">직접 입력</option>
                                     </select>
-                                    <input type="text" name="deliveryRequest" class="input-noborder direct-input-deli-request" placeholder="요청 사항을 직접 입력해주세요" style="display:none; margin-top: 10px;">
+                                    <input type="text" class="input-noborder direct-input-deli-request" placeholder="요청 사항을 직접 입력해주세요" style="display:none; margin-top: 10px;">
+                                    <input type="hidden" name="deliRequest">
                                 </div>
                             </td>
                         </tr>
@@ -342,11 +343,18 @@
             // jQuery ui select change 이벤트
             if($(this).val() == 5){
                 $(".direct-input-deli-request").show();
+                
+                $(".direct-input-deli-request").on("change", function(){
+                    $("[name=deliRequest]").val($(".direct-input-deli-request").val());
+                })
             }else{
                 $(".direct-input-deli-request").val("");
                 $(".direct-input-deli-request").hide();
+                // 배송 요청사항
+                // console.log($(this).children().eq($(this).val()).text());
+                $("[name=deliRequest]").val($(this).children().eq($(this).val()).text());
             }
-            console.log($(this).val());
+            // console.log($("[name=deliRequest]").val());
         })
 
 
@@ -648,7 +656,8 @@
             };
         
         });
-		console.log($("[name=memberNo]"));
+		// console.log($("[name=memberNo]"));
+
 
 
     </script>
