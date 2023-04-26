@@ -24,6 +24,7 @@ import moo.ng.san.admin.model.vo.AdminReportBoardPageData;
 import moo.ng.san.admin.model.vo.CouponData;
 import moo.ng.san.admin.model.vo.SalesData;
 import moo.ng.san.board.model.vo.Board;
+import moo.ng.san.gonggu.model.vo.GongguAllInfo;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.order.model.vo.Order;
 import moo.ng.san.product.model.vo.Product;
@@ -438,6 +439,17 @@ public class AdminController {
 		String result = gson.toJson(list);
 		return result;
 	}
+	
+	// 공동구매 List
+	@RequestMapping(value="/adminGongguManagePage.do")
+	public String adminGongguList(Model model) {
+		ArrayList<GongguAllInfo> list = service.selectGongguList();
+		
+		model.addAttribute("gList",list);
+		
+		return "admin/adminGongguManagePage";
+	}
+	
 	
 	
 	// ========================================================================
