@@ -59,7 +59,8 @@
     display: flex;
 }
 
-.myorder-total-price{
+.myorder-total-price,
+.myorder-total-count{
     width: 150px;
     background-color: aliceblue;
     padding: 10px;
@@ -125,4 +126,40 @@
 #order-detail-btn{
     display: flex;
     align-items: center;
+}
+
+
+
+
+
+
+/* 뷰 */
+
+/* .myorder-view-item{
+    border-bottom: 1px solid #ddd;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+} */
+
+.myorder-order-no{
+    background-color: lemonchiffon;
+}
+
+.myorder-order-content-title{
+    /* border-bottom: 1px solid #a0a0a0; */
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    border-bottom: 5px solid var(--content-secondary);
+    padding-bottom: 3px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.order-detail-info{
+    flex-direction: column;
+    align-items: flex-start;
 }

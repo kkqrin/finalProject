@@ -88,7 +88,12 @@ public class OrderController {
 	@RequestMapping(value="/myOrderList.do")
 	public String myOrderList() {
 		
-		return "member/myOrderList";
+		return "order/myOrderList";
 	}
 	
+	@RequestMapping(value="/myOrderView.do")
+	public String myOrderView() {
+		
+		return "order/myOrderView";
+	}
 }
