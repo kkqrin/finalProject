@@ -76,19 +76,36 @@ public class BoardController {
 		return "board/boardView";
 		}
 	@RequestMapping(value="/boardWriteView.do")
-	public String boardWriteView(BoardJoin bj, int boardNo, Model model) {
+//	public String boardWriteView(BoardJoin bj, int boardNo, Model model) {
+	public String boardWriteView(BoardJoin bj, int boardNo, int[] optionNo, String[] orderName, int[] orderPrice, int[] orderCount, Model model) {
+		System.out.println("보드조인  insert 전: "+bj);
 		int result = service.insertBoardJoin(bj);
+		
+		
+//		if(result>0) {
+//			// 보드 조인 상세 insert
+//			result = service.insertBoardOrder(bj.getJoinNo(), optionNo, orderName, orderPrice, orderCount);
+//		}
+		
+		
+		
+		
+		
+		System.out.println("보드조인  insert 후: "+bj);
+		
 		if(result>0) {
 			Board b = service.selectOneBoard(boardNo);
 			model.addAttribute("b", b);
+			model.addAttribute("bj", bj);
 		}
 		return "board/boardOrderAfter";
 	}
+	
 	@RequestMapping(value="/boardOrderAfter.do")
-	public String boardOrderAfter(int boardNo, Model model) {
-		Board b = service.selectOneBoard(boardNo);
-		model.addAttribute("b", b);
-		return "board/boardOrderAfter";
+	public String boardOrderAfter(int boardNo, int joinNo,Model model) {
+		BoardJoin bj = service.selectOneBoardJoin(joinNo);
+		model.addAttribute("bj",bj);
+		return"board/myPageRequestDeposit";
 	}
 	@RequestMapping(value="/myPageRequestDeposit.do")
 	public String myPageRequestDeposit(Model model, int joinNo) {

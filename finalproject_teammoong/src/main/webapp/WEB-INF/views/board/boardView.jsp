@@ -120,17 +120,18 @@ sup{
 				</tr>
 				<tr>
 					<c:forEach items="${o }" begin="0" end="${size}" varStatus="i" var="bo">
-					<input type="hidden" id="oSize" value="${size}">
+<%-- 					<input type="hidden" id="oSize" name="boardDetail" value="${size}"> --%>
 					<tr>
 						<td>
 							${bo.detailName}
 						</td>
-						<td><input type="hidden" id="detailPrice" value="${bo.detailPrice}">${bo.detailPrice}</td>
+<%-- 						<input type="hidden" name="detailName" value="${bo.detailName}"> --%>
+						<td><input type="hidden" id="detailPrice" name="detailPrice" value="${bo.detailPrice}">${bo.detailPrice}</td>
 						<td>
 							${bo.detailCount}
 						</td>
 						<td>
-							<input type="text" id="totalEaInput" class="detailCount" name="orderCount" placeholder="수량 입력" value="0" required>
+							<input type="text" id="totalEaInput" name="detailCount" class="detailCount" name="orderCount" placeholder="수량 입력" value="0" required>
 						</td>
 					</tr>
 					</c:forEach>
@@ -198,7 +199,7 @@ sup{
 				<tr>
 					
 					<td colspan="4"><input type="text" name="detailAddr"
-						placeholder="상세주소를 입력해주세요" required></td>
+						placeholder="상세주소를 입력해주세요(필수)" required></td>
 				</tr>
 				<tr>
 					<td style="text-align:left;"colspan="4">- 환불계좌 정보(가상계좌 환불, 제작무산 등의 경우) <sup>*</sup></td>

@@ -128,6 +128,7 @@ public class BoardService {
 
 	public int insertBoardJoin(BoardJoin bj) {
 		int result = dao.insertBoardJoin(bj);
+
 		return result;
 	}
 
@@ -166,6 +167,15 @@ public class BoardService {
 	public int updateBoardCount(Board b) {
 		int result = dao.updateBoardCount(b);
 		return result;
+	}
+
+
+
+
+	public int insertBoardOrder(int joinNo, int[] optionNo, String[] orderName, int[] orderPrice, int[] orderCount) {
+
+		ArrayList<boardOrder> list = new ArrayList<Order>();
+		return 0;
 	}
 
 }
