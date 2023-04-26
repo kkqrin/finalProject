@@ -36,8 +36,9 @@ public class OrderController {
 		
 		model.addAttribute("page", page);
 		
-		// 구매하려는 상품 조회
-		ArrayList<Order> orderProductList = service.selectOrderProductList(productNo, optionNo);
+		// 뷰 page : 상품 하나의 수량들 , 장바구니 : 0 
+		// 구매하려는 상품 조회 (배열)
+		ArrayList<Order> orderProductList = service.selectOrderProductList(m.getMemberNo(), productNo, optionNo, page);
 		model.addAttribute("orderProductList", orderProductList);
 		
 //		System.out.println(orderProductList);
@@ -63,7 +64,7 @@ public class OrderController {
 			int memberNo = m.getMemberNo();
 			
 			// 구매하려는 상품 조회 (배열)
-			ArrayList<Order> orderProductList = service.selectOrderProductList(productNo, optionNo);
+			ArrayList<Order> orderProductList = service.selectMoongsanOrderProductList(productNo, optionNo);
 			model.addAttribute("orderProductList", orderProductList);
 			
 //		System.out.println(orderProductList);
@@ -113,12 +114,26 @@ public class OrderController {
 		System.out.println("order.do의 deliAddr1 : " + deliAddr1 );
 		System.out.println("order.do의 deliAddr2 : " + deliAddr2 );
 		
+		// 오더 테이블엔 상품 번호 필요 없을 듯
 		int result = service.insertOrder(m.getMemberNo(),totalPrice, deliveryReceiver, deliPhone, deliAddr1, productNo[0]);
 		
 		if(result>0) {
 			System.out.println("order insert success");
 			
 			// order detail
+			// 최근 insert된 orderNo
+			int orderNo = service.selectMaxOrderNo();
+			
+			System.out.println("orderNo : "+orderNo);
+			
+			// 주문내역에 금액관련 두개 있어야할 듯 1. 실 결제금액 -> 적립금/쿠폰 금액 들어간 ,, 2. 상품금액 (할인 된 가격 or 이전 가격)
+			result = service.insertOrderDetail(orderNo, productNo, optionInfoNo, orderDetailCnt, orderDetailCost, orderSalePrice);
+			
+			if(result>0) {
+				System.out.println("order detail tbl insert success");
+			}
+			
+//			result = service.insertOrderDetail()
 			
 		}
 		

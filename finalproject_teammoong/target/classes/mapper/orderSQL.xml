@@ -27,17 +27,44 @@
 			p.PRODUCT_COST AS productCost,
 			p.product_discount AS productDiscount,
 			oi.option_info_no AS optionNo,
-			oi.option_dateail AS optionDetailName,
-			b.basket_count AS basketCount
+			oi.option_dateail AS optionDetailName
+		<if test="page == 0">
+			,b.basket_count AS basketCount
+		</if>
 		from product_tbl p
 		left join OPTION_GROUP_TBL og on p.product_no = og.product_no
 		left join OPTION_INFO_TBL oi on OG.OPTION_GROUP_NO = OI.OPTION_GROUP_NO
+		<if test="page == 0">
 		left join basket_tbl b on p.product_no = b.product_no
+		</if>
+		where p.product_no=#{productNo} 
+		<if test="page == 0">
+		and b.member_no = #{memberNo}
+		</if>
+		<if test="optionNo != 0">
+		and option_info_no = #{optionNo}
+		</if>
+	</select>
+	
+	<select id="selectMoongsanOrderProductList" parameterType="map" resultType="o">
+		select
+			p.product_no AS productNo,
+			(SELECT FILEPATH FROM PRODUCT_IMG WHERE P_IMG_NO=(SELECT MIN(P_IMG_NO) FROM PRODUCT_IMG where product_no=p.product_no)) AS thumbnail,
+			p.product_name AS productName,
+			p.product_price AS productPrice,
+			p.PRODUCT_COST AS productCost,
+			p.product_discount AS productDiscount,
+			oi.option_info_no AS optionNo,
+			oi.option_dateail AS optionDetailName			
+		from product_tbl p
+		left join OPTION_GROUP_TBL og on p.product_no = og.product_no
+		left join OPTION_INFO_TBL oi on OG.OPTION_GROUP_NO = OI.OPTION_GROUP_NO
 		where p.product_no=#{productNo}
 		<if test="optionNo != 0">
 		and option_info_no = #{optionNo}
 		</if>
 	</select>
+	
 	<insert id="insertOrder" parameterType="o">
 		insert into order_tbl values
 		(order_tbl_seq.nextval, #{memberNo}, #{productNo}, sysdate, 1, #{totalPrice}, #{deliReceiver}, #{deliPhone}, #{deliAddr1}, #{deliRequest})
@@ -45,5 +72,10 @@
 			select max(order_no) from order_tbl
 		</selectKey>
 	</insert>
+	
+	<select id="selectMaxOrderNo" parameterType="_int" resultType="_int">
+		select max(order_no) from order_tbl
+	</select>
+	
 
 </mapper>
