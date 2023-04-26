@@ -218,7 +218,24 @@
 	
 	
 	
-	
+	<select id="selectMyJoiner" resultType="bj" parameterType="_int">
+		select
+            join_no as joinNo,
+            to_char(payer_date,'""YYYY"년"MM"월"DD"일"') as payerDate,
+            deposit_price as depositPrice,
+            account_name as accountName,
+            receiver_name as receiverName,
+            receiver_phone as receiverPhone,
+            account_bank as accountBank,
+            account_writer as accountWriter,
+            refund_bank	as refundBank,
+            refund_account as refundAccount,
+            refund_name as refundName,
+            order_count as orderCount,
+            payer_name as payerName
+		from board_tbl b join board_join bj on b.board_no = bj.board_no
+		where b.board_no = #{_parameter}
+	</select>
 	
 	
 	
