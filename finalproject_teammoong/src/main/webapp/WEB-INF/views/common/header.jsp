@@ -24,6 +24,7 @@
     <!--jquery modal-->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css">
+    
     <!--모달 and 알럿-->
 	<!-- <script src="/resources/js/modal-alert.js"></script> -->
     <!-- 디폴트 커스텀 CSS -->
