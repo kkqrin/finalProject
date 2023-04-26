@@ -1,4 +1,16 @@
 $(document).ready(function() {
+
+    var joinCount = $(".joinCount");
+    for(var i=0; i<joinCount.length; i++){
+        var joinCountVal = Number(joinCount.eq(i).val());
+        if(joinCountVal == 0){
+            joinCount.eq(i).parent().parent().hide();
+        }
+        
+    }
+
+
+
     // td 요소를 클릭할 때
     $("td").on("click", function() {
       // 클릭된 td 요소의 자식 요소인 input[type=radio] 요소의 체크를 토글합니다.
@@ -559,4 +571,6 @@ $(document).ready(function() {
             };
           }
           
-          const dropFile = new DropFile("drop-file", "files");        
+          const dropFile = new DropFile("drop-file", "files");   
+          
+          

@@ -150,8 +150,14 @@ background: linear-gradient(to top, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Fir
             margin-bottom: 30px;
         }
 
-
-
+	/*메인 slick 관련*/
+	.slick-box .addZone{display: flex;justify-content: center;}
+	.slick-box .addZone img{margin:0 auto;}
+	#mainSlick{max-height: 370px;padding-top: 120px;overflow:hidden;}
+	#mainSlick .slick-prev:before,#mainSlick .slick-next:before{display: none;}
+	#mainSlick .slick-dots{opacity: 0.3;position: absolute;top: 220px;z-index: 100;}
+	.add1{background-color: rgb(249,244,241);}
+	.add3{background-color: rgb(226,209,175);}
     </style>
 </head>
 <body>
@@ -159,10 +165,23 @@ background: linear-gradient(to top, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Fir
     <c:if test="${not empty sessionScope.m }">
         <jsp:include page="/WEB-INF/views/common/stickyRight.jsp" />
     </c:if>
+    
+<div id="mainSlick">
+	<div class="slick-box">
+			<div class="addZone add1">
+				<img src="/resources/img/common/add-banner1.png">
+			</div>
+			<div class="addZone add2">
+				<a href="#"><img src="/resources/img/common/add-banner2.png"></a>
+			</div>
+			<div class="addZone add3">
+				<a href="#"><img src="/resources/img/common/add-banner3.png"></a>
+			</div>
+	</div>
+</div>
 
 <div class="main-content-wrap">
 
-    
     <h1>인기상품</h1>
     <div class="popular-product-wrap">
     <!-- 인기상품 wrap -->
@@ -586,6 +605,13 @@ background: linear-gradient(to top, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Fir
     // 슬릭 padding-bottom
     $(document).ready(function(){
         $(".popular-product-wrap .slick-list").attr("style", "padding-bottom: 10px");
+        $(".slick-box").slick({
+        	autoplay: true,
+        	autoplaySpeed: 5000,
+        	infinite: true,
+        	fade: true,
+        	dots: true
+        });
     });
     </script>
 </body>

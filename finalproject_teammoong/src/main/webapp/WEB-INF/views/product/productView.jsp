@@ -121,11 +121,11 @@
                                 <!-- </c:if> -->
                             </a>
                         </div>
-                        <div class="share-icon">
+                        <!-- <div class="share-icon">
                             <a href="#">
                                 <span class="material-symbols-outlined">share</span>
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 </div>
@@ -228,18 +228,25 @@
             </div>
         </div>
         <div class="gonggu-board-logo"><h3>뭉쳐야 산다!</h3></div>
-        	<c:if test="${gongguList ne null }">
-        <div class="gonggu-board">
+        	<c:if test="${empty gongguList}">
+        	<div class="gonggu-board">
+        		<h6>현재 진행중인 공동구매가 없습니다</h6>
+                <h6>뭉쳐야산다 버튼을 통해 공동구매를 진행해 보세요!</h6>
+        	</div>
+        	</c:if>
+        	<c:if test="${gongguList ne null}">
+            <div class="gonggu-board">
             <c:forEach items="${gongguList }" var="g">
             <div class="all-flex-wrap">
                 <div class="left-flex-wrap">
                     <div class="user-img"><img src="/resources/upload/member/${g.memberPath}" style="width: 50px; height: 50px;"></div>
                     <div class="user-id">${g.memberId}</div>
                     <div class="gonggu-number">(${g.joinCount}/${g.totalCount})</div>
+                    <input type="hidden" class="joinCount" value="${g.joinCount}">
                 </div>
                 <div class="right-flex-wrap">
                     <div class="right-flex-info">
-                        <div class="number-info">${g.totalCount - g.joinCount}명 남음</div>
+                        <div class="number-info">${g.totalCount - g.joinCount}명 <span>남음</span></div>
                     </div>
                     <c:if test="${sessionScope.m.memberId eq g.memberId }">
                     <form action="/updateGonggu.do" method="post">
@@ -273,7 +280,6 @@
             <table>
                 <tr>
                     <td><a href="#" class="product-info-btn">상품설명</a></td>
-                    <td><a href="#" class="product-view-btn">상세정보</a></td>
                     <td><a href="#" class="product-review-btn">리뷰보기</a></td>
                     <td><a href="#" class="product-inquiry-btn">문의하기</a></td>
                 </tr>
@@ -284,8 +290,9 @@
             ${p.productContent}
         </div>
         <div class="product-review-logo product-review"><h3>리뷰</h3></div>
-        <div class="review-wrap">
-            <form action="/reviewWrite.do" method="post" enctype="multipart/form-data"></form>
+        <button type="button" id="insertReview" class="btn btn-pri size01" data-modal="#modalReview">리뷰하기</button>
+        <!-- <div class="review-wrap">
+            <form action="/reviewWrite.do" method="post" enctype="multipart/form-data"></form> -->
             <!-- <div class="top-info">
                 <div class="img-title">사진</div>
                 <div class="content-title">내용</div>
@@ -308,7 +315,7 @@
                     </fieldset>
                 </div>
             </div> -->
-            <table>
+            <!-- <table>
                 <tr>
                     <th style="background-color: #f88000;">사진</th>
                     <th style="background-color: #f88000;" colspan="5">내용</th>
@@ -321,7 +328,7 @@
                     <td colspan="5" rowspan="3"><textarea style="height: 200px; border: none;"></textarea></td>
                 </tr>
                 <tr >
-                    <td>별점</td>
+                    <td>별점</td> -->
                     <!-- <td style="color:gold">
                         <div>
                           <label for="star1">★</label>
@@ -332,7 +339,7 @@
                     <td style="color:gold">★★★<div><input type="radio" name="star" value="3"></div></td>
                     <td style="color:gold">★★★★<div><input type="radio" name="star" value="1"></div></td>
                     <td style="color:gold">★★★★★<div><input type="radio" name="star" value="1"></div></td> -->
-                </tr>
+                <!-- </tr> -->
                 <!-- <fieldset class="rate">
                     <input type="radio" id="rating10" name="rating" value="10"><label for="rating10" title="5점"></label>
                     <input type="radio" id="rating9" name="rating" value="9"><label class="half" for="rating9" title="4.5점"></label>
@@ -345,7 +352,7 @@
                     <input type="radio" id="rating2" name="rating" value="2"><label for="rating2" title="1점"></label>
                     <input type="radio" id="rating1" name="rating" value="1"><label class="half" for="rating1" title="0.5점"></label>
                 </fieldset> -->
-                <tr>
+                <!-- <tr>
                     <td>
                     </td>
                 </tr>
@@ -353,7 +360,7 @@
                     <td colspan="6"><div class="area-btn full"><button class="btn btn-pri size02">리뷰작성</button></div></td>
                 </tr>
             </table>
-        </div>  
+        </div>   -->
         <div class="gonggu-content-wrap">
             <div class="gonggu-content-title">
             </div>
@@ -410,7 +417,6 @@
             <div class="insertInquiry">
                 <!-- 문의하기 작성 버튼 -->
                 <button type="button" id="insertInquiry" class="btn btn-pri size01" data-modal="#modalBasic2">문의하기</button>
-                <button type="button" id="insertReview" class="btn btn-pri size01" data-modal="#modalReview">리뷰하기</button>
             </div>
         </div>
     </div>
