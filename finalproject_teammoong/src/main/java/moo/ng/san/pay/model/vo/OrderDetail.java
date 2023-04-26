@@ -15,4 +15,5 @@ public class OrderDetail {
 	private int orderDetailCnt;
 	private int orderDetailCost;
 	private int orderSalePrice;
+	private String productName;
 }

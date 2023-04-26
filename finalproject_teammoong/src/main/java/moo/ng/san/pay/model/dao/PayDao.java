@@ -49,13 +49,6 @@ public class PayDao {
 		return result;
 	}
 
-	
-
-	public String selectProductName(int productNo) {
-		String productName = sqlSession.selectOne("product.selectProductName", productNo);
-		return productName;
-	}
-
 	public ArrayList<OrderDetail> selectOrderDetail(int reOrderNo) {
 		List list = sqlSession.selectList("orderDetail.selectOrderDetail",reOrderNo);
 		return (ArrayList<OrderDetail>) list;

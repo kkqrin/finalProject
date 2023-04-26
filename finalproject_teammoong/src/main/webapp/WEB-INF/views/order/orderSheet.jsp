@@ -90,12 +90,13 @@
                             </c:choose>
 
                             <div class="order-product-price"><span></span>원</div>
-                            <input type="text" class="product-price" value="${i.productPrice }">
+                            <input type="text" id="productPrice" class="product-price" value="${i.productPrice }">
 							<input type="text" id="productDisCount" class="product-discount" value="${i.productDiscount }">
 							<input type="text" name="productNo" class="product-no" value="${i.productNo }">
 							<input type="text" name="optionInfoNo" value="${i.optionNo }">
                             <input type="text" name="orderSalePrice" value="">
                             <input type="text" name="orderDetailCost" value="${i.productCost}">
+                            <input type="text" name="productName" value="${i.productName }">
                             <!-- ${i.productPrice } * ( 100 - ${i.productDiscount }) / 100 -->
                             <!-- .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") -->
                         </div>
@@ -318,10 +319,10 @@
         $( function() {
 			$( ".deli-request" ).selectmenu();
             $( ".order-coupon" ).selectmenu();
-            const orderDetailCost = $("[name=orderDetailCost]").val();
+            const productPrice = $("#productPrice").val();
             const productDisCount = $("#productDisCount").val();
-            const salePrice = orderDetailCost *(productDisCount /100);
-            $("[name=orderSalePrice]").val(orderDetailCost - salePrice);
+            const salePrice = productPrice *((100-productDisCount) /100);
+            $("[name=orderSalePrice]").val(salePrice);
 		});
 
         // 상품 개수
