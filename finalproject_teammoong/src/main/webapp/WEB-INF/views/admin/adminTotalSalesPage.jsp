@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -20,37 +21,20 @@
     
 </head>
 <style>
-    .adminPage-wrapper{
-        background-color: lightblue;
-        margin: auto;
-    }
-    .adminPage-header{
-        margin-left: 30px;
-    }
     .adminPage-back{
-        background-color: lightyellow;
         overflow: hidden;
-    }
-    .adminPage-sidebar{
-        float: left;
-        width: 300px;
-        background-color: lightcoral;
-        height: 2000px;
     }
     .adminPage-back>ul>li{
         text-decoration: none;
     }
     .adminPage-main{
-        background-color: lightgreen;
         overflow: hidden;
     }
     .adminPage-content{
-        background-color: #fff;
         overflow: hidden;
     }
     .material-symbols-outlined{
         font-size: 50px;
-        
     }
 
     .adminPage-sales{
@@ -99,7 +83,7 @@
 <%-- <jsp:include page="/WEB-INF/views/common/header.jsp" /> --%>
     <div class="adminPage-wrapper">
         <div class="adminPage-header">
-            <h1><a href="#">관리자 페이지 입니다.</a></h1>
+            <div class="adminPage-title"><a>Moong's Admin</a></div>
         </div>
         <div class="adminPage-back">
             <jsp:include page="/WEB-INF/views/admin/adminSideNavi.jsp"/>
@@ -109,14 +93,14 @@
 	        			<div class="sales icon"><span class="material-symbols-outlined">monitoring</span></div>
 	        			<div class="salesContent">
 	        				<span class="salesTitle">총 매출액</span>
-	        				<span class="totalSalesCount">${totalSales }원</span>
+	        				<span class="totalSalesCount"><fmt:formatNumber value="${monthSales }"/>원</span>
 	        			</div>
 	        		</div>
 	        		<div class="monthSales">
 	        			<div class="sales icon"><span class="material-symbols-outlined">trending_up</span></div>
 	        			<div class="salesContent">
 	        				<span class="salesTitle">월 매출액</span>
-	        				<span class="monthSalesCount">${monthSales }원</span>
+	        				<span class="monthSalesCount"><fmt:formatNumber value="${monthSales }"/>원</span>
 	        			</div>
 	        		</div>
 	        		<div class="salesReport">
@@ -147,7 +131,11 @@
 						    <option value="11">11월</option>
 						    <option value="12">12월</option>
 						</select>
-						<canvas id="salesChart"></canvas>
+						<canvas id="salesChart">Month Select Sales Chart</canvas>
+		        	</div>
+		        	<div class="genderSalesChart chart">
+		        		<div class="genderChartTitle"><span>Gender Sales Chart</span></div>
+		        		<canvas id="genderChart"></canvas>
 		        	</div>
 	        	</div>
 	        </div>
@@ -240,7 +228,6 @@
 					url : '/ajaxTotalCategorySalesManage.do',
 					dataType: 'json',
 					success: function(data){
-						console.log(data);
 						var context = document.getElementById('monthChart').getContext('2d');
 			            var myChart = new Chart(context, {
 			                type: 'bar', // 차트의 형태
@@ -409,74 +396,58 @@
 		            })
 	            }) // 월 select 차트
 	            
-	            
-	            
-	            
-	            
-	            // 월 select / 카테고리 매출
-	            
 	            // 구매자 성별
-	            /*
-	            var context = document.getElementById('selectMonthChart').getContext('2d');
-	            var myChart = new Chart(context, {
-	                type: 'doughnut', // 차트의 형태
-	                data: { // 차트에 들어갈 데이터
-	                    labels: [
-	                        // 카테고리 명
-	                        '1','2','3','4','5','6','7'
-	                    ],
-	                    datasets: [
-	                        { //데이터
-	                            label: 'test1', //차트 제목
-	                            fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-	                            data: [
-	                                21,19,25,20,23,26,25 // 그래프 각각의 값
-	                            ],
-	                            backgroundColor: [
-	                                //색상
-	                                'rgba(255, 99, 132, 0.2)',
-	                                'rgba(54, 162, 235, 0.2)',
-	                                'rgba(255, 206, 86, 0.2)',
-	                                'rgba(75, 192, 192, 0.2)',
-	                                'rgba(153, 102, 255, 0.2)',
-	                                'rgba(255, 159, 64, 0.2)'
-	                            ],
-	                            borderColor: [
-	                                //경계선 색상
-	                                'rgba(255, 99, 132, 1)',
-	                                'rgba(54, 162, 235, 1)',
-	                                'rgba(255, 206, 86, 1)',
-	                                'rgba(75, 192, 192, 1)',
-	                                'rgba(153, 102, 255, 1)',
-	                                'rgba(255, 159, 64, 1)'
-	                            ],
-	                            borderWidth: 1 //경계선 굵기
-	                        }/* ,
-	                        {
-	                            label: 'test2',
-	                            fill: false,
-	                            data: [
-	                                8, 34, 12, 24
-	                            ],
-	                            backgroundColor: 'rgb(157, 109, 12)',
-	                            borderColor: 'rgb(157, 109, 12)'
-	                        } */
-	                        /*
-	                    ]
-	                },
-	                options: {
-	                    scales: {
-	                        yAxes: [
-	                            {
-	                                ticks: {
-	                                    beginAtZero: true
-	                                }
-	                            }
-	                        ]
-	                    }
-	                }
-	            }); 
-	            */
+	           
+	            $.ajax({
+	            	url : "/ajaxGenderSalesCount.do",
+	            	type : "post",
+	            	success : function(data){
+	            		console.log(data);
+	            		var context = document.getElementById('genderChart').getContext('2d');
+	    	            var myChart = new Chart(context, {
+	    	                type: 'doughnut', // 차트의 형태
+	    	                data: { // 차트에 들어갈 데이터
+	    	                    labels: ['남성','여성','성별없음'], // 카테고리 명
+	    	                    datasets: [
+	    	                        { //데이터
+	    	                            label: '성별에 따른 매출분포', //차트 제목
+	    	                            fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+	    	                            data: [ // 그래프의 값
+	    	                               	data[0].totalSales, data[1].totalSales, data[2].totalSales
+	    	                            ],
+	    	                            backgroundColor: [
+	    	                                //색상
+	    	                            	'rgba(255, 99, 132, 0.2)',
+			                                'rgba(54, 162, 235, 0.2)',
+			                                'rgba(255, 206, 86, 0.2)'
+	    	                            ],
+	    	                            borderColor: [
+	    	                                //경계선 색상
+	    	                            	'rgba(255, 99, 132, 1)',
+			                                'rgba(54, 162, 235, 1)',
+			                                'rgba(255, 206, 86, 1)'
+	    	                            ],
+	    	                            borderWidth: 1 //경계선 굵기
+	    	                        },
+	    	                        
+	    	                    ]
+	    	                },
+	    	                options: {
+	    	                    scales: {
+	    	                        yAxes: [
+	    	                            {
+	    	                                ticks: {
+	    	                                    beginAtZero: true
+	    	                                }
+	    	                            }
+	    	                        ]
+	    	                    }
+	    	                }
+	    	            });
+	            	}
+	            }); // 성별에 따른 매출
+	             
+	          
 	            
 	            
 

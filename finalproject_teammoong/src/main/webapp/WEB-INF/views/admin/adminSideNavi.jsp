@@ -28,6 +28,7 @@
 	     <ul>
 	         <li><a>이벤트 관리</a></li>
 	         <li><a href="/adminDaycheckManagePage.do">쿠폰 발행 관리</a></li>
+	         <li><a href="/adminGongguManagePage.do">쿠폰 발행 관리</a></li>
 	     </ul>
 	     <ul>
 	         <li><a href="#">여여붙 대시보드</a></li>

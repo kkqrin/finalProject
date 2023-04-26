@@ -25,7 +25,7 @@
     </c:if>
     <div class="adminPage-wrapper" id="adminMemberTable">
         <div class="adminPage-header">
-            <h1><a href="#">Admin-Page</a></h1>
+            <div class="adminPage-title"><a>Moong's Admin</a></div>
         </div>
         <div class="adminPage-back">
             <jsp:include page="/WEB-INF/views/admin/adminSideNavi.jsp"/>
@@ -142,7 +142,7 @@
                                 </tr>
                             </c:forEach>
                             <tr>
-                                <td colspan="11"><div class="pagination">${pageNavi}</div></td>
+                                <td colspan="11">${pageNavi}</td>
                             </tr>
                             <tr>
                                 <td colspan="2"><div name="allChangeMemberStatus">일괄 변경</div></td>
@@ -157,7 +157,7 @@
                     </div>
                     <div class="moreResult">
 						<div>
-							<span id="closeBtn" class="material-symbols-outlined">cancel</span>
+							<div id="closeBtn" class="material-symbols-outlined">cancel</div>
 						</div>                    
                     	<div class="moreResultContent"></div>
                     </div>
@@ -180,9 +180,37 @@
     	
     	$('tr td[colspan="11"]').css("font-size","30px");
    
+    	// 가입일 == 오늘 / 효과
+    	var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+        today = yyyy + '-' + mm + '-' + dd;
+        
+        $('tr').each(function() {
+        	var regDateText = $(this).children().eq(8).text();
+        	var regDateTr = $(this).children();
+        	  
+        	if (regDateText === today) {
+        	  regDateTr.addClass('highlight');
+        	  setTimeout(function() {
+        	    regDateTr.removeClass('highlight');
+        	  }, 1000);
+        	}
+        });
+        
+        // 마케팅 동의안함 css
+        $('table tbody td').each(function() { 
+	        var tdText = $(this).text();
+	        if (tdText.includes('동의안함')) {
+	          $(this).css('font-weight', 'bold');
+	          $(this).css('color','red');
+	        }
+	     });
     	
-    	
-    })
+    })// ready
+    
+    
     /*목록으로*/
     $(".goList").on("click",function(){
     	location.reload();
@@ -190,7 +218,8 @@
     
     /* 상세보기 */
    	$(".moreInfo").on("click",function(){
-   		var memberNo = $(this).parent().parent().parent().children().eq(1).children().eq(1).text();
+   		
+   		var memberNo = $(this).parent().parent().children().eq(1).text();
    		const moreInfo = $(".moreInfo");
    		const moreResult = $(".moreResult");
    		const moreResultContent = $(".moreResultContent");
@@ -206,13 +235,13 @@
    			success: function(data){
    				console.log(data);
    				const ul = $("<ul>");
-   				ul.append("<li>"+data.memberName+"님의 개인정보 내역</li>");
-   				ul.append("<li>"+data.memberEmail+"</li>");
-   				ul.append("<li>"+data.memberPhone+"</li>");
-   				ul.append("<li>"+data.memberAddr+"</li>");
-   				ul.append("<li>"+data.memberBday+"</li>");
-   				ul.append("<li>"+data.memberBank+"</li>");
-   				ul.append("<li>"+data.memberAccount+"</li>");
+   				ul.append("<li>※ "+data.memberName+"님의 개인정보 내역</li>");
+   				ul.append("<li>▶ "+data.memberEmail+"</li>");
+   				ul.append("<li>▶ "+data.memberPhone+"</li>");
+   				ul.append("<li>▶ "+data.memberAddr+"</li>");
+   				ul.append("<li>▶ "+data.memberBday+"</li>");
+   				ul.append("<li>▶ "+data.memberBank+"</li>");
+   				ul.append("<li>▶ "+data.memberAccount+"</li>");
    				moreResultContent.append(ul);
 				   				
    			}
