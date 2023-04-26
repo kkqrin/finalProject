@@ -10,7 +10,7 @@
     	<if test="optionInfoNo != 0">
         	#{optionInfoNo}
     	</if>,
-    	#{orderDetailCnt}, #{orderDetailCost}, #{orderSalePrice}, #{productName})
+    	#{orderDetailCnt}, #{orderDetailCost}, #{orderSalePrice})
 	</insert>
 	<select id="selectOrderDetail" parameterType="_int" resultType="od">
 		select
