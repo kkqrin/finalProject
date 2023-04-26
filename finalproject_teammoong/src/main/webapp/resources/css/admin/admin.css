@@ -9,6 +9,9 @@
         margin: 0;
         
     }
+    .adminPage-title{
+    	height: 130px;
+    }
     .adminPage-header{
         margin-left: 30px;
     }

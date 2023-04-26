@@ -87,21 +87,20 @@
 		select count(*) from board_tbl where board_start between '2023-03-20' and sysdate-1
 	</select> -->
 
-	<select id="selectAllMemberList" parameterType="map"
-		resultType="m">
+	<select id="selectAllMemberList" parameterType="map" resultType="m">
 		select * from
 			(select rownum as rnum, b.* from
 				(select
 					member_no as memberNo,
 					member_id as memberId,
 					member_name as memberName,
-					member_email as memberEmail,
+					nvl(member_email,'입력안함') as memberEmail,
 					member_phone as memberPhone,
 					member_addr as memberAddr,
 					member_gender as memberGender,
-					member_bday as memberBday,
-					member_bank as memberBank,
-					member_account as memberAccount,
+					nvl(to_char(member_bday,'yyyy-mm-dd'),'입력안함') as memberBday,
+					nvl(member_bank,'입력안함') as memberBank,
+					nvl(member_account,'입력안함') as memberAccount,
 					member_status as memberStatus,
 					member_agree as memberAgree,
 					to_char(reg_date,'yyyy-mm-dd') as regDate
@@ -129,7 +128,7 @@
 			member_phone as memberPhone,
 			member_addr as memberAddr,
 			member_gender as memberGender,
-			member_bday as memberBday,
+			to_char(member_bday,'yyyy-mm-dd') as memberBday,
 			member_bank as memberBank,
 			member_account as memberAccount,
 			member_status as memberStatus,
@@ -158,7 +157,7 @@
 			member_phone as memberPhone,
 			member_addr as memberAddr,
 			member_gender as memberGender,
-			member_bday as memberBday,
+			to_char(member_bday,'yyyy-mm-dd') as memberBday,
 			member_bank as memberBank,
 			member_account as memberAccount,
 			member_status as memberStatus,
@@ -176,23 +175,31 @@
 	</select> -->
 
 	<select id="selectAllProductList" parameterType="map" resultType="p">
-		select * from (
-    	select rownum as rnum, b.*from 
-    	(select
-            product_no as productNo,
-            d_category_no as detailCategoryNo,
-            product_name as productName,
-            product_ea as productEa,
-            product_price as productPrice,
-            product_status as productStatus,
-            product_cost as productCost,
-            (select (product_ea - (select nvl(sum(order_detail_cnt),0) from order_detail od where od.product_no=pt.product_no)) as cnt from product_tbl where product_no = pt.product_no) as presentCnt,
-            gonggu_number as gongguNumber,
-            product_content as productContent,
-            product_discount as productDiscount
-        from product_tbl pt
-        order by 1 desc)b)
-		where rnum between #{start} and #{end}
+	select *
+	from (
+	    select rownum as rnum, b.*
+	    from (
+	        select
+	            product_no as productNo,
+	            d_category_no as detailCategoryNo,
+	            product_name as productName,
+	            product_ea as productEa,
+	            product_price as productPrice,
+	            product_status as productStatus,
+	            product_cost as productCost,
+	            (select (product_ea - (select nvl(sum(order_detail_cnt),0) from order_detail od where od.product_no=pt.product_no))
+	            - (select nvl(sum(count_number),0) from detail_gonggu_tbl dgt 
+	            join gonggu_pay_tbl gpt on(dgt.detail_gonggu_no = gpt.detail_gonggu_no) 
+	            join gonggu_tbl gt on (dgt.gonggu_no = gt.gonggu_no) 
+	            where gt.product_no = pt.product_no and gpt.gonggu_pay_status = 1) 
+	            as cnt from product_tbl where product_no = pt.product_no) as presentCnt,
+	            gonggu_number as gongguNumber,  
+	            product_content as productContent,
+	            product_discount as productDiscount
+	        from product_tbl pt
+	        order by 1 desc
+	    ) b)
+	where rnum between #{start} and #{end}
 	</select>
 
 	<select id="selectProductTotalCount" resultType="_int">
@@ -339,7 +346,7 @@
 	                board_no as boardNo,	
 	                d_category_no as detailCategoryNo, 
 	                board_writer as boardWriter,
-	                board_date as boardDate,
+	                to_char(board_date,'yyyy-mm-dd') as boardDate,
 	                board_start as boardStart, 
 	                to_char(board_end,'yyyy-mm-dd') as boardEnd,
 	                board_status as boardStatus
@@ -375,7 +382,7 @@
 		      bt.board_no, 
 		      bt.board_name, 
 		      bt.board_writer,
-		      bt.board_date,
+		      to_char(bt.board_date,'yyyy-mm-dd'),
               bt.report_count,
 		      bt.board_status 
 		    ORDER BY reportCount DESC)b)
@@ -437,8 +444,8 @@
               d_category_no as detailCategoryNo, 
               board_writer as boardWriter,
               to_char(board_date,'yyyy-mm-dd') as boardDate,
-              board_start as boardStart, 
-              board_end as boardEnd,
+              to_char(board_start,'yyyy-mm-dd') as boardStart, 
+              to_char(board_end,'yyyy-mm-dd') as boardEnd,
               board_status as boardStatus
         from board_tbl
 		<choose>
@@ -499,7 +506,7 @@
 		select
 			mt.member_id as memberId,
 		    pt.point_ea as pointEa,
-		    pt.point_date as pPointDate,
+		    to_char(pt.point_date,'yyyy-mm-dd') as pPointDate,
 		    pt.point_status as pointStatus
 		from member_tbl mt
 		join point_tbl pt on (mt.member_no = pt.member_no)
@@ -676,6 +683,7 @@
 		join detail_gonggu_tbl dgt on (gt.gonggu_no = dgt.gonggu_no)
 		join gonggu_pay_tbl gp on (dgt.detail_gonggu_no = gp.detail_gonggu_no)
 	</select>
+	
 	
 	
 	<!-- <select id="selectAllCouponList" resultType="ic">

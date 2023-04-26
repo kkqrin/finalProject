@@ -21,29 +21,16 @@
     
 </head>
 <style>
-    .adminPage-wrapper{
-        background-color: lightblue;
-        width: 1200px;
-        margin: auto;
-    }
     .adminPage-header{
         margin-left: 30px;
     }
     .adminPage-back{
-        background-color: lightyellow;
         overflow: hidden;
-    }
-    .adminPage-sidebar{
-        float: left;
-        width: 300px;
-        background-color: lightcoral;
-        height: 2000px;
     }
     .adminPage-back>ul>li{
         text-decoration: none;
     }
     .adminPage-main{
-        background-color: lightgreen;
         overflow: hidden;
     }
     .adminPage-sales{
@@ -51,7 +38,6 @@
     	overflow: hidden;
     }
     .adminPage-content{
-        background-color: #fff;
         overflow: hidden;
     }
     .material-symbols-outlined{
@@ -127,6 +113,7 @@
             <div class="adminPage-title"><a>Moong's Admin</a></div>
         </div>
         <div class="adminPage-back">
+            <jsp:include page="/WEB-INF/views/admin/adminSideNavi.jsp"/>
 	        <div class="adminPage-main">
 	        	<div class="adminPage-sales">
 	        		<div class="bestSales">
