@@ -58,5 +58,11 @@ public class OrderDao {
 		return result;
 	}
 
+	public int selectBasketNo(HashMap<String, Object> map) {
+		int basketNo = sqlSession.selectOne("order.selectBasketNo", map);
+		
+		return basketNo;
+	}
+
 
 }

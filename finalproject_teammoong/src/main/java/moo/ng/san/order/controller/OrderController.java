@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import moo.ng.san.basket.model.vo.Basket;
@@ -102,6 +103,7 @@ public class OrderController {
 	
 	
 //	주문하기
+	@ResponseBody
 	@RequestMapping(value="/order.do")
 	public String order(@SessionAttribute(required=false) Member m, 
 			int totalPrice, String deliReceiver, String deliPhone, String deliAddr1, String deliAddr2, String deliRequest
@@ -131,12 +133,14 @@ public class OrderController {
 			
 			if(result>0) {
 				System.out.println("order detail tbl insert success");
+				
+				return "order success";
 			}
 			
 //			result = service.insertOrderDetail()
 			
 		}
 		
-		return null;
+		return "fail";
 	}
 }

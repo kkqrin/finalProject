@@ -42,7 +42,12 @@
 		and b.member_no = #{memberNo}
 		</if>
 		<if test="optionNo != 0">
-		and option_info_no = #{optionNo}
+		and oi.option_info_no = #{optionNo}
+		</if>
+		<if test="page == 0">
+			<if test="optionNo != 0">
+				 and b.basket_no = #{basketNo}
+			</if>
 		</if>
 	</select>
 	
@@ -73,8 +78,15 @@
 		</selectKey>
 	</insert>
 	
-	<select id="selectMaxOrderNo" parameterType="_int" resultType="_int">
+	<select id="selectMaxOrderNo" resultType="_int">
 		select max(order_no) from order_tbl
+	</select>
+	
+	<select id="selectBasketNo" parameterType="map" resultType="_int">
+        select 
+       		b.basket_no as basketNo
+        from basket_tbl b left join basket_option_tbl bo on b.basket_no = bo.basket_no
+        where b.member_no = #{memberNo} and b.product_no=#{productNo} and bo.option_info_no=#{optionNo}
 	</select>
 	
 

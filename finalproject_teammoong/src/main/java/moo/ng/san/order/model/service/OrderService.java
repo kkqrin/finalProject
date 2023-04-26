@@ -37,6 +37,13 @@ public class OrderService {
 			map.put("optionNo", optionNo[i]);
 			map.put("memberNo", memberNo);
 			map.put("page", page);
+
+			
+			if(optionNo[i] != 0 && page == 0) {
+				// 장바구니에 한 상품의 여러 옵션이 있을때
+				int basketNo = dao.selectBasketNo(map);
+				map.put("basketNo", basketNo);
+			}
 			
 			Order o = dao.selectOrderProductList(map);
 			
