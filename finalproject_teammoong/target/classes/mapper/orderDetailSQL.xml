@@ -10,7 +10,6 @@
     	<if test="optionInfoNo != 0">
         	#{optionInfoNo}
     	</if>,
-    	#{orderDetailCnt},
-    	#{orderDetailPrice}, #{deliveryReceiver}, #{deliveryPhone}, #{deliveryAddress}, #{deliveryRequest})
+    	#{orderDetailCnt}, #{orderDetailCost}, #{orderSalePrice})
 	</insert>
 </mapper>

@@ -38,6 +38,12 @@
 		and option_info_no = #{optionNo}
 		</if>
 	</select>
-	
+	<insert id="insertOrder" parameterType="o">
+		insert into order_tbl values
+		(order_tbl_seq.nextval, #{memberNo}, #{productNo}, sysdate, 1, #{totalPrice}, #{deliReceiver}, #{deliPhone}, #{deliAddr}, #{deliRequest})
+		<selectKey resultType="_int" order="AFTER" keyProperty="orderNo">
+			select max(order_no) from order_tbl
+		</selectKey>
+	</insert>
 
 </mapper>

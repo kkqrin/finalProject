@@ -81,19 +81,20 @@
                             <c:choose>
                                 <c:when test="${page eq 0}">
                                     <div class="order-product-volume"><span>${i.basketCount}</span>개</div>
+                                    <input type="hidden" name="orderDetailCnt" value="${i.basketCount }">
                                 </c:when>
                                 <c:otherwise>
                                     <div class="order-product-volume"><span>${page}</span>개</div>
+                                    <input type="text" name="orderDetailCnt" value="${page }">
                                 </c:otherwise>
                             </c:choose>
 
                             <div class="order-product-price"><span></span>원</div>
-                            <input type="hidden" name="productPrice" class="product-price" value="${i.productPrice }">
-							<input type="hidden" class="product-discount" value="${i.productDiscount }">
-							<input type="hidden" name="productNo" class="product-no" value="${i.productNo }">
-							<input type="hidden" name="optionInfoNo" value="${i.optionNo }">
-                            <input type="hidden" name="orderDetailCnt">
-
+                            <input type="text" name="orderDetailCost" class="product-price" value="${i.productPrice }">
+							<input type="text" id="productDisCount" class="product-discount" value="${i.productDiscount }">
+							<input type="text" name="productNo" class="product-no" value="${i.productNo }">
+							<input type="text" name="optionInfoNo" value="${i.optionNo }">
+                            <input type="text" name="orderSalePrice" value="">
                             <!-- ${i.productPrice } * ( 100 - ${i.productDiscount }) / 100 -->
                             <!-- .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") -->
                         </div>
@@ -133,7 +134,7 @@
                         <tr>
                             <th><label for="deli-phone">휴대폰</label></th>
                             <td colspan="2">
-                                <input type="text" name="deliveryPhone" id="deli-phone" class="input-noborder" placeholder="'-' 제외 숫자만 입력해주세요">
+                                <input type="text" name="deliPhone" id="deli-phone" class="input-noborder" placeholder="'-' 제외 숫자만 입력해주세요">
                             </td>
                         </tr>
                         <tr>
@@ -145,7 +146,7 @@
                                     <input type="text" id="deli-post-number" class="input-noborder" placeholder="우편번호">
                                     <button type="button" class="btn btn-pri size01">주소검색</button>
                                 </div>
-                                <input type="text" name="deliveryAddress" id="deli-addr" class="input-noborder" placeholder="주소를 입력해주세요">
+                                <input type="text" name="deliAddr1" id="deli-addr" class="input-noborder" placeholder="주소를 입력해주세요">
                                 <input type="text" name="deliAddr2" id="deli-addr2" class="input-noborder" placeholder="상세주소를 입력해주세요">
                             </td>
                         </tr>
@@ -196,8 +197,10 @@
                                             <input type="text" id="input-saved-money" placeholder="사용 가능한 적립금 <fmt:formatNumber value="${point.pointEa }"/>원">
                                             <button type="button" class="btn btn-pri size01" id="do-saved-money">적용</button>
                                             <button type="button" class="btn btn-pri size01" id="all-saved-money">모두 사용</button>
-                                            <input type="hidden" name="minusPointEa" id="hidden-total-point" value="${point.pointEa }">
-                                            <input type="hidden" id="hidden-current-point" value="0">
+                                            <input type="hidden" id="hidden-total-point" value="${point.pointEa }">
+                                            <input type="hidden" name="minusPointEa" id="hidden-current-point" value="0">
+                                            
+                                            
                                         </div>
                                     </td>
                                 </tr>
@@ -264,13 +267,13 @@
                             <div>최종 결제 금액</div>
                             <div><span></span>원</div>
                         </div>
-                        <input type="hidden" id="hidden-total-pay">
+                        <input type="hidden" id="hidden-total-pay"  name="totalPrice">
 
                         <div class="total-order-buy-save-point">
                             <button type="button" class="btn btn-pri">적립</button>
                             <div style="margin-right: 5px;">구매시</div>
                             <div><span></span>원 (10%)</div>
-                            <input type="hidden" name="plusPointEa" value="">
+                            <input type="hidden" name="plusPointEa" id="plusPointEa" value="">
                         </div>
                     </div>
                 </div>
@@ -314,6 +317,10 @@
         $( function() {
 			$( ".deli-request" ).selectmenu();
             $( ".order-coupon" ).selectmenu();
+            const orderDetailCost = $("[name=orderDetailCost]").val();
+            const productDisCount = $("#productDisCount").val();
+            const salePrice = orderDetailCost *(productDisCount /100);
+            $("[name=orderSalePrice]").val(orderDetailCost - salePrice);
 		});
 
         // 상품 개수
@@ -400,7 +407,8 @@
             // 할인되는 금액(할인금액)
             discountPrice = ( Number(discountPrice) + Number(productPrice-(Math.floor(productPrice*(100 - productDiscount)/1000)*10)) ) * orderDetailCnt;
             $(".total-order-amount-3>div").last().children().text(discountPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-
+			
+            
             // 주문금액 (결제할 금액)
             payPrice = ( Number(payPrice) + Number((Math.floor(productPrice*(100 - productDiscount)/1000)*10)) ) * orderDetailCnt;
             $(".total-order-amount-1>div").last().children().text(payPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
@@ -418,9 +426,12 @@
 
         // 최종 결제 버튼
         $(".order-complete-btn>span").text($(".total-order-pay>div").last().children().text());
-
+        
         // 최종 결제 금액 hidden
         $("#hidden-total-pay").val(payPrice);
+        
+        // 구매시 적립금 number값 hidden에 숨김
+ 	    $("[name=plusPointEa]").val(Math.ceil(payPrice*10/100));
 
         
 
@@ -537,6 +548,7 @@
                     $(".total-order-pay>div").last().children().text(($("#number-pay-price").val()-$("#number-coupon").val()-$("#hidden-total-point").val()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     // 최종 결제 금액 hidden에 숨김
                     $("#hidden-total-pay").val($("#number-pay-price").val()-$("#number-coupon").val()-$("#hidden-total-point").val()).trigger('change');
+                    
                 }
             }else{
                 alert("최종 결제 금액보다 많은 포인트를 입력하셨습니다.");
@@ -549,7 +561,7 @@
             $(".total-order-buy-save-point>div").last().children().text(Math.ceil(Number($(this).val())*10/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
             // number값 hidden에 숨김
-            $("[name=plusPointEa]").val(Math.ceil(Number($(this).val())*10/100));
+          
             // const plusPoint = $(".total-order-buy-save-point>div").last().children().text();
             // Math.ceil(Number($(this).val())*10/100)
 
@@ -633,7 +645,7 @@
             };
         
         });
-
+		console.log($("[name=memberNo]"));
 
 
     </script>

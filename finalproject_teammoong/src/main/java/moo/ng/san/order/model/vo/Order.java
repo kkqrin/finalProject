@@ -1,8 +1,11 @@
 package moo.ng.san.order.model.vo;
 
+import java.util.ArrayList;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import moo.ng.san.pay.model.vo.OrderDetail;
 
 @Data
 @NoArgsConstructor
@@ -11,7 +14,6 @@ public class Order {
 	private int orderNo;
 	private int memberNo;
 	private int productNo;
-	private int payNo;
 	private String orderDate;
 	private int orderStatus;
 	
@@ -28,5 +30,8 @@ public class Order {
 	private String deliReceiver;
 	private String deliPhone;
 	private String deliAddr;
+	private String deliAddr1;
+	private String deliAddr2;
 	private String deliRequest;
+	private ArrayList<OrderDetail> orderDetail;
 }
