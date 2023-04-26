@@ -33,6 +33,36 @@ public class OrderDao {
 		
 		return o;
 	}
+	
+	public Order selectMoongsanOrderProductList(HashMap<String, Object> map) {
+		Order o = sqlSession.selectOne("order.selectMoongsanOrderProductList", map);
+		
+		return o;
+	}
+
+	public int insertOrder(HashMap<String, Object> map) {
+		int result = sqlSession.insert("order.insertOrder", map);
+		
+		return result;
+	}
+
+	public int selectMaxOrderNo() {
+		int orderNo = sqlSession.selectOne("order.selectMaxOrderNo");
+		
+		return orderNo;
+	}
+
+	public int insertOrderDetail(HashMap<String, Object> map) {
+		int result = sqlSession.insert("orderDetail.insertOrderDetail", map);
+		
+		return result;
+	}
+
+	public int selectBasketNo(HashMap<String, Object> map) {
+		int basketNo = sqlSession.selectOne("order.selectBasketNo", map);
+		
+		return basketNo;
+	}
 
 
 }
