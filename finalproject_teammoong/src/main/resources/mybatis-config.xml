@@ -28,6 +28,7 @@
 		<typeAlias type="moo.ng.san.board.model.vo.BoardOption" alias="bo" />
 		<typeAlias type="moo.ng.san.board.model.vo.BoardJoin" alias="bj" />
 		<typeAlias type="moo.ng.san.board.model.vo.Notify" alias="ny" /> <!-- 신고 추가 -->
+		<typeAlias type="moo.ng.san.board.model.vo.BoardOrder" alias="bl" />
 		
 		<typeAlias type="moo.ng.san.category.model.vo.Category" alias="c" />
 		<typeAlias type="moo.ng.san.category.model.vo.DetailCategory" alias="dc" />

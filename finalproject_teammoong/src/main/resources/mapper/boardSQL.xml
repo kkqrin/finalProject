@@ -50,6 +50,18 @@
 		</selectKey>
 	</insert>
 	
+	<insert id="insertBoardOrderList" parameterType="bl">
+		insert into board_order values(
+		board_order_seq.nextval,
+		#{optionNo},
+		#{orderCount},
+		#{joinNo}
+		)
+		<selectKey resultType="_int" order="AFTER" keyProperty="joinNo">
+			select max(join_no) from board_join
+		</selectKey>
+	</insert>
+	
 	<insert id="insertBoard" parameterType="b">
 		insert into board_tbl values(
 			board_seq.nextval,

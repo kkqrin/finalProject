@@ -10,6 +10,7 @@ import moo.ng.san.board.model.dao.BoardDao;
 import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.board.model.vo.BoardJoin;
 import moo.ng.san.board.model.vo.BoardOption;
+import moo.ng.san.board.model.vo.BoardOrder;
 import moo.ng.san.board.model.vo.BoardPageData;
 import moo.ng.san.board.model.vo.FileVO;
 
@@ -172,10 +173,30 @@ public class BoardService {
 
 
 
-	public int insertBoardOrder(int joinNo, int[] optionNo, String[] orderName, int[] orderPrice, int[] orderCount) {
+	public int insertBoardOrder(int joinNo, int[] optionNo, int[] orderPrice, int[] orderCount) {
 
-		ArrayList<boardOrder> list = new ArrayList<Order>();
-		return 0;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int result = 0;
+		
+		map.put("joinNo", joinNo);
+		for(int i=0 ; i < optionNo.length ; i++) {
+			map.put("optionNo", optionNo[i]);
+//			map.put("orderName",orderName[i]);
+			map.put("orderPrice",orderPrice[i]);
+			map.put("orderCount",orderCount[i]);
+			
+			result = dao.insertBoardOrderList(map);
+			
+		}
+		return result;
 	}
+
+
+
+
+//	public ArrayList<BoardOrder> selectListBoardOrder(int joinNo) {
+//		ArrayList<BoardOrder> list = dao.selectListBoardOrder(joinNo);
+//		return list;
+//	}
 
 }

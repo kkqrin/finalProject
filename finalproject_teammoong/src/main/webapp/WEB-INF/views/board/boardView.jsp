@@ -121,11 +121,12 @@ sup{
 				<tr>
 					<c:forEach items="${o }" begin="0" end="${size}" varStatus="i" var="bo">
 <%-- 					<input type="hidden" id="oSize" name="boardDetail" value="${size}"> --%>
+<%-- 						<input type="hidden" name="detailName" value="${bo.detailName}"> --%>
+						<input type="text" name="optionNo" value="${bo.optionNo}">
 					<tr>
 						<td>
 							${bo.detailName}
 						</td>
-<%-- 						<input type="hidden" name="detailName" value="${bo.detailName}"> --%>
 						<td><input type="hidden" id="detailPrice" name="detailPrice" value="${bo.detailPrice}">${bo.detailPrice}</td>
 						<td>
 							${bo.detailCount}

@@ -16,6 +16,7 @@ import moo.ng.san.board.model.service.BoardService;
 import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.board.model.vo.BoardJoin;
 import moo.ng.san.board.model.vo.BoardOption;
+import moo.ng.san.board.model.vo.BoardOrder;
 import moo.ng.san.board.model.vo.BoardPageData;
 import moo.ng.san.board.model.vo.FileVO;
 import moo.ng.san.member.model.vo.Member;
@@ -77,21 +78,17 @@ public class BoardController {
 		}
 	@RequestMapping(value="/boardWriteView.do")
 //	public String boardWriteView(BoardJoin bj, int boardNo, Model model) {
-	public String boardWriteView(BoardJoin bj, int boardNo, int[] optionNo, String[] orderName, int[] orderPrice, int[] orderCount, Model model) {
+	public String boardWriteView(BoardJoin bj, int boardNo, int[] optionNo, int[] detailPrice, int[] detailCount, Model model) {
 		System.out.println("보드조인  insert 전: "+bj);
 		int result = service.insertBoardJoin(bj);
-		
-		
-//		if(result>0) {
-//			// 보드 조인 상세 insert
-//			result = service.insertBoardOrder(bj.getJoinNo(), optionNo, orderName, orderPrice, orderCount);
-//		}
-		
-		
-		
-		
-		
 		System.out.println("보드조인  insert 후: "+bj);
+		
+		System.out.println(optionNo);
+		if(result>0) {
+			// 보드 조인 상세 insert
+			result = service.insertBoardOrder(bj.getJoinNo(), optionNo, detailPrice, detailCount);
+		}
+
 		
 		if(result>0) {
 			Board b = service.selectOneBoard(boardNo);
@@ -110,6 +107,7 @@ public class BoardController {
 	@RequestMapping(value="/myPageRequestDeposit.do")
 	public String myPageRequestDeposit(Model model, int joinNo) {
 		BoardJoin bj = service.selectOneBoardJoin(joinNo);
+//		ArrayList<BoardOrder> list = service.selectListBoardOrder(joinNo);
 		model.addAttribute("bj",bj);
 		return"board/myPageRequestDeposit";
 	}

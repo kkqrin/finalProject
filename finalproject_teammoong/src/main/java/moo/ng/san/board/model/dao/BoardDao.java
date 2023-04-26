@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.board.model.vo.BoardJoin;
 import moo.ng.san.board.model.vo.BoardOption;
+import moo.ng.san.board.model.vo.BoardOrder;
 import moo.ng.san.board.model.vo.FileVO;
 
 @Repository
@@ -84,6 +85,14 @@ public class BoardDao {
 		int result = sqlSession.delete("board.boardFileDelete",boardNo);
 		return result;
 	}
+	public int insertBoardOrderList(HashMap<String, Object> map) {
+		int result = sqlSession.insert("board.insertBoardOrderList",map);
+		return result;
+	}
+//	public ArrayList<BoardOrder> selectListBoardOrder(int joinNo) {
+//		List list = sqlSession.selectList("board.selectListBoardOrder",joinNo);
+//		return (ArrayList<BoardOrder>)list;
+//	}
 	
 
 }
