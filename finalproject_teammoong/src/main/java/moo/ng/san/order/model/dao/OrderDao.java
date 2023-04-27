@@ -91,15 +91,49 @@ public class OrderDao {
 		String productName = sqlSession.selectOne("product.selectProductName",productNo);
 		return productName;
 	}
-
-	public Order selectOrder(int orderNo) {
-		Order order = sqlSession.selectOne("order.selectOrder",orderNo);
-		return order;
+	
 	public ArrayList<Order> selectMyOrderList(int memberNo) {
 		List list = sqlSession.selectList("order.selectMyOrderList", memberNo);
 		
 		return (ArrayList<Order>)list;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	///////////// 진배님
+	public Order selectOrder(int orderNo) {
+		Order order = sqlSession.selectOne("order.selectOrder",orderNo);
+		return order;
+	}
 
 }

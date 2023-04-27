@@ -118,6 +118,40 @@ public class OrderService {
 		return result;
 	}
 
+	public ArrayList<Order> selectMyOrderList(int memberNo) {
+		
+		return dao.selectMyOrderList(memberNo);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//////////////// 진배님
+	
+	
 	public int insertMinusPointEa(Point point) {
 		int result = dao.insertMinusPointEa(point);
 		return result;
@@ -149,8 +183,5 @@ public class OrderService {
 	}
 
 
-	public ArrayList<Order> selectMyOrderList(int memberNo) {
-		
-		return dao.selectMyOrderList(memberNo);
-	}
+
 }
