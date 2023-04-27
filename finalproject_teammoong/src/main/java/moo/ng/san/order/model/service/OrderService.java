@@ -74,7 +74,7 @@ public class OrderService {
 		return list;
 	}
 
-	public int insertOrder(int memberNo, int totalPrice, String deliReceiver, String deliPhone, String deliAddr1, String deliRequest, int productNo) {
+	public int insertOrder(int memberNo, int totalPrice, String deliReceiver, String deliPhone, String deliAddr1, String deliRequest, int orderPrice) {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("memberNo", memberNo);
@@ -82,7 +82,7 @@ public class OrderService {
 		map.put("deliReceiver", deliReceiver);
 		map.put("deliPhone", deliPhone);
 		map.put("deliAddr1", deliAddr1);
-		map.put("productNo", productNo);
+		map.put("orderPrice", orderPrice);
 		map.put("deliRequest", deliRequest);
 		
 		
@@ -100,13 +100,14 @@ public class OrderService {
 		
 		for(int i=0;i<productNo.length;i++) {
 			HashMap<String, Object> map = new HashMap<String, Object>();
+			
 			map.put("orderNo", orderNo);
 			map.put("productNo", productNo[i]);
 			map.put("optionInfoNo", optionInfoNo[i]);
 			map.put("orderDetailCnt", orderDetailCnt[i]);
 			map.put("orderDetailCost", orderDetailCost[i]);
 			map.put("orderSalePrice", orderSalePrice[i]);
-			System.out.println("optionInfoNo : "+optionInfoNo[i]);
+			
 			result = dao.insertOrderDetail(map);
 		}
 		

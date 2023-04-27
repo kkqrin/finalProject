@@ -94,13 +94,20 @@
                             <div class="order-product-price"><span></span>원</div>
                             <input type="text" id="productPrice" class="product-price" value="${i.productPrice }">
 							<input type="text" id="productDisCount" class="product-discount" value="${i.productDiscount }">
+                            
 							<input type="text" name="productNo" class="product-no" value="${i.productNo }">
 							<input type="text" name="optionInfoNo" value="${i.optionNo }">
-                            <input type="text" name="orderSalePrice" value="">
                             <input type="text" name="orderDetailCost" value="${i.productCost}">
-                            <input type="text" name="productName" value="${i.productName }">
+                            <input type="text" name="orderSalePrice" value="">
+                            <!-- <input type="text" name="orderPrice" value=""> -->
+                            <!-- <input type="text" name="productName" value="${i.productName }"> -->
                             <!-- ${i.productPrice } * ( 100 - ${i.productDiscount }) / 100 -->
                             <!-- .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") -->
+                            <!-- 
+                                ////////////// 가격 정리 //////////////
+                                1. 주문 테이블  (주문서 안의 총 가격) ======> orderPrice 주문서당 총 상품가격(할인들어간 금액), totalPrice 사용자 실제 결제 금액 (쿠폰/적립금 사용후)
+                                2. 주문 상세 테이블 (한 주문당 상품들에 관한 테이블) ====> productPrice 상품당 가격, productCost 상품당 원가(판매자)
+                            -->
                         </div>
                     </c:forEach>
 					
@@ -241,7 +248,7 @@
                     <div class="total-pay-box">
                         <h5>결제 금액</h5>
 
-                        <input type="hidden" id="number-pay-price">
+                        <input type="hidden" id="number-pay-price" name="orderPrice">
                         <div class="total-order-amount-1">
                             <div>주문금액</div>
                             <div><span></span>원</div>
@@ -287,12 +294,12 @@
                 <div class="order-complete-box area-btn full">
                     <button type="button" id="payDirectBtn" class="btn btn-pri size03 order-complete-btn"><span></span>원 결제하기</button>
                 </div>
-           		<div class="area-btn left" style="display:none;">
-            	    <button class="btn btn-border-pri size01" type="button" id="alert01">성공</button>
-					<button class="btn btn-border-sec size01" type="button" id="alert02">에러</button>
-					
-           		</div>
-           		<button type="submit">제출</button>
+                <div class="area-btn left" style="display:none;">
+                    <button class="btn btn-border-pri size01" type="button" id="alert01">성공</button>
+                    <button class="btn btn-border-sec size01" type="button" id="alert02">에러</button>
+                    
+                </div>
+                <button type="submit">제출</button>
             </form>
             
 
@@ -322,10 +329,11 @@
         $( function() {
 			$( ".deli-request" ).selectmenu();
             $( ".order-coupon" ).selectmenu();
-            const productPrice = $("#productPrice").val();
-            const productDisCount = $("#productDisCount").val();
-            const salePrice = productPrice *((100-productDisCount) /100);
-            $("[name=orderSalePrice]").val(salePrice);
+            // const productPrice = $("#productPrice").val();
+            // const productDisCount = $("#productDisCount").val();
+            // const salePrice = productPrice *((100-productDisCount) /100);
+            // (Math.floor(productPrice*(100 - productDiscount)/1000)*10)
+            // $("[name=orderSalePrice]").val((Math.floor(productPrice*(100 - productDiscount)/1000)*10));
 		});
 
         // 상품 개수
@@ -391,6 +399,7 @@
 			
 			// Math.floor(productPrice*(100 - productDiscount)/1000)*10);
 			$(".order-product-price").eq(i).children().text(((Math.floor(productPrice*(100 - productDiscount)/1000)*10)*orderDetailCnt).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            $("[name=orderSalePrice]").eq(i).val((Math.floor(productPrice*(100 - productDiscount)/1000)*10));
 		};
 
 
@@ -420,9 +429,9 @@
             discountPrice = ( Number(discountPrice) + Number(productPrice-(Math.floor(productPrice*(100 - productDiscount)/1000)*10)) ) * orderDetailCnt;
             $(".total-order-amount-3>div").last().children().text(discountPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 			
-            
             // 주문금액 (결제할 금액)
             payPrice = ( Number(payPrice) + Number((Math.floor(productPrice*(100 - productDiscount)/1000)*10)) ) * orderDetailCnt;
+            $("[name=orderPrice]").val(payPrice);
             $(".total-order-amount-1>div").last().children().text(payPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
         
         }
@@ -443,7 +452,7 @@
         $("#hidden-total-pay").val(payPrice);
         
         // 구매시 적립금 number값 hidden에 숨김
- 	    $("[name=plusPointEa]").val(Math.ceil(payPrice*10/100));
+        $("[name=plusPointEa]").val(Math.ceil(payPrice*10/100));    
 
         
 
