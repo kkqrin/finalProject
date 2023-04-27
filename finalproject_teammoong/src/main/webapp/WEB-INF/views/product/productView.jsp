@@ -18,8 +18,59 @@
     <!--productView.css-->
     <link rel="stylesheet" href="/resources/css/product/productView.css">
     <script src="/resources/js/jquery-3.6.0.js"></script>
+     <!-- 리뷰css  -->
+    <link rel="stylesheet" href="/resources/css/product/review.css"/>
 </head>
 <style>
+    /* 리뷰css */
+		.modal-body>form>.selectBox-widht-explain{
+			width: 80%;
+			margin: 0 auto;
+		}
+		.slick-prev:before, .slick-next:before {
+        	/* 슬릭 슬라이더 아이콘 */
+            color: #565656;
+			font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+        }
+		.all-review-wrap .slick-prev,
+		#modal-photo-review-detail .slick-prev{
+			left: 10px;
+			z-index: 100;
+		}
+		.all-review-wrap .slick-next,
+		#modal-photo-review-detail .slick-next{
+			right: 10px;
+		}
+		.slick-next:before{
+			content: '\f054' !important;
+		}
+		.slick-prev:before{
+			content: '\f053' !important;
+		}
+		.slick-prev.slick-disabled:before,
+		.slick-next.slick-disabled:before
+		{
+			/* 슬릭 슬라이더 첫,마지막페이지 이전,다음 아이콘 숨김 */
+    		/* opacity: .25; */
+			opacity: 0;
+			cursor: default;
+		}
+        #modal-photo-review-more,
+		#modal-photo-review-detail{
+			/* 포토후기 더보기, 상세보기 */
+            max-width: none;
+            width: 800px;
+        }
+		#modal-photo-review-detail .review-info,
+		#modal-photo-review-detail .review-content{
+			width: 400px;
+		}
+		#modal-photo-review-more .photo-review-img{
+			width: 150px;
+			height: 150px;
+		}
+		/* 리뷰css 끝 */
     .slick-prev:before, .slick-next:before {
     /* 슬릭 슬라이더 아이콘 */
     color: #565656;
@@ -291,76 +342,296 @@
         </div>
         <div class="product-review-logo product-review"><h3>리뷰</h3></div>
         <button type="button" id="insertReview" class="btn btn-pri size01" data-modal="#modalReview">리뷰하기</button>
-        <!-- <div class="review-wrap">
-            <form action="/reviewWrite.do" method="post" enctype="multipart/form-data"></form> -->
-            <!-- <div class="top-info">
-                <div class="img-title">사진</div>
-                <div class="content-title">내용</div>
-            </div>
-            <div class="middle-content">
-                <div class="middle-left-content">
-                    <input type="file" name="reviewFile" multiple onchange="readURL(this)">
-                    <img id="preview">
-                    <fieldset class="rate">
-                        <input type="radio" id="rating10" name="rating" value="10"><label for="rating10" title="5점"></label>
-                        <input type="radio" id="rating9" name="rating" value="9"><label class="half" for="rating9" title="4.5점"></label>
-                        <input type="radio" id="rating8" name="rating" value="8"><label for="rating8" title="4점"></label>
-                        <input type="radio" id="rating7" name="rating" value="7"><label class="half" for="rating7" title="3.5점"></label>
-                        <input type="radio" id="rating6" name="rating" value="6"><label for="rating6" title="3점"></label>
-                        <input type="radio" id="rating5" name="rating" value="5"><label class="half" for="rating5" title="2.5점"></label>
-                        <input type="radio" id="rating4" name="rating" value="4"><label for="rating4" title="2점"></label>
-                        <input type="radio" id="rating3" name="rating" value="3"><label class="half" for="rating3" title="1.5점"></label>
-                        <input type="radio" id="rating2" name="rating" value="2"><label for="rating2" title="1점"></label>
-                        <input type="radio" id="rating1" name="rating" value="1"><label class="half" for="rating1" title="0.5점"></label>
-                    </fieldset>
-                </div>
-            </div> -->
-            <!-- <table>
-                <tr>
-                    <th style="background-color: #f88000;">사진</th>
-                    <th style="background-color: #f88000;" colspan="5">내용</th>
-                </tr>
-                <tr>
-                    <td >
-                        <input type="file" name="reviewFile" multiple onchange="readURL(this)">
-                        <img id="preview">
-                    </td>
-                    <td colspan="5" rowspan="3"><textarea style="height: 200px; border: none;"></textarea></td>
-                </tr>
-                <tr >
-                    <td>별점</td> -->
-                    <!-- <td style="color:gold">
-                        <div>
-                          <label for="star1">★</label>
+        <div class="content-wrap">
+            <pre>
+                남은 거 : 포토후기 더보기 > 상세보기 이미지 왜 바로 안뜨는지? 나중에 뜨는지?
+            </pre>
+                <h1>포토후기</h1>
+                <!-- 최근 5개의 리뷰만 노출 -->
+                <div class="photo-review-wrap">
+                    <div class="photo-review-list">
+                        <div class="photo-review-item">
+                            <div class="photo-review-img">
+                                <img src="/resources/img/review/banana_review1.jpg" />
+                            </div>
                         </div>
-                        <input type="radio" name="star" id="star1" value="1">
-                      </td>
-                    <td style="color:gold">★★<div><input type="radio" name="star" value="2"></div></td>
-                    <td style="color:gold">★★★<div><input type="radio" name="star" value="3"></div></td>
-                    <td style="color:gold">★★★★<div><input type="radio" name="star" value="1"></div></td>
-                    <td style="color:gold">★★★★★<div><input type="radio" name="star" value="1"></div></td> -->
-                <!-- </tr> -->
-                <!-- <fieldset class="rate">
-                    <input type="radio" id="rating10" name="rating" value="10"><label for="rating10" title="5점"></label>
-                    <input type="radio" id="rating9" name="rating" value="9"><label class="half" for="rating9" title="4.5점"></label>
-                    <input type="radio" id="rating8" name="rating" value="8"><label for="rating8" title="4점"></label>
-                    <input type="radio" id="rating7" name="rating" value="7"><label class="half" for="rating7" title="3.5점"></label>
-                    <input type="radio" id="rating6" name="rating" value="6"><label for="rating6" title="3점"></label>
-                    <input type="radio" id="rating5" name="rating" value="5"><label class="half" for="rating5" title="2.5점"></label>
-                    <input type="radio" id="rating4" name="rating" value="4"><label for="rating4" title="2점"></label>
-                    <input type="radio" id="rating3" name="rating" value="3"><label class="half" for="rating3" title="1.5점"></label>
-                    <input type="radio" id="rating2" name="rating" value="2"><label for="rating2" title="1점"></label>
-                    <input type="radio" id="rating1" name="rating" value="1"><label class="half" for="rating1" title="0.5점"></label>
-                </fieldset> -->
-                <!-- <tr>
-                    <td>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="6"><div class="area-btn full"><button class="btn btn-pri size02">리뷰작성</button></div></td>
-                </tr>
-            </table>
-        </div>   -->
+                        <div class="photo-review-item">
+                            <div class="photo-review-img">
+                                <img src="/resources/img/review/banana_review2.jpg" />
+                            </div>
+                        </div>
+                        <div class="photo-review-item">
+                            <div class="photo-review-img">
+                                <img src="/resources/img/review/banana_review3.jpg" />
+                            </div>
+                        </div>
+                        <div class="photo-review-item">
+                            <div class="photo-review-img">
+                                <img src="/resources/img/review/banana_review3.jpg" />
+                            </div>
+                        </div>
+                        <div class="photo-review-item">
+                            <div class="photo-review-img">
+                                <img src="/resources/img/review/banana_review3.jpg" />
+                                <div class="photo-review-more" data-modal="#modal-photo-review-more">더보기</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <h1>전체리뷰</h1>
+                <div class="all-review-wrap">
+                    <div class="review-header">
+                        <div class="review-count">총 121건</div>
+                        <div class="review-navi">
+                            <div class="review-filter" data-modal="#modal-review-filter">
+                                <span class="material-symbols-outlined">tune</span>
+                                필터
+                            </div>
+                            <div class="review-range">
+                                <span class="material-symbols-outlined">swap_vert</span>
+                                정렬
+                                <div class="review-range-view">
+                                    <div class="review-range-thing">최신순</div>
+                                    <div class="review-range-thing">인기순</div>
+                                    <div class="review-range-thing">별점낮은순</div>
+                                    <div class="review-range-thing">별점높은순</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-mid">
+                        <c:forEach items="${reviewList }" var="i">
+                        <div class="review-box">
+                            <div class="review-img">
+                                <c:forEach items="${i.fileList }" var="f">
+                                <img src="/resources/upload/review/${f.filepath}" />
+                                </c:forEach>
+                            </div>
+                            <div class="review-right">
+                                <div class="review-info">
+                                    <div class="review-rating">
+                                        <div class="material-symbols-outlined star-rate">star</div>
+                                        <div class="rating-number">${i.rating}</div>
+                                    </div>
+                                    <div class="review-option">
+                                        <div class="review-report" data-modal="#modal-report-btn">
+                                            <span class="material-symbols-outlined">warning</span>
+                                        </div>
+                                        <div class="review-enroll-date">${i.reviewDate}</div>
+                                    </div>
+                                </div>
+                                <div class="review-content">${i.reviewContent}</div>
+                                <div class="review-like">
+                                    <div>
+                                        <span class="material-symbols-outlined review-like-on">add_reaction</span>
+                                        <span class="material-symbols-outlined">sentiment_very_satisfied</span>
+                                        <a>도움이 돼요 ${i.reviewLike}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                        <div class="review-box">
+                            <div class="review-img">
+                                <!-- <img src="/resources/img/product/lactofit.jpg" /> -->
+                            </div>
+                            <div class="review-right">
+                                <div class="review-info">
+                                    <div class="review-rating">
+                                        <div class="material-symbols-outlined star-rate">star</div>
+                                        <div class="material-symbols-outlined star-rate">star</div>
+                                        <div class="material-symbols-outlined star-rate">star</div>
+                                        <div class="material-symbols-outlined star-rate">star</div>
+                                        <div class="material-symbols-outlined star-rate">star</div>
+                                    </div>
+                                    <div class="review-option">
+                                        <div class="review-report" data-modal="#modal-report-btn">
+                                            <span class="material-symbols-outlined">warning</span>
+                                        </div>
+                                        <div class="review-enroll-date">2023-04-03</div>
+                                    </div>
+                                </div>
+                                <div class="review-content">이미지없는 리뷰입니다. 이미지없는 리뷰입니다. 이미지없는 리뷰입니다. 이미지없는 리뷰입니다. </div>
+                                <div class="review-like">
+                                    <div>
+                                        <span class="material-symbols-outlined review-like-on">add_reaction</span>
+                                        <span class="material-symbols-outlined">sentiment_very_satisfied</span>
+                                        <a>도움이 돼요</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-box">
+                            <div class="review-img">
+                                <img src="/resources/img/product/lactofit.jpg" />
+                            </div>
+                            <div class="review-right">
+                                <div class="review-info">
+                                    <div class="review-rating">
+                                        <div class="material-symbols-outlined star-rate">star</div>
+                                        <div class="material-symbols-outlined star-rate">star</div>
+                                        <div class="material-symbols-outlined star-rate">star</div>
+                                        <div class="material-symbols-outlined star-rate">star</div>
+                                        <div class="material-symbols-outlined star-rate">star</div>
+                                    </div>
+                                    <div class="review-option">
+                                        <div class="review-report" data-modal="#modal-report-btn">
+                                            <span class="material-symbols-outlined">warning</span>
+                                        </div>
+                                        <div class="review-enroll-date">2023-04-03</div>
+                                    </div>
+                                </div>
+                                <div class="review-content">어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!!</div>
+                                <div class="review-like">
+                                    <div>
+                                        <span class="material-symbols-outlined review-like-on">add_reaction</span>
+                                        <span class="material-symbols-outlined">sentiment_very_satisfied</span>
+                                        <a>도움이 돼요</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+        
+        
+        
+                <!-- 필터 모달 -->
+                <div id="modal-review-filter" class="modal modal-sec">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h6>상품 옵션</h6>
+                        </div>
+                        <div class="modal-body">
+                            <!--내용영역-->
+                            <!-- <h5>내용타이틀</h5> -->
+                            <form action="/test.do">
+                                    <div class="selectBox-widht-explain">
+                                        <select class="select-custom review-color" id="review-color" style="margin-bottom: 30px;">
+                                            <option value="0" selected>색상</option>
+                                            <option value="white">White</option>
+                                            <option value="black">Black</option>
+                                        </select>
+                                        <select class="select-custom review-size" id="review-size">
+                                            <option value="0" selected>사이즈</option>
+                                            <option value="240">240</option>
+                                            <option value="245">245</option>
+                                        </select>
+                                    </div>
+                            </form>
+                            <!--//내용영역-->
+                        </div>
+                        <div class="area-btn center">
+                            <a class="btn btn-pri size01" type="button" id="review-filter-btn" rel="modal:close">확인</a>
+                            <a href="" rel="modal:close" class="btn btn-sec size01">닫기</a>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- 포토후기 더보기 -->
+                <div id="modal-photo-review-more" class="modal modal-pri">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h6>포토후기</h6>
+                        </div>
+                        <div class="modal-body">
+                            <!--내용영역-->
+                            <div class="photo-review-wrap">
+                                <div class="photo-review-list">
+                                    <div class="photo-review-item">
+                                        <div class="photo-review-img" data-modal="#modal-photo-review-detail">
+                                            <img src="/resources/img/review/banana_review1.jpg" />
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <!--//내용영역-->
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- 포토후기 더보기 > 상세보기 -->
+                <div id="modal-photo-review-detail" class="modal modal-pri">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h6>포토리뷰 상세보기</h6>
+                        </div>
+                        <div class="modal-body">
+                            <!--내용영역-->
+                            <div class="review-box">
+                                <div class="review-img">
+                                    <img src="/resources/img/review/banana_review1.jpg" />
+                                    <img src="/resources/img/review/banana_review2.jpg" />
+                                    <img src="/resources/img/review/banana_review3.jpg" />
+                                </div>
+                                <div class="review-right">
+                                    <div class="review-info">
+                                        <div class="review-rating">
+                                            <div class="material-symbols-outlined star-rate">star</div>
+                                            <div class="material-symbols-outlined star-rate">star</div>
+                                            <div class="material-symbols-outlined star-rate">star</div>
+                                            <div class="material-symbols-outlined star-rate">star</div>
+                                            <div class="material-symbols-outlined star-rate">star_half</div>
+                                        </div>
+                                        <div class="review-option">
+                                            <div class="review-report">
+                                                <span class="material-symbols-outlined">warning</span>
+                                            </div>
+                                            <div class="review-enroll-date">2023-04-03</div>
+                                        </div>
+                                    </div>
+                                    <div class="review-content">어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!!어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!!어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!! 어쩌고 저쩌고 좋아요!!</div>
+                                    <div class="review-like">
+                                        <div>
+                                            <span class="material-symbols-outlined review-like-on">add_reaction</span>
+                                            <span class="material-symbols-outlined">sentiment_very_satisfied</span>
+                                            <a>도움이 돼요</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--//내용영역-->
+                        </div>
+                        <div class="back-photo-review-more" data-modal="#modal-photo-review-more">
+                            <span class="material-symbols-outlined">grid_view</span>
+                            <div>사진 목록보기</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 신고하기 모달 -->
+                <div id="modal-report-btn" class="modal modal-pri report-modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h6>리뷰 신고하기</h6>
+                        </div>
+                        <div class="modal-body">
+                            <!--내용영역-->
+                            <!-- <h5>내용타이틀</h5> -->
+                            <form action="/test.do">
+                                <div class="report-form">
+                                    <div><label><input type="radio" name="report-reason" value="1">상품관련 비방 내용</label></div>
+                                    <div><label><input type="radio" name="report-reason" value="2">음란, 욕설 등 부절적한 내용</label></div>
+                                    <div><label><input type="radio" name="report-reason" value="3">개인, 판매자 상업적 홍보</label></div>
+                                    <div><label><input type="radio" name="report-reason" value="4">상품과 관계없는 내용</label></div>
+                                    <div><label><input type="radio" name="report-reason" value="5">개인정보 노출</label></div>
+                                    <div><label><input type="radio" name="report-reason" value="6">저작권 불법도용(이미지,동영상)</label></div>
+                                    <div><label><input type="radio" name="report-reason" value="7">상품 후기 취지에 어긋난 이용(복사글 등)</label></div>
+                                    <div><label><input type="radio" name="report-reason" value="8">직접 입력</label></div>
+                                    <div><textarea class="report-direct-input" disabled></textarea></div>
+                                </div>
+                            </form>
+                            <!--//내용영역-->
+                        </div>
+                        <div class="area-btn center">
+                            <a class="btn btn-pri size01" type="button" id="review-filter-btn" rel="modal:close">확인</a>
+                            <a rel="modal:close" class="btn btn-sec size01 report-modal-close">닫기</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <div class="gonggu-content-wrap">
             <div class="gonggu-content-title">
             </div>
@@ -421,25 +692,9 @@
         </div>
     </div>
 </div>
-    
-<!-- <div class="quick-scroll-bar">
-        <ul>
-        <li><a href="#" class="product-info-btn">상품설명</a></li>
-        <li><a href="#" class="product-view-btn">상세정보</a></li>
-        <li><a href="#" class="product-review-btn">리뷰보기</a></li>
-        <li><a href="#" class="product-inquiry-btn">문의하기</a></li>
-        </ul>
-        </div>
-        <div class="quick-scroll-content">
-        <div class="product-info-box" style="height: 500px;">상품정보</div>
-        <div class="product-info-view" style="height: 500px;">상세정보</div>
-        <div class="product-review" style="height: 500px;">리뷰보기</div>
-        <div class="product-inquiry" style="height: 500px;">문의하기</div>
-    </div> -->
-     <!--구매버튼-->
      <!--리뷰작성 모달 시작-->
-     <form action="/insertReview.do" method="post" enctype="multipart/form-data">
      <div id="modalReview" class="modal modal-pri" style="max-width: none;">
+        <form action="/insertReview.do" method="post" enctype="multipart/form-data">
         <div class="modal-content">
             <div class="modal-header">
                 <h6>리뷰작성</h6>
@@ -450,7 +705,6 @@
                 <!--내용영역-->
                 <div style="display: flex;">
                     <div>
-                        <!-- <h5>사진첨부</h5> -->
                         <div id="root">
                             <h5>사진등록</h5>
                             <div class="contents">
@@ -461,7 +715,7 @@
                                   <img src="" alt="미리보기 이미지" class="preview">
                                 </div>
                                 <label class="file-label" for="chooseFile">사진선택</label>
-                                <input class="file" id="chooseFile" type="file" onchange="dropFile.handleFiles(this.files)" accept="image/png, image/jpeg, image/gif" multiple>
+                                <input class="file" name="reviewFile" id="chooseFile" type="file" onchange="dropFile.handleFiles(this.files)" accept="image/png, image/jpeg, image/gif, image/jpg" multiple>
                               </div>
                             </div>
                           </div>
@@ -471,16 +725,16 @@
                     <div style="width: 100%; margin-left: 10px;">
                         <div>
                         <fieldset class="rate" style="padding: 0;"><h5 style="padding-bottom: 10px;">별점</h5>
-                            <input type="radio" id="rating10" name="rating" value="10"><label for="rating10" title="5점"></label>
-                            <input type="radio" id="rating9" name="rating" value="9"><label class="half" for="rating9" title="4.5점"></label>
-                            <input type="radio" id="rating8" name="rating" value="8"><label for="rating8" title="4점"></label>
-                            <input type="radio" id="rating7" name="rating" value="7"><label class="half" for="rating7" title="3.5점"></label>
-                            <input type="radio" id="rating6" name="rating" value="6"><label for="rating6" title="3점"></label>
-                            <input type="radio" id="rating5" name="rating" value="5"><label class="half" for="rating5" title="2.5점"></label>
-                            <input type="radio" id="rating4" name="rating" value="4"><label for="rating4" title="2점"></label>
-                            <input type="radio" id="rating3" name="rating" value="3"><label class="half" for="rating3" title="1.5점"></label>
-                            <input type="radio" id="rating2" name="rating" value="2"><label for="rating2" title="1점"></label>
-                            <input type="radio" id="rating1" name="rating" value="1"><label class="half" for="rating1" title="0.5점"></label>
+                            <input type="radio" id="rating10" name="rating" value="5"><label for="rating10" title="5점"></label>
+                            <input type="radio" id="rating9" name="rating" value="4.5"><label class="half" for="rating9" title="4.5점"></label>
+                            <input type="radio" id="rating8" name="rating" value="4"><label for="rating8" title="4점"></label>
+                            <input type="radio" id="rating7" name="rating" value="3.5"><label class="half" for="rating7" title="3.5점"></label>
+                            <input type="radio" id="rating6" name="rating" value="3"><label for="rating6" title="3점"></label>
+                            <input type="radio" id="rating5" name="rating" value="2.5"><label class="half" for="rating5" title="2.5점"></label>
+                            <input type="radio" id="rating4" name="rating" value="2"><label for="rating4" title="2점"></label>
+                            <input type="radio" id="rating3" name="rating" value="1.5"><label class="half" for="rating3" title="1.5점"></label>
+                            <input type="radio" id="rating2" name="rating" value="1"><label for="rating2" title="1점"></label>
+                            <input type="radio" id="rating1" name="rating" value="0.5"><label class="half" for="rating1" title="0.5점"></label>
                         </fieldset>
                         </div>
                         <br>
@@ -491,12 +745,12 @@
             </div>
             <div class="area-btn right">
                 <!-- class="btn btn-pri size01 reviewInsertBtn" id="reviewInsertBtn" -->
-                <button>작성</button>
+                <button type="submit" class="btn btn-sec size01">작성</button>
                 <a href="" rel="modal:close" class="btn btn-sec size01">닫기</a>
             </div>
         </div>
+    </form>
     </div>
-</form>
      <!-- 문의사항 삭제 모달 시작 -->
      <div id="modalDelete" class="modal modal-pri">
         <div class="modal-content">
@@ -588,9 +842,11 @@
 <!-- <input type="hidden" id="productContent" value="${p.productContent}"> -->
 
 
+<c:forEach items="${reviewList }" var="i">
+	${i.reviewContent }
+</c:forEach>
 
-
-<jsp:include page="/temporReview.jsp" />
+<!-- <jsp:include page="/temporReview.jsp" /> -->
 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
@@ -603,7 +859,8 @@
 	<script type="text/javascript" src="/resources/slick/slick.min.js"></script>
     <!-- 상품 상세 js -->
 	<script src="/resources/js/productView.js"></script>	
-
+    <!--리뷰js-->
+    <script src="/resources/js/review.js"></script>
 
         <script>
             // 상품 옵션 select

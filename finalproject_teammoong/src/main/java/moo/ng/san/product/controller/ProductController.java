@@ -40,6 +40,8 @@ import moo.ng.san.product.model.vo.Option;
 import moo.ng.san.product.model.vo.Product;
 import moo.ng.san.product.model.vo.ProductPageData;
 import moo.ng.san.product.model.vo.RecentProduct;
+import moo.ng.san.review.model.service.ReviewService;
+import moo.ng.san.review.model.vo.Review;
 
 @Controller
 public class ProductController {
@@ -51,6 +53,8 @@ public class ProductController {
 	private InquiryService iqService;
 	@Autowired
 	private GongguService gongguService;
+	@Autowired
+	private ReviewService reviewService;
 	
 	
 	
@@ -355,8 +359,8 @@ public class ProductController {
 		}
 	}
 	@RequestMapping(value="/productView.do")
-	public String productView(int productNo, Model model, @SessionAttribute(required=false) Member m) {
-		
+	public String productView(Product product, int productNo, Model model, @SessionAttribute(required=false) Member m) {
+		System.out.println("productController에서 product값"+product);
 		Product p = service.selectProductByProductNo(productNo);
 		ArrayList<Inquiry> list = iqService.selectInquiryList(productNo);
 	
@@ -373,7 +377,9 @@ public class ProductController {
 //			System.out.println("productController에서 cnt값 :"+cnt);
 			System.out.println("productController에서 gongguList값 :"+gongguList);
 //		}
-		
+		//리뷰리스트
+		ArrayList<Review> reviewList = reviewService.selectReviewListByProductNo(productNo);
+		model.addAttribute("reviewList",reviewList);
 		model.addAttribute("gongguList",gongguList);
 		// 옵션 조회 (규린)
 		ArrayList<Option> optionList = service.selectOptionList(productNo);

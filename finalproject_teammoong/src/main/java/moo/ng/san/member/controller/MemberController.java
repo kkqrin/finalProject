@@ -342,8 +342,10 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "/myPageJoiner.do")
-	public String myPageJoiner(int boardNo, Model model) {
+	public String myPageJoiner(int boardNo, String boardName, Model model) {
 		ArrayList<BoardJoin> list = service.selectMyJoiner(boardNo);
+		model.addAttribute("boardNo", boardNo);
+		model.addAttribute("boardName", boardName);
 		model.addAttribute("list", list);
 		return "board/myPageJoiner";
 	}

@@ -2,4 +2,52 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN
 " "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="review">
+	<insert id="insertReview" parameterType="r">
+		INSERT INTO REVIEW_TBL VALUES(REVIEW_SEQ.NEXTVAL,
+		#{reviewWriter},
+		#{productNo},
+		<if test="optionInfoNo == 0">
+        	null
+    	</if>
+    	<if test="optionInfoNo != 0">
+        	#{optionInfoNo}
+    	</if>,
+		#{rating},
+		0,
+		TO_CHAR(SYSDATE, 'YYYY-MM-DD'),
+		#{reviewContent})
+	</insert>
+	
+	<select id="selectReviewListByProductNo" parameterType="_int" resultType="r">
+		SELECT
+			REVIEW_NO AS reviewNo,
+			REVIEW_WRITER AS reviewWriter,
+			PRODUCT_NO AS productNo,
+        	OPTION_INFO_NO AS optionInfoNo,
+	    	STAR_RATING AS rating,
+	    	REVIEW_LIKE AS reviewLike,
+	    	REVIEW_DATE AS reviewDate,
+	    	REVIEW_CONTENT AS reviewContent
+		FROM REVIEW_TBL
+		WHERE PRODUCT_NO = #{_parameter}
+	</select>
+	
+	<select id="selectReviewNo" resultType="_int">
+		select max(review_no) from review_tbl
+	</select>
+	
+	<insert id="insertFile" parameterType="rf">
+		insert into review_img values(review_img_seq.nextval,
+		#{reviewNo},
+		#{filepath})
+	</insert>
+	
+	<select id="selectReviewFile" parameterType="_int" resultType="rf">
+		SELECT
+			REVIEW_IMG_NO AS reviewImgNo,
+			REVIEW_NO AS reviewNo,
+			FILEPATH AS filepath
+		FROM REVIEW_IMG
+		WHERE REVIEW_NO = #{_parameter}
+	</select>
 </mapper>

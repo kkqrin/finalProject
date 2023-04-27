@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import moo.ng.san.coupon.model.vo.IssueCoupon;
+import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.order.model.vo.Order;
+import moo.ng.san.pay.model.vo.OrderDetail;
+import moo.ng.san.product.model.vo.Product;
 
 @Repository
 public class OrderDao {
@@ -62,6 +65,36 @@ public class OrderDao {
 		int basketNo = sqlSession.selectOne("order.selectBasketNo", map);
 		
 		return basketNo;
+	}
+
+	public int insertMinusPointEa(Point point) {
+		int result = sqlSession.insert("point.insertMinusPoint",point);
+		return result;
+	}
+
+	public int insertPlusPointEa(Point point) {
+		int result = sqlSession.insert("point.insertPlusPoint",point);
+		return result;
+	}
+
+	public int updateCoupon(int issueNo) {
+		int result = sqlSession.update("issueCoupon.updateUseCoupon",issueNo);
+		return result;
+	}
+
+	public ArrayList<OrderDetail> selectOrderDetail(int orderNo) {
+		List list = sqlSession.selectList("orderDetail.selectOrderDetail",orderNo);
+		return (ArrayList<OrderDetail>) list;
+	}
+
+	public String selectProduct(int productNo) {
+		String productName = sqlSession.selectOne("product.selectProductName",productNo);
+		return productName;
+	}
+
+	public Order selectOrder(int orderNo) {
+		Order order = sqlSession.selectOne("order.selectOrder",orderNo);
+		return order;
 	}
 
 

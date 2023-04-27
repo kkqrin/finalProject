@@ -19,6 +19,7 @@ public class GongguService {
 
 	public ArrayList<GongguAllInfo> selectGongguList(int productNo) {
 		ArrayList<GongguAllInfo> list = dao.selectGongguList(productNo);
+		
 		return list;
 	}
 

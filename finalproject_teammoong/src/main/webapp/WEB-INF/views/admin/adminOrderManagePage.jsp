@@ -65,7 +65,7 @@
     <c:if test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
         <!-- 관리자일때만 페이지 보이게 세팅 -->
     </c:if>
-    <div class="adminPage-wrapper">
+    <div class="adminPage-wrapper" id="adminOrderTable">
         <div class="adminPage-header">
             <div class="adminPage-title"><a>Moong's Admin</a></div>
         </div>
@@ -113,38 +113,41 @@
                                     <td>${o.orderNo }</td>
                                     <td>${o.productNo }</td>
                                     <td>${o.memberNo }</td>
-                                    <td>${o.payNo }</td>
                                     <td>${o.orderDate }</td>
                                     <td>${o.productCost }</td>
                                     <td>${o.orderDetailCnt }</td>
                                     <td>${o.orderDetailPrice }</td>
-                                    <td>${o.deliveryAddress }</td>
-                                    <c:choose>
-                                    	<c:when test="${o.payStatus == 1 }">
-                                    		<td>결제완료</td>
-                                    	</c:when>
-                                    	<c:when test="${o.payStatus == 2 }">
-                                    		<td>결제취소</td>
-                                    	</c:when>
-                                    </c:choose>
+                                    <td>${o.deliAddr }</td>
                                     <c:choose>
                                     	<c:when test="${o.orderStatus == 1 }">
-                                    		<td>결제완료</td>
+                                    		<td>
+                                    			결제완료<input type="hidden" value="1">
+                                    		</td>
                                     	</c:when>
                                     	<c:when test="${o.orderStatus == 2 }">
-                                    		<td>배송준비중</td>
+                                    		<td>
+                                    			배송준비중<input type="hidden" value="2">
+                                    		</td>
                                     	</c:when>
                                     	<c:when test="${o.orderStatus == 3 }">
-                                    		<td>배송중</td>
+                                    		<td>
+                                    			배송중<input type="hidden" value="3">
+                                    		</td>
                                     	</c:when>
                                     	<c:when test="${o.orderStatus == 4 }">
-                                    		<td>배송완료</td>
+                                    		<td>
+                                    			배송완료<input type="hidden" value="4">
+                                    		</td>
                                     	</c:when>
                                     		<c:when test="${o.orderStatus == 5 }">
-                                    		<td>결제취소</td>
+                                    		<td>
+                                    			결제취소<input type="hidden" value="5">
+                                    		</td>
                                     	</c:when>
                                     		<c:when test="${o.orderStatus == 6 }">
-                                    		<td>환불완료</td>
+                                    		<td>
+                                    			환불완료<input type="hidden" value="6">
+                                    		</td>
                                     	</c:when>
                                     </c:choose>
                                     <td>
@@ -185,9 +188,12 @@
     /* 등급 변경 */
     /* 왜 첫번째만 변경되는가?! */
     	function changeOrderStatus(){
-    		var orderStatus = $(".orderStatusList option:selected").val();
-    		var orderOldStatus = $(".orderStatus").val();
-    		var orderNo = $(".orderNo").val();
+    		var orderStatus = $(this).prev().('[name=orderStatusList] :selected').val();
+    		var orderOldStatus = $(this).parent().parent().children().eq(11).$("[input=hidden]").val();
+    		var orderNo = $(this).parent().parent().children().eq(1).text();
+    		console.log(orderStatus);
+    		console.log(orderOldStatus);
+    		console.log(orderNo);
     		
             $.ajax({
                 url: "/ajaxChangeDeliveryStatus.do",
@@ -195,7 +201,7 @@
                 data: {orderStatus : orderStatus, orderNo : orderNo},
                 success: function(data) {
                 	if(data == "ok"){
-                		$("#adminMemberTable").load(location.href+ '#adminMemberTable');
+                		$("#adminOrderTable").load(location.href+ '#adminOrderTable');
                 	}else{
 	    				console.log("다시 시도");
                 		
@@ -249,12 +255,8 @@
   								tr.append("<td>"+data[i].productCost+"</td>");
   								tr.append("<td>"+data[i].orderdetailCnt+"</td>");
   								tr.append("<td>"+data[i].orderDetailPrice+"</td>");
-  								tr.append("<td>"+data[i].deliveryAddress+"</td>");
-  								if(data[i].payStatus == 1){
-  									tr.append("<td>결제완료</td>");
-  								}else{
-  									tr.append("<td>결제취소</td>");
-  								}
+  								tr.append("<td>"+data[i].deliAddr+"</td>");
+  								
   								if(data[i].orderStatus == 1){
   									tr.append("<td>결제완료</td>");
   								}else if(data[i].orderStatus == 2){

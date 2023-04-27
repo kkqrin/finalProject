@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import moo.ng.san.coupon.model.vo.IssueCoupon;
+import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.order.model.dao.OrderDao;
 import moo.ng.san.order.model.vo.Order;
+import moo.ng.san.pay.model.vo.OrderDetail;
+import moo.ng.san.product.model.vo.Product;
 
 @Service
 public class OrderService {
@@ -74,7 +77,7 @@ public class OrderService {
 		return list;
 	}
 
-	public int insertOrder(int memberNo, int totalPrice, String deliReceiver, String deliPhone, String deliAddr1, String deliRequest, int productNo) {
+	public int insertOrder(int memberNo, int totalPrice, String deliReceiver, String deliPhone, String deliAddr1, String deliRequest, int orderPrice, int issueNo) {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("memberNo", memberNo);
@@ -82,9 +85,9 @@ public class OrderService {
 		map.put("deliReceiver", deliReceiver);
 		map.put("deliPhone", deliPhone);
 		map.put("deliAddr1", deliAddr1);
-		map.put("productNo", productNo);
+		map.put("orderPrice", orderPrice);
 		map.put("deliRequest", deliRequest);
-		
+		map.put("issueNo", issueNo);
 		
 		return dao.insertOrder(map);
 	}
@@ -100,17 +103,50 @@ public class OrderService {
 		
 		for(int i=0;i<productNo.length;i++) {
 			HashMap<String, Object> map = new HashMap<String, Object>();
+			
 			map.put("orderNo", orderNo);
 			map.put("productNo", productNo[i]);
 			map.put("optionInfoNo", optionInfoNo[i]);
 			map.put("orderDetailCnt", orderDetailCnt[i]);
 			map.put("orderDetailCost", orderDetailCost[i]);
 			map.put("orderSalePrice", orderSalePrice[i]);
-			System.out.println("optionInfoNo : "+optionInfoNo[i]);
+			
 			result = dao.insertOrderDetail(map);
 		}
 		
 		
 		return result;
 	}
+
+	public int insertMinusPointEa(Point point) {
+		int result = dao.insertMinusPointEa(point);
+		return result;
+	}
+
+	public int insertPlusPointEa(Point point) {
+		int result = dao.insertPlusPointEa(point);
+		return result;
+	}
+
+	public int updateCoupon(int issueNo) {
+		int result = dao.updateCoupon(issueNo);
+		return result;
+	}
+
+	public ArrayList<OrderDetail> selectOrderDetail(int orderNo) {
+		ArrayList<OrderDetail> orderDetailList = dao.selectOrderDetail(orderNo);
+		return orderDetailList;
+	}
+
+	public String selectProduct(int productNo) {
+		String productName = dao.selectProduct(productNo);
+		return productName;
+	}
+
+	public Order selectOrder(int orderNo) {
+		Order order = dao.selectOrder(orderNo);
+		return order;
+	}
+
+
 }

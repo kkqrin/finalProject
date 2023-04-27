@@ -5,17 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<!-- 슬릭 슬라이더 제이쿼리 -->
-	<!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script> -->
-	<!-- <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
-    <!-- 리뷰 css -->
     <link rel="stylesheet" href="/resources/css/product/review.css"/>
-	<!-- 슬릭 슬라이더 -->
-	<!-- <link rel="stylesheet" href="/resources/slick/slick-theme.css"/> -->
-	<!-- <link rel="stylesheet" href="/resources/slick/slick.css"/> -->
-	<!-- 슬라이더 화살표 아이콘 arrow -->
-	<!-- <script src="https://kit.fontawesome.com/285f888d1c.js" crossorigin="anonymous"></script> -->
-
 	<style>
 		.modal-body>form>.selectBox-widht-explain{
 			width: 80%;
@@ -363,11 +353,6 @@
 
 
 	</div>
-	<!-- <jsp:include page="/WEB-INF/views/common/footer.jsp" /> -->
-	<!-- 리뷰 js -->
 	<script src="/resources/js/review.js"></script>
-	<!-- 슬릭 슬라이더 js -->
-	<!-- <script type="text/javascript" src="/resources/slick/slick.min.js"></script> -->
-
 </body>
 </html>

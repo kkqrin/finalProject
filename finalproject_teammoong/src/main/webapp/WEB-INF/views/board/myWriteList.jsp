@@ -29,10 +29,10 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${list }" var="b">
+						<c:forEach items="${list }" var="b" varStatus="i">
 							<tr>
 								<td>${b.rnum }</td>
-								<td><a href="/myPageJoiner.do?boardNo=${b.boardNo }" style="cursor: pointer;">${b.boardName }</a></td>
+								<td><a href="/myPageJoiner.do?boardNo=${b.boardNo }&boardName=${b.boardName}" style="cursor: pointer;">${b.boardName }</a></td>
 								<td>${b.joinCnt }</td>
 								<td>${b.boardStart }</td>
 								<td>${b.boardEnd }</td>

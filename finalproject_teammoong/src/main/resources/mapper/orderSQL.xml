@@ -72,10 +72,14 @@
 	
 	<insert id="insertOrder" parameterType="o">
 		insert into order_tbl values
-		(order_tbl_seq.nextval, #{memberNo}, #{productNo}, sysdate, 1, #{totalPrice}, #{deliReceiver}, #{deliPhone}, #{deliAddr1}, #{deliRequest})
-		<selectKey resultType="_int" order="AFTER" keyProperty="orderNo">
-			select max(order_no) from order_tbl
-		</selectKey>
+		(order_tbl_seq.nextval, #{memberNo}, sysdate, 1, #{totalPrice}, #{deliReceiver}, #{deliPhone}, #{deliAddr1}, #{deliRequest}, #{orderPrice},
+		 <if test="issueNo == 0">
+        	null
+    	</if>
+    	<if test="issueNo != 0">
+        	#{issueNo}
+    	</if>
+		 )
 	</insert>
 	
 	<select id="selectMaxOrderNo" resultType="_int">
@@ -89,5 +93,20 @@
         where b.member_no = #{memberNo} and b.product_no=#{productNo} and bo.option_info_no=#{optionNo}
 	</select>
 	
+	<select id="selectOrder" parameterType="map" resultType="o">
+		select
+			order_no as orderNo,
+			member_no as memberNo,
+			 TO_CHAR(order_date, 'YYYY-MM-DD') AS orderDate,
+			 order_status as orderStatus,
+			 total_price as totalPrice,
+			 deli_receiver as deliReceiver,
+			 deli_phone as deliPhone,
+			 deli_addr as deliAddr,
+			 deli_request as deliRequest,
+			 order_price as orderPrice,
+			 issue_no as issueNo
+		from order_tbl where order_no = #{orderNo}
+	</select>
 
 </mapper>

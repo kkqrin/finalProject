@@ -35,10 +35,23 @@ public class Order {
 	private int basketCount;
 	
 	private int totalPrice;
+	private int orderPrice;
 	private String deliAddr1;
 	private String deliAddr2;
 	
 	private ArrayList<OrderDetail> orderDetail;
+	private String memberId;
+	private String memberPhone;
+	private int orderDetailCnt;
+	private int orderDetailPrice;
+	private int orderDetailCost;
+	private int deliveryNo;
+	private int deliveryStatus;
+	private int orderDetailNo;
+	
+	
+	
+	
 
 
 }
