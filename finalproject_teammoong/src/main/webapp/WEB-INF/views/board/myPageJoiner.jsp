@@ -22,7 +22,7 @@
 			<div class="mypage-content">
 				<div>
 					<input type="checkbox" id="allCheck" style="margin: 0;"><label for="allCheck">전체선택</label>
-					<a href="#" style="font-weight: bold; padding: 0 3px; border: 1px solid #3a3a3a; border-radius: 5px;">공지 발송하기(쪽지)</a>
+					<a id="sendDm" style="font-weight: bold; padding: 0 3px; border: 1px solid #3a3a3a; border-radius: 5px; cursor: pointer;">쪽지 보내기</a>
 				</div>
 			
 			
@@ -64,6 +64,27 @@
 		</div>
 	</div>
 	
+	
+	<!-- 쪽지보내기 모달 -->
+	<div id="dmWriteFrm" class="modal modal-sec">
+		<div class="modal-content">
+			<div class="modal-header" style="height: auto;">
+				<h6>발송하기</h6>
+				<a>작성한 내용이 선택한 회원의 쪽지함으로 발송됩니다</a>
+			</div>
+			<div class="modal-body" style="display: flex; flex-direction: column;">
+				<div>
+				<textarea rows="10"></textarea>
+				</div>
+			</div>
+			<div class="area-btn" style="display: flex; justify-content: space-between;">
+				<a rel="modal:close" class="btn btn-sec size01" style="cursor: pointer;">취소</a>
+				<button class="btn btn-sec size01" style="cursor: pointer;">보내기</button>
+			</div>
+		</div>
+	</div><!--모달창-->
+
+	
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
@@ -79,6 +100,14 @@
 					$("#allCheck").prop('checked',false);
 				}
 			})
+		});
+		
+		
+		$("#sendDm").click(function(){
+			$("#dmWriteFrm").modal({
+				 showClose: false,
+	             fadeDuration: 100
+	        });
 		});
 
 </script>
