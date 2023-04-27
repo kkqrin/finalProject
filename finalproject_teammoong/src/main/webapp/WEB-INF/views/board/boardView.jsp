@@ -120,8 +120,8 @@ sup{
 				</tr>
 				<tr>
 					<c:forEach items="${o }" begin="0" end="${size}" varStatus="i" var="bo">
-<%-- 					<input type="hidden" id="oSize" name="boardDetail" value="${size}"> --%>
-<%-- 						<input type="hidden" name="detailName" value="${bo.detailName}"> --%>
+					<input type="hidden" id="oSize" name="boardDetail" value="${size}">
+						<input type="hidden" name="detailName" value="${bo.detailName}">
 						<input type="hidden" name="optionNo" value="${bo.optionNo}">
 					<tr>
 						<td>
@@ -132,7 +132,7 @@ sup{
 							${bo.detailCount}
 						</td>
 						<td>
-							<input type="hidden" id="totalEaInput" name="detailCount" class="detailCount" name="orderCount" placeholder="수량 입력" value="0" required>
+							<input type="text" id="totalEaInput" name="detailCount" class="detailCount" name="orderCount" placeholder="수량 입력" value="0" required>
 						</td>
 					</tr>
 					</c:forEach>
