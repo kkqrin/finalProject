@@ -289,6 +289,7 @@
                 </div>
                 <input type="hidden" name="btnDivision" value="sub">
                 <input type="hidden" name="gongguNo" value="${g.gongguNo}">
+                <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
                 </c:if>
             </form>
 

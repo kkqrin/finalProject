@@ -51,6 +51,7 @@
 		
 		
 		<typeAlias type="moo.ng.san.gonggu.model.vo.GongguPay" alias="gp" />
+		<typeAlias type="moo.ng.san.review.model.vo.Review" alias="r" />
 	</typeAliases>
 	<!-- 
 	<typeAliases>

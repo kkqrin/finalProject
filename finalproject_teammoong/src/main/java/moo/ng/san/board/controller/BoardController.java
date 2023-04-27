@@ -136,4 +136,15 @@ public class BoardController {
 		}
 
 	}
+	@RequestMapping(value="/boardYouPage.do")
+	public String boardYouPage() {
+		return "board/boardYouPage";
+	}
+	
+	
+	
+	
+	
+	
+	
 }

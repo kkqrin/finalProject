@@ -2,4 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN
 " "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="review">
+	<insert id="insertReview" parameterType="r">
+		INSERT INTO REVIEW_TBL VALUES(REVIEW_SEQ.NEXTVAL,
+		#{reviewWriter},
+		#{productNo},
+		<if test="optionInfoNo == 0">
+        	null
+    	</if>
+    	<if test="optionInfoNo != 0">
+        	#{optionInfoNo}
+    	</if>,
+		#{rating},
+		0,
+		sysdate,
+		#{reviewContent})
+	</insert>
 </mapper>

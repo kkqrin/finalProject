@@ -107,7 +107,7 @@ public class OrderController {
 	@RequestMapping(value="/order.do")
 	public String order(@SessionAttribute(required=false) Member m, 
 			int totalPrice, String deliReceiver, String deliPhone, String deliAddr1, String deliAddr2, String deliRequest
-			, int[] productNo, int[] optionInfoNo, int[] orderDetailCnt, int[] orderDetailCost, int[] orderSalePrice, Model model) {
+			, int[] productNo, int[] optionInfoNo, int[] orderDetailCnt, int[] orderDetailCost, int[] orderSalePrice, int orderPrice, Model model) {
 		
 //		order table
 //		System.out.println("order.do의 totalPrice : " + totalPrice );
@@ -117,7 +117,7 @@ public class OrderController {
 //		System.out.println("order.do의 deliAddr2 : " + deliAddr2 );
 		
 		// 오더 테이블엔 상품 번호 필요 없을 듯
-		int result = service.insertOrder(m.getMemberNo(),totalPrice, deliReceiver, deliPhone, deliAddr1, deliRequest, productNo[0]);
+		int result = service.insertOrder(m.getMemberNo(), totalPrice, deliReceiver, deliPhone, deliAddr1, deliRequest, orderPrice);
 		
 		if(result>0) {
 			System.out.println("order insert success");
@@ -128,7 +128,7 @@ public class OrderController {
 			
 			System.out.println("orderNo : "+orderNo);
 			
-			// 주문내역에 금액관련 두개 있어야할 듯 1. 실 결제금액 -> 적립금/쿠폰 금액 들어간 ,, 2. 상품금액 (할인 된 가격 or 이전 가격)
+			// 주문내역에 금액관련 두개 있어야할 듯 1. 실 결제금액 -> 적립금/쿠폰 금액 들어간 totalPrice 2. 주문서당 총 상품금액 (할인가) OrderPrice
 			result = service.insertOrderDetail(orderNo, productNo, optionInfoNo, orderDetailCnt, orderDetailCost, orderSalePrice);
 			
 			if(result>0) {

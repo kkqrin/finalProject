@@ -14,6 +14,6 @@ public class Review {
 	private int optionInfoNo;
 	private double rating;
 	private int reviewLike;
-	private int reviewDate;
-	private int reviewContent;
+	private String reviewDate;
+	private String reviewContent;
 }

@@ -355,8 +355,8 @@ public class ProductController {
 		}
 	}
 	@RequestMapping(value="/productView.do")
-	public String productView(int productNo, Model model, @SessionAttribute(required=false) Member m) {
-		
+	public String productView(Product product, int productNo, Model model, @SessionAttribute(required=false) Member m) {
+		System.out.println("productController에서 product값"+product);
 		Product p = service.selectProductByProductNo(productNo);
 		ArrayList<Inquiry> list = iqService.selectInquiryList(productNo);
 	
