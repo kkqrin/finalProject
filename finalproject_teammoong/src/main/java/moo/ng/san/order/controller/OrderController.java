@@ -93,7 +93,10 @@ public class OrderController {
 	}
 
 	@RequestMapping(value="/myOrderList.do")
-	public String myOrderList() {
+	public String myOrderList(@SessionAttribute(required=false) Member m, Model model) {
+		
+		ArrayList<Order> myOrderList = service.selectMyOrderList(m.getMemberNo());
+		model.addAttribute("myOrderList", myOrderList);
 		
 		return "order/myOrderList";
 	}

@@ -107,6 +107,19 @@
 			 order_price as orderPrice,
 			 issue_no as issueNo
 		from order_tbl where order_no = #{orderNo}
+	<select id="selectMyOrderList" parameterType="_int" resultType="o">
+       select 
+             o.order_no AS orderNo, 
+             TO_CHAR(o.order_date, 'YYYY-MM-DD') AS orderDate,
+             o.order_price AS orderPrice,
+             o.order_status AS orderStatus,
+             (select count(*) from order_detail where order_no = o.order_no ) AS orderProductCount,
+             (select product_no from product_tbl where product_no = (select product_no from order_detail where order_detail_no=(select min(order_detail_no) from order_detail where order_no=o.order_no))) AS productNo,
+             (select product_name from product_tbl where product_no = (select product_no from order_detail where order_detail_no=(select min(order_detail_no) from order_detail where order_no=o.order_no))) AS productName,
+             (select filepath from product_img where p_img_no  = (select min(p_img_no) from product_img where product_no=(select product_no from order_detail where order_detail_no=(select min(order_detail_no) from order_detail where order_no=o.order_no)))) AS thumbnail
+       from order_tbl o
+       where member_no = #{_parameter}
+       order by 1 desc
 	</select>
 
 </mapper>

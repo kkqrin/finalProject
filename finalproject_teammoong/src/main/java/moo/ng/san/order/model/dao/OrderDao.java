@@ -95,6 +95,10 @@ public class OrderDao {
 	public Order selectOrder(int orderNo) {
 		Order order = sqlSession.selectOne("order.selectOrder",orderNo);
 		return order;
+	public ArrayList<Order> selectMyOrderList(int memberNo) {
+		List list = sqlSession.selectList("order.selectMyOrderList", memberNo);
+		
+		return (ArrayList<Order>)list;
 	}
 
 

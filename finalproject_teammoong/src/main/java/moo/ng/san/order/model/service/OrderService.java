@@ -149,4 +149,8 @@ public class OrderService {
 	}
 
 
+	public ArrayList<Order> selectMyOrderList(int memberNo) {
+		
+		return dao.selectMyOrderList(memberNo);
+	}
 }
