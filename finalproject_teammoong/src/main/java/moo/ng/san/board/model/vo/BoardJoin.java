@@ -27,4 +27,7 @@ public class BoardJoin {
 	private String boardName;
 	private int boardStatus;
 	private String accountWriter;
+	
+	private String detailName;
+	private String memberName;
 }
