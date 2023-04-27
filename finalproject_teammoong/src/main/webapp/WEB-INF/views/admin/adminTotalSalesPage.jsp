@@ -323,7 +323,6 @@
 		            	type : "post",
 		            	data : {monthNo : monthNo},
 						success : function(data){
-							console.log(data);
 							const category = ['패션','뷰티','식품','생활용품','가전/디지털','가구','침구','인테리어','공구','스포츠/레저/취미','출산/유아동','반려용품','명품관'];
 				            
 				            var ctx = document.getElementById('salesChart').getContext('2d');
