@@ -80,10 +80,11 @@
                                 <div class="order-product-option">${i.optionDetailName }</div>
                             </div>
                             <!-- 뷰 page : 상품 하나의 수량들 , 장바구니 : 0 -->
+                            <!-- page가 0이면 orderDetailCnt 사용, 아니면 page 그대로 사용 -->
                             <c:choose>
                                 <c:when test="${page eq 0}">
                                     <div class="order-product-volume"><span>${i.basketCount}</span>개</div>
-                                    <input type="hidden" name="orderDetailCnt" value="${i.basketCount }">
+                                    <input type="text" name="orderDetailCnt" value="${i.basketCount }">
                                 </c:when>
                                 <c:otherwise>
                                     <div class="order-product-volume"><span>${page}</span>개</div>
@@ -99,6 +100,7 @@
 							<input type="text" name="optionInfoNo" value="${i.optionNo }">
                             <input type="text" name="orderDetailCost" value="${i.productCost}">
                             <input type="text" name="orderSalePrice" value="">
+                            <!-- <input type="text" name="orderProductCount" value=""> -->
                             <!-- <input type="text" name="orderPrice" value=""> -->
                             <!-- <input type="text" name="productName" value="${i.productName }"> -->
                             <!-- ${i.productPrice } * ( 100 - ${i.productDiscount }) / 100 -->
@@ -326,7 +328,7 @@
     <script src="/resources/js/order.js"></script>
 
     <script>
-        $( function() {
+        $(function() {
 			$( ".deli-request" ).selectmenu();
             $( ".order-coupon" ).selectmenu();
             // const productPrice = $("#productPrice").val();
@@ -400,6 +402,8 @@
 			// Math.floor(productPrice*(100 - productDiscount)/1000)*10);
 			$(".order-product-price").eq(i).children().text(((Math.floor(productPrice*(100 - productDiscount)/1000)*10)*orderDetailCnt).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             $("[name=orderSalePrice]").eq(i).val((Math.floor(productPrice*(100 - productDiscount)/1000)*10));
+            console.log("orderDetailCnt : "+orderDetailCnt);
+            // $("[name=orderDetailCnt]").eq(i).val(orderDetailCnt);
 		};
 
 
@@ -419,7 +423,7 @@
 
             
             // 수량 hidden
-            $("[name=orderDetailCnt]").val(orderDetailCnt);
+            // $("[name=orderDetailCnt]").val(orderDetailCnt);
 
             // 할인 전 원래 가격(상품금액)
             productPriceSum = (Number(productPriceSum) + Number(productPrice)) * orderDetailCnt;

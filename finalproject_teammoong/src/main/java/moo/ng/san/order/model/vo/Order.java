@@ -40,6 +40,18 @@ public class Order {
 	private String deliAddr2;
 	
 	private ArrayList<OrderDetail> orderDetail;
+	private String memberId;
+	private String memberPhone;
+	private int orderDetailCnt;
+	private int orderDetailPrice;
+	private int orderDetailCost;
+	private int deliveryNo;
+	private int deliveryStatus;
+	private int orderDetailNo;
+	
+	
+	
+	
 
 
 }
