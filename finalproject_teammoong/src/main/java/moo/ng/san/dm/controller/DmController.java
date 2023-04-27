@@ -96,5 +96,13 @@ public class DmController {
 	}
 	
 	
+	@ResponseBody
+	@RequestMapping(value = "/insertGroupDm.do")
+	public String insertGroupDm(DirectMessage dm) {
+		System.out.println(dm);
+		return "";
+	}
+	
+	
 	
 }//DmController

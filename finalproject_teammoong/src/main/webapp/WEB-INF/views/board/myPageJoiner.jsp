@@ -31,7 +31,7 @@
 						<tr style="border-top: 2px solid #000;">
 							<th rowspan="3" style="width: 5%;">
 								<input type="checkbox" class="oneCheck">
-								<input type="hidden" name="dmReceiver" value="${bj.memberNo }" disabled>
+								<input type="hidden" name="dmReceivers" value="${bj.memberNo }" disabled>
 							</th>
 							<th rowspan="3" style="width: 5%;">${i.index+1 }</th>
 							<th style="width: 20%;">주문자 정보</th>
@@ -128,7 +128,22 @@
 		
 		
 		$("#send").click(function(){
-			alert("기능 작성중");
+			
+			let receivers = [];
+			$("[name='dmReceivers']").each(function(i,one){
+				receivers[i] = String($(one).val());
+			});
+			
+			const jsonArr = JSON.stringify(receivers);
+			
+			const dmContent = $("[name='dmContent']").val();
+			$.ajax({
+				url:"/insertGroupDm.do",
+				data:{dmReceivers:jsonArr,dmContent:dmContent},
+				success:function(data){
+					$(".close").click();
+				}
+			})
 		});
 
 </script>

@@ -18,6 +18,8 @@ public class DirectMessage {
 	private String dmReceiver;
 	private String dmReceiverName;
 	
+	private String[] dmReceivers;
+	
 	private String dmContent;
 	
 	private String dmDate;
