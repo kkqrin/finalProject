@@ -233,7 +233,7 @@ sup{
 			<c:choose>
 			<c:when test="${sessionScope.m.memberId eq b.boardWriter }">
 			<div style="display: flex;">
-			<input class="btn btn-border-sec size01" name="delete" type="button"  value="삭제" style="background-color: var(--primary); border-color: var(--primary); color: #fff; cursor: pointer; padding: 20px 50px 20px 50px; margin-top: 15px; width: 100%">
+			<button class="btn btn-border-sec size01" name="delete" type="button" id="bFile" onclick="cartjQueryAlert('error');" value="삭제" style="background-color: var(--primary); border-color: var(--primary); color: #fff; cursor: pointer; padding: 20px 50px 20px 50px; margin-top: 15px; width: 100%">삭제</button>
 			</div>
 			</c:when>
 			<c:when test="${empty sessionScope.m.memberId}">
@@ -491,9 +491,50 @@ sup{
 		});//계좌번호 정규표현식
 		
 		
-	
-
+		// 장바구니에서 선택삭제 alert
 		
+		  
+		function cartjQueryAlert(type, form) {
+		let $type = type;
+		switch ($type) {
+			case 'error':
+			messageBox = $.parseHTML('<div class="alert__error" style="text-align:center;"><div class="title" style="margin-bottom:10px;color:var(--error);padding:0;">뭉쳐야산다</div><div style="margin: 50px auto;"><div style="margin-top:10px;">선택한 상품을 장바구니에서 삭제하시겠습니까?</div></div></div>');			
+			break;
+		}
+		$("body").append(messageBox);
+		$(messageBox).dialog({
+			dialogClass :$type,
+			// open: $(messageBox).append(msg),
+			draggable: false,
+			modal: true,
+			width: 400,
+			buttons: [
+				{
+					text: "삭제",
+					style: "margin-right:5px",
+					click: function(){
+						$(this).dialog("close");
+
+						form.submit();
+					}
+				},
+				{
+					text: "취소",
+					click: function(){
+						$(this).dialog("close");
+					}
+				}
+			],
+			show: {
+				effect: 'fade',
+				duration: 200 //at your convenience
+			},
+			hide: {
+				effect: 'fade',
+				duration: 200 //at your convenience
+			}
+		});
+	};
 		
 		
 		

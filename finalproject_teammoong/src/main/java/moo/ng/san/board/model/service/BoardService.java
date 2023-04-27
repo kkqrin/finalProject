@@ -13,6 +13,7 @@ import moo.ng.san.board.model.vo.BoardOption;
 import moo.ng.san.board.model.vo.BoardOrder;
 import moo.ng.san.board.model.vo.BoardPageData;
 import moo.ng.san.board.model.vo.FileVO;
+import moo.ng.san.member.model.vo.Member;
 
 @Service
 public class BoardService {
@@ -189,6 +190,21 @@ public class BoardService {
 			
 		}
 		return result;
+	}
+
+
+
+
+	public ArrayList<Board> selectBoardYourPage(String memberId) {
+		ArrayList<Board> list = dao.selectBoardYourPage(memberId);
+		return list;
+	}
+
+
+
+
+	public Member selectOneMember(String memberId) {
+		return dao.selectMemberId(memberId);
 	}
 
 
