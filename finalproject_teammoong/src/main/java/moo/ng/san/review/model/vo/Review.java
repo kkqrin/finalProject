@@ -1,5 +1,7 @@
 package moo.ng.san.review.model.vo;
 
+import java.util.ArrayList;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,4 +18,5 @@ public class Review {
 	private int reviewLike;
 	private String reviewDate;
 	private String reviewContent;
+	private ArrayList<String> fileList;
 }
