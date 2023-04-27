@@ -64,5 +64,11 @@ public class OrderDao {
 		return basketNo;
 	}
 
+	public ArrayList<Order> selectMyOrderList(int memberNo) {
+		List list = sqlSession.selectList("order.selectMyOrderList", memberNo);
+		
+		return (ArrayList<Order>)list;
+	}
+
 
 }

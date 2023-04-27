@@ -114,4 +114,9 @@ public class OrderService {
 		
 		return result;
 	}
+
+	public ArrayList<Order> selectMyOrderList(int memberNo) {
+		
+		return dao.selectMyOrderList(memberNo);
+	}
 }
