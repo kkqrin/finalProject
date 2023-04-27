@@ -147,8 +147,8 @@ public class AdminDao {
 		return totalCount;
 	}
 
-	public int updateDeliveryStatus(Product p) {
-		int result = sqlSession.update("admin.updateDeliveryStatus",p);
+	public int updateDeliveryStatus(Order o) {
+		int result = sqlSession.update("admin.updateDeliveryStatus",o);
 		
 		return result;
 	}

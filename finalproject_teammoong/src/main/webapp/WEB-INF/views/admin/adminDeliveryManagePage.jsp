@@ -34,6 +34,13 @@
     #orderStatusSelect{
     	display: none;
     }
+    .changeOrderStatusBtn{
+    	cursor: pointer;
+    }
+    img{
+    	width: 100px;
+    	height: 50px;
+    }
 
 
 
@@ -42,7 +49,7 @@
     <c:if test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
         <!-- 관리자일때만 페이지 보이게 세팅 -->
     </c:if>
-    <div class="adminPage-wrapper">
+    <div class="adminPage-wrapper" id="adminMemberTable">
         <div class="adminPage-header">
             <div class="adminPage-title"><a>Moong's Admin</a></div>
         </div>
@@ -52,9 +59,9 @@
                 <div class="adminPage-content">
                     <div class="adminPage-search">
                         <select id="orderSearchSelect">
-                            <option value="orderNo">주문번호 검색</option>
-                            <option value="memberName">주문자 이름 검색</option>
-                            <option value="orderStatus">주문 상태 검색</option>
+                            <option id="searchOrderNo" value="orderNo">주문번호 검색</option>
+                            <option id="searchMemberNo" value="memberNo">회원번호 검색</option>
+                            <option id="searchOrderStatus" value="orderStatus">주문 상태 검색</option>
                         </select>
                         <input type="text" name="orderSearchBox" id="searchOption">
                         <!-- 주문 상태 검색 시 1,2,3,4 로 변환해주는 절차 필요 -->
@@ -72,10 +79,10 @@
                         <table>
                             <tr>
                             	<th>구분</th>
+                            	<th>상품사진</th>
                                 <th>주문번호</th>
                                 <th>상품번호</th>
                                 <th>회원번호</th>
-                                <th>결제번호</th>
                                 <th>주문일자</th>
                                 <th>상품원가</th>
                                 <th>수량</th> 
@@ -83,27 +90,20 @@
                                 <th>배송주소</th> 
                                 <th>결제상태</th> <!-- choose -->
                                 <th>주문상태</th> <!-- choose -->
+                                <th>상품상태변경</th>
                             </tr>
                             <c:forEach items="${orderList }" var="o">
                                 <tr>
                                 	<td><input type="checkBox" id="checkBox"></td>
+                                	<td><img src="/resources/upload/product/${o.thumbnail }"></td>
                                     <td>${o.orderNo }</td>
                                     <td>${o.productNo }</td>
                                     <td>${o.memberNo }</td>
-                                    <td>${o.payNo }</td>
                                     <td>${o.orderDate }</td>
-                                    <td>${o.productCost }</td>
+                                    <td>${o.orderDetailCost }</td>
                                     <td>${o.orderDetailCnt }</td>
                                     <td>${o.orderDetailPrice }</td>
-                                    <td>${o.deliveryAddress }</td>
-                                    <c:choose>
-                                    	<c:when test="${o.payStatus == 1 }">
-                                    		<td>결제완료</td>
-                                    	</c:when>
-                                    	<c:when test="${o.payStatus == 2 }">
-                                    		<td>결제취소</td>
-                                    	</c:when>
-                                    </c:choose>
+                                    <td>${o.deliAddr }</td>
                                     <c:choose>
                                     	<c:when test="${o.orderStatus == 1 }">
                                     		<td>결제완료</td>
@@ -135,18 +135,14 @@
                                         </select>
                                     </td> 
                                     <td>
-                                    	<input type="hidden" class="orderStatus" value="${o.orderStatus }">
-                                    	<button type="button" id="changeOrderStatusBtn" onclick="changeOrderStatus();">상품 상태 변경</button>
+                                    	<input type="hidden" class="orderNo" value="${o.orderNo }">
+                                    	<div class="changeOrderStatusBtn">상품 상태 변경</div>
                                     </td>
                                 </tr>
                             </c:forEach>
                             <tr>
                                 <th colspan="12">${pageNavi}</th>
                             </tr>
-                            <form name="searchForm" method="POST" action="" class="">
-	                        	<input type="hidden" class="orderNo" value="${o.orderNo }">
-	                       		<button type="button" onclick="exportToExcel();">엑셀출력</button>
-	                        </form><!--  -->
                         </table>
                     </div>
                     <div id="ajaxResult" class="table"></div>
@@ -159,12 +155,13 @@
 
 <!-- 스크립트를 넣어봅시다 -->
     <script>
-    /* 등급 변경 */
-    /* 왜 첫번째만 변경되는가?! */
-    	function changeOrderStatus(){
-    		var orderStatus = $(".orderStatusList option:selected").val();
-    		var orderOldStatus = $(".orderStatus").val();
-    		var orderNo = $(".orderNo").val();
+    /* status 변경 */
+    	$(".changeOrderStatusBtn").on("click",function(){
+    		var orderStatus = $(this).parent().prev().children().val();
+    		var orderNo = $(this).prev().val();
+    		
+    		console.log(orderStatus);
+    		console.log(orderNo);
     		
             $.ajax({
                 url: "/ajaxChangeDeliveryStatus.do",
@@ -180,31 +177,70 @@
                 }
             })
             
-            };
+            });
             
+            
+            // 결제 상태로 검색시 input 사라지고 select 등장
+            $("#orderSearchSelect").on("change",function(){
+            	var orderSearchOption = $("#orderSearchSelect option:selected").val();
+            	var orderStatusSelect = $("#orderStatusSelect");
+            	var orderSearchBox = $("[name=orderSearchBox]");
+            	
+            	if(orderSearchOption == 'orderStatus'){
+            		orderSearchBox.hide();
+            		orderStatusSelect.show();
+            	}
+            	
+            })
+            
+            
+            //검색기능
             $("[name=searchSubmitBtn]").on("click",function(){
+            	
            	 var orderSearchOption = $("#orderSearchSelect option:selected").val();
-           	 var orderNo = $("#orderNo").val();
-           	 var memberNo = $("#memberNo").val();
-           	 var orderStatus = $("#orderStatus").val();
-           	 var orderSearchBox = $("[name=orderSearchBox]").val();
+           	 
+           	 var orderNo = $("#searchOrderNo").val();
+           	 var memberNo = $("#searchMemberNo").val();
+           	 var orderStatus = $("#searchOrderStatus").val();
+           	 
            	 var orderStatusSelect = $("#orderStatusSelect");
+           	 
+           	 var orderSearchBox = $("[name=orderSearchBox]").val();
            	 var orderStatusSelectVal = $("#orderStatusSelect option:selected").val();
            	 
            	 if(orderSearchOption == 'orderNo'){
            		orderNo = orderSearchBox;
+           		memberNo = 0;
+           		orderStatus = 0;
            		 
            	 }else if(orderSearchOption == 'memberNo'){
            		memberNo = orderSearchBox;
+           		orderNo = 0;
+           		orderStatus = 0;
            		 
            	 }else if(orderSearchOption == 'orderStatus'){
-           		orderStatusSelect.show();
+					           		
+           		if(orderStatusSelectVal == '결제완료'){
+           			orderStatusSelectVal = 1;
+           		}else if(orderStatusSelectVal == '배송준비중'){
+           			orderStatusSelectVal = 2;
+           		}else if(orderStatusSelectVal == '배송중'){
+           			orderStatusSelectVal = 3;
+           		}else if(orderStatusSelectVal == '배송완료'){
+           			orderStatusSelectVal = 4;
+           		}else if(orderStatusSelectVal == '결제취소'){
+           			orderStatusSelectVal = 5;
+           		}else if(orderStatusSelectVal == '환불완료'){
+           			orderStatusSelectVal = 6;
+           		}
+           		
            		orderStatus = orderStatusSelectVal;
+           		orderNo = 0;
+           		memberNo = 0;
            	 }
            	 
-           	 
            	 $.ajax({
-                   url: "/ajaxAdminSearchMember.do",
+                   url: "/ajaxAdminSearchDelivery.do",
                    type: "POST",
                    data: {orderNo : orderNo, memberNo : memberNo, orderStatus : orderStatus},
                    success: function(data) {
@@ -213,7 +249,7 @@
                    			$(".adminPage-result").hide();
   							const table =$("<table>");
   							const titleTr = $("<tr>");
-  							titleTr.html("<th>구분</th><th>주문번호</th><th>상품번호</th><th>회원번호</th><th>결제번호</th><th>주문일자</th><th>상품원가</th><th>수량</th><th>가격</th><th>배송주소</th><th>결제상태</th><th>주문상태</th>");
+  							titleTr.html("<th>구분</th><th>주문번호</th><th>상품번호</th><th>회원번호</th><th>주문일자</th><th>상품원가</th><th>수량</th><th>가격</th><th>배송주소</th><th>결제상태</th><th>주문상태</th><th>주문상태 변경</th>");
   							table.append(titleTr);
   							for(let i=0;i<data.length;i++){
   								const tr = $("<tr>");
@@ -221,17 +257,12 @@
   								tr.append("<td>"+data[i].orderNo+"</td>");
   								tr.append("<td>"+data[i].productNo+"</td>");
   								tr.append("<td>"+data[i].memberNo+"</td>");
-  								tr.append("<td>"+data[i].payNo+"</td>");
   								tr.append("<td>"+data[i].orderDate+"</td>");
-  								tr.append("<td>"+data[i].productCost+"</td>");
-  								tr.append("<td>"+data[i].orderdetailCnt+"</td>");
+  								tr.append("<td>"+data[i].orderDetailCost+"</td>");
+  								tr.append("<td>"+data[i].orderDetailCnt+"</td>");
   								tr.append("<td>"+data[i].orderDetailPrice+"</td>");
-  								tr.append("<td>"+data[i].deliveryAddress+"</td>");
-  								if(data[i].payStatus == 1){
-  									tr.append("<td>결제완료</td>");
-  								}else{
-  									tr.append("<td>결제취소</td>");
-  								}
+  								tr.append("<td>"+data[i].deliAddr+"</td>");
+  								
   								if(data[i].orderStatus == 1){
   									tr.append("<td>결제완료</td>");
   								}else if(data[i].orderStatus == 2){
@@ -245,6 +276,8 @@
   								}else if(data[i].orderStatus == 6){
   									tr.append("<td>환불완료</td>");
   								}
+  								tr.append()
+  							
   								table.append(tr);
   						}
   						$("#ajaxResult").append(table);

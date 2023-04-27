@@ -14,4 +14,5 @@ public class BoardOrder {
 	private String oderName;
 	private int orderPrice;
 	private int orderCount;
+	private int joinNo;
 }

@@ -303,8 +303,8 @@ public class AdminService {
 	}
 	
 
-	public int updateDeliveryStatus(Product p) {
-		int result = dao.updateDeliveryStatus(p);
+	public int updateDeliveryStatus(Order o) {
+		int result = dao.updateDeliveryStatus(o);
 
 		return result;
 	}

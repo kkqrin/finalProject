@@ -1,5 +1,7 @@
 package moo.ng.san.board.model.vo;
 
+import java.util.ArrayList;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,4 +29,13 @@ public class BoardJoin {
 	private String boardName;
 	private int boardStatus;
 	private String accountWriter;
+	
+	private String detailName;
+	private String memberName;
+	private ArrayList<BoardOrder> boardOrderList;
+
+	public String getDepositPriceCom() {
+		String format = String.format("%,d", depositPrice);
+		return format;
+	}
 }

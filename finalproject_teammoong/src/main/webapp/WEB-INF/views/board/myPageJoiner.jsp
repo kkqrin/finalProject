@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,46 +16,46 @@
 		
 		<div class="mypage-right">
 			<div class="mypage-right-title" style="display: flex; justify-content: space-between;">
-				작성한 게시글 제목
-				<button class="btn btn-sec size01">게시물 보기</button>
+				${boardName }
+				<button onclick="location.href='/boardView.do?boardNo=${boardNo }'" class="btn btn-sec size01">게시물 보기</button>
 			</div>
 			<div class="mypage-content">
-				<div style="border-bottom: 3px solid #3a3a3a; padding-bottom: 5px;">
+				<div>
 					<input type="checkbox" id="allCheck" style="margin: 0;"><label for="allCheck">전체선택</label>
-					<a href="#" style="font-weight: bold; padding: 0 3px; border: 1px solid #3a3a3a; border-radius: 5px;">쪽지보내기</a>
+					<a id="sendDm" style="font-weight: bold; padding: 0 3px; border: 1px solid #3a3a3a; border-radius: 5px; cursor: pointer;">쪽지 보내기</a>
 				</div>
 			
 			
-			
-			
 				<table class="tbl-box" style="margin-top: 10px;">
-					<tr>
-						<th rowspan="3" style="width: 5%;"><input type="checkbox"></th>
-						<th rowspan="3" style="width: 5%;">1</th>
-						<th style="width: 20%;">주문자 정보</th>
-						<td style="text-align: left;">
-							<p>주문한 사람 : 김채원 (010-0101-0101)</p>
-							<p>입금예정일 : 2020-01-01</p>	
-							<p>환불계좌정보 : 1002648251021 우리은행 김홍미</p>
-							<p>추가연락처 : sadfasfas@naver.com</p>			
-						</td>
-					</tr>
-					<tr>
-						<th>배송지 정보</th>
-						<td style="text-align: left;">
-							<p>배송주소 : (05132)인천어쩌구 어디시 어디시 상세주소 어디어디 어디어디</p>
-							<p>수령인 : 홍윤채(010-6213-4321)</p>
-						</td>
-					</tr>	
-					<tr>
-						<th>주문 상품 정보</th>
-						<td style="text-align: left;">
-							<p>총 주문금액 : <strong>314,215</strong>원</p>
-							<p>[주문 상세 정보]</p>
-							<p>어떤 옵션 / 1개</p>
-							<p>어떤 옵션 / 3개</p>		
-						</td>
-					</tr>
+					<c:forEach items="${list }" var="bj" varStatus="i">
+						<tr style="border-top: 2px solid #000;">
+							<th rowspan="3" style="width: 5%;"><input type="checkbox" class="oneCheck" value="${bj.memberNo }"></th>
+							<th rowspan="3" style="width: 5%;">${i.index+1 }</th>
+							<th style="width: 20%;">주문자 정보</th>
+							<td style="text-align: left;">
+								<p>주문한 사람 : ${bj.payerName }</p>
+								<p>입금예정일 : ${bj.payerDate }</p>	
+								<p>환불계좌정보 : ${bj.refundAccount } ${bj.refundBank } ${bj.refundName }</p>	
+							</td>
+						</tr>
+						<tr>
+							<th>배송지 정보</th>
+							<td style="text-align: left;">
+								<p>배송주소 : ${bj.receiverAddr }</p>
+								<p>수령인 : ${bj.receiverName }( ${bj.receiverPhone})</p>
+							</td>
+						</tr>	
+						<tr style="border-bottom: 2px solid #000;">
+							<th>주문 상품 정보</th>
+							<td style="text-align: left;">
+								<p>총 주문금액 : <strong>${bj.depositPriceCom }</strong>원</p>
+								<p>[주문 상세 정보]</p>
+								<c:forEach items="${bj.boardOrderList }" var="bo">
+								<p>${bo.oderName } / ${bo.orderCount }개</p>
+								</c:forEach>		
+							</td>
+						</tr>
+					</c:forEach>
 				</table>
 				
 				
@@ -63,7 +64,52 @@
 		</div>
 	</div>
 	
+	
+	<!-- 쪽지보내기 모달 -->
+	<div id="dmWriteFrm" class="modal modal-sec">
+		<div class="modal-content">
+			<div class="modal-header" style="height: auto;">
+				<h6>발송하기</h6>
+				<a>작성한 내용이 선택한 회원의 쪽지함으로 발송됩니다</a>
+			</div>
+			<div class="modal-body" style="display: flex; flex-direction: column;">
+				<div>
+				<textarea rows="10"></textarea>
+				</div>
+			</div>
+			<div class="area-btn" style="display: flex; justify-content: space-between;">
+				<a rel="modal:close" class="btn btn-sec size01" style="cursor: pointer;">취소</a>
+				<button class="btn btn-sec size01" style="cursor: pointer;">보내기</button>
+			</div>
+		</div>
+	</div><!--모달창-->
+
+	
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+
+<script>
+		
+		$("#allCheck").change(function(){
+			$(".oneCheck").prop('checked',$(this).prop("checked"));
+		});
+		
+		$(".oneCheck").each(function(i,one){
+			$(one).on("click",function(){
+				if($(one).prop('checked')==false){
+					$("#allCheck").prop('checked',false);
+				}
+			})
+		});
+		
+		
+		$("#sendDm").click(function(){
+			$("#dmWriteFrm").modal({
+				 showClose: false,
+	             fadeDuration: 100
+	        });
+		});
+
+</script>
 </body>
 </html>

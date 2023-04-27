@@ -27,6 +27,7 @@ import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.gonggu.model.vo.GongguAllInfo;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.order.model.vo.Order;
+import moo.ng.san.pay.model.vo.OrderDetail;
 import moo.ng.san.product.model.vo.Product;
 
 @Controller
@@ -385,8 +386,8 @@ public class AdminController {
 	// 배송 상태 변경
 	@ResponseBody
 	@RequestMapping(value="/ajaxChangeDeliveryStatus.do")
-	public String changeDeliveryStatus(Product p) {
-		int result = service.updateDeliveryStatus(p);
+	public String changeDeliveryStatus(Order o) {
+		int result = service.updateDeliveryStatus(o);
 		if(result > 0) {
 			return "ok";
 		}else {
@@ -399,6 +400,7 @@ public class AdminController {
 	@RequestMapping(value="/ajaxAdminSearchDelivery.do", produces = "application/json;charset=utf-8")
 	public String adminSearchDelivery(Order o) {
 		ArrayList<Order> list = service.selectSearchDelivery(o);
+		
 		Gson gson = new Gson();
 		String result = gson.toJson(list);
 		return result;
