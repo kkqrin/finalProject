@@ -35,6 +35,7 @@ public class Order {
 	private int basketCount;
 	
 	private int totalPrice;
+	private int orderPrice;
 	private String deliAddr1;
 	private String deliAddr2;
 	
