@@ -35,6 +35,7 @@ public class Order {
 	private int basketCount;
 	
 	private int totalPrice;
+	private int orderPrice;
 	private String deliAddr1;
 	private String deliAddr2;
 	
@@ -48,6 +49,7 @@ public class Order {
 	private int deliveryStatus;
 	private int orderDetailNo;
 	
+	private int orderProductCount; // 주문당 주문상세 행 개수 (상품건수)
 	
 	
 	

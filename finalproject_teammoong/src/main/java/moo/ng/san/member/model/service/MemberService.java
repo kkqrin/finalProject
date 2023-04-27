@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import moo.ng.san.board.model.dao.BoardDao;
 import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.board.model.vo.BoardJoin;
+import moo.ng.san.board.model.vo.BoardOrder;
 import moo.ng.san.board.model.vo.BoardPageData;
 import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.member.model.dao.MemberDao;
@@ -210,7 +211,12 @@ public class MemberService {
 
 
 	public ArrayList<BoardJoin> selectMyJoiner(int boardNo) {
-		return dao.selectMyJoiner(boardNo);
+		ArrayList<BoardJoin> list = dao.selectMyJoiner(boardNo);
+		for(int i=0 ; i<list.size() ; i++) {
+			ArrayList<BoardOrder> orderList = dao.selectJoinerOrder(list.get(i).getJoinNo()); 
+			list.get(i).setBoardOrderList(orderList);
+		}
+		return list;
 	}
 
 	

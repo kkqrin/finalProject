@@ -17,11 +17,12 @@
 			order_detail_no as orderDetailNo,
 			order_no as orderNo,
 			product_no as productNo,
-			option_info_no as optionInfoNo,
+			<if test="_parameter != 0">
+      			option_info_no as optionInfoNo,
+    		</if>
 			order_detail_cnt as orderDetailCnt,
-			order_sale_price as orderSalePrice,
-			product_name as productName
+			order_sale_price as orderSalePrice
 		from order_detail
-		where order_no = #{orderNo}
+		where order_no = #{_parameter}
 	</select>
 </mapper>

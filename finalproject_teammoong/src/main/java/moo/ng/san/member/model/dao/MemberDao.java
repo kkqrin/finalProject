@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.board.model.vo.BoardJoin;
+import moo.ng.san.board.model.vo.BoardOrder;
 import moo.ng.san.dayCheck.model.vo.Point;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.member.model.vo.Out;
@@ -81,6 +82,11 @@ public class MemberDao {
 	public ArrayList<BoardJoin> selectMyJoiner(int boardNo) {
 		List list = sqlSession.selectList("member.selectMyJoiner",boardNo);
 		return (ArrayList<BoardJoin>)list;
+	}
+
+	public ArrayList<BoardOrder> selectJoinerOrder(int joinNo) {
+		List list = sqlSession.selectList("member.selectJoinerOrder",joinNo);
+		return (ArrayList<BoardOrder>)list;
 	}
 
 	
