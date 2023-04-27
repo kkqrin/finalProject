@@ -240,22 +240,23 @@
 		select * from
 			(select rownum as rnum, b.* from
 				(select
-				ot.order_no as orderNo,
+				(SELECT FILEPATH FROM PRODUCT_IMG WHERE P_IMG_NO=(SELECT MIN(P_IMG_NO) FROM PRODUCT_IMG where product_no=P.product_no)) AS thumbnail,
+				ot.order_no as orderNo, 
 				ot.member_No as memberNo,
-				mt.member_id, 
-				mt.member_phone,
-				ot.product_no as productNo,
+				mt.member_id as memberId, 
+				mt.member_phone as memberPhone,
+				od.product_no as productNo,
 				to_char(ot.order_date,'yyyy-mm-dd') as orderDate,
 				ot.order_status as orderStatus,
 				od.order_detail_cnt as orderDetailCnt,
-				od.order_sale_price as orderSalePrice,
-				ot.deli_addr as deliAddr,
-				dt.delivery_no, 
-				dt.delivery_status
+				od.order_detail_cost as orderDetailCost,
+				od.order_sale_price as orderDetailPrice,
+				ot.deli_addr as deliAddr
 			from order_tbl ot
-			join delivery_tbl dt on (ot.product_no = dt.product_no)
 			join member_tbl mt on (ot.member_no = mt.member_no)
 			join order_detail od on (ot.order_no = od.order_no)
+			left join delivery_tbl dt on (od.product_no = dt.product_no)
+			left join product_tbl p on (od.product_no = p.product_no)
 		order by 1 desc)b)
 
 		where rnum between #{start} and #{end}
@@ -267,32 +268,39 @@
 		from product_tbl </select> -->
 
 
-	<update id="updateDeliveryStatus" parameterType="p">
+	<update id="updateDeliveryStatus" parameterType="o">
 		update
-			delivery_tbl set delivery_status = #{deliveryStatus} 
-		where delivery_no = #{deliveryNo}
+			order_tbl set order_status = #{orderStatus} 
+		where order_no = #{orderNo}
 	</update>
+	
+	
 
-	<select id="selectSearchDelivery" resultType="o">
+	<select id="selectSearchDelivery" parameterType="o" resultType="o">
 		select
-			ot.order_no as orderNo,
+			ot.order_no as orderNo, 
 			ot.member_no as memberNo,
-			ot.product_no as productNo,
-			tb.product_name,
-			tb.product_ea,
+			mt.member_id as memberId, 
+			mt.member_phone as memberPhone,
+			od.product_no as productNo,
 			to_char(ot.order_date,'yyyy-mm-dd') as orderDate,
-			ot.order_status as orderStatus
-		from order_tbl ot 
-		join product_tbl tb on (ot.product_no = tb.product_no)
+			ot.order_status as orderStatus,
+			od.order_detail_cnt as orderDetailCnt,
+			od.order_detail_cost as orderDetailCost,
+			od.order_sale_price as orderDetailPrice,
+			ot.deli_addr as deliAddr
+		from order_tbl ot
+		join member_tbl mt on (ot.member_no = mt.member_no)
+		join order_detail od on (ot.order_no = od.order_no)
 		<choose>
-			<when test="order_no == 0 and member_no == 0">
-				where product_no = #{productNo}
+			<when test="orderNo == 0 and memberNo == 0">
+				where ot.order_status = #{orderStatus}
 			</when>
-			<when test="order_no == 0 and product_no == 0">
-				where member_no == #{memberNo}
+			<when test="orderNo == 0 and orderStatus == 0">
+				where ot.member_no = #{memberNo}
 			</when>
-			<when test="member_no == 0 and product_no == 0">
-				where order_no = #{orderNo}
+			<when test="memberNo == 0 and orderStatus == 0">
+				where ot.order_no = #{orderNo}
 			</when>
 		</choose>
 	</select>
@@ -361,7 +369,7 @@
 	            (select
 	            	board_no as boardNo,
 	                detail_name as detailName, 
-	                detail_price as detailPrice 
+	                detail_price as detailPrice
 	            from board_option
 	            order by 1 desc)b)
 		where boardNo = #{_parameter}
@@ -419,10 +427,10 @@
 		from board_tbl bt 
 		join notify_tbl nt on (bt.board_no = nt.board_no)
 		<choose>
-			<when test="bt.board_writer == null">
+			<when test="boardWriter == null">
 				where bt.board_no = #{boardNo}
 			</when>
-			<when test="bt.board_no == 0">
+			<when test="boardNo == 0">
 				where bt.board_writer = #{boardWriter}
 			</when>
 		</choose>
@@ -449,10 +457,10 @@
               board_status as boardStatus
         from board_tbl
 		<choose>
-			<when test="d_category_no == 0">
+			<when test="dCategoryNo == 0">
 				where board_status = #{boardStatus}
 			</when>
-			<when test="board_status == 0">
+			<when test="boardStatus == 0">
 				where d_category_no = #{detailCategoryNo }
 			</when>
 		</choose>
