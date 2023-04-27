@@ -39,7 +39,15 @@
 			GONGGU_NUMBER AS  gongguNumber,
 			PRODUCT_CONTENT AS productContent,
 			PRODUCT_DISCOUNT AS productDiscount
-		FROM PRODUCT_TBL 
+<!--             G.GONGGU_NO AS gongguNo, -->
+<!--             D.DETAIL_GONGGU_NO AS detailGongguNo, -->
+<!--             GP.GONGGU_PAY_NO AS gongguPayNo, -->
+<!--             GP.MEMBER_NO AS memberNo -->
+<!-- 		FROM PRODUCT_TBL P -->
+<!--         LEFT JOIN GONGGU_TBL G ON P.PRODUCT_NO = G.PRODUCT_NO -->
+<!--         LEFT JOIN DETAIL_GONGGU_TBL D ON G.GONGGU_NO = D.GONGGU_NO -->
+<!--         LEFT JOIN GONGGU_PAY_TBL GP ON D.DETAIL_GONGGU_NO = GP.DETAIL_GONGGU_NO  -->
+		FROM PRODUCT_TBL
 		WHERE PRODUCT_NO = #{_parameter}
 	</select>
 	

@@ -13,8 +13,9 @@ public class ReviewController {
 	private ReviewService service;
 	
 	@RequestMapping(value="/insertReview.do")
-	public String insertReview(Review r) {
-		System.out.println("ReviewController에서 Review값 :"+r);
-		return null;
+	public String insertReview(Review review) {
+		System.out.println("ReviewController에서 Review값 :"+review);
+		int reusult = service.insertReview(review);
+		return "redirect:/";
 	}
 }
