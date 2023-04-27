@@ -176,7 +176,7 @@
 						<div class="myorder-order-info">
 							<div class="myorder-order-date">${i.orderDate}</div>
 							<c:if test="${i.orderProductCount gt 1}">
-							<div class="myorder-product-total-count">총 ${i.orderProductCount}건</div>
+							<div class="myorder-product-total-count">총 ${i.orderProductCount} 건</div>
 							</c:if>
 							<div class="myorder-order-detail">
 								<form action="#">

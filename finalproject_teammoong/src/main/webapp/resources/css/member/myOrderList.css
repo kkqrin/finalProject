@@ -90,7 +90,8 @@
 .ab-product-count{
     width: 30px;
     height: 30px;
-    background-color: rgba(255, 105, 180, 0.6);
+    /* background-color: rgba(255, 105, 180, 0.6); */
+    background-color: rgba(255, 136, 0, 0.8);
     color: #f2f2f2;
     position: absolute;
     right: 0;
