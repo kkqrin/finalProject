@@ -29,7 +29,10 @@
 				<table class="tbl-box" style="margin-top: 10px;">
 					<c:forEach items="${list }" var="bj" varStatus="i">
 						<tr style="border-top: 2px solid #000;">
-							<th rowspan="3" style="width: 5%;"><input type="checkbox" class="oneCheck" value="${bj.memberNo }"></th>
+							<th rowspan="3" style="width: 5%;">
+								<input type="checkbox" class="oneCheck">
+								<input type="hidden" name="dmReceiver" value="${bj.memberNo }" disabled>
+							</th>
 							<th rowspan="3" style="width: 5%;">${i.index+1 }</th>
 							<th style="width: 20%;">주문자 정보</th>
 							<td style="text-align: left;">
@@ -74,12 +77,12 @@
 			</div>
 			<div class="modal-body" style="display: flex; flex-direction: column;">
 				<div>
-				<textarea rows="10"></textarea>
+				<textarea name="dmContent" rows="10"></textarea>
 				</div>
 			</div>
 			<div class="area-btn" style="display: flex; justify-content: space-between;">
-				<a rel="modal:close" class="btn btn-sec size01" style="cursor: pointer;">취소</a>
-				<button class="btn btn-sec size01" style="cursor: pointer;">보내기</button>
+				<a rel="modal:close" class="btn btn-sec size01 close" style="cursor: pointer;">취소</a>
+				<button id="send" class="btn btn-sec size01" style="cursor: pointer;">보내기</button>
 			</div>
 		</div>
 	</div><!--모달창-->
@@ -98,9 +101,16 @@
 			$(one).on("click",function(){
 				if($(one).prop('checked')==false){
 					$("#allCheck").prop('checked',false);
-				}
+				}//전체체크 풀리기
+				if($(one).prop('checked')){
+					$(one).next().prop('disabled',false);
+				}else{
+					$(one).next().prop('disabled',true);
+				}//disabled
 			})
 		});
+
+		
 		
 		
 		$("#sendDm").click(function(){
@@ -108,6 +118,17 @@
 				 showClose: false,
 	             fadeDuration: 100
 	        });
+		});
+		
+		$(".close").click(function(){
+			$("[name='dmContent']").val("");
+		});
+		
+		
+		
+		
+		$("#send").click(function(){
+			alert("기능 작성중");
 		});
 
 </script>
