@@ -445,13 +445,13 @@
 			$(".cancelBtn").css("float", "right");
 		});
 		
-	$("#form").on("click",function(){
-		const fileCheck = $("#bFile").val();
-	    if(!fileCheck){
-	        alert("파일을 첨부해 주세요!");
-	        return false;
-	    }		
-	});
+// 	$("#form").on("click",function(){
+// 		const fileCheck = $("#bFile").val();
+// 	    if(!fileCheck){
+// 	        alert("파일을 첨부해 주세요!");
+// 	        return false;
+// 	    }		
+// 	});
 		
 	
 	
