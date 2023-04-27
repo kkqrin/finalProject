@@ -107,6 +107,8 @@
 			 order_price as orderPrice,
 			 issue_no as issueNo
 		from order_tbl where order_no = #{orderNo}
+	</select>
+	
 	<select id="selectMyOrderList" parameterType="_int" resultType="o">
        select 
              o.order_no AS orderNo, 
