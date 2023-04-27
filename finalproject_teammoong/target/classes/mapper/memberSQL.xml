@@ -220,29 +220,35 @@
 	
 	<select id="selectMyJoiner" resultType="bj" parameterType="_int">
 		select
+		    bj.join_no as joinNo,
 		    bj.member_no as memberNo,
-		    m.member_name as memberName,
+		    bj.payer_name as payerName,
 		    to_char(bj.payer_date,'""YYYY"년 "MM"월 "DD"일"') as payerDate,
 		    bj.refund_account as refundAccount,
 		    bj.refund_bank	as refundBank,
 		    bj.refund_name as refundName,
 		    bj.receiver_name as receiverName,
 		    bj.receiver_addr as receiverAddr,
-		    bj.payer_name as payerName,
 		    bj.receiver_phone as receiverPhone,
-		    op.detail_name as detailName,
-		    bl.order_count as orderCount,
 		    bj.deposit_price as depositPrice
 		from board_join bj 
-		join board_order bl on bj.join_no = bl.join_no
 		join board_tbl b on b.board_no = bj.board_no
-		join board_option op on bl.option_no = op.option_no
-		join member_tbl m on m.member_no = bj.member_no 
+		join member_tbl m on m.member_no = bj.member_no
 		where b.board_no = #{parameter}
 	</select>
 	
 	
-	
+	<select id="selectJoinerOrder" resultType="bl" parameterType="_int">
+		select
+		    bj.join_no as joinNo,
+		    bo.detail_name as oderName,
+		    bo.detail_price as orderPrice,
+		    bl.order_count as orderCount
+		from board_join bj
+		join board_order bl on bj.join_no = bl.join_no
+		join board_option bo on bl.option_no = bo.option_no
+		where bj.join_no = #{parameter}
+	</select>
 	
 	
 </mapper>
