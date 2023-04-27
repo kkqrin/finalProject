@@ -355,7 +355,7 @@
 	                d_category_no as detailCategoryNo, 
 	                board_writer as boardWriter,
 	                to_char(board_date,'yyyy-mm-dd') as boardDate,
-	                board_start as boardStart, 
+	                to_char(board_start,'yyyy-mm-dd') as boardStart, 
 	                to_char(board_end,'yyyy-mm-dd') as boardEnd,
 	                board_status as boardStatus
 	            from board_tbl bt
@@ -555,18 +555,15 @@
 	
 	<select id="selectCountMonthCategorySalesData" parameterType="_int" resultType="sd"> <!-- 매출보고서 작성 -->
 		select 
-			pc.category_no as categoryNo,
 			nvl(sum(od.order_detail_cnt * od.order_sale_price),0) as totalSales,
             nvl(sum(od.order_detail_cost * od.order_detail_cnt),0) as totalCost
             
 			from order_detail od 
-			join product_tbl pdt on (od.product_no = pdt.product_no)
-			join detail_category dc on (pdt.d_category_no = dc.d_category_no)
-			join product_category pc on (dc.category_no = pc.category_no)
+            join product_tbl pt on (od.product_no = pt.product_no)
+			join detail_category dc on (pt.d_category_no = dc.d_category_no)
 			join order_tbl ot on (od.order_no = ot.order_no) 
 			
 		where ot.order_status = 1 and dc.category_no = #{_parameter}
-        group by pc.category_no
 	</select>
 	
 	<select id="selectMonthSalesData" parameterType="map" resultType="sd"> 

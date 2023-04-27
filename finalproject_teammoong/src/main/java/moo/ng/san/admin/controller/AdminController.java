@@ -266,15 +266,33 @@ public class AdminController {
 	/* 매출보고서 출력 새창 경로*/
 	@RequestMapping(value="salesReportPrint.do")
 	public String salesReportPrint(Model model) {
+		ArrayList<SalesData> list = new ArrayList<SalesData>();
+		int totalSales = 0;
+		int totalCost = 0;
+		for(int i=1;i<14;i++) { // 카테고리 개수 
+			SalesData sd = service.selectCountMonthCategorySalesData(i); 
+			sd.setCategoryNo(i);
+			list.add(sd); 
+			totalSales += sd.getTotalSales();
+			totalCost += sd.getTotalCost();
+		}
+		int profit = totalSales - totalCost;
+		
+		
+		model.addAttribute("list",list);
+		model.addAttribute("totalSales",totalSales);
+		model.addAttribute("totalCost",totalCost);
+		model.addAttribute("profit",profit);
 		
 		return "admin/salesReport";
 	}
 	
 	
 	/* 매출보고서 작성 */
+	/*
 	@ResponseBody
 	@RequestMapping(value="ajaxSalesReportPrint.do", produces = "application/json;charset=utf-8")
-	public String ajaxSalesReportPrint() {
+	public String ajaxSalesReportPrint(Model model) {
 		ArrayList<SalesData> list = new ArrayList<SalesData>();
 		 
 		for(int i=1;i<14;i++) { // 카테고리 개수 
@@ -282,13 +300,12 @@ public class AdminController {
 			sd.setCategoryNo(i);
 			list.add(sd); 
 		}
+		model.addAttribute("list",list);
 		
-		Gson gson = new Gson(); 
-		String result = gson.toJson(list); 
-		return result;
-		
-		
+		return null;
 	}
+	*/
+	
 	
 	/* 카테고리별 매출관리 */
 	// 카테고리별 매출 중 연간 카테고리 매출
@@ -699,7 +716,7 @@ public class AdminController {
 	
 	// 신고회원 회원등급 update
 	@ResponseBody
-	@RequestMapping(value="/ajaxReportMemberUpdate.do")
+	@RequestMapping(value="/ajaxReportMemberUpdate.do", produces = "application/json;charset=utf-8")
 	public String reportMemberUpdate(Member m) {
 		int result = service.updateReportMember(m);
 		if(result > 0) {

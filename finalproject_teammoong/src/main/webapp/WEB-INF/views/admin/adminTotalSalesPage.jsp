@@ -145,8 +145,11 @@
 <script>
 	  
   const chartDataUrl = "https://example.com/data.json";
+  
 	$(document).ready(function() {
+		
 		var totalSalesCount = (".totalSalesCount");
+		
 				$.ajax({
 					url: 'ajaxTotalSalesManage.do',
 				    dataType: 'json',
