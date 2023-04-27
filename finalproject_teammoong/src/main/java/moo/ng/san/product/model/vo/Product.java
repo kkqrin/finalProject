@@ -23,5 +23,11 @@ public class Product {
 	private String thumbnail;
 	private ArrayList<String> fileList;
 	
+	//공구때문에 추가된 VO
+	private int gongguNo;
+	private int detailGongguNo;
+	private int gongguPayNo;
+	private int memberNo;
+	
 	private int presentCnt; // 현재 남은 수량
 }
