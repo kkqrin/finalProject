@@ -103,7 +103,7 @@ public class CouponController {
 			for(Point p: list) {
 				int pointStatus = p.getPointStatus();
 				int pointEa = p.getPointEa();
-				if(pointStatus == 3 || pointStatus == 6) {
+				if(pointStatus == 3 || pointStatus == 6 || pointStatus == 7) {
 					totalPoint -= pointEa; // minusPoint를 따로 선언하지 않고 바로 totalPoint에 빼줌
 				} else {
 					totalPoint += pointEa; // plusPoint를 따로 선언하지 않고 바로 totalPoint에 더해줌

@@ -10,12 +10,14 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import moo.ng.san.basket.model.vo.Basket;
+import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.category.model.vo.Category;
 import moo.ng.san.category.model.vo.DetailCategory;
 import moo.ng.san.product.model.vo.FileVO;
 import moo.ng.san.product.model.vo.Option;
 import moo.ng.san.product.model.vo.Product;
 import moo.ng.san.product.model.vo.RecentProduct;
+import moo.ng.san.product.model.vo.searchBarVO;
 
 @Repository
 public class ProductDao {
@@ -193,6 +195,16 @@ public class ProductDao {
 		List list = sqlSession.selectList("product.selectSoldOutProductList");
 		
 		return (ArrayList<Product>)list;
+	}
+
+	public ArrayList<Product> searchProductList(searchBarVO sb) {
+		List list = sqlSession.selectList("product.searchProductList",sb);
+		return (ArrayList<Product>)list;
+	}
+
+	public ArrayList<Board> searchBoardList(searchBarVO sb) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

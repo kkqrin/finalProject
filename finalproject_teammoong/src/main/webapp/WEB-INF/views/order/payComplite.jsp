@@ -111,7 +111,7 @@
 					</tr>
 				</table>
 			</div>
-			<input type="hidden" name="orderNo" value="${order.orderNo }">
+			
 			<div class="area-btn center">
 				<a href="/myOrderList.do" class="btn btn-sec size02"">주문상세보기</a>
 				<a href="/main.do" class="btn btn-black size02">메인으로</a>
@@ -124,6 +124,8 @@
             		<div class="area-btn center">
                			<button type="button" id="confirmBtn" class="btn size01 btn-pri">확인</button>
                			<button type="button" id="cancelBtn" class="btn size01 btn-dkgray">취소</button>
+               			<input type="hidden" id="orderNo" name="orderNo" value="${order.orderNo }">
+               			<input type="hidden" id="memberNo" name="memberNo" value="${sessionScope.m.memberNo }">
             		</div>
         		</div>
     		</div>
@@ -150,11 +152,14 @@
 	        });
 	    });
 		$("#confirmBtn").on("click", function(){
+			const orderNo = $("#orderNo").val();
+			const memberNo = $("#memberNo").val();
 			$.ajax({
 				url: "/payCancel.do",
 				type: "get",
-				data: {orderNo : orderNo},
+				data: {orderNo : orderNo, memberNo : memberNo},
 				success: function(data) {
+					console.log(data);
 					if(data == "success"){
 						alert("결제 취소");
 						$("#orderTbl").hide();

@@ -261,17 +261,18 @@
 	
 	
 	
-	<select id="selectTotalPoint" resultType="_int" parameterType="_int">
+	<select id="selectTotalPoint" resultType="point" parameterType="_int">
 		select nvl(
 		        (select sum(point_ea) as pluspoint
 		        from point_tbl
 		        where point_status in (0,1,2,4,5)
 		        and member_no = #{parameter})
 		    -
-		        (select sum(point_ea) as minuspoint
+		        nvl((select sum(point_ea) as minuspoint
 		        from point_tbl
 		        where point_status in (3,6)
-		        and member_no = #{parameter}),0)as point
+		        and member_no = #{parameter}),0)
+		        ,0)as pointEa
 		from dual
 	</select>
 	

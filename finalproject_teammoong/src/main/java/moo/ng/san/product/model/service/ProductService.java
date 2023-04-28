@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import moo.ng.san.basket.model.vo.Basket;
+import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.category.model.vo.Category;
 import moo.ng.san.category.model.vo.DetailCategory;
 import moo.ng.san.member.model.vo.Member;
@@ -16,6 +17,7 @@ import moo.ng.san.product.model.vo.Option;
 import moo.ng.san.product.model.vo.Product;
 import moo.ng.san.product.model.vo.ProductPageData;
 import moo.ng.san.product.model.vo.RecentProduct;
+import moo.ng.san.product.model.vo.searchBarVO;
 @Service
 public class ProductService {
 	@Autowired
@@ -321,6 +323,15 @@ public class ProductService {
 			p.setFileList(productFileList);
 		}
 		return list;
+	}
+
+	public ArrayList<Product> searchProductList(searchBarVO sb) {
+			ArrayList<Product> productList = dao.searchProductList(sb);
+			for(Product p : productList) {
+				ArrayList<String> productFileList = dao.selectProductFiles(p.getProductNo());
+				p.setFileList(productFileList);
+			}
+				return productList;
 	}
 
 

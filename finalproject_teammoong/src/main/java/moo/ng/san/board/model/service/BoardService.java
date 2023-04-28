@@ -15,6 +15,7 @@ import moo.ng.san.board.model.vo.BoardPageData;
 import moo.ng.san.board.model.vo.FileVO;
 import moo.ng.san.category.model.vo.Category;
 import moo.ng.san.member.model.vo.Member;
+import moo.ng.san.product.model.vo.searchBarVO;
 
 @Service
 public class BoardService {
@@ -220,6 +221,7 @@ public class BoardService {
 
 
 
+
 	public ArrayList<Category> selectCategoryList() {
 		
 		ArrayList<Category> list = dao.selectCategoryList();
@@ -243,6 +245,15 @@ public class BoardService {
 
 	public int selectJoinNo() {
 		return dao.selectJoinNo();
+
+	public ArrayList<Board> searchBoardList(searchBarVO sb) {
+		ArrayList<Board> list = dao.searchBoardList(sb);
+		for(Board b : list) {
+			ArrayList<String> fileList = dao.selectBoardImg();
+			b.setFileList(fileList);
+		}
+		return null;
+
 	}
 
 
