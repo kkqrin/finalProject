@@ -351,4 +351,12 @@ public class MemberController {
 	}
 	
 	
+	
+	@RequestMapping(value = "/errorTest.do")
+	public String errorTest() {
+		return "common/error";
+	}
+	
+	
+	
 }//MemberController
