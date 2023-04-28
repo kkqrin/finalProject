@@ -99,7 +99,7 @@ sup{
 				</tr> 
 				<tr>
 					<td style="text-align:left;" colspan="4">
-						<input type="text" name="payerName"  required placeholder="입금자명"> 
+						<input type="text" name="payerName" placeholder="입금자명"  required > 
 						<span class="comment"></span>
 					</td>
 				</tr>
@@ -132,7 +132,14 @@ sup{
 							${bo.detailCount}
 						</td>
 						<td>
-							<input type="text" id="totalEaInput" name="detailCount" class="detailCount" name="orderCount" placeholder="수량 입력" value="0" required>
+							<c:choose>
+								<c:when test="${bo.detailCount eq 0}">
+									<input type="text" placeholder="품절" disabled="disabled">
+								</c:when>
+								<c:otherwise>
+									<input type="text" id="totalEaInput" class="detailCount" name="orderCount" placeholder="수량 입력" value="0" required>
+								</c:otherwise>
+							</c:choose>
 						</td>
 					</tr>
 					</c:forEach>
@@ -269,7 +276,7 @@ sup{
 
 	$("[type='submit']").on("click",function(){
 		if(	$("[name='payerDate']").val()==""){
-			alert("입금예정 날짜를 선택해주세요!!");
+			alert("입금예정 날짜를 선택해주세요!");
 		}
 		let resultChk = true;
 		$.each(result,function(index,item){
@@ -281,6 +288,9 @@ sup{
 			event.preventDefault();
 		}
 	});
+	
+
+	
 	
 
 	$( function() {
@@ -545,8 +555,41 @@ sup{
 	};
 		
 		
-		
-		
+	
+	
+	// 	jqueryAlert
+	function optionjQueryAlert(type, msg) {
+        let $type = type;
+        let messageBox = msg;
+        switch ($type) {
+            case 'info':
+            messageBox = $.parseHTML('<div class="alert__info" style="line-height:100px;text-align:center;"><div class="title" style="margin-bottom:10px;color:var(--info);padding:0;">뭉쳐야산다</div><br>'+msg+'</div>');
+            break;
+        }
+        $("body").append(messageBox);
+        $(messageBox).dialog({
+            dialogClass :$type,
+            // open: $(messageBox).append(msg),
+            draggable: false,
+            modal: true,
+			width: 500,
+            buttons: {
+                "닫기": function () {
+                    $(this).dialog("close");
+                }
+            },
+            show: {
+                effect: 'fade',
+                duration: 200 //at your convenience
+            },
+            hide: {
+                effect: 'fade',
+                duration: 200 //at your convenience
+            }
+        });
+    };
+
+
 	
 // 		$("[type='submit']").on("click",function(){
 			

@@ -13,6 +13,7 @@ import moo.ng.san.board.model.vo.BoardOption;
 import moo.ng.san.board.model.vo.BoardOrder;
 import moo.ng.san.board.model.vo.BoardPageData;
 import moo.ng.san.board.model.vo.FileVO;
+import moo.ng.san.category.model.vo.Category;
 import moo.ng.san.member.model.vo.Member;
 
 @Service
@@ -130,6 +131,15 @@ public class BoardService {
 
 	public int insertBoardJoin(BoardJoin bj) {
 		int result = dao.insertBoardJoin(bj);
+		
+		// 재고 update
+		if(result>0) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			System.out.println("오더카운트 :  "+bj.getOrderCount());
+			map.put("boardNo", bj.getBoardNo());
+			map.put("orderCount", bj.getOrderCount());
+			result = dao.updateBoardDetailCount(map);
+		}
 
 		return result;
 	}
@@ -205,6 +215,34 @@ public class BoardService {
 
 	public Member selectOneMember(String memberId) {
 		return dao.selectMemberId(memberId);
+	}
+
+
+
+
+	public ArrayList<Category> selectCategoryList() {
+		
+		ArrayList<Category> list = dao.selectCategoryList();
+		
+		return list;
+	}
+
+
+
+
+	public ArrayList<Board> selectAllBoardList(int categoryNo) {
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("categoryNo", categoryNo);
+		
+		return dao.selectBoardAllList(map);
+	}
+
+
+
+
+	public int selectJoinNo() {
+		return dao.selectJoinNo();
 	}
 
 
