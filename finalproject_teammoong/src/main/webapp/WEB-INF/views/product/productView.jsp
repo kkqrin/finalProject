@@ -17,7 +17,7 @@
 	<script src="https://kit.fontawesome.com/285f888d1c.js" crossorigin="anonymous"></script>
     <!--productView.css-->
     <link rel="stylesheet" href="/resources/css/product/productView.css">
-    <script src="/resources/js/jquery-3.6.0.js"></script>
+    <!-- <script src="/resources/js/jquery-3.6.0.js"></script> -->
      <!-- 리뷰css  -->
     <link rel="stylesheet" href="/resources/css/product/review.css"/>
 </head>
@@ -301,7 +301,8 @@
                     </div>
                     <c:if test="${sessionScope.m.memberId eq g.memberId }">
                     <form action="/updateGonggu.do" method="post">
-                    <input type="hidden" name="gongguPayNo" value="${g.gongguPayNo}">
+                    <input type="hidden" name="gongguNo" value="${g.gongguNo}">
+                    <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
                     <button type="submit" class="btn btn-pri size01" id="orderBtn">뭉산취소</button>
                     </form>
                     </c:if>
@@ -343,12 +344,12 @@
         <div class="product-review-logo product-review"><h3>리뷰</h3></div>
         <button type="button" id="insertReview" class="btn btn-pri size01" data-modal="#modalReview">리뷰하기</button>
         <div class="content-wrap">
-            <pre>
+            <!-- <pre>
                 남은 거 : 포토후기 더보기 > 상세보기 이미지 왜 바로 안뜨는지? 나중에 뜨는지?
             </pre>
                 <h1>포토후기</h1>
                 <!-- 최근 5개의 리뷰만 노출 -->
-                <div class="photo-review-wrap">
+                <!-- <div class="photo-review-wrap">
                     <div class="photo-review-list">
                         <div class="photo-review-item">
                             <div class="photo-review-img">
@@ -377,7 +378,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
         
                 <h1>전체리뷰</h1>
                 <div class="all-review-wrap">
@@ -424,9 +425,12 @@
                                 <div class="review-content">${i.reviewContent}</div>
                                 <div class="review-like">
                                     <div>
-                                        <span class="material-symbols-outlined review-like-on">add_reaction</span>
-                                        <span class="material-symbols-outlined">sentiment_very_satisfied</span>
-                                        <a>도움이 돼요 ${i.reviewLike}</a>
+                                        <input type="hidden" value="${i.rating}">
+                                        <c:if test="${SessionScope.m.memberId eq i.reviewWriter }">
+                                        	<form action="/deleteReview.do" method="post">
+                                        		<button type="button" class="btn btn-pri size01">삭제</button>
+                                        	</form>
+                                        </c:if>
                                     </div>
                                 </div>
                             </div>
@@ -846,21 +850,21 @@
 	${i.reviewContent }
 </c:forEach>
 
-<!-- <jsp:include page="/temporReview.jsp" /> -->
+
 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 
-    
-    
+
+
 </body>
+<script src="/resources/js/productView.js"></script>	
     	<!-- 슬릭 슬라이더 js -->
 	<script type="text/javascript" src="/resources/slick/slick.min.js"></script>
-    <!-- 상품 상세 js -->
-	<script src="/resources/js/productView.js"></script>	
     <!--리뷰js-->
     <script src="/resources/js/review.js"></script>
+    <!-- 상품 상세 js -->
 
         <script>
             // 상품 옵션 select

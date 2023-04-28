@@ -778,7 +778,14 @@ public class AdminService {
 		
 		return list;
 	}
-	
+
+	public ArrayList<Product> selectBestProductCount() {
+		ArrayList<Product> list = dao.selectBestProductCount();
+		
+		return list;
+	}
+
+
 
 
 

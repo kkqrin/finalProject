@@ -39,4 +39,9 @@ public class ReviewDao {
 		List list = sqlSession.selectList("review.selectReviewFile",reviewNo);
 		return (ArrayList<String>)list;
 	}
+
+	public int updateReview(Review review) {
+		int result = sqlSession.update("review.updateReview",review);
+		return result;
+	}
 }

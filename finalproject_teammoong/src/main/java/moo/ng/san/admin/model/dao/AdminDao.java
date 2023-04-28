@@ -356,6 +356,12 @@ public class AdminDao {
 		return (ArrayList<GongguAllInfo>)list;
 	}
 
+	public ArrayList<Product> selectBestProductCount() {
+		List list = sqlSession.selectList("admin.selectBestProductCount");
+		
+		return (ArrayList<Product>)list;
+	}
+
 
 
 

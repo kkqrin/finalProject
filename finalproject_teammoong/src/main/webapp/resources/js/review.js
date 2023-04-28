@@ -62,7 +62,7 @@ $(function(){
     $('.review-img').slick();
     // $('.modal-review-img').slick();
     // 리뷰 메인페이지 슬라이드
-    $(".slick-slide").css("height","238px");
+    $(".all-review-wrap .slick-slide").css("height","238px");
 });
 
 
