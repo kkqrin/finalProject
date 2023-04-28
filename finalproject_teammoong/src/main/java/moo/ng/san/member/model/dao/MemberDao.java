@@ -38,11 +38,11 @@ public class MemberDao {
 	}
 
 	public int insertFirstPoint(Member m) {
-		return sqlSession.insert("point.insertFirstPoint", m.getMemberNo());
+		return sqlSession.insert("member.insertFirstPoint", m.getMemberNo());
 	}
 
-	public Point selectTotalPoint(int memberNo) {
-		return sqlSession.selectOne("point.selectTotalPoint",memberNo);
+	public int selectTotalPoint(int memberNo) {
+		return sqlSession.selectOne("member.selectTotalPoint",memberNo);
 	}
 
 	public int updateMember(Member member) {

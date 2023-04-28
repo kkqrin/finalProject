@@ -91,11 +91,77 @@ public class OrderDao {
 		String productName = sqlSession.selectOne("product.selectProductName",productNo);
 		return productName;
 	}
+	
+	public ArrayList<Order> selectMyOrderList(int memberNo) {
+		List list = sqlSession.selectList("order.selectMyOrderList", memberNo);
+		
+		return (ArrayList<Order>)list;
+	}
 
+	public Order selectMyOrderDetail(int orderNo) {
+		Order o = sqlSession.selectOne("order.selectMyOrderDetail", orderNo);
+		
+		return o;
+	}
+	
+	public ArrayList<Order> selectMyOrderProductList(int orderNo) {
+		List list = sqlSession.selectList("order.selectMyOrderProductList", orderNo);
+		
+		return (ArrayList<Order>)list;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	///////////// 진배님
 	public Order selectOrder(int orderNo) {
 		Order order = sqlSession.selectOne("order.selectOrder",orderNo);
 		return order;
 	}
 
+
+
+	public int cancelOrder(int orderNo) {
+		int result = sqlSession.update("order.cancelOrder",orderNo);
+		return result;
+	}
+
+	public int updatePoint(int orderNo) {
+		int result = sqlSession.update("point.updatePoint",orderNo);
+		return result;
+	}
+
+	public int cancelCoupon(int issueNo) {
+		int result = sqlSession.update("issueCoupon.cancelCoupon",issueNo);
+		return result;
+	}
+
+	
 
 }

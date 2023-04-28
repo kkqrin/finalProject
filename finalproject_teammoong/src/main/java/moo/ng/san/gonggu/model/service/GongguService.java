@@ -78,8 +78,14 @@ public class GongguService {
 		return result;
 	}
 
-	public int updateGonggu(int gongguPayNo) {
-		return dao.updateGonggu(gongguPayNo);
+	public int updateGonggu(Gonggu gonggu) {
+		int gongguPayNo = dao.selectGongguPayNo(gonggu);
+		System.out.println("GongguService에서 gongguPayNo값 :"+gongguPayNo);
+		if(gongguPayNo > 0) {
+			int result = dao.updateGonggu(gongguPayNo);
+			return result; 
+		}
+		return gongguPayNo;
 	}
 
 

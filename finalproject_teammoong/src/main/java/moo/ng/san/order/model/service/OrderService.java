@@ -118,6 +118,47 @@ public class OrderService {
 		return result;
 	}
 
+	public ArrayList<Order> selectMyOrderList(int memberNo) {
+		
+		return dao.selectMyOrderList(memberNo);
+	}
+	
+	public Order selectMyOrderDetail(int orderNo) {
+		
+		return dao.selectMyOrderDetail(orderNo);
+	}
+
+	public ArrayList<Order> selectMyOrderProductList(int orderNo) {
+		
+		return dao.selectMyOrderProductList(orderNo);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//////////////// 진배님
+	
+	
 	public int insertMinusPointEa(Point point) {
 		int result = dao.insertMinusPointEa(point);
 		return result;
@@ -147,6 +188,25 @@ public class OrderService {
 		Order order = dao.selectOrder(orderNo);
 		return order;
 	}
+
+	public int cancelOrder(int orderNo) {
+		int result = dao.cancelOrder(orderNo);
+		if(result>0) {
+			result = dao.updatePoint(orderNo);
+			Order order = dao.selectOrder(orderNo);
+			int issueNo = order.getIssueNo();
+			if(issueNo != 0) {
+				result = dao.cancelCoupon(issueNo); 
+			}
+			
+			
+		}
+		return result;
+	}
+
+
+
+
 
 
 }

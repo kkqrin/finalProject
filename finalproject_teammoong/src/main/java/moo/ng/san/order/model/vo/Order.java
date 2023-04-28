@@ -48,10 +48,13 @@ public class Order {
 	private int deliveryNo;
 	private int deliveryStatus;
 	private int orderDetailNo;
+	private int issueNo;
 	
+	private int orderProductCount; // 주문당 주문상세 행 개수 (상품건수)
 	
-	
-	
+	private int issueNo; // 주문시 사용된 쿠폰 여부 확인용
+	private int minusPointEa; // 사용된 적립금
+	private int plusPointEa; // 적립된 적립금
 
-
+	private int orderSalePrice; // 상품테이블의 productPrice와 productDiscount 계산한 값
 }

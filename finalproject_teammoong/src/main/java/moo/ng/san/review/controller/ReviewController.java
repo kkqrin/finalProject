@@ -40,4 +40,9 @@ public class ReviewController {
 			return "redirect:/";
 		}
 	}
+	@RequestMapping(value="/updateReview.do")
+	public String updateReview(Review review) {
+		int result = service.updateReview(review);
+		return null;
+	}
 }

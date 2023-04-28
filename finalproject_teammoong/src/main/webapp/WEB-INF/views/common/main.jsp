@@ -155,7 +155,7 @@ background: linear-gradient(to top, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Fir
 	.slick-box .addZone img{margin:0 auto;}
 	#mainSlick{max-height: 370px;padding-top: 120px;overflow:hidden;}
 	#mainSlick .slick-prev:before,#mainSlick .slick-next:before{display: none;}
-	#mainSlick .slick-dots{opacity: 0.3;position: absolute;top: 220px;z-index: 100;}
+	#mainSlick .slick-dots{opacity: 0.3;position: absolute;top: 220px;}
 	.add1{background-color: rgb(249,244,241);}
 	.add3{background-color: rgb(226,209,175);}
     </style>
@@ -1218,18 +1218,23 @@ background: linear-gradient(to top, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Fir
     <script src="/resources/js/product.js"></script>
 
     <script>
-        $(document).ready(function(){
-        // 슬릭 padding-bottom
-        $(".popular-product-wrap .slick-list").attr("style", "padding-bottom: 10px; margin-bottom: 250px;");
-
-
-        $(".slick-box").slick({
-            autoplay: true,
-            autoplaySpeed: 5000,
-            infinite: true,
-            fade: true,
-            dots: true
-        });
+    $(document).ready(function(){
+	    // 슬릭 padding-bottom
+	    $(".popular-product-wrap .slick-list").attr("style", "padding-bottom: 10px; margin-bottom: 250px;");
+	
+	
+	    $(".slick-box").slick({
+	        autoplay: true,
+	        autoplaySpeed: 5000,
+	        infinite: true,
+	        fade: true,
+	        dots: true
+	    });
+	    
+	    
+// 	    $(".slick-dots").hover(function(event){
+// 	    	event.stopPropagation();
+// 	    });
     });
     </script>
 </body>

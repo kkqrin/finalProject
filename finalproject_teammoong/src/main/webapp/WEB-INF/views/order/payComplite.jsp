@@ -42,7 +42,7 @@
 			<h1>결제완료</h1>
 				<p>${sessionScope.m.memberName}님의 주문내역 입니다.</p>
 				<p></p>
-			<table>
+			<table id="orderTbl">
 				<tr>
 					<th>주문번호</th>
 					<th style="width: 40%;">주문건</th>
@@ -81,6 +81,9 @@
 						<c:if test="${order.orderStatus == 6 }">
 						환불완료
 						</c:if>
+						<c:if test="${order.orderStatus == 7 }">
+						환불완료
+						</c:if>
 					</td>
 					<td>
 						<button type="button" id="cancelPay" class="btn size01 btn-border-pri">결제취소</button>
@@ -106,9 +109,9 @@
 						<th>배송요청사항</th>
 						<td>${order.deliRequest}</td>
 					</tr>
-					
 				</table>
 			</div>
+			<input type="hidden" name="orderNo" value="${order.orderNo }">
 			<div class="area-btn center">
 				<a href="/myOrderList.do" class="btn btn-sec size02"">주문상세보기</a>
 				<a href="/main.do" class="btn btn-black size02">메인으로</a>
@@ -146,6 +149,22 @@
 	            modal.css("display", "none");
 	        });
 	    });
+		$("#confirmBtn").on("click", function(){
+			$.ajax({
+				url: "/payCancel.do",
+				type: "get",
+				data: {orderNo : orderNo},
+				success: function(data) {
+					if(data == "success"){
+						alert("결제 취소");
+						$("#orderTbl").hide();
+					}
+				},
+				error: function(){
+					console.log("에러")
+				}
+			});
+		});
 	</script>
 </body>
 </html>

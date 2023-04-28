@@ -37,10 +37,15 @@
     .changeOrderStatusBtn{
     	cursor: pointer;
     }
-    img{
-    	width: 100px;
-    	height: 50px;
-    }
+    img {
+ 		 width: 100px;
+ 		 height: 50px;
+ 		 transition: transform 0.2s;
+	}
+
+	img:hover {
+	 	 transform: scale(1.5);
+	}
 
 
 
@@ -51,7 +56,7 @@
     </c:if>
     <div class="adminPage-wrapper" id="adminMemberTable">
         <div class="adminPage-header">
-            <div class="adminPage-title"><a>Moong's Admin</a></div>
+            <div class="adminPage-title"><a href="/#">Moong's Admin</a></div>
         </div>
         <div class="adminPage-back">
             <jsp:include page="/WEB-INF/views/admin/adminSideNavi.jsp"/>
@@ -141,7 +146,7 @@
                                 </tr>
                             </c:forEach>
                             <tr>
-                                <th colspan="12">${pageNavi}</th>
+                                <th colspan="13">${pageNavi}</th>
                             </tr>
                         </table>
                     </div>
@@ -290,6 +295,13 @@
           		 
            });
        	 
+            $("img").hover(function () {
+            	$(this).css("transform", "scale(1.5)"); //이미지 크기를 1.5배로 늘립니다.
+            	},
+            	function () {
+            	$(this).css("transform", "scale(1)"); //이미지 크기를 원래 크기로 돌립니다.
+            	}
+			);   	
             
             
         

@@ -53,14 +53,51 @@ section{
 	position:relative;
 	margin: auto;
 }
+.mainSelect{
+	position: absolute;
+	top:8px;
+	width: 130px;
+	cursor:pointer;
+	text-align: center;
+}
+.mainSelect>div{
+	position: relative;
+}
+.mainSelect ul{
+	width: 130px;
+	position: absolute;
+	box-shadow: 0px 8px 6px -6px #666;
+	border:1px solid #f3f3f3;
+	border-top:none;
+	top:33px;
+	border-radius: 5px;
+	background: #fff;
+	display: none;
+}
+.mainSelect ul>li{
+	padding: 10px;
+}
+.mainSelect ul>li:hover{
+	background: var(--bg-dim);
+}
+#customSelectBox>div{
+	position: relative;
+}
+#customSelectBox>div .expand{
+	position: absolute;
+	top:3px;
+	right: 0;
+}
+
 .mainSearch-input{
 	width: 100%;
 	border-radius:0px !important;
 	border-bottom: 3px solid #3a3a3a;
+	padding-left: 160px !important;
 }
 .mainSearch>button{ 
 	position: absolute;
-	top:8px ; right: 5px;
+	top:6px ; right: 5px;
 	cursor: pointer;
 	font-size: 26px;
 }

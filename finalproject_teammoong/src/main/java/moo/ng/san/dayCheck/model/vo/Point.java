@@ -13,4 +13,5 @@ public class Point {
 	private int pointEa;
 	private String pointDate;
 	private int pointStatus;
+	private int orderNo;
 }

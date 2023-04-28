@@ -298,7 +298,7 @@
 					(SELECT FILEPATH FROM PRODUCT_IMG WHERE P_IMG_NO=(SELECT MIN(P_IMG_NO) FROM PRODUCT_IMG  WHERE PRODUCT_NO=p.PRODUCT_NO))  AS thumbnail
 		from product_tbl p
 		order by p.PRODUCT_DISCOUNT desc)p)
-		WHERE RNUM BETWEEN 1 AND 2
+		WHERE RNUM BETWEEN 1 AND 3
 	</select>
 	
 	<select id="selectSoldOutProductList" resultType="p">
@@ -318,7 +318,7 @@
 					(SELECT FILEPATH FROM PRODUCT_IMG WHERE P_IMG_NO=(SELECT MIN(P_IMG_NO) FROM PRODUCT_IMG  WHERE PRODUCT_NO=p.PRODUCT_NO))  AS thumbnail
 		from product_tbl p
 		order by p.PRODUCT_ea )p)
-		WHERE RNUM BETWEEN 1 AND 2
+		WHERE RNUM BETWEEN 1 AND 3
 
 	</select>
 </mapper>

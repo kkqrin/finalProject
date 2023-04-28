@@ -23,9 +23,9 @@ public class GongguController {
 	}
 	
 	@RequestMapping(value="/updateGonggu.do")
-	public String updateGonggu(int gongguPayNo) {
-		System.out.println("gongguController에서 gongguPayNo값"+gongguPayNo);
-		int result = service.updateGonggu(gongguPayNo);
+	public String updateGonggu(Gonggu gonggu) {
+		System.out.println("gongguController에서 gonggu값 :"+gonggu);
+		int result = service.updateGonggu(gonggu);
 		return "redirect:/";
 	}
 	
