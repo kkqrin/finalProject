@@ -28,44 +28,61 @@
         color: #253033;
         overflow-y: auto;
     }
+    .delivery{
+    	padding-top: 20px;
+    }
+    .area-btn{
+    	padding-top: 20px;
+    }
 </style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 		<div class="content-wrap">
 			<h1>결제완료</h1>
-				${sessionScope.m.memberName}님의 주문내역 입니다.
+				<p>${sessionScope.m.memberName}님의 주문내역 입니다.</p>
+				<p></p>
 			<table>
 				<tr>
 					<th>주문번호</th>
 					<th style="width: 40%;">주문건</th>
-					<th>총 결제금액</th>
-					<th>결제날짜</th>
+					<th>상품금액</th>
+					<th>결제금액</th>
+					<th>주문날짜</th>
 					<th>주문상태</th>
 					<th style="width: 9%;"></th>
 				</tr>
 				<tr>
-					<td>${reOrder.orderNo }</td>
-					<td><a href="#" id="detailOrder">주문 상세</a></span></td>
-					<td>${reOrder.orderDate }</td>
+					<td>${order.orderNo }</td>
+					<td>${productName}
+						<c:if test="${orderCnt != 0 }"> 
+						외 ${orderCnt}건
+						</c:if>
+					</td>
+					<td>${order.orderPrice }</td>
+					<td>${order.totalPrice }</td>
+					<td>${order.orderDate }</td>
 					<td>
-						<c:if test="${reOrder.orderStatus == 1 }">
-							결제완료
+						<c:if test="${order.orderStatus == 1 }">
+						결제완료
 						</c:if>
-						<c:if test="${reOrder.orderStatus == 2 }">
-							배송준비중
+						<c:if test="${order.orderStatus == 2 }">
+						배송준비중
 						</c:if>
-						<c:if test="${reOrder.orderStatus == 3 }">
-							배송중
+						<c:if test="${order.orderStatus == 3 }">
+						배송중
 						</c:if>
-						<c:if test="${reOrder.orderStatus == 4 }">
-							배송완료
+						<c:if test="${order.orderStatus == 4 }">
+						배송완료
 						</c:if>
-						<c:if test="${reOrder.orderStatus == 5 }">
-							결제취소
+						<c:if test="${order.orderStatus == 5 }">
+						결제취소
 						</c:if>
-						<c:if test="${reOrder.orderStatus == 6 }">
-							환불완료
+						<c:if test="${order.orderStatus == 6 }">
+						환불완료
+						</c:if>
+						<c:if test="${order.orderStatus == 7 }">
+						환불완료
 						</c:if>
 					</td>
 					<td>
@@ -73,21 +90,33 @@
 					</td>
 				</tr>				
 			</table>
-			<div class="order">
+			<div class="delivery">
+				<h3>배송정보</h3>
 				<table>
 					<tr>
-						<th>상품명</th>
-						<th>수량</th>
-						<th>가격</th>
+						<th style="width: 20%;">수령인</th>
+						<td>${order.deliReceiver}</td>
 					</tr>
-					<c:forEach items="${reOrderDetail }" var="o">
-						
-					</c:forEach>
+					<tr>
+						<th>연락처</th>
+						<td>${order.deliPhone}</td>
+					</tr>
+					<tr>
+						<th>배송지</th>
+						<td>${order.deliAddr}</td>
+					</tr>
+					<tr>
+						<th>배송요청사항</th>
+						<td>${order.deliRequest}</td>
+					</tr>
 				</table>
 			</div>
-			<div>
-					
+			<input type="hidden" name="orderNo" value="${order.orderNo }">
+			<div class="area-btn center">
+				<a href="/myOrderList.do" class="btn btn-sec size02"">주문상세보기</a>
+				<a href="/main.do" class="btn btn-black size02">메인으로</a>
 			</div>
+			
 			<div id="myModal" class="modal">
         		<div class="modal-content">
             	<h3>결제 취소</h3>
@@ -120,6 +149,10 @@
 	            modal.css("display", "none");
 	        });
 	    });
+		$("#confirmBtn").on("click", function(){
+			const orderNo = $("[name=orderNo]").val();
+			location.href = "/payCancel.do?orderNo="+orderNo;
+		});
 	</script>
 </body>
 </html>

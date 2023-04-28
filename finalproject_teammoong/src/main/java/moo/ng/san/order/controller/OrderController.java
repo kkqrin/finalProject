@@ -1,6 +1,8 @@
 package moo.ng.san.order.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import moo.ng.san.member.model.service.MemberService;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.order.model.service.OrderService;
 import moo.ng.san.order.model.vo.Order;
+import moo.ng.san.pay.model.vo.OrderDetail;
 import moo.ng.san.product.model.service.ProductService;
 import moo.ng.san.product.model.vo.Product;
 
@@ -90,7 +93,10 @@ public class OrderController {
 	}
 
 	@RequestMapping(value="/myOrderList.do")
-	public String myOrderList() {
+	public String myOrderList(@SessionAttribute(required=false) Member m, Model model) {
+		
+		ArrayList<Order> myOrderList = service.selectMyOrderList(m.getMemberNo());
+		model.addAttribute("myOrderList", myOrderList);
 		
 		return "order/myOrderList";
 	}
@@ -103,44 +109,61 @@ public class OrderController {
 	
 	
 //	주문하기
-	@ResponseBody
 	@RequestMapping(value="/order.do")
 	public String order(@SessionAttribute(required=false) Member m, 
-			int totalPrice, String deliReceiver, String deliPhone, String deliAddr1, String deliAddr2, String deliRequest
+			int totalPrice, int issueNo, int minusPointEa, int plusPointEa, String deliReceiver, String deliPhone, String deliAddr1, String deliAddr2, String deliRequest
 			, int[] productNo, int[] optionInfoNo, int[] orderDetailCnt, int[] orderDetailCost, int[] orderSalePrice, int orderPrice, Model model) {
 		
-//		order table
-//		System.out.println("order.do의 totalPrice : " + totalPrice );
-//		System.out.println("order.do의 deliveryReceiver : " + deliReceiver );
-//		System.out.println("order.do의 deliPhone : " + deliPhone );
-//		System.out.println("order.do의 deliAddr1 : " + deliAddr1 );
-//		System.out.println("order.do의 deliAddr2 : " + deliAddr2 );
-		
+		String deliAddr = deliAddr1+deliAddr2;
 		// 오더 테이블엔 상품 번호 필요 없을 듯
-		int result = service.insertOrder(m.getMemberNo(), totalPrice, deliReceiver, deliPhone, deliAddr1, deliRequest, orderPrice);
+		int result = service.insertOrder(m.getMemberNo(), totalPrice, deliReceiver, deliPhone, deliAddr, deliRequest, orderPrice, issueNo);
 		
 		if(result>0) {
-			System.out.println("order insert success");
 			
 			// order detail
 			// 최근 insert된 orderNo
 			int orderNo = service.selectMaxOrderNo();
 			
-			System.out.println("orderNo : "+orderNo);
-			
 			// 주문내역에 금액관련 두개 있어야할 듯 1. 실 결제금액 -> 적립금/쿠폰 금액 들어간 totalPrice 2. 주문서당 총 상품금액 (할인가) OrderPrice
 			result = service.insertOrderDetail(orderNo, productNo, optionInfoNo, orderDetailCnt, orderDetailCost, orderSalePrice);
 			
-			if(result>0) {
-				System.out.println("order detail tbl insert success");
-				
-				return "order success";
+			if(result> productNo.length) {
+				Point point = new Point();
+				point.setMemberNo(m.getMemberNo());
+				point.setOrderNo(orderNo);;
+				if(minusPointEa != 0) {
+					point.setPointEa(minusPointEa);
+					result = service.insertMinusPointEa(point);					
+				}
+				if(issueNo !=0) {
+					result = service.updateCoupon(issueNo);
+				}
+				point.setPointEa(plusPointEa);
+				result = service.insertPlusPointEa(point);
 			}
 			
-//			result = service.insertOrderDetail()
 			
+			
+
 		}
+		int orderNo = service.selectMaxOrderNo();
+		return "redirect:/payComplite.do?orderNo=" + orderNo + "&productNo=" + Arrays.toString(productNo).replaceAll("[\\[\\]\\s]", "");
+
+	}
+	
+	@RequestMapping(value="/payComplite.do")
+	public String payComplite(int orderNo, int productNo[], Model model) {
 		
-		return "fail";
+		Order order = service.selectOrder(orderNo);
+		ArrayList<OrderDetail> orderDetailList = service.selectOrderDetail(orderNo);
+		System.out.println(productNo.length);
+		int orderCnt = (productNo.length -1);
+		String productName = service.selectProduct(productNo[0]);
+		
+		model.addAttribute("orderDetailList", orderDetailList);
+		model.addAttribute("order",order);
+		model.addAttribute("orderCnt",orderCnt);
+		model.addAttribute("productName",productName);
+		return "order/payComplite";
 	}
 }

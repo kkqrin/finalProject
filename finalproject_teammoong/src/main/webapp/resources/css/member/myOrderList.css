@@ -23,7 +23,7 @@
 }
 
 .myorder-order-title-box{
-    background-color: cornflowerblue;
+    /* background-color: cornflowerblue; */
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -39,7 +39,7 @@
     white-space: normal;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     word-break: keep-all;
     /* height: 50px; */
@@ -62,7 +62,7 @@
 .myorder-total-price,
 .myorder-total-count{
     width: 150px;
-    background-color: aliceblue;
+    /* background-color: aliceblue; */
     padding: 10px;
     text-align: center;
     font-size: 16px;
@@ -90,7 +90,8 @@
 .ab-product-count{
     width: 30px;
     height: 30px;
-    background-color: rgba(255, 105, 180, 0.6);
+    /* background-color: rgba(255, 105, 180, 0.6); */
+    background-color: rgba(255, 136, 0, 0.8);
     color: #f2f2f2;
     position: absolute;
     right: 0;
@@ -128,9 +129,23 @@
     align-items: center;
 }
 
+.myorder-btn-zone{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 85px;
+    top: 82px;
+}
 
+.myorder-btn-zone>form>button.btn{
+    font-size: 12px;
+    padding: 6px 10px;
+}
 
-
+.myorder-total-price{
+    position: relative;
+}
 
 
 /* 뷰 */

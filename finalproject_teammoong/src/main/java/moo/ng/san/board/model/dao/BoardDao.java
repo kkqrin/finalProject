@@ -13,6 +13,7 @@ import moo.ng.san.board.model.vo.BoardJoin;
 import moo.ng.san.board.model.vo.BoardOption;
 import moo.ng.san.board.model.vo.BoardOrder;
 import moo.ng.san.board.model.vo.FileVO;
+import moo.ng.san.member.model.vo.Member;
 
 @Repository
 public class BoardDao {
@@ -93,6 +94,14 @@ public class BoardDao {
 //		List list = sqlSession.selectList("board.selectListBoardOrder",joinNo);
 //		return (ArrayList<BoardOrder>)list;
 //	}
+	public ArrayList<Board> selectBoardYourPage(String memberId) {
+		List list = sqlSession.selectList("board.selectBoardYourPage",memberId);
+		return (ArrayList<Board>)list;
+	}
+	public Member selectMemberId(String memberId) {
+		Member m = sqlSession.selectOne("board.selectMemberId", memberId);
+		return m;
+	}
 	
 
 }

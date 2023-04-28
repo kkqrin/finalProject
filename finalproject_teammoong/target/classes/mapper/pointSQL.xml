@@ -52,15 +52,15 @@
 	</select>
 	<insert id="insertMinusPoint" parameterType="point">
 		insert into point_tbl values
-		(point_tbl_seq.nextval, #{memberNo}, #{pointEa}, sysdate, 3)
+		(point_tbl_seq.nextval, #{memberNo}, #{pointEa}, sysdate, 3, #{orderNo})
 	</insert>
 	<insert id="insertPlusPoint" parameterType="point">
 		insert into point_tbl values
-		(point_tbl_seq.nextval, #{memberNo}, #{pointEa}, sysdate, 2)
+		(point_tbl_seq.nextval, #{memberNo}, #{pointEa}, sysdate, 2, #{orderNo})
 	</insert>
 	
 	<insert id="insertGongguPoint" parameterType="point">
 		insert into point_tbl values
-		(point_tbl_seq.nextval, #{memberNo}, #{pointEa}, sysdate, 6,null)
+		(point_tbl_seq.nextval, #{memberNo}, #{pointEa}, sysdate, 6, #{orderNo})
 	</insert>
 </mapper>

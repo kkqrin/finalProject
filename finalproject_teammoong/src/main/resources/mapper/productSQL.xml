@@ -180,7 +180,7 @@
 			left join basket_option_tbl bo on b.basket_no = bo.basket_no
 			left join option_info_tbl oi on bo.option_info_no = oi.option_info_no
 			where member_no = #{_parameter}
-			order by 1
+			order by 1 desc
 		) B
 	</select>
 	
