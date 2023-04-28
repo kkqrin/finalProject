@@ -195,6 +195,11 @@ public class ProductDao {
 		return (ArrayList<Product>)list;
 	}
 
+	public ArrayList<Product> searchProductList(String searchKeyword) {
+		List list = sqlSession.selectList("product.searchProductList",searchKeyword);
+		return (ArrayList<Product>)list;
+	}
+
 	
 	
 	
