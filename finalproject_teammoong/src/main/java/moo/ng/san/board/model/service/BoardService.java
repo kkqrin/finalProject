@@ -253,8 +253,7 @@ public class BoardService {
 			ArrayList<String> fileList = dao.selectBoardImg();
 			b.setFileList(fileList);
 		}
-		return null;
-
+		return list;
 	}
 
 

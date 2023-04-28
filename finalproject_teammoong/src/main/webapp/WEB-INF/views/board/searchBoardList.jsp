@@ -12,6 +12,7 @@
 	<h1 style="padding-top : 200px">여기여기붙어라 검색 결과</h1>
 	<c:forEach items="${boardList }" var="i">
 		${i.boardName }
+		${i.boardNo }
 	</c:forEach>
 </body>
 </html>
