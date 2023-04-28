@@ -66,10 +66,16 @@ body{
 .center{
 	margin-top : 50px;
 }
+.logo{
+	margin-top: 50px;
+	font-family: 'Dongle', sans-serif;
+    font-size: 42px !important;
+}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Grandstander&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dongle:wght@700&display=swap" rel="stylesheet">
 <body>
 	<div class="ground">
 		<div class="backGround">
@@ -82,6 +88,7 @@ body{
 			<div class="area-btn center">
 			<button class="btn btn-sec size03" onclick="history.back()">뒤로가기</button>
 			</div>
+			<h5 class="logo">뭉쳐야산다</h5>
 		</div>
 	</div>
 </body>
