@@ -51,7 +51,7 @@ public class MemberService {
 		return result;
 	}//insertMember
 
-	public int selectTotalPoint(int memberNo) {
+	public Point selectTotalPoint(int memberNo) {
 		return dao.selectTotalPoint(memberNo);
 	}
 

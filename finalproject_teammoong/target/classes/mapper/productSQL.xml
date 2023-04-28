@@ -321,7 +321,7 @@
 		WHERE RNUM BETWEEN 1 AND 3
 	</select>
 	
-	<select id="searchProductList" parameterType="String" resultType="p">
+	<select id="searchProductList" parameterType="sb" resultType="p">
 		SELECT 
 			PRODUCT_NO AS productNo,
 			D_CATEGORY_NO AS detailCategoryNo,
