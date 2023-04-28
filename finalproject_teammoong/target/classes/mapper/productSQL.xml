@@ -334,7 +334,7 @@
 			PRODUCT_CONTENT AS productContent,
 			PRODUCT_DISCOUNT AS productDiscount
 		FROM PRODUCT_TBL
-		WHERE PRODUCT_NAME LIKE '%#{searchKeyword}%'
+		WHERE PRODUCT_NAME LIKE '%'||#{searchKeyword}||'%'
 	</select>
 	
 	

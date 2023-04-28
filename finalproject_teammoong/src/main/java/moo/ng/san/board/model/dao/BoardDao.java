@@ -1,5 +1,6 @@
 package moo.ng.san.board.model.dao;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,7 @@ import moo.ng.san.board.model.vo.BoardOption;
 import moo.ng.san.board.model.vo.BoardOrder;
 import moo.ng.san.board.model.vo.FileVO;
 import moo.ng.san.member.model.vo.Member;
+import moo.ng.san.product.model.vo.searchBarVO;
 
 @Repository
 public class BoardDao {
@@ -101,6 +103,10 @@ public class BoardDao {
 	public Member selectMemberId(String memberId) {
 		Member m = sqlSession.selectOne("board.selectMemberId", memberId);
 		return m;
+	}
+	public ArrayList<Board> searchBoardList(searchBarVO sb) {
+		List list = sqlSession.selectList("board.searchBoardList",sb);
+		return (ArrayList<Board>)list;
 	}
 	
 
