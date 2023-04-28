@@ -124,13 +124,15 @@ public class OrderController {
 			// 최근 insert된 orderNo
 			int orderNo = service.selectMaxOrderNo();
 			
+			
 			// 주문내역에 금액관련 두개 있어야할 듯 1. 실 결제금액 -> 적립금/쿠폰 금액 들어간 totalPrice 2. 주문서당 총 상품금액 (할인가) OrderPrice
 			result = service.insertOrderDetail(orderNo, productNo, optionInfoNo, orderDetailCnt, orderDetailCost, orderSalePrice);
 			
-			if(result> productNo.length) {
+			if(result> (productNo.length-1)) {
 				Point point = new Point();
 				point.setMemberNo(m.getMemberNo());
 				point.setOrderNo(orderNo);;
+				
 				if(minusPointEa != 0) {
 					point.setPointEa(minusPointEa);
 					result = service.insertMinusPointEa(point);					
@@ -202,8 +204,8 @@ public class OrderController {
 	
 	@ResponseBody
 	@RequestMapping(value="/payCancel.do")
-	public String payCancel(int orderNo) {
-		int result = service.cancelOrder(orderNo);
+	public String payCancel(int orderNo, int memberNo) {
+		int result = service.cancelOrder(orderNo, memberNo);
 		if(result>0) {
 			return "success";
 		}else {

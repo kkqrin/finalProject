@@ -101,7 +101,7 @@
 					<tr>
 			            <td colspan="2">카테고리<sup>*</sup></td>
 			            <td>
-			                <select name="category">
+			                <select name="category" required>
 			                    <!--아작스로 카테고리 추가  -->
 			                </select>
 			            </td>
@@ -142,7 +142,7 @@
 						<td colspan="4">상세설명<sup>*</sup></td>
 					</tr>
 					<tr>
-						<td colspan="4"><textarea id="boardContent" name="boardContent" required></textarea>
+						<td colspan="4"><textarea id="boardContent" name="boardContent"></textarea>
 						</td>
 					</tr>
 					<tr>
@@ -270,8 +270,8 @@
 	
 	
 	
-	let result = [false, false]; //정규표현식 검사
-	//0제목, 1계좌이름, 2계좌번호
+	let result = [false, false, false, false]; //정규표현식 검사
+	// 0 : 데이터피커, 1:배송시작데이터피커,
 		
 		
 		let i = 1;
@@ -392,6 +392,7 @@
 					var boardStart = start.format('YYYY-MM-DD');
 					var boardEnd = end.format('YYYY-MM-DD');
 					
+					result[0] = true;
 					console.log(boardStart);
 					console.log(boardEnd);
 					
@@ -433,6 +434,7 @@
 					},
 
 				function(start, label) {
+					result[1]=true;
 					console.log(start.format('YYYY-MM-DD'));
 					const deliveryDate = start.format('YYYY-MM-DD');
 					//input hidden 날짜 값 넣어서 디비로 보내기
@@ -468,6 +470,59 @@
     	        return false;
     	    }	
         });
+
+		$(".content-board-wrap>form").submit(function (e) {
+			if($("[name=detailCategoryNo]").val() == 0){
+				// console.log("하하하하00000000000");
+				optionjQueryAlert('info', '카테고리를 선택해주세요!');
+
+				e.preventDefault();
+				return false;
+			}
+			if($("[name=category]").val() == 0){
+				//console.log("00상상상000000000");
+				optionjQueryAlert('info', '카테고리를 선택해주세요!');
+
+				e.preventDefault();
+				return false;
+			}
+
+			if(!result[0]){
+				// optionjQueryAlert('info');
+				// alert("데이터피커1");
+				optionjQueryAlert('info', '날짜를 선택해주세요!');
+
+				// 폼 제출 막음
+				e.preventDefault();
+				return false;
+			}else if(!result[1]){
+				// optionjQueryAlert('info');
+				// alert("데이터피커2");
+				optionjQueryAlert('info', '날짜를 선택해주세요!');
+
+				// 폼 제출 막음
+				e.preventDefault();
+				return false;
+			}				
+
+			if ($('#boardContent').summernote('isEmpty')) {
+				optionjQueryAlert('info', '상세설명을 입력해주세요!');
+
+				e.preventDefault();
+				return false;
+			}
+		});
+
+
+
+
+
+
+
+
+
+
+
         $("#alert03").on("click", function () {
             jQueryAlert('warning',"경고내용경고내용경고내용경고내용");
         });
@@ -537,7 +592,7 @@
 			console.log(inputName);
 			if(inputName > 65) {
 				alert("입력가능한 글자가 초과되었습니다.");
-				result[0]=false;
+				// result[0]=false;
 			}
 		});//제목 정규표현식
 		
@@ -563,18 +618,18 @@
 			if(AcountReg.test(inputAccount)){
 		        $(this).removeClass("error");
 		        $(".caution").css("display","none");
-		        result[2] = true;
+		        // result[2] = true;
 			}else{
 				$(this).addClass("error");
 				$(".caution").css("display","block");
 				$(".caution").css("color","var(--secondary)");
 				$(".caution").html("<a>숫자를 입력해주세요</a>");
-				result[2] = false;
+				// result[2] = false;
 			}
 			if(inputAccount==""){
 				$(this).removeClass("error");
 				$(".caution-tr").eq(0).css("display","none");
-				result[2] = true;
+				// result[2] = true;
 			}
 		});//계좌번호 정규표현식
 	
@@ -584,8 +639,8 @@
 		window.onload = function(){
 			var categoryNo = $("[name=category]").val();
 			$("[name=category]").empty();
-            $("[name=category]").append("<option>카테고리</option>");
-            $("[name=detailCategoryNo]").append("<option>세부카테고리</option>");
+            $("[name=category]").append("<option value='0'>카테고리</option>");
+            $("[name=detailCategoryNo]").append("<option value='0'>세부카테고리</option>");
 		    $.ajax({
 		    	url : "/selectAllCategory.do",
 		    	type : "POST",
@@ -600,7 +655,7 @@
 	    }
 		$("[name=category]").on("selectmenuchange",function(){
 		    $("[name=detailCategoryNo]").empty();
-		    $("[name=detailCategoryNo]").append("<option>세부카테고리</option>");
+		    $("[name=detailCategoryNo]").append("<option value='0'>세부카테고리</option>");
 		    $.ajax({
 		    	url : "/selectDetailCategory.do",
 		    	type : "POST",
@@ -619,7 +674,7 @@
 		});
 		$("[name=detailCategoryNo]").on("selectmenuchange",function(){
 			console.log($(this).val());
-		})
+		});
 		
 
 		
@@ -651,6 +706,55 @@
 					
 				}
 			});
+
+
+			// 	jqueryAlert
+			function optionjQueryAlert(type, msg) {
+                let $type = type;
+                let messageBox = msg;
+                switch ($type) {
+                    case 'info':
+                    messageBox = $.parseHTML('<div class="alert__info" style="line-height:100px;text-align:center;"><div class="title" style="margin-bottom:10px;color:var(--info);padding:0;">뭉쳐야산다</div><br>'+msg+'</div>');
+                    break;
+                }
+                $("body").append(messageBox);
+                $(messageBox).dialog({
+                    dialogClass :$type,
+                    // open: $(messageBox).append(msg),
+                    draggable: false,
+                    modal: true,
+					width: 500,
+                    buttons: {
+                        "닫기": function () {
+                            $(this).dialog("close");
+                        }
+                    },
+                    show: {
+                        effect: 'fade',
+                        duration: 200 //at your convenience
+                    },
+                    hide: {
+                        effect: 'fade',
+                        duration: 200 //at your convenience
+                    }
+                });
+            };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 			
 		//이미지 프리뷰
 // 		$('.responsive').slick({

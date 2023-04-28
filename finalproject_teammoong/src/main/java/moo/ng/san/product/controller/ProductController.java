@@ -468,7 +468,13 @@ public class ProductController {
 		String a = jsonObject.toString();
 		return a;
 	}
-	
+	@RequestMapping(value="/searchBar.do")
+	public String searchBar(String searchKeyword, Model model) {
+		System.out.println("productController에서 searchKeyword값"+searchKeyword);
+		ArrayList<Product> list = service.searchProductList(searchKeyword);
+		model.addAttribute("list",list);
+		return "product/searchProductList";
+	}
 
 	
 }

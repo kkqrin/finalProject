@@ -67,6 +67,9 @@
 													<c:when test="${point.pointStatus == 6}">
 														- ${point.pointEa}
 													</c:when>
+													<c:when test="${point.pointStatus == 7}">
+														- ${point.pointEa}
+													</c:when>
 													<c:otherwise>
 														${point.pointEa}
 													</c:otherwise>
@@ -95,6 +98,9 @@
 												</c:if>
 												<c:if test="${point.pointStatus == 6}">
 													공동구매 결제
+												</c:if>
+												<c:if test="${point.pointStatus == 7}">
+													뭉머니 적립환수
 												</c:if>
 											</td>
 										</tr>

@@ -63,9 +63,22 @@
 		insert into point_tbl values
 		(point_tbl_seq.nextval, #{memberNo}, #{pointEa}, sysdate, 6, #{orderNo})
 	</insert>
-	<update id="updatePoint" parameterType="_int">
-		update point_tbl set
-		point_status = 5
-		where order_no = #{orderNo} and point_status in (3,6)
-	</update>
+	<select id="selectPlusPoint" parameterType="_int" resultType="_int">
+		SELECT COALESCE(SUM(point_ea), 0) AS pointEa
+		from point_tbl 
+		where order_no = #{orderNo} and point_status = 2
+	</select>
+	<select id="selectMinusPoint" parameterType="_int" resultType="_int">
+		 SELECT COALESCE(SUM(point_ea), 0) AS pointEa
+  			FROM point_tbl
+  			WHERE order_no = #{orderNo} AND point_status = 3
+	</select>
+	<insert id="insertReturnPointEa" parameterType="point">
+		insert into point_tbl values
+		(point_tbl_seq.nextval, #{memberNo}, #{pointEa}, sysdate, 5, #{orderNo})
+	</insert>
+	<insert id="insertPaybackPointEa" parameterType="point">
+		insert into point_tbl values
+		(point_tbl_seq.nextval, #{memberNo}, #{pointEa}, sysdate, 7, #{orderNo})
+	</insert>
 </mapper>

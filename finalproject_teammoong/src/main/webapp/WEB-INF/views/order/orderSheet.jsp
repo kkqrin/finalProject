@@ -88,18 +88,18 @@
                                 </c:when>
                                 <c:otherwise>
                                     <div class="order-product-volume"><span>${page}</span>개</div>
-                                    <input type="text" name="orderDetailCnt" value="${page }">
+                                    <input type="hidden" name="orderDetailCnt" value="${page }">
                                 </c:otherwise>
                             </c:choose>
 
                             <div class="order-product-price"><span></span>원</div>
-                            <input type="text" id="productPrice" class="product-price" value="${i.productPrice }">
-							<input type="text" id="productDisCount" class="product-discount" value="${i.productDiscount }">
+                            <input type="hidden" id="productPrice" class="product-price" value="${i.productPrice }">
+							<input type="hidden" id="productDisCount" class="product-discount" value="${i.productDiscount }">
                             
-							<input type="text" name="productNo" class="product-no" value="${i.productNo }">
-							<input type="text" name="optionInfoNo" value="${i.optionNo }">
-                            <input type="text" name="orderDetailCost" value="${i.productCost}">
-                            <input type="text" name="orderSalePrice" value="">
+							<input type="hidden" name="productNo" class="product-no" value="${i.productNo }">
+							<input type="hidden" name="optionInfoNo" value="${i.optionNo }">
+                            <input type="hidden" name="orderDetailCost" value="${i.productCost}">
+                            <input type="hidden" name="orderSalePrice" value="">
                             <!-- <input type="text" name="orderProductCount" value=""> -->
                             <!-- <input type="text" name="orderPrice" value=""> -->
                             <!-- <input type="text" name="productName" value="${i.productName }"> -->

@@ -152,13 +152,28 @@ public class OrderDao {
 		return result;
 	}
 
-	public int updatePoint(int orderNo) {
-		int result = sqlSession.update("point.updatePoint",orderNo);
+	public int cancelCoupon(int issueNo) {
+		int result = sqlSession.update("issueCoupon.cancelCoupon",issueNo);
 		return result;
 	}
 
-	public int cancelCoupon(int issueNo) {
-		int result = sqlSession.update("issueCoupon.cancelCoupon",issueNo);
+	public int selectPlusPoint(int orderNo) {
+		int plusPoint = sqlSession.selectOne("point.selectPlusPoint",orderNo);
+		return plusPoint;
+	}
+
+	public int selectMinusPoint(int orderNo) {
+		int minusPoint = sqlSession.selectOne("point.selectMinusPoint",orderNo);
+		return minusPoint;
+	}
+
+	public int insertRetunPointEa(Point point) {
+		int result = sqlSession.insert("point.insertReturnPointEa", point);
+		return result;
+	}
+
+	public int insertPaybackPointEa(Point point) {
+		int result = sqlSession.insert("point.insertPaybackPointEa", point);
 		return result;
 	}
 
