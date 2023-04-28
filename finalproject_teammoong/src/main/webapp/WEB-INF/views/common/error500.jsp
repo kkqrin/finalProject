@@ -34,7 +34,7 @@ body{
 	z-index: 10;
 }
 .backGround>a{
-	font-family: 'Dancing Script', cursive;
+	font-family: 'Indie Flower', cursive;
 	position: absolute;
 	font-size:200px;
 	color:#fff;
@@ -69,7 +69,7 @@ body{
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Grandstander&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
 <body>
 	<div class="ground">
 		<div class="backGround">
