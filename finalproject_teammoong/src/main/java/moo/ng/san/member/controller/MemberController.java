@@ -352,11 +352,15 @@ public class MemberController {
 	
 	
 	
-	@RequestMapping(value = "/errorTest.do")
-	public String errorTest() {
-		return "common/error";
+	@RequestMapping(value = "/errorTestC.do")
+	public String errorTestC() {
+		return "common/error400";
 	}
 	
+	@RequestMapping(value = "/errorTestS.do")
+	public String errorTestS() {
+		return "common/error500";
+	}
 	
 	
 }//MemberController
