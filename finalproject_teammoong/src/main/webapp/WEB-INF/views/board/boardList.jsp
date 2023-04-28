@@ -45,6 +45,9 @@
         opacity: 0;
         cursor: default;
     }
+    .content-wrap .board-wrap-header{
+     	margin-top: 200px;
+    }
 </style>
 </head>
 <body>
@@ -92,7 +95,7 @@
     
     
         <div class="board-wrap-header">
-            <h4>최근 등록 상품</h4>
+            <h4>패션</h4>
             <div>
                 <a href="#">
                     <div>더보기</div>
@@ -107,12 +110,17 @@
                 <div class="posting-img popular">
                     <a href="/boardView.do?boardNo=${b.boardNo }">
                     <c:set var="oneFile" value="0" />
-                    <c:forEach items="${b.fileList }" var="i">
-                       <c:if test="${b.boardNo eq i.boardNo && oneFile eq 0}">
-                     <img src="/resources/upload/board/${i.filepath}">
-                     <c:set var="oneFile" value="1" />
-                       </c:if>
-               </c:forEach>
+                    
+<%--                     <c:forEach items="${b.fileList }" var="i"> --%>
+<%--                        <c:if test="${b.boardNo eq i.boardNo && oneFile eq 0}"> --%>
+<%--                      <img src="/resources/upload/board/${i.filepath}"> --%>
+<%--                      <c:set var="oneFile" value="1" /> --%>
+<%--                        </c:if> --%>
+<%--                </c:forEach> --%>
+               
+               <img src="/resources/upload/board/${b.thumbnail}">
+               
+               
                     </a>
                     <!-- <div class="gonggu-info">2인 공동구매</div> -->
                 </div>
@@ -134,7 +142,7 @@
                                 <div class="board-seller-profile">
                                    <img src="/resources/upload/member/moongs.png">
                                 </div>
-                                <div class="board-seller-id">${b.boardWriter }</div>
+                                <div class="board-seller-id"><a href="/boardYourPage.do?boardWriter=${b.boardWriter}">${b.boardWriter }</a></div>
                             </div>
                             <div class="board-view-count">
                                 <!-- <div class="material-symbols-outlined star-rate">star</div> -->
@@ -154,8 +162,3173 @@
                 </div>
             </div>
       </c:forEach>
+           
             
             
+            
+            
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            
+            
+            
+
+
+
+        </div>
+		
+		<div class="board-wrap-header">
+            <h4>뷰티</h4>
+            <div>
+                <a href="#">
+                    <div>더보기</div>
+                    <span class="material-symbols-outlined">add_box</span>
+                </a>
+            </div>
+        </div>
+        <div class="popular-product-wrap">
+        <!-- 여여붙 상품 wrap -->
+        <c:forEach items="${list }" var="b">
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="/boardView.do?boardNo=${b.boardNo }">
+                    <c:set var="oneFile" value="0" />
+                    
+<%--                     <c:forEach items="${b.fileList }" var="i"> --%>
+<%--                        <c:if test="${b.boardNo eq i.boardNo && oneFile eq 0}"> --%>
+<%--                      <img src="/resources/upload/board/${i.filepath}"> --%>
+<%--                      <c:set var="oneFile" value="1" /> --%>
+<%--                        </c:if> --%>
+<%--                </c:forEach> --%>
+               
+               <img src="/resources/upload/board/${b.thumbnail}">
+               
+               
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="/boardView.do?boardNo=${b.boardNo }">${b.boardName }
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                   <img src="/resources/upload/member/moongs.png">
+                                </div>
+                                <div class="board-seller-id"><a href="/boardYourPage.do?boardWriter=${b.boardWriter}">${b.boardWriter }</a></div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">${b.boardCount }</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </c:forEach>
+           
+            
+            
+            
+            
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            
+            
+            
+
+
+
+        </div>
+		
+		
+		<div class="board-wrap-header">
+            <h4>식품</h4>
+            <div>
+                <a href="#">
+                    <div>더보기</div>
+                    <span class="material-symbols-outlined">add_box</span>
+                </a>
+            </div>
+        </div>
+        <div class="popular-product-wrap">
+        <!-- 여여붙 상품 wrap -->
+        <c:forEach items="${list }" var="b">
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="/boardView.do?boardNo=${b.boardNo }">
+                    <c:set var="oneFile" value="0" />
+                    
+<%--                     <c:forEach items="${b.fileList }" var="i"> --%>
+<%--                        <c:if test="${b.boardNo eq i.boardNo && oneFile eq 0}"> --%>
+<%--                      <img src="/resources/upload/board/${i.filepath}"> --%>
+<%--                      <c:set var="oneFile" value="1" /> --%>
+<%--                        </c:if> --%>
+<%--                </c:forEach> --%>
+               
+               <img src="/resources/upload/board/${b.thumbnail}">
+               
+               
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="/boardView.do?boardNo=${b.boardNo }">${b.boardName }
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                   <img src="/resources/upload/member/moongs.png">
+                                </div>
+                                <div class="board-seller-id"><a href="/boardYourPage.do?boardWriter=${b.boardWriter}">${b.boardWriter }</a></div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">${b.boardCount }</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </c:forEach>
+           
+            
+            
+            
+            
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            
+            
+            
+
+
+
+        </div>
+		
+		
+		<div class="board-wrap-header">
+            <h4>생활용품</h4>
+            <div>
+                <a href="#">
+                    <div>더보기</div>
+                    <span class="material-symbols-outlined">add_box</span>
+                </a>
+            </div>
+        </div>
+        <div class="popular-product-wrap">
+        <!-- 여여붙 상품 wrap -->
+        <c:forEach items="${list }" var="b">
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="/boardView.do?boardNo=${b.boardNo }">
+                    <c:set var="oneFile" value="0" />
+                    
+<%--                     <c:forEach items="${b.fileList }" var="i"> --%>
+<%--                        <c:if test="${b.boardNo eq i.boardNo && oneFile eq 0}"> --%>
+<%--                      <img src="/resources/upload/board/${i.filepath}"> --%>
+<%--                      <c:set var="oneFile" value="1" /> --%>
+<%--                        </c:if> --%>
+<%--                </c:forEach> --%>
+               
+               <img src="/resources/upload/board/${b.thumbnail}">
+               
+               
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="/boardView.do?boardNo=${b.boardNo }">${b.boardName }
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                   <img src="/resources/upload/member/moongs.png">
+                                </div>
+                                <div class="board-seller-id"><a href="/boardYourPage.do?boardWriter=${b.boardWriter}">${b.boardWriter }</a></div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">${b.boardCount }</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </c:forEach>
+           
+            
+            
+            
+            
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            
+            
+            
+
+
+
+        </div>
+		
+		
+		<div class="board-wrap-header">
+            <h4>가전/디지털</h4>
+            <div>
+                <a href="#">
+                    <div>더보기</div>
+                    <span class="material-symbols-outlined">add_box</span>
+                </a>
+            </div>
+        </div>
+        <div class="popular-product-wrap">
+        <!-- 여여붙 상품 wrap -->
+        <c:forEach items="${list }" var="b">
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="/boardView.do?boardNo=${b.boardNo }">
+                    <c:set var="oneFile" value="0" />
+                    
+<%--                     <c:forEach items="${b.fileList }" var="i"> --%>
+<%--                        <c:if test="${b.boardNo eq i.boardNo && oneFile eq 0}"> --%>
+<%--                      <img src="/resources/upload/board/${i.filepath}"> --%>
+<%--                      <c:set var="oneFile" value="1" /> --%>
+<%--                        </c:if> --%>
+<%--                </c:forEach> --%>
+               
+               <img src="/resources/upload/board/${b.thumbnail}">
+               
+               
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="/boardView.do?boardNo=${b.boardNo }">${b.boardName }
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                   <img src="/resources/upload/member/moongs.png">
+                                </div>
+                                <div class="board-seller-id"><a href="/boardYourPage.do?boardWriter=${b.boardWriter}">${b.boardWriter }</a></div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">${b.boardCount }</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </c:forEach>
+           
+            
+            
+            
+            
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            
+            
+            
+
+
+
+        </div>
+		
+		
+		<div class="board-wrap-header">
+            <h4>가구</h4>
+            <div>
+                <a href="#">
+                    <div>더보기</div>
+                    <span class="material-symbols-outlined">add_box</span>
+                </a>
+            </div>
+        </div>
+        <div class="popular-product-wrap">
+        <!-- 여여붙 상품 wrap -->
+        <c:forEach items="${list }" var="b">
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="/boardView.do?boardNo=${b.boardNo }">
+                    <c:set var="oneFile" value="0" />
+                    
+<%--                     <c:forEach items="${b.fileList }" var="i"> --%>
+<%--                        <c:if test="${b.boardNo eq i.boardNo && oneFile eq 0}"> --%>
+<%--                      <img src="/resources/upload/board/${i.filepath}"> --%>
+<%--                      <c:set var="oneFile" value="1" /> --%>
+<%--                        </c:if> --%>
+<%--                </c:forEach> --%>
+               
+               <img src="/resources/upload/board/${b.thumbnail}">
+               
+               
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="/boardView.do?boardNo=${b.boardNo }">${b.boardName }
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                   <img src="/resources/upload/member/moongs.png">
+                                </div>
+                                <div class="board-seller-id"><a href="/boardYourPage.do?boardWriter=${b.boardWriter}">${b.boardWriter }</a></div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">${b.boardCount }</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </c:forEach>
+           
+            
+            
+            
+            
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            
+            
+            
+
+
+
+        </div>
+		
+		
+		<div class="board-wrap-header">
+            <h4>침구</h4>
+            <div>
+                <a href="#">
+                    <div>더보기</div>
+                    <span class="material-symbols-outlined">add_box</span>
+                </a>
+            </div>
+        </div>
+        <div class="popular-product-wrap">
+        <!-- 여여붙 상품 wrap -->
+        <c:forEach items="${list }" var="b">
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="/boardView.do?boardNo=${b.boardNo }">
+                    <c:set var="oneFile" value="0" />
+                    
+<%--                     <c:forEach items="${b.fileList }" var="i"> --%>
+<%--                        <c:if test="${b.boardNo eq i.boardNo && oneFile eq 0}"> --%>
+<%--                      <img src="/resources/upload/board/${i.filepath}"> --%>
+<%--                      <c:set var="oneFile" value="1" /> --%>
+<%--                        </c:if> --%>
+<%--                </c:forEach> --%>
+               
+               <img src="/resources/upload/board/${b.thumbnail}">
+               
+               
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="/boardView.do?boardNo=${b.boardNo }">${b.boardName }
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                   <img src="/resources/upload/member/moongs.png">
+                                </div>
+                                <div class="board-seller-id"><a href="/boardYourPage.do?boardWriter=${b.boardWriter}">${b.boardWriter }</a></div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">${b.boardCount }</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </c:forEach>
+           
+            
+            
+            
+            
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            
+            
+            
+
+
+
+        </div>
+		
+		
+		<div class="board-wrap-header">
+            <h4>인테리어</h4>
+            <div>
+                <a href="#">
+                    <div>더보기</div>
+                    <span class="material-symbols-outlined">add_box</span>
+                </a>
+            </div>
+        </div>
+        <div class="popular-product-wrap">
+        <!-- 여여붙 상품 wrap -->
+        <c:forEach items="${list }" var="b">
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="/boardView.do?boardNo=${b.boardNo }">
+                    <c:set var="oneFile" value="0" />
+                    
+<%--                     <c:forEach items="${b.fileList }" var="i"> --%>
+<%--                        <c:if test="${b.boardNo eq i.boardNo && oneFile eq 0}"> --%>
+<%--                      <img src="/resources/upload/board/${i.filepath}"> --%>
+<%--                      <c:set var="oneFile" value="1" /> --%>
+<%--                        </c:if> --%>
+<%--                </c:forEach> --%>
+               
+               <img src="/resources/upload/board/${b.thumbnail}">
+               
+               
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="/boardView.do?boardNo=${b.boardNo }">${b.boardName }
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                   <img src="/resources/upload/member/moongs.png">
+                                </div>
+                                <div class="board-seller-id"><a href="/boardYourPage.do?boardWriter=${b.boardWriter}">${b.boardWriter }</a></div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">${b.boardCount }</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </c:forEach>
+           
+            
+            
+            
+            
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            
+            
+            
+
+
+
+        </div>
+		
+		
+		 <div class="board-wrap-header">
+            <h4>공구</h4>
+            <div>
+                <a href="#">
+                    <div>더보기</div>
+                    <span class="material-symbols-outlined">add_box</span>
+                </a>
+            </div>
+        </div>
+        <div class="popular-product-wrap">
+        <!-- 여여붙 상품 wrap -->
+        <c:forEach items="${list }" var="b">
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="/boardView.do?boardNo=${b.boardNo }">
+                    <c:set var="oneFile" value="0" />
+                    
+<%--                     <c:forEach items="${b.fileList }" var="i"> --%>
+<%--                        <c:if test="${b.boardNo eq i.boardNo && oneFile eq 0}"> --%>
+<%--                      <img src="/resources/upload/board/${i.filepath}"> --%>
+<%--                      <c:set var="oneFile" value="1" /> --%>
+<%--                        </c:if> --%>
+<%--                </c:forEach> --%>
+               
+               <img src="/resources/upload/board/${b.thumbnail}">
+               
+               
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="/boardView.do?boardNo=${b.boardNo }">${b.boardName }
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                   <img src="/resources/upload/member/moongs.png">
+                                </div>
+                                <div class="board-seller-id"><a href="/boardYourPage.do?boardWriter=${b.boardWriter}">${b.boardWriter }</a></div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">${b.boardCount }</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </c:forEach>
+           
+            
+            
+            
+            
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            
+            
+            
+
+
+
+        </div>
+		
+		
+		<div class="board-wrap-header">
+            <h4>스포츠/레저/취미</h4>
+            <div>
+                <a href="#">
+                    <div>더보기</div>
+                    <span class="material-symbols-outlined">add_box</span>
+                </a>
+            </div>
+        </div>
+        <div class="popular-product-wrap">
+        <!-- 여여붙 상품 wrap -->
+        <c:forEach items="${list }" var="b">
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="/boardView.do?boardNo=${b.boardNo }">
+                    <c:set var="oneFile" value="0" />
+                    
+<%--                     <c:forEach items="${b.fileList }" var="i"> --%>
+<%--                        <c:if test="${b.boardNo eq i.boardNo && oneFile eq 0}"> --%>
+<%--                      <img src="/resources/upload/board/${i.filepath}"> --%>
+<%--                      <c:set var="oneFile" value="1" /> --%>
+<%--                        </c:if> --%>
+<%--                </c:forEach> --%>
+               
+               <img src="/resources/upload/board/${b.thumbnail}">
+               
+               
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="/boardView.do?boardNo=${b.boardNo }">${b.boardName }
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                   <img src="/resources/upload/member/moongs.png">
+                                </div>
+                                <div class="board-seller-id"><a href="/boardYourPage.do?boardWriter=${b.boardWriter}">${b.boardWriter }</a></div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">${b.boardCount }</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </c:forEach>
+           
+            
+            
+            
+            
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            
+            
+            
+
+
+
+        </div>
+		
+		
+		<div class="board-wrap-header">
+            <h4>출산/유아동</h4>
+            <div>
+                <a href="#">
+                    <div>더보기</div>
+                    <span class="material-symbols-outlined">add_box</span>
+                </a>
+            </div>
+        </div>
+        <div class="popular-product-wrap">
+        <!-- 여여붙 상품 wrap -->
+        <c:forEach items="${list }" var="b">
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="/boardView.do?boardNo=${b.boardNo }">
+                    <c:set var="oneFile" value="0" />
+                    
+<%--                     <c:forEach items="${b.fileList }" var="i"> --%>
+<%--                        <c:if test="${b.boardNo eq i.boardNo && oneFile eq 0}"> --%>
+<%--                      <img src="/resources/upload/board/${i.filepath}"> --%>
+<%--                      <c:set var="oneFile" value="1" /> --%>
+<%--                        </c:if> --%>
+<%--                </c:forEach> --%>
+               
+               <img src="/resources/upload/board/${b.thumbnail}">
+               
+               
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="/boardView.do?boardNo=${b.boardNo }">${b.boardName }
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                   <img src="/resources/upload/member/moongs.png">
+                                </div>
+                                <div class="board-seller-id"><a href="/boardYourPage.do?boardWriter=${b.boardWriter}">${b.boardWriter }</a></div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">${b.boardCount }</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </c:forEach>
+           
+            
+            
+            
+            
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            
+            
+            
+
+
+
+        </div>
+		
+		
+		<div class="board-wrap-header">
+            <h4>반려용품</h4>
+            <div>
+                <a href="#">
+                    <div>더보기</div>
+                    <span class="material-symbols-outlined">add_box</span>
+                </a>
+            </div>
+        </div>
+        <div class="popular-product-wrap">
+        <!-- 여여붙 상품 wrap -->
+        <c:forEach items="${list }" var="b">
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="/boardView.do?boardNo=${b.boardNo }">
+                    <c:set var="oneFile" value="0" />
+                    
+<%--                     <c:forEach items="${b.fileList }" var="i"> --%>
+<%--                        <c:if test="${b.boardNo eq i.boardNo && oneFile eq 0}"> --%>
+<%--                      <img src="/resources/upload/board/${i.filepath}"> --%>
+<%--                      <c:set var="oneFile" value="1" /> --%>
+<%--                        </c:if> --%>
+<%--                </c:forEach> --%>
+               
+               <img src="/resources/upload/board/${b.thumbnail}">
+               
+               
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="/boardView.do?boardNo=${b.boardNo }">${b.boardName }
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                   <img src="/resources/upload/member/moongs.png">
+                                </div>
+                                <div class="board-seller-id"><a href="/boardYourPage.do?boardWriter=${b.boardWriter}">${b.boardWriter }</a></div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">${b.boardCount }</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </c:forEach>
+           
+            
+            
+            
+            
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="#">
+                        <img src="/resources/img/board/pizza.jpeg" />
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="#">
+                            [우주인 피자] 허니 갈릭 페퍼로니 냉동 종이포장 공동구매 폼
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                    <img src="/resources/upload/member/common/moongs.png">
+                                </div>
+                                <div class="board-seller-id">뭉산오렌지</div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">1,551</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            
+            
+            
+
+
+
+        </div>
+		
+		<div class="board-wrap-header">
+            <h4>명품관</h4>
+            <div>
+                <a href="#">
+                    <div>더보기</div>
+                    <span class="material-symbols-outlined">add_box</span>
+                </a>
+            </div>
+        </div>
+		<div class="popular-product-wrap">
+        <!-- 여여붙 상품 wrap -->
+        <c:forEach items="${list }" var="b">
+            <div class="posting-item popular board-item">
+                <div class="posting-img popular">
+                    <a href="/boardView.do?boardNo=${b.boardNo }">
+                    <c:set var="oneFile" value="0" />
+                    
+<%--                     <c:forEach items="${b.fileList }" var="i"> --%>
+<%--                        <c:if test="${b.boardNo eq i.boardNo && oneFile eq 0}"> --%>
+<%--                      <img src="/resources/upload/board/${i.filepath}"> --%>
+<%--                      <c:set var="oneFile" value="1" /> --%>
+<%--                        </c:if> --%>
+<%--                </c:forEach> --%>
+               
+               <img src="/resources/upload/board/${b.thumbnail}">
+               
+               
+                    </a>
+                    <!-- <div class="gonggu-info">2인 공동구매</div> -->
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="/boardView.do?boardNo=${b.boardNo }">${b.boardName }
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <!-- <p class="price-through">70,000원</p> -->
+                        <div class="board-date-box">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <div class="board-start-date">2023-04-04</div>
+                            <div class="board-wave"> ~ </div>
+                            <div class="board-end-date">2023-04-10</div>
+                        </div>
+                        <div class="sail-box popular board-seller-profile-box">
+                            <div class="sail-box-popular">
+                                <div class="board-seller-profile">
+                                   <img src="/resources/upload/member/moongs.png">
+                                </div>
+                                <div class="board-seller-id"><a href="/boardYourPage.do?boardWriter=${b.boardWriter}">${b.boardWriter }</a></div>
+                            </div>
+                            <div class="board-view-count">
+                                <!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div class="rating-average">조회수</div>
+                                <div class="review-count">${b.boardCount }</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </c:forEach>
+           
             
             
             
@@ -350,7 +3523,7 @@
 
         </div>
 
-
+		
 
 
 

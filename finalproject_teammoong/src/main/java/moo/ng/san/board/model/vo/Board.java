@@ -27,6 +27,7 @@ public class Board {
 	private int boardStatus;
 	private int boardCount;
 	private ArrayList<String> fileList;
+	private String thumbnail;
 	
 	//형천 추가.
 	private ArrayList<BoardOption> boardOptionList; 

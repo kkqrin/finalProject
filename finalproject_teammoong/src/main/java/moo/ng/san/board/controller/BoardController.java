@@ -136,9 +136,14 @@ public class BoardController {
 		}
 
 	}
-	@RequestMapping(value="/boardYouPage.do")
-	public String boardYouPage() {
-		return "board/boardYouPage";
+	@RequestMapping(value="/boardYourPage.do")
+	public String boardYouPage(Model model, String boardWriter) {
+		ArrayList<Board> list = service.selectBoardYourPage(boardWriter);
+		Member m = service.selectOneMember(boardWriter);
+		//System.out.println("getList 확인"+bpd.getList());
+		model.addAttribute("list",list);
+		model.addAttribute("m",m);
+		return "board/boardYourPage";
 	}
 	
 	
