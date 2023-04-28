@@ -61,6 +61,6 @@
 	
 	<insert id="insertGongguPoint" parameterType="point">
 		insert into point_tbl values
-		(point_tbl_seq.nextval, #{memberNo}, #{pointEa}, sysdate, 6)
+		(point_tbl_seq.nextval, #{memberNo}, #{pointEa}, sysdate, 6,null)
 	</insert>
 </mapper>

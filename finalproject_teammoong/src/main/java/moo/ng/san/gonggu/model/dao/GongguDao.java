@@ -57,4 +57,9 @@ public class GongguDao {
 		int result = sqlSession.update("gonggu.updateGonggu",gongguPayNo);
 		return result;
 	}
+
+	public int selectGongguPayNo(Gonggu gonggu) {
+		int result = sqlSession.selectOne("gonggu.selectGongguPayNo",gonggu);
+		return result;
+	}
 }

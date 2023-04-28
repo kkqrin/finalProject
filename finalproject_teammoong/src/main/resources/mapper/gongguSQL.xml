@@ -66,4 +66,14 @@ FROM GONGGU_TBL G WHERE PRODUCT_NO=#{_parameter}
 			 
 		WHERE GONGGU_PAY_NO = #{_parameter}
 	</update>
+	
+	<select id="selectGongguPayNo" parameterType="g" resultType="_int">
+		select gp.gonggu_pay_no AS gongguPayNo
+			from gonggu_tbl g
+			left join member_tbl m on g.member_no = m.member_no
+			left join detail_gonggu_tbl dg on g.gonggu_no = dg.gonggu_no
+			left join gonggu_pay_tbl gp on dg.detail_gonggu_no = gp.detail_gonggu_no
+		where g.gonggu_no = #{gongguNo} and m.member_no = #{memberNo}
+	</select>
+	
 </mapper>

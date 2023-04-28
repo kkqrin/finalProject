@@ -32,6 +32,14 @@
 		WHERE PRODUCT_NO = #{_parameter}
 	</select>
 	
+	<update id="updateReview" parameterType="r">
+		UPDATE REVIEW_TBL SET 
+			STAR_RATING = #{rating},
+			REVIEW_DATE = #{reviewDate},
+			REVIEW_CONTENT = #{reviewContent}
+		WHERE PRODUCT_NO = #{productNo} AND REVIEW_WRITER = #{reviewWriter}
+	</update>
+	
 	<select id="selectReviewNo" resultType="_int">
 		select max(review_no) from review_tbl
 	</select>
@@ -50,4 +58,5 @@
 		FROM REVIEW_IMG
 		WHERE REVIEW_NO = #{_parameter}
 	</select>
+	
 </mapper>

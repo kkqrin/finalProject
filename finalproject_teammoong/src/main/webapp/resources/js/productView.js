@@ -499,6 +499,11 @@ $(document).ready(function() {
             }
           }
 
+        //   $(".updateReviewBtn").on("click",function(){
+        //     var reviewContent = $(this).parent().parent().prev().text();
+        //     console.log(reviewContent);
+        //     $("[name=updateReviewContent]").text(reviewContent);
+        //   });
 
 
 
