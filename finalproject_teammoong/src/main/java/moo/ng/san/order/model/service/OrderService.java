@@ -182,21 +182,32 @@ public class OrderService {
 		return order;
 	}
 
-	public int cancelOrder(int orderNo) {
+	public int cancelOrder(int orderNo, int memberNo) {
 		int result = dao.cancelOrder(orderNo);
 		if(result>0) {
-			result = dao.updatePoint(orderNo);
-			Order order = dao.selectOrder(orderNo);
-			int issueNo = order.getIssueNo();
-			if(issueNo != 0) {
-				result = dao.cancelCoupon(issueNo); 
+			int minusPoint = dao.selectMinusPoint(orderNo);
+			Point point = new Point();
+			point.setMemberNo(memberNo);
+			point.setOrderNo(orderNo);
+			if(minusPoint != 0) {
+				point.setPointEa(minusPoint);
+				result = dao.insertRetunPointEa(point);
 			}
-			
-			
+			int plusPoint = dao.selectPlusPoint(orderNo);
+			if(result >0) {
+				if(plusPoint != 0) {
+					point.setPointEa(plusPoint);
+					result = dao.insertPaybackPointEa(point);					
+				}
+				if(result>0) {
+					Order order = dao.selectOrder(orderNo);
+					int issueNo = order.getIssueNo();
+					if(issueNo != 0) {
+						result = dao.cancelCoupon(issueNo); 
+					}					
+				}
+			}
 		}
 		return result;
 	}
-
-
-
 }
