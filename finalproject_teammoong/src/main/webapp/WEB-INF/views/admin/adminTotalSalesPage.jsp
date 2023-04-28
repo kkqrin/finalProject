@@ -83,7 +83,7 @@
 <%-- <jsp:include page="/WEB-INF/views/common/header.jsp" /> --%>
     <div class="adminPage-wrapper">
         <div class="adminPage-header">
-            <div class="adminPage-title"><a>Moong's Admin</a></div>
+            <div class="adminPage-title"><a href="/#">Moong's Admin</a></div>
         </div>
         <div class="adminPage-back">
             <jsp:include page="/WEB-INF/views/admin/adminSideNavi.jsp"/>
