@@ -323,6 +323,15 @@ public class ProductService {
 		return list;
 	}
 
+	public ArrayList<Product> searchProductList(String searchKeyword) {
+		ArrayList<Product> list = dao.searchProductList(searchKeyword);
+		for(Product p : list) {
+			ArrayList<String> productFileList = dao.selectProductFiles(p.getProductNo());
+			p.setFileList(productFileList);
+		}
+		return list;
+	}
+
 
 
 

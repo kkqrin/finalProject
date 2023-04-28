@@ -319,6 +319,23 @@
 		from product_tbl p
 		order by p.PRODUCT_ea )p)
 		WHERE RNUM BETWEEN 1 AND 3
-
 	</select>
+	
+	<select id="searchProductList" parameterType="String" resultType="p">
+		SELECT 
+			PRODUCT_NO AS productNo,
+			D_CATEGORY_NO AS detailCategoryNo,
+			PRODUCT_NAME AS productName,
+			PRODUCT_EA AS productEa,
+			PRODUCT_PRICE AS productPrice,
+			PRODUCT_STATUS AS productStatus,
+			PRODUCT_COST AS productCost,
+			GONGGU_NUMBER AS  gongguNumber,
+			PRODUCT_CONTENT AS productContent,
+			PRODUCT_DISCOUNT AS productDiscount
+		FROM PRODUCT_TBL
+		WHERE PRODUCT_NAME LIKE '%#{searchKeyword}%'
+	</select>
+	
+	
 </mapper>
