@@ -398,6 +398,14 @@
             })
        		 
         });
+        
+        /* 페이지 연결 */
+        $(".tbl-box").on("click", 'td',function(){
+        	var productNo = $(this).parent().children().eq(2).text();
+        	console.log(productNo);
+   			window.open('http://192.168.10.143/productView.do?productNo='+productNo);
+    	});
+        	
    	
    	
         
