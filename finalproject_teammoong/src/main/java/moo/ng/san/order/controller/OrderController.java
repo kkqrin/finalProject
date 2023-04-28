@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.google.gson.Gson;
+
 import moo.ng.san.basket.model.vo.Basket;
 import moo.ng.san.coupon.model.service.CouponService;
 import moo.ng.san.coupon.model.vo.IssueCoupon;
@@ -101,10 +103,30 @@ public class OrderController {
 		return "order/myOrderList";
 	}
 	
-	@RequestMapping(value="/myOrderView.do")
-	public String myOrderView() {
+	@RequestMapping(value="/myOrderDetail.do")
+	public String myOrderDetail(int orderNo, Model model) {
 		
-		return "order/myOrderView";
+		// 주문 테이블 주문 상세
+		Order o = service.selectMyOrderDetail(orderNo);
+		model.addAttribute("o", o);
+		
+		// 구매한 상품 리스트
+		ArrayList<Order> orderProductList = service.selectMyOrderProductList(orderNo);
+		model.addAttribute("orderProductList", orderProductList);
+		
+		return "order/myOrderDetail";
+	}
+	
+	// 주문내역 상품리스트 모달 ajax
+	@ResponseBody
+	@RequestMapping(value="/myOrderProductList.do", produces = "application/json;charset=utf-8")
+	public String myOrderProductList(int orderNo) {
+		
+		// 구매한 상품 리스트
+		ArrayList<Order> orderProductList = service.selectMyOrderProductList(orderNo);
+//		model.addAttribute("orderProductList", orderProductList);
+		
+		return new Gson().toJson(orderProductList);
 	}
 	
 	
@@ -151,19 +173,20 @@ public class OrderController {
 	}
 	
 	
-	@RequestMapping(value="/myOrderDetail.do")
-	public String myOrderDetail(int orderNo, Model model) {
-		
-		// 주문 테이블 주문 상세
-		Order o = service.selectMyOrderDetail(orderNo);
-		model.addAttribute("o", o);
-		
-		// 구매한 상품 리스트
-		ArrayList<Order> orderProductList = service.selectMyOrderProductList(orderNo);
-		model.addAttribute("orderProductList", orderProductList);
-		
-		return "order/myOrderDetail";
-	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

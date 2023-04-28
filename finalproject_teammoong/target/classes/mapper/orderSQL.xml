@@ -149,7 +149,9 @@
 	<select id="selectMyOrderProductList" parameterType="_int" resultType="o">
        SELECT
              (SELECT FILEPATH FROM PRODUCT_IMG WHERE P_IMG_NO=(SELECT MIN(P_IMG_NO) FROM PRODUCT_IMG where product_no=P.product_no)) AS thumbnail,
+             p.product_no AS productNo,
              p.product_name AS productName,
+             O.ORDER_status AS orderStatus,
              OD.ORDER_SALE_PRICE AS orderSalePrice,
              OD.ORDER_DETAIL_CNT AS orderDetailCnt,
              (SELECT OPTION_DATEAIL FROM OPTION_INFO_TBL WHERE OPTION_INFO_NO = OD.OPTION_INFO_NO) AS optionDetailName

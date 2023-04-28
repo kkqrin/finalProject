@@ -19,6 +19,7 @@ import moo.ng.san.board.model.vo.BoardOption;
 import moo.ng.san.board.model.vo.BoardOrder;
 import moo.ng.san.board.model.vo.BoardPageData;
 import moo.ng.san.board.model.vo.FileVO;
+import moo.ng.san.category.model.vo.Category;
 import moo.ng.san.member.model.vo.Member;
 
 @Controller
@@ -28,12 +29,37 @@ public class BoardController {
 	@Autowired
 	private FileManager manager;
 	
+//	@RequestMapping(value="/boardList.do")
+//	public String boardList(int reqPage, Model model) {
+//		BoardPageData bpd = service.selectBoardList(reqPage);
+//		//System.out.println("getList 확인"+bpd.getList());
+//		model.addAttribute("list",bpd.getList());
+//		model.addAttribute("pageNavi", bpd.getPageNavi());
+//		return "board/boardList";
+//	}
+	
 	@RequestMapping(value="/boardList.do")
-	public String boardList(int reqPage, Model model) {
-		BoardPageData bpd = service.selectBoardList(reqPage);
-		//System.out.println("getList 확인"+bpd.getList());
-		model.addAttribute("list",bpd.getList());
-		model.addAttribute("pageNavi", bpd.getPageNavi());
+	public String boardList(String categoryNo, Model model, @SessionAttribute(required=false) Member m) {
+		System.out.println("categoryNo : "+categoryNo);
+		
+		// 카테고리 리스트
+		ArrayList<Category> categoryList = service.selectCategoryList();
+		model.addAttribute("categoryList", categoryList);
+		
+		int iCategoryNo = 0;
+		if(categoryNo != null) {
+			iCategoryNo = Integer.parseInt(categoryNo);
+		}
+		model.addAttribute("sCategory", iCategoryNo);
+		
+		ArrayList<Board> boardList = service.selectAllBoardList(iCategoryNo);
+		model.addAttribute("boardList", boardList);
+		
+		// 카테고리 구분
+		model.addAttribute("sCategory", iCategoryNo);
+		
+		
+		
 		return "board/boardList";
 	}
 	
@@ -68,6 +94,7 @@ public class BoardController {
 		Board b = service.selectOneBoard(boardNo);
 		b.setBoardCount(b.getBoardCount()+1);
 		int result = service.updateBoardCount(b);
+		
 		ArrayList<BoardOption> optionList = service.selectOneBoardOptionList(boardNo);
 		ArrayList<FileVO> fileList = service.selectFileList(boardNo);
 		model.addAttribute("f",fileList);
@@ -76,9 +103,11 @@ public class BoardController {
 		model.addAttribute("size",optionList.size());
 		return "board/boardView";
 		}
+	
+	
 	@RequestMapping(value="/boardWriteView.do")
 //	public String boardWriteView(BoardJoin bj, int boardNo, Model model) {
-	public String boardWriteView(BoardJoin bj, int boardNo, int[] optionNo, int[] detailPrice, int[] detailCount, Model model) {
+	public String boardWriteView(BoardJoin bj, int boardNo, int[] optionNo, int[] detailPrice, int[] orderCount, Model model) {
 		System.out.println("보드조인  insert 전: "+bj);
 		int result = service.insertBoardJoin(bj);
 		System.out.println("보드조인  insert 후: "+bj);
@@ -86,7 +115,11 @@ public class BoardController {
 		System.out.println(optionNo);
 		if(result>0) {
 			// 보드 조인 상세 insert
-			result = service.insertBoardOrder(bj.getJoinNo(), optionNo, detailPrice, detailCount);
+			
+			// joinNo select
+			int joinNo = service.selectJoinNo();
+			
+			result = service.insertBoardOrder(joinNo, optionNo, detailPrice, orderCount);
 		}
 
 		

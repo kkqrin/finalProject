@@ -130,8 +130,8 @@ public class MemberController {
 	@RequestMapping(value = "/myPage.do")
 	public String myPage(@SessionAttribute(required=false) Member m, Model model) {
 		int memberNo = m.getMemberNo();
-		int point = service.selectTotalPoint(memberNo);
-		model.addAttribute("point", point);
+		Point point = service.selectTotalPoint(memberNo);
+		model.addAttribute("p", point);
 		return "member/myPage";
 	}//myPage
 	
@@ -352,11 +352,15 @@ public class MemberController {
 	
 	
 	
-	@RequestMapping(value = "/errorTest.do")
-	public String errorTest() {
-		return "common/error";
+	@RequestMapping(value = "/errorTestC.do")
+	public String errorTestC() {
+		return "common/error400";
 	}
 	
+	@RequestMapping(value = "/errorTestS.do")
+	public String errorTestS() {
+		return "common/error500";
+	}
 	
 	
 }//MemberController

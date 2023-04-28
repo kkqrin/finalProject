@@ -145,14 +145,15 @@
 											</span>
 										</div>
 										<ul>
-										<li>뭉쳐야산다<input type="hidden" name="selectBox" value="1"></li>
-										<li>회원주최공구<input type="hidden" name="selectBox" value="2"></li>
+										<li>뭉쳐야산다<input type="hidden"  value="1"></li>
+										<li>회원주최공구<input type="hidden"  value="2"></li>
 										</ul>
 									</div>
 								</div>
 								<input type="text" name="searchKeyword" class="mainSearch-input input-noborder" placeholder="상품을 검색해보세요">
-								<button class="material-symbols-outlined">search</button>
+								<button class="material-symbols-outlined searchBarBtn">search</button>
 							</div>
+							<input type="hidden" name="selectBox" value="1">
 						</form>
 		            </div>
 	                <div class="middle-right">
@@ -246,6 +247,9 @@
 
 	
 	<script>
+		$(".searchBarBtn").on("click",function(){
+
+		});
 	$(document).ready(function() {
 	    // 모달 열기 버튼 클릭 이벤트
 	    $("#payModal").on("click", function() {
@@ -328,8 +332,10 @@
     			const val = $(e).children().val();
     			if(val==1){
     				$("#customSelectBox").find("span").eq(0).text("뭉쳐야산다");
+					$("[name=selectBox]").val(1);
     			}else if(val==2){
     				$("#customSelectBox").find("span").eq(0).text("회원주최공구");
+					$("[name=selectBox]").val(2);
     			}
     			$("#customSelectBox").children("ul").css("display","none");
     		})

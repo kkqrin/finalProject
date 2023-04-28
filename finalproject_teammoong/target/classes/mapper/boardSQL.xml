@@ -13,10 +13,16 @@
 						board_name as boardName,
 						board_writer as boardWriter,
 						board_date as boardDate,
-						board_count as boardCount
+						board_count as boardCount,
+                        dc.d_category_no as detailCategoryNo,
+                        pc.category_no as categoryNo
 					from board_tbl b
+                    left join detail_category dc on b.d_category_no = dc.d_category_no
+            left join product_category pc on dc.category_no = pc.category_no
+         	<if test="categoryNo != 0">
+			  where dc.category_no = #{categoryNo}
+			</if>
 					order by 1 desc)b)
-			where rnum between #{start} and #{end}
 	</select>
 	<select id="totalCount" resultType="_int">
 		select count(*) from board_tbl
@@ -73,10 +79,18 @@
 		#{orderCount},
 		#{depositPrice}
 		)
-		<selectKey resultType="_int" order="AFTER" keyProperty="joinNo">
-			select max(join_no) from board_join
+		<selectKey resultType="_int" order="AFTER" keyProperty="boardNo">
+			select max(board_no) from board_join
 		</selectKey>
 	</insert>
+	
+	<select id="selectJoinNo" resultType="_int">
+		select max(join_no) from board_join
+	</select>
+	
+	<update id="updateBoardDetailCount" parameterType="map">
+		update board_option set detail_count = detail_count - #{orderCount} where board_no = #{boardNo}
+	</update>
 	
 	<insert id="insertBoardOrderList" parameterType="bl">
 		insert into board_order values(
@@ -112,8 +126,10 @@
 			)
 			<selectKey resultType="_int" order="AFTER" keyProperty="boardNo">
 			select max(board_no) from board_tbl
-		</selectKey>
+			</selectKey>
 	</insert>
+	
+	
 	<insert id="insertFile" parameterType="bf">
 		insert into file_tbl values(file_seq.nextval, #{boardNo}, #{filepath})
 	</insert>
@@ -245,5 +261,20 @@
 			BOARD_NO AS boardNo,
 			filepath
 		FROM FILE_TBL
+	</select>
+	
+	<select id="searchBoardList" parameterType="sb" resultType="b">
+		select * from
+			    (select rownum as rnum, b. * from
+			        (select
+						board_no as boardNo,
+                        (SELECT FILEPATH FROM file_tbl WHERE file_no=(SELECT MIN(file_NO) FROM file_tbl where board_no=b.board_no)) AS thumbnail,
+						board_name as boardName,
+						board_writer as boardWriter,
+						board_date as boardDate,
+						board_count as boardCount
+					from board_tbl b
+                    where board_name LIKE '%'||#{searchKeyword}||'%'
+					order by 1 desc)b)
 	</select>
 </mapper>

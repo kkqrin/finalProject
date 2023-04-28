@@ -39,7 +39,7 @@
     white-space: normal;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 1;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     word-break: keep-all;
     /* height: 50px; */
@@ -134,13 +134,16 @@
     align-items: center;
     justify-content: center;
     position: absolute;
-    left: 85px;
-    top: 82px;
+    left: 25px;
+    top: 80px;
 }
 
-.myorder-btn-zone>form>button.btn{
+.myorder-btn-zone>button.btn{
     font-size: 12px;
     padding: 6px 10px;
+    background-color: #fff;
+    /* min-width: none; */
+    width: 120px;
 }
 
 .myorder-total-price{

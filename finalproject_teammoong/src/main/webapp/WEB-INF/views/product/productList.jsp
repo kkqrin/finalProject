@@ -531,7 +531,7 @@
 			<ul>
 				<li><a class="product-sort" value="recent-sort">최신 등록순</a></li>
 				<li><a class="product-sort" value="popular-sort">인기순</a></li>
-				<li><a class="product-sort" value="review-sort">리뷰 많은순</a></li>
+				<!-- <li><a class="product-sort" value="review-sort">리뷰 많은순</a></li> -->
 				<li><a class="product-sort" value="discount-sort">할인률 <span class="material-symbols-outlined">arrow_upward</span></a></li>
 				<li><a class="product-sort" value="lowprice-sort">가격 <span class="material-symbols-outlined">arrow_downward</span></a></li>
 				<li><a class="product-sort" value="highprice-sort">가격 <span class="material-symbols-outlined">arrow_upward</span></a></li>
@@ -649,7 +649,7 @@
 				console.log("productMoreAjax 실행 : " + $("#startHidden").val());
 				$.ajax({
 					url : "/productMore.do",
-					data : {start : startHidden, amount : 3, fCategoryNo : fCategoryNo, sCategoryNo: sCategoryNo, sortType: sortType },
+					data : {start : startHidden, amount : 6, fCategoryNo : fCategoryNo, sCategoryNo: sCategoryNo, sortType: sortType },
 					success : function(data){
 						console.log(data);
 						
