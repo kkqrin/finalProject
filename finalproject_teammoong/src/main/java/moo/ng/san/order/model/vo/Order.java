@@ -48,6 +48,7 @@ public class Order {
 	private int deliveryNo;
 	private int deliveryStatus;
 	private int orderDetailNo;
+	private int issueNo;
 	
 	private int orderProductCount; // 주문당 주문상세 행 개수 (상품건수)
 	

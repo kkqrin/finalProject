@@ -51,7 +51,8 @@
 		update issue_coupon 
 		set coupon_status = 0 where issue_no = #{issueNo}
 	</update>
-	
-	
-	
+		<update id="cancelCoupon" parameterType="_int">
+		update issue_coupon 
+		set coupon_status = 1 where issue_no = #{issueNo}
+	</update>
 </mapper>

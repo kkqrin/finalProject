@@ -147,5 +147,21 @@ public class OrderDao {
 
 
 
+	public int cancelOrder(int orderNo) {
+		int result = sqlSession.update("order.cancelOrder",orderNo);
+		return result;
+	}
+
+	public int updatePoint(int orderNo) {
+		int result = sqlSession.update("point.updatePoint",orderNo);
+		return result;
+	}
+
+	public int cancelCoupon(int issueNo) {
+		int result = sqlSession.update("issueCoupon.cancelCoupon",issueNo);
+		return result;
+	}
+
+	
 
 }

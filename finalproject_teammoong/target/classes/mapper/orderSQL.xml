@@ -123,6 +123,10 @@
        where member_no = #{_parameter}
        order by 1 desc
 	</select>
+	<update id="cancelOrder" parameterType="_int">
+		update order_tbl set
+		order_status = 5 where order_no = #{orderNo}
+	</update>
 
 	<select id="selectMyOrderDetail" parameterType="_int" resultType="o">
 		select

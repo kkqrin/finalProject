@@ -3,15 +3,15 @@
 <mapper namespace="point">
 	<insert id="insertPoint" parameterType="_int">
 		insert into point_tbl values
-		(point_tbl_seq.nextval, #{memberNo}, 50, sysdate, 0)
+		(point_tbl_seq.nextval, #{memberNo}, 50, sysdate, 0, null)
 	</insert>
 	<insert id="insertFirstPoint" parameterType="_int">
 		insert into point_tbl values
-		(point_tbl_seq.nextval, #{memberNo}, 2000, sysdate, 1)
+		(point_tbl_seq.nextval, #{memberNo}, 2000, sysdate, 1, null)
 	</insert>
 	<insert id="insertChargePoint" parameterType="point">
 		insert into point_tbl values
-		(point_tbl_seq.nextval, #{memberNo}, #{pointEa}, sysdate, 4)
+		(point_tbl_seq.nextval, #{memberNo}, #{pointEa}, sysdate, 4, null)
 	</insert>
 	<select id="selectAllPoint" parameterType="map" resultType="point">
 		select*from(
@@ -63,4 +63,9 @@
 		insert into point_tbl values
 		(point_tbl_seq.nextval, #{memberNo}, #{pointEa}, sysdate, 6, #{orderNo})
 	</insert>
+	<update id="updatePoint" parameterType="_int">
+		update point_tbl set
+		point_status = 5
+		where order_no = #{orderNo} and point_status in (3,6)
+	</update>
 </mapper>
