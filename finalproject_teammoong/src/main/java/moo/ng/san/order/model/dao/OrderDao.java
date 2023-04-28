@@ -98,9 +98,18 @@ public class OrderDao {
 		return (ArrayList<Order>)list;
 	}
 
+	public Order selectMyOrderDetail(int orderNo) {
+		Order o = sqlSession.selectOne("order.selectMyOrderDetail", orderNo);
+		
+		return o;
+	}
 	
-	
-	
+	public ArrayList<Order> selectMyOrderProductList(int orderNo) {
+		List list = sqlSession.selectList("order.selectMyOrderProductList", orderNo);
+		
+		return (ArrayList<Order>)list;
+	}
+
 	
 	
 	
@@ -135,5 +144,8 @@ public class OrderDao {
 		Order order = sqlSession.selectOne("order.selectOrder",orderNo);
 		return order;
 	}
+
+
+
 
 }

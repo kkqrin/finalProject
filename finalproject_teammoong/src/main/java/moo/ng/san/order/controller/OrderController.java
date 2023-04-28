@@ -141,15 +141,48 @@ public class OrderController {
 				point.setPointEa(plusPointEa);
 				result = service.insertPlusPointEa(point);
 			}
-			
-			
-			
 
 		}
 		int orderNo = service.selectMaxOrderNo();
 		return "redirect:/payComplite.do?orderNo=" + orderNo + "&productNo=" + Arrays.toString(productNo).replaceAll("[\\[\\]\\s]", "");
 
 	}
+	
+	
+	@RequestMapping(value="/myOrderDetail.do")
+	public String myOrderDetail(int orderNo, Model model) {
+		
+		// 주문 테이블 주문 상세
+		Order o = service.selectMyOrderDetail(orderNo);
+		model.addAttribute("o", o);
+		
+		// 구매한 상품 리스트
+		ArrayList<Order> orderProductList = service.selectMyOrderProductList(orderNo);
+		model.addAttribute("orderProductList", orderProductList);
+		
+		return "order/myOrderDetail";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	///////////// 진배님
 	
 	@RequestMapping(value="/payComplite.do")
 	public String payComplite(int orderNo, int productNo[], Model model) {

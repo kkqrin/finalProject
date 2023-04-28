@@ -114,6 +114,7 @@
 
 
 				<!-- 위에는 예시 -->
+				<!-- 밑에는 진짜 ~ ////////////////////////////////////////////////// -->
 
 				<c:forEach items="${myOrderList }" var="i">
 					<div class="myorder-order-item">
@@ -179,7 +180,8 @@
 							<div class="myorder-product-total-count">총 ${i.orderProductCount} 건</div>
 							</c:if>
 							<div class="myorder-order-detail">
-								<form action="#">
+								<form action="/myOrderDetail.do" method="post">
+									<input type="hidden" name="orderNo" value="${i.orderNo}">
 									<button id="order-detail-btn">주문상세<div class="material-symbols-outlined">chevron_right</div></button>
 								</form>
 							</div>
