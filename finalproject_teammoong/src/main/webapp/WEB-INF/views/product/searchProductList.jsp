@@ -124,13 +124,45 @@
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-    <c:if test="${not empty sessionScope.m }">
-        <jsp:include page="/WEB-INF/views/common/stickyRight.jsp" />
-    </c:if>
-	<h1>검색 상품 나오는 곳 ㅋ</h1>
-	<c:forEach items="${productList }" var="i">
-		${i.productName }
-	</c:forEach>
-	
+	<div class="content-wrap">
+    <h3 class="wrap-title">[${SessionScope.m.memberId}]님이 검색하신 상품 목록 입니다.</h3>
+        <c:forEach items="${productList }" var="i">
+            <div class="posting-item">
+                <div class="posting-img">
+                    <a href="#">
+                        <img src="/resources/img/product/lactofit.jpg" />
+                    </a>
+                    <div class="gonggu-info">2인 공동구매</div>
+                </div>
+                <div class="posting-content">
+                    <p class="posting-title">
+                        <a href="#">${i.productName}</a>
+                    </p>
+                    <div class="posting-price-box">
+                        <p class="price-through">70,000원</p>
+                        <div class="sail-box">
+                            <p class="sail-percent">62%</p>
+                            <p class="price-sail">26,900원</p>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                                <span class="posting-info-box">무료배송</span>
+                            </div>
+                            <div class="star-rating">
+                                <div class="material-symbols-outlined star-rate">star</div>
+                                <div class="rating-average"></div>
+                                <div class="review-count">(152)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+	    </c:forEach>
+	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

@@ -489,6 +489,7 @@ public class ProductController {
 			ArrayList<Board> boardList = boardService.searchBoardList(sb);
 			model.addAttribute("searchBox",sb.getSelectBox());
 			model.addAttribute("boardList",boardList);
+			return "board/searchBoardList";
 			
 		}
 		return "product/searchProductList";

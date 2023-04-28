@@ -212,7 +212,11 @@ public class BoardService {
 
 
 	public ArrayList<Board> searchBoardList(searchBarVO sb) {
-		// TODO Auto-generated method stub
+		ArrayList<Board> list = dao.searchBoardList(sb);
+		for(Board b : list) {
+			ArrayList<String> fileList = dao.selectBoardImg();
+			b.setFileList(fileList);
+		}
 		return null;
 	}
 

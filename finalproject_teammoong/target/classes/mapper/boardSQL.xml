@@ -246,4 +246,19 @@
 			filepath
 		FROM FILE_TBL
 	</select>
+	
+	<select id="searchBoardList" parameterType="sb" resultType="b">
+		select * from
+			    (select rownum as rnum, b. * from
+			        (select
+						board_no as boardNo,
+                        (SELECT FILEPATH FROM file_tbl WHERE file_no=(SELECT MIN(file_NO) FROM file_tbl where board_no=b.board_no)) AS thumbnail,
+						board_name as boardName,
+						board_writer as boardWriter,
+						board_date as boardDate,
+						board_count as boardCount
+					from board_tbl b
+                    where board_name LIKE '%'||#{searchKeyword}||'%'
+					order by 1 desc)b);
+	</select>
 </mapper>
