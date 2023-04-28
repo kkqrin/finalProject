@@ -128,7 +128,7 @@
         <jsp:include page="/WEB-INF/views/common/stickyRight.jsp" />
     </c:if>
 	<h1>검색 상품 나오는 곳 ㅋ</h1>
-	<c:forEach items="${list }" var="i">
+	<c:forEach items="${productList }" var="i">
 		${i.productName }
 	</c:forEach>
 	

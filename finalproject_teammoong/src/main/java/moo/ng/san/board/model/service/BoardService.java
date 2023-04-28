@@ -14,6 +14,7 @@ import moo.ng.san.board.model.vo.BoardOrder;
 import moo.ng.san.board.model.vo.BoardPageData;
 import moo.ng.san.board.model.vo.FileVO;
 import moo.ng.san.member.model.vo.Member;
+import moo.ng.san.product.model.vo.searchBarVO;
 
 @Service
 public class BoardService {
@@ -205,6 +206,14 @@ public class BoardService {
 
 	public Member selectOneMember(String memberId) {
 		return dao.selectMemberId(memberId);
+	}
+
+
+
+
+	public ArrayList<Board> searchBoardList(searchBarVO sb) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

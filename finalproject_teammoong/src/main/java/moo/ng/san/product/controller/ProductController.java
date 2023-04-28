@@ -26,6 +26,8 @@ import com.google.gson.JsonObject;
 
 import common.FileManager;
 import moo.ng.san.basket.model.vo.Basket;
+import moo.ng.san.board.model.service.BoardService;
+import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.category.model.vo.Category;
 import moo.ng.san.category.model.vo.DetailCategory;
 import moo.ng.san.gonggu.model.service.GongguService;
@@ -40,6 +42,7 @@ import moo.ng.san.product.model.vo.Option;
 import moo.ng.san.product.model.vo.Product;
 import moo.ng.san.product.model.vo.ProductPageData;
 import moo.ng.san.product.model.vo.RecentProduct;
+import moo.ng.san.product.model.vo.searchBarVO;
 import moo.ng.san.review.model.service.ReviewService;
 import moo.ng.san.review.model.vo.Review;
 
@@ -55,6 +58,8 @@ public class ProductController {
 	private GongguService gongguService;
 	@Autowired
 	private ReviewService reviewService;
+	@Autowired
+	private BoardService boardService;
 	
 	
 	
@@ -469,10 +474,23 @@ public class ProductController {
 		return a;
 	}
 	@RequestMapping(value="/searchBar.do")
-	public String searchBar(String searchKeyword, Model model) {
-		System.out.println("productController에서 searchKeyword값"+searchKeyword);
-		ArrayList<Product> list = service.searchProductList(searchKeyword);
-		model.addAttribute("list",list);
+	public String searchBar(searchBarVO sb, Model model) {
+		
+		System.out.println("productController에서 sb 값"+sb);
+		
+		if(sb.getSelectBox() == 1) {
+			
+			ArrayList<Product> productList = service.searchProductList(sb);
+			model.addAttribute("searchBox",sb.getSelectBox());
+			model.addAttribute("productList",productList);
+			
+		} else if(sb.getSelectBox() == 2) {
+			
+			ArrayList<Board> boardList = boardService.searchBoardList(sb);
+			model.addAttribute("searchBox",sb.getSelectBox());
+			model.addAttribute("boardList",boardList);
+			
+		}
 		return "product/searchProductList";
 	}
 
