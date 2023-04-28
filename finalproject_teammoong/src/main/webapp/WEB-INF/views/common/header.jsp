@@ -123,6 +123,9 @@
 						<c:when test="${sessionScope.m.memberStatus eq 0}">
 							<a class="staffMsg">관리자 버전으로 접속중입니다.<span><a href="/myPage.do" class="staffMsg">[내정보]</a></span></a>
 						</c:when>
+						<c:when test="${sessionScope.m.memberStatus eq 2}">
+							<a class="staffMsg">정지회원 상태입니다.</a>
+						</c:when>
 					</c:choose>
 					<input type="hidden" id="memberId" value="${sessionScope.m.memberId }">
 				</div><!-- header-info -->
@@ -198,6 +201,10 @@
 			                	</c:when>
 			               		<c:when test="${sessionScope.m.memberStatus eq 0}">
 				                    <a href="/admin.do">관리자페이지</a>
+				                    <a href="/logout.do">로그아웃</a>
+			                	</c:when>
+			                	<c:when test="${sessionScope.m.memberStatus eq 2}">
+				                    <a href="/myPage.do">마이페이지</a>
 				                    <a href="/logout.do">로그아웃</a>
 			                	</c:when>
 		                </c:choose>	
