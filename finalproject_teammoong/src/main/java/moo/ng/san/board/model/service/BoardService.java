@@ -245,6 +245,7 @@ public class BoardService {
 
 	public int selectJoinNo() {
 		return dao.selectJoinNo();
+		}
 
 	public ArrayList<Board> searchBoardList(searchBarVO sb) {
 		ArrayList<Board> list = dao.searchBoardList(sb);
