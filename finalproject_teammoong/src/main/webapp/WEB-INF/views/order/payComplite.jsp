@@ -42,7 +42,7 @@
 			<h1>결제완료</h1>
 				<p>${sessionScope.m.memberName}님의 주문내역 입니다.</p>
 				<p></p>
-			<table>
+			<table id="orderTbl">
 				<tr>
 					<th>주문번호</th>
 					<th style="width: 40%;">주문건</th>
@@ -150,8 +150,20 @@
 	        });
 	    });
 		$("#confirmBtn").on("click", function(){
-			const orderNo = $("[name=orderNo]").val();
-			location.href = "/payCancel.do?orderNo="+orderNo;
+			$.ajax({
+				url: "/payCancel.do",
+				type: "get",
+				data: {orderNo : orderNo},
+				success: function(data) {
+					if(data == "success"){
+						alert("결제 취소");
+						$("#orderTbl").hide();
+					}
+				},
+				error: function(){
+					console.log("에러")
+				}
+			});
 		});
 	</script>
 </body>

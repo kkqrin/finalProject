@@ -182,6 +182,21 @@ public class OrderService {
 		return order;
 	}
 
+	public int cancelOrder(int orderNo) {
+		int result = dao.cancelOrder(orderNo);
+		if(result>0) {
+			result = dao.updatePoint(orderNo);
+			Order order = dao.selectOrder(orderNo);
+			int issueNo = order.getIssueNo();
+			if(issueNo != 0) {
+				result = dao.cancelCoupon(issueNo); 
+			}
+			
+			
+		}
+		return result;
+	}
+
 
 
 }

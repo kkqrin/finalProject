@@ -166,4 +166,16 @@ public class OrderController {
 		model.addAttribute("productName",productName);
 		return "order/payComplite";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/payCancel.do")
+	public String payCancel(int orderNo) {
+		int result = service.cancelOrder(orderNo);
+		if(result>0) {
+			return "success";
+		}else {
+			return "error";
+		}
+		
+	}
 }

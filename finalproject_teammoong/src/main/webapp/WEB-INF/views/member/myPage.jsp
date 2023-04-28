@@ -468,6 +468,7 @@
 				type: "get",
 				data: {memberNo : memberNo},
 				success: function(data) {
+					
 					if(data == "success"){
 					$("#alert01").click();
 					} else {
