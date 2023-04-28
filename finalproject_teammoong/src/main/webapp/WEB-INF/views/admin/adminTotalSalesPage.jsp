@@ -83,7 +83,7 @@
 <%-- <jsp:include page="/WEB-INF/views/common/header.jsp" /> --%>
     <div class="adminPage-wrapper">
         <div class="adminPage-header">
-            <div class="adminPage-title"><a>Moong's Admin</a></div>
+            <div class="adminPage-title"><a href="/#">Moong's Admin</a></div>
         </div>
         <div class="adminPage-back">
             <jsp:include page="/WEB-INF/views/admin/adminSideNavi.jsp"/>
@@ -145,8 +145,11 @@
 <script>
 	  
   const chartDataUrl = "https://example.com/data.json";
+  
 	$(document).ready(function() {
+		
 		var totalSalesCount = (".totalSalesCount");
+		
 				$.ajax({
 					url: 'ajaxTotalSalesManage.do',
 				    dataType: 'json',
@@ -320,7 +323,6 @@
 		            	type : "post",
 		            	data : {monthNo : monthNo},
 						success : function(data){
-							console.log(data);
 							const category = ['패션','뷰티','식품','생활용품','가전/디지털','가구','침구','인테리어','공구','스포츠/레저/취미','출산/유아동','반려용품','명품관'];
 				            
 				            var ctx = document.getElementById('salesChart').getContext('2d');

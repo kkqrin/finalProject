@@ -81,6 +81,9 @@
 						<c:if test="${order.orderStatus == 6 }">
 						환불완료
 						</c:if>
+						<c:if test="${order.orderStatus == 7 }">
+						환불완료
+						</c:if>
 					</td>
 					<td>
 						<button type="button" id="cancelPay" class="btn size01 btn-border-pri">결제취소</button>
@@ -106,9 +109,9 @@
 						<th>배송요청사항</th>
 						<td>${order.deliRequest}</td>
 					</tr>
-					
 				</table>
 			</div>
+			<input type="hidden" name="orderNo" value="${order.orderNo }">
 			<div class="area-btn center">
 				<a href="/myOrderList.do" class="btn btn-sec size02"">주문상세보기</a>
 				<a href="/main.do" class="btn btn-black size02">메인으로</a>
@@ -146,6 +149,10 @@
 	            modal.css("display", "none");
 	        });
 	    });
+		$("#confirmBtn").on("click", function(){
+			const orderNo = $("[name=orderNo]").val();
+			location.href = "/payCancel.do?orderNo="+orderNo;
+		});
 	</script>
 </body>
 </html>
