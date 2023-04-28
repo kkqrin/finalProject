@@ -259,6 +259,6 @@
 						board_count as boardCount
 					from board_tbl b
                     where board_name LIKE '%'||#{searchKeyword}||'%'
-					order by 1 desc)b);
+					order by 1 desc)b)
 	</select>
 </mapper>
