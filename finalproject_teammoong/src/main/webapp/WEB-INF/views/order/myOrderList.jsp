@@ -23,98 +23,6 @@
 			<div class="mypage-content">
 				<!-- 단일상품 / 여러상품일때 구분 필요 -->
 
-				<!-- foreach -->
-				<div class="myorder-order-item">
-					<div class="myorder-product-count">
-						<div class="myorder-order-status">결제완료</div>
-						<!-- <div style="height: 15px;"></div> -->
-					</div>
-					<div class="myorder-product-img">
-						<a href="/productView.do?productNo=${i.productNo}">
-							<img src="/resources/upload/product/${i.thumbnail }" />
-						</a>
-						<div class="ab-product-count">
-							<span>8</span>
-						</div>
-					</div>
-					<div class="myorder-order-title-box">
-						<div class="myorder-product-title">
-							<a href="/productView.do?productNo=${i.productNo}">
-								<!-- ${i.productName } -->
-								[예시][4월 한정 파격특가][우리동네과일가게]저탄소 GAP 파파야멜론 750g (2입) 
-							</a>
-						</div>
-						<!-- <div class="myorder-product-option">
-							${i.optionDetailName }
-							푸실리 파스타
-						</div> -->
-					</div>
-					<!-- <div class="myorder-product-volume">
-						${i.basketCount}
-					</div> -->
-					<div class="myorder-total-price">총 50,000 원</div>
-					<div class="myorder-order-info">
-						<div class="myorder-order-date">2023/04/25</div>
-						<div class="myorder-product-total-count">총 8건</div>
-						<div class="myorder-order-detail">
-							<form action="/myOrderView.do">
-								<button id="order-detail-btn">주문상세<div class="material-symbols-outlined">chevron_right</div></button>
-							</form>
-						</div>
-						
-					</div>
-				</div>
-
-				<div class="myorder-order-item">
-					<div class="myorder-product-count">
-						<!-- <div>총 8건</div> -->
-						<!-- <div style="height: 20px;"></div> -->
-						<div class="myorder-order-status">배송완료</div>
-						<!-- <div style="height: 15px;"></div> -->
-					</div>
-					<div class="myorder-product-img">
-						<a href="/productView.do?productNo=${i.productNo}">
-							<img src="/resources/upload/product/${i.thumbnail }" />
-						</a>
-						<!-- <div class="ab-product-count">
-							<span>8</span>
-						</div> -->
-					</div>
-					<div class="myorder-order-title-box">
-						<div class="myorder-product-title">
-							<a href="/productView.do?productNo=${i.productNo}">
-								<!-- ${i.productName } -->
-								[예시][4월 한정 파격특가][우리동네과일가게]저탄소 GAP 파파야멜론 750g (2입) 
-							</a>
-						</div>
-						<!-- <div class="myorder-product-option">
-							${i.optionDetailName }
-							푸실리 파스타
-						</div> -->
-					</div>
-					<!-- <div class="myorder-product-volume">
-						${i.basketCount}
-					</div> -->
-					<div class="myorder-total-price">50,000 원
-						<div class="myorder-btn-zone">
-							<form action="#">
-								<button class="btn btn-pri size01">리뷰쓰기</button>
-							</form>
-						</div>
-					</div>
-					<div class="myorder-order-info">
-						<div class="myorder-order-date">2023/04/25</div>
-						<div class="myorder-order-detail">
-							<form action="#">
-								<button id="order-detail-btn">주문상세<div class="material-symbols-outlined">chevron_right</div></button>
-							</form>
-						</div>
-					</div>
-				</div>
-
-
-				<!-- 위에는 예시 -->
-				<!-- 밑에는 진짜 ~ ////////////////////////////////////////////////// -->
 
 				<c:forEach items="${myOrderList }" var="i">
 					<div class="myorder-order-item">
@@ -146,9 +54,11 @@
 							</div>
 						</div>
 						<div class="myorder-product-img">
-							<a href="/productView.do?productNo=${i.productNo}">
-								<img src="/resources/upload/product/${i.thumbnail }" />
-							</a>
+							<!-- <a href="/productView.do?productNo=${i.productNo}"> -->
+								<a class="modal-product-list" data-modal="#modal-myorder-product-list" style="cursor: pointer;">
+									<img src="/resources/upload/product/${i.thumbnail }" />
+								</a>
+							<!-- </a> -->
 							<c:if test="${i.orderProductCount gt 1}">
 								<div class="ab-product-count">
 									<span>${i.orderProductCount}</span>
@@ -157,20 +67,20 @@
 						</div>
 						<div class="myorder-order-title-box">
 							<div class="myorder-product-title">
-								<a href="/productView.do?productNo=${i.productNo}">
+								<!-- <a href="/productView.do?productNo=${i.productNo}"> -->
 									${i.productName }
 									<c:if test="${i.orderProductCount gt 1}">
 										.. 외
 									</c:if>
-								</a>
+								<!-- </a> -->
 							</div>
 						</div>
 						<div class="myorder-total-price"><fmt:formatNumber value="${i.orderPrice}"/> 원
 							<c:if test="${i.orderStatus eq 7}">
 								<div class="myorder-btn-zone">
-									<form action="#">
-										<button class="btn btn-pri size01">리뷰쓰기</button>
-									</form>
+									<!-- <form action="#"> -->
+										<button type="button" class="btn btn-border-pri size01 possible-review">리뷰 작성 가능</button>
+									<!-- </form> -->
 								</div>
 							</c:if>
 						</div>
@@ -192,6 +102,45 @@
 
 
 
+				<!-- 여러 상품일때 상품들 리스트 (더보기) 모달 -->
+				<div id="modal-myorder-product-list" class="modal modal-sec" style="min-width: fit-content;">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h6>주문한 상품 목록</h6>
+						</div>
+						<div class="modal-body">
+							<!--내용영역-->
+							<!-- <h5>내용타이틀</h5> -->
+							<!-- <c:forEach items="${orderProductList }" var="i">
+								<div class="myorder-order-item">
+									<div class="myorder-product-img">
+										<a href="/productView.do?productNo=${i.productNo}">
+											<img src="/resources/upload/product/${i.thumbnail }" />
+										</a>
+									</div>
+									<div class="myorder-order-title-box">
+										<div class="myorder-product-title">
+											<a href="/productView.do?productNo=${i.productNo}">
+												${i.productName }
+											</a>
+										</div>
+										<div class="myorder-product-option">
+											${i.optionDetailName }
+										</div>
+									</div>
+									<div class="myorder-total-count"> ${i.orderDetailCnt}개</div>
+									<div class="myorder-total-price"><fmt:formatNumber value="${i.orderSalePrice}"/> 원</div>
+								</div>
+							</c:forEach> -->
+							<!--//내용영역-->
+						</div>
+						<div class="area-btn center">
+							<a class="btn btn-pri size01" type="button" id="review-filter-btn" rel="modal:close">확인</a>
+							<a href="" rel="modal:close" class="btn btn-sec size01">닫기</a>
+						</div>
+					</div>
+				</div>
+
 
 			</div>
 		</div>
@@ -199,5 +148,153 @@
 	
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+
+
+<script>
+	//모달 관련 기능
+	$(function () {
+		$('[data-modal]').click(function (event) {
+			const modalId = $(this).data('modal');
+			if ($(modalId).hasClass('modal-pri')) {
+				$($(this).data('modal')).modal({
+					fadeDuration: 100
+				});
+				return false;
+			} else if ($(modalId).hasClass('modal-sec')) {
+				$($(this).data('modal')).modal({
+					escapeClose: false,
+					showClose: false,
+					fadeDuration: 100
+				});
+				return false;
+			} else {
+				return false;
+			}
+		});
+	});
+
+
+	$(".possible-review").on("click", function(){
+		$(this).parent().parent().parent().find($(".modal-product-list")).click();
+	});
+
+
+// modal-product-list
+	$(".modal-product-list").on("click", function(){
+		const orderNo = $(this).parent().parent().find("[name=orderNo]").val();
+
+		$(".modal-body").children().remove();
+		$.ajax({
+			url : "/myOrderProductList.do",
+			data : {orderNo : orderNo},
+
+			success : function(data){
+				console.log(data);
+
+				for(let i=0;i<data.length;i++){
+					const p = data[i];
+					// console.log("p : "+p.productName);
+					// $(".modal-body").append(p.productName);
+					
+					// 				<div class="myorder-order-item">
+					// 					<div class="myorder-product-img">
+					// 						<a href="/productView.do?productNo=${i.productNo}">
+					// 							<img src="/resources/upload/product/${i.thumbnail }" />
+					// 						</a>
+					// 					</div>
+
+					const div = $("<div>");
+					div.addClass("myorder-order-item");
+
+					const imgDiv = $("<div>");
+					imgDiv.addClass("myorder-product-img");
+
+					const imgA = $("<a>");
+					imgA.attr("href", "/productView.do?productNo="+p.productNo);
+						
+					const img = $("<img>");
+					img.attr("src", "/resources/upload/product/"+p.thumbnail);
+					
+					imgDiv.append(imgA);
+					imgA.append(img);
+					div.append(imgDiv);
+
+					$(".modal-body").append(div);
+					// 					<div class="myorder-order-title-box">
+					// 						<div class="myorder-product-title">
+					// 							<a href="/productView.do?productNo=${i.productNo}">
+					// 								${i.productName }
+					// 							</a>
+					// 						</div>
+					// 						<div class="myorder-product-option">
+					// 							${i.optionDetailName }
+					// 						</div>
+					// 					</div>
+
+					const titleBoxDiv = $("<div>");
+					titleBoxDiv.addClass("myorder-order-title-box");
+
+					const titleDiv = $("<div>");
+					titleDiv.addClass("myorder-product-title");
+
+					const titleA = $("<a>");
+					titleA.attr("href", "/productView.do?productNo="+p.productNo);
+					titleA.text(p.productName);
+
+					const optionDiv = $("<div>");
+					optionDiv.addClass("myorder-product-option");
+					optionDiv.text(p.optionDetailName);
+
+					titleDiv.append(titleA);
+					titleBoxDiv.append(titleDiv);
+					titleBoxDiv.append(optionDiv);
+					div.append(titleBoxDiv);
+
+
+					// 					<div class="myorder-total-count"> ${i.orderDetailCnt}개</div>
+					// 					<div class="myorder-total-price"><fmt:formatNumber value="${i.orderSalePrice}"/> 원</div>
+					// 				</div>
+
+					const countDiv = $("<div>");
+					countDiv.addClass("myorder-total-count");
+					countDiv.text(p.orderDetailCnt);
+
+					const priceDiv = $("<div>");
+					priceDiv.text(p.orderSalePrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" 원");
+					priceDiv.addClass("myorder-total-price");
+					
+
+					div.append(countDiv);
+					div.append(priceDiv);
+
+
+					// <c:if test="${i.orderStatus eq 7}">
+					// 	<div class="myorder-btn-zone">
+					// 		<form action="#">
+					// 			<button class="btn btn-pri size01">리뷰쓰기</button>
+					// 		</form>
+					// 	</div>
+					// </c:if>
+
+					if(Number(p.orderStatus) == 7){
+						const btnZoneDiv = $("<div>");
+						const btnForm = $("<form>");
+						const btn = $("<button>");
+						btn.addClass("btn btn-pri size01");
+						btn.text("리뷰쓰기");
+
+						btnForm.append(btn);
+						btnZoneDiv.append(btnForm);
+						div.append(btnZoneDiv);
+					}
+					
+					
+					$(".modal-body").append(div);
+				}
+			}
+		});
+	});
+
+</script>
 </body>
 </html>

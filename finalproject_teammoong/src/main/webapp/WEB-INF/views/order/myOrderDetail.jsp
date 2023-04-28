@@ -59,20 +59,15 @@
 							</div>
 							<div class="myorder-total-count"> ${i.orderDetailCnt}개</div>
 							<div class="myorder-total-price"><fmt:formatNumber value="${i.orderSalePrice}"/> 원</div>
+							<c:if test="${i.orderStatus eq 7}">
+								<div class="myorder-btn-zone" style="position: static;">
+								<form action="#">
+									<button class="btn btn-pri size01">리뷰쓰기</button>
+								</form>
+								</div>
+							</c:if>
 						</div>
-
 					</c:forEach>
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -101,7 +96,7 @@
 					</div>
 
 					<!-- 최초 주문금액 -->
-					<div class="myorder-order-item order-detail-info">
+					<!-- <div class="myorder-order-item order-detail-info">
 						<div class="myorder-order-content-title">최종 결제금액</div>
 						<table class="tbl-box" style="margin-bottom: 20px;">
 							<tr>
@@ -121,24 +116,27 @@
 								<td><fmt:formatNumber value="${o.totalPrice}"/> 원</td>
 							</tr>
 						</table>
-					</div>
+					</div> -->
 
 					<!-- 결제 상세 -->
 					<div class="myorder-order-item order-detail-info">
 						<div class="myorder-order-content-title">결제 상세</div>
 						<table class="tbl-box" style="margin-bottom: 20px;">
 							<tr>
+								<th>주문금액</th>
+								<td><fmt:formatNumber value="${o.orderPrice}"/> 원</td>
+							</tr>
+							<tr>
+								<th>쿠폰 사용</th>
+								<td>-원</td>
+							</tr>
+							<tr>
+								<th>적립금 사용</th>
+								<td>- ${o.minusPointEa} 원</td>
+							</tr>
+							<tr>
 								<th>카드 간편결제</th>
-								<td>-원</td>
-							</tr>
-							<tr>
-								<th>쿠폰</th>
-								<td>-원</td>
-							</tr>
-							<tr>
-								<th>적립금</th>
-								<td>${o.minusPointEa}원</td>
-							</tr>
+								<td><fmt:formatNumber value="${o.totalPrice}"/> 원</td>
 							</tr>
 						</table>
 					</div>
@@ -149,7 +147,7 @@
 						<table class="tbl-box" style="margin-bottom: 20px;">
 							<tr>
 								<th>적립</th>
-								<td><fmt:formatNumber value="${o.plusPointEa}"/> 원</td>
+								<td>+ <fmt:formatNumber value="${o.plusPointEa}"/> 원</td>
 							</tr>
 						</table>
 					</div>
