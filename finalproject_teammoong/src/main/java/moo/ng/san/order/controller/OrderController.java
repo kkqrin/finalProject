@@ -127,6 +127,7 @@ public class OrderController {
 			if(result> productNo.length) {
 				Point point = new Point();
 				point.setMemberNo(m.getMemberNo());
+				point.setOrderNo(orderNo);;
 				if(minusPointEa != 0) {
 					point.setPointEa(minusPointEa);
 					result = service.insertMinusPointEa(point);					
