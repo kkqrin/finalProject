@@ -133,6 +133,20 @@
 	                <div class="middle-center">
 						<form action="/searchBar.do" method="post">
 							<div class="mainSearch">
+								<div class="mainSelect">
+									<div id="customSelectBox">
+										<div>
+											<span>뭉쳐야산다</span>
+											<span class="material-symbols-outlined expand">
+											expand_more
+											</span>
+										</div>
+										<ul>
+										<li>뭉쳐야산다<input type="hidden" name="selectBox" value="1"></li>
+										<li>회원주최공구<input type="hidden" name="selectBox" value="2"></li>
+										</ul>
+									</div>
+								</div>
 								<input type="text" name="searchKeyword" class="mainSearch-input input-noborder" placeholder="상품을 검색해보세요">
 								<button class="material-symbols-outlined">search</button>
 							</div>
@@ -296,6 +310,23 @@
             }
             
     });
+    </script>
+    
+    <script>
+    	$("#customSelectBox").children("div").click(function(){
+    		$("#customSelectBox").children("ul").slideToggle();
+    	});
+    	$("#customSelectBox").find("li").each(function(i,e){
+    		$(e).click(function(){
+    			const val = $(e).children().val();
+    			if(val==1){
+    				$("#customSelectBox").find("span").eq(0).text("뭉쳐야산다");
+    			}else if(val==2){
+    				$("#customSelectBox").find("span").eq(0).text("회원주최공구");
+    			}
+    			$("#customSelectBox").children("ul").css("display","none");
+    		})
+    	});
     </script>
 	
     <script src="/resources/js/header.js"></script>

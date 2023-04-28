@@ -128,4 +128,34 @@
 		order_status = 5 where order_no = #{orderNo}
 	</update>
 
+	<select id="selectMyOrderDetail" parameterType="_int" resultType="o">
+		select
+            o.order_no AS orderNo,
+            o.order_date AS orderDate,
+            o.order_status AS orderStatus,
+            o.deli_receiver AS deliReceiver,
+            o.deli_phone AS deliPhone,
+            o.deli_addr AS deliAddr,
+            o.deli_request AS deliRequest,
+            o.order_price AS orderPrice,
+            o.total_price AS totalPrice,
+            o.issue_no AS issueNo,
+            (select point_ea from point_tbl where order_no = o.order_no and point_status = 3) AS minusPointEa,
+            (select point_ea from point_tbl where order_no = o.order_no and point_status = 2) AS plusPointEa
+		from order_tbl o
+		where order_no = #{_parameter}
+	</select>
+
+	<select id="selectMyOrderProductList" parameterType="_int" resultType="o">
+       SELECT
+             (SELECT FILEPATH FROM PRODUCT_IMG WHERE P_IMG_NO=(SELECT MIN(P_IMG_NO) FROM PRODUCT_IMG where product_no=P.product_no)) AS thumbnail,
+             p.product_name AS productName,
+             OD.ORDER_SALE_PRICE AS orderSalePrice,
+             OD.ORDER_DETAIL_CNT AS orderDetailCnt,
+             (SELECT OPTION_DATEAIL FROM OPTION_INFO_TBL WHERE OPTION_INFO_NO = OD.OPTION_INFO_NO) AS optionDetailName
+       FROM ORDER_TBL o
+       left join order_detail od on o.order_no = od.order_no
+       left join product_tbl p on od.product_no = p.product_no
+       where o.order_no = #{_parameter}
+	</select>
 </mapper>

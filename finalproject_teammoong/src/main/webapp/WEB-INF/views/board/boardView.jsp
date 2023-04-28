@@ -233,7 +233,7 @@ sup{
 			<c:choose>
 			<c:when test="${sessionScope.m.memberId eq b.boardWriter }">
 			<div style="display: flex;">
-			<button class="btn btn-border-sec size01" name="delete" type="button" id="bFile" onclick="cartjQueryAlert('error');" value="삭제" style="background-color: var(--primary); border-color: var(--primary); color: #fff; cursor: pointer; padding: 20px 50px 20px 50px; margin-top: 15px; width: 100%">삭제</button>
+			<button class="btn btn-border-sec size01" name="delete" type="button" id="bFile" value="삭제" style="background-color: var(--primary); border-color: var(--primary); color: #fff; cursor: pointer; padding: 20px 50px 20px 50px; margin-top: 15px; width: 100%">삭제</button>
 			</div>
 			</c:when>
 			<c:when test="${empty sessionScope.m.memberId}">
@@ -282,11 +282,6 @@ sup{
 		}
 	});
 	
-		
-	
-	$("[name='delete']").on("click",function(){
-		location.href="/boardDelete.do?boardNo=${b.boardNo}"
-	});
 
 	$( function() {
 				$( ".select-custom" ).selectmenu();
@@ -490,15 +485,28 @@ sup{
 			}
 		});//계좌번호 정규표현식
 		
+
+
 		
-		// 장바구니에서 선택삭제 alert
+		// 삭제 버튼
+		$("[name='delete']").on("click",function(e){
+
+			deleteBoardjQueryAlert('error');
+
+			// 폼 제출 막음
+			// e.preventDefault();
+			// return false;
+			
+			// location.href="/boardDelete.do?boardNo=${b.boardNo}"
+		});
+
 		
-		  
-		function cartjQueryAlert(type, form) {
+		// 게시글 삭제 alert
+		function deleteBoardjQueryAlert(type) {
 		let $type = type;
 		switch ($type) {
 			case 'error':
-			messageBox = $.parseHTML('<div class="alert__error" style="text-align:center;"><div class="title" style="margin-bottom:10px;color:var(--error);padding:0;">뭉쳐야산다</div><div style="margin: 50px auto;"><div style="margin-top:10px;">선택한 상품을 장바구니에서 삭제하시겠습니까?</div></div></div>');			
+			messageBox = $.parseHTML('<div class="alert__error" style="text-align:center;"><div class="title" style="color:var(--error);padding:0;">뭉쳐야산다</div><div style="margin: 50px auto;"><div style="margin-top:10px;">선택한 게시글을 삭제하시겠습니까?</div></div></div>');			
 			break;
 		}
 		$("body").append(messageBox);
@@ -515,7 +523,7 @@ sup{
 					click: function(){
 						$(this).dialog("close");
 
-						form.submit();
+						location.href="/boardDelete.do?boardNo=${b.boardNo}";
 					}
 				},
 				{

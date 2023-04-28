@@ -123,8 +123,15 @@ public class OrderService {
 		return dao.selectMyOrderList(memberNo);
 	}
 	
-	
-	
+	public Order selectMyOrderDetail(int orderNo) {
+		
+		return dao.selectMyOrderDetail(orderNo);
+	}
+
+	public ArrayList<Order> selectMyOrderProductList(int orderNo) {
+		
+		return dao.selectMyOrderProductList(orderNo);
+	}
 	
 	
 	
