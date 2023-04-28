@@ -66,7 +66,15 @@
     .searchForm{
     	display: none;
     }
-
+    
+	img {
+ 		 width: 100px;
+ 		 height: 50px;
+ 		 transition: transform 0.2s;
+	}
+	img:hover {
+	 	 transform: scale(1.5);
+	}
 
 
 </style>
@@ -96,6 +104,7 @@
                         <table class="table tbl-box">
                             <tr>
                             	<td>구분</td>
+                            	<td>제품사진</td>
                                 <td>상품번호</td>
                                 <td>세부카테고리번호</td>
                                 <td>상품이름</td>
@@ -112,6 +121,7 @@
                             <c:forEach items="${productList }" var="p">
                                 <tr>
                                 	<td><input type="checkBox" class="checkBox"></td>
+                                	<td><img src="/resources/upload/product/${p.thumbnail }"></td>
                                     <td>${p.productNo }<input type="hidden" class="productNo" value="${p.productNo }"></td>
                                     <c:choose>
                                     	<c:when test="${p.detailCategoryNo == 1}">
@@ -246,14 +256,11 @@
                                 </tr>
                             </c:forEach>
                             <tr>
-                                <th colspan="13">${pageNavi}</th>
+                                <th colspan="14">${pageNavi}</th>
                             </tr>
                             <tr>
                                 <th colspan="2"><button type="button" name="allChangeProductStatus">일괄 변경</button></th>
                             </tr>
-		                        <form name="searchForm" method="POST" action="" class="">
-		                       		<button type="button" onclick="exportToExcel();">엑셀출력</button>
-		                        </form><!--  -->
                         </table>
                    	 </div>
                      <div id="ajaxResult" class="table"></div>

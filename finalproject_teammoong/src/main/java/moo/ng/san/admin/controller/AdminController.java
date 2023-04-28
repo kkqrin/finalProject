@@ -266,7 +266,15 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping(value="/ajaxGenderSalesCount.do", produces = "application/json;charset=utf-8")
 	public String ajaxGenderSalesCount() {
-		ArrayList<SalesData> list = service.selectGenderSalesData();
+		ArrayList<SalesData> list = new ArrayList<SalesData>();
+		for(int i=1;i<4;i++) {
+			SalesData sd = service.selectGenderSalesData(i);
+			if(sd == null) {
+				sd = new SalesData();
+			}
+			sd.setGender(i);
+			list.add(sd);
+		}
 		Gson gson = new Gson(); 
 		String result = gson.toJson(list); 
 		return result;

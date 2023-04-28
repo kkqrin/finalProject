@@ -136,6 +136,9 @@
 	                                    	<c:when test="${gl.gongguPayStatus == 2}">
 	                                    		<td>결제취소</td>
 	                                    	</c:when>
+	                                    	<c:when test="${gl.gongguPayStatus == 0}">
+	                                    		<td>테스트인듯</td>
+	                                    	</c:when>
 	                                    </c:choose>
 	                          	 	</tr>
 								</c:forEach>

@@ -290,10 +290,10 @@ public class AdminDao {
 		return sd;
 	}
 
-	public ArrayList<SalesData> selectGenderSalesData() {
-		List list = sqlSession.selectList("admin.selectGenderSalesData");
+	public SalesData selectGenderSalesData(int i) {
+		SalesData sd = sqlSession.selectOne("admin.selectGenderSalesData",i);
 
-		return (ArrayList<SalesData>)list;
+		return sd;
 	}
 
 	public Member ajaxMemberView(int memberNo) {
