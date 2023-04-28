@@ -22,10 +22,18 @@ public class DmService {
 		return dao.insertDm(dm);
 	}
 
-//	public ArrayList<DirectMessage> selectAllDm(DirectMessage dm) {
-//		ArrayList<DirectMessage> list = dao.selectAllDm(dm);
-//		return list;
-//	}
+	
+
+	public int insertGroupDm(DirectMessage dm) {
+		int result = 0;
+		for(int i = 0 ; i < dm.getDmReceivers().length ; i++) {
+			dm.setDmReceiver(dm.getDmReceivers()[i]);
+			result += dao.insertDm(dm);
+		}
+		return result;
+	}//insertGroupDm
+	
+	
 
 	public int selectDmCount(String memberId) {
 		return dao.selectDmCount(memberId);
@@ -82,6 +90,8 @@ public class DmService {
 		DmPageData dpd = new DmPageData(list, pageNavi);
 		return dpd;
 	}
+
+
 
 
 }//DmService

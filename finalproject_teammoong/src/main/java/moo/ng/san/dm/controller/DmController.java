@@ -99,9 +99,13 @@ public class DmController {
 	@ResponseBody
 	@RequestMapping(value = "/insertGroupDm.do")
 	public String insertGroupDm(DirectMessage dm) {
-		System.out.println(dm);
-		return "";
-	}
+		int result = service.insertGroupDm(dm);
+		if(result>0) {
+			return "ok";
+		}else {
+			return "error";
+		}
+	}//insertGroupDm
 	
 	
 	

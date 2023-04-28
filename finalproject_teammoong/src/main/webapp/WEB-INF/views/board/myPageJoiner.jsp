@@ -140,10 +140,15 @@
 			$.ajax({
 				url:"/insertGroupDm.do",
 				data:{dmReceivers:jsonArr,dmContent:dmContent},
-				success:function(data){
-					$(".close").click();
+				success:function(result){
+					if(result=="ok"){
+						alert("쪽지를 발송하였습니다");
+						$(".close").click();
+					}else{
+						alert("발송 오류. 관리자에게 문의하세요");
+					}
 				}
-			})
+			})//ajax
 		});
 
 </script>
