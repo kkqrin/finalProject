@@ -13,7 +13,9 @@ $(document).ready(function() {
         var totalCountVal = Number(totalCount.eq(i).val())
         var joinCountVal = Number(joinCount.eq(i).val());
         if(joinCountVal == totalCountVal){
-            joinCount.eq(i).parent().parent().hide();
+            // joinCount.eq(i).parent().parent().hide();
+            // joinCount.eq(i).parent().parent().hide();
+            joinCount.eq(i).parent().next().text("공구종료");
         }
     }
 
@@ -82,15 +84,18 @@ $(document).ready(function() {
             //     dataType : "JSON",
             //     data : {productNo : $("#productNo").val()},
             //     success : function(data){
-            //         console.log(data);
-            //     }
-            // });
-        });
-        $(".window-close-btn").on("click",function(){
-            $(".gonggu-window").hide();
-        });
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //         console.log(data);
+                //     }
+                // });
+            });
+            $(".window-close-btn").on("click",function(){
+                $(".gonggu-window").hide();
+            });
+            
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            $(".likeBtn").on("click",function(){ /*like click event*/
+                $(this).children().toggleClass("test");
+            })
         window.onload = function(){
             // 찜하기 DB조회후 로그인한 회원과 같으면 색칠해주는 ajax
             if($("#loginMember").val() != ''){
@@ -115,36 +120,41 @@ $(document).ready(function() {
                 });
                 }
             }
-        // 찜하기 버튼 색칠하기
-        $("[name=like]").children().on("click",function(){ /*like click event*/
-            $(this).children().toggleClass("test");
-        })
-        // 찜하기 삭제
-            $("[name=like]").on("click",function(){ /*like delete*/
-            $.ajax({
-                url : "/deleteLike.do",
-                type : "POST",
-		    	dataType : "JSON",
-                data : {productNo : $("#productNo").val(), memberNo : $("#loginMember").val()},
-                success : function(data){
-                    $("[name=like]").empty();
-                    $("[name=like]").append("<span class='material-symbols-outlined'>favorite</span>")
-                }
-            });
+            //찜하기 기능
+        $(".likeBtn").on("click",function(){
+            var productNo = $("#productNo").val();
+            var memberNo = $("#loginMember").val();
+            if($(this).children().hasClass("test")){
+                $.ajax({
+                    url : "/productLike.do",
+                    type : "POST",
+                    dataType : "JSON",
+                    data : {productNo : productNo, memberNo : memberNo},
+                    success : function(data){
+                        $("[name=like]").empty();
+                        $("[name=like]").append("<span class='material-symbols-outlined test'>favorite</span>");
+                        console.log(data);
+                        location.reload();
+                    }
+                });
+            } else {
+                $.ajax({
+                    url : "/deleteLikeByMyLikeList.do",
+                    type : "post",
+                    data : {productNo : productNo, memberNo : memberNo},
+                    context : this,
+                    success : function(data){
+                        console.log(data);
+                        if(data == 0622){
+                            $("[name=like]").empty();
+                            $("[name=like]").append("<span class='material-symbols-outlined'>favorite</span>");
+                            location.reload();
+                        }
+                    }
+                });
+               
+            }
         });
-        // 찜하기 insert
-            $("[name=like]").on("click",function(){ /*like insert*/
-            $.ajax({
-                url : "/productLike.do",
-                type : "POST",
-		    	dataType : "JSON",
-                data : {productNo : $("#productNo").val(), memberNo : $("#loginMember").val()},
-                success : function(data){
-                    console.log(data);
-                }
-            });
-        });
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         let productPrice = $("#productPrice").val();
@@ -276,7 +286,7 @@ $(document).ready(function() {
                     data : {inquiryNo : inquiryNo},
                     context: this,
                     success : function(data){
-                        $(this).parent().next().next().append("<td colspan='4' style='text-align : left;'>"+data.iqAdminContent+"</td>");
+                        $(this).parent().next().next().append("<td colspan='4' style='text-align : left;'>"+"<span style='padding-right: 10px;'><img src='/resources/img/product/inquiryA (2).png' style='width: 30px; height: 30px;'></span>"+data.iqAdminContent+"</td>");
                         chkcnt = 1;
                     }
                 });

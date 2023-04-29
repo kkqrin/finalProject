@@ -166,9 +166,9 @@
                     </div>
                     <div class="icon-box">
                         <div class="like-icon">
-                            <a name="like">
+                            <a name="like" class="likeBtn">
                                 <!-- <c:if test="${productNo eq boardNo}"> -->
-                                <span class="material-symbols-outlined">favorite</span>
+                                <span class="likeBtn material-symbols-outlined">favorite</span>
                                 <!-- </c:if> -->
                             </a>
                         </div>
@@ -338,13 +338,13 @@
                 </tr>
             </table>
         </div>
-        <div class="product-content-logo product-info-box"><h3>상품설명</h3></div>
-        <div class="product-content-wrap">
+        <div class="product-content-logo product-info-box"></div>
+        <div class="product-content-wrap" style="border-bottom: 1px solid #e1e4e5;">
             ${p.productContent}
         </div>
-        <div class="product-review-logo product-review"><h3>리뷰</h3></div>
-        <button type="button" id="insertReview" class="btn btn-pri size01" data-modal="#modalReview">리뷰하기</button>
-        <div class="content-wrap">
+        <!-- <div class="product-review-logo product-review"><h3>리뷰</h3></div> -->
+        <!-- <button type="button" id="insertReview" class="btn btn-pri size01" data-modal="#modalReview">리뷰하기</button> -->
+        <div class="content-wrap" style="padding-top: 0;">
             <!-- <pre>
                 남은 거 : 포토후기 더보기 > 상세보기 이미지 왜 바로 안뜨는지? 나중에 뜨는지?
             </pre>
@@ -381,11 +381,11 @@
                     </div>
                 </div> -->
         
-                <h1>전체리뷰</h1>
+                <h2># 리뷰</h2>
                 <div class="all-review-wrap">
                     <div class="review-header">
-                        <div class="review-count">총 121건</div>
-                        <div class="review-navi">
+                        <!-- <div class="review-count">총 121건</div> -->
+                        <!-- <div class="review-navi">
                             <div class="review-filter" data-modal="#modal-review-filter">
                                 <span class="material-symbols-outlined">tune</span>
                                 필터
@@ -400,7 +400,7 @@
                                     <div class="review-range-thing">별점높은순</div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="review-mid">
                         <c:forEach items="${reviewList }" var="i">
@@ -437,10 +437,10 @@
                             </div>
                         </div>
                     </c:forEach>
-                        <div class="review-box">
+                        <!-- <div class="review-box">
                             <div class="review-img">
                                 <!-- <img src="/resources/img/product/lactofit.jpg" /> -->
-                            </div>
+                            <!-- </div>
                             <div class="review-right">
                                 <div class="review-info">
                                     <div class="review-rating">
@@ -496,47 +496,106 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
         
         
         
         
-                <!-- 필터 모달 -->
-                <div id="modal-review-filter" class="modal modal-sec">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h6>상품 옵션</h6>
-                        </div>
-                        <div class="modal-body">
-                            <!--내용영역-->
-                            <!-- <h5>내용타이틀</h5> -->
-                            <form action="/test.do">
-                                    <div class="selectBox-widht-explain">
-                                        <select class="select-custom review-color" id="review-color" style="margin-bottom: 30px;">
-                                            <option value="0" selected>색상</option>
-                                            <option value="white">White</option>
-                                            <option value="black">Black</option>
-                                        </select>
-                                        <select class="select-custom review-size" id="review-size">
-                                            <option value="0" selected>사이즈</option>
-                                            <option value="240">240</option>
-                                            <option value="245">245</option>
-                                        </select>
+                <div class="gonggu-content-wrap">
+                    <div class="gonggu-content-title">
+                    </div>
+                    <div class="product-inquiry-logo product-inquiry"><h3>문의사항</h3></div>
+                    <div class="inquiry-box">
+                        <table class="inquiry-table">
+                            <tr>
+                                <th>제목</th>
+                                <th>작성자</th>
+                                <th>작성일</th>
+                                <th>답변상태</th>
+                            </tr>
+                            <c:forEach items="${iqList }" var="iq">
+                                <tr> 
+                                    <!-- 관리자 답글 조회시 필요한 문의사항 번호 추출용 -->
+                                    <input type="hidden" value="${iq.inquiryNo}">
+                                    <td class="inquiry-content-btn">${iq.inquiryTitle }</td>
+                                    <td>${iq.inquiryWriter }</td>
+                                    <td>${iq.inquiryDate }</td>
+                                    <c:if test="${iq.inquiryStatus eq  0}">
+                                        <td>답변대기</td>
+                            </c:if>
+                                <c:if test="${iq.inquiryStatus eq  1}">
+                                    <td>답변완료</td>
+                                </c:if>
+                            </tr>
+                            <tr class="inquiry-content" style="border: none;">
+                                <td colspan="4" value="${iq.inquiryWriter}" style="text-align: left; border: none;"><span style="padding-right: 10px;"><img src="/resources/img/product/inquiryQ (2).png" style="width: 30px; height: 30px;"></span>${iq.inquiryContent}</td>
+                            </tr>
+                            <tr class="admin-content" style="border: none;">
+                                
+                            </tr>
+                            <tr class="udBtn" style="border: none;">
+                                <td colspan="4" style="border: none;">
+                                    <div class="btn-flex-wrap">
+                                        <!-- 문의사항 update에 사용할 inquiryNo를 위한 input -->
+                                        <input type="hidden" id="inquiryNo" value="${iq.inquiryNo}">
+                                        <!-- 문의사항 각 게시글의 첫번째 수정버튼 -->
+                                        <c:choose>
+                                            <c:when test="${sessionScope.m.memberId eq iq.inquiryWriter}">
+                                                <button class="btn btn-pri size01 updateBtn" data-modal="#modalBasic">수정</button>
+                                            </c:when>
+                                            <c:when test="${sessionScope.m.memberStatus eq 0}">
+                                                <button class="btn btn-pri size01 adminModal" data-modal="#adminModal">답글</button>
+                                            </c:when>
+                                        </c:choose>
+                                        <!-- 문의사항 각 게시글의 첫번째 삭제버튼 -->
+                                        <button class="btn btn-white size01" id="delBtn" data-modal="#modalDelete">삭제</button>
                                     </div>
-                            </form>
-                            <!--//내용영역-->
-                        </div>
-                        <div class="area-btn center">
-                            <a class="btn btn-pri size01" type="button" id="review-filter-btn" rel="modal:close">확인</a>
-                            <a href="" rel="modal:close" class="btn btn-sec size01">닫기</a>
-                        </div>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                    <div class="insertInquiry">
+                        <!-- 문의하기 작성 버튼 -->
+                        <button type="button" id="insertInquiry" class="btn btn-pri size01" data-modal="#modalBasic2">문의하기</button>
                     </div>
                 </div>
-        
-                <!-- 포토후기 더보기 -->
-                <div id="modal-photo-review-more" class="modal modal-pri">
+            </div>
+        </div>
+        <!-- 필터 모달 -->
+        <div id="modal-review-filter" class="modal modal-sec">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6>상품 옵션</h6>
+                </div>
+                <div class="modal-body">
+                    <!--내용영역-->
+                    <!-- <h5>내용타이틀</h5> -->
+                    <form action="/test.do">
+                            <div class="selectBox-widht-explain">
+                                <select class="select-custom review-color" id="review-color" style="margin-bottom: 30px;">
+                                    <option value="0" selected>색상</option>
+                                    <option value="white">White</option>
+                                    <option value="black">Black</option>
+                                </select>
+                                <select class="select-custom review-size" id="review-size">
+                                    <option value="0" selected>사이즈</option>
+                                    <option value="240">240</option>
+                                    <option value="245">245</option>
+                                </select>
+                            </div>
+                    </form>
+                    <!--//내용영역-->
+                </div>
+                <div class="area-btn center">
+                    <a class="btn btn-pri size01" type="button" id="review-filter-btn" rel="modal:close">확인</a>
+                    <a href="" rel="modal:close" class="btn btn-sec size01">닫기</a>
+                </div>
+            </div>
+        </div>
+        <!-- 포토후기 더보기 -->
+        <div id="modal-photo-review-more" class="modal modal-pri">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h6>포토후기</h6>
@@ -637,66 +696,6 @@
                     </div>
                 </div>
             </div>
-        <div class="gonggu-content-wrap">
-            <div class="gonggu-content-title">
-            </div>
-            <div class="product-inquiry-logo product-inquiry"><h3>문의사항</h3></div>
-            <div class="inquiry-box">
-                <table class="inquiry-table">
-                    <tr>
-                        <th>제목</th>
-                        <th>작성자</th>
-                        <th>작성일</th>
-                        <th>답변상태</th>
-                    </tr>
-                    <c:forEach items="${iqList }" var="iq">
-                        <tr> 
-                            <!-- 관리자 답글 조회시 필요한 문의사항 번호 추출용 -->
-                            <input type="hidden" value="${iq.inquiryNo}">
-                            <td class="inquiry-content-btn">${iq.inquiryTitle }</td>
-                            <td>${iq.inquiryWriter }</td>
-                            <td>${iq.inquiryDate }</td>
-                            <c:if test="${iq.inquiryStatus eq  0}">
-                                <td>답변대기</td>
-                    </c:if>
-                        <c:if test="${iq.inquiryStatus eq  1}">
-                            <td>답변완료</td>
-                        </c:if>
-                    </tr>
-                    <tr class="inquiry-content" style="border: none;">
-                        <td colspan="4" value="${iq.inquiryWriter}" style="text-align: left; border: none;">${iq.inquiryContent}</td>
-                    </tr>
-                    <tr class="admin-content" style="border: none;">
-                        
-                    </tr>
-                    <tr class="udBtn" style="border: none;">
-                        <td colspan="4" style="border: none;">
-                            <div class="btn-flex-wrap">
-                                <!-- 문의사항 update에 사용할 inquiryNo를 위한 input -->
-                                <input type="hidden" id="inquiryNo" value="${iq.inquiryNo}">
-                                <!-- 문의사항 각 게시글의 첫번째 수정버튼 -->
-                                <c:choose>
-                                    <c:when test="${sessionScope.m.memberId eq iq.inquiryWriter}">
-	                                	<button class="btn btn-pri size01 updateBtn" data-modal="#modalBasic">수정</button>
-	                                </c:when>
-	                                <c:when test="${sessionScope.m.memberStatus eq 0}">
-	                                	<button class="btn btn-pri size01 adminModal" data-modal="#adminModal">답글</button>
-	                                </c:when>
-                                </c:choose>
-                                <!-- 문의사항 각 게시글의 첫번째 삭제버튼 -->
-                                <button class="btn btn-white size01" id="delBtn" data-modal="#modalDelete">삭제</button>
-                            </div>
-                        </td>
-                    </tr>
-                </c:forEach>
-            </table>
-            <div class="insertInquiry">
-                <!-- 문의하기 작성 버튼 -->
-                <button type="button" id="insertInquiry" class="btn btn-pri size01" data-modal="#modalBasic2">문의하기</button>
-            </div>
-        </div>
-    </div>
-</div>
      <!--리뷰작성 모달 시작-->
      <div id="modalReview" class="modal modal-pri" style="max-width: none;">
         <form action="/insertReview.do" method="post" enctype="multipart/form-data">

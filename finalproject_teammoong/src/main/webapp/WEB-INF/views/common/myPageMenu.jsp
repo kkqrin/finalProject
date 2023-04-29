@@ -19,7 +19,7 @@
 					<a href="/myPage.do">회원 정보</a>
 					<a href="/myOrderList.do">구매 내역/후기 작성</a>
 					<a href="#">장바구니</a>
-					<a href="#">찜한 상품</a>
+					<a href="/productLikePage.do?memberNo=${sessionScope.m.memberNo}">찜한 상품</a>
 					<a href="/couponSearch.do?reqPage=1&memberNo=${sessionScope.m.memberNo }">쿠폰/적립금</a>
 					<a href="/myPageMemberDelete.do">회원 탈퇴</a>
 				</div><!--one-menu-->
