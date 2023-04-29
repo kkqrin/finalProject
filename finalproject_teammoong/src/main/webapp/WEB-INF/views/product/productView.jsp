@@ -294,6 +294,7 @@
                     <div class="user-id">${g.memberId}</div>
                     <div class="gonggu-number">(${g.joinCount}/${g.totalCount})</div>
                     <input type="hidden" class="joinCount" value="${g.joinCount}">
+                    <input type="hidden" class="totalCount" value="${g.totalCount}">
                 </div>
                 <div class="right-flex-wrap">
                     <div class="right-flex-info">

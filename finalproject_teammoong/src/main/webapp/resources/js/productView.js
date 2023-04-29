@@ -8,7 +8,14 @@ $(document).ready(function() {
         }
         
     }
-
+    var totalCount = $(".totalCount");
+    for(var i=0; i<totalCount.length; i++){
+        var totalCountVal = Number(totalCount.eq(i).val())
+        var joinCountVal = Number(joinCount.eq(i).val());
+        if(joinCountVal == totalCountVal){
+            joinCount.eq(i).parent().parent().hide();
+        }
+    }
 
 
     // td 요소를 클릭할 때
