@@ -34,7 +34,7 @@
         overflow: hidden;
     }
     .material-symbols-outlined{
-        font-size: 50px;
+        font-size: 100px !important;
     }
 
     .adminPage-sales{
@@ -42,40 +42,51 @@
     }
     .totalSales{
     	float: left;
-    	width: 300px;
-    	height: 150px;
-    	background-color: lightgray;
+    	width: 600px;
+    	height: 250px;
+    	border: 1px solid #ffa220;
+    	box-sizing : border-box;
+    	border-radius: 15px;
     	margin: 10px 100px;
+    	text-align: center;
     }
     .monthSales{
     	float: left;
-    	width: 300px;
-    	height: 150px;
-    	background-color: lightyellow;
+    	width: 600px;
+    	height: 250px;
+    	border: 1px solid #ffa220;
+    	box-sizing : border-box;
+    	border-radius: 15px;
     	margin: 10px 20px;
-    }
-    .totalSalesChart{
-    	float: left;
+    	text-align: center;
     }
     
+    .salesContent span{
+    	font-size: 20px;
+    	font-weight: bold;
+    }    
     
     /* 차트 css */
 	.totalChart-wrapper{
 		width: 300px;
 	}
-	.curve_chart{
-		height: 400px;
-		width: 400px;
-	}
-	.chart{
-		margin-top: 150px;
-		width: 500px;
-		/* 높이를 주면 왜 사라지는걸까? 이유가 머이지? */
-		
-	}
 	.selectCategoryChart{
 		margin: 0;
 		padding: 0;
+	}
+	.chartDiv{
+		float: left;
+		width: 100%;
+	}
+	.chart{
+		width: 1000px;
+		height: 550px;
+		margin: 0;
+		padding: 0;
+		border: 1px solid #ffa220;
+	}
+	.totalSalesChart{
+		margin-right: 0;
 	}
 
 </style>
@@ -103,10 +114,10 @@
 	        				<span class="monthSalesCount"><fmt:formatNumber value="${monthSales }"/>원</span>
 	        			</div>
 	        		</div>
-	        		<div class="salesReport">
-	        			<button type="button" onclick="salesReportPrint();">매출보고서 출력</button>
-	        		</div>
 	        	</div>
+        		<div class="area-btn full"> <!-- ref 버튼 사용예정 -->
+        			<button type="button" onclick="salesReportPrint();">매출보고서 출력</button>
+        		</div>
 	        	<div class="chartDiv">
 		        	<div class="totalSalesChart chart">
 		        		<div class="totalChartTitle"><span>Total Sales Chart</span></div>
@@ -115,6 +126,10 @@
 		        	<div class="monthSalesChart chart">
 		        		<div class="monthChartTitle"><span>Month Sales Chart</span></div>
 		        		<canvas id="monthChart"></canvas>
+		        	</div>
+		        	<div class="genderSalesChart chart">
+		        		<div class="genderChartTitle"><span>Gender Sales Chart</span></div>
+		        		<canvas id="genderChart"></canvas>
 		        	</div>
 		        	<div class="selectCategoryChart chart">
 			        	<select id="monthSelect" class="monthSelect">
@@ -132,10 +147,6 @@
 						    <option value="12">12월</option>
 						</select>
 						<canvas id="salesChart">Month Select Sales Chart</canvas>
-		        	</div>
-		        	<div class="genderSalesChart chart">
-		        		<div class="genderChartTitle"><span>Gender Sales Chart</span></div>
-		        		<canvas id="genderChart"></canvas>
 		        	</div>
 	        	</div>
 	        </div>
@@ -298,8 +309,7 @@
 			                },
 			                options: {
 			                    scales: {
-			                        yAxes: [
-			                            {
+			                        yAxes: [{
 			                                ticks: {
 			                                    beginAtZero: true
 			                                }
@@ -383,20 +393,22 @@
 				                    ]
 				                },
 				                options: {
-				                    scales: {
-				                        yAxes: [
-				                            {
-				                                ticks: {
-				                                    beginAtZero: true
-				                                }
-				                            }
-				                        ]
-				                    }
-				                }
+		    	                	maintainAspectRatio: false,
+		    	                    height: 400,
+		    	                    scales: {
+		    	                        yAxes: [{
+		    	                                ticks: {
+		    	                                    beginAtZero: true
+		    	                                }
+		    	                            }
+		    	                        ]
+		    	                    }
+		    	                }
 				            });
 						}            	
 		            })
 	            }) // 월 select 차트
+	            
 	            
 	            // 구매자 성별
 	           
@@ -407,7 +419,7 @@
 	            		console.log(data);
 	            		var context = document.getElementById('genderChart').getContext('2d');
 	    	            var myChart = new Chart(context, {
-	    	                type: 'doughnut', // 차트의 형태
+	    	                type: 'bar', // 차트의 형태
 	    	                data: { // 차트에 들어갈 데이터
 	    	                    labels: ['남성','여성','성별없음'], // 카테고리 명
 	    	                    datasets: [
@@ -435,9 +447,9 @@
 	    	                    ]
 	    	                },
 	    	                options: {
+	    	                	maintainAspectRatio: false,
 	    	                    scales: {
-	    	                        yAxes: [
-	    	                            {
+	    	                        yAxes: [{
 	    	                                ticks: {
 	    	                                    beginAtZero: true
 	    	                                }

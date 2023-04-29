@@ -23,6 +23,7 @@
     .searchForm{
     	display: none;
     }
+    
     .moreResult{
 		float: right;
 	    top: 130px;
@@ -36,9 +37,29 @@
     }
     
     
+	.moreResult #closeBtn {
+	  display: inline-block;
+	  font-size: 30px;
+	  cursor: pointer;
+	  transition: transform 0.5s ease;
+	}
+	
+	.moreResult #closeBtn:hover {
+	  transform: rotate(360deg);
+	}
+	
+	.moreResult #closeBtn:active {
+	  transform: rotate(360deg);
+	}
+    
+    
     .moreResult>div>div{
     	font-size: 40px;
     	cursor: pointer;
+    }
+    
+    .moreResultContent>ul>li:hover{
+    	font-size: 1.5em;
     }
     /* 구분 사이즈 다운 아아아아아아 */
     .table tr:nth-child(0) th:nth-child(0) {
@@ -59,6 +80,7 @@
 	    transform: translateY(4px);
 	}
 	
+	/* 더보기 버튼 */
 	.moreInfo{
 		/* background-color: #f0a718; */
 		padding: 3px;

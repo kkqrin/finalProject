@@ -65,12 +65,9 @@
        	margin-top: 10px;
 		overflow: hidden;
 		float: left;       	
+		background: var(--bg-color, white);
+		box-shadow: var(--box-shadow, 0 0 10px #ffa220); /* 뒤에 색상만 바꿔주면 됨 */
     }
-    
-    
-
-    
-    
     
     .adminPage-content :hover{
     	color: black;
@@ -127,33 +124,33 @@
     .summary-member{
     	float: left;
     	width: 600px;
-    	border: 1px solid #ffa220;
+    	border-top: 1px solid #ffa220;
     	height: 100%;
     }
     .summary-product{
     	float: left;
     	width: 600px;
-    	border: 1px solid #ffa220;
+    	border-top: 1px solid #ffa220;
     	height: 100%;
     	margin-left: 20px;
     }
     .summary-askitem{
        	float: left;
        	width: 600px;
-       	border: 1px solid #ffa220;
+       	border-top: 1px solid #ffa220;
        	height: 100%;
     }
     .summary-board{
        	float: left;
        	width: 600px;
-       	border: 1px solid #ffa220;
+        border-top: 1px solid #ffa220;
        	height: 100%;
        	margin-left: 20px;
     }
     .summary-sales{
     	float: left;
     	width: 600px;
-    	border: 1px solid #ffa220;
+    	border-top: 1px solid #ffa220;
     	height: 100%;
     }
     
@@ -238,7 +235,7 @@
                 </div>
                 <div class="adminPage-summary">
 	                <div class="summary-row-1">
-		                <div class="summary-member">
+		                <div class="summary summary-member">
 		                	<div class="summary-title">회원게시판</div>
 		                	<table id="memberTable">
 		                		<thead>
@@ -270,7 +267,7 @@
 		                		</tbody>
 		                	</table>
 		                </div>
-	                	<div class="summary-product"> <!-- 제품 등록 현황 5개만 -->
+	                	<div class="summary summary-product"> <!-- 제품 등록 현황 5개만 -->
 	                		<div class="summary-title">상품게시판</div>
 	                		<table id="productTable">
 	                			<thead>
@@ -366,7 +363,7 @@
 	                	</div>
                 	</div>
 	                <div class="summary-row-2">
-	                	<div class="summary-askitem"> <!-- 입점 문의 5개 -->
+	                	<div class="summary summary-askitem"> <!-- 입점 문의 5개 -->
 	                		<div class="summary-title">입점문의</div>
 	                		<table id="askitemTable">
 	                			<thead>
@@ -391,7 +388,7 @@
 	                			</tbody>
 	                		</table>
 	                	</div>
-	                	<div class="summary-board"> <!-- 여여붙 5개만 -->
+	                	<div class="summary summary-board"> <!-- 여여붙 5개만 -->
 	                		<div class="summary-title">여여붙게시판</div>
 	                		<table id="boardTable">
 	                			<thead>
@@ -425,7 +422,8 @@
 	                	</div>
 	                </div>
 	                <div class="summary-row-3">
-	                	<div class="summary-sales">
+	                	<div class="summary summary-sales">
+	                		<div><span>연 매출 차트</span></div>
 	                		<canvas id="summaryChart"></canvas>
 	                	</div>
 	                </div>
@@ -514,7 +512,7 @@
 					type : 'bar', // 차트의 형태
 					data : { // 차트에 들어갈 데이터
 						labels : [ //x 축
-							'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+							'1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
 						datasets : [ { //데이터
 						label : '매출', //차트 제목
 						fill : false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
