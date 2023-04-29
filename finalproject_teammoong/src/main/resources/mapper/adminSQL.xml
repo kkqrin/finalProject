@@ -19,7 +19,63 @@
 		select count(*) from order_tbl
 		where order_date between #{start} and #{end}
 	</select>
-
+	
+	<select id="selectSummaryProductList" parameterType="map" resultType="p">
+		select *
+		from (
+		    select rownum as rnum, b.*
+		    from (
+		        select
+		            product_no as productNo,
+		            (SELECT FILEPATH FROM PRODUCT_IMG WHERE P_IMG_NO=(SELECT MIN(P_IMG_NO) FROM PRODUCT_IMG where product_no = pt.product_no)) AS thumbnail,
+		            d_category_no as detailCategoryNo,
+		            product_name as productName,
+		            product_price as productPrice
+		        from product_tbl pt
+		        order by 1 desc
+		    ) b)
+		where rnum between #{start} and #{end}
+	</select>
+	
+	<select id="selectSummaryAskItemList" parameterType="map" resultType="a">
+		select * from
+		(select rownum rnum, b.* from
+		(select
+			at.corp_name as corpName,
+			at.cont_name as contName,
+			at.cont_phone as contPhone,
+			at.ask_title as askTitle,
+			to_char(at.ask_date,'yyyy-mm-dd') as askDate
+		from askitem_tbl at)b)
+		where rnum between #{start} and #{end}
+	</select>
+	
+	<select id="selectSummaryBoardList" parameterType="map" resultType="b">
+		select * from
+			(select rownum as rnum, b.* from
+	            (select 
+	                board_writer as boardWriter,
+	                to_char(board_date,'yyyy-mm-dd') as boardDate,
+	                to_char(board_start,'yyyy-mm-dd') as boardStart, 
+	                to_char(board_end,'yyyy-mm-dd') as boardEnd,
+	                board_status as boardStatus
+	            from board_tbl bt
+	            order by 1 desc)b)
+		where rnum between #{start} and #{end}
+	</select>
+	
+	<select id="selectSummaryMemberList" parameterType="map" resultType="m">
+		select * from
+			(select rownum as rnum, b.* from
+				(select
+					member_no as memberNo,
+					member_id as memberId,
+					member_name as memberName,
+					to_char(reg_date,'yyyy-mm-dd') as regDate,
+					member_agree as memberAgree
+				from member_tbl order by 1 desc)b)
+		where rnum between #{start} and #{end}
+	</select>
 
 	<!-- 예전버전 -->
 	<!-- <select id="selectVariationOrderCount" resultType="_int">
@@ -64,7 +120,8 @@
 			from board_join b1 order by total_count desc) total_sales where rnum
 		between 1 and 5
 	</select>
-
+	
+	
 
 
 
@@ -527,6 +584,7 @@
 	<select id="selectCountTotalSalesData" resultType="sd">
 		select
 		     pc.category_no as categoryNo,
+		     
 		     nvl(sum(od.order_sale_price),0) as totalSales,
 		     nvl(sum(od.order_detail_cost),0) as totalCost
 		     
@@ -543,6 +601,7 @@
 	
 	<select id="selectCountMonthSalesData" parameterType="map" resultType="sd">
 		select
+			 
 		     nvl(sum(od.order_sale_price),0) as totalSales,
 		     nvl(sum(od.order_detail_cost),0) as totalCost
 		     
@@ -668,7 +727,7 @@
 				PRODUCT_CONTENT AS productContent,
 				PRODUCT_DISCOUNT AS productDiscount,
 
-                 (SELECT SUM(order_detail_cnt) FROM order_detail WHERE product_no = p.product_no) AS presentCnt
+                 (SELECT SUM(od.order_detail_cnt) FROM order_detail od left join order_tbl ot on (od.order_no = ot.order_no) WHERE product_no = p.product_no and ot.order_status = 1) AS presentCnt -- 총 주문개수
 			  FROM product_tbl p
 			  join DETAIL_CATEGORY using(D_CATEGORY_NO)
 			  ) od
@@ -676,6 +735,21 @@
 			ORDER BY od.presentCnt DESC) 
 		r)
 		WHERE RNUM BETWEEN 1 AND 20
+	</select>
+	
+	<!--==================================================================== 리뷰 신고  -->
+	<select id="selectReviewReportList" parameterType="r.report" resultType="r.report">
+		select
+			rrt.report_no as reportNo,
+			rt.review_no as reviewNo,
+			rrt.member_no as memberNo,
+			rrt.report_reason as reportReason,
+			rrt.report_content as reportContent,
+			count() as cnt
+		from reviewReport_tbl rrt
+		left join review_tbl rt on (rrt.review_no = rt.review_no)
+		left join member_tbl mt on (rrt.member_no = mt.member_no)
+		order by cnt
 	</select>
 	
 	<!-- ================================================================== askItems -->

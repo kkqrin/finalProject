@@ -18,9 +18,6 @@
 	<link rel="stylesheet" href="/resources/css/common/default.css" />
 </head>
 <style>
-    .adminPage-main{
-        background-color: #D8EAF0;
-    }
     .adminPage-content{
         background-color: #fff;
         overflow: hidden;
@@ -34,9 +31,6 @@
         width: 300px;
         height: 400px;
         text-align: center;
-    }
-    .adminPage-content{
-    	background-color: #D8EAF0;
     }
     
     .table{

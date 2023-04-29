@@ -23,12 +23,13 @@ import moo.ng.san.admin.model.vo.AdminProductPageData;
 import moo.ng.san.admin.model.vo.AdminReportBoardPageData;
 import moo.ng.san.admin.model.vo.CouponData;
 import moo.ng.san.admin.model.vo.SalesData;
+import moo.ng.san.askItem.model.vo.AskItem;
 import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.gonggu.model.vo.GongguAllInfo;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.order.model.vo.Order;
-import moo.ng.san.pay.model.vo.OrderDetail;
 import moo.ng.san.product.model.vo.Product;
+import moo.ng.san.review.model.vo.ReviewReport;
 
 @Controller
 public class AdminController {
@@ -38,7 +39,17 @@ public class AdminController {
 	
 	/* 페이징 처리 */
 	@RequestMapping(value="/admin.do")
-	public String admin() {
+	public String admin(Model model) {
+		int summaryNum = 5;
+		ArrayList<Product> productList = service.selectSummaryProductList(summaryNum);
+		ArrayList<AskItem> askItemList = service.selectSummaryAskItemList(summaryNum);
+		ArrayList<Board> boardList = service.selectSummaryBoardList(summaryNum);
+		ArrayList<Member> memberList = service.selectSummaryMemberList(summaryNum);
+		
+		model.addAttribute("productList",productList);
+		model.addAttribute("askItemList",askItemList);
+		model.addAttribute("boardList",boardList);
+		model.addAttribute("memberList",memberList);
 
 		return "admin/admin";
 	}
@@ -65,13 +76,14 @@ public class AdminController {
 		String boardVariation = service.selectVariationBoardCount();
 		String salesCount = service.selectAllSalesCount(); 
 		String salesVariation = service.selectVariationSalesCount();
+		
 		ArrayList<Product> list = service.selectBestProductCount();
 		int bestSalesCount = 0;
 		for(Product p : list) {
 			int bestProductCnt = p.getPresentCnt();
 			int bestProductPrice = p.getProductPrice();
-			int bestProductDiscount = p.getProductDiscount();
-			bestSalesCount += bestProductCnt * bestProductPrice * (bestProductDiscount/100) ;
+			double bestProductDiscount = p.getProductDiscount();
+			bestSalesCount += bestProductCnt * bestProductPrice * ((100-bestProductDiscount)/100) ;
 		}
 		//하단부터는 논의가 필요함
 		/*
@@ -451,7 +463,16 @@ public class AdminController {
 		return "admin/adminProductRegist";
 	}
 	
-	
+	/* 신고 리뷰 조회 */
+	@RequestMapping(value="adminReviewReportList.do")
+	public String adminReviewReportList(ReviewReport r, Model model) {
+		
+		ArrayList<ReviewReport> list = service.selectReviewReportList(r);
+		model.addAttribute("reportList",list);
+		
+		return "admin/adminReviewReport";
+		
+	}
 	
 	
 	

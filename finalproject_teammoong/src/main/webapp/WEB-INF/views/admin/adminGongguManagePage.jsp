@@ -72,95 +72,66 @@
         <!-- 관리자일때만 페이지 보이게 세팅 -->
     </c:if>
 	    <div class="adminPage-wrapper">
-	        <div class="adminPage-header">
+		    <div class="adminPage-header">
 	            <div class="adminPage-title"><a href="/#">Moong's Admin</a></div>
 	        </div>
-	        <div class="adminPage-back">
-		        <div class="adminPage-sidebar">
-				 	 <ul>
-				 	 	<li><a href="/admin.do">대시보드</a></li>
-				 	 </ul>
-				     <ul>
-				         <li><a href="/adminMemberPage.do?reqPage=1">회원 관리</a></li><!-- jsp 생성완료 -->
-				     </ul>
-				     <ul>
-				         <li><a>매출 관리</a></li>
-				         <li><a href="/adminTotalSalesManage.do?reqPage=1">전체 매출 관리</a></li><!-- jsp 생성완료 -->
-				         <li><a href="/adminCategorySalesManage.do">카테고리별 매출관리</a></li>
-				     </ul>
-				     <ul>
-				         <li><a>상품 관리</a></li>
-				         <li><a href="/adminTotalProductList.do?reqPage=1">상품 관리</a></li><!-- jsp 생성완료 -->
-				         <li><a href="/adminProductRegist.do?reqPage=1">상품 등록</a></li>
-				         <li><a href="/adminDeliveryManagePage.do?reqPage=1">배송 관리</a></li>
-				     </ul>
-				     <ul>
-				         <li><a>이벤트 관리</a></li>
-				         <li><a href="/adminDaycheckManagePage.do">쿠폰 발행 관리</a></li>
-				         <li><a href="/adminGongguManagePage.do">쿠폰 발행 관리</a></li>
-				     </ul>
-				     <ul>
-				         <li><a href="#">여여붙 대시보드</a></li>
-				         <li><a href="/adminBoardManagePage.do?reqPage=1">여여붙게시판 관리</a></li><!-- jsp 생성완료 -->
-				         <li><a href="/adminBoardReportManagePage.do?reqPage=1">여여붙 신고 관리</a></li><!-- jsp 생성완료 -->
-				         <li><a href="/adminBoardCategorySales.do">카테고리별 매출관리</a></li>
-				     </ul>
-				</div>
-            <div class="adminPage-main">
-                <div class="adminPage-content">
-                    <div class="adminPage-result">
-                    	<div class="space"></div>
-                        <table id="dataTables">
-	                        <thead>
-	                            <tr>
-	                                <th>공구번호</th> 
-	                                <th>상품번호</th>
-	                                <th>회원번호</th>
-	                                <th>카운트넘버는 무엇임?</th>
-	                                <th>결제일자</th>
-	                                <th>결제상태
-	                            </tr>
-	                        </thead>
-	                            <c:forEach items="${gList }" var="gl">
-	                            	<tr>
-	                                    <td>${gl.gongguNo }</td>
-	                                    <input type="hidden" name="gongguNo" value="${gl.gongguNo }">
-	                                    <td>${gl.productNo }</td>
-	                                    <td>${gl.memberNo }</td>
-	                                    <td>${gl.countNumber }</td>
-	                                    <td>${gl.gongguPayDate }</td>
-	                                    <c:choose>
-	                                    	<c:when test="${gl.gongguPayStatus == 1}">
-	                                    		<td>결제완료</td>
-	                                    	</c:when>
-	                                    	<c:when test="${gl.gongguPayStatus == 2}">
-	                                    		<td>결제취소</td>
-	                                    	</c:when>
-	                                    	<c:when test="${gl.gongguPayStatus == 0}">
-	                                    		<td>테스트인듯</td>
-	                                    	</c:when>
-	                                    </c:choose>
-	                          	 	</tr>
-								</c:forEach>
-	                        </table>
-                    </div>
-                    <!-- 모달 -->
-					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h4 class="modal-title" id="myModalLabel">모달 제목</h4>
-								</div>
-								<div class="modal-body">
-									<!-- 모달 내용 -->
+        	<div class="adminPage-back">
+            	<jsp:include page="/WEB-INF/views/admin/adminSideNavi.jsp" />
+	            <div class="adminPage-main">
+	                <div class="adminPage-content">
+	                    <div class="adminPage-result">
+	                    	<div class="space"></div>
+	                        <table id="dataTables">
+		                        <thead>
+		                            <tr>
+		                                <th>공구번호</th> 
+		                                <th>상품번호</th>
+		                                <th>회원번호</th>
+		                                <th>카운트넘버는 무엇임?</th>
+		                                <th>결제일자</th>
+		                                <th>결제상태
+		                            </tr>
+		                        </thead>
+		                            <c:forEach items="${gList }" var="gl">
+		                            	<tr>
+		                                    <td>${gl.gongguNo }</td>
+		                                    <input type="hidden" name="gongguNo" value="${gl.gongguNo }">
+		                                    <td>${gl.productNo }</td>
+		                                    <td>${gl.memberNo }</td>
+		                                    <td>${gl.countNumber }</td>
+		                                    <td>${gl.gongguPayDate }</td>
+		                                    <c:choose>
+		                                    	<c:when test="${gl.gongguPayStatus == 1}">
+		                                    		<td>결제완료</td>
+		                                    	</c:when>
+		                                    	<c:when test="${gl.gongguPayStatus == 2}">
+		                                    		<td>결제취소</td>
+		                                    	</c:when>
+		                                    	<c:when test="${gl.gongguPayStatus == 0}">
+		                                    		<td>테스트인듯</td>
+		                                    	</c:when>
+		                                    </c:choose>
+		                          	 	</tr>
+									</c:forEach>
+		                        </table>
+	                    </div>
+	                    <!-- 모달 -->
+						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title" id="myModalLabel">모달 제목</h4>
+									</div>
+									<div class="modal-body">
+										<!-- 모달 내용 -->
+									</div>
 								</div>
 							</div>
-						</div>
-					</div><!-- 모달 div -->
-				</div>
-            </div>
-        </div>
-   </div>
+						</div><!-- 모달 div -->
+					</div>
+	            </div>
+       		</div>
+   		</div>
 
 
 <!-- 스크립트를 넣어봅시다 -->
