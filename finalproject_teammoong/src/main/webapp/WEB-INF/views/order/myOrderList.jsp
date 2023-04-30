@@ -14,6 +14,31 @@
 	<link rel="stylesheet" href="/resources/css/product/productView.css"/>
 </head>
 <style>
+	
+	@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+.rate { display: inline-block;border: 0;margin-right: 15px;}
+.rate > input 
+{display: none;}
+
+.rate > label 
+{float: right;color: #ddd}
+
+.rate > label:before 
+{display: inline-block;font-size: 2rem;padding: .3rem .2rem;margin: 0;cursor: pointer;font-family: FontAwesome;content: "\f005 ";}
+
+.rate .half:before 
+{content: "\f089 "; position: absolute;padding-right: 0;}
+
+.rate input:checked ~ label, 
+.rate label:hover,
+.rate label:hover ~ label 
+{ color: gold !important;  } 
+
+.rate input:checked + .rate label:hover,
+.rate input input:checked ~ label:hover,
+.rate input:checked ~ .rate label:hover ~ label,  
+.rate label:hover ~ input:checked ~ label 
+{ color: gold !important;  } 
 /* 리뷰css */
 .modal-body>form>.selectBox-widht-explain{
 	width: 80%;
@@ -315,6 +340,17 @@ font-variation-settings:
 
 
 <script>
+	  function readURL(input) {
+            if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              reader.onload = function(e) {
+                document.getElementById('preview').src = e.target.result;
+              };
+              reader.readAsDataURL(input.files[0]);
+            } else {
+              document.getElementById('preview').src = "";
+            }
+          }
 	//모달 관련 기능
 	$(function () {
 		$('[data-modal]').click(function (event) {
