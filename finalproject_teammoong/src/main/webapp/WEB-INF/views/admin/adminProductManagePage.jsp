@@ -70,33 +70,36 @@
                             <option id="searchProductName" value="productName">상품 이름</option>
                             <option id="searchProductStatus" value="productStatus">상품 상태 검색</option>
                         </select>
-                        <input type="text" name="productSearchBox" id="searchOption" placeholder="상태 검색시 [대기/등록/보류/만료]">
+                        <div><input type="text" name="productSearchBox" id="searchOption" placeholder="상태 검색시 [대기/등록/보류/만료]"></div>
                         <!-- 상품 상태 검색 시 1,2,3,4 로 변환해주는 choose 걸어줘야 함 -->
-                        <button type="button" name="searchSubmitBtn">검색</button>
+                        <div class="search-btns">
+	                        <button type="button" name="searchSubmitBtn" class="searchSubmit Btn">검색</button>
+	                        <button type="button" class="goList" class="goList Btn">목록</button>
+                        </div>
                     </div>
                     <div class="adminPage-result">
                         <table class="table tbl-box">
                             <tr>
-                            	<td>구분</td>
-                            	<td>제품사진</td>
-                                <td>상품번호</td>
-                                <td>세부카테고리번호</td>
-                                <td>상품이름</td>
-                                <td>상품수량</td>
-                                <td>남은수량</td><!-- 추가 -->
-                                <td>상품가격</td>
-                                <td>원가</td>
-                                <td>공동구매인원수</td>
-                                <td>상품할인률</td>
-                                <td>상품상태</td> 
-                                <td>상품상태변경</td>
-                                <td>확정버튼</td>
+                            	<th>구분</th>
+                                <th>상품번호</th>
+                            	<th>제품사진</th>
+                                <th>세부카테고리번호</th>
+                                <th>상품이름</th>
+                                <th>상품수량</th>
+                                <th>남은수량</th><!-- 추가 -->
+                                <th>상품가격</th>
+                                <th>원가</th>
+                                <th>공동구매인원수</th>
+                                <th>상품할인율</th>
+                                <th>상품상태</th> 
+                                <th>상품상태변경</th>
+                                <th>확정버튼</th>
                             </tr>
                             <c:forEach items="${productList }" var="p">
                                 <tr>
                                 	<td><input type="checkBox" class="checkBox"></td>
+                                    <td>${p.productNo }<input type="hidden" name="productNo" class="productNo" value="${p.productNo }"></td>
                                 	<td><img src="/resources/upload/product/${p.thumbnail }"></td>
-                                    <td>${p.productNo }<input type="hidden" class="productNo" value="${p.productNo }"></td>
                                     <c:choose>
                                     	<c:when test="${p.detailCategoryNo == 1}">
                                     		<td>패션</td>
@@ -225,7 +228,7 @@
 	                                    </c:choose>
 	                                </td>
                                     <td>
-                                    	<button type="button" class="changeProductStatusBtn">상품 상태 변경</button>
+                                    	<div class="changeProductStatusBtn">상품 상태 변경</div>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -336,31 +339,41 @@
                 	if(data){
                 		$("#ajaxResult").empty();
                 			$(".adminPage-result").hide();
-							const table =$("<table>");
+							const table =$("<table class='tbl-box'>");
 							const titleTr = $("<tr>");
-							titleTr.html("<th>구분</th><th>상품번호</th><th>세부카테고리번호</th><th>상품이름</th><th>상품수량</th><th>상품가격</th><th>원가</th><th>공동구매인원수</th><th>상품내용</th><th>상품할인률</th><th>상품상태</th>");
+							titleTr.html("<th>구분</th><th>제품사진</th><th>상품번호</th><th>세부카테고리번호</th><th>상품이름</th><th>상품수량</th><th>남은수량</th><th>상품가격</th><th>원가</th><th>공동구매인원수</th><th>상품할인율</th><th>상품상태</th><th>상품상태변경</th><th>확정버튼</th>");
 							table.append(titleTr);
 							for(let i=0;i<data.length;i++){
 								const tr = $("<tr>");
 								tr.append("<td>"+"</td>")
 								tr.append("<td>"+data[i].productNo+"</td>");
+								tr.append("<td><img src='/resources/upload/product/"+data[i].thumbnail+"'></td>")
 								tr.append("<td>"+data[i].dCategoryId+"</td>");
 								tr.append("<td>"+data[i].productName+"</td>");
 								tr.append("<td>"+data[i].productEa+"</td>");
+								tr.append("<td>"+data[i].presentCnt+"</td>");
 								tr.append("<td>"+data[i].productPrice+"</td>");
-								if(productStatus == 1){
-									tr.append("<td>대기</td>");
-								}else if(productStatus == 2){
-									tr.append("<td>등록</td>");
-								}else if(productStatus == 3){
-									tr.append("<td>보류</td>");
-								}else if(productStatus == 4){
-									tr.append("<td>만료</td>");
-								}
 								tr.append("<td>"+data[i].productCost+"</td>");
 								tr.append("<td>"+data[i].gongguNumber+"</td>");
-								tr.append("<td>"+data[i].productContent+"</td>");
 								tr.append("<td>"+data[i].productDiscount+"</td>");
+								
+								if(data[i].productStatus == 1){
+									tr.append("<td>대기</td>");
+								}else if(data[i].productStatus == 2){
+									tr.append("<td>등록</td>");
+								}else if(data[i].productStatus == 3){
+									tr.append("<td>보류</td>");
+								}else if(data[i].productStatus == 4){
+									tr.append("<td>만료</td>");
+								}
+								var select = $("<select name='productStatusList' class='productStatusList'></select>");
+								tr.append(select.append(
+							                $("<option value='1'" + (data[i].productStatus == 1 ? " selected" : "") + ">대기</option>"),
+							                $("<option value='2'" + (data[i].productStatus == 2 ? " selected" : "") + ">등록</option>"),
+							                $("<option value='3'" + (data[i].productStatus == 3 ? " selected" : "") + ">보류</option>"),
+							                $("<option value='4'" + (data[i].productStatus == 4 ? " selected" : "") + ">만료</option>")
+							     ));
+								tr.append("<td><div class='changeProductStatusBtn'>상품 상태 변경</div></td>"); // 확정버튼으로
 								table.append(tr);
 						}
 						$("#ajaxResult").append(table);
@@ -368,18 +381,53 @@
                 	}else{
 	    				console.log("다시 시도");
                 	}
+                	
+                	// 상태변경
+                	$(".changeProductStatusBtn").on("click",function(){
+                		var productNo = $(this).parent().parent().children().eq(1).text();
+                		var productStatus = $(this).parent().prev().val();
+                		
+                        $.ajax({
+                            url: "/ajaxChangeProductStatus.do",
+                            type: "POST",
+                            data: {productStatus : productStatus, productNo : productNo},
+                            success: function(data) {
+                            	if(data == "ok"){
+                            		$("#adminProductTable").load(location.href+ '#adminProductTable');
+                            	}else{
+                    				console.log("다시 시도");
+                            		
+                            	}
+                            }
+                        })
+                		
+                	});
+                	
+                	/* 페이지 연결 */
+                    $(".tbl-box").on("click",'td:nth-child(n+2):nth-child(-n+11)',function(){
+                    	var productNo = $(this).parent().children().eq(1).text();
+                    	
+                    	console.log("productNo : "+productNo);
+                    	
+               			window.open('http://192.168.10.143/productView.do?productNo='+productNo);
+                	});
+                	
                 }
             })
        		 
         });
         
         /* 페이지 연결 */
-        $(".tbl-box").on("click", 'td',function(){
-        	var productNo = $(this).parent().children().eq(2).text();
+        $(".tbl-box").on("click", 'td:nth-child(n+2):nth-child(-n+11)',function(){
+        	var productNo = $(this).parent().children().eq(1).text();
         	console.log(productNo);
    			window.open('http://192.168.10.143/productView.do?productNo='+productNo);
     	});
-        	
+        
+        /*목록으로*/
+        $(".goList").on("click",function(){
+        	location.reload();
+        })
    	
    	
         
