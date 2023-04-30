@@ -33,6 +33,7 @@
 			  FROM point_tbl
 			  WHERE member_no = #{memberNo}
 			) t
+			order by 1
 		)
 		where rnum between #{start} and #{end}
 	</select>

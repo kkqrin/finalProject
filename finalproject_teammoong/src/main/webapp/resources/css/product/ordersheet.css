@@ -22,8 +22,10 @@
 }
 
 .order-product-item{
-    background-color: #eee;
+    /* background-color: #eee; */
+    border-bottom: 1px solid #ddd;
     margin-top: 20px;
+    padding-bottom: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -74,7 +76,7 @@
 
 .order-product-volume{
     width: 150px;
-    background-color: hotpink;
+    /* background-color: hotpink; */
     padding: 10px;
     text-align: center;
     font-size: 16px;
@@ -83,7 +85,7 @@
 
 .order-product-price{
     width: 150px;
-    background-color: aliceblue;
+    /* background-color: aliceblue; */
     padding: 10px;
     text-align: center;
     font-size: 16px;
@@ -103,7 +105,7 @@
 }
 
 .deli-box *{
-    margin-top: 10px;
+    /* margin-top: 10px; */
 }
 
 .deli-box>div *{
@@ -199,4 +201,123 @@
 .total-order-pay>div{
     font-size: 18px;
     font-weight: 600;
+}
+
+
+
+
+
+
+
+
+
+/* 체크박스 */
+/* 체크박스 컨테이너 스타일 */
+.checkbox-container {
+    /* display: inline-block; */
+    vertical-align: middle;
+    /* margin-right: 10px; */
+    display: flex;
+    align-items: center;
+}
+
+/* 실제 체크박스 숨기기 */
+.checkbox-container input[type="checkbox"] {
+    display: none;
+}
+
+/* 커스텀 체크박스 스타일 */
+.checkbox-container .custom-checkbox {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    margin-right: 5px;
+}
+
+/* 체크된 커스텀 체크박스 스타일 */
+.checkbox-container input[type="checkbox"]:checked + .custom-checkbox {
+    background-color: #f88000;
+    border-color: #f88000;
+}
+
+/* 체크된 커스텀 체크박스 내부 아이콘 스타일 */
+.checkbox-container input[type="checkbox"]:checked + .custom-checkbox::before {
+    content: "";
+    display: block;
+    width: 5px;
+    height: 8px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -6px 0 0 -3px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* 라디오 버튼 */
+/* 라디오 버튼 컨테이너 스타일 */
+.radio-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+/* 실제 라디오 버튼 숨기기 */
+.radio-container input[type="radio"] {
+    display: none;
+}
+
+/* 커스텀 라디오 버튼 스타일 */
+.radio-container .custom-radio {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    margin-right: 5px;
+    margin-top: 1px;
+}
+
+/* 체크된 커스텀 라디오 버튼 스타일 */
+.radio-container input[type="radio"]:checked + .custom-radio {
+    background-color: #f88000;
+    border-color: #f88000;
+}
+
+/* 체크된 커스텀 라디오 버튼 내부 아이콘 스타일 */
+.radio-container input[type="radio"]:checked + .custom-radio::after {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

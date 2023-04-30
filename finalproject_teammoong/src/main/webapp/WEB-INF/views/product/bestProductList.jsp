@@ -96,6 +96,7 @@
 						<div class="posting-info">
 							<div>
 								<span class="posting-info-box">무료배송</span>
+                                <span class="posting-info-box today-close">${p.purchasedVolume}개 구매</span>
 							</div>
 							<div class="star-rating">
 								<div class="material-symbols-outlined star-rate">star</div>

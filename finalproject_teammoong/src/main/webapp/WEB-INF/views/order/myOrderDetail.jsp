@@ -131,11 +131,11 @@
 							</tr>
 							<tr>
 								<th>쿠폰 사용</th>
-								<td>-원</td>
+								<td>- <fmt:formatNumber value="${couponPrice}"/> 원</td>
 							</tr>
 							<tr>
 								<th>적립금 사용</th>
-								<td>- ${o.minusPointEa} 원</td>
+								<td>- <fmt:formatNumber value="${o.minusPointEa}"/> 원</td>
 							</tr>
 							<tr>
 								<th>카드 간편결제</th>

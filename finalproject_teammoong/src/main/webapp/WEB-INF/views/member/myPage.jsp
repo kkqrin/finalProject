@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,7 +55,7 @@
 						</div>
 						<div class="point-zone">
 							<p class="tag">뭉 포인트</p>
-							<h4>${p.pointEa }</h4>
+							<h4><fmt:formatNumber value="${p.pointEa }"/> </h4>
 						</div>
 						<div>
 							<button type="button" class="btn btn-pri size01" id="dayCheck">출석체크</button>

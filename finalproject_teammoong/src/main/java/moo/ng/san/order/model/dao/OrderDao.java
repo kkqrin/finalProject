@@ -110,7 +110,12 @@ public class OrderDao {
 		return (ArrayList<Order>)list;
 	}
 
-	
+	public int deleteCartbyProductNo(HashMap<String, Object> map) {
+		int result = sqlSession.delete("product.deleteCartByProductNo", map);
+		
+		return result;
+	}
+
 	
 	
 	
@@ -176,6 +181,12 @@ public class OrderDao {
 		int result = sqlSession.insert("point.insertPaybackPointEa", point);
 		return result;
 	}
+
+	public String selectDoneCouponPrice(int orderNo) {
+		String couponPrice = sqlSession.selectOne("order.selectDoneCouponPrice", orderNo);
+		return couponPrice;
+	}
+
 
 	
 
