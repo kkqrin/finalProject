@@ -52,26 +52,6 @@
             font-weight: 900;
         }
 
-
-
-        @font-face {
-        font-family: 'ClimateCrisisKRVF';
-        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/ClimateCrisisKRVF.woff2') format('woff2');
-        font-weight: normal;
-        font-style: normal;
-        }
-        @font-face {
-        font-family: 'EF_MACHO';
-        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/EF_MACHO.woff2') format('woff2');
-        font-weight: normal;
-        font-style: normal;
-        }
-        @font-face {
-        font-family: 'OAGothic-ExtraBold';
-        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-ExtraBold.woff2') format('woff2');
-        font-weight: 800;
-        font-style: normal;
-        }
         @font-face {
         font-family: 'SEBANG_Gothic_Bold';
         src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/SEBANG_Gothic_Bold.woff') format('woff');
@@ -87,9 +67,8 @@
         position: relative;
         /* background-color: #f88000; */
         background: #f12711;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to top, #f5af19, #f12711);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to top, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+        background: -webkit-linear-gradient(to top, #f5af19, #f12711);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to top, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
         color: #fffff6;
         margin-left: 15px;
@@ -98,29 +77,9 @@ background: linear-gradient(to top, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Fir
         font-family: 'SEBANG_Gothic_Bold';
         font-weight: 100;
         top: -5px;
-        /* width: 70px;
-    height: 80px;
-    line-height: 90px;
-    position: relative;
-    background-color: #f88000;
-    color: #fffff6;
-    margin-left: 15px;
-    border-radius: 5%;
-    box-shadow: 1px 2px 6px 0px #9f9f9f;
-    font-family: 'SEBANG_Gothic_Bold'; */
         }
 
         .bookmark::before {
-        /* content: "";
-        position: absolute;
-        bottom: -19px;
-        left: 0;
-        width: 0;
-        height: 0;
-        border-style: solid;
-        border-width: 0 20px 20px 20px;
-        border-color: #f88000 #f88000 transparent #f88000; */
-
         content: "";
         position: absolute;
         bottom: -23px;
@@ -130,17 +89,6 @@ background: linear-gradient(to top, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Fir
         border-style: solid;
         border-width: 0 25px 25px 25px;
         border-color: #f5af19 #f5af19 transparent #f5af19;
-        
-        /* content: "";
-    position: absolute;
-    bottom: -34px;
-    left: 0;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 35px 35px 35px;
-    border-color: #f88000 #f88000 transparent #f88000; */
-
         }
 
         /* wrap 타이틀 */
@@ -150,14 +98,14 @@ background: linear-gradient(to top, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Fir
             margin-bottom: 30px;
         }
 
-	/*메인 slick 관련*/
-	.slick-box .addZone{display: flex;justify-content: center;}
-	.slick-box .addZone img{margin:0 auto;}
-	#mainSlick{max-height: 370px;padding-top: 120px;overflow:hidden;}
-	#mainSlick .slick-prev:before,#mainSlick .slick-next:before{display: none;}
-	#mainSlick .slick-dots{opacity: 0.3;position: absolute;top: 220px;}
-	.add1{background-color: rgb(249,244,241);}
-	.add3{background-color: rgb(226,209,175);}
+        /*메인 slick 관련*/
+        .slick-box .addZone{display: flex;justify-content: center;}
+        .slick-box .addZone img{margin:0 auto;}
+        #mainSlick{max-height: 370px;padding-top: 120px;overflow:hidden;}
+        #mainSlick .slick-prev:before,#mainSlick .slick-next:before{display: none;}
+        #mainSlick .slick-dots{opacity: 0.3;position: absolute;top: 220px;}
+        .add1{background-color: rgb(249,244,241);}
+        .add3{background-color: rgb(226,209,175);}
     </style>
 </head>
 <body>

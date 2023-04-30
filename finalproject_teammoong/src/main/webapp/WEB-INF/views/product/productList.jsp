@@ -45,6 +45,8 @@
 	
 <div class="content-wrap">
 
+
+
 	<!-- 카테고리 구분 -->
 	<input type="hidden" id="fCategoryNo" value="${fCategory }">
 	<input type="hidden" id="sCategoryNo" value="${sCategory }">
@@ -628,6 +630,7 @@
 			// if ($("body").height() > $(window).height()) {
 				// console.log("스크롤");
 				// 아작스 함수 실행
+				// console.log(isBottom + " = " + scrollTop + " + " + windowHeight + ">=" + documentHeight);
 				productMoreAjax(isBottom);
 				// console.log(isBottom);
 			// }
@@ -646,12 +649,27 @@
 
 			// (1) 2 3 (4) 5 6 (7) 8 9 (10) < 10
 			if(isBottom && currentVal <= totalCount){
+				// loadingjQueryAlert('loading', "아작스 로딩!");
+
 				console.log("productMoreAjax 실행 : " + $("#startHidden").val());
+
+				if( $("#startHidden").val() >= 7){
+					$(".loading").fadeIn(200);
+					setTimeout(function() {
+						$(".loading").fadeOut(200);
+					}, 300);
+				}
+
+
 				$.ajax({
 					url : "/productMore.do",
 					data : {start : startHidden, amount : 6, fCategoryNo : fCategoryNo, sCategoryNo: sCategoryNo, sortType: sortType },
 					success : function(data){
 						console.log(data);
+
+
+
+
 						
 						for(let i=0; i<data.length ; i++) {
 							const p = data[i];
@@ -873,6 +891,58 @@
 		// }
 
 
+		// ajax 로딩
+	// 	function loadingjQueryAlert(type, msg) {
+    //     let $type = type;
+    //     let messageBox = msg;
+    //     switch ($type) {
+    //         case 'loading':
+				
+    //         // messageBox = $.parseHTML('<div class="alert__info" style="line-height:100px;text-align:center;"><div class="title" style="margin-bottom:10px;color:var(--info);padding:0;">뭉쳐야산다</div><br>'+msg+'</div>');
+	// 		messageBox = $.parseHTML('<img src="/resources/slick/loading-loading-forever.gif">');
+    //         break;
+    //     }
+    //     $("body").append(messageBox);
+    //     $(messageBox).dialog({
+    //         dialogClass :$type,
+    //         // open: $(messageBox).append(msg),
+    //         draggable: false,
+    //         modal: true,
+    //         width: 500,
+	// 		buttons: [
+	// 			{
+	// 				text: "진행",
+	// 				style: "margin-right:5px",
+	// 				click: function(){
+	// 					$(this).dialog("close");
+	// 				}
+	// 			}
+	// 		],
+    //         show: {
+    //             effect: 'fade',
+    //             duration: 200 //at your convenience
+    //         },
+    //         hide: {
+    //             effect: 'fade',
+    //             duration: 200 //at your convenience
+    //         }
+    //     });
+    // };
+
+	// setTimeout(function(){
+    // $(".ui-dialog").dialog('close')
+	// }, 3000);
+
 	</script>
+
+
+
+<!-- 로딩 -->
+<div tabindex="-1" role="dialog" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front loading ui-dialog-buttons ui-resizable" aria-describedby="ui-id-1" aria-labelledby="ui-id-2" style="position: absolute; height: auto; width: 500px; top: 367px; left: 556.5px; z-index: 101; background-color: transparent; box-shadow: none; text-align: center;">
+	<img src="/resources/slick/loading-loading-forever.gif" id="ui-id-1" class="ui-dialog-content ui-widget-content" style="width: 90px; min-height: 76px; max-height: none; height: auto; position: fixed;">
+<div class="ui-widget-overlay ui-front" style="z-index: 100;"></div>
+<script>
+	$(".loading").hide();
+</script>
 </body>
 </html>
