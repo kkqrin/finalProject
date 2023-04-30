@@ -282,6 +282,8 @@ font-variation-settings:
 				<h6>리뷰작성</h6>
 			</div>
 				<input type="hidden" name="reviewWriter" value="${sessionScope.m.memberId}">
+				<input type="hidden" name="productNo" class="insertProductNoVal">
+				<!-- <input type="hidden" name="optionInfoNo" class="insertOptionInfoNoVal"> -->
 			<div class="modal-body">
 				<!--내용영역-->
 				<div style="display: flex;">
@@ -339,10 +341,6 @@ font-variation-settings:
 
 
 <script>
-	var productNo
-
-
-
 	function DropFile(dropAreaId, fileListId) {
             let dropArea = document.getElementById(dropAreaId);
             let fileList = document.getElementById(fileListId);
@@ -568,7 +566,16 @@ font-variation-settings:
 					
 					$("#modal-myorder-product-list .modal-body").append(div);
 					modalOnfunction();
+					
 				}
+				$(".reviewModalBtn").on("click",function(){
+					var productNo = $(this).next().eq(0).val();
+					var optionNo = $(this).next().eq(1).val();
+					console.log(productNo);
+					console.log(optionNo);
+					$(".insertProductNoVal").val(productNo);
+					$(".insertOptionInfoNoVal").val(optionNo);
+				});
 			}
 		});
 	});

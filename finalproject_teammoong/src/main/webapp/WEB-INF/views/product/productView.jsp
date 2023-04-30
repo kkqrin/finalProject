@@ -507,7 +507,7 @@
                 <div class="gonggu-content-wrap">
                     <div class="gonggu-content-title">
                     </div>
-                    <div class="product-inquiry-logo product-inquiry"><h3>문의사항</h3></div>
+                    <div class="product-inquiry-logo product-inquiry"><h2># 문의사항</h2></div>
                     <div class="inquiry-box">
                         <table class="inquiry-table">
                             <tr>
