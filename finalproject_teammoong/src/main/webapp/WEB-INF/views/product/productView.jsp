@@ -698,7 +698,7 @@
             </div>
      <!--리뷰작성 모달 시작-->
      <div id="modalReview" class="modal modal-pri" style="max-width: none;">
-        <form action="/insertReview.do" method="post" enctype="multipart/form-data">
+        <!-- <form action="/insertReview.do" method="post" enctype="multipart/form-data"> -->
         <div class="modal-content">
             <div class="modal-header">
                 <h6>리뷰작성</h6>

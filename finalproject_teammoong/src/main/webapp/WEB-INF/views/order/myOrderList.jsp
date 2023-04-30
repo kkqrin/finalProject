@@ -276,13 +276,12 @@ font-variation-settings:
 	<!--리뷰관련 HTML 시작-->
 	<!--리뷰작성 모달 시작-->
 	<div id="modalReview" class="modal modal-pri" style="max-width: none;">
-		<form action="/insertReview.do" method="post" enctype="multipart/form-data">
+		<form action="/insertReviewModal.do" method="post" enctype="multipart/form-data">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h6>리뷰작성</h6>
 			</div>
 				<input type="hidden" name="reviewWriter" value="${sessionScope.m.memberId}">
-				<input type="hidden" name="productNo" value="${p.productNo}">
 			<div class="modal-body">
 				<!--내용영역-->
 				<div style="display: flex;">
@@ -340,6 +339,75 @@ font-variation-settings:
 
 
 <script>
+	var productNo
+
+
+
+	function DropFile(dropAreaId, fileListId) {
+            let dropArea = document.getElementById(dropAreaId);
+            let fileList = document.getElementById(fileListId);
+          
+            function preventDefaults(e) {
+              e.preventDefault();
+              e.stopPropagation();
+            }
+          
+            function highlight(e) {
+              preventDefaults(e);
+              dropArea.classList.add("highlight");
+            }
+          
+            function unhighlight(e) {
+              preventDefaults(e);
+              dropArea.classList.remove("highlight");
+            }
+          
+            function handleDrop(e) {
+              unhighlight(e);
+              let dt = e.dataTransfer;
+              let files = dt.files;
+          
+              handleFiles(files);
+          
+              const fileList = document.getElementById(fileListId);
+              if (fileList) {
+                fileList.scrollTo({ top: fileList.scrollHeight });
+              }
+            }
+          
+            function handleFiles(files) {
+              files = [...files];
+              // files.forEach(uploadFile);
+              files.forEach(previewFile);
+            }
+          
+            function previewFile(file) {
+              console.log(file);
+              renderFile(file);
+            }
+          
+            function renderFile(file) {
+              let reader = new FileReader();
+              reader.readAsDataURL(file);
+              reader.onloadend = function () {
+                let img = dropArea.getElementsByClassName("preview")[0];
+                img.src = reader.result;
+                img.style.display = "block";
+              };
+            }
+          
+            dropArea.addEventListener("dragenter", highlight, false);
+            dropArea.addEventListener("dragover", highlight, false);
+            dropArea.addEventListener("dragleave", unhighlight, false);
+            dropArea.addEventListener("drop", handleDrop, false);
+          
+            return {
+              handleFiles
+            };
+          }
+          
+          const dropFile = new DropFile("drop-file", "files");   
+          
 	  function readURL(input) {
             if (input.files && input.files[0]) {
               var reader = new FileReader();
@@ -480,7 +548,7 @@ font-variation-settings:
 						const btnZoneDiv = $("<div>");
 						const btnForm = $("<form>");
 						const btn = $("<button>");
-						btn.addClass("btn btn-pri size01");
+						btn.addClass("btn btn-pri size01 reviewModalBtn");
 						btn.attr('type','button')
 						btn.attr('id',"insertReview");
 						btn.attr('data-modal','#modalReview');
