@@ -324,17 +324,17 @@
   
         	 
         	 if(memberSearchOption == 'memberNo'){
-        		 memberNo = memberSearchBox;
+        		 memberNo = memberSearchBox.trim();
         		 memberId = '';
 	        	 memberName = '';
         		 
         	 }else if(memberSearchOption == 'memberId'){
-        		 memberId = memberSearchBox;
+        		 memberId = memberSearchBox.trim();
         		 memberNo = 0;
         		 memberName = '';
         		 
         	 }else if(memberSearchOption == 'memberName'){
-        		 memberName = memberSearchBox;
+        		 memberName = memberSearchBox.replace(/\s/g, '');
         		 memberNo = 0;
         		 memberId = '';
         	 }

@@ -47,7 +47,10 @@
 	.tbl-box th:nth-child(2),
 	.tbl-box th:nth-child(10),
 	.tbl-box th:nth-child(11){
-		width: 50px;
+		width: 55px;
+	}
+	.tbl-box th:nth-child(3){
+		width: 150px;
 	}
 	.tbl-box th:nth-child(8),
 	.tbl-box th:nth-child(9){
@@ -56,12 +59,23 @@
 	.tbl-box th:nth-child(7){
 		width: 100px;
 	}
-	.tbl-box th:nth-child(4),
-	.tbl-box th:nth-child(6),
-	.tbl-box th:nth-child(6){
+	.tbl-box th:nth-child(4){
 		width: 150px;
 	}
-    
+	.tbl-box th:nth-child(6){
+		width: 100px;
+	}
+	.tbl-box th:nth-child(12),
+	.tbl-box th:nth-child(13){
+		width: 100px;
+	}
+    .tbl-box th:nth-child(14){
+		width: 100px;
+	}
+	[name=productSearchBox]{
+		width: 500px;
+	}
+	
     
 	img {
  		 width: 100px;
@@ -102,20 +116,20 @@
                     <div class="adminPage-result">
                         <table class="table tbl-box">
                             <tr>
-                            	<th>구분</th>
-                                <th>상품번호</th>
-                            	<th>제품사진</th>
-                                <th>세부카테고리번호</th>
-                                <th>상품이름</th>
-                                <th>상품수량</th>
-                                <th>남은수량</th><!-- 추가 -->
-                                <th>상품가격</th>
-                                <th>원가</th>
-                                <th>인원수</th>
-                                <th>할인율</th>
-                                <th>상품상태</th> 
-                                <th>상품상태변경</th>
-                                <th>확정버튼</th>
+                            	<th>구분1</th>
+                                <th>상품번호2</th>
+                            	<th>제품사진3</th>
+                                <th>세부카테고리번호4</th>
+                                <th>상품이름5</th>
+                                <th>상품수량6</th>
+                                <th>남은수량7</th><!-- 추가 -->
+                                <th>상품가격8</th>
+                                <th>원가9</th>
+                                <th>인원수10</th>
+                                <th>할인율11</th>
+                                <th>상품상태12</th> 
+                                <th>상품상태변경13</th>
+                                <th>확정버튼14</th>
                             </tr>
                             <c:forEach items="${productList }" var="p">
                                 <tr>

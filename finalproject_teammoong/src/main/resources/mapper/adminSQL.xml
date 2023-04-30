@@ -790,6 +790,8 @@
 		select count(*) from askitem_tbl
 	</select>
 	
+	
+	
 	<!-- ================================================================== gongguList -->
 	
 	<select id="selectGongguList" resultType="gai">
