@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div class="adminPage-result">
-                        <table class="table .tbl-box">
+                        <table class="table tbl-box">
                             <tr>
                             	<th>구분</th>
                                 <th>회원번호</th>
@@ -324,17 +324,17 @@
   
         	 
         	 if(memberSearchOption == 'memberNo'){
-        		 memberNo = memberSearchBox;
+        		 memberNo = memberSearchBox.trim();
         		 memberId = '';
 	        	 memberName = '';
         		 
         	 }else if(memberSearchOption == 'memberId'){
-        		 memberId = memberSearchBox;
+        		 memberId = memberSearchBox.trim();
         		 memberNo = 0;
         		 memberName = '';
         		 
         	 }else if(memberSearchOption == 'memberName'){
-        		 memberName = memberSearchBox;
+        		 memberName = memberSearchBox.replace(/\s/g, '');
         		 memberNo = 0;
         		 memberId = '';
         	 }

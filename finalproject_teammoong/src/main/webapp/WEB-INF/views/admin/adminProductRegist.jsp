@@ -6,8 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<!-- default 적용 -->
+	<!-- jquery -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<!-- css -->
+	<link rel="stylesheet" href="/resources/css/admin/admin.css" />
 	<link rel="stylesheet" href="/resources/css/common/default.css" />
+	
 </head>
 <style>
 	.adminPage-main{
@@ -16,6 +20,12 @@
 
 	.adminPage-content{
 		float: left;
+	}
+	.tbl-box{
+		width: 1600px;
+	}
+	[name=boardSearchBox]{
+		width: 500px;
 	}
 </style>
 <body>
@@ -57,7 +67,10 @@
                         
                         <input type="text" name="boardSearchBox" id="searchOption">
                         <!-- 주문 상태 검색 시 1,2,3,4 로 변환해주는 절차 필요 -->
-                        <button type="button" name="searchSubmitBtn">검색</button>
+                        <div class="search-btns">
+	                        <button type="button" name="searchSubmitBtn" class="searchSubmit Btn">검색</button>
+	                        <button type="button" class="goList" class="goList Btn">목록</button>
+                        </div>
                     </div>
                     <div class="boardStatus">
                     	<div class="boardSalse-wrap">
@@ -70,19 +83,19 @@
                     	</div>
                     </div>
                     <div class="adminPage-result">
-                        <table class="table guide-board tbl-box">
+                        <table class="table tbl-box">
                             <tr>
-                           		<td>사업자명</td>
-                            	<td>사업자등록번호</td>
-                                <td>대표 전화번호</td>
-                            	<td>사업장 주소1</td>
-                            	<td>사업장 주소2</td>
-                                <td>담당자명</td>
-                                <td>담당자 연락처</td>
-                                <td>담당자 메일</td>
-                                <!-- <td>카테고리</td> -->
-                            	<td>요청제목</td>
-                            	<td>요청일자</td>
+                           		<th>사업자명</th>
+                            	<th>사업자등록번호</th>
+                                <th>대표 전화번호</th>
+                            	<th>사업장 주소1</th>
+                            	<th>사업장 주소2</th>
+                                <th>담당자명</th>
+                                <th>담당자 연락처</th>
+                                <th>담당자 메일</th>
+                                <th>카테고리</th>
+                            	<th>요청제목</th>
+                            	<th>요청일자</th>
                             </tr>
                             <c:forEach items="${askList }" var="a">
                                 <tr>
@@ -94,87 +107,9 @@
                                     <td>${a.contName }</td>
                                     <td>${a.contPhone }</td>
                                     <td>${a.contMail }</td>
-                                    <%-- <c:choose>
-                                    	<c:when test="${a.detailCategoryNo == 1}">
-                                    		<td>패션</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo == 2}">
-                                    		<td>뷰티</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo == 3}">
-                                    		<td>식품</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo == 4}">
-                                    		<td>생활용품</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo == 5}">
-                                    		<td>가전/디지털</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo == 6}">
-                                    		<td>가구</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo == 7}">
-                                    		<td>침구</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo == 8}">
-                                    		<td>인테리어</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo == 9}">
-                                    		<td>공구</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo == 10}">
-                                    		<td>스포츠/레저/취미</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo == 11}">
-                                    		<td>출산/유아동</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo == 12}">
-                                    		<td>반려용품</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo == 13}">
-                                    		<td>명품관</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo > 13}">
-                                    		<td>테스트용인듯</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    
-                                    <c:choose>
-                                    	<c:when test="${b.boardStatus == 1 }">
-                                    		<td>진행</td>
-                                    	</c:when>
-                                    	<c:when test="${b.boardStatus == 2 }">
-                                    		<td>마감</td>
-                                    	</c:when>
-                                   	</c:choose> --%>
-		                             <td>${a.askTitle }</td>
-		                             <td>${a.askDate }</td>
+                                    <td>${a.categoryName }</td>
+		                            <td>${a.askTitle }</td>
+		                            <td>${a.askDate }</td>
 	                            </c:forEach>
                                 </tr>
                             <tr>
@@ -187,7 +122,20 @@
             </div>
         </div>
     </div>
+<script type="text/javascript">
 
+/*목록으로*/
+$(".goList").on("click",function(){
+	location.reload();
+})
+
+/* 검색기능 */
+
+
+
+
+
+</script>
 
 </body>
 </html>

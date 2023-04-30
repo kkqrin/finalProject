@@ -49,7 +49,8 @@
     
     /* 차트 css */
 	.chartDiv{
-		width: 800px;
+		width: 1100px;
+		margin-top: 100px;
 	}
 	.bestSales{
 		background-color: white;
@@ -66,6 +67,7 @@
 		width: 400px;
 		border: 1px solid #ffa220;
 		width: 500px;
+		margin-left: 100px;
 	}
 	
 	.salesContent{
