@@ -26,9 +26,6 @@
         .product-wrap{
             margin-top: 150px;
         }
-        .posting-item{
-            /* margin-bottom: 100px; */
-        }
 
         /* 순위 */
         .best-product-ranking{
