@@ -419,6 +419,7 @@ $(document).ready(function() {
                     }
                 });
             };
+            
         }
          //문의사항 작성 성공시 띄울 alert창
          function insertAlert(){
@@ -463,7 +464,49 @@ $(document).ready(function() {
                     }
                 });
             };
-        }
+        }function insertReportAlert(){
+            jQueryAlert('success',"신고가 완료되었습니다.");
+
+        function jQueryAlert(type, msg) {
+            let $type = type;
+            let messageBox = msg;
+            switch ($type) {
+                case 'success':
+                messageBox = $.parseHTML('<div class="alert__success"></div>');
+                break;
+                case 'error':
+                messageBox = $.parseHTML('<div class="alert__error"></div>');
+                break;
+                case 'warning':
+                messageBox = $.parseHTML('<div class="alert__warning"></div>');
+                break;
+                case 'info':
+                messageBox = $.parseHTML('<div class="alert__info"></div>');
+                break;
+            }
+            $("body").append(messageBox);
+            $(messageBox).dialog({
+                dialogClass :$type,
+                open: $(messageBox).append(msg),
+                draggable: false,
+                modal: true,
+                buttons: {
+                    "OK": function () {
+                        $(this).dialog("close");
+                         location.reload()
+                    }
+                },
+                show: {
+                    effect: 'fade',
+                    duration: 200 //at your convenience
+                },
+                hide: {
+                    effect: 'fade',
+                    duration: 200 //at your convenience
+                }
+            });
+        };
+    }
         //문의사항 수정 성공시 띄울 alert창
             function jalertshow(){
                 jQueryAlert('success',"문의사항이 수정되었습니다.");
