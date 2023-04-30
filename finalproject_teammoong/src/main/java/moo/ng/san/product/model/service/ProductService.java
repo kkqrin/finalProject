@@ -218,7 +218,10 @@ public class ProductService {
 		return dao.selectSoldOutProductList();
 	}
 
-
+	public ArrayList<Product> selectgongguNumberProductList(int i) {
+		
+		return dao.selectgongguNumberProductList(i);
+	}
 	
 	
 	
@@ -333,6 +336,8 @@ public class ProductService {
 			}
 				return productList;
 	}
+
+
 
 
 
