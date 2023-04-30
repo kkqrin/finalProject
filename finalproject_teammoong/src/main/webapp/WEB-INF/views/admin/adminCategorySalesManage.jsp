@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -21,9 +22,6 @@
     
 </head>
 <style>
-    .adminPage-header{
-        margin-left: 30px;
-    }
     .adminPage-back{
         overflow: hidden;
     }
@@ -44,65 +42,40 @@
         font-size: 50px;
         
     }
-    
-
     .adminPage-sales{
     	overflow: hidden;
-    }
-    .totalSales{
-    	float: left;
-    	width: 300px;
-    	height: 150px;
-    	background-color: lightgray;
-    	margin: 10px 100px;
-    }
-    .monthSales{
-    	float: left;
-    	width: 300px;
-    	height: 150px;
-    	background-color: lightyellow;
-    	margin: 10px 20px;
-    }
-    .totalSalesChart{
-    	float: left;
-
     }
     
     
     /* 차트 css */
-	.totalChart-wrapper{
-		width: 300px;
-	}
-	.curve_chart{
-		height: 400px;
-		width: 400px;
-	}
 	.chartDiv{
 		width: 800px;
 	}
-	.chart{
-		margin-top: 150px;
-	}
 	.bestSales{
-		float: left;
 		background-color: white;
+		display: inline-block;
+		width: 400px;
+		vertical-align: top; /* 요소 상단 맞추기 */
+		border: 1px solid #ffa220;
+		width: 500px;
 	}
 	.salesRanking{
 		background-color: white;
-		margin: auto;
+		display: inline-block;
+		vertical-align: top; /* 요소 상단 맞추기 */
+		width: 400px;
+		border: 1px solid #ffa220;
+		width: 500px;
 	}
 	
-	.bestSalesTable{
-		width: 450px;
+	.salesContent{
+		display: inline-block;
 	}
 	
-	.otherSalesTable{
-		width: 450px;
-	}
+	
 	.otherSalesTable>tbody>tr>th{
 		height: 68.59px;
 	}
-	
 	
 
 </style>
@@ -116,101 +89,139 @@
             <jsp:include page="/WEB-INF/views/admin/adminSideNavi.jsp"/>
 	        <div class="adminPage-main">
 	        	<div class="adminPage-sales">
-	        		<div class="bestSales">
-	        			<div class="sales icon"><span class="material-symbols-outlined">monitoring</span></div>
-	        			<div class="salesContent">
-	        				<span class="bestSalesCategory">최고 매출 카테고리</span>
-	        				<span class="bestSalesCount"></span>
-	        				<table class="bestSalesTable guide-board">
-	        					<tr>
-	        						<th>카테고리 베스트</th>
-	        						<th>카테고리 베스트 매출액</th>
-	        						<th>카테고리 베스트 원가</th>
-	        						<th>카테고리 베스트 이익률</th>
-	        					</tr>
-	        					<tr>
-	        						<c:choose>
-	        							<c:when test="">
-	        							
-	        							</c:when>
-	        							<c:when test="">
-	        							
-	        							</c:when>
-	        							<c:when test="">
-	        							
-	        							</c:when>
-	        							<c:when test="">
-	        							
-	        							</c:when>
-	        							<c:when test="">
-	        							
-	        							</c:when>
-	        							<c:when test="">
-	        							
-	        							</c:when>
-	        							<c:when test="">
-	        							
-	        							</c:when>
-	        							<c:when test="">
-	        							
-	        							</c:when>
-	        							<c:when test="">
-	        							
-	        							</c:when>
-	        							<c:when test="">
-	        							
-	        							</c:when>
-	        							<c:when test="">
-	        							
-	        							</c:when>
-	        							<c:when test="">
-	        							
-	        							</c:when>
-	        						</c:choose>
-	        						<td>${bestSales.categoryNo }</td>
-	        						<td>${bestSales.totalSales }</td>
-	        						<td>${bestSales.totalCost }</td>
-	        						<td>${bestProfit } </td>
-	        					</tr>
-	        				</table>
-	        			</div>
-	        		</div>
-	        		<div class="salesRanking">
-	        			<div class="sales icon"><span class="material-symbols-outlined">trending_up</span></div>
-	        			<div class="otherSales">
-	        				<span class="salesTitle">월 매출액</span>
-	        				<span class="otherSalesCount"></span>
-	        				<table class="otherSalesTable guide-board">
-	        					<tr>
-	        						<th>카테고리</th>
-	        						<th>매출액</th>
-	        						<th>원가</th>
-	        						<th>이익률</th>
-	        					</tr>
-		        				<c:forEach items="${otherSalesList }" var="other">
-		        					<c:forEach items="${otherProfit }" var="otherProfit">
-		        						<tr>
-		        							<td>${other.categoryNo }</td>
-		        							<td>${other.totalSales }</td>
-		        							<td>${other.totalCost }</td>
-		        							<td>${otherProfit }</td>
-		        						</tr>
-	        						</c:forEach>
-	        					</c:forEach>
-	        						<tr>
-	        							<td colspan="4">pageNavi</td>
-	        						</tr>
-	        				</table>
-	        			</div>
-	        		</div>
-	        		<div class="salesReport">
-	        			<button type="button" onclick="salesReportPrint();">매출보고서 출력</button>
+	        		<div class="bestAndOther">
+		        		<div class="bestSales">
+		        			<div class="sales icon"><span class="material-symbols-outlined">monitoring</span></div>
+		        			<div class="salesContent">
+		        				<span class="bestSalesCategory">최고 매출 카테고리</span>
+		        				<span class="bestSalesCount"><fmt:formatNumber value="${bestSales.totalSales }"/>원</span>
+		        				<table class="bestSalesTable guide-board">
+		        					<tr>
+		        						<th>카테고리 베스트</th>
+		        						<th>카테고리 베스트 매출액</th>
+		        						<th>카테고리 베스트 원가</th>
+		        						<th>카테고리 베스트 이익률</th>
+		        					</tr>
+		        					<tr>
+		        						<c:choose>
+		        							<c:when test="${bestSales.categoryNo == 1}">
+		        								<td>패션</td>
+		        							</c:when>
+		        							<c:when test="${bestSales.categoryNo == 2}">
+		        								<td>뷰티</td>
+		        							</c:when>
+		        							<c:when test="${bestSales.categoryNo == 3}">
+		        								<td>식품</td>
+		        							</c:when>
+		        							<c:when test="${bestSales.categoryNo == 4}">
+		        								<td>생활용품</td>
+		        							</c:when>
+		        							<c:when test="${bestSales.categoryNo == 5}">
+		        								<td>가전/디지털</td>
+		        							</c:when>
+		        							<c:when test="${bestSales.categoryNo == 6}">
+		        								<td>가구</td>
+		        							</c:when>
+		        							<c:when test="${bestSales.categoryNo == 7}">
+		        								<td>침구</td>
+		        							</c:when>
+		        							<c:when test="${bestSales.categoryNo == 8}">
+		        								<td>인테리어</td>	
+		        							</c:when>
+		        							<c:when test="${bestSales.categoryNo == 9}">
+		        								<td>공구</td>
+		        							</c:when>
+		        							<c:when test="${bestSales.categoryNo == 10}">
+		        								<td>스포츠/레저/취미</td>
+		        							</c:when>
+		        							<c:when test="${bestSales.categoryNo == 11}">
+		        								<td>출산/유아동</td>
+		        							</c:when>
+		        							<c:when test="${bestSales.categoryNo == 12}">
+		        								<td>반려용품</td>
+		        							</c:when>
+		        							<c:when test="${bestSales.categoryNo == 13}">
+		        								<td>명품관</td>
+		        							</c:when>
+		        						</c:choose>
+		        						<td><fmt:formatNumber value="${bestSales.totalSales }"/>원</td>
+		        						<td><fmt:formatNumber value="${bestSales.totalCost }"/>원</td>
+		        						<td>${bestProfit } </td>
+		        					</tr>
+		        				</table>
+		        			</div>
+		        		</div>
+		        		<div class="salesRanking">
+		        			<div class="sales icon"><span class="material-symbols-outlined">trending_up</span></div>
+		        			<div class="salesContent">
+		        				<span class="salesTitle">월 매출액</span>
+		        				<span class="otherSalesCount"><fmt:formatNumber value="${otherSalSum }"/>원</span>
+		        				<table class="otherSalesTable guide-board">
+		        					<tr>
+		        						<th>카테고리</th>
+		        						<th>매출액</th>
+		        						<th>원가</th>
+		        						<th>이익률</th>
+		        					</tr>
+			        				<c:forEach items="${otherSalesList }" var="other">
+			        					<c:forEach items="${otherProfit }" var="otherProfit">
+			        						<tr>
+			        							<c:choose>
+				        							<c:when test="${other.categoryNo == 1}">
+				        								<td>패션</td>
+				        							</c:when>
+				        							<c:when test="${other.categoryNo == 2}">
+				        								<td>뷰티</td>
+				        							</c:when>
+				        							<c:when test="${other.categoryNo == 3}">
+				        								<td>식품</td>
+				        							</c:when>
+				        							<c:when test="${other.categoryNo == 4}">
+				        								<td>생활용품</td>
+				        							</c:when>
+				        							<c:when test="${other.categoryNo == 5}">
+				        								<td>가전/디지털</td>
+				        							</c:when>
+				        							<c:when test="${other.categoryNo == 6}">
+				        								<td>가구</td>
+				        							</c:when>
+				        							<c:when test="${other.categoryNo == 7}">
+				        								<td>침구</td>
+				        							</c:when>
+				        							<c:when test="${other.categoryNo == 8}">
+				        								<td>인테리어</td>	
+				        							</c:when>
+				        							<c:when test="${other.categoryNo == 9}">
+				        								<td>공구</td>
+				        							</c:when>
+				        							<c:when test="${other.categoryNo == 10}">
+				        								<td>스포츠/레저/취미</td>
+				        							</c:when>
+				        							<c:when test="${other.categoryNo == 11}">
+				        								<td>출산/유아동</td>
+				        							</c:when>
+				        							<c:when test="${other.categoryNo == 12}">
+				        								<td>반려용품</td>
+				        							</c:when>
+				        							<c:when test="${other.categoryNo == 13}">
+				        								<td>명품관</td>
+				        							</c:when>
+				        						</c:choose>
+				        						<td><fmt:formatNumber value="${other.totalSales }"/>원</td>
+		        								<td><fmt:formatNumber value="${other.totalCost }"/>원</td>
+		        								<td>${otherProfit } </td>
+			        						</tr>
+		        						</c:forEach>
+		        					</c:forEach>
+		        				</table>
+		        			</div>
+		        		</div>
 	        		</div>
 	        	</div>
+        		<!-- <div class="salesReport">
+        			<div><button type="button" onclick="salesReportPrint();">매출보고서 출력</button></div>
+        		</div> -->
 	        	<div class="chartDiv">
-		        	<div class="totalSalesChart chart">
-		        		<canvas id="totalChart"></canvas>
-		        	</div>
 		        	<div class="monthSalesChart chart">
 		        		<canvas id="monthChart"></canvas>
 		        	</div>
@@ -313,6 +324,8 @@
 					} 
 					
 				})// 카테고리별 연도 매출
+				
+	
 
 			}); // function ready
 			

@@ -348,15 +348,18 @@ public class AdminController {
 		int bestCos = bestSales.getTotalCost();
 		double bestProfit = Math.floor((1-(bestCos/(double)bestSal))*100);
 		double [] otherProfit = new double[otherSalesList.size()];
+		int otherSalSum = 0;
 		
 		for(int i=0;i < otherSalesList.size();i++) {
 			int otherSal = otherSalesList.get(i).getTotalSales();
 			int otherCos = otherSalesList.get(i).getTotalCost();
 			otherProfit[i] = Math.floor((1-(otherCos / (double)otherSal))*100);
+			otherSalSum += otherSal;
 		}
 		
 		model.addAttribute("bestSales",bestSales);
 		model.addAttribute("otherSalesList",otherSalesList);
+		model.addAttribute("otherSalSum",otherSalSum);
 		model.addAttribute("bestProfit",bestProfit);
 		model.addAttribute("otherProfit",otherProfit);
 		
