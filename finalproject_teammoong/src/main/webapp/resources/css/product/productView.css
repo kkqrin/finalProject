@@ -288,10 +288,10 @@ align-items: center;
     color: #3A3A3A;
 }
   /* 라디오 버튼을 숨깁니다. */
-/* input[type="radio"] {
+#modalReview input[type="radio"] {
     position: absolute;
     left: -9999px;
-} */
+}
 
   /* 체크된 라디오 버튼의 부모 요소인 <td>의 배경색을 변경합니다. */
 input[type="radio"]:checked + label {
@@ -460,64 +460,3 @@ input[type="radio"]:checked + label {
     padding-top: 10px;
     color: #3A3A3A;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-  /* 라디오 버튼 */
-/* 라디오 버튼 컨테이너 스타일 */
-.radio-container {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    margin-right: 20px;
-}
-
-/* 실제 라디오 버튼 숨기기 */
-.radio-container input[type="radio"] {
-    display: none;
-}
-
-/* 커스텀 라디오 버튼 스타일 */
-.radio-container .custom-radio {
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-    border: 2px solid #ccc;
-    border-radius: 50%;
-    background-color: #fff;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    position: relative;
-    margin-right: 5px;
-    margin-top: 1px;
-}
-
-/* 체크된 커스텀 라디오 버튼 스타일 */
-.radio-container input[type="radio"]:checked + .custom-radio {
-    background-color: #f88000;
-    border-color: #f88000;
-}
-
-/* 체크된 커스텀 라디오 버튼 내부 아이콘 스타일 */
-.radio-container input[type="radio"]:checked + .custom-radio::after {
-    content: "";
-    display: block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #fff;
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
