@@ -21,7 +21,7 @@ public class ReviewController {
 	@Autowired
 	private FileManager fileManager;
 	
-	@RequestMapping(value="/insertReview.do")
+	@RequestMapping(value="/insertReviewModal.do")
 	public String insertReview(Review review, MultipartFile[] reviewFile, HttpServletRequest request) {
 		System.out.println("reviewController에서 review값 : "+review);
 		ArrayList<FileVO> fileList = new ArrayList<FileVO>();
