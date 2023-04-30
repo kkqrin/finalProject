@@ -415,7 +415,7 @@ public class AdminController {
 		boolean result = service.updateChangeProductStatus(no, level);
 		
 		if(result) {
-			return "admin/adminProductManagePage";
+			return "redirect:/adminTotalProductList.do?reqPage=1";
 		}else {
 			return "redirect:/admin/admin";
 		}

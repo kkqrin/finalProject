@@ -40,6 +40,28 @@
     .searchForm{
     	display: none;
     }
+    .tbl-box{
+    	width: 1600px;
+    }
+    .tbl-box th:nth-child(1),
+	.tbl-box th:nth-child(2),
+	.tbl-box th:nth-child(10),
+	.tbl-box th:nth-child(11){
+		width: 50px;
+	}
+	.tbl-box th:nth-child(8),
+	.tbl-box th:nth-child(9){
+		width: 75px;
+	}
+	.tbl-box th:nth-child(7){
+		width: 100px;
+	}
+	.tbl-box th:nth-child(4),
+	.tbl-box th:nth-child(6),
+	.tbl-box th:nth-child(6){
+		width: 150px;
+	}
+    
     
 	img {
  		 width: 100px;
@@ -89,8 +111,8 @@
                                 <th>남은수량</th><!-- 추가 -->
                                 <th>상품가격</th>
                                 <th>원가</th>
-                                <th>공동구매인원수</th>
-                                <th>상품할인율</th>
+                                <th>인원수</th>
+                                <th>할인율</th>
                                 <th>상품상태</th> 
                                 <th>상품상태변경</th>
                                 <th>확정버튼</th>
@@ -296,7 +318,6 @@
 			});
 			
 			location.href="/checkedChangeProductStatus.do?no="+no.join("/")+"&level="+level.join("/");
-            
 	});
             
         
