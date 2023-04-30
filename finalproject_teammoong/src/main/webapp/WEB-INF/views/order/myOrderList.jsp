@@ -450,8 +450,8 @@ font-variation-settings:
 						btn.attr('data-modal','#modalReview');
 						btn.text("리뷰쓰기");
 
-						const hidden1 = $("<input type='hidden' name='productNo' value="+p.productNo+">");
-						const hidden2 = $("<input type='hidden' name='optionInfoNo' value="+p.optionInfoNo+">");
+						const hidden1 = $("<input type='hidden' class='productNo' value="+p.productNo+">");
+						const hidden2 = $("<input type='hidden' class='optionInfoNo' value="+p.optionInfoNo+">");
 
 						// btnForm.append(btn);
 						btnZoneDiv.append(btn);
