@@ -42,6 +42,7 @@
 					</div>
 
 
+					<!-- 주문한 상품리스트 -->
 					<c:forEach items="${orderProductList }" var="i">
 						<div class="myorder-order-item">
 							<div class="myorder-product-img">

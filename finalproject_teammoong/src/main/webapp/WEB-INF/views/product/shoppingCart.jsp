@@ -6,7 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>뭉쳐야산다 | 장바구니</title>
+    <!-- 웹페이지 로고 -->
+    <link rel="shortcut icon" href="/resources/upload/member/free-icon-tangerine-1450252.png" />
 
 <link rel="stylesheet" href="/resources/css/product/cart.css"/>
 <style>
