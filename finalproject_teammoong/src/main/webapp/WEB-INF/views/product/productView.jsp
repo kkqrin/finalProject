@@ -408,7 +408,7 @@
                         <div class="review-box">
                             <div class="review-img">
                                 <c:forEach items="${i.fileList }" var="f">
-                                <img src="/resources/upload/review/${f.filepath}" />
+                                    <img src="/resources/upload/review/${f.filepath}" />
                                 </c:forEach>
                             </div>
                             <div class="review-right">
@@ -420,6 +420,7 @@
                                     <div class="review-option">
                                         <div class="review-report" data-modal="#modal-report-btn">
                                             <span class="material-symbols-outlined">warning</span>
+                                            <input type="hidden" id="reviewNoTest" value="${i.reviewNo}">
                                         </div>
                                         <div class="review-enroll-date">${i.reviewDate}</div>
                                     </div>
@@ -436,8 +437,98 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> 
                     </c:forEach>
+                      <!-- 신고하기 모달 -->
+                <div id="modal-report-btn" class="modal modal-pri report-modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h6>리뷰 신고하기</h6>
+                        </div>
+                        <div class="modal-body">
+                            <!--내용영역-->
+                            <!-- <h5>내용타이틀</h5> -->
+                            <!-- <form action="/test.do"> -->
+                                <div class="report-form">
+                                    <!-- 
+                                        <label class="radio-container">
+                                        <input type="radio" name="deli-address" id="member-address">
+                                        <span class="custom-radio"></span>
+                                        기본 배송지
+                                        </label>
+                                    -->
+                                    <div>
+                                        <label class="radio-container">
+                                            <input type="radio" name="reportReason" value="1">
+                                            <span class="custom-radio"></span>
+                                            상품관련 비방 내용
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label class="radio-container">
+                                            <input type="radio" name="reportReason" value="2">
+                                            <span class="custom-radio"></span>
+                                            음란, 욕설 등 부절적한 내용
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label class="radio-container">
+                                            <input type="radio" name="reportReason" value="3">
+                                            <span class="custom-radio"></span>
+                                            개인, 판매자 상업적 홍보
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label class="radio-container">
+                                            <input type="radio" name="reportReason" value="4">
+                                            <span class="custom-radio"></span>
+                                            상품과 관계없는 내용
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label class="radio-container">
+                                            <input type="radio" name="reportReason" value="5">
+                                            <span class="custom-radio"></span>
+                                            개인정보 노출
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label class="radio-container">
+                                            <input type="radio" name="reportReason" value="6">
+                                            <span class="custom-radio"></span>
+                                            저작권 불법도용(이미지,동영상)
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label class="radio-container">
+                                            <input type="radio" name="reportReason" value="7">
+                                            <span class="custom-radio"></span>
+                                            상품 후기 취지에 어긋난 이용(복사글 등)
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label class="radio-container">
+                                            <input type="radio" name="reportReason" value="8">
+                                            <span class="custom-radio"></span>
+                                            직접 입력
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <textarea class="report-direct-input" name="reportContent" disabled></textarea>
+                                    </div>
+                                </div>
+                            <!-- </form> -->
+                            <!--//내용영역-->
+                        </div>
+                        <div class="area-btn center">
+                            <input type="hidden" class="reviewNoVal">
+                            <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
+                            <a class="btn btn-pri size01 reviewReportBtn" type="button" id="review-filter-btn" rel="modal:close">확인</a>
+                            <a rel="modal:close" class="btn btn-sec size01 report-modal-close">닫기</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
                         <!-- <div class="review-box">
                             <div class="review-img">
                                 <!-- <img src="/resources/img/product/lactofit.jpg" /> -->
@@ -666,94 +757,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- 신고하기 모달 -->
-                <div id="modal-report-btn" class="modal modal-pri report-modal">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h6>리뷰 신고하기</h6>
-                        </div>
-                        <div class="modal-body">
-                            <!--내용영역-->
-                            <!-- <h5>내용타이틀</h5> -->
-                            <!-- <form action="/test.do"> -->
-                                <div class="report-form">
-                                    <!-- 
-                                        <label class="radio-container">
-                                        <input type="radio" name="deli-address" id="member-address">
-                                        <span class="custom-radio"></span>
-                                        기본 배송지
-                                        </label>
-                                    -->
-                                    <div>
-                                        <label class="radio-container">
-                                            <input type="radio" name="report-reason" value="1">
-                                            <span class="custom-radio"></span>
-                                            상품관련 비방 내용
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label class="radio-container">
-                                            <input type="radio" name="report-reason" value="2">
-                                            <span class="custom-radio"></span>
-                                            음란, 욕설 등 부절적한 내용
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label class="radio-container">
-                                            <input type="radio" name="report-reason" value="3">
-                                            <span class="custom-radio"></span>
-                                            개인, 판매자 상업적 홍보
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label class="radio-container">
-                                            <input type="radio" name="report-reason" value="4">
-                                            <span class="custom-radio"></span>
-                                            상품과 관계없는 내용
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label class="radio-container">
-                                            <input type="radio" name="report-reason" value="5">
-                                            <span class="custom-radio"></span>
-                                            개인정보 노출
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label class="radio-container">
-                                            <input type="radio" name="report-reason" value="6">
-                                            <span class="custom-radio"></span>
-                                            저작권 불법도용(이미지,동영상)
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label class="radio-container">
-                                            <input type="radio" name="report-reason" value="7">
-                                            <span class="custom-radio"></span>
-                                            상품 후기 취지에 어긋난 이용(복사글 등)
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label class="radio-container">
-                                            <input type="radio" name="report-reason" value="8">
-                                            <span class="custom-radio"></span>
-                                            직접 입력
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <textarea class="report-direct-input" disabled></textarea>
-                                    </div>
-                                </div>
-                            <!-- </form> -->
-                            <!--//내용영역-->
-                        </div>
-                        <div class="area-btn center">
-                            <a class="btn btn-pri size01" type="button" id="review-filter-btn" rel="modal:close">확인</a>
-                            <a rel="modal:close" class="btn btn-sec size01 report-modal-close">닫기</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+              
      <!--리뷰작성 모달 시작-->
      <div id="modalReview" class="modal modal-pri" style="max-width: none;">
         <!-- <form action="/insertReview.do" method="post" enctype="multipart/form-data"> -->
@@ -925,16 +929,36 @@
     <!-- 상품 상세 js -->
 
         <script>
-            //신고 insert
             $(".review-report").children().on("click",function(){
-                var reviewNo;
-                var memberNo;
-                var reportReason;
-                var reportContent;
+                console.log($("#reviewNoTest").val());
+                var reviewNoVal = $(this).next().val();
+                $(".reviewNoVal").val(reviewNoVal);
+            });
+            //신고 insert
+            $(".reviewReportBtn").on("click",function(){
+                console.log("신고제출 작동");
+                var reviewNo = $(".reviewNoVal").val();
+                var memberNo = $("[name=memberNo]").val();
+                var reportReason = $("input:radio[name=reportReason]:checked").val();
+                if($("[name=reportContent]").val() == ''){
+                    var reportContent = 0;
+                } else {
+                    var reportContent = $("[name=reportContent]").val();
+                }
+                console.log(reviewNo);
+                console.log(memberNo);
+                console.log(reportReason);
+                console.log(reportContent);
                 $.ajax({
-                    url : "/insertReport.do",
+                    url : "/insertReportAjax.do",
                     type : "post",
-                    data : {reviewNo : reviewNo, memberNo:memberNo, reportReason : reportReason, reportContent : reportContent}
+                    data : {reviewNo : reviewNo, memberNo:memberNo, reportReason : reportReason, reportContent : reportContent},
+                    success : function(data){
+                        if(data == 'success'){
+                            insertReportAlert();
+                        }
+                    }
+                    
                 });
             });
             // 상품 옵션 select

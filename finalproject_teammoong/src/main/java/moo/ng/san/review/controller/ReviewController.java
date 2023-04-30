@@ -49,8 +49,9 @@ public class ReviewController {
 		return null;
 	}
 	@ResponseBody
-	@RequestMapping(value="/insertReport.do")
+	@RequestMapping(value="/insertReportAjax.do")
 	public String insertReport(ReviewReport rr) {
+		System.out.println("ReviewController에서 rr값"+rr);
 		int result = service.insertReport(rr);
 		return "success";
 	}
