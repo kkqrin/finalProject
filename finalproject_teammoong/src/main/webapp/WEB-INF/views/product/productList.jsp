@@ -65,6 +65,7 @@
 
 
 		<c:if test="${sCategory eq 0 }">
+			<h5 style="text-align: center; margin: 80px 0 30px 0;"># 인기상품</h5>
 		<div class="popular-product-wrap">
 			<!-- 인기상품 wrap -->
 			<c:forEach items="${bestProductList }" var="p" varStatus="status">			
@@ -488,7 +489,7 @@
 
 	$(document).ready(function(){
 	    // 슬릭 padding-bottom
-		$(".popular-product-wrap .slick-list").attr("style", "padding-bottom: 10px; margin-bottom: 250px;");
+		$(".popular-product-wrap .slick-list").attr("style", "padding-bottom: 10px; margin-bottom: 150px;");
 	});
 	</script>
 
