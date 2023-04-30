@@ -155,6 +155,7 @@
              O.ORDER_status AS orderStatus,
              OD.ORDER_SALE_PRICE AS orderSalePrice,
              OD.ORDER_DETAIL_CNT AS orderDetailCnt,
+             (SELECT OPTION_INFO_NO FROM OPTION_INFO_TBL WHERE OPTION_INFO_NO = OD.OPTION_INFO_NO) AS optionInfoNo,
              (SELECT OPTION_DATEAIL FROM OPTION_INFO_TBL WHERE OPTION_INFO_NO = OD.OPTION_INFO_NO) AS optionDetailName
        FROM ORDER_TBL o
        left join order_detail od on o.order_no = od.order_no

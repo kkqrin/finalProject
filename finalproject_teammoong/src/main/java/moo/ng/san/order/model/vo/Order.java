@@ -29,6 +29,7 @@ public class Order {
 	private int productCost;
 	private int productDiscount;
 	private int optionNo;
+	private int optionInfoNo;
 	private String optionDetailName;
 	private int optionPrice;
 	
@@ -56,4 +57,5 @@ public class Order {
 	private int plusPointEa; // 적립된 적립금
 
 	private int orderSalePrice; // 상품테이블의 productPrice와 productDiscount 계산한 값
+	
 }

@@ -434,15 +434,15 @@ font-variation-settings:
 
 					// <c:if test="${i.orderStatus eq 7}">
 					// 	<div class="myorder-btn-zone">
-					// 		<form action="#">
-					// 			<button class="btn btn-pri size01">리뷰쓰기</button>
-					// 		</form>
+					// 			<button class="btn btn-pri size01" type="button">리뷰쓰기</button>
+					//			<input type="hidden" name="productNo" value="${p.productNo}">
+					//			<input type="hidden" name="optionInfoNo" value="${p.optionInfoNo}">
 					// 	</div>
 					// </c:if>
 
 					if(Number(p.orderStatus) == 7){
 						const btnZoneDiv = $("<div>");
-						const btnForm = $("<form>");
+						// const btnForm = $("<form>");
 						const btn = $("<button>");
 						btn.addClass("btn btn-pri size01");
 						btn.attr('type','button')
@@ -450,8 +450,13 @@ font-variation-settings:
 						btn.attr('data-modal','#modalReview');
 						btn.text("리뷰쓰기");
 
+						const hidden1 = $("<input type='hidden' name='productNo' value="+p.productNo+">");
+						const hidden2 = $("<input type='hidden' name='optionInfoNo' value="+p.optionInfoNo+">");
+
 						// btnForm.append(btn);
 						btnZoneDiv.append(btn);
+						btnZoneDiv.append(hidden1);
+						btnZoneDiv.append(hidden2);
 						div.append(btnZoneDiv);
 
 					}
