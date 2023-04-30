@@ -7,7 +7,7 @@
 
 .cart-header{
     width: 160px;
-    background-color: #eee;
+    /* background-color: #eee; */
     display: flex;
     justify-content: space-between;
 }
@@ -27,8 +27,11 @@
 
 
 .cart-product-item{
-    background-color: #eee;
+    /* background-color: #eee; */
+    border-bottom: 1px solid #ddd;
     margin-top: 20px;
+    padding-bottom: 20px;
+    /* margin: 30px auto; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -97,7 +100,7 @@
 
 .cart-product-price{
     width: 150px;
-    background-color: aliceblue;
+    /* background-color: aliceblue; */
     padding: 10px;
     text-align: center;
     font-size: 16px;
@@ -128,13 +131,13 @@
 @supports (position: sticky) or (position: -webkit-sticky){
     .order-payment-wrap>.total-pay-box{
         width: 300px;
-        height: 330px;
+        height: 290px;
         background: var(--bg-secondary);
         margin: 30px;
         padding: 30px;
         box-sizing: border-box;
         position: sticky;
-        top: 0px;
+        top: 180px;
         }
     }
     
@@ -197,15 +200,15 @@
     /* margin-right: 10px; */
     display: flex;
     align-items: center;
-  }
-  
-  /* 실제 체크박스 숨기기 */
-  .checkbox-container input[type="checkbox"] {
+}
+
+/* 실제 체크박스 숨기기 */
+.checkbox-container input[type="checkbox"] {
     display: none;
-  }
-  
-  /* 커스텀 체크박스 스타일 */
-  .checkbox-container .custom-checkbox {
+}
+
+/* 커스텀 체크박스 스타일 */
+.checkbox-container .custom-checkbox {
     display: inline-block;
     width: 18px;
     height: 18px;
@@ -216,16 +219,16 @@
     transition: all 0.3s ease-in-out;
     position: relative;
     margin-right: 5px;
-  }
-  
-  /* 체크된 커스텀 체크박스 스타일 */
-  .checkbox-container input[type="checkbox"]:checked + .custom-checkbox {
+}
+
+/* 체크된 커스텀 체크박스 스타일 */
+.checkbox-container input[type="checkbox"]:checked + .custom-checkbox {
     background-color: #f88000;
     border-color: #f88000;
-  }
-  
-  /* 체크된 커스텀 체크박스 내부 아이콘 스타일 */
-  .checkbox-container input[type="checkbox"]:checked + .custom-checkbox::before {
+}
+
+/* 체크된 커스텀 체크박스 내부 아이콘 스타일 */
+.checkbox-container input[type="checkbox"]:checked + .custom-checkbox::before {
     content: "";
     display: block;
     width: 5px;
@@ -237,5 +240,4 @@
     top: 50%;
     left: 50%;
     margin: -6px 0 0 -4px;
-  }
-  
+}

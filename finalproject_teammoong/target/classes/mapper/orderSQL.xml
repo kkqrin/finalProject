@@ -9,14 +9,15 @@
        		issue_no AS issueNo,
             coupon_title AS couponTitle,
             coupon_price AS couponPrice,
-             TO_CHAR(end_date, 'YYYY-MM-DD') AS endDate
+            coupon_status AS couponStatus,
+            TO_CHAR(end_date, 'YYYY-MM-DD') AS endDate
        from issue_coupon
        left join coupon_tbl using (coupon_no)
        where member_no = #{_parameter}
        order by 1 desc
 	</select>
 	<select id="selectMemberCouponCount" parameterType="_int" resultType="_int">
-		 select count(*) AS couponCount from ISSUE_COUPON where member_no=#{_parameter}
+		 select count(*) AS couponCount from ISSUE_COUPON where member_no=#{_parameter} and  coupon_status = 1
 	</select>
 	<select id="selectOrderProductList" parameterType="map" resultType="o">
 		select
@@ -159,5 +160,13 @@
        left join order_detail od on o.order_no = od.order_no
        left join product_tbl p on od.product_no = p.product_no
        where o.order_no = #{_parameter}
+	</select>
+	
+	<select id="selectDoneCouponPrice" parameterType="_int" resultType="_int">
+       select
+       		coupon_price AS couponPrice
+       from issue_coupon
+       left join coupon_tbl using(coupon_no)
+       where issue_no = (select issue_no from order_tbl where order_no = #{_parameter})
 	</select>
 </mapper>

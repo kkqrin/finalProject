@@ -111,7 +111,7 @@ public class OrderService {
 			map.put("orderDetailCost", orderDetailCost[i]);
 			map.put("orderSalePrice", orderSalePrice[i]);
 			
-			result = dao.insertOrderDetail(map);
+			result += dao.insertOrderDetail(map);
 		}
 		
 		
@@ -132,7 +132,11 @@ public class OrderService {
 		
 		return dao.selectMyOrderProductList(orderNo);
 	}
-	
+
+	public int selectDoneCouponPrice(int orderNo) {
+		
+		return dao.selectDoneCouponPrice(orderNo);
+	}
 	
 	
 	
@@ -217,4 +221,5 @@ public class OrderService {
 		}
 		return result;
 	}
+
 }

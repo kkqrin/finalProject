@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/resources/css/product/ordersheet.css"/>
+<!-- 주소검색 api -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <style>
     /* #delivery-member{
@@ -38,10 +40,7 @@
 		<input type="hidden" id="session-member-zonecode" value="${sessionScope.m.memberZoneCode}">
 		<input type="hidden" id="session-member-addr" value="${sessionScope.m.memberAddr}">
 	
-	
-        <pre>
-            남은 일 : 주소검색 API, 유효성 검사 (나쁜사용자), 전체 주문금액보다 쿠폰/적립금 더 못쓰게
-        </pre>
+
         <div class="order-sheet-wrap">
             <h1>주문서</h1>
             <!--  -->
@@ -84,7 +83,7 @@
                             <c:choose>
                                 <c:when test="${page eq 0}">
                                     <div class="order-product-volume"><span>${i.basketCount}</span>개</div>
-                                    <input type="text" name="orderDetailCnt" value="${i.basketCount }">
+                                    <input type="hidden" name="orderDetailCnt" value="${i.basketCount }">
                                 </c:when>
                                 <c:otherwise>
                                     <div class="order-product-volume"><span>${page}</span>개</div>
@@ -133,9 +132,14 @@
                 </div>
                 <div class="order-delivery-box">
                     <h4>배송 정보</h4>
-                    <div>
-                        <input type="checkbox" id="delivery-member">
-                        <label for="delivery-member">주문자 정보와 동일</label>
+                    <div style="width: 200px;">
+                        <!-- <input type="checkbox" id="delivery-member">
+                        <label for="delivery-member">주문자 정보와 동일</label> -->
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="delivery-member">
+                            <span class="custom-checkbox"></span>
+                            주문자 정보와 동일
+                        </label>
                     </div>
                     <table class="tbl-box deli-sheet">
                         <tr>
@@ -146,20 +150,35 @@
                         </tr>
                         <tr>
                             <th><label for="deli-phone">휴대폰</label></th>
-                            <td colspan="2">
-                                <input type="text" name="deliPhone" id="deli-phone" class="input-noborder" placeholder="'-' 제외 숫자만 입력해주세요">
+                            <td colspan="2" style="position: relative;">
+                                <input type="text" name="deliPhone" id="deli-phone" class="input-noborder" placeholder="'-' 제외 숫자만 입력해주세요" style="width: 40%;">
+                                <span class="deli-phone-valid" style="color:var(--primary); position: absolute; left:260px; top: 17px;"></span>
                             </td>
                         </tr>
                         <tr>
                             <th>배송지</th>
                             <td colspan="2" class="deli-box">
-                                <input type="radio" name="deli-address" id="member-address"><label for="member-address">기본 배송지</label>
-                                <input type="radio" name="deli-address" id="new-input-address" checked><label for="new-input-address">직접 입력</label>
+                                <!-- <input type="radio" name="deli-address" id="member-address">
+                                <label for="member-address">기본 배송지</label>
+                                <input type="radio" name="deli-address" id="new-input-address" checked>
+                                <label for="new-input-address">직접 입력</label> -->
+                                <p style="display: flex;">
+                                    <label class="radio-container">
+                                        <input type="radio" name="deli-address" id="member-address">
+                                        <span class="custom-radio"></span>
+                                        기본 배송지
+                                    </label>
+                                    <label class="radio-container">
+                                        <input type="radio" name="deli-address" id="new-input-address" checked>
+                                        <span class="custom-radio"></span>
+                                        직접 입력
+                                    </label>
+                                </p>
                                 <div>
-                                    <input type="text" id="deli-post-number" class="input-noborder" placeholder="우편번호">
-                                    <button type="button" class="btn btn-pri size01">주소검색</button>
+                                    <input type="text" id="deli-post-number" class="input-noborder" placeholder="우편번호" readonly>
+                                    <button type="button" class="btn btn-pri size01" id="addr">주소검색</button>
                                 </div>
-                                <input type="text" name="deliAddr1" id="deli-addr" class="input-noborder" placeholder="주소를 입력해주세요">
+                                <input type="text" name="deliAddr1" id="deli-addr" class="input-noborder" placeholder="주소를 입력해주세요" readonly>
                                 <input type="text" name="deliAddr2" id="deli-addr2" class="input-noborder" placeholder="상세주소를 입력해주세요">
                             </td>
                         </tr>
@@ -193,9 +212,20 @@
                                     <td colspan="2">
                                         <div class="selectBox-widht-explain" style="width: 100%;">
                                             <select class="select-custom order-coupon" id="order-coupon">
-                                                <option value="0" issueNo="0" selected>사용 가능한 쿠폰 ${couponCount }장</option>
+                                                <c:if test="${couponCount eq 0}">
+                                                    <option value="0" issueNo="0" selected>사용 가능한 쿠폰이 없습니다.</option>
+                                                </c:if>
+                                                <c:if test="${couponCount ne 0}">
+                                                    <option value="0" issueNo="0" selected>사용 가능한 쿠폰 ${couponCount }장</option>
+                                                </c:if>
+                                                
                                                 <c:forEach items="${couponList }" var="i">
-                                                <option value="${i.couponPrice }" issueNo="${i.issueNo}">${i.couponTitle }( <fmt:formatNumber value="${i.couponPrice }"/>원 할인 / ~ ${i.endDate } )</option>
+                                                    <c:if test="${i.couponStatus ne 1}">
+                                                        <option value="${i.couponPrice }" issueNo="${i.issueNo}" disabled>${i.couponTitle }( <fmt:formatNumber value="${i.couponPrice }"/>원 할인 / ~ ${i.endDate } )</option>
+                                                    </c:if>
+                                                    <c:if test="${i.couponStatus eq 1}">
+                                                        <option value="${i.couponPrice }" issueNo="${i.issueNo}">${i.couponTitle }( <fmt:formatNumber value="${i.couponPrice }"/>원 할인 / ~ ${i.endDate } )</option>
+                                                    </c:if>
                                                 <!-- <input type="hidden" name="issueNo" value="${i.issueNo}"> -->
                                                 </c:forEach>
                                                 <!-- <option value="2" disabled>5만원이상 1천원 할인</option> -->
@@ -234,15 +264,30 @@
                             <h4>개인정보 수집 / 제공</h4>
                             <div>
                                 <div>
-                                    <label for="agree1"><input type="checkbox" name="chk" id="agree1"> 개인정보 수집·이용 및 처리 동의</label>
+                                    <!-- <label for="agree1"><input type="checkbox" name="chk" id="agree1"> 개인정보 수집·이용 및 처리 동의</label> -->
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" name="chk" id="agree1">
+                                        <span class="custom-checkbox"></span>
+                                        개인정보 수집·이용 및 처리 동의
+                                    </label>
                                     <a href="#">보기</a>
                                 </div>
                                 <div>
-                                    <label for="agree2"><input type="checkbox" name="chk" id="agree2"> 전자지급 결제대행 서비스 이용약관 동의</label>
+                                    <!-- <label for="agree2"><input type="checkbox" name="chk" id="agree2"> 전자지급 결제대행 서비스 이용약관 동의</label> -->
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" name="chk" id="agree2">
+                                        <span class="custom-checkbox"></span>
+                                        전자지급 결제대행 서비스 이용약관 동의
+                                    </label>
                                     <a href="#">보기</a>
                                 </div>
                                 <div>
-                                    <label for="all-agree"><input type="checkbox" id="all-agree"> 전체 동의</label>
+                                    <!-- <label for="all-agree"><input type="checkbox" id="all-agree"> 전체 동의</label> -->
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" id="all-agree">
+                                        <span class="custom-checkbox"></span>
+                                        전체 동의
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -296,6 +341,12 @@
                 <div class="order-complete-box area-btn full">
                     <button type="button" id="payDirectBtn" class="btn btn-pri size03 order-complete-btn"><span></span>원 결제하기</button>
                 </div>
+
+
+
+
+
+
                 <div class="area-btn left" style="display:none;">
                     <button class="btn btn-border-pri size01" type="button" id="alert01">성공</button>
                     <button class="btn btn-border-sec size01" type="button" id="alert02">에러</button>
@@ -586,44 +637,84 @@
             $(".total-order-buy-save-point>div").last().children().text(Math.ceil(Number($(this).val())*10/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
             // number값 hidden에 숨김
-          
+
             // const plusPoint = $(".total-order-buy-save-point>div").last().children().text();
             // Math.ceil(Number($(this).val())*10/100)
+
+            $("[name=plusPointEa]").val(Math.ceil($(this).val()*10/100));    
 
             // 결제버튼에 최종 결제 금액 표시
             $(".order-complete-btn>span").text($(".total-order-pay>div").last().children().text());
         })
+
+
+
+
+
+
+
+
+
+
 		
         //결제엔진
-        $("#payDirectBtn").on("click",function(){
-			const price = $("#hidden-total-pay").val();
-			
-			const d = new Date();
-			
-			const memberMail = $("[name=memberMail]").val();
-			const memberName = $("[name=memberName]").val();
-			const memberPhone = $("[name=memberPhone]").val();
-			
-			const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
-			
-			IMP.init("imp35435215");
-			IMP.request_pay({
-				pg : "html5_inicis",
-				pay_method : "card",
-				merchant_uid: "상품번호_"+date,//상점에서 관리하는 주문번호
-				name: "뭉쳐야산다",//결제이름
-				amount : price,
-				buyer_email: memberMail,
-				buyer_name: memberName,
-				buyer_tel: memberPhone
-			},function(rsp){
-				if(rsp.success){
-					$("#alert01").click();
-		            
-				}else{
-					$("#alert02").click();
-				}
-			});
+        $("#payDirectBtn").on("click",function(e){
+
+            // 유효성 검사
+
+            const deliMember = $("#deli-member").val();
+            const deliPhone = $("#deli-phone").val();
+            const deliAddr = $("#deli-addr").val();
+
+            if(deliMember === '' || deliPhone === '' || deliAddr === ''){
+                orderjQueryAlert('info', '배송 정보를 모두 입력해주세요.');
+                e.preventDefault();
+                return false;  
+            }
+
+            else if(result[0]){
+                orderjQueryAlert('info', '배송정보를 올바르게 입력했는지 확인해주세요.');
+                e.preventDefault();
+                return false;
+            }
+
+            else if(!$("#all-agree").is(":checked")){
+                orderjQueryAlert('info', '약관 동의 후 결제하실 수 있습니다.');
+                e.preventDefault();
+                return false;
+            }
+
+            else{
+                // 유효성 검사 만족시 결제 엔진 진행
+                const price = $("#hidden-total-pay").val();
+                
+                const d = new Date();
+                
+                const memberMail = $("[name=memberMail]").val();
+                const memberName = $("[name=memberName]").val();
+                const memberPhone = $("[name=memberPhone]").val();
+                
+                const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
+                
+                IMP.init("imp35435215");
+                IMP.request_pay({
+                    pg : "html5_inicis",
+                    pay_method : "card",
+                    merchant_uid: "상품번호_"+date,//상점에서 관리하는 주문번호
+                    name: "뭉쳐야산다",//결제이름
+                    amount : price,
+                    buyer_email: memberMail,
+                    buyer_name: memberName,
+                    buyer_tel: memberPhone
+                },function(rsp){
+                    if(rsp.success){
+                        $("#alert01").click();
+                            
+                    }else{
+                        $("#alert02").click();
+                    }
+                });
+            }
 		});
         //결제 완료 메세지버튼
         $(function () {
@@ -671,6 +762,8 @@
         
         });
 		// console.log($("[name=memberNo]"));
+
+
 
 
 

@@ -114,6 +114,10 @@ public class OrderController {
 		ArrayList<Order> orderProductList = service.selectMyOrderProductList(orderNo);
 		model.addAttribute("orderProductList", orderProductList);
 		
+		// 사용한 쿠폰 가격
+		int couponPrice = service.selectDoneCouponPrice(orderNo);
+		model.addAttribute("couponPrice", couponPrice);
+		
 		return "order/myOrderDetail";
 	}
 	
@@ -157,12 +161,14 @@ public class OrderController {
 				
 				if(minusPointEa != 0) {
 					point.setPointEa(minusPointEa);
+					System.out.println("minusPointEa : "+point.getPointEa());
 					result = service.insertMinusPointEa(point);					
 				}
 				if(issueNo !=0) {
 					result = service.updateCoupon(issueNo);
 				}
 				point.setPointEa(plusPointEa);
+				System.out.println("plusPointEa : "+point.getPointEa());
 				result = service.insertPlusPointEa(point);
 			}
 

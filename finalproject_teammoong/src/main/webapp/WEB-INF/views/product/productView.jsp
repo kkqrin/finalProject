@@ -228,7 +228,8 @@
                                 <li><select class="select-custom product-option">
                                     <option value="0" selected>상품 옵션을 선택해주세요</option>
                                     <c:forEach items="${optionList }" var="po">
-	                                    <option value="${po.optionInfoNo }">${po.optionDetailName } ( +<fmt:formatNumber value="${po.optionPrice }"/>원 )</option>
+                                        <option value="${po.optionInfoNo }">${po.optionDetailName }</option>
+                                        <!-- ( +<fmt:formatNumber value="${po.optionPrice }"/>원 ) -->
                                     </c:forEach>
                                 </select></li>
                             </ul>

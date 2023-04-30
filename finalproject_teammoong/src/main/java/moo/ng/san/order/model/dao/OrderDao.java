@@ -177,6 +177,11 @@ public class OrderDao {
 		return result;
 	}
 
+	public int selectDoneCouponPrice(int orderNo) {
+		int couponPrice = sqlSession.selectOne("order.selectDoneCouponPrice", orderNo);
+		return couponPrice;
+	}
+
 	
 
 }

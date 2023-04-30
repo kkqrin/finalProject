@@ -136,13 +136,13 @@
 							<div><span></span>원</div>
 						</div> -->
 
-						<div class="total-order-buy-save-point">
+						<!-- <div class="total-order-buy-save-point">
 							<button type="button" class="btn btn-pri">적립</button>
 							<div>구매시 </div>
 							<div>2,180원 (5%)</div>
-						</div>
+						</div> -->
 						<div class="cart-pay-box area-btn full" style="margin-top: 30px;">
-							<button class="btn btn-pri size02" id="form-submit-order-btn">주문하기</button>
+							<button class="btn btn-pri size02" id="form-submit-order-btn" style="margin-top: 15px;">주문하기</button>
 						</div>
 					</div>
 				</div>
@@ -369,10 +369,13 @@
 
 		// 폼 제출
 		$("#form-submit-order-btn").on("click", function(){
-			$(".order-payment-wrap form").submit();
+			if(($("input[name=chk]:checked")).length == 0){
+				// 선택한 상품이 없을때
+				nocheckjQueryAlert('error');
+			}else{
+				$(".order-payment-wrap form").submit();
+			}		
 		});
-
-		
 
 	</script>
 </body>
