@@ -675,7 +675,7 @@
                         <div class="modal-body">
                             <!--내용영역-->
                             <!-- <h5>내용타이틀</h5> -->
-                            <form action="/test.do">
+                            <!-- <form action="/test.do"> -->
                                 <div class="report-form">
                                     <!-- 
                                         <label class="radio-container">
@@ -744,7 +744,7 @@
                                         <textarea class="report-direct-input" disabled></textarea>
                                     </div>
                                 </div>
-                            </form>
+                            <!-- </form> -->
                             <!--//내용영역-->
                         </div>
                         <div class="area-btn center">
@@ -925,6 +925,18 @@
     <!-- 상품 상세 js -->
 
         <script>
+            //신고 insert
+            $(".review-report").children().on("click",function(){
+                var reviewNo;
+                var memberNo;
+                var reportReason;
+                var reportContent;
+                $.ajax({
+                    url : "/insertReport.do",
+                    type : "post",
+                    data : {reviewNo : reviewNo, memberNo:memberNo, reportReason : reportReason, reportContent : reportContent}
+                });
+            });
             // 상품 옵션 select
             $( function() {
                 $( ".product-option" ).selectmenu();

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import moo.ng.san.review.model.vo.FileVO;
 import moo.ng.san.review.model.vo.Review;
+import moo.ng.san.review.model.vo.ReviewReport;
 
 @Repository
 public class ReviewDao {
@@ -42,6 +43,11 @@ public class ReviewDao {
 
 	public int updateReview(Review review) {
 		int result = sqlSession.update("review.updateReview",review);
+		return result;
+	}
+
+	public int insertReport(ReviewReport rr) {
+		int result = sqlSession.insert("review.insertReport",rr);
 		return result;
 	}
 }
