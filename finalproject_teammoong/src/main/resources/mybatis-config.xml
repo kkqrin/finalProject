@@ -55,6 +55,7 @@
 		<typeAlias type="moo.ng.san.review.model.vo.FileVO" alias="rf" />
 		<typeAlias type="moo.ng.san.product.model.vo.searchBarVO" alias="sb" />
 		<typeAlias type="moo.ng.san.like.model.vo.LikeListInfo" alias="lli" />
+		<typeAlias type="moo.ng.san.review.model.vo.ReviewReport" alias="rr" />
 	</typeAliases>
 	<!-- 
 	<typeAliases>

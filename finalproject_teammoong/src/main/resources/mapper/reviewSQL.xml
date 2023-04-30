@@ -59,4 +59,12 @@
 		WHERE REVIEW_NO = #{_parameter}
 	</select>
 	
+	<insert id="insertReport">
+		INSERT INTO REVIEW_REPORT_TBL VALUES(REVIEW_REPORT_SEQ.NEXTVAL,
+		#{reportNo},
+		#{reviewNo},
+		#{memberNo},
+		#{reportReason},
+		#{reportContent})
+	</insert>
 </mapper>
