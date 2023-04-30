@@ -220,7 +220,7 @@
         </div>
         <div class="icon-logo-box">
             <div class="kkt-logo">
-                <a href="#">
+                <a href="https://open.kakao.com/o/suFU3Yhf">
                     <img src="/resources/img/common/kakaotalk_logo.png">
                 </a>
             </div>
