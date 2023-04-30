@@ -291,7 +291,7 @@
             <div class="all-flex-wrap">
                 <div class="left-flex-wrap">
                     <div class="user-img"><img src="/resources/upload/member/${g.memberPath}" style="width: 50px; height: 50px;"></div>
-                    <div class="user-id">${g.memberId}</div>
+                    <div class="user-id"><a href="#">${g.memberId}</a></div>
                     <div class="gonggu-number">(${g.joinCount}/${g.totalCount})</div>
                     <input type="hidden" class="joinCount" value="${g.joinCount}">
                     <input type="hidden" class="totalCount" value="${g.totalCount}">

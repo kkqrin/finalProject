@@ -15,7 +15,14 @@ $(document).ready(function() {
         if(joinCountVal == totalCountVal){
             // joinCount.eq(i).parent().parent().hide();
             // joinCount.eq(i).parent().parent().hide();
-            joinCount.eq(i).parent().next().text("공구종료");
+            joinCount.eq(i).parent().next().text("종료된 공동구매 입니다.");
+            joinCount.eq(i).parent().next().css("color", "darkgrey");
+            joinCount.eq(i).parent().next().css("font-size", "20px");
+            joinCount.eq(i).parent().next().css("margin-top", "20px");
+            joinCount.eq(i).parent().children().eq(1).css("text-decoration", "line-through");
+            joinCount.eq(i).parent().children().eq(2).css("text-decoration", "line-through");
+            joinCount.eq(i).parent().children().eq(1).css("color", "darkgrey");
+            joinCount.eq(i).parent().children().eq(2).css("color", "darkgrey");
         }
     }
 
