@@ -115,7 +115,7 @@ public class OrderController {
 		model.addAttribute("orderProductList", orderProductList);
 		
 		// 사용한 쿠폰 가격
-		int couponPrice = service.selectDoneCouponPrice(orderNo);
+		String couponPrice = service.selectDoneCouponPrice(orderNo);
 		model.addAttribute("couponPrice", couponPrice);
 		
 		return "order/myOrderDetail";
@@ -152,7 +152,7 @@ public class OrderController {
 			
 			
 			// 주문내역에 금액관련 두개 있어야할 듯 1. 실 결제금액 -> 적립금/쿠폰 금액 들어간 totalPrice 2. 주문서당 총 상품금액 (할인가) OrderPrice
-			result = service.insertOrderDetail(orderNo, productNo, optionInfoNo, orderDetailCnt, orderDetailCost, orderSalePrice);
+			result = service.insertOrderDetail(orderNo, productNo, optionInfoNo, orderDetailCnt, orderDetailCost, orderSalePrice, m.getMemberNo());
 			
 			if(result> (productNo.length-1)) {
 				Point point = new Point();

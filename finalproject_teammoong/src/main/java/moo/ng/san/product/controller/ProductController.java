@@ -125,6 +125,11 @@ public class ProductController {
 //		System.out.println(list);
 //		System.out.println(detailCategoryList);
 		
+		
+		// 상위 카테고리 페이지일때 해당 카테고리의 인기 상품 리스트
+		ArrayList<Product> bestProductList = service.selectBestProductList(fCategory);
+		model.addAttribute("bestProductList", bestProductList);
+		
 		// 최근 본 상품 select
 		selectRecentProduct(m, model);
 		
@@ -233,7 +238,7 @@ public class ProductController {
 	// 인기 상품 리스트
 	@RequestMapping(value="/bestProductList.do")
 	public String bestProductList(String categoryNo, Model model, @SessionAttribute(required=false) Member m) {
-		System.out.println("categoryNo : "+categoryNo);
+//		System.out.println("categoryNo : "+categoryNo);
 		
 		// 카테고리 리스트
 		ArrayList<Category> categoryList = service.selectCategoryList();		

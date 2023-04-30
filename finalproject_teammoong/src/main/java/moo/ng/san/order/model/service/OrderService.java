@@ -97,7 +97,7 @@ public class OrderService {
 	}
 
 	public int insertOrderDetail(int orderNo, int[] productNo, int[] optionInfoNo, int[] orderDetailCnt,
-			int[] orderDetailCost, int[] orderSalePrice) {
+			int[] orderDetailCost, int[] orderSalePrice, int memberNo) {
 		
 		int result = 0;
 		
@@ -112,8 +112,12 @@ public class OrderService {
 			map.put("orderSalePrice", orderSalePrice[i]);
 			
 			result += dao.insertOrderDetail(map);
+			
+			// 방금 주문한 상품 -> 장바구니에 있으면 삭제
+			map.put("memberNo", memberNo);
+			int result2 = dao.deleteCartbyProductNo(map);
+			System.out.println("장바구니 삭제.. " + result2);
 		}
-		
 		
 		return result;
 	}
@@ -133,7 +137,7 @@ public class OrderService {
 		return dao.selectMyOrderProductList(orderNo);
 	}
 
-	public int selectDoneCouponPrice(int orderNo) {
+	public String selectDoneCouponPrice(int orderNo) {
 		
 		return dao.selectDoneCouponPrice(orderNo);
 	}

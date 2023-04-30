@@ -236,6 +236,11 @@
 	<delete id="deleteCart" parameterType="_int">
 		delete from BASKET_TBL where basket_no = #{_parameter}
 	</delete>
+	
+	<delete id="deleteCartByProductNo" parameterType="map">
+		delete from BASKET_TBL where member_no = #{memberNo} and product_no = #{productNo}
+	</delete>
+	
 	<select id="selectProductCost" parameterType="_int" resultType="_int">
 		select product_cost from product_tbl where product_no = #{productNo}
 	</select>

@@ -162,7 +162,7 @@
        where o.order_no = #{_parameter}
 	</select>
 	
-	<select id="selectDoneCouponPrice" parameterType="_int" resultType="_int">
+	<select id="selectDoneCouponPrice" parameterType="_int" resultType="string">
        select
        		coupon_price AS couponPrice
        from issue_coupon
