@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div class="adminPage-result">
-                        <table class="table .tbl-box">
+                        <table class="table tbl-box">
                             <tr>
                             	<th>구분</th>
                                 <th>회원번호</th>

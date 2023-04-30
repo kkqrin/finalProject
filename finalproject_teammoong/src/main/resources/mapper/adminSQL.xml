@@ -344,6 +344,7 @@
 	<select id="selectSearchDelivery" parameterType="o" resultType="o">
 		select
 			ot.order_no as orderNo, 
+			(SELECT FILEPATH FROM PRODUCT_IMG WHERE P_IMG_NO=(SELECT MIN(P_IMG_NO) FROM PRODUCT_IMG where product_no=P.product_no)) AS thumbnail,
 			ot.member_no as memberNo,
 			mt.member_id as memberId, 
 			mt.member_phone as memberPhone,
@@ -357,6 +358,7 @@
 		from order_tbl ot
 		join member_tbl mt on (ot.member_no = mt.member_no)
 		join order_detail od on (ot.order_no = od.order_no)
+		join product_tbl p on (od.product_no = p.product_no)
 		<choose>
 			<when test="orderNo == 0 and memberNo == 0">
 				where ot.order_status = #{orderStatus}
