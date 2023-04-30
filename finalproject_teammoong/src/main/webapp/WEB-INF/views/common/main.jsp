@@ -6,7 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>뭉쳐야산다</title>
+    <!-- 웹페이지 로고 -->
+    <link rel="shortcut icon" href="/resources/upload/member/free-icon-tangerine-1450252.png" />
     <!-- 슬릭 슬라이더 제이쿼리 -->
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -106,6 +108,14 @@
         #mainSlick .slick-dots{opacity: 0.3;position: absolute;top: 220px;}
         .add1{background-color: rgb(249,244,241);}
         .add3{background-color: rgb(226,209,175);}
+
+        /* 롱배너 */
+        .long-banner{
+            margin: 200px 0px;
+        }
+        .long-banner>img{
+            width: 1200px;
+        }
     </style>
 </head>
 <body>
@@ -131,8 +141,7 @@
 <div class="main-content-wrap">
 
     <!-- 임시 인기상품리스트, 밑에 있는 wrap으로 수정예정 -->
-    <div class="popular-product-wrap">
-    <!-- 인기상품 wrap -->
+    <!-- <div class="popular-product-wrap">
        <c:forEach items="${productList }" var="p">
         <div class="posting-item popular">
             <div class="posting-img popular">
@@ -216,7 +225,66 @@
         <div class="posting-item popular all-product">
             전체보기
         </div>
+    </div> -->
+
+
+
+
+
+    
+
+    <h3 class="wrap-title"># 인기 상품</h3>
+    <div class="popular-product-wrap">
+        <!-- 인기상품 wrap -->
+        <c:forEach items="${productList }" var="p">
+            <div class="posting-item popular">
+                <div class="posting-img popular">
+                    <a href="/productView.do?productNo=${p.productNo }">
+                    <c:forEach var="pf" items="${p.fileList}" begin="0" end="0" step="1">
+                        <img src="/resources/upload/product/${pf.filepath }" />
+                    </c:forEach>
+                    </a>
+                    <div class="gonggu-info">2인 공동구매</div>
+                </div>
+                <div class="posting-content popular">
+                    <p class="posting-title">
+                        <a href="/productView.do?productNo=${p.productNo }">
+                            ${p.productName}
+                        </a>
+                    </p>
+                    <div class="posting-price-box">
+                        <p class="price-through"><fmt:formatNumber value="${p.productPrice}"/> 원</p>
+                        <div class="sail-box popular">
+                            <div class="sail-box-popular">
+                                <p class="sail-percent">${p.productDiscount}%</p>
+                                <p class="price-sail"><fmt:formatNumber value="${(Math.floor(p.productPrice*(100 - p.productDiscount)/1000)*10)}"/>원</p>
+                            </div>
+                            <div class="star-rating">
+                                <div class="material-symbols-outlined star-rate">star</div>
+                                <div class="rating-average">4.8</div>
+                                <div class="review-count">(152)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="posting-detail">
+                        <div class="posting-icon">
+                        </div>
+                        <div class="posting-info">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
+
+            <div class="posting-item popular all-product">
+                <a href="/bestProductList.do">전체보기</a>
+            </div>
     </div>
+
+
+
 
 
 
@@ -297,7 +365,11 @@
     </div>
 
 
-
+    <!-- 롱배너 -->
+    <div class="long-banner">
+        <img src="/resources/img/common/long_banner1.jpg">
+    </div>
+        
 
     <h3 class="wrap-title"># 품절 임박 ⏰</h3>
     <div class="product-wrap soldout">
@@ -359,62 +431,17 @@
     </div>
 
 
-    <h3 class="wrap-title"># 인기 상품</h3>
-    <div class="popular-product-wrap">
-        <!-- 인기상품 wrap -->
-        <c:forEach items="${productList }" var="p">
-            <div class="posting-item popular">
-                <div class="posting-img popular">
-                    <a href="/productView.do?productNo=${p.productNo }">
-                    <c:forEach var="pf" items="${p.fileList}" begin="0" end="0" step="1">
-                        <img src="/resources/upload/product/${pf.filepath }" />
-                    </c:forEach>
-                    </a>
-                    <div class="gonggu-info">2인 공동구매</div>
-                </div>
-                <div class="posting-content popular">
-                    <p class="posting-title">
-                        <a href="/productView.do?productNo=${p.productNo }">
-                            ${p.productName}
-                        </a>
-                    </p>
-                    <div class="posting-price-box">
-                        <p class="price-through"><fmt:formatNumber value="${p.productPrice}"/> 원</p>
-                        <div class="sail-box popular">
-                            <div class="sail-box-popular">
-                                <p class="sail-percent">${p.productDiscount}%</p>
-                                <p class="price-sail"><fmt:formatNumber value="${(Math.floor(p.productPrice*(100 - p.productDiscount)/1000)*10)}"/>원</p>
-                            </div>
-                            <div class="star-rating">
-                                <div class="material-symbols-outlined star-rate">star</div>
-                                <div class="rating-average">4.8</div>
-                                <div class="review-count">(152)</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="posting-detail">
-                        <div class="posting-icon">
-                        </div>
-                        <div class="posting-info">
-                            <div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </c:forEach>
 
-            <div class="posting-item popular all-product">
-                <a href="/bestProductList.do">전체보기</a>
-            </div>
+
+
+
+
+
+
+    <!-- 롱배너 -->
+    <div class="long-banner">
+        <img src="/resources/img/common/long_banner2.jpg">
     </div>
-
-
-
-
-
-
-
 
 
 
