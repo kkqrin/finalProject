@@ -677,15 +677,72 @@
                             <!-- <h5>내용타이틀</h5> -->
                             <form action="/test.do">
                                 <div class="report-form">
-                                    <div><label><input type="radio" name="report-reason" value="1">상품관련 비방 내용</label></div>
-                                    <div><label><input type="radio" name="report-reason" value="2">음란, 욕설 등 부절적한 내용</label></div>
-                                    <div><label><input type="radio" name="report-reason" value="3">개인, 판매자 상업적 홍보</label></div>
-                                    <div><label><input type="radio" name="report-reason" value="4">상품과 관계없는 내용</label></div>
-                                    <div><label><input type="radio" name="report-reason" value="5">개인정보 노출</label></div>
-                                    <div><label><input type="radio" name="report-reason" value="6">저작권 불법도용(이미지,동영상)</label></div>
-                                    <div><label><input type="radio" name="report-reason" value="7">상품 후기 취지에 어긋난 이용(복사글 등)</label></div>
-                                    <div><label><input type="radio" name="report-reason" value="8">직접 입력</label></div>
-                                    <div><textarea class="report-direct-input" disabled></textarea></div>
+                                    <!-- 
+                                        <label class="radio-container">
+                                        <input type="radio" name="deli-address" id="member-address">
+                                        <span class="custom-radio"></span>
+                                        기본 배송지
+                                        </label>
+                                    -->
+                                    <div>
+                                        <label class="radio-container">
+                                            <input type="radio" name="report-reason" value="1">
+                                            <span class="custom-radio"></span>
+                                            상품관련 비방 내용
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label class="radio-container">
+                                            <input type="radio" name="report-reason" value="2">
+                                            <span class="custom-radio"></span>
+                                            음란, 욕설 등 부절적한 내용
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label class="radio-container">
+                                            <input type="radio" name="report-reason" value="3">
+                                            <span class="custom-radio"></span>
+                                            개인, 판매자 상업적 홍보
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label class="radio-container">
+                                            <input type="radio" name="report-reason" value="4">
+                                            <span class="custom-radio"></span>
+                                            상품과 관계없는 내용
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label class="radio-container">
+                                            <input type="radio" name="report-reason" value="5">
+                                            <span class="custom-radio"></span>
+                                            개인정보 노출
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label class="radio-container">
+                                            <input type="radio" name="report-reason" value="6">
+                                            <span class="custom-radio"></span>
+                                            저작권 불법도용(이미지,동영상)
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label class="radio-container">
+                                            <input type="radio" name="report-reason" value="7">
+                                            <span class="custom-radio"></span>
+                                            상품 후기 취지에 어긋난 이용(복사글 등)
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label class="radio-container">
+                                            <input type="radio" name="report-reason" value="8">
+                                            <span class="custom-radio"></span>
+                                            직접 입력
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <textarea class="report-direct-input" disabled></textarea>
+                                    </div>
                                 </div>
                             </form>
                             <!--//내용영역-->
