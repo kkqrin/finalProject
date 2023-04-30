@@ -1,34 +1,9 @@
 @charset "UTF-8";
 
-.adminPage-wrapper{
-        background-color: #111;
-        margin-top: 300px;
-        
-    }
-    .adminPage-header{
-        margin-left: 30px;
-    }
-    .adminPage-back{
-        background-color: lightyellow;
-        overflow: hidden;
-    }
-    .adminPage-sidebar{
-        float: left;
-        width: 300px;
-        background-color: lightcoral;
-        height: 2000px;
-
-    }
-    .adminPage-sidebar>ul>li{
-        list-style-type: none;
-    }
     .topBtns>div{
     	float: left;
     }
     
-    .adminPage-main{
-        background-color: lightgreen;
-    }
     .adminPage-content{
         background-color: #fff;
         overflow: hidden;
@@ -48,6 +23,7 @@
     .searchForm{
     	display: none;
     }
+    
     .moreResult{
 		float: right;
 	    top: 130px;
@@ -61,9 +37,29 @@
     }
     
     
+	.moreResult #closeBtn {
+	  display: inline-block;
+	  font-size: 30px;
+	  cursor: pointer;
+	  transition: transform 0.5s ease;
+	}
+	
+	.moreResult #closeBtn:hover {
+	  transform: rotate(360deg);
+	}
+	
+	.moreResult #closeBtn:active {
+	  transform: rotate(360deg);
+	}
+    
+    
     .moreResult>div>div{
     	font-size: 40px;
     	cursor: pointer;
+    }
+    
+    .moreResultContent>ul>li:hover{
+    	font-size: 1.5em;
     }
     /* 구분 사이즈 다운 아아아아아아 */
     .table tr:nth-child(0) th:nth-child(0) {
@@ -84,6 +80,7 @@
 	    transform: translateY(4px);
 	}
 	
+	/* 더보기 버튼 */
 	.moreInfo{
 		/* background-color: #f0a718; */
 		padding: 3px;

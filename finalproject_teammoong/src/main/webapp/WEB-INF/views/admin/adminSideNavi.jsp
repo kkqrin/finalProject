@@ -27,8 +27,8 @@
 	     </ul>
 	     <ul>
 	         <li><a>이벤트 관리</a></li>
-	         <li><a href="/adminDaycheckManagePage.do">쿠폰 발행 관리</a></li>
-	         <li><a href="/adminGongguManagePage.do">쿠폰 발행 관리</a></li>
+	         <li><a href="/adminDaycheckManagePage.do">뭉머니 사용내역</a></li>
+	         <li><a href="/adminGongguManagePage.do">공구 포인트 사용내역</a></li>
 	     </ul>
 	     <ul>
 	         <li><a href="/adminBoardManagePage.do?reqPage=1">여여붙게시판 관리</a></li><!-- jsp 생성완료 -->

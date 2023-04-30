@@ -26,6 +26,7 @@ import moo.ng.san.gonggu.model.vo.GongguAllInfo;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.order.model.vo.Order;
 import moo.ng.san.product.model.vo.Product;
+import moo.ng.san.review.model.vo.ReviewReport;
 
 @Service
 public class AdminService {
@@ -664,10 +665,10 @@ public class AdminService {
 		return list;
 	}
 
-	public ArrayList<SalesData> selectGenderSalesData() {
-		ArrayList<SalesData> list = dao.selectGenderSalesData();
+	public SalesData selectGenderSalesData(int i) {
+		SalesData sd = dao.selectGenderSalesData(i);
 		
-		return list;
+		return sd;
 	}
 
 	public Member ajaxMemberView(int memberNo) {
@@ -781,6 +782,54 @@ public class AdminService {
 
 	public ArrayList<Product> selectBestProductCount() {
 		ArrayList<Product> list = dao.selectBestProductCount();
+		
+		return list;
+	}
+
+	public ArrayList<ReviewReport> selectReviewReportList(ReviewReport r) {
+		ArrayList<ReviewReport> list = dao.selectReviewReportList(r);
+		
+		return list;
+	}
+
+	public ArrayList<Product> selectSummaryProductList(int summaryNum) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int start = 1;
+		int end = summaryNum;
+		map.put("start", start);
+		map.put("end", summaryNum);
+		ArrayList<Product> list = dao.selectSummaryProductList(map);
+		
+		return list;
+	}
+
+	public ArrayList<AskItem> selectSummaryAskItemList(int summaryNum) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int start = 1;
+		int end = summaryNum;
+		map.put("start", start);
+		map.put("end", summaryNum);
+		ArrayList<AskItem> list = dao.selectSummaryAskItemList(map);
+		return list;
+	}
+
+	public ArrayList<Board> selectSummaryBoardList(int summaryNum) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int start = 1;
+		int end = summaryNum;
+		map.put("start", start);
+		map.put("end", summaryNum);
+		ArrayList<Board> list = dao.selectSummaryBoardList(map);
+		return list;
+	}
+
+	public ArrayList<Member> selectSummaryMemberList(int summaryNum) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int start = 1;
+		int end = summaryNum;
+		map.put("start", start);
+		map.put("end", summaryNum);
+		ArrayList<Member> list = dao.selectSummaryMemberList(map);
 		
 		return list;
 	}

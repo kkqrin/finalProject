@@ -17,7 +17,16 @@
 	
 </head>
 <style>
-    
+	.adminPage-content{
+		overflow: hidden;
+	}
+    .adminPage-search{
+    	width: 100%;
+    	float: left;
+    }
+    .table{
+    	width: 1500px;
+    }
 </style>
 <body>
     <c:if test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
@@ -32,14 +41,18 @@
             <div class="adminPage-main">
                 <div class="adminPage-content">
                     <div class="adminPage-search">
-                        <select id="memberSearchSelect">
-                            <option id="searchMemberNo" value="memberNo">회원번호 검색</option>
-                            <option id="searchMemberId" value="memberId">회원 아이디 검색</option>
-                            <option id="searchMemberName" value="memberName">회원 이름 검색</option>
-                        </select>
-                        <input type="text" name="memberSearchBox" id="searchOption">
-                        <div class="area-btn left"><button type="button" name="searchSubmitBtn" class="searchSubmit Btn">검색</button></div>
-                        <div class="area-btn left"><button type="button" class="goList" class="goList Btn">목록</button></div>
+                    	<div class="search-select">
+	                        <select id="memberSearchSelect">
+	                            <option id="searchMemberNo" value="memberNo">회원번호 검색</option>
+	                            <option id="searchMemberId" value="memberId">회원 아이디 검색</option>
+	                            <option id="searchMemberName" value="memberName">회원 이름 검색</option>
+	                        </select>
+                    	</div>
+                        <div class="search-input"><input type="text" name="memberSearchBox" id="searchOption"></div>
+                        <div class="search-btns">
+	                        <button type="button" name="searchSubmitBtn" class="searchSubmit Btn">검색</button>
+	                        <button type="button" class="goList" class="goList Btn">목록</button>
+                        </div>
                     </div>
                     <div class="adminPage-result">
                         <table class="table .tbl-box">
@@ -146,11 +159,6 @@
                             </tr>
                             <tr>
                                 <td colspan="2"><div name="allChangeMemberStatus">일괄 변경</div></td>
-                                <td>
-			                        <form name="searchForm" method="POST" action="" class="">
-			                       		<button type="button" onclick="exportToExcel();">엑셀출력</button>
-			                        </form><!--  -->
-		                        </td>
                             </tr>
                         </table>
                         <!-- 엑셀용 -->
@@ -342,7 +350,7 @@
                  			$(".adminPage-result").hide();
 							const table =$("<table>");
 							const titleTr = $("<tr>");
-							titleTr.html("<th>구분</th><th>회원번호</th><th>회원아이디</th><th>이름</th><th>이메일</th><th>전화번호</th><th>주소</th><th>성별</th><th>생년월일</th><th>은행정보</th><th>계좌번호</th><th>회원등급</th><th>마케팅 동의 여부</th><th>가입일</th><th>회원등급 변경</th><th>확정버튼</th>");
+							titleTr.html("<th>구분</th><th>회원번호</th><th>회원아이디</th><th>이름</th><th>성별</th><th>회원등급</th><th>마케팅 동의 여부</th><th>가입일</th><th>회원등급 변경</th><th>등급변경</th><th>상세보기</th>");
 							table.append(titleTr);
 							for(let i=0;i<data.length;i++){
 								const tr = $("<tr>");
@@ -350,9 +358,6 @@
 								tr.append("<td>"+data[i].memberNo+"</td>");
 								tr.append("<td>"+data[i].memberId+"</td>");
 								tr.append("<td>"+data[i].memberName+"</td>");
-								tr.append("<td>"+data[i].memberEmail+"</td>");
-								tr.append("<td>"+data[i].memberPhone+"</td>");
-								tr.append("<td>"+data[i].memberAddr+"</td>");
 								
 								if(data[i].memberGender == 1){
 									tr.append("<td>남자</td>");
@@ -361,15 +366,13 @@
 								}else if(data[i].memberGender == 3){
 									tr.append("<td>성별없음</td>");
 								}
-								
-								tr.append("<td>"+data[i].memberBday+"</td>");
-								tr.append("<td>"+data[i].memberBank+"</td>");
-								
+								/*
 								if(data[i].memberAccount == undefined){
 									tr.append("<td>계좌 등록 안함</td>");
 								}else{
 									tr.append("<td>"+data[i].memberAccount+"</td>");
 								}
+								*/
 								
 								if(data[i].memberStatus == 0){
 									tr.append("<td>관리자</td>");
@@ -388,8 +391,18 @@
 								}
 								
 								tr.append("<td>"+data[i].regDate+"</td>");
-								tr.append("<td>"+data[i].memberNo+"</td>");
-								tr.append("<td>"+data[i].memberNo+"</td>");
+								
+								var select = $("<select name='memberStatusList' class='memberStatusList'></select>"); // select 태그 생성
+					            // 세번째 열에 select 태그 삽입
+					            tr.append(select.append(
+					                $("<option value='0'" + (data[i].memberStatus == 0 ? " selected" : "") + ">관리자</option>"),
+					                $("<option value='1'" + (data[i].memberStatus == 1 ? " selected" : "") + ">정상회원</option>"),
+					                $("<option value='2'" + (data[i].memberStatus == 2 ? " selected" : "") + ">정지회원</option>"),
+					                $("<option value='3'" + (data[i].memberStatus == 3 ? " selected" : "") + ">탈퇴회원</option>")
+					            ));
+								
+								tr.append("<td><div class='changeMemberStatusBtn'>회원등급 변경</div></td>"); // 확정버튼으로
+								tr.append("<td><div class='moreInfo'>상세보기</div></td>"); // 상세보기로
 								table.append(tr);
 						}
 						$("#ajaxResult").append(table);
@@ -397,7 +410,63 @@
                  	}else{
  	    				console.log("다시 시도");
                  	}
-                 }
+                 	
+                 	/* 상세보기 */
+                   	$(".moreInfo").on("click",function(){
+                   		
+                   		var memberNo = $(this).parent().prev().prev().prev().prev().prev().prev().prev().prev().prev().text();
+                   		const moreInfo = $(".moreInfo");
+                   		const moreResult = $(".moreResult");
+                   		const moreResultContent = $(".moreResultContent");
+                   		const closeBtn = $(".material-symbols-outlined");
+                   		
+                   		moreResultContent.empty();
+                   		moreResult.show();
+                   		
+                   		$.ajax({
+                   			url: "/ajaxMemberView.do",
+                   			type:"post",
+                   			data:{memberNo : memberNo},
+                   			success: function(data){
+                   				console.log(data);
+                   				const ul = $("<ul>");
+                   				ul.append("<li>※ "+data.memberName+"님의 개인정보 내역</li>");
+                   				ul.append("<li>▶ "+data.memberEmail+"</li>");
+                   				ul.append("<li>▶ "+data.memberPhone+"</li>");
+                   				ul.append("<li>▶ "+data.memberAddr+"</li>");
+                   				ul.append("<li>▶ "+data.memberBday+"</li>");
+                   				ul.append("<li>▶ "+data.memberBank+"</li>");
+                   				ul.append("<li>▶ "+data.memberAccount+"</li>");
+                   				moreResultContent.append(ul);
+                				   				
+                   			}
+                   			
+                   		})
+                   		
+                   	}) // 상세보기
+                   	
+                   	/* 등급 변경 */
+                	$(".changeMemberStatusBtn").on("click",function(){
+                		var memberNo = $(this).parent().parent().children().eq(1).text();
+                		var memberStatus = $(this).parent().prev().val();
+                		
+                        $.ajax({
+                            url: "/ajaxChangeMemberStatus.do",
+                            type: "POST",
+                            data: {memberStatus : memberStatus, memberNo : memberNo},
+                            success: function(data) {
+                            	if(data == "ok"){
+                            		$("#adminMemberTable").load(location.href+ '#adminMemberTable');
+                            	}else{
+            	    				console.log("다시 시도");
+                            		
+                            	}
+                            }
+                        })
+                		
+                	});
+                 	
+                 } // ajax success
              })        		 
          });
     	

@@ -7,10 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class ReviewReport {
 	private int reportNo;
 	private int reviewNo;
 	private int memberNo;
 	private int reportReason;
 	private String reportContent;
+
 }
