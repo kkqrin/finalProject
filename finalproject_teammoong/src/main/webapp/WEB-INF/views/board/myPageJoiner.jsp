@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +35,9 @@
 								<input type="checkbox" class="oneCheck">
 								<input type="hidden" name="dmReceivers" value="${bj.memberId }" disabled>
 							</th>
-							<th rowspan="3" style="width: 5%;">${i.index+1 }</th>
+							<th rowspan="3" style="width: 5%;">
+								${fn:length(list)-i.index }
+							</th>
 							<th style="width: 20%;">주문자 정보</th>
 							<td style="text-align: left;">
 								<p>주문한 사람 : ${bj.payerName }</p>
@@ -153,11 +156,9 @@
 		$("#send").click(function(){
 			
 			let receivers = [];
-			$("[name='dmReceivers']").each(function(i,one){
+			$("[name='dmReceivers']:not(:disabled)").each(function(i,one){
 				receivers[i] = $(one).val();
 			});
-			
-// 			const jsonArr = JSON.stringify(receivers);
 			
 			const dmContent = $("[name='dmContent']").val();
 			const dmSender = $("[name='memberId']").val();

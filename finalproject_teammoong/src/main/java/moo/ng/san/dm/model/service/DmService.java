@@ -25,11 +25,9 @@ public class DmService {
 	
 
 	public int insertGroupDm(DirectMessage dm) {
-		System.out.println("service에서 받은 정보 : "+dm);
 		int result = 0;
 		for(int i = 0 ; i < dm.getDmReceivers().length ; i++) {
 			dm.setDmReceiver(dm.getDmReceivers()[i]);
-			System.out.println("다오로 넘겨주는 정보 : "+dm);
 			result += dao.insertDm(dm);
 		}
 		return result;
