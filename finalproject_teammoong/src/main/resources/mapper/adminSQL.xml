@@ -564,17 +564,16 @@
         where bt.board_no = #{boardNo} and bo.detail_name like '%'||#{detailName}||'%'
 	</select>
 	
-	<select id="selectAllCouponList" resultType="cd">
+	<select id="selectAllCouponList" resultType="cd"> <!-- 수정 완료 -->
 		SELECT 
-			mt.member_no as memberNo,
+		    mt.member_no AS memberNo,
 		    mt.member_name AS memberName,
 		    mt.member_id AS memberId,
-		    SUM(pt.point_ea) AS pointEa
+		    SUM(pt.point_ea) - COALESCE((SELECT SUM(pt2.point_ea) FROM point_tbl pt2 JOIN member_tbl mt2 ON pt2.member_no = mt2.member_no WHERE pt2.point_status = 3 AND pt2.member_no = mt.member_no), 0) AS pointEa
 		FROM point_tbl pt
-		JOIN member_tbl mt ON (pt.member_no = mt.member_no)
+		JOIN member_tbl mt ON pt.member_no = mt.member_no
 		WHERE pt.point_status != 3
-		GROUP BY mt.member_name, mt.member_id, mt.member_no
-		
+		GROUP BY mt.member_no, mt.member_name, mt.member_id
 	</select>
 	
 	<select id="selectUseMoongList" parameterType="_int" resultType="cd">

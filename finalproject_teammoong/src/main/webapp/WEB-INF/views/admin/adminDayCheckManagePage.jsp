@@ -20,7 +20,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script> 
 	<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script> 
 	<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
-	<!-- Bootstrap JavaScript -->
+	<!-- Bootstrap JavaScript 모달 -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
 	<!-- css -->
 	<link rel="stylesheet" href="/resources/css/admin/admin.css" />
@@ -56,12 +56,14 @@
     
 	tr.hover {
     background-color: lightgray;
-    color : white;
+    color : #ffa220;
 	
 	}
 	.adminPage-result{
 		width: 1500px;
 	}
+	
+	
 
 
 
@@ -159,19 +161,22 @@
 	    	    var modalBody = $(".modal-body");
 	    	    modalBody.empty(); // 모달 초기화
 	    	    
+	    	    
 	    	    for(let i=0;i<data.length;i++){
+		    	    var formattedPointEa = data[i].pointEa.toLocaleString('ko-KR', {style: 'currency', currency: 'KRW'});
 					const ul = $("<ul>");
 					ul.append("<li>"+data[i].memberId+"님의 뭉머니 사용내역</li>")
 					ul.append("<li>사용한 뭉머니 : "+data[i].pointEa+"</li>");
 					ul.append("<li>뭉머니 적립일 : "+data[i].pPointDate+"</li>");
 					if(data[i].pointStatus == 3){
-						ul.append("<li>뭉머니 "+data[i].pointEa+"뭉 사용완료</li>");
+						ul.append("<li>뭉머니 "+formattedPointEa+"뭉 사용완료</li>");
 					}
 					ul.append("<br>");
 					modalBody.append(ul);
 	    	      }
 	    	      $('#myModal').modal('show');
 	    	    } // for
+	    	    
 	    	    
     	  }); // ajax
 	    	  
@@ -186,10 +191,7 @@
 	    
 	    
 	    
-	    
-	    
-	    
-});
+}); // ready
     
     
     
