@@ -350,6 +350,7 @@
                  			$(".adminPage-result").hide();
 							const table =$("<table>");
 							const titleTr = $("<tr>");
+							const td = $("<td></td>");
 							titleTr.html("<th>구분</th><th>회원번호</th><th>회원아이디</th><th>이름</th><th>성별</th><th>회원등급</th><th>마케팅 동의 여부</th><th>가입일</th><th>회원등급 변경</th><th>등급변경</th><th>상세보기</th>");
 							table.append(titleTr);
 							for(let i=0;i<data.length;i++){
@@ -394,13 +395,13 @@
 								
 								var select = $("<select name='memberStatusList' class='memberStatusList'></select>"); // select 태그 생성
 					            // 세번째 열에 select 태그 삽입
-					            tr.append(select.append(
+					            td.append(select.append(
 					                $("<option value='0'" + (data[i].memberStatus == 0 ? " selected" : "") + ">관리자</option>"),
 					                $("<option value='1'" + (data[i].memberStatus == 1 ? " selected" : "") + ">정상회원</option>"),
 					                $("<option value='2'" + (data[i].memberStatus == 2 ? " selected" : "") + ">정지회원</option>"),
 					                $("<option value='3'" + (data[i].memberStatus == 3 ? " selected" : "") + ">탈퇴회원</option>")
 					            ));
-								
+					            tr.append(td);
 								tr.append("<td><div class='changeMemberStatusBtn'>회원등급 변경</div></td>"); // 확정버튼으로
 								tr.append("<td><div class='moreInfo'>상세보기</div></td>"); // 상세보기로
 								table.append(tr);
@@ -448,7 +449,9 @@
                    	/* 등급 변경 */
                 	$(".changeMemberStatusBtn").on("click",function(){
                 		var memberNo = $(this).parent().parent().children().eq(1).text();
-                		var memberStatus = $(this).parent().prev().val();
+                		var memberStatus = $(this).parent().prev().children().val();
+                		
+                		console.log(memberStatus);
                 		
                         $.ajax({
                             url: "/ajaxChangeMemberStatus.do",

@@ -16,9 +16,8 @@
 	<!-- Chart.js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 	<!-- data tables -->
-	<link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/> 
-	<script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
-	
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"/> 
+		
 
 	
 </head>
@@ -175,6 +174,8 @@
         </div>
         <div class="adminPage-back">
             <jsp:include page="/WEB-INF/views/admin/adminSideNavi.jsp" />
+            <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+            
             <div class="adminPage-main">
                 <div class="adminPage-content">
                 	<div class="mainContent-row-1">
@@ -578,7 +579,7 @@
 		    }
 		});
         
-        $('#memberTable').DataTable({
+        $("#memberTable").DataTable({
 	        dom : 'lfrtip',
 	        searching: true, // 검색 input 세팅
 	        fixedHeader: true, // 헤더 설정
@@ -611,7 +612,7 @@
 	        
 	    });
          
-        $('#askItemTable').DataTable({
+        $('#askitemTable').DataTable({
 	        dom : 'lfrtip',
 	        searching: true, // 검색 input 세팅
 	        fixedHeader: true, // 헤더 설정

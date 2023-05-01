@@ -376,6 +376,7 @@
                 			$(".adminPage-result").hide();
 							const table =$("<table class='tbl-box'>");
 							const titleTr = $("<tr>");
+							const td = $("<td></td>")
 							titleTr.html("<th>구분</th><th>제품사진</th><th>상품번호</th><th>세부카테고리번호</th><th>상품이름</th><th>상품수량</th><th>남은수량</th><th>상품가격</th><th>원가</th><th>공동구매인원수</th><th>상품할인율</th><th>상품상태</th><th>상품상태변경</th><th>확정버튼</th>");
 							table.append(titleTr);
 							for(let i=0;i<data.length;i++){
@@ -401,13 +402,15 @@
 								}else if(data[i].productStatus == 4){
 									tr.append("<td>만료</td>");
 								}
+								
 								var select = $("<select name='productStatusList' class='productStatusList'></select>");
-								tr.append(select.append(
+								td.append(select.append(
 							                $("<option value='1'" + (data[i].productStatus == 1 ? " selected" : "") + ">대기</option>"),
 							                $("<option value='2'" + (data[i].productStatus == 2 ? " selected" : "") + ">등록</option>"),
 							                $("<option value='3'" + (data[i].productStatus == 3 ? " selected" : "") + ">보류</option>"),
 							                $("<option value='4'" + (data[i].productStatus == 4 ? " selected" : "") + ">만료</option>")
 							     ));
+								tr.append(td);
 								tr.append("<td><div class='changeProductStatusBtn'>상품 상태 변경</div></td>"); // 확정버튼으로
 								table.append(tr);
 						}
@@ -420,7 +423,10 @@
                 	// 상태변경
                 	$(".changeProductStatusBtn").on("click",function(){
                 		var productNo = $(this).parent().parent().children().eq(1).text();
-                		var productStatus = $(this).parent().prev().val();
+                		var productStatus = $(this).parent().prev().children().val();
+                		
+                		console.log(productNo);
+                		console.log(productStatus);
                 		
                         $.ajax({
                             url: "/ajaxChangeProductStatus.do",
