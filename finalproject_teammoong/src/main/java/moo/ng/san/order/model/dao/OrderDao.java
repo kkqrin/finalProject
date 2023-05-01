@@ -187,6 +187,12 @@ public class OrderDao {
 		return couponPrice;
 	}
 
+	public int updateOrderStatusConfirm(int orderNo) {
+		int result = sqlSession.update("order.updateOrderStatusConfirm", orderNo);
+		
+		return result;
+	}
+
 
 	
 

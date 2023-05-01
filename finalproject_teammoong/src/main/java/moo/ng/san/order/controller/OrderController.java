@@ -178,6 +178,21 @@ public class OrderController {
 
 	}
 	
+	@RequestMapping(value="/orderConfirm.do")
+	public String orderConfirm(int orderNo) {
+		
+		// 배송중, 배송완료 -> 구매확정 상태 변경
+		int result = service.updateOrderStatusConfirm(orderNo);
+		
+		if(result>0) {
+			System.out.println("구매확정 성공");
+		}else {
+			System.out.println("구매확정 실패");
+		}
+		
+		return "redirect:/myOrderDetail.do?orderNo="+orderNo;
+	}
+	
 	
 
 	

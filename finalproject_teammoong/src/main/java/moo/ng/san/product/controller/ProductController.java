@@ -453,6 +453,12 @@ public class ProductController {
 		ArrayList<Product> gongguFiveList = service.selectgongguNumberProductList(5);
 		model.addAttribute("gongguFiveList", gongguFiveList);
 		
+		// 식품 카테고리 상품 리스트
+		ArrayList<Product> category3List = service.selectCategoryProductList(3);
+		model.addAttribute("category3List", category3List);
+		
+		// 공동구매 진행
+		
 		
 		return "common/main";
 	}
