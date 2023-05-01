@@ -279,7 +279,7 @@
 	
 	<insert id="insertFirstPoint" parameterType="_int">
 		insert into point_tbl values
-		(point_tbl_seq.nextval, #{memberNo}, 2000, sysdate, 1)
+		(point_tbl_seq.nextval, #{memberNo}, 2000, sysdate, 1,null)
 	</insert>
 	
 	
