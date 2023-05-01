@@ -159,7 +159,7 @@
                     <div class="flex-price-box">
                     <div class="price-box2">
                         <div class="no-discount-price">
-                            <a style="text-decoration: line-through;">${p.productPrice}</a>
+                            <a style="text-decoration: line-through;"><fmt:formatNumber value="${p.productPrice}"/></a>
                             <span>원</span>
                         </div>
                         <div class="real-price"><span class="product-price"></span><span class="product-price-currency"> 원</span></div>
