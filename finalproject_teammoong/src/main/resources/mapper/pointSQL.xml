@@ -33,6 +33,7 @@
 			  FROM point_tbl
 			  WHERE member_no = #{memberNo}
 			) t
+			order by 1
 		)
 		where rnum between #{start} and #{end}
 	</select>
@@ -61,7 +62,7 @@
 	
 	<insert id="insertGongguPoint" parameterType="point">
 		insert into point_tbl values
-		(point_tbl_seq.nextval, #{memberNo}, #{pointEa}, sysdate, 6, #{orderNo})
+		(point_tbl_seq.nextval, #{memberNo}, #{pointEa}, sysdate, 6, null)
 	</insert>
 	<select id="selectPlusPoint" parameterType="_int" resultType="_int">
 		SELECT COALESCE(SUM(point_ea), 0) AS pointEa

@@ -23,12 +23,13 @@ import moo.ng.san.admin.model.vo.AdminProductPageData;
 import moo.ng.san.admin.model.vo.AdminReportBoardPageData;
 import moo.ng.san.admin.model.vo.CouponData;
 import moo.ng.san.admin.model.vo.SalesData;
+import moo.ng.san.askItem.model.vo.AskItem;
 import moo.ng.san.board.model.vo.Board;
 import moo.ng.san.gonggu.model.vo.GongguAllInfo;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.order.model.vo.Order;
-import moo.ng.san.pay.model.vo.OrderDetail;
 import moo.ng.san.product.model.vo.Product;
+import moo.ng.san.review.model.vo.ReviewReport;
 
 @Controller
 public class AdminController {
@@ -38,7 +39,17 @@ public class AdminController {
 	
 	/* 페이징 처리 */
 	@RequestMapping(value="/admin.do")
-	public String admin() {
+	public String admin(Model model) {
+		int summaryNum = 5;
+		ArrayList<Product> productList = service.selectSummaryProductList(summaryNum);
+		ArrayList<AskItem> askItemList = service.selectSummaryAskItemList(summaryNum);
+		ArrayList<Board> boardList = service.selectSummaryBoardList(summaryNum);
+		ArrayList<Member> memberList = service.selectSummaryMemberList(summaryNum);
+		
+		model.addAttribute("productList",productList);
+		model.addAttribute("askItemList",askItemList);
+		model.addAttribute("boardList",boardList);
+		model.addAttribute("memberList",memberList);
 
 		return "admin/admin";
 	}
@@ -65,13 +76,14 @@ public class AdminController {
 		String boardVariation = service.selectVariationBoardCount();
 		String salesCount = service.selectAllSalesCount(); 
 		String salesVariation = service.selectVariationSalesCount();
+		
 		ArrayList<Product> list = service.selectBestProductCount();
 		int bestSalesCount = 0;
 		for(Product p : list) {
 			int bestProductCnt = p.getPresentCnt();
 			int bestProductPrice = p.getProductPrice();
-			int bestProductDiscount = p.getProductDiscount();
-			bestSalesCount += bestProductCnt * bestProductPrice * (bestProductDiscount/100) ;
+			double bestProductDiscount = p.getProductDiscount();
+			bestSalesCount += bestProductCnt * bestProductPrice * ((100-bestProductDiscount)/100) ;
 		}
 		//하단부터는 논의가 필요함
 		/*
@@ -266,7 +278,15 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping(value="/ajaxGenderSalesCount.do", produces = "application/json;charset=utf-8")
 	public String ajaxGenderSalesCount() {
-		ArrayList<SalesData> list = service.selectGenderSalesData();
+		ArrayList<SalesData> list = new ArrayList<SalesData>();
+		for(int i=1;i<4;i++) {
+			SalesData sd = service.selectGenderSalesData(i);
+			if(sd == null) {
+				sd = new SalesData();
+			}
+			sd.setGender(i);
+			list.add(sd);
+		}
 		Gson gson = new Gson(); 
 		String result = gson.toJson(list); 
 		return result;
@@ -328,15 +348,18 @@ public class AdminController {
 		int bestCos = bestSales.getTotalCost();
 		double bestProfit = Math.floor((1-(bestCos/(double)bestSal))*100);
 		double [] otherProfit = new double[otherSalesList.size()];
+		int otherSalSum = 0;
 		
 		for(int i=0;i < otherSalesList.size();i++) {
 			int otherSal = otherSalesList.get(i).getTotalSales();
 			int otherCos = otherSalesList.get(i).getTotalCost();
 			otherProfit[i] = Math.floor((1-(otherCos / (double)otherSal))*100);
+			otherSalSum += otherSal;
 		}
 		
 		model.addAttribute("bestSales",bestSales);
 		model.addAttribute("otherSalesList",otherSalesList);
+		model.addAttribute("otherSalSum",otherSalSum);
 		model.addAttribute("bestProfit",bestProfit);
 		model.addAttribute("otherProfit",otherProfit);
 		
@@ -392,7 +415,7 @@ public class AdminController {
 		boolean result = service.updateChangeProductStatus(no, level);
 		
 		if(result) {
-			return "admin/adminProductManagePage";
+			return "redirect:/adminTotalProductList.do?reqPage=1";
 		}else {
 			return "redirect:/admin/admin";
 		}
@@ -443,7 +466,16 @@ public class AdminController {
 		return "admin/adminProductRegist";
 	}
 	
-	
+	/* 신고 리뷰 조회 */
+	@RequestMapping(value="adminReviewReportList.do")
+	public String adminReviewReportList(ReviewReport r, Model model) {
+		
+		ArrayList<ReviewReport> list = service.selectReviewReportList(r);
+		model.addAttribute("reportList",list);
+		
+		return "admin/adminReviewReport";
+		
+	}
 	
 	
 	

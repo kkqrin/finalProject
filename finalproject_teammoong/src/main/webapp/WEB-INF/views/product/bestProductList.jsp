@@ -26,9 +26,6 @@
         .product-wrap{
             margin-top: 150px;
         }
-        .posting-item{
-            /* margin-bottom: 100px; */
-        }
 
         /* 순위 */
         .best-product-ranking{
@@ -96,6 +93,7 @@
 						<div class="posting-info">
 							<div>
 								<span class="posting-info-box">무료배송</span>
+                                <span class="posting-info-box today-close">${p.purchasedVolume}개 구매</span>
 							</div>
 							<div class="star-rating">
 								<div class="material-symbols-outlined star-rate">star</div>

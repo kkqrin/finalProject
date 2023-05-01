@@ -20,6 +20,7 @@ import moo.ng.san.gonggu.model.vo.GongguAllInfo;
 import moo.ng.san.member.model.vo.Member;
 import moo.ng.san.order.model.vo.Order;
 import moo.ng.san.product.model.vo.Product;
+import moo.ng.san.review.model.vo.ReviewReport;
 
 @Repository
 public class AdminDao {
@@ -290,10 +291,10 @@ public class AdminDao {
 		return sd;
 	}
 
-	public ArrayList<SalesData> selectGenderSalesData() {
-		List list = sqlSession.selectList("admin.selectGenderSalesData");
+	public SalesData selectGenderSalesData(int i) {
+		SalesData sd = sqlSession.selectOne("admin.selectGenderSalesData",i);
 
-		return (ArrayList<SalesData>)list;
+		return sd;
 	}
 
 	public Member ajaxMemberView(int memberNo) {
@@ -360,6 +361,36 @@ public class AdminDao {
 		List list = sqlSession.selectList("admin.selectBestProductCount");
 		
 		return (ArrayList<Product>)list;
+	}
+
+	public ArrayList<ReviewReport> selectReviewReportList(ReviewReport r) {
+		List list = sqlSession.selectList("admin.selectReviewReportList",r);
+		// TODO Auto-generated method stub
+		return (ArrayList<ReviewReport>)list;
+	}
+
+	public ArrayList<Product> selectSummaryProductList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("admin.selectSummaryProductList",map);
+		// TODO Auto-generated method stub
+		return (ArrayList<Product>)list;
+	}
+
+	public ArrayList<AskItem> selectSummaryAskItemList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("admin.selectSummaryAskItemList",map);
+		
+		return (ArrayList<AskItem>)list;
+	}
+
+	public ArrayList<Board> selectSummaryBoardList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("admin.selectSummaryBoardList",map);
+		// TODO Auto-generated method stub
+		return (ArrayList<Board>)list;
+	}
+
+	public ArrayList<Member> selectSummaryMemberList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("admin.selectSummaryMemberList",map);
+		
+		return (ArrayList<Member>)list;
 	}
 
 

@@ -47,6 +47,7 @@ $("#delivery-member").on("change", function(){
         $("#deli-post-number").val("");
         $("#deli-post-number").prop("readonly", false);
         $("#deli-addr").val("");
+        $("#deli-addr2").val("");
         $("#deli-addr").prop("readonly", false);
 
         // 라디오
@@ -68,6 +69,7 @@ $("#new-input-address").on("change", function(){
 
         // 주소검색을 위한 상세주소 input 활성화
         $("#deli-addr2").slideDown(200);
+        $("#deli-addr2").val("");
     }
 });
 
@@ -82,3 +84,95 @@ $("#member-address").on("change", function(){
         $("#deli-addr2").slideUp(200);
     }
 })
+
+
+
+
+$("#addr").on("click",function(){
+    new daum.Postcode({
+        oncomplete: function(data) {
+            $("#deli-post-number").val(data.zonecode);
+            const addr = String(data.address);
+            $("#deli-addr").val(addr);
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+        }
+    }).open();
+});//다음 지도 API
+
+
+
+
+// 휴대폰 유효성 검사
+const phoneNumber = '01012345678';
+let result = [false];
+
+
+$("#deli-phone").on("change", function(){
+    const phoneRegex = /^010\d{8}$/;
+
+    if (phoneRegex.test($(this).val())) {
+        $(".deli-phone-valid").text("");
+    } else {
+        $(".deli-phone-valid").text("'-'제외 '010'으로 시작하는 11자리 숫자를 입력해주세요");
+        result[0] = true;
+    }
+    
+
+})
+
+// // 유효성 검사
+// $(".order-sheet-wrap>form").submit(function (e) {
+
+//     const deliMember = $("#deli-member").val();
+//     const deliPhone = $("#deli-phone").val();
+//     const deliAddr = $("#deli-addr").val();
+
+//     if(deliMember === '' || deliPhone === '' || deliAddr === ''){
+//         orderjQueryAlert('info', '배송 정보를 모두 입력해주세요.');
+//     }
+
+//     else if(result[0]){
+//         orderjQueryAlert('info', '배송정보를 올바르게 입력했는지 확인해주세요.');
+//     }
+
+//     else if(!$("#all-agree").is(":checked")){
+//         orderjQueryAlert('info', '약관 동의 후 결제하실 수 있습니다.');
+//     }
+
+//         e.preventDefault();
+//         return false;
+// });
+
+
+    // 	jqueryAlert
+    function orderjQueryAlert(type, msg) {
+        let $type = type;
+        let messageBox = msg;
+        switch ($type) {
+            case 'info':
+            messageBox = $.parseHTML('<div class="alert__info" style="line-height:100px;text-align:center;"><div class="title" style="margin-bottom:10px;color:var(--info);padding:0;">뭉쳐야산다</div><br>'+msg+'</div>');
+            break;
+        }
+        $("body").append(messageBox);
+        $(messageBox).dialog({
+            dialogClass :$type,
+            // open: $(messageBox).append(msg),
+            draggable: false,
+            modal: true,
+            width: 500,
+            buttons: {
+                "닫기": function () {
+                    $(this).dialog("close");
+                }
+            },
+            show: {
+                effect: 'fade',
+                duration: 200 //at your convenience
+            },
+            hide: {
+                effect: 'fade',
+                duration: 200 //at your convenience
+            }
+        });
+    };

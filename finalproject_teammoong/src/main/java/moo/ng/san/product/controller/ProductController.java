@@ -125,6 +125,11 @@ public class ProductController {
 //		System.out.println(list);
 //		System.out.println(detailCategoryList);
 		
+		
+		// 상위 카테고리 페이지일때 해당 카테고리의 인기 상품 리스트
+		ArrayList<Product> bestProductList = service.selectBestProductList(fCategory);
+		model.addAttribute("bestProductList", bestProductList);
+		
 		// 최근 본 상품 select
 		selectRecentProduct(m, model);
 		
@@ -233,7 +238,7 @@ public class ProductController {
 	// 인기 상품 리스트
 	@RequestMapping(value="/bestProductList.do")
 	public String bestProductList(String categoryNo, Model model, @SessionAttribute(required=false) Member m) {
-		System.out.println("categoryNo : "+categoryNo);
+//		System.out.println("categoryNo : "+categoryNo);
 		
 		// 카테고리 리스트
 		ArrayList<Category> categoryList = service.selectCategoryList();		
@@ -270,8 +275,6 @@ public class ProductController {
 			return "redirect:/";
 		}		
 	}
-	
-	
 	
 	
 	
@@ -424,6 +427,10 @@ public class ProductController {
 		// (임시) 상품리스트
 		ArrayList<Product> productList = service.selectProductList();
 		model.addAttribute("productList",productList);
+		
+		// 인기 상품 리스트
+		ArrayList<Product> bestProductList = service.selectBestProductList(0);
+		model.addAttribute("bestProductList", bestProductList);
 
 		// 최근 본 상품 select
 		selectRecentProduct(m, model);
@@ -437,6 +444,14 @@ public class ProductController {
 		// 할인률 높은 상품 리스트
 		ArrayList<Product> highSaleList = service.selectHighSaleProductList();
 		model.addAttribute("highSaleList", highSaleList);
+		
+		// 2인 공동구매
+		ArrayList<Product> gongguTwoList = service.selectgongguNumberProductList(2);
+		model.addAttribute("gongguTwoList", gongguTwoList);
+		
+		// 5인 공동구매
+		ArrayList<Product> gongguFiveList = service.selectgongguNumberProductList(5);
+		model.addAttribute("gongguFiveList", gongguFiveList);
 		
 		
 		return "common/main";

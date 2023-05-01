@@ -9,6 +9,7 @@ import moo.ng.san.product.model.vo.Product;
 import moo.ng.san.review.model.dao.ReviewDao;
 import moo.ng.san.review.model.vo.FileVO;
 import moo.ng.san.review.model.vo.Review;
+import moo.ng.san.review.model.vo.ReviewReport;
 
 @Service
 public class ReviewService {
@@ -39,5 +40,9 @@ public class ReviewService {
 	public int updateReview(Review review) {
 		
 		return dao.updateReview(review);
+	}
+
+	public int insertReport(ReviewReport rr) {
+		return dao.insertReport(rr);
 	}
 }

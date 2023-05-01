@@ -7,12 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import common.FileManager;
 import moo.ng.san.review.model.service.ReviewService;
 import moo.ng.san.review.model.vo.FileVO;
 import moo.ng.san.review.model.vo.Review;
+import moo.ng.san.review.model.vo.ReviewReport;
 
 @Controller
 public class ReviewController {
@@ -21,8 +23,9 @@ public class ReviewController {
 	@Autowired
 	private FileManager fileManager;
 	
-	@RequestMapping(value="/insertReview.do")
+	@RequestMapping(value="/insertReviewModal.do")
 	public String insertReview(Review review, MultipartFile[] reviewFile, HttpServletRequest request) {
+		System.out.println("reviewController에서 review값 : "+review);
 		ArrayList<FileVO> fileList = new ArrayList<FileVO>();
 		if(!reviewFile[0].isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/review/");
@@ -44,5 +47,12 @@ public class ReviewController {
 	public String updateReview(Review review) {
 		int result = service.updateReview(review);
 		return null;
+	}
+	@ResponseBody
+	@RequestMapping(value="/insertReportAjax.do")
+	public String insertReport(ReviewReport rr) {
+		System.out.println("ReviewController에서 rr값"+rr);
+		int result = service.insertReport(rr);
+		return "success";
 	}
 }
