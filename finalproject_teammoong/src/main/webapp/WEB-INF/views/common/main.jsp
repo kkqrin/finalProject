@@ -687,7 +687,7 @@
 
 
     <h3 class="wrap-title" style="margin-bottom: 0px;"># 가정의달 우리 아이 👶🏻</h3>
-    <h5 class="wrap-sub-title">최근 별점 5점을 받은 상품이에요!</h5>
+    <h5 class="wrap-sub-title">가정의달을 맞이하여 아이에게 선물해주세요!</h5>
 
 
     <h3 class="wrap-title" style="margin-bottom: 0px;"># 이건 꼭 사세요 📢</h3>

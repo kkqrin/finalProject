@@ -141,8 +141,12 @@ public class OrderService {
 		
 		return dao.selectDoneCouponPrice(orderNo);
 	}
-	
-	
+
+	public int updateOrderStatusConfirm(int orderNo) {
+		
+		return dao.updateOrderStatusConfirm(orderNo);
+	}
+
 	
 	
 	
