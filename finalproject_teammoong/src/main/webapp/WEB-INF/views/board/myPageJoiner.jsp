@@ -20,6 +20,7 @@
 				<button onclick="location.href='/boardView.do?boardNo=${boardNo }'" class="btn btn-sec size01">게시물 보기</button>
 			</div>
 			<div class="mypage-content">
+				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 				<div>
 					<input type="checkbox" id="allCheck" style="margin: 0;"><label for="allCheck">전체선택</label>
 					<a id="sendDm" style="font-weight: bold; padding: 0 3px; border: 1px solid #3a3a3a; border-radius: 5px; cursor: pointer;">쪽지 보내기</a>
@@ -31,7 +32,7 @@
 						<tr style="border-top: 2px solid #000;">
 							<th rowspan="3" style="width: 5%;">
 								<input type="checkbox" class="oneCheck">
-								<input type="hidden" name="dmReceivers" value="${bj.memberNo }" disabled>
+								<input type="hidden" name="dmReceivers" value="${bj.memberId }" disabled>
 							</th>
 							<th rowspan="3" style="width: 5%;">${i.index+1 }</th>
 							<th style="width: 20%;">주문자 정보</th>
@@ -153,15 +154,17 @@
 			
 			let receivers = [];
 			$("[name='dmReceivers']").each(function(i,one){
-				receivers[i] = String($(one).val());
+				receivers[i] = $(one).val();
 			});
 			
-			const jsonArr = JSON.stringify(receivers);
+// 			const jsonArr = JSON.stringify(receivers);
 			
 			const dmContent = $("[name='dmContent']").val();
+			const dmSender = $("[name='memberId']").val();
 			$.ajax({
 				url:"/insertGroupDm.do",
-				data:{dmReceivers:jsonArr,dmContent:dmContent},
+				traditional: true,
+				data:{dmReceivers:receivers,dmContent:dmContent,dmSender:dmSender},
 				success:function(result){
 					if(result=="ok"){
 						alert("쪽지를 발송하였습니다");

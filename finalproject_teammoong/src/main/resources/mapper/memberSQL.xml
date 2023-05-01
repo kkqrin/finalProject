@@ -221,7 +221,7 @@
 	<select id="selectMyJoiner" resultType="bj" parameterType="_int">
 		select
 		    bj.join_no as joinNo,
-		    bj.member_no as memberNo,
+		    m.member_id as memberId,
 		    bj.payer_name as payerName,
 		    to_char(bj.payer_date,'""YYYY"년 "MM"월 "DD"일"') as payerDate,
 		    bj.refund_account as refundAccount,
