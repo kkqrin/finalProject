@@ -30,6 +30,7 @@ public class CouponData {
 	private String pPointDate;
 	private int pointStatus;
 	
+	
 	//day_check
 	private int dMemberNo;
 	private int checkNo;

@@ -2,26 +2,28 @@
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<!-- jquery -->
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<!-- google icon -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 	<!-- data tables -->
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"/> 
-	
 	<!-- data tables 버튼 관련 -->
+	<script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script> 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script> 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script> 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script> 
 	<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script> 
 	<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
 	<!-- Bootstrap JavaScript 모달 -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
 	<!-- css -->
 	<link rel="stylesheet" href="/resources/css/admin/admin.css" />
 	<link rel="stylesheet" href="/resources/css/common/default.css" />
@@ -62,9 +64,6 @@
 	.adminPage-result{
 		width: 1500px;
 	}
-	
-	
-
 
 
 
@@ -165,17 +164,50 @@
 	    	    for(let i=0;i<data.length;i++){
 		    	    var formattedPointEa = data[i].pointEa.toLocaleString('ko-KR', {style: 'currency', currency: 'KRW'});
 					const ul = $("<ul>");
-					ul.append("<li>"+data[i].memberId+"님의 뭉머니 사용내역</li>")
-					ul.append("<li>사용한 뭉머니 : "+data[i].pointEa+"</li>");
-					ul.append("<li>뭉머니 적립일 : "+data[i].pPointDate+"</li>");
-					if(data[i].pointStatus == 3){
-						ul.append("<li>뭉머니 "+formattedPointEa+"뭉 사용완료</li>");
+					ul.append("<li>"+data[i].memberId+"님의 뭉머니 내역</li>")
+					
+					if(data[i].pointStatus == 0){
+						ul.append("<li>적립한 뭉머니 : "+formattedPointEa+"</li>");
+						ul.append("<li>뭉머니 적립일 : "+data[i].pPointDate+"</li>");
+						ul.append("<li>뭉머니 "+formattedPointEa+"뭉 출석체크 적립</li>");
+					}else if(data[i].pointStatus == 1){
+						ul.append("<li>적립한 뭉머니 : "+formattedPointEa+"</li>");
+						ul.append("<li>뭉머니 적립일 : "+data[i].pPointDate+"</li>");
+						ul.append("<li>뭉머니 "+formattedPointEa+"뭉 가입축하 적립</li>");
+					}else if(data[i].pointStatus == 2){
+						ul.append("<li>적립한 뭉머니 : "+formattedPointEa+"</li>");
+						ul.append("<li>뭉머니 적립일 : "+data[i].pPointDate+"</li>");
+						ul.append("<li>뭉머니 "+formattedPointEa+"뭉 적립</li>");
+					}else if(data[i].pointStatus == 3){
+						ul.append("<li>사용한 뭉머니 : "+formattedPointEa+"</li>");
+						ul.append("<li>뭉머니 사용일 : "+data[i].pPointDate+"</li>");
+						ul.append("<li>뭉머니 "+formattedPointEa+"뭉 사용</li>");
+					}else if(data[i].pointStatus == 4){
+						ul.append("<li>충전한 뭉머니 : "+formattedPointEa+"</li>");
+						ul.append("<li>뭉머니 충전일 : "+data[i].pPointDate+"</li>");
+						ul.append("<li>뭉머니 "+formattedPointEa+"뭉 충전</li>");
+					}else if(data[i].pointStatus == 5){
+						ul.append("<li>환불한 뭉머니 : "+formattedPointEa+"</li>");
+						ul.append("<li>뭉머니 환불일 : "+data[i].pPointDate+"</li>");
+						ul.append("<li>뭉머니 "+formattedPointEa+"뭉 환불</li>");
+					}else if(data[i].pointStatus == 6){
+						ul.append("<li>사용한 뭉머니 : "+formattedPointEa+"</li>");
+						ul.append("<li>뭉머니 결제일 : "+data[i].pPointDate+"</li>");
+						ul.append("<li>뭉머니 "+formattedPointEa+"뭉 공구결제</li>");
+					}else if(data[i].pointStatus == 7){
+						ul.append("<li>회수한 뭉머니 : "+formattedPointEa+"</li>");
+						ul.append("<li>뭉머니 회수일 : "+data[i].pPointDate+"</li>");
+						ul.append("<li>뭉머니 "+formattedPointEa+"뭉 회수</li>");
 					}
+					
 					ul.append("<br>");
 					modalBody.append(ul);
-	    	      }
+					
+	    	      }// for
+	    	    
 	    	      $('#myModal').modal('show');
-	    	    } // for
+	    	      
+	    	    } // success
 	    	    
 	    	    
     	  }); // ajax

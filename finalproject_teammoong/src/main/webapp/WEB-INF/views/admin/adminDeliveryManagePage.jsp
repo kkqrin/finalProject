@@ -137,11 +137,14 @@
                                     	<c:when test="${o.orderStatus == 4 }">
                                     		<td>배송완료</td>
                                     	</c:when>
-                                    		<c:when test="${o.orderStatus == 5 }">
+                                    	<c:when test="${o.orderStatus == 5 }">
                                     		<td>결제취소</td>
                                     	</c:when>
-                                    		<c:when test="${o.orderStatus == 6 }">
+                                    	<c:when test="${o.orderStatus == 6 }">
                                     		<td>환불완료</td>
+                                    	</c:when>
+                                    	<c:when test="${o.orderStatus == 7 }">
+                                    		<td>구매확정</td>
                                     	</c:when>
                                     </c:choose>
                                     <td>
@@ -241,7 +244,13 @@
     <script>
     /* status 변경 */
     $(document).ready(function(){
-    	
+    	$(".tbl-box td:contains('구매확정')").each(function() {
+    	    var td = $(this);
+    	    var tr = td.parent();
+    	    td.css('color', 'red').css('font-weight','bold');
+    	    var originalFontSize = td.css('font-size');
+    	    td.css('font-size', '20px').animate({fontSize: originalFontSize}, 1000);
+    	  });
     	
     })
     	$(".changeOrderStatusBtn").on("click",function(){
@@ -364,7 +373,10 @@
   									tr.append("<td>결제취소</td>");
   								}else if(data[i].orderStatus == 6){
   									tr.append("<td>환불완료</td>");
+  								}else if(data[i].orderStatus == 7){
+  									tr.append("<td>구매확정</td>");
   								}
+  								
   								var select = $("<select name='orderStatusList' class='orderStatusList'></select>");
 								td.append(select.append(
 							                $("<option value='1'" + (data[i].orderStatus == 1 ? " selected" : "") + ">결제완료</option>"),
@@ -372,7 +384,8 @@
 							                $("<option value='3'" + (data[i].orderStatus == 3 ? " selected" : "") + ">배송중</option>"),
 							                $("<option value='4'" + (data[i].orderStatus == 4 ? " selected" : "") + ">배송완료</option>"),
 							                $("<option value='5'" + (data[i].orderStatus == 5 ? " selected" : "") + ">결제취소</option>"),
-							                $("<option value='6'" + (data[i].orderStatus == 6 ? " selected" : "") + ">환불완료</option>")
+							                $("<option value='6'" + (data[i].orderStatus == 6 ? " selected" : "") + ">환불완료</option>"),
+							                $("<option value='7'" + (data[i].orderStatus == 7 ? " selected" : "") + ">구매확정</option>")
 							     ));
 								tr.append(td);
 								tr.append("<td><div class='changeOrderStatusBtn'>상품 상태 변경</div></td>"); // 확정버튼으로

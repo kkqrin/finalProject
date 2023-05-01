@@ -94,9 +94,11 @@
                             <option value="88">테스트용</option>
                         </select>
                         
-                        <input type="text" name="boardSearchBox" id="searchOption">
-                        <!-- 주문 상태 검색 시 1,2,3,4 로 변환해주는 절차 필요 -->
-                        <button type="button" name="searchSubmitBtn">검색</button>
+                        <div><input type="text" name="boardSearchBox" id="searchOption"></div>
+                        <div class="search-btns">
+	                        <button type="button" name="searchSubmitBtn" class="searchSubmit Btn">검색</button>
+	                        <button type="button" class="goList" class="goList Btn">목록</button>
+                        </div>
                     </div>
                     <div class="boardStatus">
                     	<div class="boardSalse-wrap">
@@ -210,7 +212,7 @@
                                     	</c:when>
                                    	</c:choose>
 		                             <td>${bo.detailName }</td>
-		                             <fmt:formatNumber value="${bo.detailPrice }"/>원
+		                             <td><fmt:formatNumber value="${bo.detailPrice }"/>원</td>
 		                             </c:forEach>
                             	</c:forEach>
                                 </tr>
@@ -350,8 +352,13 @@
 	        })
 	   		 
 	    });
-	   	
+	
+	    /*목록으로*/
+	    $(".goList").on("click",function(){
+	    	location.reload();
+	    });
     
+	    
     
     
         
