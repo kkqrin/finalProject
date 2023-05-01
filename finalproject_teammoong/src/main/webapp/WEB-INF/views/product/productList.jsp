@@ -16,6 +16,11 @@
 	<script src="https://kit.fontawesome.com/285f888d1c.js" crossorigin="anonymous"></script>
 
 	<style>
+		.material-symbols-outlined.star-rate{
+        	/* 구글 아이콘 (별점) */
+            font-variation-settings:
+            'FILL' 1
+        }
 		.slick-prev:before, .slick-next:before {
         	/* 슬릭 슬라이더 아이콘 */
             color: #565656;

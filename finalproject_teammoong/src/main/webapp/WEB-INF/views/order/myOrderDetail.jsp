@@ -36,43 +36,49 @@
 								<th>주문날짜</th>
 								<td><div id="myorder-order-dateonly"></div></td>
 							</tr>
+							<tr>
+								<th>주문상태</th>
+								<td>
+									<c:choose>
+										<c:when test="${o.orderStatus eq 1}">
+											결제완료
+										</c:when>
+										<c:when test="${o.orderStatus eq 2}">
+											배송준비중
+										</c:when>
+										<c:when test="${o.orderStatus eq 3}">
+											배송중
+										</c:when>
+										<c:when test="${o.orderStatus eq 4}">
+											배송완료
+										</c:when>
+										<c:when test="${o.orderStatus eq 5}">
+											결제취소
+										</c:when>
+										<c:when test="${o.orderStatus eq 6}">
+											환불완료
+										</c:when>
+										<c:when test="${o.orderStatus eq 7}">
+											구매확정
+										</c:when>
+									</c:choose>
+								</td>
+							</tr>
+							<c:if test="${o.orderStatus eq 3 || o.orderStatus eq 4}">
+							<tr>
+								<td colspan="2">
+									<div style="display: flex;justify-content: center;">
+											<button type="button" id="order-confirm-btn" class="btn btn-pri size02" style="margin-right: 5px;">구매확정</button>
+											<button type="button"class="btn btn-pri size02">교환/반품문의</button>
+										</div>
+									</td>
+								</tr>
+							</c:if>
 						</table>
 						<input type="hidden" value="${o.orderDate}" name="orderDate">
 						<input type="hidden" value="${o.orderNo}" name="orderNo">
 					</div>
 
-
-					<div style="display: flex;">
-						<div class="myorder-order-status">
-						<c:choose>
-							<c:when test="${o.orderStatus eq 1}">
-								결제완료
-							</c:when>
-							<c:when test="${o.orderStatus eq 2}">
-								배송준비중
-							</c:when>
-							<c:when test="${o.orderStatus eq 3}">
-								배송중
-							</c:when>
-							<c:when test="${o.orderStatus eq 4}">
-								배송완료
-							</c:when>
-							<c:when test="${o.orderStatus eq 5}">
-								결제취소
-							</c:when>
-							<c:when test="${o.orderStatus eq 6}">
-								환불완료
-							</c:when>
-							<c:when test="${o.orderStatus eq 7}">
-								구매확정
-							</c:when>
-						</c:choose>
-						</div>
-						<c:if test="${o.orderStatus eq 3 || o.orderStatus eq 4}">
-							<a href="/orderConfirm.do?orderNo=${o.orderNo}" class="btn btn-pri size03">구매확정</a>
-							<button type="button"class="btn btn-pri size03">교환/반품문의</button>
-						</c:if>
-					</div>
 
 
 					<!-- 주문한 상품리스트 -->
@@ -291,8 +297,65 @@
 
 		$("#myorder-order-sheetno").text(numOrderDate+""+orderNo);
 		$("#myorder-order-dateonly").text(dateOnlyString);
-
 	});
+
+	// 구매 확정
+	$("#order-confirm-btn").on("click", function(){
+		const orderNo = $("[name=orderNo]").val();
+
+		jQueryAlert(type, orderNo);
+	});
+
+		// 구매확정 여부 물어봄
+		function jQueryAlert(type, orderNo) {
+		let $type = type;
+		// let messageBox = msg;
+			switch ($type) {
+				// case 'success':
+				// messageBox = $.parseHTML('<div class="alert__success"></div>');
+				// break;
+				// case 'error':
+				// messageBox = $.parseHTML('<div class="alert__error"></div>');
+				// break;
+				case 'error':
+				messageBox = $.parseHTML('<div class="alert__error" style="text-align:center;"><div class="title" style="margin-bottom:10px;color:var(--error);padding:0;">뭉쳐야산다</div><div style="margin-bottom: 50px;margin-top: 20px;"><h6 style="margin-bottom:40px;">< 구매확정 ></h6><div>해당 주문에 대해 구매를 확정하시겠습니까?</div><div style="margin-top:20px;">구매를 확정하면 교환 / 반품이 불가합니다.</div></div></div>');
+				break;
+			}
+			$("body").append(messageBox);
+			$(messageBox).dialog({
+				dialogClass :$type,
+				// open: $(messageBox).append(msg),
+				draggable: false,
+				modal: true,
+				width: 500,
+				buttons: [
+					{
+						text: "확정",
+						style: "margin-right:5px",
+						click: function(){
+							$(this).dialog("close");
+
+							// location.href
+							location.href="/orderConfirm.do?orderNo="+orderNo
+						}
+					},
+					{
+						text: "취소",
+						click: function(){
+							$(this).dialog("close");
+						}
+					}
+				],
+				show: {
+					effect: 'fade',
+					duration: 200 //at your convenience
+				},
+				hide: {
+					effect: 'fade',
+					duration: 200 //at your convenience
+				}
+			});
+		};
 </script>
 </body>
 </html>
