@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -455,7 +456,7 @@
             dataType : "json",
             success : function(data){
             	console.log(data);
-                memberTotalCount.text(data[0]);
+                memberTotalCount.text(data[0]); // 맴버수
                 if(data[1] > 0){
 	                memberSpan.text("+"+data[1]);
 	                memberSpan.css("color","blue")
@@ -465,7 +466,7 @@
                 	memberSpan.text("-"+data[1]);
                 	memberSpan.css("color","red")
                 }
-                productTotalCount.text(data[2]);
+                productTotalCount.text(data[2]); // 판매 게시글
                 if(data[3] > 0){
 	                productSpan.text("+"+data[3]);
 	                productSpan.css("color","blue")
@@ -475,7 +476,7 @@
                 	productSpan.text("-"+data[3]);
                 	productSpan.css("color","red")
                 }
-                boardTotalCount.text(data[4]);
+                boardTotalCount.text(data[4]); // 여여붙 매출액
                 if(data[5] > 0){
 	                boardSpan.text("+"+data[5]);
 	                boardSpan.css("color","blue")
@@ -485,7 +486,7 @@
                 	boardSpan.text("-"+data[3]);
                 	boardSpan.css("color","red")
                 }
-                orderTotalCount.text(data[6]);
+                orderTotalCount.text(data[6]); // 주문 매출액
                 if(data[7] > 0){
 	                orderSpan.text("+"+data[5]);
 	                orderSpan.css("color","blue")
@@ -590,7 +591,7 @@
 	            { searchable: true },
 	            { searchable: true }
 	        ], // 검색 조건 설정, 컬럼에 true 값을 주면 해당 컬럼적용
-	        "lengthMenu": [ [1, 3, 5, -1], [1, 3, 5, "All"] ], // 조회 개수 설정
+	        "lengthMenu": [ [3, 5, -1], [3, 5, "All"] ], // 조회 개수 설정
 	        
 	    });    
         
@@ -608,7 +609,7 @@
 	            { searchable: true },
 	            { searchable: true }
 	        ], // 검색 조건 설정, 컬럼에 true 값을 주면 해당 컬럼적용
-	        "lengthMenu": [ [1, 3, 5, -1], [1, 3, 5, "All"] ], // 조회 개수 설정
+	        "lengthMenu": [ [2, 3, 5, -1], [2, 3, 5, "All"] ], // 조회 개수 설정
 	        
 	    });
          
@@ -623,7 +624,7 @@
 	            { searchable: true },
 	            { searchable: true }
 	        ], // 검색 조건 설정, 컬럼에 true 값을 주면 해당 컬럼적용
-	        "lengthMenu": [ [1, 3, 5, -1], [1, 3, 5, "All"] ], // 조회 개수 설정
+	        "lengthMenu": [ [3, 5, -1], [3, 5, "All"] ], // 조회 개수 설정
 	        
 	    });
         
@@ -638,7 +639,7 @@
 	            { searchable: true },
 	            { searchable: true }
 	        ], // 검색 조건 설정, 컬럼에 true 값을 주면 해당 컬럼적용
-	        "lengthMenu": [ [1, 3, 5, -1], [1, 3, 5, "All"] ], // 조회 개수 설정
+	        "lengthMenu": [ [3, 5, -1], [3, 5, "All"] ], // 조회 개수 설정
 	        
 	    });
         

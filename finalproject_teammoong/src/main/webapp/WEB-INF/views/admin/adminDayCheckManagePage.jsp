@@ -100,7 +100,7 @@
 	                                    <td>${ml.memberId }</td>
 	                                    <td>${ml.memberName }</td>
 	                                    <td>이것은 사용금액</td>
-	                                    <td>${ml.pointEa }</td>
+	                                    <td><fmt:formatNumber value="${ml.pointEa }"/></td>
 	                          	 	</tr>
 								</c:forEach>
 	                        </tbody>

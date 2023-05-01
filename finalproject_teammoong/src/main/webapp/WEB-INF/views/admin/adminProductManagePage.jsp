@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -209,8 +211,8 @@
                                     <td>${p.productName }<input type="hidden" class="productName" value="${p.productName }"></td>
                                     <td>${p.productEa }</td>
                                     <td>${p.presentCnt }</td>
-                                    <td>${p.productPrice }</td>
-                                    <td>${p.productCost }</td>
+                                    <td><fmt:formatNumber value="${p.productPrice }"/></td>
+                                    <td><fmt:formatNumber value="${p.productCost }"/></td>
                                     <td>${p.gongguNumber }</td>
                                     <td>${p.productDiscount }%</td>
                                    	<c:choose>
@@ -376,7 +378,7 @@
                 			$(".adminPage-result").hide();
 							const table =$("<table class='tbl-box'>");
 							const titleTr = $("<tr>");
-							const td = $("<td></td>")
+							const td = $("<td></td>");
 							titleTr.html("<th>구분</th><th>제품사진</th><th>상품번호</th><th>세부카테고리번호</th><th>상품이름</th><th>상품수량</th><th>남은수량</th><th>상품가격</th><th>원가</th><th>공동구매인원수</th><th>상품할인율</th><th>상품상태</th><th>상품상태변경</th><th>확정버튼</th>");
 							table.append(titleTr);
 							for(let i=0;i<data.length;i++){
@@ -424,9 +426,6 @@
                 	$(".changeProductStatusBtn").on("click",function(){
                 		var productNo = $(this).parent().parent().children().eq(1).text();
                 		var productStatus = $(this).parent().prev().children().val();
-                		
-                		console.log(productNo);
-                		console.log(productStatus);
                 		
                         $.ajax({
                             url: "/ajaxChangeProductStatus.do",
