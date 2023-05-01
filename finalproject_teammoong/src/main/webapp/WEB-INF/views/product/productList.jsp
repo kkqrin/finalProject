@@ -130,7 +130,7 @@
 	<div class="product-wrap">
 		<!-- 전체 상품 wrap -->
 		<div class="product-sort-top-menu">
-			<div class="product-count">총 142건</div>
+			<div class="product-count">총 ${totalCount}건</div>
 			<ul>
 				<li><a class="product-sort" value="recent-sort">최신 등록순</a></li>
 				<li><a class="product-sort" value="popular-sort">인기순</a></li>

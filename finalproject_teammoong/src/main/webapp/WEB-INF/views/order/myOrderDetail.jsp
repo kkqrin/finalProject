@@ -7,10 +7,41 @@
 <head>
 <meta charset="UTF-8">
 <title>내 구매내역</title>
-    <!--productView.css-->
-    <link rel="stylesheet" href="/resources/css/member/myOrderList.css">
-	<!-- 리뷰css -->
-	<link rel="stylesheet" href="/resources/css/product/review.css"/>
+<!--productView.css-->
+<link rel="stylesheet" href="/resources/css/member/myOrderList.css">
+<!-- 리뷰css -->
+<link rel="stylesheet" href="/resources/css/product/review.css"/>
+<!--productView.css-->
+<link rel="stylesheet" href="/resources/css/product/productView.css"/>
+
+<style>
+/* 별점 */
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+.rate { display: inline-block;border: 0;margin-right: 15px;}
+.rate > input 
+{display: none;}
+
+.rate > label 
+{float: right;color: #ddd}
+
+.rate > label:before 
+{display: inline-block;font-size: 2rem;padding: .3rem .2rem;margin: 0;cursor: pointer;font-family: FontAwesome;content: "\f005 ";}
+
+.rate .half:before 
+{content: "\f089 "; position: absolute;padding-right: 0;}
+
+.rate input:checked ~ label, 
+.rate label:hover,
+.rate label:hover ~ label 
+{ color: gold !important;  } 
+
+.rate input:checked + .rate label:hover,
+.rate input input:checked ~ label:hover,
+.rate input:checked ~ .rate label:hover ~ label,  
+.rate label:hover ~ input:checked ~ label 
+{ color: gold !important;  } 
+
+	</style>
 </head>
 
 <body>
@@ -104,7 +135,7 @@
 							<c:if test="${i.orderStatus eq 7}">
 								<div class="myorder-btn-zone" style="position: static;">
 								<!-- <form action="#"> -->
-									<button id="insertReiview" type="button" class="btn btn-pri size01"  data-modal="#modalReview">리뷰쓰기</button>
+									<button id="insertReiview" type="button" class="btn btn-pri size01" data-modal="#modalReview">리뷰쓰기</button>
 									<!-- </form> -->
 								</div>
 							</c:if>
@@ -303,7 +334,7 @@
 	$("#order-confirm-btn").on("click", function(){
 		const orderNo = $("[name=orderNo]").val();
 
-		jQueryAlert(type, orderNo);
+		jQueryAlert('warning', orderNo);
 	});
 
 		// 구매확정 여부 물어봄
@@ -317,8 +348,8 @@
 				// case 'error':
 				// messageBox = $.parseHTML('<div class="alert__error"></div>');
 				// break;
-				case 'error':
-				messageBox = $.parseHTML('<div class="alert__error" style="text-align:center;"><div class="title" style="margin-bottom:10px;color:var(--error);padding:0;">뭉쳐야산다</div><div style="margin-bottom: 50px;margin-top: 20px;"><h6 style="margin-bottom:40px;">< 구매확정 ></h6><div>해당 주문에 대해 구매를 확정하시겠습니까?</div><div style="margin-top:20px;">구매를 확정하면 교환 / 반품이 불가합니다.</div></div></div>');
+				case 'warning':
+				messageBox = $.parseHTML('<div class="alert__warning" style="text-align:center;"><div class="title" style="margin-bottom:10px;color:var(--primary);padding:0;">뭉쳐야산다</div><div style="margin-bottom: 50px;margin-top: 20px;"><h6 style="margin-bottom:40px;">< 구매확정 ></h6><div>해당 주문에 대해 구매를 확정하시겠습니까?</div><div style="margin-top:20px;">구매를 확정하면 교환 / 반품이 불가합니다.</div></div></div>');
 				break;
 			}
 			$("body").append(messageBox);
@@ -336,7 +367,7 @@
 							$(this).dialog("close");
 
 							// location.href
-							location.href="/orderConfirm.do?orderNo="+orderNo
+							location.href="/orderConfirm.do?orderNo="+orderNo;
 						}
 					},
 					{
@@ -356,6 +387,85 @@
 				}
 			});
 		};
+
+
+
+		function DropFile(dropAreaId, fileListId) {
+            let dropArea = document.getElementById(dropAreaId);
+            let fileList = document.getElementById(fileListId);
+          
+            function preventDefaults(e) {
+              e.preventDefault();
+              e.stopPropagation();
+            }
+          
+            function highlight(e) {
+              preventDefaults(e);
+              dropArea.classList.add("highlight");
+            }
+          
+            function unhighlight(e) {
+              preventDefaults(e);
+              dropArea.classList.remove("highlight");
+            }
+          
+            function handleDrop(e) {
+              unhighlight(e);
+              let dt = e.dataTransfer;
+              let files = dt.files;
+          
+              handleFiles(files);
+          
+              const fileList = document.getElementById(fileListId);
+              if (fileList) {
+                fileList.scrollTo({ top: fileList.scrollHeight });
+              }
+            }
+          
+            function handleFiles(files) {
+              files = [...files];
+              // files.forEach(uploadFile);
+              files.forEach(previewFile);
+            }
+          
+            function previewFile(file) {
+              console.log(file);
+              renderFile(file);
+            }
+          
+            function renderFile(file) {
+              let reader = new FileReader();
+              reader.readAsDataURL(file);
+              reader.onloadend = function () {
+                let img = dropArea.getElementsByClassName("preview")[0];
+                img.src = reader.result;
+                img.style.display = "block";
+              };
+            }
+          
+            dropArea.addEventListener("dragenter", highlight, false);
+            dropArea.addEventListener("dragover", highlight, false);
+            dropArea.addEventListener("dragleave", unhighlight, false);
+            dropArea.addEventListener("drop", handleDrop, false);
+          
+            return {
+              handleFiles
+            };
+          }
+          
+          const dropFile = new DropFile("drop-file", "files");   
+          
+	  function readURL(input) {
+            if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              reader.onload = function(e) {
+                document.getElementById('preview').src = e.target.result;
+              };
+              reader.readAsDataURL(input.files[0]);
+            } else {
+              document.getElementById('preview').src = "";
+            }
+          }
 </script>
 </body>
 </html>

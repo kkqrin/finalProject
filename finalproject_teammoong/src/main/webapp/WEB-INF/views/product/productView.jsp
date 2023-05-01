@@ -343,7 +343,7 @@
         <div class="product-content-wrap" style="border-bottom: 1px solid #e1e4e5;">
             ${p.productContent}
         </div>
-        <!-- <div class="product-review-logo product-review"><h3>리뷰</h3></div> -->
+        <div class="product-review-logo product-review"></div>
         <!-- <button type="button" id="insertReview" class="btn btn-pri size01" data-modal="#modalReview">리뷰하기</button> -->
         <div class="content-wrap" style="padding-top: 0;">
             <!-- <pre>
@@ -427,14 +427,14 @@
                                 </div>
                                 <div class="review-content">${i.reviewContent}</div>
                                 <div class="review-like">
-                                    <div>
+                                    <!-- <div> -->
                                         <input type="hidden" value="${i.rating}">
                                         <c:if test="${SessionScope.m.memberId eq i.reviewWriter }">
                                         	<form action="/deleteReview.do" method="post">
                                         		<button type="button" class="btn btn-pri size01">삭제</button>
                                         	</form>
                                         </c:if>
-                                    </div>
+                                    <!-- </div> -->
                                 </div>
                             </div>
                         </div> 
@@ -1254,6 +1254,18 @@
                         inputCount.val(Number(inputCountVal)-1).trigger('change');
                     }
                 }
+            });
+
+
+            // 리뷰 등록 시간 떼기
+            $(function () {
+                const date = $(".review-enroll-date");
+
+                console.log(date.length);
+                for(let i=0;i<date.length;i++){
+                    $(".review-enroll-date").eq(i).text(date.eq(i).text().substring(0, 10));
+                }
+
             });
 
         </script>
