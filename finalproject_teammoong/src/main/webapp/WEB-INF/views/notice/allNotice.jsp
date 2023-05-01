@@ -8,12 +8,52 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-  .content-all{
-  	 
-  }
-  .main-content{
-  	padding-top: 30px; 
-  }
+ .main-content{
+		padding-top: 30px; 
+	}
+	.search-box {
+		padding-top: 20px;
+		display: flex;
+		align-items: center;
+  		justify-content: center;
+  	}
+	.search-box select {
+  		margin-right: 10px;
+	}
+	.search-box select{
+  		height: 40px;
+  		font-size: 18px;
+  		padding: 0 10px;
+  		border-radius: 5px;
+  		border: 1px solid #ccc;
+	}
+	.search-box input[type="text"] {
+  		margin-right: 10px;
+  		width: 50%;
+	}
+	#popupModal {
+  	  	position: fixed;
+    	top: 0;
+    	left: 0;
+    	width: 100%;
+    	height: 100%;
+    	background-color: rgba(0, 0, 0, 0.5);
+    	display: none;
+  	}
+  	.popupModal-content {
+    	position: absolute;
+    	top: 50%;
+    	left: 50%;
+    	transform: translate(-50%, -50%);
+    	background-color: #fff;
+    	padding: 20px;
+    	width: 300px;
+    	text-align: center;
+  	}
+  	.checkbox-remember {
+    	display: block;
+    	margin-bottom: 10px;
+  	}
 </style>
 </head>
 <body>
@@ -59,16 +99,16 @@
 			<div class="pagination">
 			${pageNavi }
 			</div>
-			<div class="searchBox">
-				<form action="/noticeList.do?reqPage=1" method="post">
+			<form action="/noticeList.do?reqPage=1" method="post">
+				<div class="search-box">
 					<select name="searchType">
 						<option value="1">제목</option>
 						<option value="2">내용</option>
 					</select>
 					<input type="text" name="keyword" id="searchText">        
                 	<button class="btn btn-pri size01" type="submit" name="searchSubmitBtn">검색</button>
-                </form>
-			</div>
+				</div>
+            </form>
 			<div class="">
 				<c:if test="${sessionScope.m.memberStatus == 0 }">
 					<div class="area-btn right">
@@ -79,9 +119,7 @@
 		</div>
 		<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}"> 
 	</div>
-	<script>
-		
-	</script>
+	<script src="/resources/js/popup.js"></script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
