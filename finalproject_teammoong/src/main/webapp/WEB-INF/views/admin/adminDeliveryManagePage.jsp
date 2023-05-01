@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -119,9 +120,9 @@
                                     <td>${o.productNo }</td>
                                     <td>${o.memberNo }</td>
                                     <td>${o.orderDate }</td>
-                                    <td>${o.orderDetailCost }</td>
+                                    <td><fmt:formatNumber value="${o.orderDetailCost }"/></td>
                                     <td>${o.orderDetailCnt }</td>
-                                    <td>${o.orderDetailPrice }</td>
+                                    <td><fmt:formatNumber value="${o.orderDetailPrice }"/></td>
                                     <td>${o.deliAddr }</td>
                                     <c:choose>
                                     	<c:when test="${o.orderStatus == 1 }">
@@ -335,6 +336,7 @@
                    			$(".adminPage-result").hide();
   							const table =$("<table class='tbl-box'>");
   							const titleTr = $("<tr>");
+  							const td = $("<td></td>");
   							titleTr.html("<th>구분</th><th>상품사진></th><th>주문번호</th><th>상품번호</th><th>회원번호</th><th>주문일자</th><th>상품원가</th><th>수량</th><th>가격</th><th>배송주소</th><th>결제상태</th><th>주문상태</th><th>주문상태 변경</th>");
   							table.append(titleTr);
   							for(let i=0;i<data.length;i++){
@@ -364,7 +366,7 @@
   									tr.append("<td>환불완료</td>");
   								}
   								var select = $("<select name='orderStatusList' class='orderStatusList'></select>");
-								tr.append(select.append(
+								td.append(select.append(
 							                $("<option value='1'" + (data[i].orderStatus == 1 ? " selected" : "") + ">결제완료</option>"),
 							                $("<option value='2'" + (data[i].orderStatus == 2 ? " selected" : "") + ">배송준비중</option>"),
 							                $("<option value='3'" + (data[i].orderStatus == 3 ? " selected" : "") + ">배송중</option>"),
@@ -372,6 +374,7 @@
 							                $("<option value='5'" + (data[i].orderStatus == 5 ? " selected" : "") + ">결제취소</option>"),
 							                $("<option value='6'" + (data[i].orderStatus == 6 ? " selected" : "") + ">환불완료</option>")
 							     ));
+								tr.append(td);
 								tr.append("<td><div class='changeOrderStatusBtn'>상품 상태 변경</div></td>"); // 확정버튼으로
 								table.append(tr);
   						}
@@ -384,7 +387,7 @@
 	                 // 상태변경
 	                	$(".changeOrderStatusBtn").on("click",function(){
 	                		var orderNo = $(this).parent().parent().children().eq(1).text();
-	                		var orderStatus = $(this).parent().prev().val();
+	                		var orderStatus = $(this).parent().prev().children().val();
 	                		
 	                		
 	                        $.ajax({

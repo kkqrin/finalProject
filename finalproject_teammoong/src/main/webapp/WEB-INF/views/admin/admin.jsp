@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -16,9 +17,8 @@
 	<!-- Chart.js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 	<!-- data tables -->
-	<link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/> 
-	<script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
-	
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"/> 
+		
 
 	
 </head>
@@ -175,6 +175,8 @@
         </div>
         <div class="adminPage-back">
             <jsp:include page="/WEB-INF/views/admin/adminSideNavi.jsp" />
+            <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+            
             <div class="adminPage-main">
                 <div class="adminPage-content">
                 	<div class="mainContent-row-1">
@@ -454,7 +456,7 @@
             dataType : "json",
             success : function(data){
             	console.log(data);
-                memberTotalCount.text(data[0]);
+                memberTotalCount.text(data[0]); // 맴버수
                 if(data[1] > 0){
 	                memberSpan.text("+"+data[1]);
 	                memberSpan.css("color","blue")
@@ -464,7 +466,7 @@
                 	memberSpan.text("-"+data[1]);
                 	memberSpan.css("color","red")
                 }
-                productTotalCount.text(data[2]);
+                productTotalCount.text(data[2]); // 판매 게시글
                 if(data[3] > 0){
 	                productSpan.text("+"+data[3]);
 	                productSpan.css("color","blue")
@@ -474,7 +476,7 @@
                 	productSpan.text("-"+data[3]);
                 	productSpan.css("color","red")
                 }
-                boardTotalCount.text(data[4]);
+                boardTotalCount.text(data[4]); // 여여붙 매출액
                 if(data[5] > 0){
 	                boardSpan.text("+"+data[5]);
 	                boardSpan.css("color","blue")
@@ -484,7 +486,7 @@
                 	boardSpan.text("-"+data[3]);
                 	boardSpan.css("color","red")
                 }
-                orderTotalCount.text(data[6]);
+                orderTotalCount.text(data[6]); // 주문 매출액
                 if(data[7] > 0){
 	                orderSpan.text("+"+data[5]);
 	                orderSpan.css("color","blue")
@@ -578,7 +580,7 @@
 		    }
 		});
         
-        $('#memberTable').DataTable({
+        $("#memberTable").DataTable({
 	        dom : 'lfrtip',
 	        searching: true, // 검색 input 세팅
 	        fixedHeader: true, // 헤더 설정
@@ -589,7 +591,7 @@
 	            { searchable: true },
 	            { searchable: true }
 	        ], // 검색 조건 설정, 컬럼에 true 값을 주면 해당 컬럼적용
-	        "lengthMenu": [ [1, 3, 5, -1], [1, 3, 5, "All"] ], // 조회 개수 설정
+	        "lengthMenu": [ [3, 5, -1], [3, 5, "All"] ], // 조회 개수 설정
 	        
 	    });    
         
@@ -607,11 +609,11 @@
 	            { searchable: true },
 	            { searchable: true }
 	        ], // 검색 조건 설정, 컬럼에 true 값을 주면 해당 컬럼적용
-	        "lengthMenu": [ [1, 3, 5, -1], [1, 3, 5, "All"] ], // 조회 개수 설정
+	        "lengthMenu": [ [2, 3, 5, -1], [2, 3, 5, "All"] ], // 조회 개수 설정
 	        
 	    });
          
-        $('#askItemTable').DataTable({
+        $('#askitemTable').DataTable({
 	        dom : 'lfrtip',
 	        searching: true, // 검색 input 세팅
 	        fixedHeader: true, // 헤더 설정
@@ -622,7 +624,7 @@
 	            { searchable: true },
 	            { searchable: true }
 	        ], // 검색 조건 설정, 컬럼에 true 값을 주면 해당 컬럼적용
-	        "lengthMenu": [ [1, 3, 5, -1], [1, 3, 5, "All"] ], // 조회 개수 설정
+	        "lengthMenu": [ [3, 5, -1], [3, 5, "All"] ], // 조회 개수 설정
 	        
 	    });
         
@@ -637,7 +639,7 @@
 	            { searchable: true },
 	            { searchable: true }
 	        ], // 검색 조건 설정, 컬럼에 true 값을 주면 해당 컬럼적용
-	        "lengthMenu": [ [1, 3, 5, -1], [1, 3, 5, "All"] ], // 조회 개수 설정
+	        "lengthMenu": [ [3, 5, -1], [3, 5, "All"] ], // 조회 개수 설정
 	        
 	    });
         

@@ -100,7 +100,7 @@ public class AdminService {
 	// 페이지 네비 주소 수정 필요
 	public AdminMemberPageData selectAllMemberList(int reqPage) {
 		// 한 페이지 당 보여줄 게시물 수 : 10개
-		int numPerPage = 5;
+		int numPerPage = 10;
 		// reqPage = 1 : 1~2 , reqPage = 2 3~4
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -209,7 +210,7 @@
                                     	</c:when>
                                    	</c:choose>
 		                             <td>${bo.detailName }</td>
-		                             <td>${bo.detailPrice }원</td>
+		                             <fmt:formatNumber value="${bo.detailPrice }"/>원
 		                             </c:forEach>
                             	</c:forEach>
                                 </tr>
