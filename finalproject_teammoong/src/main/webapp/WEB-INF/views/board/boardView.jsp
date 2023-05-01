@@ -263,20 +263,27 @@ sup{
 		src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 	
 	<script>
+
 	
-	let result = [false, false, false, false, false]; //정규표현식 검사
-	//0이메일, 1핸드폰, 2계좌번호, 3주소입력, 4 수령자 연락처
+	let result = [false, false, false, false, false, false, false]; //정규표현식 검사
+	//0이메일, 1핸드폰, 2계좌번호, 3주소입력, 4 수령자 연락처, 5데이터피커, 6입금자명
 	
-// 	$("[name='0orderCount']").on("change",function(){
-// 		const orderCount = $("[name='0orderCount']").val();
-// 		const price = $("[name='0price']").val();
-// 		const result = orderCount * price;
-// 		 $("#result-price").val(result);
-// 	});
+	$("[name='0orderCount']").on("change",function(){
+		const orderCount = $("[name='0orderCount']").val();
+		const price = $("[name='0price']").val();
+		const result = orderCount * price;
+		 $("#result-price").val(result);
+	});
 
 	$("[type='submit']").on("click",function(){
 		if(	$("[name='payerDate']").val()==""){
-			alert("입금예정 날짜를 선택해주세요!");
+			optionjQueryAlert('info', "날짜를 선택해주세요");
+		}else if($("[name=payerName]").val()==""){
+			optionjQueryAlert('info', "입금자명을 입력해주세요");
+		}else if($("[name=memberName]").val() == ""){
+			optionjQueryAlert('info', "주문자 정보를 입력해 주세요");
+		}else if($("[name=payerName]").val()==""){
+			optionjQueryAlert('info', "입금자명을 입력해주세요");
 		}
 		let resultChk = true;
 		$.each(result,function(index,item){
@@ -288,10 +295,10 @@ sup{
 			event.preventDefault();
 		}
 	});
-	
 
 	
-	
+
+	//input hidden 날짜 값 넣어서 디비로 보내기
 
 	$( function() {
 				$( ".select-custom" ).selectmenu();
@@ -350,6 +357,8 @@ sup{
 				const deliveryDate = start.format('YYYY-MM-DD');
 				//input hidden 날짜 값 넣어서 디비로 보내기
 				$("[name=payerDate]").val(deliveryDate);
+				result[5]=true;
+				console.log("5 : "+result[5]);
 			});
 
 	$("#paydate").on('show.daterangepicker', function(ev, picker) {
@@ -554,8 +563,17 @@ sup{
 		});
 	};
 		
+	$(".content-boardView-wrap>form").submit(function (e){
+		if(!result[6]){
+		console.log("실패");
+		optionjQueryAlert('info', '입금자명을 입력해주세요!');
 		
-	
+		e.preventDefault();
+		return false;
+	}
+	});
+
+
 	
 	// 	jqueryAlert
 	function optionjQueryAlert(type, msg) {
@@ -589,6 +607,7 @@ sup{
         });
     };
 
+ 
 
 	
 // 		$("[type='submit']").on("click",function(){
