@@ -362,4 +362,23 @@
         order by 1 desc )p)
 	</select>
 	
+	<select id="selectCategoryProductList" parameterType="_int" resultType="p">
+		select
+	            p.PRODUCT_NO AS productNo,
+				p.D_CATEGORY_NO AS detailCategoryNo,
+				p.PRODUCT_NAME AS productName,
+				p.PRODUCT_EA AS productEa,
+				p.PRODUCT_PRICE AS productPrice,
+				p.PRODUCT_STATUS AS productStatus,
+				p.PRODUCT_COST AS productCost,
+				p.GONGGU_NUMBER AS  gongguNumber,
+				p.PRODUCT_CONTENT AS productContent,
+				p.PRODUCT_DISCOUNT AS productDiscount,
+				(SELECT FILEPATH FROM PRODUCT_IMG WHERE P_IMG_NO=(SELECT MIN(P_IMG_NO) FROM PRODUCT_IMG  WHERE PRODUCT_NO=p.PRODUCT_NO))  AS thumbnail
+		from product_tbl p
+		left join detail_category dc on p.d_category_no = dc.d_category_no
+		left join product_category c on dc.category_no = c.category_no
+		where c.category_no = #{i}
+	</select>
+	
 </mapper>

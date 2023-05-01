@@ -223,7 +223,11 @@ public class ProductService {
 		return dao.selectgongguNumberProductList(i);
 	}
 	
-	
+	public ArrayList<Product> selectCategoryProductList(int i) {
+		
+		return dao.selectCategoryProductList(i);
+	}
+
 	
 	
 	
@@ -336,6 +340,7 @@ public class ProductService {
 			}
 				return productList;
 	}
+
 
 
 

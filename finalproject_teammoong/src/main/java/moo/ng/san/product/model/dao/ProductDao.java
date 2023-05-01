@@ -212,6 +212,11 @@ public class ProductDao {
 		return (ArrayList<Product>)list;
 	}
 
+	public ArrayList<Product> selectCategoryProductList(int i) {
+		List list = sqlSession.selectList("product.selectCategoryProductList",i);
+		return (ArrayList<Product>)list;
+	}
+
 	
 	
 	
