@@ -636,8 +636,7 @@
     <h3 class="wrap-title" style="margin-bottom: 0px;"># 오늘 저녁 뭐먹지? 🥂</h3>
     <h5 class="wrap-sub-title">뭉쳐야산다의 식품 코너를 소개합니다!</h5>
     <div class="popular-product-wrap">
-        <!-- 인기상품 wrap -->
-        <c:forEach items="${productList }" var="p">
+        <c:forEach items="${category3List }" var="p">
             <div class="posting-item popular">
                 <div class="posting-img popular">
                     <a href="/productView.do?productNo=${p.productNo }">
@@ -687,7 +686,8 @@
 
 
 
-
+    <h3 class="wrap-title" style="margin-bottom: 0px;"># 가정의달 우리 아이 👶🏻</h3>
+    <h5 class="wrap-sub-title">최근 별점 5점을 받은 상품이에요!</h5>
 
 
     <h3 class="wrap-title" style="margin-bottom: 0px;"># 이건 꼭 사세요 📢</h3>
