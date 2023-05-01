@@ -170,4 +170,8 @@
        left join coupon_tbl using(coupon_no)
        where issue_no = (select issue_no from order_tbl where order_no = #{_parameter})
 	</select>
+	
+	<update id="updateOrderStatusConfirm" parameterType="_int">
+		update order_tbl set order_status = 7 where order_no = #{_parameter}
+	</update>
 </mapper>

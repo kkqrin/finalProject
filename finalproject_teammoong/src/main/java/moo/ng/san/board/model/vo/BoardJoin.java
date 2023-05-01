@@ -33,6 +33,7 @@ public class BoardJoin {
 	private String detailName;
 	private String memberName;
 	private ArrayList<BoardOrder> boardOrderList;
+	private String memberId;
 
 	public String getDepositPriceCom() {
 		String format = String.format("%,d", depositPrice);

@@ -120,6 +120,19 @@
 	</div>
 	
 	
+	<!-- 알림 모달 -->
+	<div id="alertModal" class="modal modal-sec">
+				<div class="modal-content">
+					<div class="modal-header" style="padding: 40px; height: auto;">
+						<h6 id="alertTitle" style="text-align: center;"></h6>
+					</div>
+					<div class="area-btn center">
+						<a rel="modal:close" class="btn btn-sec size01" style="cursor: pointer;">확인</a>
+					</div>
+				</div>
+	</div><!--모달창-->
+	
+	
 	<script>
 		$(function(){
 			$("#agree").prop('checked',false);
@@ -145,7 +158,11 @@
 						$("#step2").hide();
 						$("#step3").show();
 					}else{
-						alert("비밀번호가 틀립니다");
+						$("#alertTitle").html("비밀번호가 틀립니다");
+			            $("#alertModal").modal({
+							 showClose: false,
+				             fadeDuration: 100
+				        });
 					}
 				}
 			})//ajax
