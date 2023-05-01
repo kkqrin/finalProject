@@ -42,6 +42,40 @@
 					</div>
 
 
+					<div style="display: flex;">
+						<div class="myorder-order-status">
+						<c:choose>
+							<c:when test="${o.orderStatus eq 1}">
+								결제완료
+							</c:when>
+							<c:when test="${o.orderStatus eq 2}">
+								배송준비중
+							</c:when>
+							<c:when test="${o.orderStatus eq 3}">
+								배송중
+							</c:when>
+							<c:when test="${o.orderStatus eq 4}">
+								배송완료
+							</c:when>
+							<c:when test="${o.orderStatus eq 5}">
+								결제취소
+							</c:when>
+							<c:when test="${o.orderStatus eq 6}">
+								환불완료
+							</c:when>
+							<c:when test="${o.orderStatus eq 7}">
+								구매확정
+							</c:when>
+						</c:choose>
+						</div>
+						<c:if test="${o.orderStatus eq 3 || o.orderStatus eq 4}">
+							<a href="/orderConfirm.do?orderNo=${o.orderNo}" class="btn btn-pri size03">구매확정</a>
+							<button type="button"class="btn btn-pri size03">교환/반품문의</button>
+						</c:if>
+					</div>
+
+
+					<!-- 주문한 상품리스트 -->
 					<c:forEach items="${orderProductList }" var="i">
 						<div class="myorder-order-item">
 							<div class="myorder-product-img">
@@ -70,7 +104,6 @@
 							</c:if>
 						</div>
 					</c:forEach>
-					<button type="button" id="insertReview" class="btn btn-pri size01" data-modal="#modalReview">리뷰하기</button>
 
 
 

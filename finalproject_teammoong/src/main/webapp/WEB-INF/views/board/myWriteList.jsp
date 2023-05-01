@@ -29,15 +29,24 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${list }" var="b" varStatus="i">
+					<c:choose>
+						<c:when test="${list.size() eq 0 }">
 							<tr>
-								<td>${b.rnum }</td>
-								<td><a href="/myPageJoiner.do?boardNo=${b.boardNo }&boardName=${b.boardName}" style="cursor: pointer;">${b.boardName }</a></td>
-								<td>${b.joinCnt }</td>
-								<td>${b.boardStart }</td>
-								<td>${b.boardEnd }</td>
+								<td colspan="5">등록한 게시물이 없습니다.</td>
 							</tr>
-						</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${list }" var="b" varStatus="i">
+								<tr>
+									<td>${b.rnum }</td>
+									<td><a href="/myPageJoiner.do?boardNo=${b.boardNo }&boardName=${b.boardName}" style="cursor: pointer;">${b.boardName }</a></td>
+									<td>${b.joinCnt }</td>
+									<td>${b.boardStart }</td>
+									<td>${b.boardEnd }</td>
+								</tr>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 					</tbody>
 				</table>
 			</div>

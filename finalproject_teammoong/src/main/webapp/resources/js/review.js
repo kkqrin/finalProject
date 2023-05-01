@@ -70,7 +70,7 @@ $(function(){
 
 
     // 신고 모달 직접 입력 선택시 textarea 작성 가능
-    $("[name=report-reason]").on("change", function(){
+    $("[name=reportReason]").on("change", function(){
         if($(this).val() == 8){
             $(".report-direct-input").attr("disabled", false);
         }else{

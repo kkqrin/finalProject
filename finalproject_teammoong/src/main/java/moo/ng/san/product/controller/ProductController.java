@@ -340,8 +340,6 @@ public class ProductController {
 	
 	
 	
-	
-	
 //	명훈작업공간 120~200
 	
 	@RequestMapping(value="/insertProductFrm.do")
@@ -429,6 +427,10 @@ public class ProductController {
 		// (임시) 상품리스트
 		ArrayList<Product> productList = service.selectProductList();
 		model.addAttribute("productList",productList);
+		
+		// 인기 상품 리스트
+		ArrayList<Product> bestProductList = service.selectBestProductList(0);
+		model.addAttribute("bestProductList", bestProductList);
 
 		// 최근 본 상품 select
 		selectRecentProduct(m, model);
@@ -442,6 +444,20 @@ public class ProductController {
 		// 할인률 높은 상품 리스트
 		ArrayList<Product> highSaleList = service.selectHighSaleProductList();
 		model.addAttribute("highSaleList", highSaleList);
+		
+		// 2인 공동구매
+		ArrayList<Product> gongguTwoList = service.selectgongguNumberProductList(2);
+		model.addAttribute("gongguTwoList", gongguTwoList);
+		
+		// 5인 공동구매
+		ArrayList<Product> gongguFiveList = service.selectgongguNumberProductList(5);
+		model.addAttribute("gongguFiveList", gongguFiveList);
+		
+		// 식품 카테고리 상품 리스트
+		ArrayList<Product> category3List = service.selectCategoryProductList(3);
+		model.addAttribute("category3List", category3List);
+		
+		// 공동구매 진행
 		
 		
 		return "common/main";

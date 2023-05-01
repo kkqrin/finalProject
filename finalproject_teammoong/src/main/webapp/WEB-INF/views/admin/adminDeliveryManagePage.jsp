@@ -37,6 +37,12 @@
     .changeOrderStatusBtn{
     	cursor: pointer;
     }
+    [name=orderSearchBox]{
+		width: 500px;
+	}
+    .tbl-box{
+		width: 1600px;
+	}
     img {
  		 width: 100px;
  		 height: 50px;
@@ -46,6 +52,11 @@
 	img:hover {
 	 	 transform: scale(1.5);
 	}
+	
+	.tbl-box tr:hover {
+	  background-color: #e1e4e5;
+	}
+	
 
 
 
@@ -54,7 +65,7 @@
     <c:if test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
         <!-- 관리자일때만 페이지 보이게 세팅 -->
     </c:if>
-    <div class="adminPage-wrapper" id="adminMemberTable">
+    <div class="adminPage-wrapper" id="adminOrderTable">
         <div class="adminPage-header">
             <div class="adminPage-title"><a href="/#">Moong's Admin</a></div>
         </div>
@@ -68,7 +79,6 @@
                             <option id="searchMemberNo" value="memberNo">회원번호 검색</option>
                             <option id="searchOrderStatus" value="orderStatus">주문 상태 검색</option>
                         </select>
-                        <input type="text" name="orderSearchBox" id="searchOption">
                         <!-- 주문 상태 검색 시 1,2,3,4 로 변환해주는 절차 필요 -->
                         <select id="orderStatusSelect">
                         	<option value="1">결제완료</option>
@@ -78,10 +88,14 @@
                         	<option value="5">결제취소</option>
                         	<option value="6">환불완료</option>
                         </select>
-                        <button type="button" name="searchSubmitBtn">검색</button>
+                        <input type="text" name="orderSearchBox" id="searchOption">
+                        <div class="search-btns">
+	                        <button type="button" name="searchSubmitBtn" class="searchSubmit Btn">검색</button>
+	                        <button type="button" class="goList" class="goList Btn">목록</button>
+                        </div>
                     </div>
                     <div class="adminPage-result">
-                        <table>
+                        <table class="table tbl-box">
                             <tr>
                             	<th>구분</th>
                             	<th>상품사진</th>
@@ -130,14 +144,78 @@
                                     	</c:when>
                                     </c:choose>
                                     <td>
-                                        <select name="orderStatusList">
-                                            <option value="1">결제완료</option>
-                                            <option value="2">배송준비중</option>
-                                            <option value="3">배송중</option>
-                                            <option value="4">배송완료</option>
-                                            <option value="5">결제취소</option>
-                                            <option value="6">환불완료</option>
-                                        </select>
+                                    	<c:choose>
+                                    		<c:when test="${o.orderStatus == 1 }">
+                                    			<select name="orderStatusList" class="orderStatusList">
+		                                            <option value="1" selected>결제완료</option>
+		                                            <option value="2">배송준비중</option>
+		                                            <option value="3">배송중</option>
+		                                            <option value="4">배송완료</option>
+		                                            <option value="5">결제취소</option>
+		                                            <option value="6">환불완료</option>
+		                                        </select>
+                                    		</c:when>
+                                    	</c:choose>
+                                    	<c:choose>
+                                    		<c:when test="${o.orderStatus == 2 }">
+                                    			<select name="orderStatusList" class="orderStatusList">
+		                                            <option value="1">결제완료</option>
+		                                            <option value="2" selected>배송준비중</option>
+		                                            <option value="3">배송중</option>
+		                                            <option value="4">배송완료</option>
+		                                            <option value="5">결제취소</option>
+		                                            <option value="6">환불완료</option>
+		                                        </select>
+                                    		</c:when>
+                                    	</c:choose>
+                                    	<c:choose>
+                                    		<c:when test="${o.orderStatus == 3 }">
+                                    			<select name="orderStatusList" class="orderStatusList">
+		                                            <option value="1">결제완료</option>
+		                                            <option value="2">배송준비중</option>
+		                                            <option value="3" selected>배송중</option>
+		                                            <option value="4">배송완료</option>
+		                                            <option value="5">결제취소</option>
+		                                            <option value="6">환불완료</option>
+		                                        </select>
+                                    		</c:when>
+                                    	</c:choose>
+                                    	<c:choose>
+                                    		<c:when test="${o.orderStatus == 4 }">
+                                    			<select name="orderStatusList" class="orderStatusList">
+		                                            <option value="1">결제완료</option>
+		                                            <option value="2">배송준비중</option>
+		                                            <option value="3">배송중</option>
+		                                            <option value="4" selected>배송완료</option>
+		                                            <option value="5">결제취소</option>
+		                                            <option value="6">환불완료</option>
+		                                        </select>
+                                    		</c:when>
+                                    	</c:choose>
+                                    	<c:choose>
+                                    		<c:when test="${o.orderStatus == 5 }">
+                                    			<select name="orderStatusList" class="orderStatusList">
+		                                            <option value="1">결제완료</option>
+		                                            <option value="2">배송준비중</option>
+		                                            <option value="3">배송중</option>
+		                                            <option value="4">배송완료</option>
+		                                            <option value="5" selected>결제취소</option>
+		                                            <option value="6">환불완료</option>
+		                                        </select>
+                                    		</c:when>
+                                    	</c:choose>
+                                    	<c:choose>
+                                    		<c:when test="${o.orderStatus == 6 }">
+                                    			<select name="orderStatusList" class="orderStatusList">
+		                                            <option value="1">결제완료</option>
+		                                            <option value="2">배송준비중</option>
+		                                            <option value="3">배송중</option>
+		                                            <option value="4">배송완료</option>
+		                                            <option value="5">결제취소</option>
+		                                            <option value="6" selected>환불완료</option>
+		                                        </select>
+                                    		</c:when>
+                                    	</c:choose>
                                     </td> 
                                     <td>
                                     	<input type="hidden" class="orderNo" value="${o.orderNo }">
@@ -161,12 +239,15 @@
 <!-- 스크립트를 넣어봅시다 -->
     <script>
     /* status 변경 */
+    $(document).ready(function(){
+    	
+    	
+    })
     	$(".changeOrderStatusBtn").on("click",function(){
     		var orderStatus = $(this).parent().prev().children().val();
     		var orderNo = $(this).prev().val();
-    		
-    		console.log(orderStatus);
     		console.log(orderNo);
+    		console.log(orderStatus);
     		
             $.ajax({
                 url: "/ajaxChangeDeliveryStatus.do",
@@ -174,7 +255,7 @@
                 data: {orderStatus : orderStatus, orderNo : orderNo},
                 success: function(data) {
                 	if(data == "ok"){
-                		$("#adminMemberTable").load(location.href+ '#adminMemberTable');
+                		$("#adminOrderTable").load(location.href+ '#adminOrderTable');
                 	}else{
 	    				console.log("다시 시도");
                 		
@@ -252,14 +333,15 @@
                    	if(data){
                    		$("#ajaxResult").empty();
                    			$(".adminPage-result").hide();
-  							const table =$("<table>");
+  							const table =$("<table class='tbl-box'>");
   							const titleTr = $("<tr>");
-  							titleTr.html("<th>구분</th><th>주문번호</th><th>상품번호</th><th>회원번호</th><th>주문일자</th><th>상품원가</th><th>수량</th><th>가격</th><th>배송주소</th><th>결제상태</th><th>주문상태</th><th>주문상태 변경</th>");
+  							titleTr.html("<th>구분</th><th>상품사진></th><th>주문번호</th><th>상품번호</th><th>회원번호</th><th>주문일자</th><th>상품원가</th><th>수량</th><th>가격</th><th>배송주소</th><th>결제상태</th><th>주문상태</th><th>주문상태 변경</th>");
   							table.append(titleTr);
   							for(let i=0;i<data.length;i++){
   								const tr = $("<tr>");
   								tr.append("<td>"+"</td>")
   								tr.append("<td>"+data[i].orderNo+"</td>");
+  								tr.append("<td><img src='/resources/upload/product/"+data[i].thumbnail+"'></td>")
   								tr.append("<td>"+data[i].productNo+"</td>");
   								tr.append("<td>"+data[i].memberNo+"</td>");
   								tr.append("<td>"+data[i].orderDate+"</td>");
@@ -281,20 +363,57 @@
   								}else if(data[i].orderStatus == 6){
   									tr.append("<td>환불완료</td>");
   								}
-  								tr.append()
-  							
-  								table.append(tr);
+  								var select = $("<select name='orderStatusList' class='orderStatusList'></select>");
+								tr.append(select.append(
+							                $("<option value='1'" + (data[i].orderStatus == 1 ? " selected" : "") + ">결제완료</option>"),
+							                $("<option value='2'" + (data[i].orderStatus == 2 ? " selected" : "") + ">배송준비중</option>"),
+							                $("<option value='3'" + (data[i].orderStatus == 3 ? " selected" : "") + ">배송중</option>"),
+							                $("<option value='4'" + (data[i].orderStatus == 4 ? " selected" : "") + ">배송완료</option>"),
+							                $("<option value='5'" + (data[i].orderStatus == 5 ? " selected" : "") + ">결제취소</option>"),
+							                $("<option value='6'" + (data[i].orderStatus == 6 ? " selected" : "") + ">환불완료</option>")
+							     ));
+								tr.append("<td><div class='changeOrderStatusBtn'>상품 상태 변경</div></td>"); // 확정버튼으로
+								table.append(tr);
   						}
   						$("#ajaxResult").append(table);
                    		
                    	}else{
    	    				console.log("다시 시도");
                    	}
+                   	
+	                 // 상태변경
+	                	$(".changeOrderStatusBtn").on("click",function(){
+	                		var orderNo = $(this).parent().parent().children().eq(1).text();
+	                		var orderStatus = $(this).parent().prev().val();
+	                		
+	                		
+	                        $.ajax({
+	                            url: "/ajaxChangeDeliveryStatus.do",
+	                            type: "POST",
+	                            data: {orderStatus : orderStatus, orderNo : orderNo},
+	                            success: function(data) {
+	                            	if(data == "ok"){
+	                            		$("#adminOrderTable").load(location.href+ '#adminOrderTable');
+	                            	}else{
+	                    				console.log("다시 시도");
+	                            		
+	                            	}
+	                            }
+	                        })
+	                		
+	                	});
                    }
                })
           		 
            });
-       	 
+            
+            /*목록으로*/
+            $(".goList").on("click",function(){
+            	location.reload();
+            })
+
+            
+            /* 이미지 css */
             $("img").hover(function () {
             	$(this).css("transform", "scale(1.5)"); //이미지 크기를 1.5배로 늘립니다.
             	},
@@ -302,7 +421,7 @@
             	$(this).css("transform", "scale(1)"); //이미지 크기를 원래 크기로 돌립니다.
             	}
 			);   	
-            
+           
             
         
     </script>

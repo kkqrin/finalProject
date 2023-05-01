@@ -27,7 +27,9 @@ public class AskItem {
 	private String askTitle;
 	private String askContent;
 	private String askDate;
-	private ArrayList<AskItemCategory>categoryList;
+	private ArrayList<AskItemCategory>categoryList; // 필요없는듯?
 	private ArrayList<DocuVO>fileList;
+	
+	private String categoryName;
 	
 }

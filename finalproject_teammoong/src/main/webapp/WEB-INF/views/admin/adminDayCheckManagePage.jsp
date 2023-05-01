@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,13 +21,12 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script> 
 	<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script> 
 	<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
-	
 	<!-- Bootstrap JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
-	
 	<!-- css -->
 	<link rel="stylesheet" href="/resources/css/admin/admin.css" />
 	<link rel="stylesheet" href="/resources/css/common/default.css" />
+	
 	
 </head>
 <style>
@@ -74,36 +74,7 @@
             <div class="adminPage-title"><a href="/#">Moong's Admin</a></div>
         </div>
         <div class="adminPage-back">
-            <div class="adminPage-sidebar">
-                <ul>
-			 	 	<li><a href="/admin.do">대시보드</a></li>
-			 	</ul>
-			    <ul>
-			         <li><a href="/adminMemberPage.do?reqPage=1">회원 관리</a></li><!-- jsp 생성완료 -->
-			    </ul>
-			    <ul>
-			         <li><a>매출 관리</a></li>
-			         <li><a href="/adminTotalSalesManage.do?reqPage=1">전체 매출 관리</a></li><!-- jsp 생성완료 -->
-			         <li><a href="/adminCategorySalesManage.do">카테고리별 매출관리</a></li>
-			    </ul>
-			    <ul>
-			         <li><a>상품 관리</a></li>
-			         <li><a href="/adminTotalProductList.do?reqPage=1">상품 관리</a></li><!-- jsp 생성완료 -->
-			         <li><a href="/adminProductRegist.do?reqPage=1">상품 등록</a></li>
-			         <li><a href="/adminDeliveryManagePage.do?reqPage=1">배송 관리</a></li>
-			    </ul>
-			    <ul>
-			         <li><a>이벤트 관리</a></li>
-			         <li><a href="/adminDaycheckManagePage.do">쿠폰 발행 관리</a></li>
-			         <li><a href="/adminGongguManagePage.do">쿠폰 발행 관리</a></li>
-			    </ul>
-			    <ul>
-			         <li><a href="#">여여붙 대시보드</a></li>
-			         <li><a href="/adminBoardManagePage.do?reqPage=1">여여붙게시판 관리</a></li><!-- jsp 생성완료 -->
-			         <li><a href="/adminBoardReportManagePage.do?reqPage=1">여여붙 신고 관리</a></li><!-- jsp 생성완료 -->
-			         <li><a href="/adminBoardCategorySales.do">카테고리별 매출관리</a></li>
-			    </ul>
-            </div>
+            <jsp:include page="/WEB-INF/views/admin/adminSideNavi.jsp"/>
             <div class="adminPage-main">
                 <div class="adminPage-content">
                     <div class="adminPage-result">

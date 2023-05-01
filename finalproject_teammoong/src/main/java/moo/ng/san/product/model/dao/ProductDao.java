@@ -207,6 +207,16 @@ public class ProductDao {
 		return null;
 	}
 
+	public ArrayList<Product> selectgongguNumberProductList(int i) {
+		List list = sqlSession.selectList("product.selectgongguNumberProductList",i);
+		return (ArrayList<Product>)list;
+	}
+
+	public ArrayList<Product> selectCategoryProductList(int i) {
+		List list = sqlSession.selectList("product.selectCategoryProductList",i);
+		return (ArrayList<Product>)list;
+	}
+
 	
 	
 	
