@@ -295,7 +295,7 @@ font-variation-settings:
 						<div id="root">
 							<h5>사진등록</h5>
 							<div class="contents">
-							  <div class="upload-box">
+							  <div class="upload-box" style="position: relative;">
 								<div id="drop-file" class="drag-file">
 								  <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image" >
 								  <p class="message">사진 드래그 업로드</p>
@@ -303,6 +303,7 @@ font-variation-settings:
 								</div>
 								<label class="file-label" for="chooseFile">사진선택</label>
 								<input class="file" name="reviewFile" id="chooseFile" type="file" onchange="dropFile.handleFiles(this.files)" accept="image/png, image/jpeg, image/gif, image/jpg" multiple>
+								<!-- <div class="ab-product-count" style="margin: 5px;">3</div> -->
 							  </div>
 							</div>
 						  </div>
@@ -345,6 +346,9 @@ font-variation-settings:
 
 
 <script>
+
+	let fileCnt = 0;
+
 	function DropFile(dropAreaId, fileListId) {
             let dropArea = document.getElementById(dropAreaId);
             let fileList = document.getElementById(fileListId);
@@ -381,11 +385,22 @@ font-variation-settings:
               files = [...files];
               // files.forEach(uploadFile);
               files.forEach(previewFile);
+			  console.log("업로드 끝 : " +fileCnt);
+
+			  // 올린 사진 개수 표시
+			  // <div class="ab-product-count" style="margin: 5px;">3</div>
+				const abCnt = $("<div class='ab-product-count' style='margin: 5px;'>");
+				abCnt.text(fileCnt);
+				
+				$(".upload-box").append(abCnt);
             }
           
             function previewFile(file) {
-              console.log(file);
-              renderFile(file);
+            //   console.log(file);
+				// 올린 사진 개수 카운트
+				fileCnt++;
+				console.log("cnt : "+fileCnt)
+				renderFile(file);
             }
           
             function renderFile(file) {
@@ -421,6 +436,9 @@ font-variation-settings:
               document.getElementById('preview').src = "";
             }
           }
+
+
+
 	//모달 관련 기능
 	$(function () {
 		modalOnfunction();
@@ -533,11 +551,21 @@ font-variation-settings:
 						const btnZoneDiv = $("<div>");
 						// const btnForm = $("<form>");
 						const btn = $("<button>");
-						btn.addClass("btn btn-pri size01 reviewModalBtn");
-						btn.attr('type','button')
-						btn.attr('id',"insertReview");
-						btn.attr('data-modal','#modalReview');
-						btn.text("리뷰쓰기");
+							btn.attr('type','button')
+							btn.attr('id',"insertReview");
+							
+						if(p.reviewCheck == 0){
+							btn.addClass("btn btn-pri size01 reviewModalBtn");
+							btn.text("리뷰쓰기");
+							btn.attr('data-modal','#modalReview');
+						}else if(p.reviewCheck == 1){
+							btn.addClass("btn btn-dkgray size01 reviewModalBtn");
+							btn.text("리뷰완료");
+							btn.attr('data-modal','');
+						}
+
+
+
 
 						const hidden1 = $("<input type='hidden' class='productNo' value="+p.productNo+">");
 						const hidden2 = $("<input type='hidden' class='optionInfoNo' value="+p.optionInfoNo+">");
@@ -563,9 +591,18 @@ font-variation-settings:
 					$(".insertProductNoVal").val(productNo);
 					$(".insertOptionInfoNoVal").val(optionNo);
 				});
+
+
+				
+
 			}
 		});
+
+
+
+
 	});
+
 	function modalOnfunction(){
 		//모달 관련 기능
 		$('[data-modal]').click(function (event) {
@@ -587,6 +624,9 @@ font-variation-settings:
 			}
 		});
 	}
+
+
+
 </script>
 </body>
 </html>

@@ -414,10 +414,20 @@
                             <div class="review-right">
                                 <div class="review-info">
                                     <div class="review-rating">
-                                        <div class="material-symbols-outlined star-rate">star</div>
-                                        <div class="rating-number">${i.rating}</div>
+                                        <!-- 리뷰 별점 -->
+                                        <c:forEach var="index" begin="1" end="${i.rating}" step="1">
+                                                <div class="material-symbols-outlined star-rate">star</div>
+                                        </c:forEach>
+                                        <c:if test="${ (i.rating*2) % 2 == 1 }">
+                                            <div class="material-symbols-outlined star-rate">star_half</div>
+                                        </c:if>
+                                        <!-- <div class="rating-number">${i.rating}</div> -->
                                     </div>
                                     <div class="review-option">
+                                        <div class="review-writer" style="padding-right: 20px; font-size: 12px; display: flex; align-items: center;">
+                                            <div class="material-symbols-outlined" style="color: #9e9e9e; font-size: 20px; margin-right: 5px;">account_circle</div>
+                                            <div>${i.reviewWriter}</div>
+                                        </div>
                                         <div class="review-report" data-modal="#modal-report-btn">
                                             <span class="material-symbols-outlined">warning</span>
                                             <input type="hidden" id="reviewNoTest" value="${i.reviewNo}">

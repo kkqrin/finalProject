@@ -156,7 +156,8 @@
              OD.ORDER_SALE_PRICE AS orderSalePrice,
              OD.ORDER_DETAIL_CNT AS orderDetailCnt,
              (SELECT OPTION_INFO_NO FROM OPTION_INFO_TBL WHERE OPTION_INFO_NO = OD.OPTION_INFO_NO) AS optionInfoNo,
-             (SELECT OPTION_DATEAIL FROM OPTION_INFO_TBL WHERE OPTION_INFO_NO = OD.OPTION_INFO_NO) AS optionDetailName
+             (SELECT OPTION_DATEAIL FROM OPTION_INFO_TBL WHERE OPTION_INFO_NO = OD.OPTION_INFO_NO) AS optionDetailName,
+             (select count(*) from review_tbl r where r.product_no = p.product_no and order_no=o.order_no) AS reviewCheck
        FROM ORDER_TBL o
        left join order_detail od on o.order_no = od.order_no
        left join product_tbl p on od.product_no = p.product_no
@@ -174,4 +175,12 @@
 	<update id="updateOrderStatusConfirm" parameterType="_int">
 		update order_tbl set order_status = 7 where order_no = #{_parameter}
 	</update>
+	
+	<select id="selectReviewCheckList" parameterType="_int" resultType="p">
+        select
+        	product_no AS productNo
+        from
+        (select * from review_tbl)
+        right join (select product_no from order_detail where order_no = #{_parameter}) using (product_no)
+	</select>
 </mapper>

@@ -149,6 +149,7 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
+    align-items: center;
 }
 
 .review-option{
@@ -183,14 +184,13 @@
 .review-content{
     /* background-color: lavender; */
     width: 800px;
-    height: 210px;
+    height: 180px;
     padding: 30px;
     box-sizing: border-box;
     overflow: auto;
-    border: 1px solid #ccc;
-
-    
+    border: 1px solid #ccc;   
 }
+
 
 ::-webkit-scrollbar { width: 5.2px; } /* 스크롤 바 */
 

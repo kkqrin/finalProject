@@ -38,7 +38,7 @@ public class ReviewController {
 		}
 		int result = service.insertReview(review, fileList);
 		if(result == (fileList.size()+1)) {
-			return "redirect:/";
+			return "redirect:/myOrderList.do";
 		} else {
 			return "redirect:/";
 		}

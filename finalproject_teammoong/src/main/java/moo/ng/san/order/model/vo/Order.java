@@ -58,4 +58,6 @@ public class Order {
 
 	private int orderSalePrice; // 상품테이블의 productPrice와 productDiscount 계산한 값
 	
+	private int reviewCheck;
+	
 }
