@@ -80,16 +80,10 @@ public class AdminController {
 		String salesCount = service.selectAllSalesCount(); 
 		String salesVariation = service.selectVariationSalesCount();
 		
+		String bestSalesCount = service.selectBestProductCount();
+				
 		
-		//수정필요
-		ArrayList<Product> list = service.selectBestProductCount();
-		int bestSalesCount = 0;
-		for(Product p : list) {
-			int bestProductCnt = p.getPresentCnt();
-			int bestProductPrice = p.getProductPrice();
-			double bestProductDiscount = p.getProductDiscount();
-			bestSalesCount += bestProductCnt * bestProductPrice * ((100-bestProductDiscount)/100) ;
-		}
+		
 		//하단부터는 논의가 필요함
 		/*
 		String couponCount = service.selectEventCount();  쿼리문 대기
@@ -104,7 +98,7 @@ public class AdminController {
 		total[5] = boardVariation;
 		total[6] = salesCount;
 		total[7] = salesVariation;
-		total[8] = Integer.toString(bestSalesCount);
+		total[8] = bestSalesCount;
 		// 하단은 논의가 필요
 		/*
 		total[9] = couponCount;

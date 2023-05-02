@@ -774,10 +774,10 @@ public class AdminService {
 		return list;
 	}
 
-	public ArrayList<Product> selectBestProductCount() {
-		ArrayList<Product> list = dao.selectBestProductCount();
+	public String selectBestProductCount() {
+		String result = dao.selectBestProductCount();
 		
-		return list;
+		return result;
 	}
 
 	public ArrayList<ReviewReport> selectReviewReportList(ReviewReport r) {

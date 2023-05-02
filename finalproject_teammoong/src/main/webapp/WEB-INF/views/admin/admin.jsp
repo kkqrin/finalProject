@@ -208,7 +208,7 @@
 	                        <div class="member icon"><span class="material-symbols-outlined">account_circle</span></div>
 	                        <div class="member subTitle"><h4>총 회원수</h4></div>
 	                        <div class="member totalCount"><span id="memberTotalCount"></span></div>
-	                        <div class="member variationTitle"><h5 style="font-size: 20px">증감</h5></div>
+	                        <div class="member variationTitle"><h5 style="font-size: 20px">금일 회원가입</h5></div>
 	                        <div class="member-variationCount" style="font-weight: bold"></div>
 	                    </div>
 	                    <div class="mainContent c-2">
@@ -216,7 +216,7 @@
 	                        <div class="product icon"><span class="material-symbols-outlined">redeem</span></div>
 	                        <div class="product subTitle"><h4>오늘 판매된 상품</h4></div>
 	                        <div class="product totalCount"><span id="productTotalCount"></span></div>
-	                        <div class="product variationTitle"><h5 style="font-size: 20px">증감</h5></div>
+	                        <div class="product variationTitle"><h5 style="font-size: 20px">금일 등록 상품</h5></div>
 	                        <div class="product-variationCount" style="font-weight: bold"></div>
 	                    </div>
                 	</div>
@@ -226,7 +226,7 @@
 	                        <div class="board icon"><span class="material-symbols-outlined">thumb_up</span></div>
 	                        <div class="board subTitle"><h4>오늘 등록된 게시물</h4></div>
 	                        <div class="board totalCount"><span id="boardTotalcount"></span></div>
-	                        <div class="board variationTitle"><h5 style="font-size: 20px">증감</h5></div>
+	                        <div class="board variationTitle"><h5 style="font-size: 20px">금일 등록 게시글</h5></div>
 	                        <div class="board-variationCount" style="font-weight: bold"></div>
 	                    </div>
 	                    <div class="mainContent c-4">
@@ -234,7 +234,7 @@
 	                        <div class="order icon"><span class="material-symbols-outlined">calculate</span></div>
 	                        <div class="order subTitle"><h4>이번달 매출액</h4></div>
 	                        <div class="order-totalCount"><span id="orderTotalcount"></span></div>
-	                        <div class="order variationTitle"><h5 style="font-size: 20px">증감</h5></div>
+	                        <div class="order variationTitle"><h5 style="font-size: 20px">금일 판매금액</h5></div>
 	                        <div class="order-variationCount" style="font-weight: bold"></div>
 	                    </div>
                 	</div>
@@ -244,8 +244,8 @@
 	                        <div class="bestProduct icon"><span class="material-symbols-outlined">mode_heat</span></div>
 	                        <div class="bestProduct subTitle"><h4>베스트 상품 매출액</h4></div>
 	                        <div class="bestProduct totalCount"><span id="bestProductTotalCount"></span></div>
-	                        <div class="bestProduct variationTitle"><h5 style="font-size: 20px">증감</h5></div>
-	                        <div class="bestProduct variationCount" style="font-weight: bold"></div>
+	                        <!-- <div class="bestProduct variationTitle"><h5 style="font-size: 20px"></h5></div>
+	                        <div class="bestProduct variationCount" style="font-weight: bold"></div> -->
 	                    </div>
 	                    <div class="mainContent c-6">
 	                        <div class="coupon title"><h3>쿠폰 관리</h3></div>

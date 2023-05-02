@@ -367,10 +367,10 @@ public class AdminDao {
 		return (ArrayList<GongguAllInfo>)list;
 	}
 
-	public ArrayList<Product> selectBestProductCount() {
-		List list = sqlSession.selectList("admin.selectBestProductCount");
+	public String selectBestProductCount() {
+		int result = sqlSession.selectOne("admin.selectBestProductCount");
 		
-		return (ArrayList<Product>)list;
+		return Integer.toString(result);
 	}
 
 	public ArrayList<ReviewReport> selectReviewReportList(ReviewReport r) {
