@@ -70,13 +70,18 @@ public class AdminController {
 	public String ajaxTotalCountSelect(Model model) {
 		String memberCount = service.selectAllMemberCount();
 		String memberVariation = service.selectVariationMemberCount();
+		
 		String orderCount = service.selectAllOrderCount();
 		String orderVariation = service.selectVariationOrderCount();
+		
 		String boardCount = service.selectAllBoardCount();
 		String boardVariation = service.selectVariationBoardCount();
+		
 		String salesCount = service.selectAllSalesCount(); 
 		String salesVariation = service.selectVariationSalesCount();
 		
+		
+		//수정필요
 		ArrayList<Product> list = service.selectBestProductCount();
 		int bestSalesCount = 0;
 		for(Product p : list) {
@@ -181,8 +186,8 @@ public class AdminController {
 			}else {
 				sd = new SalesData();
 				sd.setMonthNo(i);
-				sd.setTotalSales(i*10000);
-				sd.setTotalCost(i*8000);
+				sd.setTotalSales(0);
+				sd.setTotalCost(0);
 				list.add(sd);
 			}
 		}
@@ -218,8 +223,8 @@ public class AdminController {
 			}else {
 				sd = new SalesData();
 				sd.setMonthNo(i);
-				sd.setTotalSales(i*10000);
-				sd.setTotalCost(i*8000);
+				sd.setTotalSales(0);
+				sd.setTotalCost(0);
 				list.add(sd);
 			}
 		}
@@ -251,8 +256,8 @@ public class AdminController {
 			}else {
 				sd = new SalesData();
 				sd.setCategoryNo(i);
-				sd.setTotalCost(i*10000);
-				sd.setTotalSales(i*12000);
+				sd.setTotalCost(0);
+				sd.setTotalSales(0);
 				list.add(sd);
 			}
 		}
@@ -347,21 +352,21 @@ public class AdminController {
 		int bestSal = bestSales.getTotalSales();
 		int bestCos = bestSales.getTotalCost();
 		double bestProfit = Math.floor((1-(bestCos/(double)bestSal))*100);
-		double [] otherProfit = new double[otherSalesList.size()];
 		int otherSalSum = 0;
 		
-		for(int i=0;i < otherSalesList.size();i++) {
-			int otherSal = otherSalesList.get(i).getTotalSales();
-			int otherCos = otherSalesList.get(i).getTotalCost();
-			otherProfit[i] = Math.floor((1-(otherCos / (double)otherSal))*100);
+		for(SalesData sd : otherSalesList) {
+			int otherSal = sd.getTotalSales();
+			int otherCos = sd.getTotalCost();
 			otherSalSum += otherSal;
+			double otherProfit = Math.floor((1-(otherCos/(double)otherSal))*100);
+			sd.setOtherProfit(otherProfit);
+			
 		}
 		
 		model.addAttribute("bestSales",bestSales);
 		model.addAttribute("otherSalesList",otherSalesList);
 		model.addAttribute("otherSalSum",otherSalSum);
 		model.addAttribute("bestProfit",bestProfit);
-		model.addAttribute("otherProfit",otherProfit);
 		
 		return "admin/adminCategorySalesManage";
 	}
