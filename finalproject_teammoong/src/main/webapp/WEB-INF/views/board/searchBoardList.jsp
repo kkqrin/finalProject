@@ -27,7 +27,7 @@
 		<div class="content-wrap">
 			<div class="form-title">
 				<div>
-					<p>여기여기붙어라 검색 결과</p>
+					<p style="text-align: center;">여기여기붙어라 [ ${sk} ]에 대한 검색 결과</p>
 					<c:forEach items="${boardList }" var="i">
 						<div class="my-content">
 						<ul class="grid"

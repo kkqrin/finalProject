@@ -93,12 +93,13 @@
 						<div class="posting-info">
 							<div>
 								<span class="posting-info-box">무료배송</span>
-                                <span class="posting-info-box today-close">${p.purchasedVolume}개 구매</span>
+                                <!-- <span class="posting-info-box today-close">${p.purchasedVolume}개 구매</span> -->
 							</div>
 							<div class="star-rating">
-								<div class="material-symbols-outlined star-rate">star</div>
-								<div class="rating-average">4.8</div>
-								<div class="review-count">(152)</div>
+								<!-- <div class="material-symbols-outlined star-rate">star</div> -->
+                                <div></div>
+								<div class="rating-average">${p.purchasedVolume}개 구매</div>
+								<!-- <div class="review-count">(152)</div> -->
 							</div>
 						</div>
 					</div>
