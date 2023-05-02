@@ -144,7 +144,7 @@
 											expand_more
 											</span>
 										</div>
-										<ul>
+										<ul style="z-index: 1000;">
 										<li>뭉쳐야산다<input type="hidden"  value="1"></li>
 										<li>회원주최공구<input type="hidden"  value="2"></li>
 										</ul>

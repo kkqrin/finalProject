@@ -94,43 +94,21 @@
 	</select>
 
 	<select id="selectAllSalesCount" resultType="_int">
-		select
-		    nvl(sum(od.order_sale_price),0) as totalSales,
-		    nvl(sum(od.order_detail_cost * od.order_detail_cnt),0) as totalCost
-		from order_detail od
-		    left join order_tbl ot on(od.order_no = ot.order_no)
-		    left join member_tbl mt on(ot.member_no = mt.member_no)
-		    left join product_tbl pt on(od.product_no = pt.product_no)
-		    left join detail_category dc on (pt.d_category_no = dc.d_category_no)
-		    left join product_category pc on(dc.category_no = pc.category_no)
-		where ot.order_status = 1
+		select sum(totalSales) from 
+        (select product_no, sum(order_detail_cnt) as cnt, sum(order_detail_cnt * order_sale_price) as totalSales from order_detail 
+        left join order_tbl using(order_no)
+		where order_status != 5 and order_status != 6
+        group by product_no order by 2 desc)
 	</select>
 	
 	<select id="selectVariationSalesCount" resultType="_int">
-		select
-		    nvl(sum(od.order_sale_price),0) as totalSales,
-		    nvl(sum(od.order_detail_cost * od.order_detail_cnt),0) as totalCost
-		from order_detail od
-		    left join order_tbl ot on(od.order_no = ot.order_no)
-		    left join member_tbl mt on(ot.member_no = mt.member_no)
-		    left join product_tbl pt on(od.product_no = pt.product_no)
-		    left join detail_category dc on (pt.d_category_no = dc.d_category_no)
-		    left join product_category pc on(dc.category_no = pc.category_no)
-		where ot.order_status = 1 and ot.order_date like sysdate
+		select sum(totalSales) from 
+        (select product_no, sum(order_detail_cnt) as cnt, sum(order_detail_cnt * order_sale_price) as totalSales from order_detail 
+        left join order_tbl using(order_no)
+		where order_status != 5 and order_status != 6 and order_date like sysdate
+        group by product_no order by 2 desc)
 	</select>
 	
-	<select id="selectVariationBeforeSalesCount" resultType="_int">
-		select
-		    nvl(sum(od.order_sale_price),0) as totalSales,
-		    nvl(sum(od.order_detail_cost * od.order_detail_cnt),0) as totalCost
-		from order_detail od
-		    left join order_tbl ot on(od.order_no = ot.order_no)
-		    left join member_tbl mt on(ot.member_no = mt.member_no)
-		    left join product_tbl pt on(od.product_no = pt.product_no)
-		    left join detail_category dc on (pt.d_category_no = dc.d_category_no)
-		    left join product_category pc on(dc.category_no = pc.category_no)
-		where ot.order_status = 1 and ot.order_date like sysdate
-	</select>
 
 	<!-- <select id="selectBestSalesCount" resultType="_int"> 판매량 기준 1~5 사이의 금액을 뽑아옴 /// 쿼리문 수정 필요
 		select rownum as rnum, total_sales.* from
@@ -611,7 +589,7 @@
 	<!-- 전체 sales/cost -->
 	<select id="selectCountTotalSalesData" resultType="sd">
 		select
-		    nvl(sum(od.order_sale_price),0) as totalSales,
+		    nvl(sum(od.order_sale_price * od.order_detail_cnt),0) as totalSales,
 		    nvl(sum(od.order_detail_cost * od.order_detail_cnt),0) as totalCost
 		from order_detail od
 		    left join order_tbl ot on(od.order_no = ot.order_no)
@@ -619,12 +597,12 @@
 		    left join product_tbl pt on(od.product_no = pt.product_no)
 		    left join detail_category dc on (pt.d_category_no = dc.d_category_no)
 		    left join product_category pc on(dc.category_no = pc.category_no)
-		where ot.order_status = 1
+		where ot.order_status != 5 and ot.order_status != 6
 	</select>
 	
 	<select id="selectCountMonthSalesData" parameterType="map" resultType="sd">
 		select
-		    nvl(sum(od.order_sale_price),0) as totalSales,
+		    nvl(sum(od.order_sale_price * od.order_detail_cnt),0) as totalSales,
 		    nvl(sum(od.order_detail_cost * od.order_detail_cnt),0) as totalCost
 		from order_detail od
 		    left join order_tbl ot on(od.order_no = ot.order_no)
@@ -632,13 +610,13 @@
 		    left join product_tbl pt on(od.product_no = pt.product_no)
 		    left join detail_category dc on (pt.d_category_no = dc.d_category_no)
 		    left join product_category pc on(dc.category_no = pc.category_no)
-		where ot.order_status = 1 and to_char(ot.order_date,'yyyy-mm-dd') between #{start} and #{end}
+		where ot.order_status != 5 and ot.order_status != 6 and to_char(ot.order_date,'yyyy-mm-dd') between #{start} and #{end}
 			
 	</select>
 	
 	<select id="selectCountMonthCategorySalesData" parameterType="_int" resultType="sd"> <!-- 매출보고서 작성 -->
 		select
-		    nvl(sum(od.order_sale_price),0) as totalSales,
+		    nvl(sum(od.order_sale_price * od.order_detail_cnt),0) as totalSales,
 		    nvl(sum(od.order_detail_cost * od.order_detail_cnt),0) as totalCost
 		from order_detail od
 		    left join order_tbl ot on(od.order_no = ot.order_no)
@@ -646,12 +624,12 @@
 		    left join product_tbl pt on(od.product_no = pt.product_no)
 		    left join detail_category dc on (pt.d_category_no = dc.d_category_no)
 		    left join product_category pc on(dc.category_no = pc.category_no)
-		where ot.order_status = 1 and pc.category_no = #{_parameter}
+		where ot.order_status != 5 and ot.order_status != 6 and pc.category_no = #{_parameter}
 	</select>
 	
 	<select id="selectMonthSalesData" parameterType="map" resultType="sd"> 
 		select
-		    nvl(sum(od.order_sale_price),0) as totalSales,
+		    nvl(sum(od.order_sale_price * od.order_detail_cnt),0) as totalSales,
 		    nvl(sum(od.order_detail_cost * od.order_detail_cnt),0) as totalCost
 		from order_detail od
 		    left join order_tbl ot on(od.order_no = ot.order_no)
@@ -659,23 +637,16 @@
 		    left join product_tbl pt on(od.product_no = pt.product_no)
 		    left join detail_category dc on (pt.d_category_no = dc.d_category_no)
 		    left join product_category pc on(dc.category_no = pc.category_no)
-		where ot.order_status = 1 and pc.category_no = #{categoryNo } and ot.order_date between #{start} and #{end}
+		where ot.order_status != 5 and ot.order_status != 6 and pc.category_no = #{categoryNo } and ot.order_date between #{start} and #{end}
 	</select>
 	
-	<select id="selectGenderSalesData" parameterType="_int" resultType="sd">
-		select
-		    mt.member_gender as memberGender,
-		    nvl(sum(od.order_sale_price),0) as totalSales,
-		    nvl(sum(od.order_detail_cost * od.order_detail_cnt),0) as totalCost
-		from order_detail od
-		    left join order_tbl ot on(od.order_no = ot.order_no)
-		    left join member_tbl mt on(ot.member_no = mt.member_no)
-		    left join product_tbl pt on(od.product_no = pt.product_no)
-		    left join detail_category dc on (pt.d_category_no = dc.d_category_no)
-		    left join product_category pc on(dc.category_no = pc.category_no)
-		where ot.order_status = 1 and mt.member_gender = #{_parameter}
-		group by mt.member_gender
-		order by mt.member_gender
+	<select id="selectGenderSalesData" resultType="sd">
+		select 
+        member_gender as gender,
+		nvl(sum(od.order_sale_price * od.order_detail_cnt),0) as totalSales
+		from order_detail od join order_tbl using(order_no)
+        join member_tbl using(member_no) 
+		where order_status != 5 and order_status != 6 group by member_gender
 	</select>
 	
 	<select id="selectBestSalesCategory" resultType="sd">
@@ -684,7 +655,7 @@
         (select rownum as rnum, ord.* from
         (select 
 			pc.category_no as categoryNo,
-			nvl(sum(od.order_sale_price),0) as totalSales,
+			nvl(sum(od.order_sale_price * od.order_detail_cnt),0) as totalSales,
 		    nvl(sum(od.order_detail_cost * od.order_detail_cnt),0) as totalCost
             
 			from order_detail od 
@@ -693,7 +664,7 @@
 			join product_category pc on (dc.category_no = pc.category_no)
 			join order_tbl ot on (od.order_no = ot.order_no) 
 			
-		where ot.order_status = 1
+		where ot.order_status != 5 and ot.order_status != 6
         group by pc.category_no
         
         order by totalSales desc) ord) where rnum = 1
@@ -706,7 +677,7 @@
         (select rownum as rnum, ord.* from
         (select 
 			pc.category_no as categoryNo,
-		    nvl(sum(od.order_sale_price),0) as totalSales,
+		    nvl(sum(od.order_sale_price * od.order_detail_cnt),0) as totalSales,
 		    nvl(sum(od.order_detail_cost * od.order_detail_cnt),0) as totalCost
 	           
 			from order_detail od 
@@ -715,35 +686,18 @@
 			join product_category pc on (dc.category_no = pc.category_no)
 			join order_tbl ot on (od.order_no = ot.order_no) 
 			
-		where ot.order_status = 1
+		where ot.order_status != 5 and ot.order_status != 6
         group by pc.category_no
         
         order by totalSales desc) ord) where rnum != 1
 	</select>
 	
-	<select id="selectBestProductCount" resultType="p">
-	SELECT * FROM
-		(SELECT ROWNUM AS RNUM, r.* FROM(
-			SELECT *
-			FROM (
-			  SELECT 
-				PRODUCT_NO AS productNo,
-				D_CATEGORY_NO AS detailCategoryNo,
-				PRODUCT_NAME AS productName,
-				PRODUCT_EA AS productEa,
-				PRODUCT_PRICE AS productPrice,
-				PRODUCT_STATUS AS productStatus,
-				PRODUCT_COST AS productCost,
-				GONGGU_NUMBER AS  gongguNumber,
-				PRODUCT_CONTENT AS productContent,
-				PRODUCT_DISCOUNT AS productDiscount,
-
-                 (SELECT SUM(od.order_detail_cnt) FROM order_detail od left join order_tbl ot on (od.order_no = ot.order_no) WHERE product_no = p.product_no and ot.order_status = 1) AS presentCnt -- 총 주문개수
-			  FROM product_tbl p
-			  join DETAIL_CATEGORY using(D_CATEGORY_NO) ) od
-			WHERE od.presentCnt IS NOT NULL
-			ORDER BY od.presentCnt DESC) r)
-		WHERE RNUM BETWEEN 1 AND 20
+	<select id="selectBestProductCount" resultType="_int">
+		select sum(total_price) from (select rownum as rnum,o.* from
+        	(select product_no, sum(order_detail_cnt) as cnt, sum(order_detail_cnt * order_sale_price) as total_price from order_detail 
+        left join order_tbl using(order_no)
+		where order_status != 5 and order_status != 6
+        group by product_no order by 2 desc)o) where rnum between 1 and 20
 	</select>
 	
 	<!--==================================================================== 리뷰 신고  -->
