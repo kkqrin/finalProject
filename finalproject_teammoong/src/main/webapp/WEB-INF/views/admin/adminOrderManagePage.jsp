@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -114,9 +116,9 @@
                                     <td>${o.productNo }</td>
                                     <td>${o.memberNo }</td>
                                     <td>${o.orderDate }</td>
-                                    <td>${o.productCost }</td>
+                                    <td><fmt:formatNumber value="${o.productCost }"/></td>
                                     <td>${o.orderDetailCnt }</td>
-                                    <td>${o.orderDetailPrice }</td>
+                                    <td><fmt:formatNumber value="${o.orderDetailPrice }"/></td>
                                     <td>${o.deliAddr }</td>
                                     <c:choose>
                                     	<c:when test="${o.orderStatus == 1 }">

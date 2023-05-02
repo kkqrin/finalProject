@@ -33,8 +33,8 @@ public class AdminDao {
 		return Integer.toString(result);
 	}
 
-	public String selectAllOrderCount() {
-		int result = sqlSession.selectOne("admin.selectAllOrderCount");
+	public String selectAllOrderCount(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("admin.selectAllOrderCount",map);
 		return Integer.toString(result);
 	}
 
@@ -315,21 +315,31 @@ public class AdminDao {
 	 * Auto-generated method stub return null; }
 	 */
 
-	public String selectVariationOrderCount(HashMap<String, Object> map) {
-		int orderCount = sqlSession.selectOne("admin.selectVariationOrderCount", map);
+	public String selectVariationOrderCount() {
+		int orderCount = sqlSession.selectOne("admin.selectVariationOrderCount");
+		
+		return Integer.toString(orderCount);
+	}
+	
+	public String selectVariationBeforeOrderCount(HashMap<String, Object> map) {
+		int orderCount = sqlSession.selectOne("admin.selectVariationBeforeOrderCount",map);
 		
 		return Integer.toString(orderCount);
 	}
 
-	public String selectVariationSalesCount(HashMap<String, Object> map) {
-		int result = sqlSession.selectOne("admin.selectVariationSalesCount",map);
-		// TODO Auto-generated method stub
+	public String selectVariationSalesCount() {
+		int result = sqlSession.selectOne("admin.selectVariationSalesCount");
+		return Integer.toString(result);
+	}
+	
+	public String selectVariationBeforeSalesCount() {
+		int result = sqlSession.selectOne("admin.selectVariationBeforeSalesCount");
 		return Integer.toString(result);
 	}
 
 	public ArrayList<AskItem> selectAskItemList(HashMap<String, Object> map) {
 		List list = sqlSession.selectList("admin.selectAskItemList",map);
-		// TODO Auto-generated method stub
+		
 		return (ArrayList<AskItem>)list;
 	}
 

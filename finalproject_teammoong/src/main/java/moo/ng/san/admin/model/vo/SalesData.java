@@ -13,6 +13,7 @@ public class SalesData {
 	private int totalSales;
 	private int totalCost;
 	private int gender;
+	private double otherProfit;
 	
 }
 

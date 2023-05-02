@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -16,9 +17,9 @@
 	<!-- Chart.js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 	<!-- data tables -->
-	<link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/> 
-	<script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
-	
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"/> 
+	<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+		
 
 	
 </head>
@@ -67,6 +68,12 @@
 		float: left;       	
 		background: var(--bg-color, white);
 		box-shadow: var(--box-shadow, 0 0 10px #ffa220); /* 뒤에 색상만 바꿔주면 됨 */
+    }
+    .mainContent>div>h4{
+    	margin: 0;
+    }
+    .mainContent>div>h5{
+    	margin-bottom: 0;
     }
     
     .adminPage-content :hover{
@@ -163,7 +170,23 @@
 	img:hover {
 	 	 transform: scale(1.5);
 	}
+	
+	.highlight {
+	   background-color: #ffa220;
+	   transition: transform 0.2s ease-in-out;
+	}
 
+	.highlight:hover {
+	   transform: translateY(-2px);
+	}
+	
+	.lowlight{
+		background-color: #cc3d50;
+	  	transition: transform 0.2s ease-in-out;
+	}
+	.lowlight:hover {
+	   transform: translateY(-2px);
+	}
 
 
 </style>
@@ -175,6 +198,8 @@
         </div>
         <div class="adminPage-back">
             <jsp:include page="/WEB-INF/views/admin/adminSideNavi.jsp" />
+            
+            
             <div class="adminPage-main">
                 <div class="adminPage-content">
                 	<div class="mainContent-row-1">
@@ -182,18 +207,17 @@
 	                        <div class="member title"><h3>회원수 관리</h3></div>
 	                        <div class="member icon"><span class="material-symbols-outlined">account_circle</span></div>
 	                        <div class="member subTitle"><h4>총 회원수</h4></div>
-	                        <div class="member totalCount"><span id="memberTotalCount"></span><span>명</span></div>
-	                        <div class="member variationTitle"><h5>증감</h5></div>
-	                        <div class="member variationCount"><span>+10명/-10명</span></div>
+	                        <div class="member totalCount"><span id="memberTotalCount"></span></div>
+	                        <div class="member variationTitle"><h5 style="font-size: 20px">증감</h5></div>
+	                        <div class="member-variationCount" style="font-weight: bold"></div>
 	                    </div>
 	                    <div class="mainContent c-2">
 	                        <div class="product title"><h3>상품 관리</h3></div>
-	                        
 	                        <div class="product icon"><span class="material-symbols-outlined">redeem</span></div>
 	                        <div class="product subTitle"><h4>오늘 판매된 상품</h4></div>
-	                        <div class="product totalCount"><span id="productTotalCount"></span><span>개</span></div>
-	                        <div class="product variationTitle"><h5>증감</h5></div>
-	                        <div class="product variationCount"><span>+10개/-10개</span></div>
+	                        <div class="product totalCount"><span id="productTotalCount"></span></div>
+	                        <div class="product variationTitle"><h5 style="font-size: 20px">증감</h5></div>
+	                        <div class="product-variationCount" style="font-weight: bold"></div>
 	                    </div>
                 	</div>
                 	<div class="mainContent-row-2">
@@ -201,17 +225,17 @@
 	                        <div class="board title"><h3>여기여기붙어라 관리</h3></div>
 	                        <div class="board icon"><span class="material-symbols-outlined">thumb_up</span></div>
 	                        <div class="board subTitle"><h4>오늘 등록된 게시물</h4></div>
-	                        <div class="board totalCount"><span id="boardTotalcount"></span><span>개</span></div>
-	                        <div class="board variationTitle"><h5>증감</h5></div>
-	                        <div class="board variationCount"><span>+5개/-5개</span></div>
+	                        <div class="board totalCount"><span id="boardTotalcount"></span></div>
+	                        <div class="board variationTitle"><h5 style="font-size: 20px">증감</h5></div>
+	                        <div class="board-variationCount" style="font-weight: bold"></div>
 	                    </div>
 	                    <div class="mainContent c-4">
 	                        <div class="order title"><h3>매출액 관리</h3></div>
 	                        <div class="order icon"><span class="material-symbols-outlined">calculate</span></div>
 	                        <div class="order subTitle"><h4>이번달 매출액</h4></div>
-	                        <div class="order totalCount"><span id="orderTotalcount"></span><span>원</span></div>
-	                        <!-- <div class="order variationTitle"><span>증감</span></div>
-	                        <div class="order variationCount"><span>+50,000,000원/-50,000,000원</span></div> -->
+	                        <div class="order-totalCount"><span id="orderTotalcount"></span></div>
+	                        <div class="order variationTitle"><h5 style="font-size: 20px">증감</h5></div>
+	                        <div class="order-variationCount" style="font-weight: bold"></div>
 	                    </div>
                 	</div>
                 	<div class="mainContent-row-3">
@@ -219,17 +243,17 @@
 	                        <div class="bestProduct title"><h3>베스트 상품 관리</h3></div>
 	                        <div class="bestProduct icon"><span class="material-symbols-outlined">mode_heat</span></div>
 	                        <div class="bestProduct subTitle"><h4>베스트 상품 매출액</h4></div>
-	                        <div class="bestProduct totalCount"><span id="bestProductTotalCount"></span><span>원</span></div>
-	                        <!-- <div class="bestProduct variationTitle"><span>증감</span></div>
-	                        <div class="bestProduct variationCount"><span>+20,000,000원/-20,000,000원</span></div> -->
+	                        <div class="bestProduct totalCount"><span id="bestProductTotalCount"></span></div>
+	                        <div class="bestProduct variationTitle"><h5 style="font-size: 20px">증감</h5></div>
+	                        <div class="bestProduct variationCount" style="font-weight: bold"></div>
 	                    </div>
 	                    <div class="mainContent c-6">
 	                        <div class="coupon title"><h3>쿠폰 관리</h3></div>
 	                        <div class="coupon icon"><span class="material-symbols-outlined">festival</span></div>
 	                        <div class="coupon subTitle"><h4>현지 진행중인 쿠폰 이벤트</h4></div>
-	                        <div class="coupon totalCount"><span id="couponTotalCount"></span><span>건</span></div>
-	                        <!-- <div class="coupon variationTitle"><span>증감</span></div>
-	                        <div class="coupon variationCount"><span>+1건/-1건</span></div> -->
+	                        <div class="coupon totalCount"><span id="couponTotalCount"></span></div>
+	                        <!-- <div class="coupon variationTitle"><h5 style="font-size: 20px">증감</h5></div>
+	                        <div class="coupon variationCount" style="font-weight: bold"></div> -->
 	                    </div>
                 	</div>
                 </div>
@@ -443,10 +467,10 @@
         var bestProductTotalCount = $("#bestProductTotalCount");
         var couponTotalCount = $("#couponTotalCount");
         
-        var memberSpan = $(".member .variationCount");
-        var productSpan = $(".product .variationCount");
-        var boardSpan = $(".board .variationCount");
-        var orderSpan = $(".order .variationCount");
+        var memberSpan = $(".member-variationCount");
+        var productSpan = $(".product-variationCount");
+        var boardSpan = $(".board-variationCount");
+        var orderSpan = $(".order-variationCount");
 
         $.ajax({
             url : "/ajaxTotalCount.do",
@@ -454,54 +478,79 @@
             dataType : "json",
             success : function(data){
             	console.log(data);
-                memberTotalCount.text(data[0]);
-                if(data[1] > 0){
-	                memberSpan.text("+"+data[1]);
-	                memberSpan.css("color","blue")
-                }else if(data[1] == 0){
-                	memberSpan.text(0);
-                }else if(data[1] < 0){
-                	memberSpan.text("-"+data[1]);
-                	memberSpan.css("color","red")
+            	var memberTotal = parseInt(data[1]);
+            	var productTotal = parseInt(data[3]);
+            	var boardTotal = parseInt(data[5]);
+            	var orderTotal = parseInt(data[7]);
+            	
+                memberTotalCount.text(data[0]+"명"); // 맴버수
+                
+                if(memberTotal > 0){
+                	memberSpan.text("+"+memberTotal+"명");
+                    memberSpan.css("color","blue");
+                    $(".c-1").addClass('highlight');
+                } else if(memberTotal == 0){
+                    memberSpan.text(0);
+                } else if(memberTotal < 0){
+                    memberSpan.text("-"+memberTotal+"명");
+                    memberSpan.css("color","red");
+                    $(".c-1").addClass('lowlight');
                 }
-                productTotalCount.text(data[2]);
-                if(data[3] > 0){
-	                productSpan.text("+"+data[3]);
-	                productSpan.css("color","blue")
-                }else if(data[3] == 0){
+                productTotalCount.text(data[2]+"개"); // 판매 게시글
+                
+                if(productTotal > 0){
+	                productSpan.text("+"+productTotal+"개");
+	                productSpan.css("color","blue");
+	                $(".c-2").addClass('highlight');
+                }else if(productTotal == 0){
                 	productSpan.text(0);
-                }else if(data[3] < 0){
-                	productSpan.text("-"+data[3]);
-                	productSpan.css("color","red")
+                }else if(productTotal < 0){
+                	productSpan.text("-"+productTotal+"개");
+                	productSpan.css("color","red");
+                	$(".c-2").addClass('lowlight');
                 }
-                boardTotalCount.text(data[4]);
-                if(data[5] > 0){
-	                boardSpan.text("+"+data[5]);
-	                boardSpan.css("color","blue")
-                }else if(data[5] == 0){
+                boardTotalCount.text(data[4]+"개"); // 여여붙 게시글
+                
+                if(boardTotal > 0){
+	                boardSpan.text("+"+boardTotal+"원");
+	                boardSpan.css("color","blue");
+	                $(".c-3").addClass('highlight');
+                }else if(boardTotal == 0){
                 	boardSpan.text(0);
-                }else if(data[5] < 0){
-                	boardSpan.text("-"+data[3]);
-                	boardSpan.css("color","red")
+                }else if(boardTotal < 0){
+                	boardSpan.text("-"+boardTotal+"원");
+                	boardSpan.css("color","red");
+                	$(".c-3").addClass('lowlight');
                 }
-                orderTotalCount.text(data[6]);
-                if(data[7] > 0){
-	                orderSpan.text("+"+data[5]);
-	                orderSpan.css("color","blue")
-                }else if(data[7] == 0){
+                
+                orderTotalCount.text(data[6]+"원"); // 주문 매출액
+                
+                if(orderTotal > 0){
+	                orderSpan.text("+"+orderTotal+"원");
+	                orderSpan.css("color","blue");
+	                $(".c-4").addClass('highlight');
+                }else if(orderTotal == 0){
                 	orderSpan.text(0);
-                }else if(data[7] < 0){
-                	orderSpan.text("-"+data[3]);
-                	orderSpan.css("color","red")
+                }else if(orderTotal < 0){
+                	orderSpan.text("-"+orderTotal+"원");
+                	orderSpan.css("color","red");
+                	$(".c-4").addClass('lowlight');
                 }
-                /* bestProductTotalCount.text(data[8]);
-                couponTotalCount.text(data[5]);  */
+                
+                bestProductTotalCount.text(data[8]+"원"); // 베스트 상품 매출액
+                
+                /* couponTotalCount.text(data[5]);  */
             }
             
-        });
+        }); // 대시보드 count
         
+        $(".mainContent").on("click",function(){
+        	$(this).removeClass("highlight");
+        	$(this).removeClass("lowlight");
+        	
+        }) // 대시보드 하이라이트
         
-        const chartDataUrl = "https://example.com/data.json";
+	    const chartDataUrl = "https://example.com/data.json";
         
         $.ajax({
 			url: 'ajaxTotalSalesManage.do',
@@ -578,7 +627,9 @@
 		    }
 		});
         
-        $('#memberTable').DataTable({
+        
+        // 테이블
+        $("#memberTable").DataTable({
 	        dom : 'lfrtip',
 	        searching: true, // 검색 input 세팅
 	        fixedHeader: true, // 헤더 설정
@@ -589,13 +640,12 @@
 	            { searchable: true },
 	            { searchable: true }
 	        ], // 검색 조건 설정, 컬럼에 true 값을 주면 해당 컬럼적용
-	        "lengthMenu": [ [1, 3, 5, -1], [1, 3, 5, "All"] ], // 조회 개수 설정
+	        "lengthMenu": [ [3, 5, -1], [3, 5, "All"] ], // 조회 개수 설정
 	        
 	    });    
         
-         // memberTable
         
-         
+        // 상품테이블 
         $('#productTable').DataTable({
 	        dom : 'lfrtip',
 	        searching: true, // 검색 input 세팅
@@ -607,11 +657,17 @@
 	            { searchable: true },
 	            { searchable: true }
 	        ], // 검색 조건 설정, 컬럼에 true 값을 주면 해당 컬럼적용
-	        "lengthMenu": [ [1, 3, 5, -1], [1, 3, 5, "All"] ], // 조회 개수 설정
+	        "lengthMenu": [ [2, 3, 5, -1], [2, 3, 5, "All"] ], // 조회 개수 설정
 	        
 	    });
+        
+        $('#productTable tbody').on('click', 'tr', function() {
+        	var productNo = $(this).children().eq(0).text();
+        	console.log(productNo);
+   			window.open('http://192.168.10.143/productView.do?productNo='+productNo); 
+	    });
          
-        $('#askItemTable').DataTable({
+        $('#askitemTable').DataTable({
 	        dom : 'lfrtip',
 	        searching: true, // 검색 input 세팅
 	        fixedHeader: true, // 헤더 설정
@@ -622,7 +678,7 @@
 	            { searchable: true },
 	            { searchable: true }
 	        ], // 검색 조건 설정, 컬럼에 true 값을 주면 해당 컬럼적용
-	        "lengthMenu": [ [1, 3, 5, -1], [1, 3, 5, "All"] ], // 조회 개수 설정
+	        "lengthMenu": [ [3, 5, -1], [3, 5, "All"] ], // 조회 개수 설정
 	        
 	    });
         
@@ -637,7 +693,7 @@
 	            { searchable: true },
 	            { searchable: true }
 	        ], // 검색 조건 설정, 컬럼에 true 값을 주면 해당 컬럼적용
-	        "lengthMenu": [ [1, 3, 5, -1], [1, 3, 5, "All"] ], // 조회 개수 설정
+	        "lengthMenu": [ [3, 5, -1], [3, 5, "All"] ], // 조회 개수 설정
 	        
 	    });
         
