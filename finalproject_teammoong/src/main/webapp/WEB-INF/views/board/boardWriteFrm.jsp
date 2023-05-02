@@ -181,7 +181,7 @@
 							<input type="hidden" name="deliveryDate" required></td>
 					</tr>
 				</table>
-				<input class="btn btn-border-sec size01" type="submit" id="form" value="폼만들기">       
+				<input class="btn btn-border-sec size01" type="submit" id="form" value="폼만들기" style="cursor: pointer;">       
 			</form>
 		</div>
 	</div>
@@ -340,17 +340,17 @@
 					});
 					input3.appendTo(td3);
 					input3.on("keyup",function(){
-						const detailPrice = $(this).val();
-						const caution = $(this).next();
-						priceCheck(detailPrice,caution);
+						const detailCount = $(this).val();
+						const cautionn = $(this).next();
+						countCheck(detailCount,cautionn);
 					});
 					td3.appendTo(tr3);
 					
 					const cautionSpann = $("<span class='cautionn'>");
 					input3.after(cautionSpann);
 					
-					input3.appendTo(td3);
-					td3.appendTo(tr3);
+// 					input3.appendTo(td3);
+// 					td3.appendTo(tr3);
 					$("#goods-plus").parent().parent().parent().before(tr0)
 							.before(tr).before(tr2).before(tr3);
 
@@ -627,28 +627,37 @@
 			// result[2] = true;
 		}
 	}		
-
+	
 	$("[name = detailCount]").keyup(function(){
-
-		const inputDetailCount = $("[name=detailCount]").val();
+		
+		const detailCount = $(this).val();
+		const cautionn = $(this).next();
+		
+		countCheck(detailCount,cautionn);
+		
+	});
+	
+	function countCheck(inputDetailCount,cautionn){
 		const DetailCountReg = /^[0-9]+$/;
 		
 		if(DetailCountReg.test(inputDetailCount)){
 			$(this).removeClass("error");
-			$(".caution").css("display","none");
+			cautionn.css("display","none");
 		}else{
 			$(this).addClass("error");
-			$(".cautionn").css("display","block");
-			$(".cautionn").css("color","var(--secondary)");
-			$(".cautionn").html("<a>숫자만 입력해주세요</a>");
+			cautionn.css("display","block");
+			cautionn.css("color","var(--secondary)");
+			cautionn.html("<a>숫자만 입력해주세요</a>");
 			// result[2] = false;
 		}
-		if(inputDetailCount==""){
+		if(inputAccount==""){
 			$(this).removeClass("error");
-			$(".cautionn-tr").eq(0).css("display","none");
+			cautionn.html("");
 			// result[2] = true;
 		}
-	});
+	}	
+	
+	
 	
 // 		$("[name='accountName']").on("change",function(){
 // 		    const nameReg = /^[가-힣]{1,}$/;

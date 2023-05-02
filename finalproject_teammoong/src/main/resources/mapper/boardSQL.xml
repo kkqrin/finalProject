@@ -272,7 +272,7 @@
                         (SELECT FILEPATH FROM file_tbl WHERE file_no=(SELECT MIN(file_NO) FROM file_tbl where board_no=b.board_no)) AS thumbnail,
 						board_name as boardName,
 						board_writer as boardWriter,
-						board_date as boardDate,
+						 to_char(board_date,'"20"YY"년"MM"월"DD"일"') as boardDate,
 						board_count as boardCount
 					from board_tbl b
                     where board_name LIKE '%'||#{searchKeyword}||'%'

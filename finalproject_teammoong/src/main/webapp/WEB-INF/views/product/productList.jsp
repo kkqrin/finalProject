@@ -491,7 +491,6 @@
 		// 	$(".price-through").eq(i).text($(".productPrice").eq(i).text().toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
 		// }
 
-
 	$(document).ready(function(){
 	    // 슬릭 padding-bottom
 		$(".popular-product-wrap .slick-list").attr("style", "padding-bottom: 10px; margin-bottom: 150px;");
@@ -504,7 +503,7 @@
 
 
 <!-- 로딩 -->
-<div tabindex="-1" role="dialog" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front loading ui-dialog-buttons ui-resizable" aria-describedby="ui-id-1" aria-labelledby="ui-id-2" style="position: absolute; height: auto; width: 500px; top: 367px; left: 556.5px; z-index: 101; background-color: transparent; box-shadow: none; text-align: center;">
+<div tabindex="-1" role="dialog" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front loading ui-dialog-buttons ui-resizable" aria-describedby="ui-id-1" aria-labelledby="ui-id-2" style="position: absolute; height: auto; width: 500px; top: 400px; left: 650px; z-index: 101; background-color: transparent; box-shadow: none; text-align: center;">
 	<img src="/resources/slick/loading-loading-forever.gif" id="ui-id-1" class="ui-dialog-content ui-widget-content" style="width: 90px; min-height: 76px; max-height: none; height: auto; position: fixed;">
 <div class="ui-widget-overlay ui-front" style="z-index: 100;"></div>
 <script>

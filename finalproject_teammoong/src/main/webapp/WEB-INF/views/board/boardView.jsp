@@ -30,9 +30,9 @@ sup{
     color: #fff;
     width: 20px;
     border-radius: 50%;
-    position: absolute;
     left: 700px;
     margin-top: 50px;
+    margin-left: 350px;
 }
 
 .caution {
@@ -75,7 +75,6 @@ sup{
 						</div>
 					</c:when>
 					<c:otherwise>
-						<div>작성자 : ${b.boardWriter }</div>
 						<div style="background-color: var(--primary); color: #fff; width: 100%; height: 80px; text-align: center; font-size: 23px; line-height: 80px;">
 							${b.boardName }
 						</div>

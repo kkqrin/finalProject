@@ -8,13 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<style>
-table tr th {
-    background: var(--pink-300)!important;
-}
 
-
-</style>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="content-wrap">
