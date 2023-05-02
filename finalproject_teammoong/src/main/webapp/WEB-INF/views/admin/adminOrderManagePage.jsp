@@ -168,14 +168,8 @@
                                     </td>
                                 </tr>
                             </c:forEach>
-                            <tr>
-                                <th colspan="12">${pageNavi}</th>
-                            </tr>
-                            <form name="searchForm" method="POST" action="" class="">
-	                        	<input type="hidden" class="orderNo" value="${o.orderNo }">
-	                       		<button type="button" onclick="exportToExcel();">엑셀출력</button>
-	                        </form><!--  -->
                         </table>
+                        <div class="pagination">${pageNavi }</div>
                     </div>
                     <div id="ajaxResult" class="table"></div>
                 </div>

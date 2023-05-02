@@ -11,22 +11,48 @@
 	<!-- google icon -->	
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 	<!--  -->
-	<link rel="stylesheet" href="/resources/css/admin/admin.css" />
 	<link rel="stylesheet" href="/resources/css/admin/adminMemberPageCss.css" />
 	<link rel="stylesheet" href="/resources/css/common/default.css" />
+	<link rel="stylesheet" href="/resources/css/admin/admin.css" />
 	
 </head>
 <style>
-	.adminPage-content{
-		overflow: hidden;
-	}
+
     .adminPage-search{
     	width: 100%;
     	float: left;
     }
-    .table{
-    	width: 1500px;
-    }
+    
+    /**/
+	#memberSearchSelect{
+		min-height: 32px;
+	    padding: 8px 10px;
+	    border-radius: 4px;
+	    height: 37px;
+	}
+	
+	.adminPage-search {
+		  display: flex;
+		  align-items: center;
+		  margin-bottom: 15px;
+	}
+
+	.search-select,
+	.search-input,
+	.area-btn {
+	  	margin-right: 10px;
+	}
+
+	.btn {
+	  	margin-right: 5px;
+	}
+	[name=allChangeMemberStatus]{
+		margin-top: 20px;
+	}
+	.size02{
+		font-size: 15px !important;
+	}
+	
 </style>
 <body>
     <c:if test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
@@ -41,18 +67,20 @@
             <div class="adminPage-main">
                 <div class="adminPage-content">
                     <div class="adminPage-search">
-                    	<div class="search-select">
-	                        <select id="memberSearchSelect">
+                    	<div class="search-select"> <!--  -->
+	                        <select id="memberSearchSelect" class="select-custom">
 	                            <option id="searchMemberNo" value="memberNo">회원번호 검색</option>
 	                            <option id="searchMemberId" value="memberId">회원 아이디 검색</option>
 	                            <option id="searchMemberName" value="memberName">회원 이름 검색</option>
 	                        </select>
                     	</div>
-                        <div class="search-input"><input type="text" name="memberSearchBox" id="searchOption"></div>
-                        <div class="search-btns">
-	                        <button type="button" name="searchSubmitBtn" class="searchSubmit Btn">검색</button>
-	                        <button type="button" class="goList" class="goList Btn">목록</button>
+                        <div class="search-input">
+                        	<input type="text" name="memberSearchBox" id="searchOption">
                         </div>
+                        <div class="area-btn right">
+	                        <button type="button" name="searchSubmitBtn" class="btn btn-pri size01">검색</button>
+	                        <button type="button" name="goList" class="btn btn-pri size01">목록</button>
+                        </div><!--  -->
                     </div>
                     <div class="adminPage-result">
                         <table class="table tbl-box">
@@ -147,20 +175,16 @@
 	                                    </c:choose>
                                     </td>
                                     <td>
-                                    	<div class="changeMemberStatusBtn">회원등급 변경</div>
+                                    	<div name="changeMemberStatusBtn" class="area-btn center"><button type="button" class="btn btn-pri size02">등급 변경</button></div>
                                     </td>
                                     <td>
-                                    	<div class="moreInfo">상세보기</div>
+                                    	<div name="moreInfo" class="area-btn center"><button type="button" class="btn btn-pri size02">상세보기</button></div>
                                     </td>
                                 </tr>
                             </c:forEach>
-                            <tr>
-                                <td colspan="11">${pageNavi}</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2"><div name="allChangeMemberStatus">일괄 변경</div></td>
-                            </tr>
                         </table>
+                        <div name="allChangeMemberStatus" class="area-btn left"><button type="button" name="allChangeProductStatus" class="btn btn-pri size02">일괄 변경</button></div>
+                        <div class="pagination">${pageNavi }</div>
                         <!-- 엑셀용 -->
                     </div>
                     <div class="moreResult">
@@ -180,13 +204,9 @@
     <script>
     
     $(document).ready(function(){
-    	const changeMemberStatusBtnTd = $(".changeMemberStatusBtn").parent();
-    	changeMemberStatusBtnTd.css("background-color","#f0a718");
+    	const changeMemberStatusBtnTd = $("[name=changeMemberStatusBtn]").parent();
     	
-    	const moreInfoTd = $(".moreInfo").parent();
-    	moreInfoTd.css("background-color","#f0a718");
-    	
-    	$('tr td[colspan="11"]').css("font-size","30px");
+    	const moreInfoTd = $("[name=moreInfo]").parent();
    
     	// 가입일 == 오늘 / 효과
     	var today = new Date();
@@ -220,15 +240,15 @@
     
     
     /*목록으로*/
-    $(".goList").on("click",function(){
+    $("[name=goList]").on("click",function(){
     	location.reload();
     })
     
     /* 상세보기 */
-   	$(".moreInfo").on("click",function(){
+   	$("[name=moreInfo]").on("click",function(){
    		
    		var memberNo = $(this).parent().parent().children().eq(1).text();
-   		const moreInfo = $(".moreInfo");
+   		const moreInfo = $("[name=moreInfo]");
    		const moreResult = $(".moreResult");
    		const moreResultContent = $(".moreResultContent");
    		const closeBtn = $(".material-symbols-outlined");
@@ -268,7 +288,7 @@
    	
    	
     /* 등급 변경 */
-    	$(".changeMemberStatusBtn").on("click",function(){
+    	$("[name=changeMemberStatusBtn]").on("click",function(){
     		var memberNo = $(this).parent().parent().children().eq(1).text();
     		var memberStatus = $(this).parent().prev().children().val();
     		
@@ -402,8 +422,8 @@
 					                $("<option value='3'" + (data[i].memberStatus == 3 ? " selected" : "") + ">탈퇴회원</option>")
 					            ));
 					            tr.append(td);
-								tr.append("<td><div class='changeMemberStatusBtn'>회원등급 변경</div></td>"); // 확정버튼으로
-								tr.append("<td><div class='moreInfo'>상세보기</div></td>"); // 상세보기로
+								tr.append("<td><div name='changeMemberStatusBtn' class='area-btn center'><button type='button' class='btn btn-pri size02'>등급 변경</button></div></td>"); // 확정버튼으로
+								tr.append("<td><div name='moreInfo' class='area-btn center'><button type='button' class='btn btn-pri size02'>상세보기</button></div></td>"); // 상세보기로
 								table.append(tr);
 						}
 						$("#ajaxResult").append(table);
@@ -413,10 +433,10 @@
                  	}
                  	
                  	/* 상세보기 */
-                   	$(".moreInfo").on("click",function(){
+                   	$("[name=moreInfo]").on("click",function(){
                    		
                    		var memberNo = $(this).parent().prev().prev().prev().prev().prev().prev().prev().prev().prev().text();
-                   		const moreInfo = $(".moreInfo");
+                   		const moreInfo = $("[name=moreInfo]");
                    		const moreResult = $(".moreResult");
                    		const moreResultContent = $(".moreResultContent");
                    		const closeBtn = $(".material-symbols-outlined");
@@ -447,7 +467,7 @@
                    	}) // 상세보기
                    	
                    	/* 등급 변경 */
-                	$(".changeMemberStatusBtn").on("click",function(){
+                	$("[name=changeMemberStatusBtn]").on("click",function(){
                 		var memberNo = $(this).parent().parent().children().eq(1).text();
                 		var memberStatus = $(this).parent().prev().children().val();
                 		

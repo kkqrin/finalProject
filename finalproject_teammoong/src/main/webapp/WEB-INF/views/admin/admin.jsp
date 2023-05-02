@@ -5,21 +5,20 @@
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
   	<!-- jquery -->
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!-- google icon -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+	<!-- data tables -->
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"/> 
+	<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 	<!-- css -->
 	<link rel="stylesheet" href="/resources/css/admin/admin.css" />
 	<!-- Chart.js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-	<!-- data tables -->
-	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"/> 
-	<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-		
+	<!-- Bootstrap JavaScript 모달 -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 	
 </head>
@@ -28,7 +27,7 @@
 		margin-bottom: 20px;
 	}
     .adminPage-main{
-        background-color: ;
+    	margin-top: 35px;
     }
     .adminPage-content{
         background-color: #fff;
@@ -102,6 +101,7 @@
     .adminPage-summary{
     	width : 100%;
     	overflow: hidden;
+    	margin-top: 50px;
     }
     .summary-row-1{
     	float: left;
@@ -131,34 +131,33 @@
     .summary-member{
     	float: left;
     	width: 600px;
-    	border-top: 1px solid #ffa220;
     	height: 100%;
     }
     .summary-product{
     	float: left;
     	width: 600px;
-    	border-top: 1px solid #ffa220;
     	height: 100%;
     	margin-left: 20px;
     }
     .summary-askitem{
        	float: left;
        	width: 600px;
-       	border-top: 1px solid #ffa220;
        	height: 100%;
     }
     .summary-board{
        	float: left;
        	width: 600px;
-        border-top: 1px solid #ffa220;
        	height: 100%;
        	margin-left: 20px;
     }
     .summary-sales{
     	float: left;
     	width: 600px;
-    	border-top: 1px solid #ffa220;
     	height: 100%;
+    }
+    #summaryChart{
+    	height: 280px !important;
+
     }
     
     
@@ -187,7 +186,21 @@
 	.lowlight:hover {
 	   transform: translateY(-2px);
 	}
-
+	.subtitle{
+		font-size: 20px;
+	    font-weight: bold;
+	    border-bottom: 5px solid #ffa220;
+	    margin-bottom: 20px;
+	    padding-left: 30px;
+	    padding-bottom: 15px;
+	    
+	}
+	#memberTable tbody tr{
+		border: 1px soild #ffa220;
+	}
+	table.dataTable tr {
+  		border-bottom: 1px solid #ccc;
+	}
 
 </style>
 <body>
@@ -260,7 +273,7 @@
                 <div class="adminPage-summary">
 	                <div class="summary-row-1">
 		                <div class="summary summary-member">
-		                	<div class="summary-title">회원게시판</div>
+		                	<div class="summary-title subtitle">회원게시판</div>
 		                	<table id="memberTable">
 		                		<thead>
 			                		<tr>
@@ -274,10 +287,10 @@
 		                		<tbody>
 			                		<c:forEach items="${memberList }" var="m">
 			                			<tr>
-			                				<th>${m.memberNo }</th>
-			                				<th>${m.memberId }</th>
-			                				<th>${m.memberName }</th>
-			                				<th>${m.regDate }</th>
+			                				<td>${m.memberNo }</td>
+			                				<td>${m.memberId }</td>
+			                				<td>${m.memberName }</td>
+			                				<td>${m.regDate }</td>
 			                				<c:choose>
 		                                        <c:when test="${m.memberAgree == 0}">
 		                                            <td>동의안함</td>
@@ -292,7 +305,7 @@
 		                	</table>
 		                </div>
 	                	<div class="summary summary-product"> <!-- 제품 등록 현황 5개만 -->
-	                		<div class="summary-title">상품게시판</div>
+	                		<div class="summary-title subtitle">상품게시판</div>
 	                		<table id="productTable">
 	                			<thead>
 		                			<tr>
@@ -388,7 +401,7 @@
                 	</div>
 	                <div class="summary-row-2">
 	                	<div class="summary summary-askitem"> <!-- 입점 문의 5개 -->
-	                		<div class="summary-title">입점문의</div>
+	                		<div class="summary-title subtitle">입점문의</div>
 	                		<table id="askitemTable">
 	                			<thead>
 		                			<tr>
@@ -413,7 +426,7 @@
 	                		</table>
 	                	</div>
 	                	<div class="summary summary-board"> <!-- 여여붙 5개만 -->
-	                		<div class="summary-title">여여붙게시판</div>
+	                		<div class="summary-title subtitle">여여붙게시판</div>
 	                		<table id="boardTable">
 	                			<thead>
 		                			<tr>
@@ -447,7 +460,7 @@
 	                </div>
 	                <div class="summary-row-3">
 	                	<div class="summary summary-sales">
-	                		<div><span>연 매출 차트</span></div>
+	                		<div class="subtitle"><span>연 매출 차트</span></div>
 	                		<canvas id="summaryChart"></canvas>
 	                	</div>
 	                </div>

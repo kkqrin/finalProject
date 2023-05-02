@@ -21,12 +21,37 @@
 	.adminPage-content{
 		float: left;
 	}
-	.tbl-box{
-		width: 1600px;
+	
+	.select-custom{
+		min-height: 32px;
+	    padding: 8px 10px;
+	    border-radius: 4px;
+	    height: 37px;
 	}
-	[name=boardSearchBox]{
-		width: 500px;
+	
+	.adminPage-search {
+		  display: flex;
+		  align-items: center;
+		  margin-bottom: 15px;
 	}
+
+	.search-select,
+	.search-input,
+	.area-btn {
+	  	margin-right: 10px;
+	}
+
+	.btn {
+	  	margin-right: 5px;
+	}
+	[name=allChangeMemberStatus]{
+		margin-top: 20px;
+	}
+	.size02{
+		font-size: 15px !important;
+	}	
+	
+	
 </style>
 <body>
 <c:if test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
@@ -41,46 +66,38 @@
             <div class="adminPage-main">
                 <div class="adminPage-content">
                     <div class="adminPage-search">
-                        <select id="boardSearchSelect">
-                        	<option name="none" value="">선택하세요</option>
-                            <option name="searchDetailName" value="detailName">상품명 검색</option>
-                            <option name="searchCategoryNo" value="categoryNo">카테고리 검색</option>
-                            <option name="searchBoardStatus" value="boardStatus">공구 진행여부</option>
-                        </select>
-                        <select id="categorySelect" name="categorySelectBox">
-                        	<option>카테고리를 선택해주세요</option>
-                            <option value="1">패션</option>
-                            <option value="2">뷰티</option>
-                            <option value="3">식품</option>
-                            <option value="4">생활용품</option>
-                            <option value="5">가전/디지털</option>
-                            <option value="6">가구</option>
-                            <option value="7">침구</option>
-                            <option value="8">인테리어</option>
-                            <option value="9">공구</option>
-                            <option value="10">스포츠/레저/취미</option>
-                            <option value="11">출산/유아동</option>
-                            <option value="12">반려용품</option>
-                            <option value="13">명품관</option>
-                            <option value="88">테스트용</option>
-                        </select>
-                        
+	                    <div class="search-select">
+	                        <select id="boardSearchSelect" class="select-custom">
+	                        	<option name="none" value="">선택하세요</option>
+	                            <option name="searchDetailName" value="detailName">상품명 검색</option>
+	                            <option name="searchCategoryNo" value="categoryNo">카테고리 검색</option>
+	                            <option name="searchBoardStatus" value="boardStatus">공구 진행여부</option>
+	                        </select>
+	                        <select id="categorySelect" class="select-custom">
+	                        	<option>카테고리를 선택해주세요</option>
+	                            <option value="1">패션</option>
+	                            <option value="2">뷰티</option>
+	                            <option value="3">식품</option>
+	                            <option value="4">생활용품</option>
+	                            <option value="5">가전/디지털</option>
+	                            <option value="6">가구</option>
+	                            <option value="7">침구</option>
+	                            <option value="8">인테리어</option>
+	                            <option value="9">공구</option>
+	                            <option value="10">스포츠/레저/취미</option>
+	                            <option value="11">출산/유아동</option>
+	                            <option value="12">반려용품</option>
+	                            <option value="13">명품관</option>
+	                            <option value="88">테스트용</option>
+	                        </select>
+	                    </div>
+                    <div class="search-input">
                         <input type="text" name="boardSearchBox" id="searchOption">
-                        <!-- 주문 상태 검색 시 1,2,3,4 로 변환해주는 절차 필요 -->
-                        <div class="search-btns">
-	                        <button type="button" name="searchSubmitBtn" class="searchSubmit Btn">검색</button>
-	                        <button type="button" class="goList" class="goList Btn">목록</button>
-                        </div>
                     </div>
-                    <div class="boardStatus">
-                    	<div class="boardSalse-wrap">
-	                    	<div class="boardTotalStatus">
-	                    	
-	                    	</div>
-	                    	<div class="boardMonthStatus">
-	                    	
-	                    	</div>
-                    	</div>
+                        <div class="area-btn right">
+	                        <button type="button" name="searchSubmitBtn" class="btn btn-pri size01">검색</button>
+	                        <button type="button" name="goList" class="btn btn-pri size01">목록</button>
+                        </div>
                     </div>
                     <div class="adminPage-result">
                         <table class="table tbl-box">
@@ -110,12 +127,10 @@
                                     <td>${a.categoryName }</td>
 		                            <td>${a.askTitle }</td>
 		                            <td>${a.askDate }</td>
-	                            </c:forEach>
                                 </tr>
-                            <tr>
-                                <th colspan="11">${pageNavi}</th>
-                            </tr>
-                        </table>
+                            </c:forEach>
+                   		</table>
+                        <div class="pagination">${pageNavi }</div>
                     </div>
                     <div id="ajaxResult" class="table"></div>
                 </div>
@@ -125,7 +140,7 @@
 <script type="text/javascript">
 
 /*목록으로*/
-$(".goList").on("click",function(){
+$("[name=goList]").on("click",function(){
 	location.reload();
 })
 

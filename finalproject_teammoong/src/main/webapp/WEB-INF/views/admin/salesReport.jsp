@@ -16,22 +16,66 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 	
 <style>
-	
-	
+	#yearChart{
+		height: 350px !important;
+	}
+	#monthChart{
+		height: 350px !important;
+	}
+	[name=reportTitle]{
+		background-color: black;
+	    color: white;
+	    font-size: 35px;
+	    text-align: center;
+	    margin-bottom: 50px;
+	    border-radius: 30px;
+	    font-weight: bold;
+	    height: 60px;
+	    line-height: 60px;
+	}
+	.firstTr {
+		border-bottom: 3px solid black;
+	}
+	.secondTr{
+		border-bottom: 3px solid black;
+	}
+	.thirdTr{
+		border-bottom: 3px solid black;
+	}
+	.subTitle{
+	    margin-left: 20px;
+	    margin-bottom: 10px;
+	    font-size: 20px;
+	    font-weight: bold;
+	}
+	.dateTitle{
+		margin-left: 710px;
+	    padding-bottom: 20px;
+	    font-size: 20px;
+	    font-weight: bold;
+	}
+	.writerTitle{
+		margin-left: 626px;
+	    padding-bottom: 20px;
+	    font-size: 20px;
+	    font-weight: bold;
+	}
 </style>
 </head>
 <body>
 	<div class="salesReport">
 		<div class="salesReport-main">
 			<table id="dataTables" class="table table-bordered">
-				<tr>매출요약</tr>
+				<div name="reportTitle">뭉쳐야산다 매출보고서</div>
 				<tr>
-					<td><div><canvas id="yearChart"></canvas></div></td>
-					<td><div><canvas id="monthChart"></canvas></div></td>
+					<div class="subTitle">ㅇ 매출 차트</div>
+					<div name="yearChart"><canvas id="yearChart"></canvas></div>
+					<div name="monthChart"><canvas id="monthChart"></canvas></div>
 				</tr>
 			</table>
 			<table id="sumTables" class="table table-bordered">
-				<tr>
+				<div class="subTitle">ㅇ 보고서 본문</div>
+				<tr class="firstTr">
 					<th style="width : 100px">매출액</th>
 					<th style="text-align: right;" colspan="2"><fmt:formatNumber value="${totalSales }"/></th>
 				</tr>
@@ -90,8 +134,7 @@
 						</c:choose>
 					</tr>
 				</c:forEach>
-				
-				<tr>
+				<tr class="secondTr">
 					<th style="width : 100px">매출원가</th>
 					<th style="text-align: right;" colspan="2"><fmt:formatNumber value="${totalCost }"/></th>
 				</tr>
@@ -149,11 +192,13 @@
 						</c:choose>
 					</tr>
 				</c:forEach>
-				<tr>
+				<tr class="thirdTr">
 					<th style="width : 100px">당기순이익</th>
 					<th style="text-align: right;" colspan="2"><fmt:formatNumber value="${profit }"/></th>
 				</tr>
 			</table>
+			<div class="dateTitle"></div>
+			<div class="writerTitle">작성자 : 뭉쳐야산다 일동</div>
 		</div>
 	</div>
 	
@@ -166,8 +211,7 @@
 const chartDataUrl = "https://example.com/data.json";
 
 	$(document).ready(function() {	
-		$("#sumTable").css("border-bottom-color","red")
-		
+			
 		$.ajax({
 			url: 'ajaxTotalSalesManage.do',
 		    dataType: 'json',
@@ -330,8 +374,18 @@ const chartDataUrl = "https://example.com/data.json";
 			} 
 			
 		})
-				
-				
+	
+		
+		// 날짜 입력
+		var dateTitle = $(".dateTitle");
+		
+		var today = new Date();
+		var year = today.getFullYear(); // 년도
+		var month = today.getMonth() + 1;  // 월
+		var date = today.getDate();  // 날짜
+
+		// 출력 예시 : 2023년 5월 2일
+		dateTitle.text(year + "년 " + month + "월 " + date + "일");			
 				
 				
 				

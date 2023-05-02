@@ -97,7 +97,7 @@
 		        			<div class="salesContent">
 		        				<span class="bestSalesCategory">최고 매출 카테고리</span>
 		        				<span class="bestSalesCount"><fmt:formatNumber value="${bestSales.totalSales }"/>원</span>
-		        				<table class="bestSalesTable guide-board">
+		        				<table class="bestSalesTable tbl-box">
 		        					<tr>
 		        						<th>카테고리 베스트</th>
 		        						<th>카테고리 베스트 매출액</th>
@@ -158,7 +158,7 @@
 		        			<div class="salesContent">
 		        				<span class="salesTitle">월 매출액</span>
 		        				<span class="otherSalesCount"><fmt:formatNumber value="${otherSalSum }"/>원</span>
-		        				<table class="otherSalesTable guide-board">
+		        				<table class="otherSalesTable tbl-box">
 		        					<tr>
 		        						<th>카테고리</th>
 		        						<th>매출액</th>

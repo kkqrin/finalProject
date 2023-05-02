@@ -134,14 +134,14 @@ public class AdminService {
 		String pageNavi = "";
 		// 이전버튼
 		if (pageNo != 1) {
-			pageNavi += "<a href='adminMemberPage.do?reqPage=" + (pageNo - 1) + "'>[이전]</a>";
+			pageNavi += "<a href='adminMemberPage.do?reqPage=" + (pageNo - 1) + "'class='btn-pagi ctrl'>[이전]</a>";
 		}
 		// 페이지 숫자 생성
 		for (int i = 0; i < pageNaviSize; i++) {
 			if (pageNo == reqPage) {
-				pageNavi += "<span>" + pageNo + "</span>";
+				pageNavi += "<span class='btn-pagi page-active'>" + pageNo + "</span>";
 			} else {
-				pageNavi += "<a href='adminMemberPage.do?reqPage=" + pageNo + "'>" + pageNo + "</a>";
+				pageNavi += "<a href='adminMemberPage.do?reqPage=" + pageNo + "'class='btn-pagi'>" + pageNo + "</a>";
 			}
 			pageNo++;
 
@@ -151,7 +151,7 @@ public class AdminService {
 		}
 		// 다음버튼
 		if (pageNo <= totalPage) {
-			pageNavi += "<a href='adminMemberPage.do?reqPage=" + pageNo + "'>[다음]</a>";
+			pageNavi += "<a href='adminMemberPage.do?reqPage=" + pageNo + "'class='btn-pagi ctrl'>[다음]</a>";
 		}
 		AdminMemberPageData ampd = new AdminMemberPageData(list, pageNavi);
 
@@ -177,7 +177,7 @@ public class AdminService {
 	// 페이지 네비 주소 수정 필요
 	public AdminProductPageData selectProductList(int reqPage) {
 		// 한 페이지 당 보여줄 게시물 수 : 10개
-		int numPerPage = 10;
+		int numPerPage = 7;
 		// reqPage = 1 : 1~2 , reqPage = 2 3~4
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
@@ -209,14 +209,14 @@ public class AdminService {
 		String pageNavi = "";
 		// 이전버튼
 		if (pageNo != 1) {
-			pageNavi += "<a href='/adminTotalProductList.do?reqPage=" + (pageNo - 1) + "'>[이전]</a>";
+			pageNavi += "<a href='/adminTotalProductList.do?reqPage=" + (pageNo - 1) + "'class='btn-pagi ctrl'>[이전]</a>";
 		}
 		// 페이지 숫자 생성
 		for (int i = 0; i < pageNaviSize; i++) {
 			if (pageNo == reqPage) {
-				pageNavi += "<span>" + pageNo + "</span>";
+				pageNavi += "<span class='btn-pagi page-active'>" + pageNo + "</span>";
 			} else {
-				pageNavi += "<a href='/adminTotalProductList.do?reqPage=" + pageNo + "'>" + pageNo + "</a>";
+				pageNavi += "<a href='/adminTotalProductList.do?reqPage=" + pageNo + "'class='btn-pagi'>" + pageNo + "</a>";
 			}
 			pageNo++;
 
@@ -226,7 +226,7 @@ public class AdminService {
 		}
 		// 다음버튼
 		if (pageNo <= totalPage) {
-			pageNavi += "<a href='/adminTotalProductList.do?reqPage=" + pageNo + "'>[다음]</a>";
+			pageNavi += "<a href='/adminTotalProductList.do?reqPage=" + pageNo + "'class='btn-pagi ctrl'>[다음]</a>";
 		}
 		AdminProductPageData appd = new AdminProductPageData(list, pageNavi);
 
@@ -280,14 +280,14 @@ public class AdminService {
 		String pageNavi = "";
 		// 이전버튼
 		if (pageNo != 1) {
-			pageNavi += "<a href='/adminDeliveryManagePage.do?reqPage=" + (pageNo - 1) + "'>[이전]</a>";
+			pageNavi += "<a href='/adminDeliveryManagePage.do?reqPage=" + (pageNo - 1) + "'class='btn-pagi ctrl'>[이전]</a>";
 		}
 		// 페이지 숫자 생성
 		for (int i = 0; i < pageNaviSize; i++) {
 			if (pageNo == reqPage) {
-				pageNavi += "<span>" + pageNo + "</span>";
+				pageNavi += "<span class='btn-pagi page-active'>" + pageNo + "</span>";
 			} else {
-				pageNavi += "<a href='/adminDeliveryManagePage.do?reqPage=" + pageNo + "'>" + pageNo + "</a>";
+				pageNavi += "<a href='/adminDeliveryManagePage.do?reqPage=" + pageNo + "'class='btn-pagi'>" + pageNo + "</a>";
 			}
 			pageNo++;
 
@@ -297,7 +297,7 @@ public class AdminService {
 		}
 		// 다음버튼
 		if (pageNo <= totalPage) {
-			pageNavi += "<a href='/adminDeliveryManagePage.do?reqPage=" + pageNo + "'>[다음]</a>";
+			pageNavi += "<a href='/adminDeliveryManagePage.do?reqPage=" + pageNo + "'class='btn-pagi ctrl'>[다음]</a>";
 		}
 		
 		AdminOrderPageData aopd = new AdminOrderPageData(list, pageNavi);
@@ -381,14 +381,14 @@ public class AdminService {
 		String pageNavi = "";
 		// 이전버튼
 		if (pageNo != 1) {
-			pageNavi += "<a href='/adminBoardManagePage.do?reqPage=" + (pageNo - 1) + "'>[이전]</a>";
+			pageNavi += "<a href='/adminBoardManagePage.do?reqPage=" + (pageNo - 1) + "'class='btn-pagi ctrl'>[이전]</a>";
 		}
 		// 페이지 숫자 생성
 		for (int i = 0; i < pageNaviSize; i++) {
 			if (pageNo == reqPage) {
-				pageNavi += "<span>" + pageNo + "</span>";
+				pageNavi += "<span class='btn-pagi page-active'>" + pageNo + "</span>";
 			} else {
-				pageNavi += "<a href='/adminBoardManagePage.do?reqPage=" + pageNo + "'>" + pageNo + "</a>";
+				pageNavi += "<a href='/adminBoardManagePage.do?reqPage=" + pageNo + "'class='btn-pagi'>" + pageNo + "</a>";
 			}
 			pageNo++;
 
@@ -398,7 +398,7 @@ public class AdminService {
 		}
 		// 다음버튼
 		if (pageNo <= totalPage) {
-			pageNavi += "<a href='/adminBoardManagePage.do?reqPage=" + pageNo + "'>[다음]</a>";
+			pageNavi += "<a href='/adminBoardManagePage.do?reqPage=" + pageNo + "'class='btn-pagi ctrl'>[다음]</a>";
 		}
 		AdminBoardPageData abpd = new AdminBoardPageData(boardList, pageNavi);
 
@@ -447,14 +447,14 @@ public class AdminService {
 		String pageNavi = "";
 		// 이전버튼
 		if (pageNo != 1) {
-			pageNavi += "<a href='/adminBoardReportManagePage.do?reqPage=" + (pageNo - 1) + "'>[이전]</a>";
+			pageNavi += "<a href='/adminBoardReportManagePage.do?reqPage=" + (pageNo - 1) + "'class='btn-pagi ctrl'>[이전]</a>";
 		}
 		// 페이지 숫자 생성
 		for (int i = 0; i < pageNaviSize; i++) {
 			if (pageNo == reqPage) {
-				pageNavi += "<span>" + pageNo + "</span>";
+				pageNavi += "<span class='btn-pagi page-active'>" + pageNo + "</span>";
 			} else {
-				pageNavi += "<a href='/adminBoardReportManagePage.do?reqPage=" + pageNo + "'>" + pageNo + "</a>";
+				pageNavi += "<a href='/adminBoardReportManagePage.do?reqPage=" + pageNo + "'class='btn-pagi'>" + pageNo + "</a>";
 			}
 			pageNo++;
 
@@ -464,7 +464,7 @@ public class AdminService {
 		}
 		// 다음버튼
 		if (pageNo <= totalPage) {
-			pageNavi += "<a href='/adminBoardReportManagePage.do?reqPage=" + pageNo + "'>[다음]</a>";
+			pageNavi += "<a href='/adminBoardReportManagePage.do?reqPage=" + pageNo + "'class='btn-pagi ctrl'>[다음]</a>";
 		}
 		AdminReportBoardPageData arbpd = new AdminReportBoardPageData(list, pageNavi);
 
@@ -526,6 +526,7 @@ public class AdminService {
 		
 		if(detailName == "") {
 			ArrayList<Board> boardList = dao.selectSearchBoard(b);
+			
 			for(Board board : boardList) {
 					int boardNo = board.getBoardNo();
 					ArrayList<BoardOption> boardOptionList = dao.selectSearchBoardOption(boardNo);
@@ -730,14 +731,14 @@ public class AdminService {
 		String pageNavi = "";
 		// 이전버튼
 		if (pageNo != 1) {
-			pageNavi += "<a href='/adminProductRegist.do?reqPage=" + (pageNo - 1) + "'>[이전]</a>";
+			pageNavi += "<a href='/adminProductRegist.do?reqPage=" + (pageNo - 1) + "'class='btn-pagi ctrl'>[이전]</a>";
 		}
 		// 페이지 숫자 생성
 		for (int i = 0; i < pageNaviSize; i++) {
 			if (pageNo == reqPage) {
-				pageNavi += "<span>" + pageNo + "</span>";
+				pageNavi += "<span class='btn-pagi page-active'>" + pageNo + "</span>";
 			} else {
-				pageNavi += "<a href='/adminProductRegist.do?reqPage=" + pageNo + "'>" + pageNo + "</a>";
+				pageNavi += "<a href='/adminProductRegist.do?reqPage=" + pageNo + "'class='btn-pagi'>" + pageNo + "</a>";
 			}
 			pageNo++;
 
@@ -747,7 +748,7 @@ public class AdminService {
 		}
 		// 다음버튼
 		if (pageNo <= totalPage) {
-			pageNavi += "<a href='/adminProductRegist.do?reqPage=" + pageNo + "'>[다음]</a>";
+			pageNavi += "<a href='/adminProductRegist.do?reqPage=" + pageNo + "'class='btn-pagi ctrl'>[다음]</a>";
 		}
 		
 		AdminAskItemPageData aapd = new AdminAskItemPageData(list, pageNavi);

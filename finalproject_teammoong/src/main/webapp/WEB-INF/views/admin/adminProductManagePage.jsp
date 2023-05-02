@@ -17,10 +17,6 @@
 	<link rel="stylesheet" href="/resources/css/common/default.css" />
 </head>
 <style>
-    .adminPage-content{
-        background-color: #fff;
-        overflow: hidden;
-    }
     .material-symbols-outlined{
         font-size: 150px;
     }
@@ -29,9 +25,6 @@
         width: 300px;
         height: 400px;
         text-align: center;
-    }
-    .table{
-    	border: 1px solid black;
     }
     .table>tbody>tr>th{
     	border: 1px solid black;
@@ -42,42 +35,37 @@
     .searchForm{
     	display: none;
     }
-    .tbl-box{
-    	width: 1600px;
-    }
     .tbl-box th:nth-child(1),
 	.tbl-box th:nth-child(2),
 	.tbl-box th:nth-child(10),
 	.tbl-box th:nth-child(11){
-		width: 55px;
+		width: 45px;
 	}
-	.tbl-box th:nth-child(3){
-		width: 150px;
+	.tbl-box th:nth-child(3),
+	.tbl-box th:nth-child(4){
+		width: 100px;
+	}
+	.tbl-box th:nth-child(5){
+		width: 200px;
 	}
 	.tbl-box th:nth-child(8),
 	.tbl-box th:nth-child(9){
-		width: 75px;
+		width: 60px;
 	}
-	.tbl-box th:nth-child(7){
-		width: 100px;
-	}
-	.tbl-box th:nth-child(4){
-		width: 150px;
-	}
+	.tbl-box th:nth-child(7),
 	.tbl-box th:nth-child(6){
-		width: 100px;
+		width: 50px;
 	}
 	.tbl-box th:nth-child(12),
 	.tbl-box th:nth-child(13){
-		width: 100px;
+		width: 80px;
 	}
     .tbl-box th:nth-child(14){
 		width: 100px;
 	}
-	[name=productSearchBox]{
-		width: 500px;
+	.tbl-box tr{
+		height: 40px;
 	}
-	
     
 	img {
  		 width: 100px;
@@ -86,6 +74,34 @@
 	}
 	img:hover {
 	 	 transform: scale(1.5);
+	}
+	
+	.adminPage-search {
+		  display: flex;
+		  align-items: center;
+		  margin-bottom: 15px;
+	}
+
+	.search-select,
+	.search-input,
+	.area-btn {
+	  margin-right: 10px;
+	}
+
+	.btn {
+	  margin-right: 5px;
+	}
+	#searchOption{
+		width: 400px;
+	}
+	#productSearchSelect{
+		min-height: 32px;
+	    padding: 8px 10px;
+	    border-radius: 4px;
+	    height: 37px;
+	}
+	[name=allChangeProductStatus]{
+		margin-top: 20px;
 	}
 
 
@@ -103,16 +119,17 @@
             <div class="adminPage-main">
                 <div class="adminPage-content">
                     <div class="adminPage-search">
-                        <select id="productSearchSelect">
-                            <option id="searchProductNo" value="productNo">상품 번호 검색</option>
-                            <option id="searchProductName" value="productName">상품 이름</option>
-                            <option id="searchProductStatus" value="productStatus">상품 상태 검색</option>
-                        </select>
-                        <div><input type="text" name="productSearchBox" id="searchOption" placeholder="상태 검색시 [대기/등록/보류/만료]"></div>
-                        <!-- 상품 상태 검색 시 1,2,3,4 로 변환해주는 choose 걸어줘야 함 -->
-                        <div class="search-btns">
-	                        <button type="button" name="searchSubmitBtn" class="searchSubmit Btn">검색</button>
-	                        <button type="button" class="goList" class="goList Btn">목록</button>
+	                    <div class="search-select">
+	                        <select id="productSearchSelect" class="select-custom">
+	                            <option id="searchProductNo" value="productNo">상품 번호 검색</option>
+	                            <option id="searchProductName" value="productName">상품 이름</option>
+	                            <option id="searchProductStatus" value="productStatus">상품 상태 검색</option>
+	                        </select>
+	                    </div>
+                        <div class="search-input"><input type="text" name="productSearchBox" id="searchOption" placeholder="상태 검색시 [대기/등록/보류/만료]"></div>
+                        <div class="area-btn right">
+	                        <button type="button" name="searchSubmitBtn" class="btn btn-pri size01">검색</button>
+	                        <button type="button" name="goList" class="btn btn-pri size01">목록</button>
                         </div>
                     </div>
                     <div class="adminPage-result">
@@ -266,17 +283,13 @@
 	                                    </c:choose>
 	                                </td>
                                     <td>
-                                    	<div class="changeProductStatusBtn">상품 상태 변경</div>
+                                    	<div name="changeProductStatusBtn" class="area-btn center"><button type="button" class="btn btn-pri size02">상태 변경</button></div>
                                     </td>
                                 </tr>
                             </c:forEach>
-                            <tr>
-                                <th colspan="14">${pageNavi}</th>
-                            </tr>
-                            <tr>
-                                <th colspan="2"><button type="button" name="allChangeProductStatus">일괄 변경</button></th>
-                            </tr>
                         </table>
+                        <div class="area-btn left size02"><button type="button" name="allChangeProductStatus" class="btn btn-pri size02">일괄 변경</button></div>
+                        <div class="pagination">${pageNavi }</div>
                    	 </div>
                      <div id="ajaxResult" class="table"></div>
                 </div>
@@ -288,7 +301,7 @@
 <!-- 스크립트를 넣어봅시다 -->
     <script>
     /* 상태 변경 */
-	$(".changeProductStatusBtn").on("click",function(){
+	$("[name=changeProductStatusBtn]").on("click",function(){
 		var productNo = $(this).parent().parent().children().eq(1).text();
 		var productStatus = $(this).parent().prev().children().val();
 
@@ -413,7 +426,7 @@
 							                $("<option value='4'" + (data[i].productStatus == 4 ? " selected" : "") + ">만료</option>")
 							     ));
 								tr.append(td);
-								tr.append("<td><div class='changeProductStatusBtn'>상품 상태 변경</div></td>"); // 확정버튼으로
+								tr.append("<td><div name='changeProductStatusBtn' class='area-btn center'><button type='button' class='btn btn-pri size02'>상태 변경</button></div></td>"); // 확정버튼으로
 								table.append(tr);
 						}
 						$("#ajaxResult").append(table);
@@ -423,7 +436,7 @@
                 	}
                 	
                 	// 상태변경
-                	$(".changeProductStatusBtn").on("click",function(){
+                	$("[name=changeProductStatusBtn]").on("click",function(){
                 		var productNo = $(this).parent().parent().children().eq(1).text();
                 		var productStatus = $(this).parent().prev().children().val();
                 		
@@ -465,7 +478,7 @@
     	});
         
         /*목록으로*/
-        $(".goList").on("click",function(){
+        $("[name=goList]").on("click",function(){
         	location.reload();
         })
    	
