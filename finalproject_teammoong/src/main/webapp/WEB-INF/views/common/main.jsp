@@ -985,7 +985,7 @@
         			
 				</div>
 			    <div class="popupModal-body">
-        			<img src="/resources/img/common/popup-banner.png">
+        			<a href="/noticeView.do?noticeNo=121"><img src="/resources/img/common/popup-banner.png"></a>
         			<div class="checkbox-remember">
           				<input type="checkbox" id="popupModalCheckbox" />
           				<label for="popupModalCheckbox">24시간동안 보지 않기</label>
