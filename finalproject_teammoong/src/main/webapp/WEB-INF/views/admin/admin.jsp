@@ -195,6 +195,12 @@
 	    padding-bottom: 15px;
 	    
 	}
+	#memberTable tbody tr{
+		border: 1px soild #ffa220;
+	}
+	table.dataTable tr {
+  		border-bottom: 1px solid #ccc;
+	}
 
 </style>
 <body>
@@ -281,10 +287,10 @@
 		                		<tbody>
 			                		<c:forEach items="${memberList }" var="m">
 			                			<tr>
-			                				<th>${m.memberNo }</th>
-			                				<th>${m.memberId }</th>
-			                				<th>${m.memberName }</th>
-			                				<th>${m.regDate }</th>
+			                				<td>${m.memberNo }</td>
+			                				<td>${m.memberId }</td>
+			                				<td>${m.memberName }</td>
+			                				<td>${m.regDate }</td>
 			                				<c:choose>
 		                                        <c:when test="${m.memberAgree == 0}">
 		                                            <td>동의안함</td>

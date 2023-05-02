@@ -419,7 +419,7 @@
 	                board_no as boardNo,	
 	                d_category_no as detailCategoryNo, 
 	                board_writer as boardWriter,
-	                to_char(board_date,'yyyy-mm-dd') as boardDate,
+	                to_char(board_date,'yy-mm-dd') as boardDate,
 	                to_char(board_start,'yyyy-mm-dd') as boardStart, 
 	                to_char(board_end,'yyyy-mm-dd') as boardEnd,
 	                board_status as boardStatus

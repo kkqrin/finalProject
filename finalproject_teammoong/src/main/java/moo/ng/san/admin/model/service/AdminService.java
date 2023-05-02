@@ -526,6 +526,7 @@ public class AdminService {
 		
 		if(detailName == "") {
 			ArrayList<Board> boardList = dao.selectSearchBoard(b);
+			
 			for(Board board : boardList) {
 					int boardNo = board.getBoardNo();
 					ArrayList<BoardOption> boardOptionList = dao.selectSearchBoardOption(boardNo);

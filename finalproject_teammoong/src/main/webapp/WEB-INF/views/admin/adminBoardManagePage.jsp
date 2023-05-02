@@ -23,26 +23,11 @@
         background-color: #fff;
         overflow: hidden;
     }
-    .material-symbols-outlined{
-        font-size: 150px !important;
-        
-    }
     .mainContent{
         float: left;
         width: 300px;
         height: 400px;
         text-align: center;
-    }
-    
-    .table{
-    	border: 1px solid black;
-    	
-    }
-    .table>tbody>tr>th{
-    	border: 1px solid black;
-    }
-    .table>tbody>tr>td{
-    	border: 1px solid black;
     }
     .searchForm{
     	display: none;
@@ -53,6 +38,38 @@
     #searchOption{
     	width: 300px !important;
     }
+    
+    #boardSearchSelect{
+		min-height: 32px;
+	    padding: 8px 10px;
+	    border-radius: 4px;
+	    height: 37px;
+	}
+	#categorySelect{
+		min-height: 32px;
+	    padding: 8px 10px;
+	    border-radius: 4px;
+	    height: 37px;
+	}
+	
+	.adminPage-search {
+		  display: flex;
+		  align-items: center;
+		  margin-bottom: 15px;
+	}
+
+	.search-select,
+	.search-input,
+	.area-btn {
+	  	margin-right: 10px;
+	}
+
+	.btn {
+	  	margin-right: 5px;
+	}
+	.size02{
+		font-size: 15px !important;
+	}
 
 
 
@@ -70,34 +87,40 @@
             <div class="adminPage-main">
                 <div class="adminPage-content">
                     <div class="adminPage-search">
-                        <select id="boardSearchSelect">
-                        	<option name="none" value="">선택하세요</option>
-                            <option name="searchDetailName" value="detailName">상품명 검색</option>
-                            <option name="searchCategoryNo" value="categoryNo">카테고리 검색</option>
-                            <option name="searchBoardStatus" value="boardStatus">공구 진행여부</option>
-                        </select>
-                        <select id="categorySelect" name="categorySelectBox">
-                        	<option>카테고리를 선택해주세요</option>
-                            <option value="1">패션</option>
-                            <option value="2">뷰티</option>
-                            <option value="3">식품</option>
-                            <option value="4">생활용품</option>
-                            <option value="5">가전/디지털</option>
-                            <option value="6">가구</option>
-                            <option value="7">침구</option>
-                            <option value="8">인테리어</option>
-                            <option value="9">공구</option>
-                            <option value="10">스포츠/레저/취미</option>
-                            <option value="11">출산/유아동</option>
-                            <option value="12">반려용품</option>
-                            <option value="13">명품관</option>
-                            <option value="88">테스트용</option>
-                        </select>
+                    	<div class="search-select">
+	                        <select id="boardSearchSelect">
+	                        	<option name="none" value="">선택하세요</option>
+	                            <option name="searchDetailName" value="detailName">상품명 검색</option>
+	                            <option name="searchCategoryNo" value="categoryNo">카테고리 검색</option>
+	                            <option name="searchBoardStatus" value="boardStatus">공구 진행여부</option>
+	                        </select>
+                    	</div>
+						<div class="search-select">
+	                        <select id="categorySelect" name="categorySelectBox">
+	                        	<option>카테고리를 선택해주세요</option>
+	                            <option value="1">패션</option>
+	                            <option value="2">뷰티</option>
+	                            <option value="3">식품</option>
+	                            <option value="4">생활용품</option>
+	                            <option value="5">가전/디지털</option>
+	                            <option value="6">가구</option>
+	                            <option value="7">침구</option>
+	                            <option value="8">인테리어</option>
+	                            <option value="9">공구</option>
+	                            <option value="10">스포츠/레저/취미</option>
+	                            <option value="11">출산/유아동</option>
+	                            <option value="12">반려용품</option>
+	                            <option value="13">명품관</option>
+	                            <option value="88">테스트용</option>
+	                        </select>
+						</div>	                    
                         
-                        <div><input type="text" name="boardSearchBox" id="searchOption"></div>
-                        <div class="search-btns">
-	                        <button type="button" name="searchSubmitBtn" class="searchSubmit Btn">검색</button>
-	                        <button type="button" class="goList" class="goList Btn">목록</button>
+                        <div class="search-input">
+                        	<input type="text" name="boardSearchBox" id="searchOption">
+                       	</div>
+                        <div class="area-btn right">
+	                        <button type="button" name="searchSubmitBtn" class="btn btn-pri size01">검색</button>
+	                        <button type="button" name="goList" class="btn btn-pri size01">목록</button>
                         </div>
                     </div>
                     <div class="boardStatus">
@@ -111,23 +134,21 @@
                     	</div>
                     </div>
                     <div class="adminPage-result">
-                        <table class="tbl-box">
+                        <table class="table tbl-box">
                             <tr>
-                           		<td>구분</td>
-                            	<td>게시글 번호</td>
-                                <td>카테고리 번호</td>
-                            	<td>작성자</td>
-                                <td>게시일자</td>
-                                <td>공구 시작일</td>
-                                <td>공구 마감일</td>
-                                <td>공구 진행여부</td>
-                            	<td>상품명</td>
-                                <td>상품가격</td>
+                            	<th>게시글 번호</th>
+                                <th>카테고리 번호</th>
+                            	<th>작성자</th>
+                                <th>게시일자</th>
+                                <th>공구 시작일</th>
+                                <th>공구 마감일</th>
+                                <th>공구 진행여부</th>
+                            	<th>상품명</th>
+                                <th>상품가격</th>
                             </tr>
                             <c:forEach items="${boardList }" var="b">
                             	<c:forEach items="${b.boardOptionList }" var="bo">
                                 <tr>
-                                	<td><input type="checkBox" id="checkBox"></td>
                                     <td>${b.boardNo }<input type="hidden" class="boardNo" value="${b.boardNo }"></td>
                                     <c:choose>
                                     	<c:when test="${b.detailCategoryNo == 1}">
@@ -351,7 +372,7 @@
 	    });
 	
 	    /*목록으로*/
-	    $(".goList").on("click",function(){
+	    $("[name=goList]").on("click",function(){
 	    	location.reload();
 	    });
     

@@ -65,7 +65,7 @@
 	
 	}
 	.adminPage-result{
-		width: 1500px;
+		width: 1600px;
 	}
 	.modal-content{
 	    width: 400px;
@@ -81,6 +81,9 @@
 	.modal-title{
 		font-size: 25px;
    		font-weight: bold;
+	}
+	#dataTables thead th {
+ 	 	text-align: center;
 	}
 
 
