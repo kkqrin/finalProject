@@ -46,13 +46,14 @@
     	left: 50%;
     	transform: translate(-50%, -50%);
     	background-color: #fff;
-    	padding: 20px;
-    	width: 300px;
+    	padding: 10px;
+    	width: 440px;
     	text-align: center;
   	}
   	.checkbox-remember {
     	display: block;
     	margin-bottom: 10px;
+    	float:right;
   	}
 </style>
 </head>
@@ -123,11 +124,11 @@
   		<div class="popupModal-dialog">
     		<div class="popupModal-content">
       			<div class="popupMpodal-header">
-        			<h4 class="popupModal-title">팝업 모달</h4>
+        			<h4 class="popupModal-title">EVENT</h4>
         			
 				</div>
 			    <div class="popupModal-body">
-        			<p>팝업 모달 내용입니다.</p>
+        			<img src="/resources/img/common/popup-banner.png">
         			<div class="checkbox-remember">
           				<input type="checkbox" id="popupModalCheckbox" />
           				<label for="popupModalCheckbox">24시간동안 보지 않기</label>
