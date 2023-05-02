@@ -139,9 +139,9 @@
                         <a href="#">${i.productName}</a>
                     </p>
                     <div class="posting-price-box">
-                        <p class="price-through">70,000원</p>
+                        <p class="price-through">${i.productPrice}</p>
                         <div class="sail-box">
-                            <p class="sail-percent">62%</p>
+                            <p class="sail-percent">${i.productDiscount}%</p>
                             <p class="price-sail">26,900원</p>
                         </div>
                     </div>
