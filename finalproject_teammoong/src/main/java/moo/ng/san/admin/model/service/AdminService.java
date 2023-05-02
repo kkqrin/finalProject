@@ -40,8 +40,18 @@ public class AdminService {
 	}
 
 	public String selectAllOrderCount() {
-		String result = dao.selectAllOrderCount();
-		return result;
+		LocalDate today = LocalDate.now();  // 오늘 날짜
+		YearMonth thisMonth = YearMonth.from(today);  // 이번 달
+		LocalDate firstDayOfMonth = thisMonth.atDay(1);  // 이번 달의 첫째 날
+		LocalDate lastDayOfMonth = thisMonth.atEndOfMonth();  // 이번 달의 마지막 날
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", firstDayOfMonth);
+		map.put("end", lastDayOfMonth);
+		
+		String monthCount = dao.selectAllOrderCount(map);
+		
+		return monthCount;
+		
 	}
 
 	public String selectAllBoardCount() {
@@ -71,16 +81,8 @@ public class AdminService {
 	}
 
 	public String selectVariationOrderCount() {
-		LocalDate today = LocalDate.now();  // 오늘 날짜
-		YearMonth thisMonth = YearMonth.from(today);  // 이번 달
-		LocalDate firstDayOfMonth = thisMonth.atDay(1);  // 이번 달의 첫째 날
-		LocalDate lastDayOfMonth = thisMonth.atEndOfMonth();  // 이번 달의 마지막 날
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("start", firstDayOfMonth);
-		map.put("end", lastDayOfMonth);
+		String result = dao.selectVariationOrderCount();
 		
-		String result = dao.selectVariationOrderCount(map);
-
 		return result;
 	}
 
@@ -100,7 +102,7 @@ public class AdminService {
 	// 페이지 네비 주소 수정 필요
 	public AdminMemberPageData selectAllMemberList(int reqPage) {
 		// 한 페이지 당 보여줄 게시물 수 : 10개
-		int numPerPage = 5;
+		int numPerPage = 10;
 		// reqPage = 1 : 1~2 , reqPage = 2 3~4
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
@@ -690,15 +692,7 @@ public class AdminService {
 	 */
 
 	public String selectVariationSalesCount() {
-		LocalDate today = LocalDate.now();  // 오늘 날짜
-		YearMonth thisMonth = YearMonth.from(today);  // 이번 달
-		LocalDate firstDayOfMonth = thisMonth.atDay(1);  // 이번 달의 첫째 날
-		LocalDate lastDayOfMonth = thisMonth.atEndOfMonth();  // 이번 달의 마지막 날
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("start", firstDayOfMonth);
-		map.put("end", lastDayOfMonth);
-		
-		String result = dao.selectVariationSalesCount(map);
+		String result = dao.selectVariationSalesCount();
 		
 		return result;
 	}

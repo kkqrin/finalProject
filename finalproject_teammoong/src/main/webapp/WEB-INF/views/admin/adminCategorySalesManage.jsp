@@ -166,54 +166,52 @@
 		        						<th>이익률</th>
 		        					</tr>
 			        				<c:forEach items="${otherSalesList }" var="other">
-			        					<c:forEach items="${otherProfit }" var="otherProfit">
-			        						<tr>
-			        							<c:choose>
-				        							<c:when test="${other.categoryNo == 1}">
-				        								<td>패션</td>
-				        							</c:when>
-				        							<c:when test="${other.categoryNo == 2}">
-				        								<td>뷰티</td>
-				        							</c:when>
-				        							<c:when test="${other.categoryNo == 3}">
-				        								<td>식품</td>
-				        							</c:when>
-				        							<c:when test="${other.categoryNo == 4}">
-				        								<td>생활용품</td>
-				        							</c:when>
-				        							<c:when test="${other.categoryNo == 5}">
-				        								<td>가전/디지털</td>
-				        							</c:when>
-				        							<c:when test="${other.categoryNo == 6}">
-				        								<td>가구</td>
-				        							</c:when>
-				        							<c:when test="${other.categoryNo == 7}">
-				        								<td>침구</td>
-				        							</c:when>
-				        							<c:when test="${other.categoryNo == 8}">
-				        								<td>인테리어</td>	
-				        							</c:when>
-				        							<c:when test="${other.categoryNo == 9}">
-				        								<td>공구</td>
-				        							</c:when>
-				        							<c:when test="${other.categoryNo == 10}">
-				        								<td>스포츠/레저/취미</td>
-				        							</c:when>
-				        							<c:when test="${other.categoryNo == 11}">
-				        								<td>출산/유아동</td>
-				        							</c:when>
-				        							<c:when test="${other.categoryNo == 12}">
-				        								<td>반려용품</td>
-				        							</c:when>
-				        							<c:when test="${other.categoryNo == 13}">
-				        								<td>명품관</td>
-				        							</c:when>
-				        						</c:choose>
-				        						<td><fmt:formatNumber value="${other.totalSales }"/>원</td>
-		        								<td><fmt:formatNumber value="${other.totalCost }"/>원</td>
-		        								<td>${otherProfit } </td>
-			        						</tr>
-		        						</c:forEach>
+		        						<tr>
+		        							<c:choose>
+			        							<c:when test="${other.categoryNo == 1}">
+			        								<td>패션</td>
+			        							</c:when>
+			        							<c:when test="${other.categoryNo == 2}">
+			        								<td>뷰티</td>
+			        							</c:when>
+			        							<c:when test="${other.categoryNo == 3}">
+			        								<td>식품</td>
+			        							</c:when>
+			        							<c:when test="${other.categoryNo == 4}">
+			        								<td>생활용품</td>
+			        							</c:when>
+			        							<c:when test="${other.categoryNo == 5}">
+			        								<td>가전/디지털</td>
+			        							</c:when>
+			        							<c:when test="${other.categoryNo == 6}">
+			        								<td>가구</td>
+			        							</c:when>
+			        							<c:when test="${other.categoryNo == 7}">
+			        								<td>침구</td>
+			        							</c:when>
+			        							<c:when test="${other.categoryNo == 8}">
+			        								<td>인테리어</td>	
+			        							</c:when>
+			        							<c:when test="${other.categoryNo == 9}">
+			        								<td>공구</td>
+			        							</c:when>
+			        							<c:when test="${other.categoryNo == 10}">
+			        								<td>스포츠/레저/취미</td>
+			        							</c:when>
+			        							<c:when test="${other.categoryNo == 11}">
+			        								<td>출산/유아동</td>
+			        							</c:when>
+			        							<c:when test="${other.categoryNo == 12}">
+			        								<td>반려용품</td>
+			        							</c:when>
+			        							<c:when test="${other.categoryNo == 13}">
+			        								<td>명품관</td>
+			        							</c:when>
+			        						</c:choose>
+			        						<td><fmt:formatNumber value="${other.totalSales }"/>원</td>
+	        								<td><fmt:formatNumber value="${other.totalCost }"/>원</td>
+	        								<td>${other.otherProfit } </td>
+		        						</tr>
 		        					</c:forEach>
 		        				</table>
 		        			</div>
