@@ -667,10 +667,10 @@ public class AdminService {
 		return list;
 	}
 
-	public SalesData selectGenderSalesData(int i) {
-		SalesData sd = dao.selectGenderSalesData(i);
+	public ArrayList<SalesData> selectGenderSalesData() {
+		ArrayList<SalesData> list = dao.selectGenderSalesData();
 		
-		return sd;
+		return list;
 	}
 
 	public Member ajaxMemberView(int memberNo) {

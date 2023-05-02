@@ -291,10 +291,10 @@ public class AdminDao {
 		return sd;
 	}
 
-	public SalesData selectGenderSalesData(int i) {
-		SalesData sd = sqlSession.selectOne("admin.selectGenderSalesData",i);
+	public ArrayList<SalesData> selectGenderSalesData() {
+		List list = sqlSession.selectList("admin.selectGenderSalesData");
 
-		return sd;
+		return (ArrayList<SalesData>)list;
 	}
 
 	public Member ajaxMemberView(int memberNo) {

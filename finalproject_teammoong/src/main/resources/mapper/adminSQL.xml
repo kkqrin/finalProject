@@ -640,9 +640,12 @@
 		where ot.order_status != 5 and ot.order_status != 6 and pc.category_no = #{categoryNo } and ot.order_date between #{start} and #{end}
 	</select>
 	
-	<select id="selectGenderSalesData" parameterType="_int" resultType="sd">
-		select sum(order_price) as totalSales
-		from order_tbl join member_tbl using(member_no) 
+	<select id="selectGenderSalesData" resultType="sd">
+		select 
+        member_gender as gender,
+		nvl(sum(od.order_sale_price * od.order_detail_cnt),0) as totalSales
+		from order_detail od join order_tbl using(order_no)
+        join member_tbl using(member_no) 
 		where order_status != 5 and order_status != 6 group by member_gender
 	</select>
 	

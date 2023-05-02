@@ -277,18 +277,60 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping(value="/ajaxGenderSalesCount.do", produces = "application/json;charset=utf-8")
 	public String ajaxGenderSalesCount() {
-		ArrayList<SalesData> list = new ArrayList<SalesData>();
-		for(int i=1;i<4;i++) {
-			SalesData sd = service.selectGenderSalesData(i);
-			if(sd == null) {
-				sd = new SalesData();
-			}
-			sd.setGender(i);
+		
+		ArrayList<SalesData> list = service.selectGenderSalesData();
+		
+		if(list.get(0).getGender() == 1 && list.get(1).getGender() == 2 ) {
+			SalesData sd = new SalesData();
+			sd.setGender(3);
+			sd.setTotalSales(0);
 			list.add(sd);
+		
+		}else if(list.get(0).getGender() == 1 && list.get(1).getGender() == 3) {
+			SalesData sd = new SalesData();
+			sd.setGender(2);
+			sd.setTotalSales(0);
+			list.add(sd);
+			
+		}else if(list.get(1).getGender() == 2 && list.get(2).getGender() == 3) {
+			SalesData sd = new SalesData();
+			sd.setGender(1);
+			sd.setTotalSales(0);
+			list.add(sd);
+			
+		}else if(list.get(0).getGender() == 1) {
+			for(int i=0;i<2;i++) {
+				SalesData sd = new SalesData();
+				sd.setGender(i+1);
+				sd.setTotalSales(0);
+				list.add(sd);
+			}
+			
+		}else if(list.get(0).getGender() == 2) {
+			SalesData sd = new SalesData();
+			sd.setGender(1);
+			sd.setTotalSales(0);
+			list.add(sd);
+			
+			SalesData sd1 = new SalesData();
+			sd.setGender(3);
+			sd.setTotalSales(0);
+			list.add(sd1);
+		
+		}else if(list.get(0).getGender() == 3) {
+			for(int i=0;i<2;i++) {
+				SalesData sd = new SalesData();
+				sd.setGender(i+1);
+				sd.setTotalSales(0);
+				list.add(sd);
+			}
 		}
+		
 		Gson gson = new Gson(); 
 		String result = gson.toJson(list); 
 		return result;
+		
+		
 	}
 	
 	
