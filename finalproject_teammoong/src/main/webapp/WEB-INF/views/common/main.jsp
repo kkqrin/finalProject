@@ -287,11 +287,11 @@
                                 <p class="sail-percent">${p.productDiscount}%</p>
                                 <p class="price-sail"><fmt:formatNumber value="${(Math.floor(p.productPrice*(100 - p.productDiscount)/1000)*10)}"/>원</p>
                             </div>
-                            <div class="star-rating">
+                            <!-- <div class="star-rating">
                                 <div class="material-symbols-outlined star-rate">star</div>
                                 <div class="rating-average">4.8</div>
                                 <div class="review-count">(152)</div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="posting-detail">
@@ -341,8 +341,8 @@
         </div>
         <div class="posting-item hotdeal">
             <div class="posting-img hotdeal">
-                <a href="#">
-                    <img src="/resources/img/product/korean-melon.jpg" />
+                <a href="/productView.do?productNo=139">
+                    <img src="/resources/upload/product/hotdealorange.jpg" />
                 </a>
                 <div class="gonggu-info">2인 공동구매</div>
                 <div class="end-hotdeal shutdown">
@@ -351,15 +351,15 @@
             </div>
             <div class="posting-content">
                 <p class="posting-title">
-                    <a href="#">
-                        [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
+                    <a href="/productView.do?productNo=139">
+                        [MPARK] 블랙라벨 고당도 오렌지 1.2kg (중대과/5입)
                     </a>
                 </p>
                 <div class="posting-price-box">
-                    <p class="price-through">70,000원</p>
+                    <p class="price-through">8,900원</p>
                     <div class="sail-box">
-                        <p class="sail-percent">62%</p>
-                        <p class="price-sail">26,900원</p>
+                        <p class="sail-percent">11%</p>
+                        <p class="price-sail">7,920원</p>
                     </div>
                 </div>
                 <div class="posting-detail">
@@ -380,11 +380,11 @@
                             <span class="posting-info-box">무료배송</span>
                         </div>
                         <!-- <span class="posting-volume">0개 구매</span> -->
-                        <div class="star-rating">
+                        <!-- <div class="star-rating">
                             <div class="material-symbols-outlined star-rate">star</div>
                             <div class="rating-average">4.8</div>
                             <div class="review-count">(152)</div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -426,11 +426,11 @@
                                 <p class="sail-percent">${p.productDiscount}%</p>
                                 <p class="price-sail"><fmt:formatNumber value="${(Math.floor(p.productPrice*(100 - p.productDiscount)/1000)*10)}"/>원</p>
                             </div>
-                            <div class="star-rating">
+                            <!-- <div class="star-rating">
                                 <div class="material-symbols-outlined star-rate">star</div>
                                 <div class="rating-average">4.8</div>
                                 <div class="review-count">(152)</div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="posting-detail">
@@ -502,11 +502,11 @@
                                 <span class="posting-info-box today-close">오늘마감</span>
                                 <span class="posting-info-box">무료배송</span>
                             </div>
-                            <div class="star-rating">
+                            <!-- <div class="star-rating">
                                 <div class="material-symbols-outlined star-rate">star</div>
                                 <div class="rating-average">4.8</div>
                                 <div class="review-count">(152)</div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -557,11 +557,11 @@
                                 <p class="sail-percent">${p.productDiscount}%</p>
                                 <p class="price-sail"><fmt:formatNumber value="${(Math.floor(p.productPrice*(100 - p.productDiscount)/1000)*10)}"/>원</p>
                             </div>
-                            <div class="star-rating">
+                            <!-- <div class="star-rating">
                                 <div class="material-symbols-outlined star-rate">star</div>
                                 <div class="rating-average">4.8</div>
                                 <div class="review-count">(152)</div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="posting-detail">
@@ -630,11 +630,11 @@
                                 <span class="posting-info-box today-close">오늘마감</span>
                                 <span class="posting-info-box">무료배송</span>
                             </div>
-                            <div class="star-rating">
+                            <!-- <div class="star-rating">
                                 <div class="material-symbols-outlined star-rate">star</div>
                                 <div class="rating-average">4.8</div>
                                 <div class="review-count">(152)</div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -681,11 +681,11 @@
                                 <p class="sail-percent">${p.productDiscount}%</p>
                                 <p class="price-sail"><fmt:formatNumber value="${(Math.floor(p.productPrice*(100 - p.productDiscount)/1000)*10)}"/>원</p>
                             </div>
-                            <div class="star-rating">
+                            <!-- <div class="star-rating">
                                 <div class="material-symbols-outlined star-rate">star</div>
                                 <div class="rating-average">4.8</div>
                                 <div class="review-count">(152)</div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="posting-detail">
@@ -710,7 +710,7 @@
 
 
 
-    <h3 class="wrap-title" style="margin-bottom: 0px;"># 가정의달 우리 아이 👶🏻</h3>
+    <!-- <h3 class="wrap-title" style="margin-bottom: 0px;"># 가정의달 우리 아이 👶🏻</h3>
     <h5 class="wrap-sub-title">가정의달을 맞이하여 아이에게 선물해주세요!</h5>
 
 
@@ -720,6 +720,7 @@
 
     <h3 class="wrap-title" style="margin-bottom: 0px;"># 공동구매가 대세 👍 </h3>
     <h5 class="wrap-sub-title">활발하게 공동구매가 이루어지고 있는 상품이에요!</h5>
+-->
 
 
 
@@ -728,248 +729,6 @@
 
 
 
-
-
-    <h1>전체</h1>
-    <div class="product-wrap">
-    <!-- 전체 상품 wrap -->
-        <div class="posting-item">
-            <div class="posting-img">
-                <a href="#">
-                    <img src="/resources/img/product/lactofit.jpg" />
-                </a>
-                <div class="gonggu-info">2인 공동구매</div>
-            </div>
-            <div class="posting-content">
-                <p class="posting-title">
-                    <a href="#">
-                        [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
-                    </a>
-                </p>
-                <div class="posting-price-box">
-                    <p class="price-through">70,000원</p>
-                    <div class="sail-box">
-                        <p class="sail-percent">62%</p>
-                        <p class="price-sail">26,900원</p>
-                    </div>
-                </div>
-                <div class="posting-detail">
-                    <div class="posting-icon">
-                        <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
-                        </div> -->
-                        <!-- <div class="comment-div">
-                            <span class="material-symbols-outlined">chat_bubble</span>
-                            <span class="comment-count">3</span>
-                        </div> -->
-                    </div>
-                    <div class="posting-info">
-                        <div>
-                            <!-- <span class="posting-info-box today-close">오늘마감</span> -->
-                            <span class="posting-info-box">무료배송</span>
-                        </div>
-                        <!-- <span class="posting-volume">0개 구매</span> -->
-                        <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="posting-item">
-            <div class="posting-img">
-                <a href="#">
-                    <img src="/resources/img/product/cleansing_foam.jpeg" />
-                </a>
-                <div class="gonggu-info">2인 공동구매</div>
-            </div>
-            <div class="posting-content">
-                <p class="posting-title">
-                    <a href="#">
-                        [리얼베리어] 크림 클렌징 폼
-                    </a>
-                </p>
-                <!-- 120ml 1+1 기획세트 -->
-                <div class="posting-price-box">
-                    <p class="price-through">32,000원</p>
-                    <div class="sail-box">
-                        <p class="sail-percent">69%</p>
-                        <p class="price-sail">9,900원</p>
-                    </div>
-                </div>
-                <div class="posting-detail">
-                    <div class="posting-icon">
-                        <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
-                        </div> -->
-                        <!-- <div class="comment-div">
-                            <span class="material-symbols-outlined">chat_bubble</span>
-                            <span class="comment-count">3</span>
-                        </div> -->
-                    </div>
-                    <div class="posting-info">
-                        <div>
-                            <span class="posting-info-box today-close">오늘마감</span>
-                            <span class="posting-info-box">무료배송</span>
-                        </div>
-                        <!-- <span class="posting-volume">0개 구매</span> -->
-                        <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="posting-item">
-            <div class="posting-img">
-                <a href="#">
-                    <img src="/resources/img/product/lactofit.jpg" />
-                </a>
-                <div class="gonggu-info">2인 공동구매</div>
-            </div>
-            <div class="posting-content">
-                <p class="posting-title">
-                    <a href="#">
-                        [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
-                    </a>
-                </p>
-                <div class="posting-price-box">
-                    <p class="price-through">70,000원</p>
-                    <div class="sail-box">
-                        <p class="sail-percent">62%</p>
-                        <p class="price-sail">26,900원</p>
-                    </div>
-                </div>
-                <div class="posting-detail">
-                    <div class="posting-icon">
-                        <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
-                        </div> -->
-                        <!-- <div class="comment-div">
-                            <span class="material-symbols-outlined">chat_bubble</span>
-                            <span class="comment-count">3</span>
-                        </div> -->
-                    </div>
-                    <div class="posting-info">
-                        <div>
-                            <span class="posting-info-box today-close">오늘마감</span>
-                            <span class="posting-info-box">무료배송</span>
-                        </div>
-                        <!-- <span class="posting-volume">0개 구매</span> -->
-                        <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="posting-item">
-            <div class="posting-img">
-                <a href="#">
-                    <img src="/resources/img/product/lactofit.jpg" />
-                </a>
-                <div class="gonggu-info">2인 공동구매</div>
-            </div>
-            <div class="posting-content">
-                <p class="posting-title">
-                    <a href="#">
-                        [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
-                    </a>
-                </p>
-                <div class="posting-price-box">
-                    <p class="price-through">70,000원</p>
-                    <div class="sail-box">
-                        <p class="sail-percent">62%</p>
-                        <p class="price-sail">26,900원</p>
-                    </div>
-                </div>
-                <div class="posting-detail">
-                    <div class="posting-icon">
-                        <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
-                        </div> -->
-                        <!-- <div class="comment-div">
-                            <span class="material-symbols-outlined">chat_bubble</span>
-                            <span class="comment-count">3</span>
-                        </div> -->
-                    </div>
-                    <div class="posting-info">
-                        <div>
-                            <span class="posting-info-box today-close">오늘마감</span>
-                            <span class="posting-info-box">무료배송</span>
-                        </div>
-                        <!-- <span class="posting-volume">0개 구매</span> -->
-                        <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="posting-item">
-            <div class="posting-img">
-                <a href="#">
-                    <img src="/resources/img/product/lactofit.jpg" />
-                </a>
-                <div class="gonggu-info">2인 공동구매</div>
-            </div>
-            <div class="posting-content">
-                <p class="posting-title">
-                    <a href="#">
-                        [3월 한정 파격특가][종근당건강] 락토핏 생유산균 골드(50포) 3통 (150일분) / 온가족 유산균
-                    </a>
-                </p>
-                <div class="posting-price-box">
-                    <p class="price-through">70,000원</p>
-                    <div class="sail-box">
-                        <p class="sail-percent">62%</p>
-                        <p class="price-sail">26,900원</p>
-                    </div>
-                </div>
-                <div class="posting-detail">
-                    <div class="posting-icon">
-                        <!-- <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
-                        </div> -->
-                        <!-- <div class="comment-div">
-                            <span class="material-symbols-outlined">chat_bubble</span>
-                            <span class="comment-count">3</span>
-                        </div> -->
-                    </div>
-                    <div class="posting-info">
-                        <div>
-                            <span class="posting-info-box today-close">오늘마감</span>
-                            <span class="posting-info-box">무료배송</span>
-                        </div>
-                        <!-- <span class="posting-volume">0개 구매</span> -->
-                        <div class="star-rating">
-                            <div class="material-symbols-outlined star-rate">star</div>
-                            <div class="rating-average">4.8</div>
-                            <div class="review-count">(152)</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 

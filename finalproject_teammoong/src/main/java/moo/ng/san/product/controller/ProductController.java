@@ -504,6 +504,7 @@ public class ProductController {
 			
 			ArrayList<Product> productList = service.searchProductList(sb);
 			model.addAttribute("searchBox",sb.getSelectBox());
+			model.addAttribute("sk",sb.getSearchKeyword());
 			model.addAttribute("productList",productList);
 			
 		} else if(sb.getSelectBox() == 2) {
@@ -512,6 +513,7 @@ public class ProductController {
 			model.addAttribute("searchBox",sb.getSelectBox());
 			model.addAttribute("sk",sb.getSearchKeyword());
 			model.addAttribute("boardList",boardList);
+			
 			return "board/searchBoardList";
 			
 		}

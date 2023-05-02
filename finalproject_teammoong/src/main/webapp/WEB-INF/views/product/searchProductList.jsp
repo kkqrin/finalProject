@@ -20,6 +20,7 @@
     <!-- <script src="/resources/js/jquery-3.6.0.js"></script> -->
      <!-- 리뷰css  -->
     <link rel="stylesheet" href="/resources/css/product/review.css"/>
+    <link rel="stylesheet" href="/resources/css/product/product.css"/>
 </head>
 <style>
     /* 리뷰css */
@@ -125,26 +126,27 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="content-wrap">
-    <h3 class="wrap-title">[${SessionScope.m.memberId}]님이 검색하신 상품 목록 입니다.</h3>
-        <c:forEach items="${productList }" var="i">
+    <!-- <h3 class="wrap-title">[${SessionScope.m.memberId}]님이 검색하신 상품 목록 입니다.</h3> -->
+    <h3 style="text-align: center; margin-bottom: 100px;">[ ${sk} ] 에 대한 검색 결과 입니다.</h3>
+        <c:forEach items="${productList }" var="p">
             <div class="posting-item">
                 <div class="posting-img">
-                    <a href="#">
-                        <img src="/resources/img/product/lactofit.jpg" />
-                    </a>
-                    <div class="gonggu-info">2인 공동구매</div>
+					<a href="/productView.do?productNo=${p.productNo}">
+						<img src="/resources/upload/product/${p.thumbnail }" />
+					</a>
+                    <div class="gonggu-info">${p.gongguNumber}인 공동구매</div>
                 </div>
                 <div class="posting-content">
-                    <p class="posting-title">
-                        <a href="#">${i.productName}</a>
-                    </p>
-                    <div class="posting-price-box">
-                        <p class="price-through">${i.productPrice}</p>
-                        <div class="sail-box">
-                            <p class="sail-percent">${i.productDiscount}%</p>
-                            <p class="price-sail">26,900원</p>
-                        </div>
-                    </div>
+                    <a href="/productView.do?productNo=${p.productNo}">
+                        ${p.productName}
+                    </a>
+					<div class="posting-price-box">
+						<p class="price-through"><fmt:formatNumber value="${p.productPrice }"/>원</p>
+						<div class="sail-box">
+							<p class="sail-percent">${p.productDiscount}%</p>
+							<p class="price-sail"><fmt:formatNumber value="${(Math.floor(p.productPrice*(100 - p.productDiscount)/1000)*10)}"/>원</p>
+						</div>
+					</div>
                     <div class="posting-detail">
                         <div class="posting-icon">
                         </div>
@@ -152,11 +154,11 @@
                             <div>
                                 <span class="posting-info-box">무료배송</span>
                             </div>
-                            <div class="star-rating">
+                            <!-- <div class="star-rating">
                                 <div class="material-symbols-outlined star-rate">star</div>
                                 <div class="rating-average"></div>
                                 <div class="review-count">(152)</div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
