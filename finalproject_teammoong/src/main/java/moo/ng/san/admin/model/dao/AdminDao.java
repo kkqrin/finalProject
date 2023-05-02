@@ -339,7 +339,7 @@ public class AdminDao {
 
 	public ArrayList<AskItem> selectAskItemList(HashMap<String, Object> map) {
 		List list = sqlSession.selectList("admin.selectAskItemList",map);
-		// TODO Auto-generated method stub
+		
 		return (ArrayList<AskItem>)list;
 	}
 
