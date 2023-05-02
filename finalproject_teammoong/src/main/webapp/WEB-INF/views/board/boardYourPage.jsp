@@ -40,7 +40,7 @@ border-radius: 20px;
 				</div>
 				<div>
 					<div class="btn-con">
-						<button type="button" class="btn btn-border-ter size02" style=" margin-left:1100px; border-color: var(--secondary); color: var(--secondary); background-color: #fff; width: 134px; height: 48px; border-radius: 38px;">쪽지</button>
+						<button type="button" class="btn btn-border-ter size02" style=" margin-left:1100px; border-color: var(--secondary); color: var(--secondary); background-color: #fff; width: 134px; height: 48px; border-radius: 38px;" onclick="location.href='/dmReply.do?receiver=${m.memberId }'">쪽지</button>
 					</div>
 				</div>
 			</div>
