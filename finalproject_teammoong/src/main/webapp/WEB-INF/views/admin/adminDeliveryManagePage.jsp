@@ -430,7 +430,7 @@
   									tr.append("<td>구매확정</td>");
   								}
   								
-  								var select = $("<select name='orderStatusList' class='orderStatusList'></select>");
+  								var select = $("<select name='orderStatusList' class='orderStatusList' style='margin: 32px 15px;'></select>");
 								tr.append(select.append(
 							                $("<option value='1'" + (data[i].orderStatus == 1 ? " selected" : "") + ">결제완료</option>"),
 							                $("<option value='2'" + (data[i].orderStatus == 2 ? " selected" : "") + ">배송준비중</option>"),

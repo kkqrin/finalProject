@@ -107,6 +107,9 @@
 	[name=allChangeProductStatus]{
 		margin-top: 20px;
 	}
+	[name=changeProductStatusBtn]{
+		margin: auto;
+	}
 
 
 </style>
@@ -142,7 +145,7 @@
                             	<th>구분1</th>
                                 <th>상품번호2</th>
                             	<th>제품사진3</th>
-                                <th>세부카테고리번호4</th>
+                                <th>카테고리명4</th>
                                 <th>상품이름5</th>
                                 <th>상품수량6</th>
                                 <th>남은수량7</th><!-- 추가 -->
@@ -159,76 +162,7 @@
                                 	<td><input type="checkBox" class="checkBox"></td>
                                     <td>${p.productNo }<input type="hidden" name="productNo" class="productNo" value="${p.productNo }"></td>
                                 	<td><img src="/resources/upload/product/${p.thumbnail }"></td>
-                                    <c:choose>
-                                    	<c:when test="${p.detailCategoryNo == 1}">
-                                    		<td>패션</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${p.detailCategoryNo == 2}">
-                                    		<td>뷰티</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${p.detailCategoryNo == 3}">
-                                    		<td>식품</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${p.detailCategoryNo == 4}">
-                                    		<td>생활용품</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${p.detailCategoryNo == 5}">
-                                    		<td>가전/디지털</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${p.detailCategoryNo == 6}">
-                                    		<td>가구</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${p.detailCategoryNo == 7}">
-                                    		<td>침구</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${p.detailCategoryNo == 8}">
-                                    		<td>인테리어</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${p.detailCategoryNo == 9}">
-                                    		<td>공구</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${p.detailCategoryNo == 10}">
-                                    		<td>스포츠/레저/취미</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${p.detailCategoryNo == 11}">
-                                    		<td>출산/유아동</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${p.detailCategoryNo == 12}">
-                                    		<td>반려용품</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${p.detailCategoryNo == 13}">
-                                    		<td>명품관</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${p.detailCategoryNo > 13}">
-                                    		<td>테스트용인듯</td>
-                                    	</c:when>
-                                    </c:choose>
+                                    <td>${p.categoryName }</td>
                                     <td>${p.productName }<input type="hidden" class="productName" value="${p.productName }"></td>
                                     <td>${p.productEa }</td>
                                     <td>${p.presentCnt }</td>
@@ -403,7 +337,7 @@
 								tr.append("<td>"+"</td>")
 								tr.append("<td>"+data[i].productNo+"</td>");
 								tr.append("<td><img src='/resources/upload/product/"+data[i].thumbnail+"'></td>")
-								tr.append("<td>"+data[i].dCategoryId+"</td>");
+								tr.append("<td>"+data[i].detailCategoryNo+"</td>");
 								tr.append("<td>"+data[i].productName+"</td>");
 								tr.append("<td>"+data[i].productEa+"</td>");
 								tr.append("<td>"+data[i].presentCnt+"</td>");
@@ -422,7 +356,7 @@
 									tr.append("<td>만료</td>");
 								}
 								
-								var select = $("<select name='productStatusList' class='productStatusList'></select>");
+								var select = $("<select name='productStatusList' class='productStatusList' style='margin: 24px 35px;'></select>");
 								tr.append(select.append(
 							                $("<option value='1'" + (data[i].productStatus == 1 ? " selected" : "") + ">대기</option>"),
 							                $("<option value='2'" + (data[i].productStatus == 2 ? " selected" : "") + ">등록</option>"),
@@ -441,7 +375,11 @@
                 	// 상태변경
                 	$("[name=changeProductStatusBtn]").on("click",function(){
                 		var productNo = $(this).parent().parent().children().eq(1).text();
-                		var productStatus = $(this).parent().prev().children().val();
+                		var productStatus = $(this).parent().prev().val();
+                		
+                		console.log(productNo);
+                		console.log(productStatus);
+                		
                 		
                         $.ajax({
                             url: "/ajaxChangeProductStatus.do",

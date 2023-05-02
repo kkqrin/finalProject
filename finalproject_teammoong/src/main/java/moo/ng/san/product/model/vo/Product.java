@@ -32,4 +32,6 @@ public class Product {
 	private int presentCnt; // 현재 남은 수량
 	
 	private int purchasedVolume; // 구매량
+	
+	private String categoryName;
 }
