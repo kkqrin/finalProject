@@ -43,7 +43,7 @@
     .totalSales{
     	float: left;
     	width: 600px;
-    	height: 250px;
+    	height: 170px;
     	border: 1px solid #ffa220;
     	box-sizing : border-box;
     	border-radius: 15px;
@@ -53,7 +53,7 @@
     .monthSales{
     	float: left;
     	width: 600px;
-    	height: 250px;
+    	height: 170px;
     	border: 1px solid #ffa220;
     	box-sizing : border-box;
     	border-radius: 15px;
@@ -76,19 +76,59 @@
 	}
 	.chartDiv{
 		float: left;
-		width: 100%;
 	}
 	.chart{
-		width: 1000px;
-		height: 550px;
+		width: 600px;
+		height: 450px;
 		margin: 0;
 		padding: 0;
-		border: 1px solid #ffa220;
 	}
 	.totalSalesChart{
 		margin-right: 0;
 	}
-
+	.chartLow-1{
+		display: flex;
+		margin-left: 100px;
+		margin-top: 100px;
+	}	
+	.chartLow-2{
+		display: flex;
+		margin-left: 100px;
+		margin-top: 50px;
+	}
+	.monthSalesChart{
+		margin-left: 120px;
+	}
+	.selectCategoryChart{
+		margin-left: 120px;
+	}
+	#genderChart{
+		height: 400px !important;
+	}
+	#salesChart{
+		height: 350px !important;
+	}
+	#monthSelect{
+		width: 600px;
+	    height: 420px;
+	    border: 1px solid #ffa220;
+	    box-sizing: border-box;
+	    font-size: 50px;
+   	    text-align: center;
+	}
+	#monthChart{
+		height: 395px !important;
+	}
+	.title{
+		font-size: 20px;
+	    font-weight: bold;
+	    border-bottom: 5px solid #ffa220;
+	}
+	.full{
+		margin: 30px 106px;
+		width: 1300px !important;
+	}
+		
 </style>
 <body>
 <%-- <jsp:include page="/WEB-INF/views/common/header.jsp" /> --%>
@@ -100,6 +140,9 @@
             <jsp:include page="/WEB-INF/views/admin/adminSideNavi.jsp"/>
 	        <div class="adminPage-main">
 	        	<div class="adminPage-sales">
+	        	<div class="area-btn full"> <!-- ref 버튼 사용예정 -->
+        			<button type="button" class="btn btn-pri size02" onclick="salesReportPrint();">매출보고서 출력</button>
+        		</div>
 	        		<div class="totalSales">
 	        			<div class="sales icon"><span class="material-symbols-outlined">monitoring</span></div>
 	        			<div class="salesContent">
@@ -115,38 +158,42 @@
 	        			</div>
 	        		</div>
 	        	</div>
-        		<div class="area-btn full"> <!-- ref 버튼 사용예정 -->
-        			<button type="button" onclick="salesReportPrint();">매출보고서 출력</button>
-        		</div>
+        		
 	        	<div class="chartDiv">
-		        	<div class="totalSalesChart chart">
-		        		<div class="totalChartTitle"><span>Total Sales Chart</span></div>
-		        		<canvas id="totalChart"></canvas>
-		        	</div>
-		        	<div class="monthSalesChart chart">
-		        		<div class="monthChartTitle"><span>Month Sales Chart</span></div>
-		        		<canvas id="monthChart"></canvas>
-		        	</div>
-		        	<div class="genderSalesChart chart">
-		        		<div class="genderChartTitle"><span>Gender Sales Chart</span></div>
-		        		<canvas id="genderChart"></canvas>
-		        	</div>
-		        	<div class="selectCategoryChart chart">
-			        	<select id="monthSelect" class="monthSelect">
-						    <option value="1">1월</option>
-						    <option value="2">2월</option>
-						    <option value="3">3월</option>
-						    <option value="4">4월</option>
-						    <option value="5">5월</option>
-						    <option value="6">6월</option>
-						    <option value="7">7월</option>
-						    <option value="8">8월</option>
-						    <option value="9">9월</option>
-						    <option value="10">10월</option>
-						    <option value="11">11월</option>
-						    <option value="12">12월</option>
-						</select>
-						<canvas id="salesChart">Month Select Sales Chart</canvas>
+	        		<div class="chartLow-1">
+			        	<div class="totalSalesChart chart">
+			        		<div class="totalChartTitle title"><span>Total Sales Chart</span></div>
+			        		<canvas id="totalChart"></canvas>
+			        	</div>
+			        	<div class="monthSalesChart chart">
+			        		<div class="monthChartTitle title"><span>Month Sales Chart</span></div>
+			        		<canvas id="monthChart"></canvas>
+			        	</div>
+	        		</div>
+		        	<div class="chartLow-2">
+			        	<div class="genderSalesChart chart">
+			        		<div class="genderChartTitle title"><span>Gender Sales Chart</span></div>
+			        		<canvas id="genderChart"></canvas>
+			        	</div>
+			        	<div class="selectCategoryChart chart">
+			        		<div class="categoryChartTitle title"><span>Select Month</span></div>
+				        	<select id="monthSelect" class="monthSelect">
+				        		<option value="1">선택해주세요.</option>
+							    <option value="1">1월</option>
+							    <option value="2">2월</option>
+							    <option value="3">3월</option>
+							    <option value="4">4월</option>
+							    <option value="5">5월</option>
+							    <option value="6">6월</option>
+							    <option value="7">7월</option>
+							    <option value="8">8월</option>
+							    <option value="9">9월</option>
+							    <option value="10">10월</option>
+							    <option value="11">11월</option>
+							    <option value="12">12월</option>
+							</select>
+							<canvas id="salesChart">Month Select Sales Chart</canvas>
+			        	</div>
 		        	</div>
 	        	</div>
 	        </div>
@@ -326,8 +373,10 @@
 	            // 월 select / 카테고리 매출
 	            
 	            $("#monthSelect").on("change",function(){
-		            var monthNo = $("#monthSelect option:selected").val(); // 입력확인
-	
+	            	
+					$("#monthSelect").css("width","70px").css("height","30px").css("font-size","15px").css("text-align","left");
+	            	var monthNo = $("#monthSelect option:selected").val(); // 입력확인
+					
 		            $.ajax({
 		            	url : "ajaxSelectMonthSales.do",
 		            	type : "post",
@@ -472,6 +521,8 @@
 		
 			
 		}
+			
+		
 			
 			
 			

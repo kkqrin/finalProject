@@ -15,12 +15,12 @@
 	<!-- data tables -->
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"/> 
 	<!-- data tables 버튼 관련 -->
-	<script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script> 
+<!-- 	<script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script> 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script> 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script> 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script> 
 	<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script> 
-	<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script> -->
 	<!-- Bootstrap JavaScript 모달 -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	
@@ -40,7 +40,10 @@
         overflow: hidden;
     }
     .material-symbols-outlined{
-        font-size: 150px;
+        cursor: pointer;
+	    font-size: 35px !important;
+	    line-height: 35px;
+	    position: absolute;
         
     }
     .mainContent{
@@ -57,12 +60,27 @@
     }
     
 	tr.hover {
-    background-color: lightgray;
-    color : #ffa220;
+    	background-color: lightgray;
+    	color : #ffa220;
 	
 	}
 	.adminPage-result{
 		width: 1500px;
+	}
+	.modal-content{
+	    width: 400px;
+	    border: 5px solid #ffa220;
+	    position: fixed;
+	    top: 80px;
+	    right: 524px;
+	    border-radius: 20px;
+	}
+	#myModal{
+		display: none;
+	}
+	.modal-title{
+		font-size: 25px;
+   		font-weight: bold;
 	}
 
 
@@ -107,13 +125,14 @@
 	                        </tbody>
 		                        <!-- <div><button type="button">데이터 엑셀 출력</button></div> -->
                         </table>
-                    	</div>
+                   	</div>
                     <!-- 모달 -->
 					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h4 class="modal-title" id="myModalLabel">모달 제목</h4>
+									<span class="modal-title" id="myModalLabel">고객님의 뭉머니 History</span>
+									<span class="material-symbols-outlined" name="cancel">cancel</span>
 								</div>
 								<div class="modal-body">
 									<!-- 모달 내용 -->
@@ -151,6 +170,9 @@
 	    	  
 	    	  var memberNo = $(this).closest('tr').find('input[name="memberNo"]').val();
 	    	  
+	    	  /* $(".adminPage-back").css("background-color","gray");
+	    	  $(".adminPage-content").css("background-color","gray";) */
+	    	  
 	    	  $.ajax({
 	    	    url: '/ajaxUseMoongCheck.do',
 	    	    type: 'post',
@@ -158,6 +180,7 @@
 	    	    success: function(data) {
 	    	    	
 	    	    var modalBody = $(".modal-body");
+	    	    modalBody.css("background-color","white");
 	    	    modalBody.empty(); // 모달 초기화
 	    	    
 	    	    
@@ -200,7 +223,7 @@
 						ul.append("<li>뭉머니 "+formattedPointEa+"뭉 회수</li>");
 					}
 					
-					ul.append("<br>");
+					ul.append("<hr>");
 					modalBody.append(ul);
 					
 	    	      }// for
@@ -214,13 +237,33 @@
 	    	  
     	}); // 클릭 모달
     	
+    	// close 클릭시 모달 숨기기
+    	$("[name=cancel]").on("click",function(){
+    		$("#myModal").modal('hide');
+    	})
+    	
+    	// 마우스 커서 변경
+    	$("[name=cancel]").on("mouseenter",function(){
+    		$(this).css("cursor","pointer");
+    	})
+    	
+    	// 호버
 	    $('#dataTables tbody').on('mouseenter', 'tr', function() {
 	        $(this).addClass('hover'); 
+	       
 	    });// 호버시 CSS 클래스 추가
 	    $('#dataTables tbody').on('mouseleave', 'tr', function() {
 	        $(this).removeClass('hover'); 
+	        
 	    }); // 호버 빠져나올시 CSS 클래스 제거
 	    
+	    
+	    
+	    $(".adminPage-back").css("background-color","gray");
+    	$(".adminPage-content").css("background-color","gray");
+    	
+    	$(".adminPage-back").css("background-color","white");
+    	$(".adminPage-content").css("background-color","white");
 	    
 	    
 }); // ready

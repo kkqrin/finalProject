@@ -4,6 +4,10 @@
     	float: left;
     }
     
+    .adminPage-main{
+		margin-top: 35px;
+	}
+    
     .adminPage-content{
         background-color: #fff;
         overflow: hidden;
@@ -19,6 +23,23 @@
         height: 400px;
         text-align: center;
     }
+    /**/
+    .adminPage-search {
+	  display: flex;
+	  align-items: center;
+	  margin-bottom: 15px;
+	}
+
+	.search-select,
+	.search-input,
+	.area-btn {
+	  margin-right: 10px;
+	}
+
+	.btn {
+	  margin-right: 5px;
+	}
+	/**/
 
     .searchForm{
     	display: none;
@@ -69,20 +90,17 @@
 	.table tr td{
 		padding: 0;
 	}
-	.changeMemberStatusBtn{
-		/* background-color: #f0a718; */
-		padding: 2px;
+	[name=changeMemberStatusBtn]{
 		cursor: pointer;
 	}
 	
-	.changeMemberStatusBtn:active{
+	[name=changeMemberStatusBtn]:active{
 		box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
 	    transform: translateY(4px);
 	}
 	
 	/* 더보기 버튼 */
 	.moreInfo{
-		/* background-color: #f0a718; */
 		padding: 3px;
 		cursor: pointer;
 	}
@@ -93,13 +111,6 @@
      }
 	
     
-    #searchOption{
-    	display: inline-block;
-    	width: 300px;
-    }
-    
-    
-	
 	.highlight {
 	  animation: highlight 1s ease-in-out;
 	  background-color: #ffd900;

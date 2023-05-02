@@ -227,10 +227,8 @@
                                     </td>
                                 </tr>
                             </c:forEach>
-                            <tr>
-                                <th colspan="13">${pageNavi}</th>
-                            </tr>
                         </table>
+                        <div class="pagination">${pageNavi }</div>
                     </div>
                     <div id="ajaxResult" class="table"></div>
                 </div>
@@ -249,7 +247,7 @@
     	    var tr = td.parent();
     	    td.css('color', 'red').css('font-weight','bold');
     	    var originalFontSize = td.css('font-size');
-    	    td.css('font-size', '20px').animate({fontSize: originalFontSize}, 1000);
+    	    td.css('font-size', '20px').animate({fontSize: originalFontSize}, 1500);
     	  });
     	
     })

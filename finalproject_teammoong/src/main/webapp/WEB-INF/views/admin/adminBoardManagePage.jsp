@@ -111,7 +111,7 @@
                     	</div>
                     </div>
                     <div class="adminPage-result">
-                        <table class="table">
+                        <table class="tbl-box">
                             <tr>
                            		<td>구분</td>
                             	<td>게시글 번호</td>
@@ -215,11 +215,8 @@
 		                             <td><fmt:formatNumber value="${bo.detailPrice }"/>원</td>
 		                             </c:forEach>
                             	</c:forEach>
-                                </tr>
-                            <tr>
-                                <th colspan="10">${pageNavi}</th>
-                            </tr>
-                        </table>
+                        	</table>
+                        <div class="pagination">${pageNavi }</div>
                     </div>
                     <div id="ajaxResult" class="table"></div>
                 </div>

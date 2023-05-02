@@ -11,7 +11,9 @@
     }
     .adminPage-main{
     	overflow: hidden;
+    	margin-top: 35px;
     }
+    
     .adminPage-title{
     	height: 130px;
     	line-height: 130px;
@@ -123,4 +125,21 @@
     	overflow: hidden;
     }
     
+    /**/
+    .adminPage-search {
+	  display: flex;
+	  align-items: center;
+	  margin-bottom: 15px;
+	}
+
+	.search-select,
+	.search-input,
+	.area-btn {
+	  margin-right: 10px;
+	}
+
+	.btn {
+	  margin-right: 5px;
+	}
+	/**/
     
