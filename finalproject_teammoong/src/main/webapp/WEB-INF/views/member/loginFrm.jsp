@@ -99,6 +99,9 @@
 				success : function(data){
 					if(data=="ok"){
 						location.href="/main.do";
+					}else if(data=="bDay"){
+						location.href="/main.do";
+						alert("생일 축하 합니다!! 생일 축하 쿠폰이 발급되었으니 마이페이지에서 확인하세요!");
 					}else{
 						$(".modal").css("display","flex");
 						$("#loginFail").css("display","flex");			
