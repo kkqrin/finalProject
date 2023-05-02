@@ -6,7 +6,8 @@ $(document).ready(function(){
 
     timeId = window.setInterval(function () {
         var now = new Date();
-        var end = new Date(now.getFullYear(),now.getMonth(),now.getDate(),24,00,00);
+        // 핫딜 종료
+        var end = new Date(now.getFullYear(),now.getMonth(),now.getDate(),12,00,00);
     
         var nt = now.getTime();
         var et = end.getTime();

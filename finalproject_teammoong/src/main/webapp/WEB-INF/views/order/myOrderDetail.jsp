@@ -7,10 +7,41 @@
 <head>
 <meta charset="UTF-8">
 <title>내 구매내역</title>
-    <!--productView.css-->
-    <link rel="stylesheet" href="/resources/css/member/myOrderList.css">
-	<!-- 리뷰css -->
-	<link rel="stylesheet" href="/resources/css/product/review.css"/>
+<!--productView.css-->
+<link rel="stylesheet" href="/resources/css/member/myOrderList.css">
+<!-- 리뷰css -->
+<link rel="stylesheet" href="/resources/css/product/review.css"/>
+<!--productView.css-->
+<link rel="stylesheet" href="/resources/css/product/productView.css"/>
+
+<style>
+/* 별점 */
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+.rate { display: inline-block;border: 0;margin-right: 15px;}
+.rate > input 
+{display: none;}
+
+.rate > label 
+{float: right;color: #ddd}
+
+.rate > label:before 
+{display: inline-block;font-size: 2rem;padding: .3rem .2rem;margin: 0;cursor: pointer;font-family: FontAwesome;content: "\f005 ";}
+
+.rate .half:before 
+{content: "\f089 "; position: absolute;padding-right: 0;}
+
+.rate input:checked ~ label, 
+.rate label:hover,
+.rate label:hover ~ label 
+{ color: gold !important;  } 
+
+.rate input:checked + .rate label:hover,
+.rate input input:checked ~ label:hover,
+.rate input:checked ~ .rate label:hover ~ label,  
+.rate label:hover ~ input:checked ~ label 
+{ color: gold !important;  } 
+
+	</style>
 </head>
 
 <body>
@@ -36,43 +67,49 @@
 								<th>주문날짜</th>
 								<td><div id="myorder-order-dateonly"></div></td>
 							</tr>
+							<tr>
+								<th>주문상태</th>
+								<td>
+									<c:choose>
+										<c:when test="${o.orderStatus eq 1}">
+											결제완료
+										</c:when>
+										<c:when test="${o.orderStatus eq 2}">
+											배송준비중
+										</c:when>
+										<c:when test="${o.orderStatus eq 3}">
+											배송중
+										</c:when>
+										<c:when test="${o.orderStatus eq 4}">
+											배송완료
+										</c:when>
+										<c:when test="${o.orderStatus eq 5}">
+											결제취소
+										</c:when>
+										<c:when test="${o.orderStatus eq 6}">
+											환불완료
+										</c:when>
+										<c:when test="${o.orderStatus eq 7}">
+											구매확정
+										</c:when>
+									</c:choose>
+								</td>
+							</tr>
+							<c:if test="${o.orderStatus eq 3 || o.orderStatus eq 4}">
+							<tr>
+								<td colspan="2">
+									<div style="display: flex;justify-content: center;">
+											<button type="button" id="order-confirm-btn" class="btn btn-pri size02" style="margin-right: 5px;">구매확정</button>
+											<button type="button"class="btn btn-pri size02">교환/반품문의</button>
+										</div>
+									</td>
+								</tr>
+							</c:if>
 						</table>
 						<input type="hidden" value="${o.orderDate}" name="orderDate">
 						<input type="hidden" value="${o.orderNo}" name="orderNo">
 					</div>
 
-
-					<div style="display: flex;">
-						<div class="myorder-order-status">
-						<c:choose>
-							<c:when test="${o.orderStatus eq 1}">
-								결제완료
-							</c:when>
-							<c:when test="${o.orderStatus eq 2}">
-								배송준비중
-							</c:when>
-							<c:when test="${o.orderStatus eq 3}">
-								배송중
-							</c:when>
-							<c:when test="${o.orderStatus eq 4}">
-								배송완료
-							</c:when>
-							<c:when test="${o.orderStatus eq 5}">
-								결제취소
-							</c:when>
-							<c:when test="${o.orderStatus eq 6}">
-								환불완료
-							</c:when>
-							<c:when test="${o.orderStatus eq 7}">
-								구매확정
-							</c:when>
-						</c:choose>
-						</div>
-						<c:if test="${o.orderStatus eq 3 || o.orderStatus eq 4}">
-							<a href="/orderConfirm.do?orderNo=${o.orderNo}" class="btn btn-pri size03">구매확정</a>
-							<button type="button"class="btn btn-pri size03">교환/반품문의</button>
-						</c:if>
-					</div>
 
 
 					<!-- 주문한 상품리스트 -->
@@ -98,7 +135,7 @@
 							<c:if test="${i.orderStatus eq 7}">
 								<div class="myorder-btn-zone" style="position: static;">
 								<!-- <form action="#"> -->
-									<button id="insertReiview" type="button" class="btn btn-pri size01"  data-modal="#modalReview">리뷰쓰기</button>
+									<button id="insertReiview" type="button" class="btn btn-pri size01" data-modal="#modalReview">리뷰쓰기</button>
 									<!-- </form> -->
 								</div>
 							</c:if>
@@ -291,8 +328,144 @@
 
 		$("#myorder-order-sheetno").text(numOrderDate+""+orderNo);
 		$("#myorder-order-dateonly").text(dateOnlyString);
-
 	});
+
+	// 구매 확정
+	$("#order-confirm-btn").on("click", function(){
+		const orderNo = $("[name=orderNo]").val();
+
+		jQueryAlert('warning', orderNo);
+	});
+
+		// 구매확정 여부 물어봄
+		function jQueryAlert(type, orderNo) {
+		let $type = type;
+		// let messageBox = msg;
+			switch ($type) {
+				// case 'success':
+				// messageBox = $.parseHTML('<div class="alert__success"></div>');
+				// break;
+				// case 'error':
+				// messageBox = $.parseHTML('<div class="alert__error"></div>');
+				// break;
+				case 'warning':
+				messageBox = $.parseHTML('<div class="alert__warning" style="text-align:center;"><div class="title" style="margin-bottom:10px;color:var(--primary);padding:0;">뭉쳐야산다</div><div style="margin-bottom: 50px;margin-top: 20px;"><h6 style="margin-bottom:40px;">< 구매확정 ></h6><div>해당 주문에 대해 구매를 확정하시겠습니까?</div><div style="margin-top:20px;">구매를 확정하면 교환 / 반품이 불가합니다.</div></div></div>');
+				break;
+			}
+			$("body").append(messageBox);
+			$(messageBox).dialog({
+				dialogClass :$type,
+				// open: $(messageBox).append(msg),
+				draggable: false,
+				modal: true,
+				width: 500,
+				buttons: [
+					{
+						text: "확정",
+						style: "margin-right:5px",
+						click: function(){
+							$(this).dialog("close");
+
+							// location.href
+							location.href="/orderConfirm.do?orderNo="+orderNo;
+						}
+					},
+					{
+						text: "취소",
+						click: function(){
+							$(this).dialog("close");
+						}
+					}
+				],
+				show: {
+					effect: 'fade',
+					duration: 200 //at your convenience
+				},
+				hide: {
+					effect: 'fade',
+					duration: 200 //at your convenience
+				}
+			});
+		};
+
+
+
+		function DropFile(dropAreaId, fileListId) {
+            let dropArea = document.getElementById(dropAreaId);
+            let fileList = document.getElementById(fileListId);
+          
+            function preventDefaults(e) {
+              e.preventDefault();
+              e.stopPropagation();
+            }
+          
+            function highlight(e) {
+              preventDefaults(e);
+              dropArea.classList.add("highlight");
+            }
+          
+            function unhighlight(e) {
+              preventDefaults(e);
+              dropArea.classList.remove("highlight");
+            }
+          
+            function handleDrop(e) {
+              unhighlight(e);
+              let dt = e.dataTransfer;
+              let files = dt.files;
+          
+              handleFiles(files);
+          
+              const fileList = document.getElementById(fileListId);
+              if (fileList) {
+                fileList.scrollTo({ top: fileList.scrollHeight });
+              }
+            }
+          
+            function handleFiles(files) {
+              files = [...files];
+              // files.forEach(uploadFile);
+              files.forEach(previewFile);
+            }
+          
+            function previewFile(file) {
+              console.log(file);
+              renderFile(file);
+            }
+          
+            function renderFile(file) {
+              let reader = new FileReader();
+              reader.readAsDataURL(file);
+              reader.onloadend = function () {
+                let img = dropArea.getElementsByClassName("preview")[0];
+                img.src = reader.result;
+                img.style.display = "block";
+              };
+            }
+          
+            dropArea.addEventListener("dragenter", highlight, false);
+            dropArea.addEventListener("dragover", highlight, false);
+            dropArea.addEventListener("dragleave", unhighlight, false);
+            dropArea.addEventListener("drop", handleDrop, false);
+          
+            return {
+              handleFiles
+            };
+          }
+          
+          const dropFile = new DropFile("drop-file", "files");   
+          
+	  function readURL(input) {
+            if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              reader.onload = function(e) {
+                document.getElementById('preview').src = e.target.result;
+              };
+              reader.readAsDataURL(input.files[0]);
+            } else {
+              document.getElementById('preview').src = "";
+            }
+          }
 </script>
 </body>
 </html>

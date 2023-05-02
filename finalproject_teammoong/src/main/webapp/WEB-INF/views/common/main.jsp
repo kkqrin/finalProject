@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>뭉쳐야산다</title>
     <!-- 웹페이지 로고 -->
-    <link rel="shortcut icon" href="/resources/upload/member/free-icon-tangerine-1450252.png" />
+    <link rel="shortcut icon" href="/resources/img/common/tangerine_icon.png" />
     <!-- 슬릭 슬라이더 제이쿼리 -->
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>

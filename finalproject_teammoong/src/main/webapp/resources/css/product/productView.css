@@ -299,8 +299,11 @@ input[type="radio"]:checked + label {
 }
 .product-content-wrap{
     width: 1200px;
-    margin: 0 auto;
+    margin: 200px auto;
     text-align: center;
+}
+.product-content-wrap *{
+    margin: 100px 0px;
 }
 
 #preview{

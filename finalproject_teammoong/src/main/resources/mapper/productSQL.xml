@@ -360,6 +360,7 @@
 		from product_tbl p
 		where gonggu_number = #{i}
         order by 1 desc )p)
+        where rnum between 1 and 20
 	</select>
 	
 	<select id="selectCategoryProductList" parameterType="_int" resultType="p">

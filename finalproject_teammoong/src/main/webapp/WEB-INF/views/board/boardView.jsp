@@ -234,7 +234,7 @@ sup{
 개인정보의 수집 및 이용에 대한 동의를 거부할수 있으며, 이 경우 상품 주문이 어려울 수 있습니다.</td>
 				</tr>
 				<tr>
-					<td colspan="4"><label><input type="checkbox" required>동의</label></td>
+					<td colspan="4"><label><input type="checkbox" name="checkBox" required>동의</label></td>
 				</tr>
 			</table>
 			<c:choose>
@@ -275,25 +275,60 @@ sup{
 		 $("#result-price").val(result);
 	});
 
-	$("[type='submit']").on("click",function(){
+	$("[type='submit']").on("click",function(event){
 		if(	$("[name='payerDate']").val()==""){
 			optionjQueryAlert('info', "날짜를 선택해주세요");
+			event.preventDefault();
 		}else if($("[name=payerName]").val()==""){
 			optionjQueryAlert('info', "입금자명을 입력해주세요");
+			event.preventDefault();
+		}else if($("[name=depositPrice]").val()==""){
+			optionjQueryAlert('info', "상품수량을 입력해주세요");
+			event.preventDefault();
 		}else if($("[name=memberName]").val() == ""){
 			optionjQueryAlert('info', "주문자 정보를 입력해 주세요");
-		}else if($("[name=payerName]").val()==""){
-			optionjQueryAlert('info', "입금자명을 입력해주세요");
-		}
-		let resultChk = true;
-		$.each(result,function(index,item){
-			if(!item){
-				resultChk = false;
-			}
-		})
-		if(!resultChk){
+			event.preventDefault();
+		}else if($("[name=memberEmail]").val() == ""){
+			optionjQueryAlert('info', "주문자 정보를 입력해 주세요");
+			event.preventDefault();
+		}else if($("[name=memberPhone]").val() == ""){
+			optionjQueryAlert('info', "주문자 정보를 입력해 주세요");
+			event.preventDefault();
+		}else if($("[name=receiverName]").val() == ""){
+			optionjQueryAlert('info', "배송지 정보를 입력해 주세요");
+			event.preventDefault();
+		}else if($("[name=receiverPhone]").val() == ""){
+			optionjQueryAlert('info', "배송지 정보를 입력해 주세요");
+			event.preventDefault();
+		}else if($("[name=memberZoneCode]").val() == ""){
+			optionjQueryAlert('info', "배송지 정보를 입력해 주세요");
+			event.preventDefault();
+		}else if($("[name=detailAddr]").val() == ""){
+			optionjQueryAlert('info', "상세주소를 입력해 주세요");
+			event.preventDefault();
+		}else if($("[name=refundBank]").val() == null){
+			optionjQueryAlert('info', "은행을 선택해 주세요");
+			event.preventDefault();
+		}else if($("[name=refundAccount]").val() == ""){
+			optionjQueryAlert('info', "계좌번호를 입력해 주세요('-'없이)");
+			event.preventDefault();
+		}else if($("[name=refundName]").val() == ""){
+			optionjQueryAlert('info', "예금주명을입력해 주세요");
+			event.preventDefault();
+		}else if(!$("[name=checkBox]").is(":checked")){
+			optionjQueryAlert('info', "동의를 체크해 주세요");
 			event.preventDefault();
 		}
+		
+		// let resultChk = true;
+		// $.each(result,function(index,item){
+		// 	if(!item){
+		// 		resultChk = false;
+		// 	}
+		// })
+		// if(!resultChk){
+		// 	event.preventDefault();
+		// }
 	});
 
 	
@@ -563,16 +598,6 @@ sup{
 		});
 	};
 		
-	$(".content-boardView-wrap>form").submit(function (e){
-		if(!result[6]){
-		console.log("실패");
-		optionjQueryAlert('info', '입금자명을 입력해주세요!');
-		
-		e.preventDefault();
-		return false;
-	}
-	});
-
 
 	
 	// 	jqueryAlert

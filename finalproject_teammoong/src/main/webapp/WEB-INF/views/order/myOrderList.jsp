@@ -7,15 +7,15 @@
 <head>
 <meta charset="UTF-8">
 <title>내 구매내역</title>
-    <!--productView.css-->
-    <link rel="stylesheet" href="/resources/css/member/myOrderList.css">
-	<!-- 리뷰css -->
-	<link rel="stylesheet" href="/resources/css/product/review.css"/>
+<link rel="stylesheet" href="/resources/css/member/myOrderList.css">
+<!-- 리뷰css -->
+<link rel="stylesheet" href="/resources/css/product/review.css"/>
+<!--productView.css-->
 	<link rel="stylesheet" href="/resources/css/product/productView.css"/>
 </head>
 <style>
-	
-	@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+/* 별점 */
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 .rate { display: inline-block;border: 0;margin-right: 15px;}
 .rate > input 
 {display: none;}
@@ -39,6 +39,9 @@
 .rate input:checked ~ .rate label:hover ~ label,  
 .rate label:hover ~ input:checked ~ label 
 { color: gold !important;  } 
+
+
+
 /* 리뷰css */
 .modal-body>form>.selectBox-widht-explain{
 	width: 80%;
@@ -88,6 +91,7 @@
 	height: 150px;
 }
 /* 리뷰css 끝 */
+
 .slick-prev:before, .slick-next:before {
 /* 슬릭 슬라이더 아이콘 */
 color: #565656;
@@ -419,24 +423,7 @@ font-variation-settings:
           }
 	//모달 관련 기능
 	$(function () {
-		$('[data-modal]').click(function (event) {
-			const modalId = $(this).data('modal');
-			if ($(modalId).hasClass('modal-pri')) {
-				$($(this).data('modal')).modal({
-					fadeDuration: 100
-				});
-				return false;
-			} else if ($(modalId).hasClass('modal-sec')) {
-				$($(this).data('modal')).modal({
-					escapeClose: false,
-					showClose: false,
-					fadeDuration: 100
-				});
-				return false;
-			} else {
-				return false;
-			}
-		});
+		modalOnfunction();
 	});
 
 
