@@ -6,8 +6,30 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/resources/css/member/loginFrm.css" />
+<style>
+	#bDayModal {
+  	  	position: fixed;
+    	top: 0;
+    	left: 0;
+    	width: 100%;
+    	height: 100%;
+    	background-color: rgba(0, 0, 0, 0.5);
+    	display: none;
+  	}
+  	.bDayModal-content {
+    	position: absolute;
+    	top: 50%;
+    	left: 50%;
+    	transform: translate(-50%, -50%);
+    	background-color: #fff;
+    	padding: 10px;
+    	width: 440px;
+    	text-align: center;
+  	}
+</style>
 </head>
 <body>
+
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
 	
@@ -56,6 +78,24 @@
 	
 	
 	</div>
+	<!--팝업모달-->
+	<div id="bDayModal" class="bDayModal">
+  		<div class="bDayModal-dialog">
+    		<div class="bDayModal-content">
+      			<div class="bDayMpodal-header">
+        			<h4 class="bDayModal-title"><span id="bName"></span>님의 생일을 축하합니다!!</h4>
+				</div>
+			    <div class="bDayModal-body">
+        			<img src="/resources/img/common/bday-coupon.png">
+        			<p>마이페이지에서 쿠폰함을 확인해보세요</p>
+        			<p>※생일날 가입하신분들은 지급해드릴 수 없어요 힝ㅠㅠ</p>
+        		</div>
+      			<div class="area-btn right">
+        			<button type="button" class="btn btn-border-pri size01" id="closeBtn">닫기</button>
+      			</div>
+    		</div>
+  		</div>
+	</div>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
@@ -100,8 +140,9 @@
 					if(data=="ok"){
 						location.href="/main.do";
 					}else if(data=="bDay"){
-						location.href="/main.do";
-						alert("생일 축하 합니다!! 생일 축하 쿠폰이 발급되었으니 마이페이지에서 확인하세요!");
+						$(".bDayModal").css("display","flex");
+						const memberId = $("#id").val();
+						$("#bName").text(memberId);
 					}else{
 						$(".modal").css("display","flex");
 						$("#loginFail").css("display","flex");			
@@ -122,6 +163,12 @@
                 return false;
             }); 
         });
+		
+		
+		$("#closeBtn").on("click",function(){
+			location.href="/main.do";
+			$(".bDayModal").css("display","none");
+		});
 	</script>
 </body>
 </html>

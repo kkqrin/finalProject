@@ -43,7 +43,7 @@ public class CouponController {
 		    int day = Integer.parseInt(parts[2]);
 		    if(todayMonth == month && todayDay == day) {
 		    	int result = service.insertIssueCoupon(ic);
-		    	System.out.println(result);
+		    	
 		    }
 
 		}
@@ -62,7 +62,7 @@ public class CouponController {
 		
 		    if(date.equals(endDate) && couponStatus == 1) {
 		    	int result = service.updateIssueCoupon(issueNo);
-		    	System.out.println(result);
+		    	
 		    }
 
 		}
@@ -89,7 +89,7 @@ public class CouponController {
 	@RequestMapping(value="/insertPoint.do")
 	public String insertPoint(int memberNo, int pointEa) {
 		int result = service.insertPoint(memberNo, pointEa);
-		System.out.println(result);
+		
 		return "common/main";
 	}
 	
