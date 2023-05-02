@@ -71,7 +71,7 @@
                 <div class="adminPage-content">
                     <div class="adminPage-search">
 	                    <div class="search-select">
-	                        <select id="boardSearchSelect" class="select-custom">
+	                        <select id="askSearchSelect" class="select-custom">
 	                        	<option name="none" value="">선택하세요</option>
 	                            <option name="searchDetailName" value="detailName">상품명 검색</option>
 	                            <option name="searchCategoryNo" value="categoryNo">카테고리 검색</option>
@@ -108,7 +108,7 @@
                             <tr>
                            		<th>사업자명</th>
                             	<th>사업자등록번호</th>
-                                <th>대표 전화번호</th>
+                                <th>대표자명</th>
                             	<th>사업장 주소1</th>
                             	<th>사업장 주소2</th>
                                 <th>담당자명</th>
@@ -125,8 +125,8 @@
                                     <td>${a.repName }</td>
                                     <td>${a.corpAddr1 }</td>
                                     <td>${a.corpAddr2 }</td>
-                                    <td>${a.contName }</td>
                                     <td>${a.contPhone }</td>
+                                    <td>${a.contName }</td>
                                     <td>${a.contMail }</td>
                                     <td>${a.categoryName }</td>
 		                            <td>${a.askTitle }</td>

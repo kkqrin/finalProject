@@ -342,16 +342,16 @@
             //검색기능
             $("[name=searchSubmitBtn]").on("click",function(){
             	
-           	 var orderSearchOption = $("#orderSearchSelect option:selected").val();
+           	 var orderSearchOption = $("#orderSearchSelect option:selected").val(); // 검색조건
            	 
            	 var orderNo = $("#searchOrderNo").val();
            	 var memberNo = $("#searchMemberNo").val();
            	 var orderStatus = $("#searchOrderStatus").val();
            	 
-           	 var orderStatusSelect = $("#orderStatusSelect");
+           	 var orderStatusSelect = $("#orderStatusSelect"); // 두번째 검색조건
            	 
-           	 var orderSearchBox = $("[name=orderSearchBox]").val();
-           	 var orderStatusSelectVal = $("#orderStatusSelect option:selected").val();
+           	 var orderSearchBox = $("[name=orderSearchBox]").val(); // input
+           	 var orderStatusSelectVal = $("#orderStatusSelect option:selected").val(); // 검색조건 val
            	 
            	 if(orderSearchOption == 'orderNo'){
            		orderNo = orderSearchBox;
@@ -364,27 +364,9 @@
            		orderStatus = 0;
            		 
            	 }else if(orderSearchOption == 'orderStatus'){
-					           		
-           		if(orderStatusSelectVal == '결제완료'){
-           			orderStatusSelectVal = 1;
-           		}else if(orderStatusSelectVal == '배송준비중'){
-           			orderStatusSelectVal = 2;
-           		}else if(orderStatusSelectVal == '배송중'){
-           			orderStatusSelectVal = 3;
-           		}else if(orderStatusSelectVal == '배송완료'){
-           			orderStatusSelectVal = 4;
-           		}else if(orderStatusSelectVal == '결제취소'){
-           			orderStatusSelectVal = 5;
-           		}else if(orderStatusSelectVal == '환불완료'){
-           			orderStatusSelectVal = 6;
-           		}else if(orderStatusSelectVal == '구매확정'){
-           			orderStatusSelectVal = 7;
-           		
-           		
            		orderStatus = orderStatusSelectVal;
            		orderNo = 0;
            		memberNo = 0;
-           	 	}
            		
            	 }
            	 
@@ -396,7 +378,7 @@
                    	if(data){
                    		$("#ajaxResult").empty();
                    			$(".adminPage-result").hide();
-  							const table =$("<table class='tbl-box'>");
+  							const table =$("<table class='table tbl-box' style='width:98%'>");
   							const titleTr = $("<tr>");
   							const td = $("<td></td>");
   							titleTr.html("<th>구분</th><th>상품사진</th><th>주문번호</th><th>상품번호</th><th>회원번호</th><th>주문일자</th><th>상품원가</th><th>수량</th><th>가격</th><th>배송주소</th><th>결제상태</th><th>주문상태</th><th>주문상태 변경</th>");
@@ -404,8 +386,8 @@
   							for(let i=0;i<data.length;i++){
   								const tr = $("<tr>");
   								tr.append("<td>"+"</td>")
-  								tr.append("<td>"+data[i].orderNo+"</td>");
   								tr.append("<td><img src='/resources/upload/product/"+data[i].thumbnail+"'></td>")
+  								tr.append("<td>"+data[i].orderNo+"</td>");
   								tr.append("<td>"+data[i].productNo+"</td>");
   								tr.append("<td>"+data[i].memberNo+"</td>");
   								tr.append("<td>"+data[i].orderDate+"</td>");
@@ -452,7 +434,7 @@
                    	
 	                 // 상태변경
                 	$("[name=changeOrderStatusBtn]").on("click",function(){
-                		var orderNo = $(this).parent().parent().children().eq(1).text();
+                		var orderNo = $(this).parent().parent().children().eq(2).text();
                 		var orderStatus = $(this).parent().prev().val();
                 		
                 		console.log(orderNo);

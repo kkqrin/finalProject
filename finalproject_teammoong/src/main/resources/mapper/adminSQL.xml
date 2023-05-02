@@ -421,13 +421,13 @@
 			(select rownum as rnum, b.* from
 	            (select 
 	                board_no as boardNo,	
-	                d_category_no as detailCategoryNo, 
+                    d_category_name as categoryName,
 	                board_writer as boardWriter,
 	                to_char(board_date,'yy-mm-dd') as boardDate,
 	                to_char(board_start,'yyyy-mm-dd') as boardStart, 
 	                to_char(board_end,'yyyy-mm-dd') as boardEnd,
 	                board_status as boardStatus
-	            from board_tbl bt
+	            from board_tbl bt join detail_category using(d_category_no)
 	            order by 1 desc)b)
 		where rnum between #{start} and #{end}
 	</select>

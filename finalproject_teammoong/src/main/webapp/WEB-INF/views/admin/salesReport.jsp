@@ -50,13 +50,11 @@
 	    font-weight: bold;
 	}
 	.dateTitle{
-		margin-left: 710px;
-	    padding-bottom: 20px;
+	    padding-bottom: 10px;
 	    font-size: 20px;
 	    font-weight: bold;
 	}
 	.writerTitle{
-		margin-left: 626px;
 	    padding-bottom: 20px;
 	    font-size: 20px;
 	    font-weight: bold;
@@ -198,8 +196,10 @@
 					<th style="text-align: right;" colspan="2"><fmt:formatNumber value="${profit }"/></th>
 				</tr>
 			</table>
-			<div class="dateTitle"></div>
-			<div class="writerTitle">작성자 : 뭉쳐야산다 일동</div>
+			<div class="dateWriter">
+				<div class="dateTitle"></div>
+				<div class="writerTitle">작성자 : 뭉쳐야산다 일동</div>
+			</div>
 		</div>
 	</div>
 	

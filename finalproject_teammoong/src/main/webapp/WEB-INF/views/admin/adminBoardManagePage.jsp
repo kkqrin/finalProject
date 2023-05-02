@@ -7,16 +7,26 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- jquery -->
+	<!-- jquery -->
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<!-- 여여붙 data tables -->
-	<script type="text/javascript" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css"/>
-<!-- google icon -->
+	<!-- google icon -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+	<!-- data tables -->
+	<link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/> 
+	<!-- data tables 버튼 관련 -->
+<!-- 	<script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script> 
+	<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script> 
+	<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script> -->
+	<!-- Bootstrap JavaScript 모달 -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
 	<!-- css -->
 	<link rel="stylesheet" href="/resources/css/admin/admin.css" />
 	<link rel="stylesheet" href="/resources/css/common/default.css" />
+	
 </head>
 <style>
     .adminPage-content{
@@ -32,7 +42,7 @@
     .searchForm{
     	display: none;
     }
-    #categorySelect{
+   /*  #categorySelect{
     	display: none;
     }
     #searchOption{
@@ -69,6 +79,10 @@
 	}
 	.size02{
 		font-size: 15px !important;
+	} */
+	
+	.adminPage-result{
+		width: 98%;
 	}
 
 
@@ -84,10 +98,11 @@
         </div>
         <div class="adminPage-back">
             <jsp:include page="/WEB-INF/views/admin/adminSideNavi.jsp"/>
+            <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
             <div class="adminPage-main">
                 <div class="adminPage-content">
                     <div class="adminPage-search">
-                    	<div class="search-select">
+                    	<!-- <div class="search-select">
 	                        <select id="boardSearchSelect">
 	                        	<option name="none" value="">선택하세요</option>
 	                            <option name="searchDetailName" value="detailName">상품명 검색</option>
@@ -115,15 +130,15 @@
 	                        </select>
 						</div>	                    
                         
-                        <div class="search-input">
+                       	<div class="search-input">
                         	<input type="text" name="boardSearchBox" id="searchOption">
                        	</div>
                         <div class="area-btn right">
 	                        <button type="button" name="searchSubmitBtn" class="btn btn-pri size01">검색</button>
 	                        <button type="button" name="goList" class="btn btn-pri size01">목록</button>
                         </div>
-                    </div>
-                    <div class="boardStatus">
+                    </div> -->
+                    <!-- <div class="boardStatus">
                     	<div class="boardSalse-wrap">
 	                    	<div class="boardTotalStatus">
 	                    	
@@ -132,94 +147,28 @@
 	                    	
 	                    	</div>
                     	</div>
-                    </div>
+                    </div> -->
                     <div class="adminPage-result">
-                        <table class="table tbl-box">
-                            <tr>
-                            	<th>게시글 번호</th>
-                                <th>카테고리 번호</th>
-                            	<th>작성자</th>
-                                <th>게시일자</th>
-                                <th>공구 시작일</th>
-                                <th>공구 마감일</th>
-                                <th>공구 진행여부</th>
-                            	<th>상품명</th>
-                                <th>상품가격</th>
-                            </tr>
+                        <table id="dataTables" class="table-bordered">
+	                        <thead>
+	                            <tr>
+	                            	<th>게시글 번호</th>
+	                                <th>카테고리 번호</th>
+	                            	<th>작성자</th>
+	                                <th>게시일자</th>
+	                                <th>공구 시작일</th>
+	                                <th>공구 마감일</th>
+	                                <th>공구 진행여부</th>
+	                            	<th>상품명</th>
+	                                <th>상품가격</th>
+	                            </tr>
+	                        </thead>
+	                        <tbody>
                             <c:forEach items="${boardList }" var="b">
                             	<c:forEach items="${b.boardOptionList }" var="bo">
                                 <tr>
                                     <td>${b.boardNo }<input type="hidden" class="boardNo" value="${b.boardNo }"></td>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo == 1}">
-                                    		<td>패션</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo == 2}">
-                                    		<td>뷰티</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo == 3}">
-                                    		<td>식품</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo == 4}">
-                                    		<td>생활용품</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo == 5}">
-                                    		<td>가전/디지털</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo == 6}">
-                                    		<td>가구</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo == 7}">
-                                    		<td>침구</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo == 8}">
-                                    		<td>인테리어</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo == 9}">
-                                    		<td>공구</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo == 10}">
-                                    		<td>스포츠/레저/취미</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo == 11}">
-                                    		<td>출산/유아동</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo == 12}">
-                                    		<td>반려용품</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo == 13}">
-                                    		<td>명품관</td>
-                                    	</c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                    	<c:when test="${b.detailCategoryNo > 13}">
-                                    		<td>테스트용인듯</td>
-                                    	</c:when>
-                                    </c:choose>
+                                    <td>${b.categoryName }</td>
                                     <td>${b.boardWriter }</td>
                                     <td>${b.boardDate }</td>
                                     <td>${b.boardStart }</td>
@@ -236,151 +185,50 @@
 		                             <td><fmt:formatNumber value="${bo.detailPrice }"/>원</td>
 		                             </c:forEach>
                             	</c:forEach>
-                        	</table>
-                        <div class="pagination">${pageNavi }</div>
+                            </tbody>
+                       	</table>
                     </div>
                     <div id="ajaxResult" class="table"></div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 
 <!-- 스크립트를 넣어봅시다 -->
-    <script>
+<script type="text/javascript">
 
-    /* 검색기능 */
-    
-    //첫번째 셀렉트 창 변경시 
-    $("#boardSearchSelect").on("change",function(){
-    	
-	   	 var boardSearchOption = $("#boardSearchSelect option:selected").val();
-		 
-	     var detailCategoryNo = $("#searchCategoryNo").val();
-	   	 var detailName = $("#searchDetailName").val();
-	   	 var boardStatus = $("#searchBoardStatus").val();
-	   	 
-	   	 var boardSearchBox = $("[name=boardSearchBox]"); // 검색 박스
-	   	 var boardSearchBoxVal = $("[name=boardSearchBox]").val(); // 검색박스 값
-	   	 
-	   	 var categorySelectBox = $("[name=categorySelectBox]"); // 추가 카테고리 셀렉트 박스
-	   	 var categorySelectVal = $("[name=categorySelectBox]").val(); // 추가 카테고리 셀렉트 박스 value
-	   	
-	   	detailCategoryNo = '';
-	   	detailName= '';
-	   	boardStatus= '';
-	   	 
-	   	if(boardSearchOption == 'categoryNo'){
-	   		boardSearchBox.hide();
-	   		categorySelectBox.show();
-		}else if(boardSearchOption == 'detailName'){
-	   		boardSearchBox.hide();
-	   		categorySelectBox.hide();
-	   		boardSearchBox.show();
-		}else if(boardSearchOption == 'boardStatus'){
-			boardSearchBox.hide();
-	   		categorySelectBox.hide();
-	   		boardSearchBox.show();
-		}
+    $(document).ready(function() {
+	    $('#dataTables').DataTable({
+	        dom : 'lfrtip',
+	        searching: true, // 검색 input 세팅
+	        fixedHeader: true, // 헤더 설정
+	        columns: [
+	        	{ searchable: true },
+	            { searchable: true },
+	            { searchable: true },
+	            { searchable: true },
+	            { searchable: true },
+	            { searchable: true },
+	            { searchable: true },
+	            { searchable: true },
+	            { searchable: true },
+	        ], // 검색 조건 설정, 컬럼에 true 값을 주면 해당 컬럼적용
+	        "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ], // 조회 개수 설정
+	        buttons: ['copy', 'excel', 'pdf', 'print'],
+	        
+	    });	
     });
-	   	 
-    //검색 버튼을 눌렀을때
-	    $("[name=searchSubmitBtn]").on("click",function(){
-	    	 boardSearchOption = $("#boardSearchSelect option:selected").val();
-			 
-	         detailCategoryNo = $("#searchCategoryNo").val();
-	       	 detailName = $("#searchDetailName").val();
-	       	 boardStatus = $("#searchBoardStatus").val();
-	       	 
-	       	 boardSearchBox = $("[name=boardSearchBox]"); // 검색 박스
-	       	 boardSearchBoxVal = $("[name=boardSearchBox]").val(); // 검색박스 값
-	       	 
-	       	 categorySelectBox = $("[name=categorySelectBox]"); // 추가 카테고리 셀렉트 박스
-	       	 categorySelectVal = $("[name=categorySelectBox]").val(); // 추가 카테고리 셀렉트 박스 value
-	   	 
-	  	 	if(boardSearchOption == 'categoryNo'){
-				if(categorySelectBox.on("change")){
-				 	categorySelectVal = $(this).prev().prev().val();
-				}
-				
-		   		detailCategoryNo = categorySelectVal;
-		   		detailName = '';
-		   		boardStatus = '0';
-		   		
-		   	 }else if(boardSearchOption == 'detailName'){
-		   		detailCategoryNo = '0';
-		   		detailName = boardSearchBoxVal;
-		   		boardStatus = '0';
-		   		
-		   	 }else if(boardSearchOption == 'boardStatus'){
-		   		 
-		   		 if(boardSearchBoxVal == '진행'){
-		       		boardStatus = 1;
-		       		
-		   		 }else if(boardSearchBoxVal == '마감'){
-		   			boardStatus = 2; 
-		   		 }
-		       		detailCategoryNo = '0';
-		   			detailName = '';
-		   	 }
-	  	 	
-	    	 $.ajax({
-	            url: "/ajaxAdminSearchBoard.do",
-	            type: "POST",
-	            data: {detailCategoryNo : detailCategoryNo, detailName : detailName, boardStatus : boardStatus},
-	            success: function(data) {
-	            	if(data){
-	            		$("#ajaxResult").empty();
-	            			$(".adminPage-result").hide();
-							console.log(data);
-							const table =$("<table>");
-							const titleTr = $("<tr>");
-							titleTr.html("<th>구분</th><th>게시글 번호</th><th>카테고리 번호</th><th>작성자</th><th>게시일자</th><th>공구 시작일</th><th>공구 마감일</th><th>공구 진행여부</th><th>상품명</th><th>상품가격</th>");
-							table.append(titleTr);
-							for(let i=0;i<data.length;i++){
-								for(let j=0;j<data[i].boardOptionList.length;j++){
-								const tr = $("<tr>");
-								tr.append("<td>"+"</td>")
-								tr.append("<td>"+data[i].boardNo+"</td>");
-								tr.append("<td>"+data[i].detailCategoryNo+"</td>");
-								tr.append("<td>"+data[i].boardWriter+"</td>");
-								tr.append("<td>"+data[i].boardDate+"</td>");
-								tr.append("<td>"+data[i].boardStart+"</td>");
-								tr.append("<td>"+data[i].boardEnd+"</td>");
-								
-								if(data[i].boardStatus == 1){
-									tr.append("<td>진행</td>");
-								}else if(data[i].boardStatus == 2){
-									tr.append("<td>마감</td>");
-								}
-								
-								tr.append("<td>"+data[i].boardOptionList[j].detailName+"</td>");
-								tr.append("<td>"+data[i].boardOptionList[j].detailPrice+"원</td>");
-								table.append(tr);
-								
-								} 
-								
-						}
-						$("#ajaxResult").append(table);
-	            		
-	            	}else{
-	    				console.log("다시 시도");
-	            	}
-	            }
-	        })
-	   		 
-	    });
-	
-	    /*목록으로*/
-	    $("[name=goList]").on("click",function(){
-	    	location.reload();
-	    });
+    
+</script>
+    
+    
     
 	    
     
     
         
-    </script>
     
 </body>
 </html>

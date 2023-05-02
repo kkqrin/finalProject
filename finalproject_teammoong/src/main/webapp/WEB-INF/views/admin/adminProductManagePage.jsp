@@ -330,14 +330,14 @@
 							const table =$("<table class='tbl-box'>");
 							const titleTr = $("<tr>");
 							const td = $("<td></td>");
-							titleTr.html("<th>구분</th><th>제품사진</th><th>상품번호</th><th>세부카테고리번호</th><th>상품이름</th><th>상품수량</th><th>남은수량</th><th>상품가격</th><th>원가</th><th>공동구매인원수</th><th>상품할인율</th><th>상품상태</th><th>상품상태변경</th><th>확정버튼</th>");
+							titleTr.html("<th>구분</th><th>제품사진</th><th>상품번호</th><th>카테고리명</th><th>상품이름</th><th>상품수량</th><th>남은수량</th><th>상품가격</th><th>원가</th><th>공동구매인원수</th><th>상품할인율</th><th>상품상태</th><th>상품상태변경</th><th>확정버튼</th>");
 							table.append(titleTr);
 							for(let i=0;i<data.length;i++){
 								const tr = $("<tr>");
 								tr.append("<td>"+"</td>")
 								tr.append("<td>"+data[i].productNo+"</td>");
 								tr.append("<td><img src='/resources/upload/product/"+data[i].thumbnail+"'></td>")
-								tr.append("<td>"+data[i].detailCategoryNo+"</td>");
+								tr.append("<td>"+data[i].categoryName+"</td>");
 								tr.append("<td>"+data[i].productName+"</td>");
 								tr.append("<td>"+data[i].productEa+"</td>");
 								tr.append("<td>"+data[i].presentCnt+"</td>");

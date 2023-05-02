@@ -34,7 +34,7 @@ public class Board {
 	private ArrayList<BoardJoin> boardJoinList;
 	private ArrayList<Notify> notifyList;
 	private int reportCount;
-	
+	private String categoryName;
 	
 	//홍미 추가
 	private int rnum;
