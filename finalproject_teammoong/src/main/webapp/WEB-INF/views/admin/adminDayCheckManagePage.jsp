@@ -31,9 +31,10 @@
 	
 </head>
 <style>
-    
     .adminPage-main{
-        background-color: lightgreen;
+    	overflow: hidden;
+    	margin-top: 35px;
+    	margin-left: 350px;
     }
     .adminPage-content{
         background-color: #fff;
@@ -65,7 +66,7 @@
 	
 	}
 	.adminPage-result{
-		width: 1600px;
+		width: 98%;
 	}
 	.modal-content{
 	    width: 400px;
@@ -91,8 +92,6 @@
 </style>
 <body>
     <c:if test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
-        <!-- 관리자일때만 페이지 보이게 세팅 -->
-    </c:if>
     <div class="adminPage-wrapper">
         <div class="adminPage-header">
             <div class="adminPage-title"><a href="/#">Moong's Admin</a></div>
@@ -147,7 +146,7 @@
             </div>
         </div>
     </div>
-
+</c:if>
 
 <!-- 스크립트를 넣어봅시다 -->
     <script>

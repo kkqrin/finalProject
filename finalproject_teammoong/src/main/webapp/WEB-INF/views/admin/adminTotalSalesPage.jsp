@@ -28,7 +28,9 @@
         text-decoration: none;
     }
     .adminPage-main{
-        overflow: hidden;
+    	overflow: hidden;
+    	margin-top: 35px;
+    	margin-left: 350px;
     }
     .adminPage-content{
         overflow: hidden;
@@ -132,6 +134,7 @@
 </style>
 <body>
 <%-- <jsp:include page="/WEB-INF/views/common/header.jsp" /> --%>
+<c:if test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
     <div class="adminPage-wrapper">
         <div class="adminPage-header">
             <div class="adminPage-title"><a href="/#">Moong's Admin</a></div>
@@ -199,7 +202,7 @@
 	        </div>
     	</div>
     </div>
-  
+</c:if>
 <script>
 	  
   const chartDataUrl = "https://example.com/data.json";

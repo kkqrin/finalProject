@@ -3,6 +3,7 @@
 		margin: 0;
 		padding: 0;
 	}
+	
     .adminPage-wrapper{
         background-color: ; /* admin-page 상단 색상 */
         width: ;
@@ -12,6 +13,7 @@
     .adminPage-main{
     	overflow: hidden;
     	margin-top: 35px;
+    	margin-left: 350px;
     }
     
     .adminPage-title{
@@ -71,26 +73,30 @@
         
     }
     
-    .adminPage-sidebar>ul>li>a{
+    .adminPage-sidebar>ul>li>a{  /* 사이드바 텍스트 css */
         text-decoration: none;
-        color: #70ad54;
+        color: #114757;
         font-weight: bold;
         margin-left: 30px;
-        /*  */
         display: block;
 		transition: background-color 0.3s ease;
     }
     
     /*  */
-    .adminPage-sidebar ul li a:hover {
-		background-color:;
+    .adminPage-sidebar ul li a:hover { /* 사이드바 호버 css */
 		color: #3a3a3a;
 		font-size: 20px;
 	}
 	
-	.adminPage-sidebar ul li a:active {
+	.adminPage-sidebar ul li a:active { /* 사이드바 텍스트 css */
 	    animation: buttonClick 0.3s ease;
 	}
+	
+	.firstLi>li:first-child>a:first-child{
+		margin-left: 0;
+	}
+	
+	
 	
 	
 	@keyframes buttonClick {

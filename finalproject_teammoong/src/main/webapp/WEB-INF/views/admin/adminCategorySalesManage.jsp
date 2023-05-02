@@ -29,7 +29,9 @@
         text-decoration: none;
     }
     .adminPage-main{
-        overflow: hidden;
+    	overflow: hidden;
+    	margin-top: 35px;
+    	margin-left: 350px;
     }
     .adminPage-sales{
     	margin: auto;
@@ -55,17 +57,15 @@
 	.bestSales{
 		background-color: white;
 		display: inline-block;
-		width: 400px;
+		width: 550px !important;
 		vertical-align: top; /* 요소 상단 맞추기 */
-		border: 1px solid #ffa220;
 		width: 500px;
 	}
 	.salesRanking{
 		background-color: white;
 		display: inline-block;
 		vertical-align: top; /* 요소 상단 맞추기 */
-		width: 400px;
-		border: 1px solid #ffa220;
+		width: 550px !important;
 		width: 500px;
 		margin-left: 100px;
 	}
@@ -78,11 +78,20 @@
 	.otherSalesTable>tbody>tr>th{
 		height: 68.59px;
 	}
+	.subContent{
+		font-size: 25px;
+	    font-weight: bold;
+	    border-bottom: 3px solid #1A6075;
+	}
+	#monthChart{
+		width: 1200px;
+	}
 	
 
 </style>
 <body>
 <%-- <jsp:include page="/WEB-INF/views/common/header.jsp" /> --%>
+ <c:if test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
     <div class="adminPage-wrapper">
         <div class="adminPage-header">
             <div class="adminPage-title"><a href="/#">Moong's Admin</a></div>
@@ -93,10 +102,11 @@
 	        	<div class="adminPage-sales">
 	        		<div class="bestAndOther">
 		        		<div class="bestSales">
-		        			<div class="sales icon"><span class="material-symbols-outlined">monitoring</span></div>
 		        			<div class="salesContent">
-		        				<span class="bestSalesCategory">최고 매출 카테고리</span>
-		        				<span class="bestSalesCount"><fmt:formatNumber value="${bestSales.totalSales }"/>원</span>
+		        				<div class="subContent">
+			        				<span class="bestSalesCategory">최고 매출 카테고리</span>
+			        				<span class="bestSalesCount"><fmt:formatNumber value="${bestSales.totalSales }"/>원</span>
+		        				</div>
 		        				<table class="bestSalesTable tbl-box">
 		        					<tr>
 		        						<th>카테고리 베스트</th>
@@ -154,10 +164,11 @@
 		        			</div>
 		        		</div>
 		        		<div class="salesRanking">
-		        			<div class="sales icon"><span class="material-symbols-outlined">trending_up</span></div>
 		        			<div class="salesContent">
-		        				<span class="salesTitle">월 매출액</span>
-		        				<span class="otherSalesCount"><fmt:formatNumber value="${otherSalSum }"/>원</span>
+		        				<div class="subContent">
+			        				<span class="salesTitle">월 매출액</span>
+			        				<span class="otherSalesCount"><fmt:formatNumber value="${otherSalSum }"/>원</span>
+		        				</div>
 		        				<table class="otherSalesTable tbl-box">
 		        					<tr>
 		        						<th>카테고리</th>
@@ -229,7 +240,7 @@
 	        </div>
     	</div>
     </div>
-  
+ </c:if>
 <script>
 
   const chartDataUrl = "https://example.com/data.json";

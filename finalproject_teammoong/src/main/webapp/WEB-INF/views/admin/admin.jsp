@@ -26,8 +26,13 @@
 	.adminPage-title{
 		margin-bottom: 20px;
 	}
+	.adminPage-title>a{
+		text-decoration: none;
+	}
     .adminPage-main{
+    	overflow: hidden;
     	margin-top: 35px;
+    	margin-left: 350px;
     }
     .adminPage-content{
         background-color: #fff;
@@ -79,25 +84,6 @@
     	color: black;
     	background-color: white;
     }
-    /* 
-    .c-1{
-        background-color: #f88000;
-    }
-    .c-2{
-        background-color: #ffa200;
-    }
-    .c-3{
-        background-color: #bf389f;
-    }
-    .c-4{
-        background-color: #70ad54;
-    }
-    .c-5{
-        background-color: #f1bff8;
-    }
-    .c-6{
-        background-color: #89C9DC;
-    } */
     .adminPage-summary{
     	width : 100%;
     	overflow: hidden;
@@ -205,6 +191,7 @@
 </style>
 <body>
 <%-- <jsp:include page="/WEB-INF/views/common/header.jsp" /> --%>
+ <c:if test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
     <div class="adminPage-wrapper">
         <div class="adminPage-header">
             <div class="adminPage-title"><a href="/#">Moong's Admin</a></div>
@@ -468,8 +455,9 @@
             </div>
         </div>
     </div>
-
+ 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+</c:if>
 
 <script>
     $(document).ready(function(){

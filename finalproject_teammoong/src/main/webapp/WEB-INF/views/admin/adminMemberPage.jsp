@@ -17,6 +17,13 @@
 	
 </head>
 <style>
+
+	.adminPage-main{
+    	overflow: hidden;
+    	margin-top: 35px;
+    	margin-left: 350px;
+    }
+    
 	.adminPage-result{
 		width: 98%;
 	}
@@ -59,8 +66,6 @@
 </style>
 <body>
     <c:if test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
-        <!-- 관리자일때만 페이지 보이게 세팅 -->
-    </c:if>
     <div class="adminPage-wrapper" id="adminMemberTable">
         <div class="adminPage-header">
             <div class="adminPage-title"><a href="/#">Moong's Admin</a></div>
@@ -202,7 +207,7 @@
             
         </div>
     </div>
-
+</c:if>
 <!-- 스크립트를 넣어봅시다 -->
     <script>
     
