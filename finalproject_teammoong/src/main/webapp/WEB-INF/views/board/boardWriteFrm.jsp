@@ -181,7 +181,7 @@
 							<input type="hidden" name="deliveryDate" required></td>
 					</tr>
 				</table>
-				<input class="btn btn-border-sec size01" type="submit" id="form" value="폼만들기">       
+				<input class="btn btn-border-sec size01" type="submit" id="form" value="폼만들기" style="cursor: pointer;">       
 			</form>
 		</div>
 	</div>
