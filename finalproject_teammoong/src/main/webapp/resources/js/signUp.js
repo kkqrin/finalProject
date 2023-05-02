@@ -21,8 +21,8 @@
 			
 			
 			$("[name='memberId']").keyup(function(){
-				//영문 혹은 영문+숫자, 8자 이상 16자 이하
-				const idReg = /^[a-z0-9]{8,16}$/;
+				//영문 혹은 영문+숫자, 6자 이상 16자 이하
+				const idReg = /^[a-z0-9]{6,16}$/;
 				const inputId = $(this).val();
 				if(idReg.test(inputId)){
 					$(this).removeClass("error");
@@ -393,7 +393,7 @@
 					reader.readAsDataURL(input.files[0]);
 				} else {
 					document.getElementById('preview').src = "/resources/upload/member/moongs.png";
-					document.getElementsByName('memberPath')[0].value=null;
+					document.getElementsByName('memberPropic')[0].value=null;
 					$(".deletePic").hide();	
 					$(".fileUpload").show();
 				}

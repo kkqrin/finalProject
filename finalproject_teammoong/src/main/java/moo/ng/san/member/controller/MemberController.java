@@ -2,6 +2,7 @@ package moo.ng.san.member.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -113,8 +114,23 @@ public class MemberController {
 	public String login(Member member, HttpSession session) {
 		Member loginMember = service.selectOneMember(member);
 		if(loginMember!=null) {
-			session.setAttribute("m", loginMember);
-			return "ok";
+			String bDay = loginMember.getMemberBday();
+			String month = bDay.substring(5,7);
+		    String day = bDay.substring(8,10);
+		    int bDayMonth = Integer.parseInt(month);
+		    int bDayDay = Integer.parseInt(day);
+			
+			LocalDate today = LocalDate.now();
+			String[] dateParts = today.toString().split("-");
+			int todayMonth = Integer.parseInt(dateParts[1]);
+			int todayDay = Integer.parseInt(dateParts[2]);
+			if(todayMonth == bDayMonth && todayDay == bDayDay) {
+				session.setAttribute("m", loginMember);
+				return "bDay";							
+			}else {
+				session.setAttribute("m", loginMember);
+				return "ok";								
+			}
 		}else {
 			return "error";
 		}

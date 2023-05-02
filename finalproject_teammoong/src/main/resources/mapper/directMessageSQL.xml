@@ -42,7 +42,7 @@
 								where
 								    dm_sender = #{dm.dmSender}
 							</if>
-			            order by 8 desc)t)r
+			            order by dmNo desc)t)r
 			where rnum between #{start} and #{end}
 	</select>
 	
@@ -51,8 +51,14 @@
 			count(*)
 		from
 			member_dm
-		where
-			dm_receiver=#{dmReceiver}
+		<if test="dmReceiver != null">
+			where
+			    dm_receiver = #{dmReceiver}
+		</if>
+		<if test="dmSender != null">
+			where
+			    dm_sender = #{dmSender}
+		</if>
 	</select>
 	
 
