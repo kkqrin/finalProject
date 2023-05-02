@@ -48,6 +48,14 @@
     .content-wrap .board-wrap-header{
      	margin-top: 200px;
     }
+    .posting-info-box {
+    background-color: cornflowerblue;
+    color: #fff;
+    border-radius: 5px;
+    padding: 4px;
+    font-size: 10px;
+    display: inline-block;
+}
 </style>
 </head>
 <body>

@@ -40,6 +40,14 @@ sup{
     text-align: left;
     width: 100%;
 }
+.posting-info-box {
+    background-color: #fefefe;
+    color: #3a3a3a;
+    border-radius: 5px;
+    padding: 4px;
+    font-size: 15px;
+    display: inline-block;
+}
 
 </style>
 
@@ -54,11 +62,11 @@ sup{
 				<div style="display: none;">
 					<input type="text" name="boardNo" value="${b.boardNo }">
 				</div>
-				<div style="display: none;">
-					${b.boardWriter }
-				</div>
 				<div>
-					${b.boardDate }
+					<span class="posting-info-box">
+					<a href="/boardYourPage.do?boardWriter=${b.boardWriter }">아이디 : <span style="color: cornflowerblue;">${b.boardWriter }</span></a>
+						<br> 날짜 : ${b.boardDate }
+					</span>
 				</div>
 				<c:choose>
 					<c:when test="${empty sessionScope.m.memberId}">

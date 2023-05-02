@@ -498,6 +498,7 @@ public class ProductController {
 	public String searchBar(searchBarVO sb, Model model) {
 		
 		System.out.println("productController에서 sb 값"+sb);
+		System.out.println("productController에서 searchKeyword 값 : "+sb.getSearchKeyword());
 		
 		if(sb.getSelectBox() == 1) {
 			
@@ -509,6 +510,7 @@ public class ProductController {
 			
 			ArrayList<Board> boardList = boardService.searchBoardList(sb);
 			model.addAttribute("searchBox",sb.getSelectBox());
+			model.addAttribute("sk",sb.getSearchKeyword());
 			model.addAttribute("boardList",boardList);
 			return "board/searchBoardList";
 			
