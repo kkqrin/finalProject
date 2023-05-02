@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,9 +26,9 @@
 						<th>받은사람</th>
 						<th>보낸날짜</th>
 					</tr>
-					<c:forEach items="${list }" var="dm">
+					<c:forEach items="${list }" var="dm" varStatus="i">
 						<tr>
-							<td>${dm.rnum }</td>
+							<td>${fn:length(list)-i.index }</td>
 							<td onclick="dmView(${dm.dmNo})">
 								<div style="width: 478px; height: 20px; overflow: hidden;cursor: pointer;white-space: nowrap;text-overflow: ellipsis;">
 									${dm.dmContent }

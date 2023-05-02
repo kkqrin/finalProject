@@ -78,7 +78,6 @@ public class DmController {
 		dm.setDmSender(dmSender);
 		dm.setDmReceiver(dmReceiver);
 		dm.setDmContent(dmContent);
-		System.out.println(dm);
 		int result = service.insertDm(dm);
 		if(result==1) {
 			return "ok";
