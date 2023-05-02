@@ -112,6 +112,11 @@
 		
 		$("#allCheck").change(function(){
 			$(".oneCheck").prop('checked',$(this).prop("checked"));
+			if($(".oneCheck").prop('checked')){
+				$(".oneCheck").next().prop('disabled',false);
+			}else{
+				$(".oneCheck").next().prop('disabled',true);
+			}
 		});
 		
 		$(".oneCheck").each(function(i,one){
