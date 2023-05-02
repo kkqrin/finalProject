@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 	<!-- data tables -->
 	<link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/> 
-	<script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
+	
 	<!-- data tables 버튼 관련 -->
 	<script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script> 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script> 
@@ -62,6 +62,9 @@
     color : white;
 	
 	}
+	.adminPage-result{
+		width: 1500px;
+	}
 
 
 
@@ -77,6 +80,7 @@
 	        </div>
         	<div class="adminPage-back">
             	<jsp:include page="/WEB-INF/views/admin/adminSideNavi.jsp" />
+            	<script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
 	            <div class="adminPage-main">
 	                <div class="adminPage-content">
 	                    <div class="adminPage-result">

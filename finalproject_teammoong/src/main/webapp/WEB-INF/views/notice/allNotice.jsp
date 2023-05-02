@@ -31,29 +31,7 @@
   		margin-right: 10px;
   		width: 50%;
 	}
-	#popupModal {
-  	  	position: fixed;
-    	top: 0;
-    	left: 0;
-    	width: 100%;
-    	height: 100%;
-    	background-color: rgba(0, 0, 0, 0.5);
-    	display: none;
-  	}
-  	.popupModal-content {
-    	position: absolute;
-    	top: 50%;
-    	left: 50%;
-    	transform: translate(-50%, -50%);
-    	background-color: #fff;
-    	padding: 20px;
-    	width: 300px;
-    	text-align: center;
-  	}
-  	.checkbox-remember {
-    	display: block;
-    	margin-bottom: 10px;
-  	}
+
 </style>
 </head>
 <body>
@@ -119,27 +97,8 @@
 		</div>
 		<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}"> 
 	</div>
-	<div id="popupModal" class="popupModal">
-  		<div class="popupModal-dialog">
-    		<div class="popupModal-content">
-      			<div class="popupMpodal-header">
-        			<h4 class="popupModal-title">팝업 모달</h4>
-        			
-				</div>
-			    <div class="popupModal-body">
-        			<p>팝업 모달 내용입니다.</p>
-        			<div class="checkbox-remember">
-          				<input type="checkbox" id="popupModalCheckbox" />
-          				<label for="popupModalCheckbox">24시간동안 보지 않기</label>
-        			</div>
-      			</div>
-      			<div class="popupModal-footer">
-        			<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closePopupModal()">[닫기]</button>
-      			</div>
-    		</div>
-  		</div>
-	</div>
-	<script src="/resources/js/popup.js"></script>
+	
+	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

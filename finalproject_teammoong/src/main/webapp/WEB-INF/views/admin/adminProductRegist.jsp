@@ -113,7 +113,7 @@
 	                            </c:forEach>
                                 </tr>
                             <tr>
-                                <th colspan="10">${pageNavi}</th>
+                                <th colspan="11">${pageNavi}</th>
                             </tr>
                         </table>
                     </div>
