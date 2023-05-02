@@ -72,6 +72,7 @@ public class MemberDao {
 
 	public ArrayList<Board> selectMyBoardList(HashMap<String, Object> map) {
 		List list = sqlSession.selectList("member.selectMyBoardList",map);
+		System.out.println("다오 : "+ list);
 		return (ArrayList<Board>)list;
 	}
 

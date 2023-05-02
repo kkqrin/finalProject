@@ -157,13 +157,14 @@ public class MemberService {
 				int numPerPage = 5;
 				int end = reqPage * numPerPage;
 				int start = end - numPerPage + 1;
-				String id = memberId;
 				//계산된 start, end를 가지고 게시물 목록 조회
 				HashMap<String, Object> map = new HashMap<String, Object>();
-				map.put("start", start);
-				map.put("end", end);
-				map.put("memberId", id);
+				map.put("start", 1);
+				map.put("end", 100);
+				map.put("memberId", memberId);
+				System.out.println("넘어가는 정보 맵" + map);
 				ArrayList<Board> list = dao.selectMyBoardList(map);
+				System.out.println("리스트"+list);
 				
 				//pageNavi 제작시작
 				//전체페이지 수 계산필요 -> 전체 게시물 수 조회
@@ -200,7 +201,6 @@ public class MemberService {
 					pageNavi +="<a href='/boardList.do?reqPage="+pageNo+"'>[다음]</a>";
 				}
 				BoardPageData bpd = new BoardPageData(list, pageNavi);
-//				bpd.setFileList(fileList);
 				return bpd;
 	}//selectMyWriteList
 

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +39,7 @@
 						<c:otherwise>
 							<c:forEach items="${list }" var="b" varStatus="i">
 								<tr>
-									<td>${b.rnum }</td>
+									<td>${fn:length(list)-i.index }</td>
 									<td><a href="/myPageJoiner.do?boardNo=${b.boardNo }&boardName=${b.boardName}" style="cursor: pointer;">${b.boardName }</a></td>
 									<td>${b.joinCnt }</td>
 									<td>${b.boardStart }</td>
