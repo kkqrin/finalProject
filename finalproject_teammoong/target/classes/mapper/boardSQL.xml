@@ -170,7 +170,7 @@
                 account_name as accountName,
                 receiver_name as receiverName,
                 receiver_phone as receiverPhone,
-                receiver_phone as receiverAddr,
+                receiver_addr as receiverAddr,
                 account_bank as accountBank
 		from board_tbl b left join board_join bj on b.board_no = bj.board_no where member_no = #{_parameter}
 	</select>
@@ -187,6 +187,7 @@
             account_name as accountName,
             receiver_name as receiverName,
             receiver_phone as receiverPhone,
+            receiver_addr as receiverAddr,
             account_bank as accountBank,
             account_writer as accountWriter,
             refund_bank	as refundBank,

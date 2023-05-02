@@ -235,17 +235,12 @@ img, figure {
 							<ul>
 								<li>
 									<strong>연락처</strong>
-									<span class="delivery_1" style="display: block;">${sessionScope.m.memberPhone}</span>
+									<span class="delivery_1" style="display: block;">${bj.receiverPhone}</span>
 								</li>
 								<li>
 									<strong>배송지</strong>
 									<span class="line delivery_1" style="display: block;">
-									${bj.receiverAddr }
-									08350
-									<br>
-									서울 구로구 오리로
-									<br>
-									101동
+									${bj.receiverAddr}
 									</span>
 								</li>
 							</ul>

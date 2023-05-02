@@ -43,7 +43,7 @@
 								</div>
 								<div class="card-info">
 									<div class="title"
-										style="font-size: 30px; line-height: 25px; padding-top: 25px; padding-bottom: 10px;">${i.boardName }</div>
+										style="font-size: 30px; line-height: 25px; padding-top: 25px; padding-bottom: 10px;"><a href="/boardView.do?boardNo=${i.boardNo }">${i.boardName }</a></div>
 									<div class="data" style="margin-left: 15px;">
 										<img
 											src="//d2i2w6ttft7yxi.cloudfront.net/site_img/seller/images/icon/icon_calendar.png">${i.boardDate }</div>

@@ -177,25 +177,11 @@
 						<td colspan="4">판매 상품 리스트<span>(총 1개의 상품)</span></td>
 					</tr>
 					<tr>
-						<td colspan="4">공구 사이트 링크</td>
-					</tr>
-					<tr>
-						<td colspan="4"><input type="text" id="site-link"
-							name="referenceLink" placeholder="공구 사이트 링크"></td>
-					</tr>
-					<tr>
 						<td colspan="4">배송 예정일<sup>*</sup></td>
 					</tr>
 					<tr>
 						<td colspan="4"><input type="text" id="deldate" required>
 							<input type="hidden" name="deliveryDate" required></td>
-					</tr>
-					<tr>
-						<td colspan="4">기타 문의사항</td>
-					</tr>
-					<tr>
-						<td colspan="4"><input type="text" id="etc-content"
-							name="boardEtc" placeholder="문의사항 필요한 경우 작성해 주세요."></td>
 					</tr>
 				</table>
 				<input class="btn btn-border-sec size01" type="submit" id="form" value="폼만들기">       

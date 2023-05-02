@@ -172,12 +172,6 @@ sup{
 				</tr>
 				<tr>
 					<td style="text-align:left;" colspan="4">
-						<input type="text" name="memberEmail"  required placeholder="주문자 이메일주소">
-						<span class="comment"></span> 
-					</td>
-				</tr>
-				<tr>
-					<td style="text-align:left;" colspan="4">
 						<input type="text"  id="phoneChk" name="memberPhone"  required placeholder="주문자 핸드폰번호">
 						<span class="comment"></span>
 					</td>
@@ -294,9 +288,6 @@ sup{
 			optionjQueryAlert('info', "상품수량을 입력해주세요");
 			event.preventDefault();
 		}else if($("[name=memberName]").val() == ""){
-			optionjQueryAlert('info', "주문자 정보를 입력해 주세요");
-			event.preventDefault();
-		}else if($("[name=memberEmail]").val() == ""){
 			optionjQueryAlert('info', "주문자 정보를 입력해 주세요");
 			event.preventDefault();
 		}else if($("[name=memberPhone]").val() == ""){
@@ -457,21 +448,6 @@ sup{
 		
 	
 		
-		
-		$("[name='memberEmail'").on("keyup",function(){
-		    //이메일 : 영어/숫자4~12글자+@(@뒤로는 제한 없음)
-		    const emailReg = /^[a-zA-Z0-9]{4,12}@/;
-		    const emailValue = $(this).val();
-		    const check = emailReg.test(emailValue);
-		    if(check){
-		        $(this).next().text("")
-		        result[0] = true;
-		    }else{
-		        $(this).next().text("이메일 형식을 확인하세요")
-		        $(this).next().css("color","var(--secondary)");
-		        result[0] = false;
-		    }
-		});//이메일 정규표현식
 		
 		
 		

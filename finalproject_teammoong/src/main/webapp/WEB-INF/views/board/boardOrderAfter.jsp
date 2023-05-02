@@ -212,7 +212,7 @@ border-bottom: 1px solid rgba(36, 36, 36, 0.6);
 				</div>
 				<div class="complete_row" style="height:42px; display: flex; margin-top:20px;">
 					<div class="request-btn1" onclick="location.href='/boardList.do?reqPage=1';">나중에 하기</div>
-					<div class="request-btn2" onclick="location.href='/myPageRequestDeposit.do?baordNo=${b.boardNo}&joinNo=${bj.joinNo}';">입금했어요!</div>
+					<div class="request-btn2" onclick="location.href='/myPageRequestDeposit.do?baordNo=${b.boardNo}&joinNo=${joinNo}'">입금했어요!</div>
 				</div>
 				<div class="complete_row" style="margin-top:20px;">
 					<span class="info">. 시간 내 입금하지 않으면 주문이 취소될 수 있습니다.</span>

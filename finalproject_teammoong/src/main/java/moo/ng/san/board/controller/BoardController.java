@@ -108,6 +108,9 @@ public class BoardController {
 	@RequestMapping(value="/boardWriteView.do")
 //	public String boardWriteView(BoardJoin bj, int boardNo, Model model) {
 	public String boardWriteView(BoardJoin bj, int boardNo, int[] optionNo, int[] detailPrice, int[] orderCount, Model model) {
+		int joinNo = 0;
+		
+		
 		System.out.println("보드조인  insert 전: "+bj);
 		int result = service.insertBoardJoin(bj);
 		System.out.println("보드조인  insert 후: "+bj);
@@ -117,16 +120,17 @@ public class BoardController {
 			// 보드 조인 상세 insert
 			
 			// joinNo select
-			int joinNo = service.selectJoinNo();
+			joinNo = service.selectJoinNo();
 			
 			result = service.insertBoardOrder(joinNo, optionNo, detailPrice, orderCount);
+	
 		}
 
 		
 		if(result>0) {
 			Board b = service.selectOneBoard(boardNo);
 			model.addAttribute("b", b);
-			model.addAttribute("bj", bj);
+			model.addAttribute("joinNo", joinNo);
 		}
 		return "board/boardOrderAfter";
 	}
