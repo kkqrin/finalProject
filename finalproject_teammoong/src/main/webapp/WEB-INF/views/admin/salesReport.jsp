@@ -32,6 +32,7 @@
 	    font-weight: bold;
 	    height: 60px;
 	    line-height: 60px;
+	    margin-top: 10px;
 	}
 	.firstTr {
 		border-bottom: 3px solid black;

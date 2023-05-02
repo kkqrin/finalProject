@@ -12,8 +12,8 @@
 <!-- google icon -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 	<!-- css -->
-	<link rel="stylesheet" href="/resources/css/admin/admin.css" />
 	<link rel="stylesheet" href="/resources/css/common/default.css" />
+	<link rel="stylesheet" href="/resources/css/admin/admin.css" />
 </head>
 <style>
     .adminPage-back{
@@ -21,6 +21,9 @@
     }
     .adminPage-content{
         overflow: hidden;
+    }
+    .adminPage-result{
+    	width: 98%;
     }
     .material-symbols-outlined{
         font-size: 150px;
@@ -41,9 +44,6 @@
     [name=orderSearchBox]{
 		width: 500px;
 	}
-    .tbl-box{
-		width: 1600px;
-	}
     img {
  		 width: 100px;
  		 height: 50px;
@@ -56,6 +56,29 @@
 	
 	.tbl-box tr:hover {
 	  background-color: #e1e4e5;
+	}
+	
+	.select-custom{
+		min-height: 32px;
+	    padding: 8px 10px;
+	    border-radius: 4px;
+	    height: 37px;
+	}
+	
+	.adminPage-search {
+		  display: flex;
+		  align-items: center;
+		  margin-bottom: 15px;
+	}
+
+	.search-select,
+	.search-input,
+	.area-btn {
+	  	margin-right: 10px;
+	}
+
+	.btn {
+	  	margin-right: 5px;
 	}
 	
 
@@ -75,24 +98,30 @@
             <div class="adminPage-main">
                 <div class="adminPage-content">
                     <div class="adminPage-search">
-                        <select id="orderSearchSelect">
-                            <option id="searchOrderNo" value="orderNo">주문번호 검색</option>
-                            <option id="searchMemberNo" value="memberNo">회원번호 검색</option>
-                            <option id="searchOrderStatus" value="orderStatus">주문 상태 검색</option>
-                        </select>
-                        <!-- 주문 상태 검색 시 1,2,3,4 로 변환해주는 절차 필요 -->
-                        <select id="orderStatusSelect">
-                        	<option value="1">결제완료</option>
-                        	<option value="2">배송준비중</option>
-                        	<option value="3">배송중</option>
-                        	<option value="4">배송완료</option>
-                        	<option value="5">결제취소</option>
-                        	<option value="6">환불완료</option>
-                        </select>
-                        <input type="text" name="orderSearchBox" id="searchOption">
-                        <div class="search-btns">
-	                        <button type="button" name="searchSubmitBtn" class="searchSubmit Btn">검색</button>
-	                        <button type="button" class="goList" class="goList Btn">목록</button>
+                    	<div class="search-select">
+	                        <select id="orderSearchSelect" class="select-custom">
+	                            <option id="searchOrderNo" value="orderNo">주문번호 검색</option>
+	                            <option id="searchMemberNo" value="memberNo">회원번호 검색</option>
+	                            <option id="searchOrderStatus" value="orderStatus">주문 상태 검색</option>
+	                        </select>
+                    	</div>
+                    	<div class="search-select">
+	                        <select id="orderStatusSelect" class="select-custom">
+	                        	<option value="1">결제완료</option>
+	                        	<option value="2">배송준비중</option>
+	                        	<option value="3">배송중</option>
+	                        	<option value="4">배송완료</option>
+	                        	<option value="5">결제취소</option>
+	                        	<option value="6">환불완료</option>
+	                        	<option value="7">구매확정</option>
+	                        </select>
+                    	</div>
+                    	<div class="search-input">
+	                        <input type="text" name="orderSearchBox" id="searchOption">
+                    	</div>
+                        <div class="area-btn right">
+	                        <button type="button" name="searchSubmitBtn" class="btn btn-pri size01">검색</button>
+	                        <button type="button" name="goList" class="btn btn-pri size01">목록</button>
                         </div>
                     </div>
                     <div class="adminPage-result">
@@ -157,6 +186,7 @@
 		                                            <option value="4">배송완료</option>
 		                                            <option value="5">결제취소</option>
 		                                            <option value="6">환불완료</option>
+		                                            <option value="7">구매확정</option>
 		                                        </select>
                                     		</c:when>
                                     	</c:choose>
@@ -169,6 +199,7 @@
 		                                            <option value="4">배송완료</option>
 		                                            <option value="5">결제취소</option>
 		                                            <option value="6">환불완료</option>
+		                                            <option value="7">구매확정</option>
 		                                        </select>
                                     		</c:when>
                                     	</c:choose>
@@ -181,6 +212,7 @@
 		                                            <option value="4">배송완료</option>
 		                                            <option value="5">결제취소</option>
 		                                            <option value="6">환불완료</option>
+		                                            <option value="7">구매확정</option>
 		                                        </select>
                                     		</c:when>
                                     	</c:choose>
@@ -193,6 +225,7 @@
 		                                            <option value="4" selected>배송완료</option>
 		                                            <option value="5">결제취소</option>
 		                                            <option value="6">환불완료</option>
+		                                            <option value="7">구매확정</option>
 		                                        </select>
                                     		</c:when>
                                     	</c:choose>
@@ -205,6 +238,7 @@
 		                                            <option value="4">배송완료</option>
 		                                            <option value="5" selected>결제취소</option>
 		                                            <option value="6">환불완료</option>
+		                                            <option value="7">구매확정</option>
 		                                        </select>
                                     		</c:when>
                                     	</c:choose>
@@ -217,13 +251,27 @@
 		                                            <option value="4">배송완료</option>
 		                                            <option value="5">결제취소</option>
 		                                            <option value="6" selected>환불완료</option>
+		                                            <option value="7">구매확정</option>
+		                                        </select>
+                                    		</c:when>
+                                    	</c:choose>
+                                    	<c:choose>
+                                    		<c:when test="${o.orderStatus == 7 }">
+                                    			<select name="orderStatusList" class="orderStatusList">
+		                                            <option value="1">결제완료</option>
+		                                            <option value="2">배송준비중</option>
+		                                            <option value="3">배송중</option>
+		                                            <option value="4">배송완료</option>
+		                                            <option value="5">결제취소</option>
+		                                            <option value="6">환불완료</option>
+		                                            <option value="7" selected>구매확정</option>
 		                                        </select>
                                     		</c:when>
                                     	</c:choose>
                                     </td> 
                                     <td>
                                     	<input type="hidden" class="orderNo" value="${o.orderNo }">
-                                    	<div class="changeOrderStatusBtn">상품 상태 변경</div>
+                                    	<div name="changeOrderStatusBtn"class="area-btn center"><button type="button" class="btn btn-pri size02">상태 변경</button></div>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -251,11 +299,11 @@
     	  });
     	
     })
-    	$(".changeOrderStatusBtn").on("click",function(){
+    
+    	/* 주문상태 변경 */
+    	$("[name=changeOrderStatusBtn]").on("click",function(){
     		var orderStatus = $(this).parent().prev().children().val();
     		var orderNo = $(this).prev().val();
-    		console.log(orderNo);
-    		console.log(orderStatus);
     		
             $.ajax({
                 url: "/ajaxChangeDeliveryStatus.do",
@@ -283,6 +331,9 @@
             	if(orderSearchOption == 'orderStatus'){
             		orderSearchBox.hide();
             		orderStatusSelect.show();
+            	}else{
+            		orderSearchBox.show();
+            		orderStatusSelect.hide();
             	}
             	
             })
@@ -326,11 +377,15 @@
            			orderStatusSelectVal = 5;
            		}else if(orderStatusSelectVal == '환불완료'){
            			orderStatusSelectVal = 6;
-           		}
+           		}else if(orderStatusSelectVal == '구매확정'){
+           			orderStatusSelectVal = 7;
+           		
            		
            		orderStatus = orderStatusSelectVal;
            		orderNo = 0;
            		memberNo = 0;
+           	 	}
+           		
            	 }
            	 
            	 $.ajax({
@@ -344,7 +399,7 @@
   							const table =$("<table class='tbl-box'>");
   							const titleTr = $("<tr>");
   							const td = $("<td></td>");
-  							titleTr.html("<th>구분</th><th>상품사진></th><th>주문번호</th><th>상품번호</th><th>회원번호</th><th>주문일자</th><th>상품원가</th><th>수량</th><th>가격</th><th>배송주소</th><th>결제상태</th><th>주문상태</th><th>주문상태 변경</th>");
+  							titleTr.html("<th>구분</th><th>상품사진</th><th>주문번호</th><th>상품번호</th><th>회원번호</th><th>주문일자</th><th>상품원가</th><th>수량</th><th>가격</th><th>배송주소</th><th>결제상태</th><th>주문상태</th><th>주문상태 변경</th>");
   							table.append(titleTr);
   							for(let i=0;i<data.length;i++){
   								const tr = $("<tr>");
@@ -376,7 +431,7 @@
   								}
   								
   								var select = $("<select name='orderStatusList' class='orderStatusList'></select>");
-								td.append(select.append(
+								tr.append(select.append(
 							                $("<option value='1'" + (data[i].orderStatus == 1 ? " selected" : "") + ">결제완료</option>"),
 							                $("<option value='2'" + (data[i].orderStatus == 2 ? " selected" : "") + ">배송준비중</option>"),
 							                $("<option value='3'" + (data[i].orderStatus == 3 ? " selected" : "") + ">배송중</option>"),
@@ -385,8 +440,8 @@
 							                $("<option value='6'" + (data[i].orderStatus == 6 ? " selected" : "") + ">환불완료</option>"),
 							                $("<option value='7'" + (data[i].orderStatus == 7 ? " selected" : "") + ">구매확정</option>")
 							     ));
-								tr.append(td);
-								tr.append("<td><div class='changeOrderStatusBtn'>상품 상태 변경</div></td>"); // 확정버튼으로
+								
+								tr.append("<td><div name='changeOrderStatusBtn' class='area-btn center'><button type='button' class='btn btn-pri size02'>상태 변경</button></div></td>"); // 확정버튼으로
 								table.append(tr);
   						}
   						$("#ajaxResult").append(table);
@@ -396,33 +451,39 @@
                    	}
                    	
 	                 // 상태변경
-	                	$(".changeOrderStatusBtn").on("click",function(){
-	                		var orderNo = $(this).parent().parent().children().eq(1).text();
-	                		var orderStatus = $(this).parent().prev().children().val();
-	                		
-	                		
-	                        $.ajax({
-	                            url: "/ajaxChangeDeliveryStatus.do",
-	                            type: "POST",
-	                            data: {orderStatus : orderStatus, orderNo : orderNo},
-	                            success: function(data) {
-	                            	if(data == "ok"){
-	                            		$("#adminOrderTable").load(location.href+ '#adminOrderTable');
-	                            	}else{
-	                    				console.log("다시 시도");
-	                            		
-	                            	}
-	                            }
-	                        })
-	                		
-	                	});
-                   }
-               })
-          		 
+                	$("[name=changeOrderStatusBtn]").on("click",function(){
+                		var orderNo = $(this).parent().parent().children().eq(1).text();
+                		var orderStatus = $(this).parent().prev().val();
+                		
+                		console.log(orderNo);
+                		console.log(orderStatus);
+                		
+                        $.ajax({
+                            url: "/ajaxChangeDeliveryStatus.do",
+                            type: "POST",
+                            data: {orderStatus : orderStatus, orderNo : orderNo},
+                            success: function(data) {
+                            	console.log(data);
+                            	
+                            	if(data == "ok"){
+                            		$("#adminOrderTable").load(location.href+ '#adminOrderTable');
+                            	}else{
+                    				console.log("다시 시도");
+                            		
+                            	}
+                            }
+                        })
+                		
+               		})
+               	}
+                  
+         	  })
+           
            });
-            
+       		 
+         
             /*목록으로*/
-            $(".goList").on("click",function(){
+            $("[name=List]").on("click",function(){
             	location.reload();
             })
 
@@ -434,7 +495,29 @@
             	function () {
             	$(this).css("transform", "scale(1)"); //이미지 크기를 원래 크기로 돌립니다.
             	}
-			);   	
+			);
+            
+            //상태변경
+            $("[name=changeOrderStatusBtn]").on("click",function(){
+        		var orderNo = $(this).parent().parent().children().eq(1).text();
+        		var orderStatus = $(this).parent().prev().children().val();
+        		
+        		
+                $.ajax({
+                    url: "/ajaxChangeDeliveryStatus.do",
+                    type: "POST",
+                    data: {orderStatus : orderStatus, orderNo : orderNo},
+                    success: function(data) {
+                    	if(data == "ok"){
+                    		$("#adminOrderTable").load(location.href+ '#adminOrderTable');
+                    	}else{
+            				console.log("다시 시도");
+                    		
+                    	}
+                    }
+                })
+        		
+        	});
            
             
         

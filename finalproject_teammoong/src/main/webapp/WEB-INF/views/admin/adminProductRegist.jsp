@@ -30,9 +30,13 @@
 	}
 	
 	.adminPage-search {
-		  display: flex;
-		  align-items: center;
-		  margin-bottom: 15px;
+	  display: flex;
+	  align-items: center;
+	  margin-bottom: 15px;
+	}
+	
+	.adminPage-result{
+		width: 98%;
 	}
 
 	.search-select,

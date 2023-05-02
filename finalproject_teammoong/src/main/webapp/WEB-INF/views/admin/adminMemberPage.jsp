@@ -17,7 +17,9 @@
 	
 </head>
 <style>
-
+	.adminPage-result{
+		width: 98%;
+	}
     .adminPage-search{
     	width: 100%;
     	float: left;
@@ -46,6 +48,7 @@
 	.btn {
 	  	margin-right: 5px;
 	}
+	
 	[name=allChangeMemberStatus]{
 		margin-top: 20px;
 	}

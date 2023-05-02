@@ -13,8 +13,8 @@
 <!-- google icon -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 	<!-- css -->
-	<link rel="stylesheet" href="/resources/css/admin/admin.css" />
 	<link rel="stylesheet" href="/resources/css/common/default.css" />
+	<link rel="stylesheet" href="/resources/css/admin/admin.css" />
 </head>
 <style>
     .material-symbols-outlined{
@@ -81,7 +81,11 @@
 		  align-items: center;
 		  margin-bottom: 15px;
 	}
-
+	
+	.adminPage-result{
+		width: 98%;
+	}
+	
 	.search-select,
 	.search-input,
 	.area-btn {
@@ -419,13 +423,12 @@
 								}
 								
 								var select = $("<select name='productStatusList' class='productStatusList'></select>");
-								td.append(select.append(
+								tr.append(select.append(
 							                $("<option value='1'" + (data[i].productStatus == 1 ? " selected" : "") + ">대기</option>"),
 							                $("<option value='2'" + (data[i].productStatus == 2 ? " selected" : "") + ">등록</option>"),
 							                $("<option value='3'" + (data[i].productStatus == 3 ? " selected" : "") + ">보류</option>"),
 							                $("<option value='4'" + (data[i].productStatus == 4 ? " selected" : "") + ">만료</option>")
 							     ));
-								tr.append(td);
 								tr.append("<td><div name='changeProductStatusBtn' class='area-btn center'><button type='button' class='btn btn-pri size02'>상태 변경</button></div></td>"); // 확정버튼으로
 								table.append(tr);
 						}

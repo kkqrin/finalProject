@@ -38,12 +38,10 @@
         overflow: hidden;
     }
     
-    
     .adminPage-sidebar{
         float: left;
         width: 250px;
         background-color: ; /* 사이드바 배경 */
-        height: 2000px;
         text-align: center;
         /*  */
   		color: #ffa200;
@@ -123,6 +121,7 @@
     .adminPage-result{
     	background-color: white;
     	overflow: hidden;
+    	width: 98%;
     }
     
     /**/
