@@ -1,13 +1,13 @@
 const value = $("#memberId").val();
     $(document).ready(function(){
         showPopupModal();
-        console.log(value);
+        
     });
 	    // 팝업 모달을 표시하는 함수
 	    function showPopupModal() {
 	        // 쿠키를 확인하여 팝업 모달을 표시할지 여부를 결정합니다.
 	        const popupCookie = getCookie("memberId");
-            console.log(popupCookie);
+            
 	        if (popupCookie === null) {
 	        // 쿠키가 없으면 팝업 모달을 표시합니다.
 	        $("#popupModal").show();
@@ -46,6 +46,6 @@ const value = $("#memberId").val();
 	    function setCookie(memberId, value, expires) {
 	        const cookie = `${memberId}=${value}; expires=${expires.toUTCString()}; path=/`;
 	        document.cookie = cookie;
-            console.log(cookie);
+            
 	    }
     
