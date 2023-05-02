@@ -116,6 +116,24 @@ public class OrderDao {
 		return result;
 	}
 
+	public String selectDoneCouponPrice(int orderNo) {
+		String couponPrice = sqlSession.selectOne("order.selectDoneCouponPrice", orderNo);
+		return couponPrice;
+	}
+
+	public int updateOrderStatusConfirm(int orderNo) {
+		int result = sqlSession.update("order.updateOrderStatusConfirm", orderNo);
+		
+		return result;
+	}
+
+	public ArrayList<Product> selectReviewCheckList(int orderNo) {
+		List list = sqlSession.selectList("order.selectReviewCheckList", orderNo);
+		
+		return (ArrayList<Product>)list;
+	}
+
+	
 	
 	
 	
@@ -182,18 +200,7 @@ public class OrderDao {
 		return result;
 	}
 
-	public String selectDoneCouponPrice(int orderNo) {
-		String couponPrice = sqlSession.selectOne("order.selectDoneCouponPrice", orderNo);
-		return couponPrice;
-	}
-
-	public int updateOrderStatusConfirm(int orderNo) {
-		int result = sqlSession.update("order.updateOrderStatusConfirm", orderNo);
-		
-		return result;
-	}
-
-
+//////////
 	
 
 }
