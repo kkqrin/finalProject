@@ -97,8 +97,10 @@ public class OrderController {
 	@RequestMapping(value="/myOrderList.do")
 	public String myOrderList(@SessionAttribute(required=false) Member m, Model model) {
 		
+		// 주문 내역 리스트
 		ArrayList<Order> myOrderList = service.selectMyOrderList(m.getMemberNo());
 		model.addAttribute("myOrderList", myOrderList);
+		
 		
 		return "order/myOrderList";
 	}
@@ -193,10 +195,17 @@ public class OrderController {
 		return "redirect:/myOrderDetail.do?orderNo="+orderNo;
 	}
 	
-	
+	@ResponseBody
+	@RequestMapping(value="/reviewCheck.do", produces = "application/json;charset=utf-8")
+	public String reviewCheck(int orderNo) {
+		
+		// 리뷰 썼는지 체크 ajax
+		ArrayList<Product> reviewCheckList = service.selectReviewCheckList(orderNo);
+		
+		return new Gson().toJson(reviewCheckList);
+	}
 
-	
-	
+
 	
 	
 	

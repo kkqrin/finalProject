@@ -80,16 +80,10 @@ public class AdminController {
 		String salesCount = service.selectAllSalesCount(); 
 		String salesVariation = service.selectVariationSalesCount();
 		
+		String bestSalesCount = service.selectBestProductCount();
+				
 		
-		//수정필요
-		ArrayList<Product> list = service.selectBestProductCount();
-		int bestSalesCount = 0;
-		for(Product p : list) {
-			int bestProductCnt = p.getPresentCnt();
-			int bestProductPrice = p.getProductPrice();
-			double bestProductDiscount = p.getProductDiscount();
-			bestSalesCount += bestProductCnt * bestProductPrice * ((100-bestProductDiscount)/100) ;
-		}
+		
 		//하단부터는 논의가 필요함
 		/*
 		String couponCount = service.selectEventCount();  쿼리문 대기
@@ -104,7 +98,7 @@ public class AdminController {
 		total[5] = boardVariation;
 		total[6] = salesCount;
 		total[7] = salesVariation;
-		total[8] = Integer.toString(bestSalesCount);
+		total[8] = bestSalesCount;
 		// 하단은 논의가 필요
 		/*
 		total[9] = couponCount;
@@ -283,18 +277,60 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping(value="/ajaxGenderSalesCount.do", produces = "application/json;charset=utf-8")
 	public String ajaxGenderSalesCount() {
-		ArrayList<SalesData> list = new ArrayList<SalesData>();
-		for(int i=1;i<4;i++) {
-			SalesData sd = service.selectGenderSalesData(i);
-			if(sd == null) {
-				sd = new SalesData();
-			}
-			sd.setGender(i);
+		
+		ArrayList<SalesData> list = service.selectGenderSalesData();
+		
+		if(list.get(0).getGender() == 1 && list.get(1).getGender() == 2 ) {
+			SalesData sd = new SalesData();
+			sd.setGender(3);
+			sd.setTotalSales(0);
 			list.add(sd);
+		
+		}else if(list.get(0).getGender() == 1 && list.get(1).getGender() == 3) {
+			SalesData sd = new SalesData();
+			sd.setGender(2);
+			sd.setTotalSales(0);
+			list.add(sd);
+			
+		}else if(list.get(1).getGender() == 2 && list.get(2).getGender() == 3) {
+			SalesData sd = new SalesData();
+			sd.setGender(1);
+			sd.setTotalSales(0);
+			list.add(sd);
+			
+		}else if(list.get(0).getGender() == 1) {
+			for(int i=0;i<2;i++) {
+				SalesData sd = new SalesData();
+				sd.setGender(i+1);
+				sd.setTotalSales(0);
+				list.add(sd);
+			}
+			
+		}else if(list.get(0).getGender() == 2) {
+			SalesData sd = new SalesData();
+			sd.setGender(1);
+			sd.setTotalSales(0);
+			list.add(sd);
+			
+			SalesData sd1 = new SalesData();
+			sd.setGender(3);
+			sd.setTotalSales(0);
+			list.add(sd1);
+		
+		}else if(list.get(0).getGender() == 3) {
+			for(int i=0;i<2;i++) {
+				SalesData sd = new SalesData();
+				sd.setGender(i+1);
+				sd.setTotalSales(0);
+				list.add(sd);
+			}
 		}
+		
 		Gson gson = new Gson(); 
 		String result = gson.toJson(list); 
 		return result;
+		
+		
 	}
 	
 	

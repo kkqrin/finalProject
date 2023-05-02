@@ -147,7 +147,10 @@ public class OrderService {
 		return dao.updateOrderStatusConfirm(orderNo);
 	}
 
-	
+	public ArrayList<Product> selectReviewCheckList(int orderNo) {
+		
+		return dao.selectReviewCheckList(orderNo);
+	}
 	
 	
 	
@@ -229,5 +232,7 @@ public class OrderService {
 		}
 		return result;
 	}
+
+
 
 }

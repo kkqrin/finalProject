@@ -15,7 +15,8 @@
 		#{rating},
 		0,
 		TO_CHAR(SYSDATE, 'YYYY-MM-DD'),
-		#{reviewContent})
+		#{reviewContent},
+		#{orderNo})
 	</insert>
 	
 	<select id="selectReviewListByProductNo" parameterType="_int" resultType="r">

@@ -94,11 +94,11 @@
 									<p class="sail-percent">${p.productDiscount}%</p>
 									<p class="price-sail"><fmt:formatNumber value="${(Math.floor(p.productPrice*(100 - p.productDiscount)/1000)*10)}"/>원</p>
 								</div>
-								<div class="star-rating">
+								<!-- <div class="star-rating">
 									<div class="material-symbols-outlined star-rate">star</div>
 									<div class="rating-average">4.8</div>
 									<div class="review-count">(152)</div>
-								</div>
+								</div> -->
 							</div>
 						</div>
 						<div class="posting-detail">
@@ -387,27 +387,27 @@
 							
 							postinginfoboxDiv.append(postinginfoSpan);
 							
-							const ratingDiv = $("<div>");
-							ratingDiv.addClass("star-rating");
+							// const ratingDiv = $("<div>");
+							// ratingDiv.addClass("star-rating");
 							
-							const stariconDiv = $("<div>");
-							stariconDiv.addClass("material-symbols-outlined star-rate");
-							stariconDiv.text("star");
+							// const stariconDiv = $("<div>");
+							// stariconDiv.addClass("material-symbols-outlined star-rate");
+							// stariconDiv.text("star");
 							
-							const averageDiv = $("<div>");
-							averageDiv.addClass("rating-average");
-							averageDiv.text("4.8");
+							// const averageDiv = $("<div>");
+							// averageDiv.addClass("rating-average");
+							// averageDiv.text("4.8");
 							
-							const countDiv = $("<div>");
-							countDiv.addClass("review-count");
-							countDiv.text("(152)");
+							// const countDiv = $("<div>");
+							// countDiv.addClass("review-count");
+							// countDiv.text("(152)");
 							
-							ratingDiv.append(stariconDiv);
-							ratingDiv.append(averageDiv);
-							ratingDiv.append(countDiv);
+							// ratingDiv.append(stariconDiv);
+							// ratingDiv.append(averageDiv);
+							// ratingDiv.append(countDiv);
 							
 							postinginfoDiv.append(postinginfoboxDiv);
-							postinginfoDiv.append(ratingDiv);
+							// postinginfoDiv.append(ratingDiv);
 							
 							detailDiv.append(postinginfoDiv);
 							

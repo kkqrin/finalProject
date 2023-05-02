@@ -144,7 +144,7 @@
 											expand_more
 											</span>
 										</div>
-										<ul>
+										<ul style="z-index: 1000;">
 										<li>뭉쳐야산다<input type="hidden"  value="1"></li>
 										<li>회원주최공구<input type="hidden"  value="2"></li>
 										</ul>
@@ -176,12 +176,11 @@
             	
             	<div class="header-bottom">
             		<div class="menu-product">
+            			<div><a href="/noticeList.do?reqPage=1&searchType=0">공지사항</a></div>
 		                <div><a href="/bestProductList.do">인기상품</a></div>
-		                <div><a href="/insertProductFrm.do">물품등록(예비버튼)</a></div>
 		                <c:if test="${!empty sessionScope.m}">
 		                	<div id="payModal"><a href="#">충전하기</a></div>
 		                </c:if>
-		                <div><a href="#">오늘의상품</a></div>
 		                <div class="together">
 		                	<a href="/boardList.do?reqPage=1">
 		               		 여기여기붙어라
@@ -190,7 +189,6 @@
 		                </div>
 	                </div>
 	              	<div class="menu-area">
-								<a href="/noticeList.do?reqPage=1&searchType=0">공지사항</a>
 		            	<c:choose>
 		            			<c:when test="${empty sessionScope.m}">
 				                    <a href="/signUpFrm.do">회원가입</a>

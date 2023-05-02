@@ -7,7 +7,7 @@ $(document).ready(function(){
     timeId = window.setInterval(function () {
         var now = new Date();
         // 핫딜 종료
-        var end = new Date(now.getFullYear(),now.getMonth(),now.getDate(),12,00,00);
+        var end = new Date(now.getFullYear(),now.getMonth(),now.getDate(),18,20,00);
     
         var nt = now.getTime();
         var et = end.getTime();

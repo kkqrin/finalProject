@@ -100,7 +100,8 @@
 								<td colspan="2">
 									<div style="display: flex;justify-content: center;">
 											<button type="button" id="order-confirm-btn" class="btn btn-pri size02" style="margin-right: 5px;">구매확정</button>
-											<button type="button"class="btn btn-pri size02">교환/반품문의</button>
+											<a href="https://open.kakao.com/o/suFU3Yhf" type="button"class="btn btn-pri size02">교환/반품문의</a>
+											<!-- <a href="https://open.kakao.com/o/suFU3Yhf"> -->
 										</div>
 									</td>
 								</tr>
@@ -135,7 +136,7 @@
 							<c:if test="${i.orderStatus eq 7}">
 								<div class="myorder-btn-zone" style="position: static;">
 								<!-- <form action="#"> -->
-									<button id="insertReiview" type="button" class="btn btn-pri size01" data-modal="#modalReview">리뷰쓰기</button>
+									<!-- <button id="insertReiview" type="button" class="btn btn-pri size01" data-modal="#modalReview">리뷰쓰기</button> -->
 									<!-- </form> -->
 								</div>
 							</c:if>
