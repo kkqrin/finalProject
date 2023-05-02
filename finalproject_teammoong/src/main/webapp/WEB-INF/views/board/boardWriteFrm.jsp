@@ -158,11 +158,11 @@
 					</tr>
 					<tr class="one-goods">
 						<td colspan="4"><input type="text" id="goods-price"
-							name="detailPrice" placeholder="가격을 입력해 주세요" required></td>
+							name="detailPrice" placeholder="가격을 입력해 주세요(숫자만!)" required><span class="caution"></span></td>
 					</tr>
 					<tr class="one-goods">
 						<td colspan="4"><input type="text" id="goods-count"
-							name="detailCount" placeholder="재고를 입력해 주세요" required></td>
+							name="detailCount" placeholder="재고를 입력해 주세요(숫자만!)" required><span class="cautionn"></span></td>
 					</tr>
 					<tr>
 						<td colspan="4">
@@ -172,9 +172,6 @@
 								
 							</div>
 						</td>
-					</tr>
-					<tr>
-						<td colspan="4">판매 상품 리스트<span>(총 1개의 상품)</span></td>
 					</tr>
 					<tr>
 						<td colspan="4">배송 예정일<sup>*</sup></td>
@@ -318,11 +315,19 @@
 						type : 'text',
 						id : 'goods-price',
 						name : 'detailPrice',
-						placeholder : '가격을 입력해 주세요',
+						placeholder : '가격을 입력해 주세요(숫자만!)',
 						required : true
 					});
 					input2.appendTo(td2);
+					input2.on("keyup",function(){
+						const detailPrice = $(this).val();
+						const caution = $(this).next();
+						priceCheck(detailPrice,caution);
+					});
 					td2.appendTo(tr2);
+					
+					const cautionSpan = $("<span class='caution'>");
+					input2.after(cautionSpan);
 
 					const tr3 = $('<tr>').addClass('one-goods');
 					const td3 = $('<td>').attr('colspan', 4);
@@ -330,9 +335,20 @@
 						type : 'text',
 						id : 'goods-count',
 						name : 'detailCount',
-						placeholder : '재고를 입력해 주세요',
+						placeholder : '재고를 입력해 주세요(숫자만!)',
 						required : true
 					});
+					input3.appendTo(td3);
+					input3.on("keyup",function(){
+						const detailPrice = $(this).val();
+						const caution = $(this).next();
+						priceCheck(detailPrice,caution);
+					});
+					td3.appendTo(tr3);
+					
+					const cautionSpann = $("<span class='cautionn'>");
+					input3.after(cautionSpann);
+					
 					input3.appendTo(td3);
 					td3.appendTo(tr3);
 					$("#goods-plus").parent().parent().parent().before(tr0)
@@ -582,6 +598,58 @@
 			}
 		});//제목 정규표현식
 		
+		$("[name = detailPrice]").keyup(function(){
+			
+			const detailPrice = $(this).val();
+			const caution = $(this).next();
+			
+			priceCheck(detailPrice,caution);
+			
+		});
+		
+		
+	function priceCheck(inputDetailPrcie,caution){
+		const DetailPriceReg = /^[0-9]+$/;
+		
+		if(DetailPriceReg.test(inputDetailPrcie)){
+			$(this).removeClass("error");
+			caution.css("display","none");
+		}else{
+			$(this).addClass("error");
+			caution.css("display","block");
+			caution.css("color","var(--secondary)");
+			caution.html("<a>숫자만 입력해주세요</a>");
+			// result[2] = false;
+		}
+		if(inputAccount==""){
+			$(this).removeClass("error");
+			caution.html("");
+			// result[2] = true;
+		}
+	}		
+
+	$("[name = detailCount]").keyup(function(){
+
+		const inputDetailCount = $("[name=detailCount]").val();
+		const DetailCountReg = /^[0-9]+$/;
+		
+		if(DetailCountReg.test(inputDetailCount)){
+			$(this).removeClass("error");
+			$(".caution").css("display","none");
+		}else{
+			$(this).addClass("error");
+			$(".cautionn").css("display","block");
+			$(".cautionn").css("color","var(--secondary)");
+			$(".cautionn").html("<a>숫자만 입력해주세요</a>");
+			// result[2] = false;
+		}
+		if(inputDetailCount==""){
+			$(this).removeClass("error");
+			$(".cautionn-tr").eq(0).css("display","none");
+			// result[2] = true;
+		}
+	});
+	
 // 		$("[name='accountName']").on("change",function(){
 // 		    const nameReg = /^[가-힣]{1,}$/;
 // 		    const nameValue = $(this).val();
