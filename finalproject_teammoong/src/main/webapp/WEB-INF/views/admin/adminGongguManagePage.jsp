@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<!-- DataTables CSS -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
 	<!-- jquery -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<!-- google icon -->
@@ -61,11 +64,23 @@
     
 	tr.hover {
     background-color: lightgray;
-    color : white;
+    color : #ffa220;
 	
 	}
 	.adminPage-result{
 		width: 98%;
+	}
+	.table-bordered thead tr th:nth-child(1),
+	.table-bordered thead tr th:nth-child(2),
+	.table-bordered thead tr th:nth-child(3),
+	.table-bordered thead tr th:nth-child(5),
+	.table-bordered thead tr th:nth-child(6),
+	.table-bordered thead tr th:nth-child(7),
+	.table-bordered thead tr th:nth-child(8){
+		width: 100px;
+	}
+	.table-bordered thead tr th:nth-child(4){
+		width: 270px;
 	}
 
 
@@ -107,7 +122,7 @@
 		                                    <td>${gl.productNo }</td>
 		                                    <td>${gl.memberNo }</td>
 		                                    <td>${gl.productName }</td>
-		                                    <td>${gl.productPrice }</td>
+		                                    <td><fmt:formatNumber value="${gl.productPrice }"></fmt:formatNumber></td>
 		                                    <td>${gl.countNumber }</td>
 		                                    <td>${gl.gongguPayDate }</td>
 		                                    <c:choose>
@@ -169,7 +184,27 @@
 	            { searchable: true },
 	        ], // 검색 조건 설정, 컬럼에 true 값을 주면 해당 컬럼적용
 	        "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ], // 조회 개수 설정
-	        buttons: ['copy', 'excel', 'pdf', 'print'],
+	        buttons: [
+	            'copy',
+	            {
+	                extend: 'excel',
+	                exportOptions: {
+	                    columns: ':visible'
+	                }
+	            },
+	            {
+	                extend: 'pdf',
+	                exportOptions: {
+	                    columns: ':visible'
+	                }
+	            },
+	            {
+	                extend: 'print',
+	                exportOptions: {
+	                    columns: ':visible'
+	                }
+	            }
+	        ]
 	        
 	    }); // 테이블 옵션
 	    
@@ -216,8 +251,24 @@
 	        if (tdText.includes('취소')) {
 	          $(this).css('font-weight', 'bold');
 	          $(this).css('color','red');
+	        }else if(tdText.includes('완료')){
+	        	$(this).css('font-weight', 'bold');
+		        $(this).css('color','blue');
+	        	
 	        }
+	        
 	     });
+	    
+	    /* 페이지 연결 */
+        $(".table-bordered").on("click",'td',function(){
+        	var productNo = $(this).parent().children().eq(2).text();
+        	
+        	console.log("productNo : "+productNo);
+        	
+   			window.open('http://192.168.10.143/productView.do?productNo='+productNo);
+   			
+        });
+	   
 	    
 });
     
