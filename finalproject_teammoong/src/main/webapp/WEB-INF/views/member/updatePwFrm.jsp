@@ -32,10 +32,6 @@
 
 	<script>
 		$(".ChangePw").on('click',function(){
-			method();
-		});
-	
-		$("[name='memberNewPw']").keyup(function(){
 			const pwReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~+@$!%*#?&])[A-Za-z\d~+@$!%*#?&]{8,}$/;
 			const memberNewPw = $("[name='memberNewPw']").val();
 			
@@ -50,9 +46,8 @@
 				$(".caution").eq(0).css("display","block");
 				$(".ChangePw").off('click');
 			}
-		})//새 비밀번호 패스워드 정규표현식
-	
-	
+		});
+
 		function method(){
 			const memberId = $("[name='memberId']").val();
 			
