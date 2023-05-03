@@ -159,12 +159,10 @@ public class MemberService {
 				int start = end - numPerPage + 1;
 				//계산된 start, end를 가지고 게시물 목록 조회
 				HashMap<String, Object> map = new HashMap<String, Object>();
-				map.put("start", 1);
-				map.put("end", 100);
+				map.put("start", start);
+				map.put("end", end);
 				map.put("memberId", memberId);
-				System.out.println("넘어가는 정보 맵" + map);
 				ArrayList<Board> list = dao.selectMyBoardList(map);
-				System.out.println("리스트"+list);
 				
 				//pageNavi 제작시작
 				//전체페이지 수 계산필요 -> 전체 게시물 수 조회
