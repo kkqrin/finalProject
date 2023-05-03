@@ -115,18 +115,23 @@ public class MemberController {
 		Member loginMember = service.selectOneMember(member);
 		if(loginMember!=null) {
 			String bDay = loginMember.getMemberBday();
-			String month = bDay.substring(5,7);
-		    String day = bDay.substring(8,10);
-		    int bDayMonth = Integer.parseInt(month);
-		    int bDayDay = Integer.parseInt(day);
+			if(bDay != null) {	
+				String month = bDay.substring(5,7);
+				String day = bDay.substring(8,10);
+				int bDayMonth = Integer.parseInt(month);
+				int bDayDay = Integer.parseInt(day);
 			
-			LocalDate today = LocalDate.now();
-			String[] dateParts = today.toString().split("-");
-			int todayMonth = Integer.parseInt(dateParts[1]);
-			int todayDay = Integer.parseInt(dateParts[2]);
-			if(todayMonth == bDayMonth && todayDay == bDayDay) {
-				session.setAttribute("m", loginMember);
-				return "bDay";							
+				LocalDate today = LocalDate.now();
+				String[] dateParts = today.toString().split("-");
+				int todayMonth = Integer.parseInt(dateParts[1]);
+				int todayDay = Integer.parseInt(dateParts[2]);
+				if(todayMonth == bDayMonth && todayDay == bDayDay) {
+					session.setAttribute("m", loginMember);
+					return "bDay";							
+				}else {
+					session.setAttribute("m", loginMember);
+					return "ok";
+				}
 			}else {
 				session.setAttribute("m", loginMember);
 				return "ok";								
