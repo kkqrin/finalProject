@@ -26,7 +26,9 @@
     .saved-money-box>input[type=text]{
         height: auto;
     }
-
+	#submit{
+		display:none;
+	}
 </style>
 </head>
 <body>
@@ -352,7 +354,7 @@
                     <button class="btn btn-border-sec size01" type="button" id="alert02">에러</button>
                     
                 </div>
-                <button type="submit">제출</button>
+                <button type="submit" id="submit">제출</button>
             </form>
             
 

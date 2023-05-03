@@ -646,7 +646,10 @@
 
 
 
-
+    <!-- 롱배너 -->
+    <div class="long-banner">
+        <img src="/resources/img/common/long-banner3.jpg">
+    </div>
 
 
 
@@ -704,6 +707,19 @@
                 <a href="/bestProductList.do">전체보기</a>
             </div>
     </div>
+
+
+
+
+    <div style="text-align: center; margin-bottom: 200px; margin-top:500px;">
+        <div class="title" style="margin-bottom:10px;padding:0;">뭉쳐야산다</div>
+        <div>흩어지면 비싸다, 뭉쳐야 싸게 산다.</div>
+    </div>
+
+
+
+
+
 
 
 

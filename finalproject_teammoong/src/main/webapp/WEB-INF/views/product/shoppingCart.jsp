@@ -357,12 +357,6 @@
 
 
 
-
-
-
-
-
-
 		// 페이박스 화폐 단위 표시
 		$(".hidden-product-price").on("change", function(){
 			// console.log("change!");
@@ -377,6 +371,10 @@
 			}else{
 				$(".order-payment-wrap form").submit();
 			}		
+		});
+
+		$(function(){
+			$("#all-product").click();
 		});
 
 	</script>
