@@ -85,13 +85,15 @@
 	}
 	#monthChart{
 		width: 1200px;
+		margin-left: 70px;
 	}
 	
 
 </style>
 <body>
 <%-- <jsp:include page="/WEB-INF/views/common/header.jsp" /> --%>
- <c:if test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
+<c:choose>
+ <c:when test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
     <div class="adminPage-wrapper">
         <div class="adminPage-header">
             <div class="adminPage-title"><a href="/#">Moong's Admin</a></div>
@@ -240,7 +242,13 @@
 	        </div>
     	</div>
     </div>
- </c:if>
+ </c:when>
+ <c:otherwise>
+ <script type="text/javascript">
+	location.href = "/main.do";
+</script>
+ </c:otherwise>
+ </c:choose>
 <script>
 
   const chartDataUrl = "https://example.com/data.json";

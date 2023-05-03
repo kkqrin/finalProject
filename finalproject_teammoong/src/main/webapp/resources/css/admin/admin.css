@@ -36,7 +36,7 @@
 
     }
     .adminPage-back{
-        background-color: ;
+        margin-bottom: 100px;
         overflow: hidden;
     }
     
@@ -90,6 +90,11 @@
 	
 	.adminPage-sidebar ul li a:active { /* 사이드바 텍스트 css */
 	    animation: buttonClick 0.3s ease;
+	    color: #ffa220;
+	}
+	
+	.adminPage-sidebar ul li a:visited{
+		color: #ffa220;
 	}
 	
 	.firstLi>li:first-child>a:first-child{
@@ -147,4 +152,4 @@
 	  margin-right: 5px;
 	}
 	/**/
-    
+	

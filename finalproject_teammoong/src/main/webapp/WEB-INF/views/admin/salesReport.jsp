@@ -62,6 +62,8 @@
 </style>
 </head>
 <body>
+<c:choose>
+<c:when test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
 	<div class="salesReport">
 		<div class="salesReport-main">
 			<table id="dataTables" class="table table-bordered">
@@ -202,8 +204,14 @@
 			</div>
 		</div>
 	</div>
-	
-	
+</c:when>
+<c:otherwise>
+<script type="text/javascript">
+	location.href = "/main.do";
+</script>
+</c:otherwise>	
+</c:choose>
+
 	
 	
 	

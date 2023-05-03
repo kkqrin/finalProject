@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<!-- DataTables CSS -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
 	<!-- jquery -->
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<!-- google icon -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 	<!-- data tables -->
@@ -61,11 +64,23 @@
     
 	tr.hover {
     background-color: lightgray;
-    color : white;
+    color : #ffa220;
 	
 	}
 	.adminPage-result{
-		width: 1500px;
+		width: 98%;
+	}
+	.table-bordered thead tr th:nth-child(1),
+	.table-bordered thead tr th:nth-child(2),
+	.table-bordered thead tr th:nth-child(3),
+	.table-bordered thead tr th:nth-child(5),
+	.table-bordered thead tr th:nth-child(6),
+	.table-bordered thead tr th:nth-child(7),
+	.table-bordered thead tr th:nth-child(8){
+		width: 100px;
+	}
+	.table-bordered thead tr th:nth-child(4){
+		width: 270px;
 	}
 
 
@@ -73,7 +88,8 @@
 
 </style>
 <body>
-    <c:if test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
+<c:choose>
+    <c:when test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
 	    <div class="adminPage-wrapper">
 		    <div class="adminPage-header">
 	            <div class="adminPage-title"><a href="/#">Moong's Admin</a></div>
@@ -85,23 +101,28 @@
 	                <div class="adminPage-content">
 	                    <div class="adminPage-result">
 	                    	<div class="space"></div>
-	                        <table id="dataTables">
+	                        <table id="dataTables" class="table-bordered">
 		                        <thead>
 		                            <tr>
 		                                <th>공구번호</th> 
 		                                <th>상품번호</th>
 		                                <th>회원번호</th>
+		                                <th>상품명</th>
+		                                <th>상품가격</th>
 		                                <th>주문수량</th>
 		                                <th>결제일자</th>
-		                                <th>결제상태
+		                                <th>결제상태</th>
 		                            </tr>
 		                        </thead>
+		                        <tbody>
 		                            <c:forEach items="${gList }" var="gl">
 		                            	<tr>
 		                                    <td>${gl.gongguNo }</td>
 		                                    <input type="hidden" name="gongguNo" value="${gl.gongguNo }">
 		                                    <td>${gl.productNo }</td>
 		                                    <td>${gl.memberNo }</td>
+		                                    <td>${gl.productName }</td>
+		                                    <td><fmt:formatNumber value="${gl.productPrice }"></fmt:formatNumber></td>
 		                                    <td>${gl.countNumber }</td>
 		                                    <td>${gl.gongguPayDate }</td>
 		                                    <c:choose>
@@ -117,7 +138,8 @@
 		                                    </c:choose>
 		                          	 	</tr>
 									</c:forEach>
-		                        </table>
+		                        </tbody>
+	                        </table>
 	                    </div>
 	                    <!-- 모달 -->
 						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -136,8 +158,13 @@
 	            </div>
        		</div>
    		</div>
-</c:if>
-
+</c:when>
+<c:otherwise>
+<script type="text/javascript">
+	location.href = "/main.do";
+</script>
+</c:otherwise>
+</c:choose>
 <!-- 스크립트를 넣어봅시다 -->
     <script>
     /* data tables 적용해보자 */
@@ -153,9 +180,31 @@
 	            { searchable: true },
 	            { searchable: true },
 	            { searchable: true },
+	            { searchable: true },
+	            { searchable: true },
 	        ], // 검색 조건 설정, 컬럼에 true 값을 주면 해당 컬럼적용
 	        "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ], // 조회 개수 설정
-	        buttons: ['copy', 'excel', 'pdf', 'print'],
+	        buttons: [
+	            'copy',
+	            {
+	                extend: 'excel',
+	                exportOptions: {
+	                    columns: ':visible'
+	                }
+	            },
+	            {
+	                extend: 'pdf',
+	                exportOptions: {
+	                    columns: ':visible'
+	                }
+	            },
+	            {
+	                extend: 'print',
+	                exportOptions: {
+	                    columns: ':visible'
+	                }
+	            }
+	        ]
 	        
 	    }); // 테이블 옵션
 	    
@@ -202,8 +251,24 @@
 	        if (tdText.includes('취소')) {
 	          $(this).css('font-weight', 'bold');
 	          $(this).css('color','red');
+	        }else if(tdText.includes('완료')){
+	        	$(this).css('font-weight', 'bold');
+		        $(this).css('color','blue');
+	        	
 	        }
+	        
 	     });
+	    
+	    /* 페이지 연결 */
+        $(".table-bordered").on("click",'td',function(){
+        	var productNo = $(this).parent().children().eq(2).text();
+        	
+        	console.log("productNo : "+productNo);
+        	
+   			window.open('http://192.168.10.143/productView.do?productNo='+productNo);
+   			
+        });
+	   
 	    
 });
     
