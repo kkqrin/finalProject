@@ -91,7 +91,8 @@
 
 </style>
 <body>
-    <c:if test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
+<c:choose>
+    <c:when test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
     <div class="adminPage-wrapper" id="adminOrderTable">
         <div class="adminPage-header">
             <div class="adminPage-title"><a href="/#">Moong's Admin</a></div>
@@ -286,8 +287,13 @@
             </div>
         </div>
     </div>
-</c:if>
-
+</c:when>
+<c:otherwise>
+<script type="text/javascript">
+	location.href = "/main.do";
+</script>
+</c:otherwise>
+</c:choose>
 <!-- 스크립트를 넣어봅시다 -->
     <script>
     /* status 변경 */

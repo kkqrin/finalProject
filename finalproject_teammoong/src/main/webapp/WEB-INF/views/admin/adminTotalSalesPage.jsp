@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <head>
@@ -108,11 +109,11 @@
 		height: 400px !important;
 	}
 	#salesChart{
-		height: 350px !important;
+		height: 380px !important;
 	}
 	#monthSelect{
 		width: 600px;
-	    height: 420px;
+	    height: 400px;
 	    border: 1px solid #ffa220;
 	    box-sizing: border-box;
 	    font-size: 50px;
@@ -134,7 +135,8 @@
 </style>
 <body>
 <%-- <jsp:include page="/WEB-INF/views/common/header.jsp" /> --%>
-<c:if test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
+<c:choose>
+<c:when test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
     <div class="adminPage-wrapper">
         <div class="adminPage-header">
             <div class="adminPage-title"><a href="/#">Moong's Admin</a></div>
@@ -202,7 +204,13 @@
 	        </div>
     	</div>
     </div>
-</c:if>
+</c:when>
+<c:otherwise>
+<script type="text/javascript">
+	location.href = "/main.do";
+</script>
+</c:otherwise>
+</c:choose>
 <script>
 	  
   const chartDataUrl = "https://example.com/data.json";
@@ -446,7 +454,7 @@
 				                },
 				                options: {
 		    	                	maintainAspectRatio: false,
-		    	                    height: 400,
+		    	                    height: 420,
 		    	                    scales: {
 		    	                        yAxes: [{
 		    	                                ticks: {

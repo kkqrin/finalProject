@@ -8,6 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- DataTables CSS -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
 	<!-- jquery -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<!-- google icon -->
@@ -15,12 +17,12 @@
 	<!-- data tables -->
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"/> 
 	<!-- data tables 버튼 관련 -->
-<!-- 	<script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script> 
+	<script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script> 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script> 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script> 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script> 
 	<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script> 
-	<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script> -->
+	<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
 	<!-- Bootstrap JavaScript 모달 -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	
@@ -91,7 +93,8 @@
 
 </style>
 <body>
-    <c:if test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
+<c:choose>
+    <c:when test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
     <div class="adminPage-wrapper">
         <div class="adminPage-header">
             <div class="adminPage-title"><a href="/#">Moong's Admin</a></div>
@@ -146,7 +149,13 @@
             </div>
         </div>
     </div>
-</c:if>
+</c:when>
+<c:otherwise>
+	<script type="text/javascript">
+	location.href = "/main.do";
+</script>
+</c:otherwise>
+</c:choose>
 
 <!-- 스크립트를 넣어봅시다 -->
     <script>
@@ -164,7 +173,27 @@
 	            { searchable: true },
 	        ], // 검색 조건 설정, 컬럼에 true 값을 주면 해당 컬럼적용
 	        "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ], // 조회 개수 설정
-	        buttons: ['copy', 'excel', 'pdf', 'print'],
+	        buttons: [
+	            'copy',
+	            {
+	                extend: 'excel',
+	                exportOptions: {
+	                    columns: ':visible'
+	                }
+	            },
+	            {
+	                extend: 'pdf',
+	                exportOptions: {
+	                    columns: ':visible'
+	                }
+	            },
+	            {
+	                extend: 'print',
+	                exportOptions: {
+	                    columns: ':visible'
+	                }
+	            }
+	        ]
 	        
 	    }); // 테이블 옵션
 	    
@@ -258,14 +287,6 @@
 	        $(this).removeClass('hover'); 
 	        
 	    }); // 호버 빠져나올시 CSS 클래스 제거
-	    
-	    
-	    
-	    $(".adminPage-back").css("background-color","gray");
-    	$(".adminPage-content").css("background-color","gray");
-    	
-    	$(".adminPage-back").css("background-color","white");
-    	$(".adminPage-content").css("background-color","white");
 	    
 	    
 }); // ready
