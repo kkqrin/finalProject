@@ -138,6 +138,7 @@
 							$("[name='memberId']").attr('readonly',true);
 							
 							let cerCode="";
+							alert("인증번호를 전송합니다. 잠시만 기다려주세요!");	
 							$.ajax({
 								url:"/memberPhoneCheck.do",
 								data:{memberPhone:inputPhone},
@@ -164,7 +165,7 @@
 									
 									$(".cerNumChk").on("click",function(){
 										if($("[name='memberPhone']").val()==cerCode){//인증번호가 일치할때
-											location.href="/updateNewPwMemberFrm.do";
+											location.href="/updateNewPwMemberFrm.do?hideMemberId="+$("[name='memberId']").val();
 										}else{//인증번호가 다를때
 											$("#alertTitle").html("인증번호가 다릅니다");
 								            $("#alertModal").modal({

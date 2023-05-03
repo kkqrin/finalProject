@@ -34,7 +34,6 @@
 		$(".ChangePw").on('click',function(){
 			const pwReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~+@$!%*#?&])[A-Za-z\d~+@$!%*#?&]{8,}$/;
 			const memberNewPw = $("[name='memberNewPw']").val();
-			
 			if(pwReg.test(memberNewPw) || memberNewPw==""){
 				$("[name='memberNewPw']").removeClass("error");
 				$(".caution").eq(0).css("display","none");
