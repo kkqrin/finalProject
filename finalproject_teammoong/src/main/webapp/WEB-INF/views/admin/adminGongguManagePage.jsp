@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<!-- jquery -->
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<!-- google icon -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 	<!-- data tables -->
@@ -65,7 +65,7 @@
 	
 	}
 	.adminPage-result{
-		width: 1500px;
+		width: 98%;
 	}
 
 
@@ -73,7 +73,8 @@
 
 </style>
 <body>
-    <c:if test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
+<c:choose>
+    <c:when test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
 	    <div class="adminPage-wrapper">
 		    <div class="adminPage-header">
 	            <div class="adminPage-title"><a href="/#">Moong's Admin</a></div>
@@ -85,23 +86,28 @@
 	                <div class="adminPage-content">
 	                    <div class="adminPage-result">
 	                    	<div class="space"></div>
-	                        <table id="dataTables">
+	                        <table id="dataTables" class="table-bordered">
 		                        <thead>
 		                            <tr>
 		                                <th>공구번호</th> 
 		                                <th>상품번호</th>
 		                                <th>회원번호</th>
+		                                <th>상품명</th>
+		                                <th>상품가격</th>
 		                                <th>주문수량</th>
 		                                <th>결제일자</th>
-		                                <th>결제상태
+		                                <th>결제상태</th>
 		                            </tr>
 		                        </thead>
+		                        <tbody>
 		                            <c:forEach items="${gList }" var="gl">
 		                            	<tr>
 		                                    <td>${gl.gongguNo }</td>
 		                                    <input type="hidden" name="gongguNo" value="${gl.gongguNo }">
 		                                    <td>${gl.productNo }</td>
 		                                    <td>${gl.memberNo }</td>
+		                                    <td>${gl.productName }</td>
+		                                    <td>${gl.productPrice }</td>
 		                                    <td>${gl.countNumber }</td>
 		                                    <td>${gl.gongguPayDate }</td>
 		                                    <c:choose>
@@ -117,7 +123,8 @@
 		                                    </c:choose>
 		                          	 	</tr>
 									</c:forEach>
-		                        </table>
+		                        </tbody>
+	                        </table>
 	                    </div>
 	                    <!-- 모달 -->
 						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -136,8 +143,13 @@
 	            </div>
        		</div>
    		</div>
-</c:if>
-
+</c:when>
+<c:otherwise>
+<script type="text/javascript">
+	location.href = "/main.do";
+</script>
+</c:otherwise>
+</c:choose>
 <!-- 스크립트를 넣어봅시다 -->
     <script>
     /* data tables 적용해보자 */
@@ -148,6 +160,8 @@
 	        fixedHeader: true, // 헤더 설정
 	        columns: [
 	        	{ searchable: true },
+	            { searchable: true },
+	            { searchable: true },
 	            { searchable: true },
 	            { searchable: true },
 	            { searchable: true },

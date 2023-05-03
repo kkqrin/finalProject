@@ -119,7 +119,8 @@
 
 </style>
 <body>
-<c:if test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
+<c:choose>
+<c:when test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
     <div class="adminPage-wrapper" id="adminProductTable">
         <div class="adminPage-header">
             <div class="adminPage-title"><a href="/#">Moong's Admin</a></div>
@@ -145,20 +146,20 @@
                     <div class="adminPage-result">
                         <table class="table tbl-box">
                             <tr>
-                            	<th>구분1</th>
-                                <th>상품번호2</th>
-                            	<th>제품사진3</th>
-                                <th>카테고리명4</th>
-                                <th>상품이름5</th>
-                                <th>상품수량6</th>
-                                <th>남은수량7</th><!-- 추가 -->
-                                <th>상품가격8</th>
-                                <th>원가9</th>
-                                <th>인원수10</th>
-                                <th>할인율11</th>
-                                <th>상품상태12</th> 
-                                <th>상품상태변경13</th>
-                                <th>확정버튼14</th>
+                            	<th>구분</th>
+                                <th>상품번호</th>
+                            	<th>제품사진</th>
+                                <th>카테고리명</th>
+                                <th>상품이름</th>
+                                <th>상품수량</th>
+                                <th>남은수량</th><!-- 추가 -->
+                                <th>상품가격</th>
+                                <th>원가</th>
+                                <th>인원수</th>
+                                <th>할인율</th>
+                                <th>상품상태</th> 
+                                <th>상품상태변경</th>
+                                <th>확정버튼</th>
                             </tr>
                             <c:forEach items="${productList }" var="p">
                                 <tr>
@@ -237,7 +238,13 @@
             </div>
         </div>
     </div>
-</c:if>
+</c:when>
+<c:otherwise>
+<script type="text/javascript">
+	location.href = "/main.do";
+</script>
+</c:otherwise>
+</c:choose>
 <!-- 스크립트를 넣어봅시다 -->
     <script>
     /* 상태 변경 */

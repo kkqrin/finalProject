@@ -47,14 +47,16 @@
     
     .moreResult{
 		float: right;
-	    top: 130px;
+	    top: 262px;
 	    position: absolute;
-	    right: 294px;
+	    right: 190px;
 	    text-align: left;
 	    background-color: lightgray;
 	    width: 400px;
-	    height: 1000px;
 	    display: none;
+	    border-radius: 6px;
+	    opacity: 0.8;
+		font-weight: bold;
     }
     
     
@@ -113,8 +115,9 @@
     
 	.highlight {
 	  animation: highlight 1s ease-in-out;
-	  background-color: #ffd900;
+	  background-color: #ffa220a;
 	  color: #fff;
+	  font-weight: bold;
 	}
 
 	@keyframes highlight {

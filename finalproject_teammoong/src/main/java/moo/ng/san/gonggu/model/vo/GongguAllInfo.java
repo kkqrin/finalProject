@@ -27,5 +27,9 @@ public class GongguAllInfo {
 	private String gongguPayDate;
 	private int memberNo;
 	
+	private String productName;
+	private int productPrice;
+	
+	
 }
 

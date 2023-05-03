@@ -95,8 +95,8 @@
 
 </style>
 <body>
-    <c:if test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
-        <!-- 관리자일때만 페이지 보이게 세팅 -->
+<c:choose>
+<c:when test="${not empty sessionScope.m and sessionScope.m.memberStatus == 0}">
     <div class="adminPage-wrapper">
         <div class="adminPage-header">
             <div class="adminPage-title"><a href="/#">Moong's Admin</a></div>
@@ -107,52 +107,6 @@
             <div class="adminPage-main">
                 <div class="adminPage-content">
                     <div class="adminPage-search">
-                    	<!-- <div class="search-select">
-	                        <select id="boardSearchSelect">
-	                        	<option name="none" value="">선택하세요</option>
-	                            <option name="searchDetailName" value="detailName">상품명 검색</option>
-	                            <option name="searchCategoryNo" value="categoryNo">카테고리 검색</option>
-	                            <option name="searchBoardStatus" value="boardStatus">공구 진행여부</option>
-	                        </select>
-                    	</div>
-						<div class="search-select">
-	                        <select id="categorySelect" name="categorySelectBox">
-	                        	<option>카테고리를 선택해주세요</option>
-	                            <option value="1">패션</option>
-	                            <option value="2">뷰티</option>
-	                            <option value="3">식품</option>
-	                            <option value="4">생활용품</option>
-	                            <option value="5">가전/디지털</option>
-	                            <option value="6">가구</option>
-	                            <option value="7">침구</option>
-	                            <option value="8">인테리어</option>
-	                            <option value="9">공구</option>
-	                            <option value="10">스포츠/레저/취미</option>
-	                            <option value="11">출산/유아동</option>
-	                            <option value="12">반려용품</option>
-	                            <option value="13">명품관</option>
-	                            <option value="88">테스트용</option>
-	                        </select>
-						</div>	                    
-                        
-                       	<div class="search-input">
-                        	<input type="text" name="boardSearchBox" id="searchOption">
-                       	</div>
-                        <div class="area-btn right">
-	                        <button type="button" name="searchSubmitBtn" class="btn btn-pri size01">검색</button>
-	                        <button type="button" name="goList" class="btn btn-pri size01">목록</button>
-                        </div>
-                    </div> -->
-                    <!-- <div class="boardStatus">
-                    	<div class="boardSalse-wrap">
-	                    	<div class="boardTotalStatus">
-	                    	
-	                    	</div>
-	                    	<div class="boardMonthStatus">
-	                    	
-	                    	</div>
-                    	</div>
-                    </div> -->
                     <div class="adminPage-result">
                         <table id="dataTables" class="table-bordered">
 	                        <thead>
@@ -199,7 +153,16 @@
         </div>
     </div>
 </div>
-</c:if>
+</c:when>
+<c:otherwise>
+<script type="text/javascript">
+	location.href = "/main.do";
+</script>
+</c:otherwise>
+</c:choose>
+
+
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <!-- 스크립트를 넣어봅시다 -->
 <script type="text/javascript">
 
